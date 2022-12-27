@@ -1,0 +1,13 @@
+@import "../../../../core/scss/params";
+
+.menu-item-child {
+  display: flex;
+  flex-direction: column;
+  gap: $base;
+  padding-top: $base * 2;
+  padding-left: $base * 6;
+
+  .menu:not(.menu_open) & {
+    padding-left: 0;
+  }
+}

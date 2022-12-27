@@ -1,0 +1,104 @@
+@import "../../scss/params";
+
+.attachment {
+  display: flex;
+  flex-direction: column;
+  gap: $base * 3;
+  width: 100%;
+
+  &-zone {
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: $border-radius-default;
+    border: 2px dashed $color-grey-50;
+    padding: 0 $base * 4;
+    gap: $base * 2;
+    width: 100%;
+    height: $input-height * 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & .MuiSvgIcon-root {
+      fill: $color-grey-100;
+    }
+    &__text {
+      flex: 1 1 auto;
+      color: $color-grey-150;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &:hover {
+      border-color: $color-blue;
+      & .MuiSvgIcon-root {
+        fill: $color-blue;
+      }
+    }
+    &:hover &__text {
+      color: $color-blue;
+    }
+
+    &_active {
+      border-color: $color-blue;
+      border-style: solid;
+      & .MuiSvgIcon-root {
+        fill: $color-blue;
+      }
+    }
+    &_active &__text {
+      color: $color-blue;
+    }
+
+    &_disabled {
+      cursor: not-allowed;
+      &:hover {
+        border-color: $color-grey-50;
+        & .MuiSvgIcon-root {
+          fill: $color-grey-100;
+        }
+      }
+    }
+    &_disabled:hover &__text {
+      color: $color-grey-150;
+    }
+  }
+  &-files {
+    display: flex;
+    flex-direction: column;
+    gap: $base * 2;
+    overflow: auto;
+  }
+  &-file {
+    display: flex;
+    gap: $base * 2;
+    align-items: center;
+
+    &__icon {
+      display: flex;
+    }
+    &__name {
+      flex: 1 1 auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    &__size {
+      flex: 0 0 auto;
+      color: $color-grey-150;
+    }
+  }
+
+  &_error &-zone {
+    border-color: $color-red;
+  }
+  &_error &-zone:hover {
+    & .MuiSvgIcon-root {
+      fill: $color-red;
+    }
+  }
+  &_error &-zone:hover &-zone__text {
+    color: $color-red;
+  }
+}

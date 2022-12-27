@@ -1,0 +1,35 @@
+@import "../../../core/scss/params";
+
+.no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  gap: $base * 3;
+
+  &_column {
+    flex-direction: column;
+  }
+  &_row {
+    flex-direction: row;
+  }
+
+  &__icon {
+    color: $color-grey-50;
+
+    & .MuiSvgIcon-root {
+      font-size: 5rem;
+    }
+  }
+
+  &__message {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    color: $color-grey-120;
+    line-height: 1.5rem;
+  }
+  &_row &__message {
+    text-align: left;
+  }
+}

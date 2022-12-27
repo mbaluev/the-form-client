@@ -1,0 +1,79 @@
+@import "../../../core/scss/params";
+
+.page {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-white;
+  border-radius: $border-radius-default * 2;
+  gap: $base * 2;
+
+  &__wrapper {
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: $base * 3;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    gap: $base * 2;
+    padding: $base * 2;
+    padding-bottom: 0;
+  }
+  &__top-column {
+    display: flex;
+    flex-direction: column;
+  }
+  &__bread-crumbs {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: $base * 2;
+    background-color: $color-white;
+    border-radius: $border-radius-default * 2;
+  }
+  &__quick-filter {
+    display: flex;
+    gap: $base * 2;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+  &__container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  &__title {
+    flex: 0 0 auto;
+    font-size: 1.4rem;
+    line-height: $input-height - $base * 2;
+    font-weight: 500;
+    padding: $base $base * 2;
+    display: flex;
+    gap: $base * 2;
+  }
+  &__sub-title {
+    flex: 0 0 auto;
+    font-size: 1.1rem;
+    line-height: $input-height - $base * 2;
+    font-weight: 500;
+    padding: $base $base * 2;
+    color: $color-grey-100;
+    display: flex;
+    align-items: baseline;
+    gap: $base * 3;
+  }
+  &__children {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    position: relative;
+
+    &_padding {
+      padding: $base * 4;
+    }
+  }
+}

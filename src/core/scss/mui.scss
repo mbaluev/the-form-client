@@ -1,0 +1,10 @@
+@import "./params";
+
+.MuiDivider-root {
+  border-color: $color-grey-30;
+}
+
+.MuiTooltip-tooltip,
+.MuiAutocomplete-option {
+  font-family: $font-family;
+}

@@ -1,0 +1,67 @@
+@import "../../scss/params";
+
+.alert {
+  font-family: $font-family;
+  border: solid 2px;
+
+  &_shadow {
+    box-shadow: 0 5px 10px -5px rgba($color-black, 0.2);
+  }
+
+  &.MuiAlert-root {
+    font-size: 1rem;
+    border-radius: $border-radius-default;
+    padding: $base $base * 2;
+
+    & .MuiAlert-message {
+      font-weight: 500;
+    }
+
+    & .MuiTypography-root {
+      margin: 0;
+      font-family: $font-family;
+    }
+  }
+
+  &.MuiAlert-filledSuccess {
+    background-color: $color-green-dark;
+    border-color: $color-green-dark;
+    color: $color-white;
+  }
+  &.MuiAlert-filledInfo {
+    background-color: $color-blue;
+    border-color: $color-blue;
+    color: $color-white;
+  }
+  &.MuiAlert-filledWarning {
+    background-color: $color-orange;
+    border-color: $color-orange;
+    color: $color-white;
+  }
+  &.MuiAlert-filledError {
+    background-color: $color-red;
+    border-color: $color-red;
+    color: $color-white;
+  }
+
+  &.MuiAlert-outlinedSuccess {
+    background-color: rgba($color-green-dark, 0.1);
+    border-color: $color-green-dark;
+    color: $color-green-dark;
+  }
+  &.MuiAlert-outlinedInfo {
+    background-color: rgba($color-blue, 0.1);
+    border-color: $color-blue;
+    color: $color-blue;
+  }
+  &.MuiAlert-outlinedWarning {
+    background-color: rgba($color-orange, 0.1);
+    border-color: $color-orange;
+    color: $color-orange;
+  }
+  &.MuiAlert-outlinedError {
+    background-color: rgba($color-red, 0.1);
+    border-color: $color-red;
+    color: $color-red;
+  }
+}

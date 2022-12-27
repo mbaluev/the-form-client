@@ -1,0 +1,68 @@
+@import "../../../scss/params";
+
+.slider-field-control {
+  min-height: $input-height;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-height: $base * 5 + 1;
+  }
+  &__minus,
+  &__plus {
+    display: flex;
+    cursor: pointer;
+  }
+  &__label {
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+  &__slider {
+    display: flex;
+
+    & .MuiSlider-root {
+      padding: $base 0;
+    }
+  }
+
+  &.field-control_is-view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  &.field-control_error {
+    & .MuiSlider-root {
+      color: $color-red;
+    }
+    & .MuiSlider-thumb {
+      background-color: $color-red;
+    }
+    & .MuiSlider-thumb:hover,
+    & .MuiSlider-thumb.Mui-focusVisible {
+      box-shadow: 0 0 0 8px rgba($color-red, 0.16);
+    }
+    & .MuiSlider-thumb.Mui-active {
+      box-shadow: 0 0 0 14px rgba($color-red, 0.16);
+    }
+  }
+  &.field-control_error &__label {
+    color: $color-red;
+  }
+  &.field-control_error.MuiFormControl-root &__minus,
+  &.field-control_error.MuiFormControl-root &__plus {
+    & .MuiSvgIcon-root {
+      color: $color-red;
+    }
+  }
+
+  & .MuiSlider-thumb.Mui-disabled {
+    background-color: $color-grey-100;
+  }
+}

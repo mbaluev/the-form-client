@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "jsxImportSource": "@emotion/react",
+    "incremental": true,
+    "types": ["node", "reflect-metadata", "@types/jest"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "downlevelIteration": true,
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@infrastructure/*": ["controller/infrastructure/*"],
+      "@model/*": ["controller/model/*"],
+      "@service/*": ["controller/service/*"],
+      "@viewModel/*": ["controller/viewModel/*"],
+      "@app/*": ["core/app/*"],
+      "@components/*": ["core/components/*"],
+      "@hooks/*": ["core/hooks/*"],
+      "@utils/*": ["core/utils/*"],
+      "@pages/*": ["pages/*"],
+      "@ui/*": ["ui/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "jest.config.js",
+    "next.config.js"
+  ],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}

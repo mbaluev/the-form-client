@@ -1,0 +1,53 @@
+@import "../../../scss/params";
+
+.radio-group-field-control {
+  & .MuiRadio-colorPrimary.Mui-checked {
+    & .MuiSvgIcon-root {
+      color: $color-blue;
+    }
+  }
+  & .MuiTypography-root {
+    font-size: 1rem;
+    font-family: $font-family;
+  }
+
+  & .Mui-disabled,
+  & .Mui-checked.Mui-disabled {
+    & .MuiSvgIcon-root {
+      color: $color-grey-70;
+    }
+  }
+
+  &_horizontal .MuiFormGroup-root {
+    flex-direction: row;
+  }
+
+  &.field-control_error {
+    &.MuiFormControl-root {
+      & .MuiIconButton-root {
+        color: $color-red;
+
+        & .MuiSvgIcon-root {
+          color: $color-red;
+        }
+
+        &:hover {
+          background-color: fade($color-red, 10);
+        }
+      }
+
+      & .Mui-disabled {
+        & .MuiSvgIcon-root {
+          color: lighten($color-red, 20%);
+        }
+      }
+    }
+  }
+  &.field-control_is-edit.field-control_no-data {
+    color: $color-black;
+  }
+
+  &.field-control_is-loading {
+    width: $base * 20;
+  }
+}

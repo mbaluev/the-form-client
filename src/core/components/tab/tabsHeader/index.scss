@@ -1,0 +1,98 @@
+@import "../../../scss/params";
+
+.tabs__header {
+  flex: 0 0 auto;
+  box-shadow: none;
+  z-index: 1;
+
+  & .MuiAppBar-root {
+    box-shadow: none;
+  }
+  & .MuiTabs-root {
+    margin-bottom: -2px;
+    min-height: auto;
+    padding: 0;
+  }
+  & .MuiTabs-fixed {
+    margin-bottom: -1px;
+  }
+  & .MuiTabs-indicator {
+    height: 2px;
+    border-radius: 0;
+    background-color: $color-blue;
+  }
+  & .MuiTabs-scrollButtons.Mui-disabled {
+    opacity: 0.3;
+  }
+  & .MuiDivider-horizontal {
+    border-bottom: solid 2px $color-grey-30;
+  }
+
+  & .MuiTabs-flexContainer {
+    gap: $base * 2;
+  }
+
+  &-item {
+    &.MuiTab-root {
+      text-transform: none;
+      min-width: auto;
+      height: $tab-height;
+      max-height: $tab-height;
+      min-height: $tab-height;
+      padding: 0 $base * 2;
+      font-size: 1rem;
+      font-family: $font-family;
+      letter-spacing: normal;
+      color: $color-grey-200;
+    }
+    &.Mui-selected {
+      color: $color-blue;
+    }
+    &.Mui-disabled {
+      color: $color-grey-100;
+    }
+
+    & .MuiTab-wrapper {
+      font-size: 15px;
+    }
+
+    &:last-child {
+      &.MuiTab-root {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &_vertical {
+    min-width: $base * 40;
+    width: $base * 40;
+  }
+  &_vertical .MuiTabs-flexContainer {
+    gap: $base * 2;
+  }
+  &_vertical .MuiAppBar-root {
+    flex-direction: row;
+    height: 100%;
+  }
+  &_vertical .MuiTabs-root {
+    margin-bottom: 0;
+    margin-right: -2px;
+    flex: 1 1 auto;
+  }
+  &_vertical .MuiDivider-vertical {
+    border-right: solid 2px $color-grey-30;
+  }
+
+  &_vertical &-item {
+    &.MuiTab-root {
+      height: $tab-height-vertical;
+      max-height: $tab-height-vertical;
+      min-height: $tab-height-vertical;
+      padding: 0 $base * 4 0 $base * 2;
+      align-items: flex-start;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

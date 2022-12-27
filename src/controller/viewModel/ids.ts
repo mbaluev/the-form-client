@@ -1,0 +1,13 @@
+export const VIEW_MODEL = {
+  App: Symbol.for('AppViewModel'),
+  Notify: Symbol.for('NotifyViewModel'),
+  Locale: Symbol.for('LocaleViewModel'),
+  Menu: Symbol.for('MenuViewModel'),
+  User: Symbol.for('UserViewModel'),
+  Module: Symbol.for('ModuleViewModel'),
+  Block: Symbol.for('BlockViewModel'),
+  Filter: Symbol.for('FilterViewModel'),
+  Material: Symbol.for('MaterialViewModel'),
+  Question: Symbol.for('QuestionViewModel'),
+  Task: Symbol.for('TaskViewModel'),
+};

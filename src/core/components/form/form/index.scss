@@ -1,0 +1,6 @@
+@import "../../../scss/params";
+
+.form {
+  display: grid;
+  gap: $base * 4;
+}

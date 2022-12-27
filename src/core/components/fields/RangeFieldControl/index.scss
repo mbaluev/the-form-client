@@ -1,0 +1,57 @@
+@import "../../../scss/params";
+
+.range-field-control {
+  &.MuiFormControl-root .MuiInputBase-root {
+    padding-right: $base + 2;
+    overflow: hidden;
+  }
+
+  &__popover {
+    &-root {
+      display: flex;
+      flex-direction: column;
+    }
+    &-buttons {
+      flex: 0 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+      padding: $base * 3;
+      background-color: $color-grey-20;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: $base * 3;
+    }
+    &-content {
+      padding: $base * 3 $base * 5;
+
+      & .field-control {
+        width: 100%;
+      }
+    }
+  }
+
+  &.field-control_is-view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  &.field-control_is-view &__input {
+    &-value {
+      flex: 0 0 auto;
+    }
+    &-placeholder {
+      flex: 1 1 auto;
+      color: $color-grey-100;
+    }
+    &-end {
+      margin-left: $base * 1;
+    }
+  }
+
+  &:not(.field-control_no-data) {
+    & .MuiInputBase-root {
+      padding-right: 0;
+    }
+  }
+}

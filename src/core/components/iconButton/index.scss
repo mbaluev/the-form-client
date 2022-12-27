@@ -1,0 +1,35 @@
+@import "../../scss/params.scss";
+
+.icon-button {
+  &.button_size_default,
+  &.button_size_medium {
+    height: $input-height;
+    width: $input-height;
+    min-width: $input-height;
+    padding: 0;
+
+    & .MuiSvgIcon-root {
+      font-size: 1.5rem;
+    }
+  }
+  &.button_size_small {
+    height: $input-height-small;
+    width: $input-height-small;
+    min-width: $input-height-small;
+    padding: 0;
+
+    & .MuiSvgIcon-root {
+      font-size: 1.3rem;
+    }
+  }
+  &.button_size_x-small {
+    height: $input-height-x-small;
+    width: $input-height-x-small;
+    min-width: $input-height-x-small;
+    padding: 0;
+
+    & .MuiSvgIcon-root {
+      font-size: 1.1rem;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import "../../../../../core/scss/params";
+
+.tab-homework {
+  &__accordion {
+    & .MuiAccordionDetails-root {
+      display: flex;
+      flex-direction: column;
+      gap: $base * 4;
+    }
+  }
+}

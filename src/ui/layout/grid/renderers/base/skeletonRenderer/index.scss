@@ -1,0 +1,8 @@
+@import "../../../../../../core/scss/params";
+@import "../../params";
+
+.skeleton-renderer {
+  white-space: normal;
+  line-height: $line-height;
+  padding: $padding 0;
+}

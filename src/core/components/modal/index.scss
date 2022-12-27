@@ -1,0 +1,135 @@
+@import "../../scss/params";
+@import "../../scss/animations";
+
+$dialog-container-align-items: flex-start;
+$dialog-margin-top: $base * 3;
+$dialog-margin-left: $base * 3;
+$dialog-margin-right: $base * 3;
+$dialog-margin-bottom: $base * 3;
+$dialog-min-width: $base * 150;
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &-backdrop {
+    background-color: rgba($color-black, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+  &-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: $dialog-container-align-items;
+    justify-content: center;
+
+    .modal_transition & {
+      transition: opacity 100ms ease-in;
+      opacity: 0;
+    }
+    .modal_transition.modal-enter-done & {
+      opacity: 1;
+    }
+    .modal_transition.modal-exit-done & {
+      opacity: 0;
+    }
+  }
+  &-draggable {
+    display: flex;
+    max-height: 100%;
+
+    &_full-screen {
+      width: 100%;
+      height: 100%;
+      transform: translate(0, 0) !important;
+    }
+  }
+  &-dialog {
+    background-color: $color-white;
+    border-radius: $border-radius-default;
+    position: relative;
+    display: flex;
+    gap: $base * 4;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: calc(100% - #{$dialog-margin-top + $dialog-margin-bottom});
+    max-width: calc(100% - #{$dialog-margin-right + $dialog-margin-left});
+    min-width: $dialog-min-width;
+    margin: $dialog-margin-top $dialog-margin-right $dialog-margin-bottom
+      $dialog-margin-left;
+    box-shadow: 0 11px 15px -7px rgba($color-black, 0.2),
+      0px 24px 38px 3px rgba($color-black, 0.14),
+      0px 9px 46px 8px rgba($color-black, 0.12);
+
+    &_shake {
+      animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      transform: translate(0, 0);
+      backface-visibility: hidden;
+      perspective: 1000px;
+    }
+    &_full-screen {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &-title {
+    flex: 0 0 auto;
+    padding: $base * 2;
+    display: flex;
+    border-bottom: solid 1px $color-grey-30;
+    align-items: flex-start;
+    gap: $base * 2;
+
+    &-text {
+      flex: 1 1 auto;
+      font-size: 1.4rem;
+      line-height: $base * 5;
+      font-weight: 500;
+      padding: $base $base * 2;
+      display: flex;
+      gap: $base * 2;
+    }
+  }
+  &-content {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 $base * 4;
+
+    &-text {
+      font-size: 0.8rem;
+    }
+  }
+  &-footer {
+    flex: 0 0 auto;
+    padding: $base * 4;
+    display: flex;
+    justify-content: flex-end;
+    border-top: solid 1px $color-grey-30;
+    gap: $base * 3;
+  }
+}
+
+@media (max-width: $media-xs) {
+  .modal {
+    &-draggable {
+      min-width: 100%;
+    }
+    &-dialog {
+      margin: $base * 2;
+      min-width: calc(100% - #{$dialog-margin-right + $dialog-margin-left});
+    }
+  }
+}

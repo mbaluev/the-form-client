@@ -1,0 +1,70 @@
+$font-family: "Roboto Mono", "Roboto", "Montserrat", "Helvetica", "Verdana",
+  sans-serif;
+$font-family-mono: "Roboto Mono", monospace;
+
+$font-size: 13px;
+$base: 5px;
+$border-radius-default: $base;
+$input-height: $base * 7;
+$input-height-big: $base * 10;
+$input-height-small: $base * 6;
+$input-height-x-small: $base * 5;
+$tab-height: $base * 8;
+$tab-height-vertical: $base * 6;
+$menu-width: $base * 40;
+$transition-duration: 300ms;
+
+$color-pink: #ffa8a8;
+$color-red: #ec3d7d;
+$color-purple: #775bf7;
+$color-blue-dark: #2f41cd;
+$color-blue: #167dff;
+$color-blue-light: #4ca6ff;
+$color-green: #64d897;
+$color-green-dark: #00c075;
+$color-yellow: #fbf84a;
+$color-orange: #ffa300;
+$color-orange-dark: #f75229;
+
+$color-black: #111;
+$color-white: #fff;
+
+$color-grey-300: #111419;
+$color-grey-290: #191c21;
+$color-grey-280: #212429;
+$color-grey-270: #292c31;
+$color-grey-260: #313439;
+$color-grey-250: #393c41;
+$color-grey-240: #414449;
+$color-grey-230: #494c51;
+$color-grey-220: #515459;
+$color-grey-210: #595c61;
+$color-grey-200: #616469;
+$color-grey-190: #696c71;
+$color-grey-180: #717479;
+$color-grey-170: #797c81;
+$color-grey-160: #818489;
+$color-grey-150: #898c91;
+$color-grey-140: #919499;
+$color-grey-130: #999ca1;
+$color-grey-120: #a1a4a9;
+$color-grey-110: #a9acb1;
+$color-grey-100: #b1b4b9;
+$color-grey-90: #b9bcc1;
+$color-grey-80: #c1c4c9;
+$color-grey-70: #c9ccd1;
+$color-grey-60: #d1d4d9;
+$color-grey-50: #d9dce1;
+$color-grey-40: #e1e4e9;
+$color-grey-30: #e9ecf1;
+$color-grey-20: #f1f4f9;
+$color-grey-10: #f9faff;
+
+$color-tooltip: $color-grey-280;
+
+$media-hg: 1400px;
+$media-lg: 1280px;
+$media-md: 1024px;
+$media-sm: 768px;
+$media-xs: 550px;
+$media-xxs: 420px;

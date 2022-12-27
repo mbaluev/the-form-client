@@ -1,0 +1,65 @@
+@import "../../../scss/params";
+
+.tag {
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 2px $base * 2;
+  border-radius: $border-radius-default;
+  line-height: $base * 3 + 1;
+  display: inline-block;
+
+  &_color_grey {
+    background-color: $color-grey-20;
+    color: $color-grey-170;
+
+    .tag_checked,
+    &.tag_active:hover {
+      background-color: $color-grey-30;
+    }
+  }
+  &_color_grey-dark {
+    background-color: $color-grey-40;
+    color: $color-grey-170;
+
+    .tag_checked,
+    &.tag_active:hover {
+      background-color: $color-grey-50;
+    }
+  }
+  &_color_blue {
+    background-color: rgba($color-blue, 0.1);
+    color: $color-blue;
+
+    .tag_checked,
+    &.tag_active:hover {
+      background-color: rgba($color-blue, 0.2);
+    }
+  }
+  &_color_green {
+    background-color: rgba($color-green-dark, 0.1);
+    color: $color-green-dark;
+
+    .tag_checked,
+    &.tag_active:hover {
+      background-color: rgba($color-green-dark, 0.2);
+    }
+  }
+  &_color_orange {
+    background-color: rgba($color-orange, 0.1);
+    color: $color-orange;
+
+    .tag_checked,
+    &.tag_active:hover {
+      background-color: rgba($color-orange, 0.2);
+    }
+  }
+  &_color_red {
+    background-color: rgba($color-red, 0.1);
+    color: $color-red;
+
+    .tag_checked,
+    &.tag_active:hover {
+      background-color: rgba($color-red, 0.2);
+    }
+  }
+}

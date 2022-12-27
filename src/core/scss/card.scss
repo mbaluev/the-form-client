@@ -1,0 +1,31 @@
+@import "./params";
+
+.card {
+  border-radius: $border-radius-default * 2;
+  padding: $base * 4;
+  transition-duration: $transition-duration;
+  border: solid 2px $color-grey-30;
+  color: $color-black;
+
+  &:hover {
+    cursor: pointer;
+    border-color: $color-blue;
+    background-color: $color-white;
+    color: $color-black;
+  }
+
+  &_complete {
+    border-color: lighten($color-green, 10);
+    &:hover {
+      border-color: $color-green-dark;
+    }
+  }
+  &_disable {
+    background-color: $color-grey-20;
+    &:hover {
+      background-color: $color-grey-20;
+      border-color: $color-grey-30;
+      cursor: not-allowed;
+    }
+  }
+}

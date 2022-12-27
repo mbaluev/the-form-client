@@ -1,0 +1,12 @@
+@import "../../../scss/params";
+
+.bread-crumb {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  &__separator {
+    display: flex;
+    color: $color-grey-150;
+  }
+}

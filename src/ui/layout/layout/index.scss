@@ -1,0 +1,100 @@
+@import "../../../core/scss/params";
+
+.layout {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-grey-20;
+  min-height: 100%;
+  padding: $base * 3;
+  gap: $base * 3;
+
+  &_overflow {
+    overflow: hidden;
+  }
+
+  &__top {
+    flex: 0 0 auto;
+    display: flex;
+    gap: $base * 3;
+
+    &-left {
+      flex: 0 0 auto;
+      display: flex;
+      width: $base * 40;
+      gap: $base * 2;
+    }
+    &-center {
+      flex: 1 1 auto;
+      display: flex;
+      gap: $base * 2;
+      justify-content: space-between;
+
+      & .text-field-control {
+        flex-basis: 50%;
+
+        & fieldset {
+          border: none;
+        }
+      }
+    }
+    &-right {
+      flex: 0 0 auto;
+      display: flex;
+      gap: $base * 2;
+      justify-content: flex-end;
+    }
+  }
+  &__middle {
+    flex: 1 1 auto;
+    display: flex;
+    gap: $base * 3;
+  }
+  &__left {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: $base * 2;
+
+    &-top {
+      display: flex;
+      flex: 1 1 auto;
+    }
+    &-bottom {
+      display: flex;
+      flex: 0 0 auto;
+    }
+  }
+  &__center {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: $base * 3;
+    transition-duration: $transition-duration;
+
+    &_shift {
+      margin-right: -$menu-width;
+    }
+  }
+  &__right {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: $base * 2;
+  }
+}
+
+@media (max-width: $media-md) {
+  .layout {
+    &__top {
+      &-left {
+        width: auto;
+      }
+      &-center {
+        & .text-field-control {
+          flex-basis: 100%;
+        }
+      }
+    }
+  }
+}

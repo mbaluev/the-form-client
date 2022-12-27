@@ -1,0 +1,8 @@
+@import "../../../../../core/scss/params";
+
+.module-content {
+  display: flex;
+  flex-direction: column;
+  gap: $base * 3;
+  flex: 1 1 auto;
+}

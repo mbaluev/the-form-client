@@ -1,0 +1,74 @@
+@import "../../scss/params";
+
+.accordion {
+  width: 100%;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  & .MuiAccordion-root {
+    border: 2px solid $color-grey-40;
+    border-radius: $border-radius-default;
+    box-shadow: none;
+    overflow: hidden;
+  }
+  & .MuiAccordionDetails-root {
+    flex-direction: column;
+    padding: $base * 4;
+  }
+
+  & .MuiAccordionSummary-root {
+    height: $input-height;
+    min-height: $input-height;
+    padding: 0 $base * 2 + 2;
+    font-weight: 500;
+    font-size: 1.1rem;
+    flex-direction: row-reverse;
+    background-color: $color-grey-10;
+    gap: $base * 2;
+
+    &.Mui-expanded {
+      height: $input-height;
+      min-height: $input-height;
+      padding: 0 $base * 2 + 2;
+    }
+
+    & .MuiSvgIcon-root {
+      font-size: 1.8rem;
+    }
+  }
+  & .MuiAccordionSummary-content {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  & .MuiAccordion-rounded:last-child {
+    border-bottom-left-radius: $border-radius-default;
+    border-bottom-right-radius: $border-radius-default;
+  }
+  & .MuiAccordion-rounded:first-child {
+    border-top-left-radius: $border-radius-default;
+    border-top-right-radius: $border-radius-default;
+  }
+
+  &_expanded {
+    & .MuiAccordionSummary-root {
+      background-color: $color-grey-10;
+    }
+  }
+
+  &__footer {
+    background-color: $color-grey-10;
+    transition: padding 0.3s;
+    min-height: $input-height;
+
+    &-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: $base * 2;
+      padding: $base * 3 $base * 3;
+    }
+  }
+}

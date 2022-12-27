@@ -1,0 +1,19 @@
+@import "../../../scss/params";
+
+.multi-select-field-control {
+  overflow: hidden;
+
+  &__menu {
+    & .MuiList-root .MuiListItem-root {
+      font-size: 1rem;
+      font-family: $font-family;
+      padding: $base + 2 $base * 2 + 2;
+    }
+  }
+
+  &.field-control_no-data {
+    & .MuiInputBase-input {
+      color: $color-grey-100;
+    }
+  }
+}

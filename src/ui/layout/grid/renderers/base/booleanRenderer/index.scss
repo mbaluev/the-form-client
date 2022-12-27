@@ -1,0 +1,18 @@
+@import "../../../../../../core/scss/params";
+@import "../../params";
+
+.boolean-renderer {
+  display: flex;
+  line-height: $line-height;
+  padding: $padding 0;
+
+  & .MuiSvgIcon-root {
+    color: $color-grey-80;
+  }
+
+  &_checked {
+    & .MuiSvgIcon-root {
+      color: $color-blue;
+    }
+  }
+}

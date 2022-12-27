@@ -1,0 +1,87 @@
+@import "../../../scss/params";
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: $base * 3;
+
+  &__label {
+    display: flex;
+    gap: $base * 2;
+    color: $color-grey-150;
+
+    &-error {
+      color: $color-red;
+    }
+    &-success {
+      color: $color-green;
+    }
+    &-svg {
+      display: flex;
+
+      & .MuiSvgIcon-root {
+        font-size: 1.2rem;
+        color: $color-grey-100;
+
+        &:hover {
+          color: $color-blue;
+        }
+      }
+    }
+  }
+  &_disabled &__label {
+    color: $color-grey-100;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $base * 2;
+    position: relative;
+    width: 100%;
+
+    &_horizontal {
+      flex-direction: row;
+      gap: $base * 2;
+    }
+
+    &:not(&_right):not(&_left):not(&_center) > .btn {
+      width: 100%;
+    }
+
+    &_right {
+      display: flex;
+      align-items: flex-end;
+    }
+    &_left {
+      display: flex;
+      align-items: flex-start;
+    }
+    &_center {
+      display: flex;
+      align-items: center;
+    }
+
+    & .field-control {
+      flex: 1 1 auto;
+    }
+  }
+}
+
+@media (min-width: $media-xs) {
+  .form-field {
+    &_row {
+      flex-direction: row;
+      gap: $base * 3;
+
+      .form-field__label {
+        width: $base * 40;
+        flex: 0 0 auto;
+        display: flex;
+      }
+      .form-field__content {
+        flex: 1 1 auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@import "../../../../../../core/scss/params";
+@import "../../params";
+
+.default-renderer {
+  line-height: $line-height;
+  padding: $padding 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
