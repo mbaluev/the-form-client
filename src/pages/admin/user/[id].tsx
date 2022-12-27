@@ -46,7 +46,7 @@ const User = (
       url: { pathname: ROUTER_CONST_SCHOOL.ADMIN_USERS.path },
     },
     {
-      label: user ? user.name : 'Not found',
+      label: user ? user.username : 'Not found',
       url: {
         pathname: ROUTER_CONST_SCHOOL.ADMIN_USER.path,
         query: { id: user?.id },

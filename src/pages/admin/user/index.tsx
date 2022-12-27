@@ -20,7 +20,7 @@ export const getServerSideProps = async (
   const { query } = context;
   const serviceUser = useService<IUserService>(SERVICE.User);
 
-  const users = (await serviceUser.getUsers(query)) || [];
+  const users = (await serviceUser.getUsers(query)) || null;
 
   return { props: { users } };
 };

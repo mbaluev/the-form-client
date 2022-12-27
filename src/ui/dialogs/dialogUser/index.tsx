@@ -1,7 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { Modal } from '@components/modal';
 import { Form, FormField, FormSection } from '@components/form';
-import { CheckboxFieldControl, TextFieldControl } from '@components/fields';
 import { IButtonProps } from '@components/button';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
@@ -9,6 +8,11 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { Loader } from '@components/loader';
 import { Skeleton } from '@components/skeleton';
 import { IUserViewModel } from '@viewModel/modules/user/interface';
+import {
+  CheckboxFieldControl,
+  PasswordFieldControl,
+  TextFieldControl,
+} from '@components/fields';
 
 interface IProps {
   isOpen: boolean;
@@ -41,10 +45,10 @@ export const DialogUser = observer((props: IProps) => {
     if (isModalLoading) {
       return <Skeleton width={200} />;
     }
-    if (!modalData || (modalData && !modalData.name)) {
+    if (!modalData || (modalData && !modalData.username)) {
       return <React.Fragment>New user</React.Fragment>;
     }
-    return <React.Fragment>{modalData.name}</React.Fragment>;
+    return <React.Fragment>{modalData.username}</React.Fragment>;
   };
   const footerButtons: IButtonProps[] = [
     {
@@ -73,22 +77,22 @@ export const DialogUser = observer((props: IProps) => {
       <Loader loading={isModalLoading} />
       <Form cols={1}>
         <FormSection>
-          <FormField title="Name">
-            <TextFieldControl
-              name="name"
-              value={modalData?.name}
-              onChange={changeHandler}
-              error={Boolean(getModalError('name'))}
-              helperText={getModalError('name')?.message}
-            />
-          </FormField>
           <FormField title="Email">
             <TextFieldControl
-              name="email"
-              value={modalData?.email}
+              name="username"
+              value={modalData?.username}
               onChange={changeHandler}
-              error={Boolean(getModalError('email'))}
-              helperText={getModalError('email')?.message}
+              error={Boolean(getModalError('username'))}
+              helperText={getModalError('username')?.message}
+            />
+          </FormField>
+          <FormField title="Password">
+            <PasswordFieldControl
+              name="password"
+              value={modalData?.password}
+              onChange={changeHandler}
+              error={Boolean(getModalError('password'))}
+              helperText={getModalError('password')?.message}
             />
           </FormField>
           <FormField>

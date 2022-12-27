@@ -21,8 +21,8 @@ export class UserViewModel
       clearUserData: action,
     });
     this.setValidations([
-      { nameSpace: 'name', type: 'required', message: 'Required' },
-      { nameSpace: 'email', type: 'required', message: 'Required' },
+      { nameSpace: 'username', type: 'required', message: 'Required' },
+      { nameSpace: 'password', type: 'required', message: 'Required' },
     ]);
   }
 
@@ -48,8 +48,10 @@ export class UserViewModel
     try {
       if (this.data && !this.hasErrors) {
         const data = await this.serviceUser.saveUser(this.data);
-        this.updateFromList(data);
-        await this.clearChanges();
+        if (data) {
+          this.updateFromList(data);
+          await this.clearChanges();
+        }
         return data;
       }
     } finally {
@@ -62,8 +64,10 @@ export class UserViewModel
     try {
       if (this.modalData && !this.hasModalErrors) {
         const data = await this.serviceUser.saveUser(this.modalData);
-        this.updateFromList(data);
-        await this.clearModalChanges();
+        if (data) {
+          this.updateFromList(data);
+          await this.clearModalChanges();
+        }
         return data;
       }
     } finally {

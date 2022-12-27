@@ -25,22 +25,13 @@ export const TabDetails = observer(() => {
         <FormField isRow title="Id">
           <TextFieldControl name="id" disabled value={data?.id} />
         </FormField>
-        <FormField isRow title="Name">
-          <TextFieldControl
-            name="name"
-            value={data?.name}
-            onChange={changeHandler}
-            error={Boolean(getError('name'))}
-            helperText={getError('name')?.message}
-          />
-        </FormField>
         <FormField isRow title="Email">
           <TextFieldControl
-            name="email"
-            value={data?.email}
+            name="username"
+            value={data?.username}
             onChange={changeHandler}
-            error={Boolean(getError('email'))}
-            helperText={getError('email')?.message}
+            error={Boolean(getError('username'))}
+            helperText={getError('username')?.message}
           />
         </FormField>
         <FormField isRow title="&nbsp;">

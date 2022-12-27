@@ -1,6 +1,6 @@
 export const userValueGetter = (params: any) => {
   return {
-    title: `${params.node.rowIndex + 1}. ${params.data?.name}`,
+    title: `${params.node.rowIndex + 1}. ${params.data?.username}`,
     paid: Boolean(params.data.paid)
       ? { status: 'Paid', color: 'green' }
       : undefined,

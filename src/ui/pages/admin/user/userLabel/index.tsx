@@ -6,6 +6,6 @@ import { IUserViewModel } from '@viewModel/modules/user/interface';
 
 export const UserLabel = observer(() => {
   const { data } = useViewModel<IUserViewModel>(VIEW_MODEL.User);
-  const label = data ? `${data.name}` : undefined;
+  const label = data ? `${data.username}` : undefined;
   return <React.Fragment>{label}</React.Fragment>;
 });

@@ -44,24 +44,13 @@ module.exports = {
   },
   env: {
     REACT_APP_CORE_URL: process.env.REACT_APP_CORE_URL,
-    MSAL_REDIRECT_URL: process.env.MSAL_REDIRECT_URL,
-    OPEN_EXCHANGE_RATES_APP_ID: process.env.OPEN_EXCHANGE_RATES_APP_ID,
-    TENANT_ID: process.env.TENANT_ID,
-    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-    FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
-    FACEBOOK_CLIENT_SECRET: process.env.FACEBOOK_CLIENT_SECRET,
-    LINKEDIN_CLIENT_ID: process.env.LINKEDIN_CLIENT_ID,
-    LINKEDIN_CLIENT_SECRET: process.env.LINKEDIN_CLIENT_SECRET,
-    MS_CLIENT_ID: process.env.MS_CLIENT_ID,
-    MS_CLIENT_SECRET: process.env.MS_CLIENT_SECRET,
   },
   images: {
     domains: [
-      'lh3.googleusercontent.com',
-      'scontent.fdps8-1.fna.fbcdn.net',
-      'platform-lookaside.fbsbx.com',
-      'media-exp1.licdn.com',
+      // 'lh3.googleusercontent.com',
+      // 'scontent.fdps8-1.fna.fbcdn.net',
+      // 'platform-lookaside.fbsbx.com',
+      // 'media-exp1.licdn.com',
     ],
   },
 };
