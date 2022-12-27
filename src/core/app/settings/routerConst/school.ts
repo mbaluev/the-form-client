@@ -22,7 +22,17 @@ export const ROUTER_CONST_SCHOOL: Record<string, any> = {
   PROFILE: {
     name: 'profile',
     label: 'Profile',
-    path: '/profile',
+    path: '/account/profile',
+  },
+  LOGIN: {
+    name: 'login',
+    label: 'login',
+    path: '/account/login',
+  },
+  REGISTER: {
+    name: 'register',
+    label: 'register',
+    path: '/account/register',
   },
   ADMIN_MODULES: {
     name: 'adminModules',

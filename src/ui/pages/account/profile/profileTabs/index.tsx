@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ITabItemProps, Tabs } from '@components/tab';
-import { ProfileLocale } from '@ui/pages/profile/profileLocale';
-import { ProfileAvatar } from '@ui/pages/profile/profileAvatar';
+import { ProfileLocale } from '@ui/pages/account/profile/profileLocale';
+import { ProfileAvatar } from '@ui/pages/account/profile/profileAvatar';
 
 enum ProfileTabNames {
   avatar = 'avatar',

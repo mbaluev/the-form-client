@@ -83,9 +83,11 @@ export const Layout = observer((props: TLayoutProps) => {
     <div className={cls}>
       <div className="layout__top">
         <div className="layout__top-left">
-          <IconButton onClick={menuClick} color="grey">
-            <MenuIcon />
-          </IconButton>
+          {menuProps && (
+            <IconButton onClick={menuClick} color="grey">
+              <MenuIcon />
+            </IconButton>
+          )}
           <Link passHref href={ROUTER_CONST_SCHOOL.HOME.path}>
             {size.width > MEDIA_XS ? (
               <Button startIcon={<IconLogo />} size="medium" variant="text">
@@ -120,6 +122,12 @@ export const Layout = observer((props: TLayoutProps) => {
           )}
         </div>
         <div className="layout__top-right">
+          <Link passHref href={ROUTER_CONST_SCHOOL.LOGIN.path}>
+            <Button>Login</Button>
+          </Link>
+          <Link passHref href={ROUTER_CONST_SCHOOL.REGISTER.path}>
+            <Button>Register</Button>
+          </Link>
           {process.env.NODE_ENV === 'development' && (
             <Link passHref href={ROUTER_CONST_DEV.home.path}>
               <IconButton color={colorDev} tooltip="Dev library">
@@ -150,9 +158,11 @@ export const Layout = observer((props: TLayoutProps) => {
         </div>
       </div>
       <div className="layout__middle">
-        <div className="layout__left">
-          <Menu {...menuProps} />
-        </div>
+        {menuProps && (
+          <div className="layout__left">
+            <Menu {...menuProps} />
+          </div>
+        )}
         <div className={clsCenter}>{children}</div>
         {isNotifications && (
           <div className="layout__right">

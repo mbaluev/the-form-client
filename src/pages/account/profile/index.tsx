@@ -3,7 +3,7 @@ import { Page } from '@ui/layout/page';
 import { MasterSchool } from '@ui/masters/masterSchool';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
-import { ProfileTabs } from '@ui/pages/profile/profileTabs';
+import { ProfileTabs } from '@ui/pages/account/profile/profileTabs';
 
 const Profile = () => {
   const breadCrumbs: TBreadCrumb[] = [

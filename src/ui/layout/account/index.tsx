@@ -9,10 +9,9 @@ import { IconButton } from '@components/iconButton';
 import { AccountImage } from '@ui/layout/account/accountImage';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
-import './index.scss';
 import Link from 'next/link';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
-import { Button } from '@components/button';
+import './index.scss';
 
 export const Account = observer(() => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

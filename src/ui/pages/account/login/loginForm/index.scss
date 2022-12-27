@@ -1,0 +1,13 @@
+@import "../../../../../core/scss/params";
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  align-items: center;
+  margin-top: $base * 20;
+
+  & .form {
+    min-width: $base * 60;
+  }
+}

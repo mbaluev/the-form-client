@@ -102,8 +102,8 @@ export interface IBaseCardViewModel<T extends IBaseCardType> {
 
   // --- validations
 
-  validate: (data: T) => void;
-  validateModal: (data: T) => void;
+  validate: () => void;
+  validateModal: () => void;
 
   // --- clear
 
