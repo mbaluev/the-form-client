@@ -1,5 +1,6 @@
 export const VIEW_MODEL = {
   App: Symbol.for('AppViewModel'),
+  Auth: Symbol.for('AuthViewModel'),
   Notify: Symbol.for('NotifyViewModel'),
   Locale: Symbol.for('LocaleViewModel'),
   Menu: Symbol.for('MenuViewModel'),

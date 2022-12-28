@@ -3,13 +3,13 @@ import { Page } from '@ui/layout/page';
 import { LoginForm } from '@ui/pages/account/login/loginForm';
 import { MasterSite } from '@ui/masters/masterSite';
 import { useViewModel } from '@hooks/useViewModel';
-import { IUserViewModel } from '@viewModel/modules/user/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
+import { IAuthViewModel } from '@viewModel/modules/auth/interface';
 
 const Login = () => {
-  const { clearData, clearChanges } = useViewModel<IUserViewModel>(
-    VIEW_MODEL.User
+  const { clearData, clearChanges } = useViewModel<IAuthViewModel>(
+    VIEW_MODEL.Auth
   );
 
   useEffect(() => {

@@ -3,21 +3,21 @@ import { Form, FormField, FormSection } from '@components/form';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IUserViewModel } from '@viewModel/modules/user/interface';
 import { PasswordFieldControl, TextFieldControl } from '@components/fields';
 import { Button } from '@components/button';
+import { IAuthViewModel } from '@viewModel/modules/auth/interface';
 import './index.scss';
 
 export const LoginForm = observer(() => {
-  const { data, changeField, getError, validate, hasErrors } =
-    useViewModel<IUserViewModel>(VIEW_MODEL.User);
+  const { data, changeField, getError, login, hasErrors } =
+    useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     changeField(e.target.name, e.target.value);
   };
   const submitHandler = () => {
-    validate();
+    login();
   };
 
   return (

@@ -29,10 +29,10 @@ export const ROUTER_CONST_SCHOOL: Record<string, any> = {
     label: 'login',
     path: '/account/login',
   },
-  REGISTER: {
-    name: 'register',
-    label: 'register',
-    path: '/account/register',
+  SIGNUP: {
+    name: 'signup',
+    label: 'signup',
+    path: '/account/signup',
   },
   ADMIN_MODULES: {
     name: 'adminModules',

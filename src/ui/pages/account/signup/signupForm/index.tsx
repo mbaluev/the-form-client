@@ -3,25 +3,25 @@ import { Form, FormField, FormSection } from '@components/form';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IUserViewModel } from '@viewModel/modules/user/interface';
 import { PasswordFieldControl, TextFieldControl } from '@components/fields';
 import { Button } from '@components/button';
+import { IAuthViewModel } from '@viewModel/modules/auth/interface';
 import './index.scss';
 
-export const RegisterForm = observer(() => {
-  const { data, changeField, getError, validate, hasErrors } =
-    useViewModel<IUserViewModel>(VIEW_MODEL.User);
+export const SignupForm = observer(() => {
+  const { data, changeField, getError, signup, hasErrors } =
+    useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     changeField(e.target.name, e.target.value);
   };
   const submitHandler = () => {
-    validate();
+    signup();
   };
 
   return (
-    <div className="register-form">
+    <div className="signup-form">
       <Form cols={1}>
         <FormSection>
           <FormField title="Email">
@@ -44,7 +44,7 @@ export const RegisterForm = observer(() => {
           </FormField>
           <FormField>
             <Button onClick={submitHandler} disabled={hasErrors}>
-              Register
+              Signup
             </Button>
           </FormField>
         </FormSection>

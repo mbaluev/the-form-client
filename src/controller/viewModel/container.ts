@@ -22,10 +22,14 @@ import { ITaskViewModel } from '@viewModel/modules/task/interface';
 import { TaskViewModel } from '@viewModel/modules/task';
 import { IUserViewModel } from '@viewModel/modules/user/interface';
 import { UserViewModel } from '@viewModel/modules/user';
+import { IAuthViewModel } from '@viewModel/modules/auth/interface';
+import { AuthViewModel } from '@viewModel/modules/auth';
 
 export const viewModelContainer = new Container({ defaultScope: 'Singleton' });
 
 viewModelContainer.bind<IAppViewModel>(VIEW_MODEL.App).to(AppViewModel);
+
+viewModelContainer.bind<IAuthViewModel>(VIEW_MODEL.Auth).to(AuthViewModel);
 
 viewModelContainer.bind<IMenuViewModel>(VIEW_MODEL.Menu).to(MenuViewModel);
 

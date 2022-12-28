@@ -1,13 +1,12 @@
 export interface IResponseListDTO<T> {
-  status: string;
-  error?: string;
+  success: boolean;
+  message?: string;
   data?: T[];
 }
 
 export interface IResponseItemDTO<T> {
-  status: string;
-  error?: string;
-  data?: T;
+  success: boolean;
+  message?: string;
   changes?: any;
-  deleted?: boolean;
+  data?: T;
 }

@@ -12,7 +12,7 @@ import { MOCK_USERS } from '@model/user/mock';
 export class UserService implements IUserService {
   @inject(INFRASTRUCTURE_MODULE.Axios) protected apiModule!: IAxiosApiModule;
 
-  API_PREFIX = process.env.REACT_APP_CORE_URL;
+  API_PREFIX = `${process.env.REACT_APP_CORE_URL}/api/user`;
 
   MOCK = false;
 
@@ -39,7 +39,7 @@ export class UserService implements IUserService {
       });
     } else {
       const ret = await this.apiModule.get<IResponseListDTO<IUserDTO>>(
-        `${this.API_PREFIX}/api/users`,
+        `${this.API_PREFIX}/list`,
         { ...query }
       );
       return ret.data;
@@ -60,7 +60,7 @@ export class UserService implements IUserService {
       });
     } else {
       const ret = await this.apiModule.get<IResponseItemDTO<IUserDTO>>(
-        `${this.API_PREFIX}/api/user/${id}`,
+        `${this.API_PREFIX}/get/${id}`,
         { ...query }
       );
       return ret.data;
@@ -77,13 +77,13 @@ export class UserService implements IUserService {
       if (data.id) {
         const { id, ...params } = data;
         const ret = await this.apiModule.patch<IResponseItemDTO<IUserDTO>>(
-          `${this.API_PREFIX}/api/user/${data.id}`,
+          `${this.API_PREFIX}/update/${data.id}`,
           { ...params }
         );
         return ret.data;
       } else {
         const ret = await this.apiModule.post<IResponseItemDTO<IUserDTO>>(
-          `${this.API_PREFIX}/api/user`,
+          `${this.API_PREFIX}/create`,
           { ...data }
         );
         return ret.data;
@@ -98,10 +98,10 @@ export class UserService implements IUserService {
       });
     } else {
       const ret = await this.apiModule.delete<IResponseItemDTO<IUserDTO>>(
-        `${this.API_PREFIX}/api/user/`,
+        `${this.API_PREFIX}/delete`,
         { ids }
       );
-      return ret.deleted as boolean;
+      return ret.success;
     }
   };
 }

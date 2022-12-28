@@ -12,8 +12,12 @@ import { IQuestionService } from '@service/modules/question/interface';
 import { QuestionService } from '@service/modules/question';
 import { IUserService } from '@service/modules/user/interface';
 import { UserService } from '@service/modules/user';
+import { IAuthService } from '@service/modules/auth/interface';
+import { AuthService } from '@service/modules/auth';
 
 export const serviceContainer = new Container();
+
+serviceContainer.bind<IAuthService>(SERVICE.Auth).to(AuthService);
 
 serviceContainer.bind<IUserService>(SERVICE.User).to(UserService);
 

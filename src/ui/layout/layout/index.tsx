@@ -125,8 +125,8 @@ export const Layout = observer((props: TLayoutProps) => {
           <Link passHref href={ROUTER_CONST_SCHOOL.LOGIN.path}>
             <Button>Login</Button>
           </Link>
-          <Link passHref href={ROUTER_CONST_SCHOOL.REGISTER.path}>
-            <Button>Register</Button>
+          <Link passHref href={ROUTER_CONST_SCHOOL.SIGNUP.path}>
+            <Button>Signup</Button>
           </Link>
           {process.env.NODE_ENV === 'development' && (
             <Link passHref href={ROUTER_CONST_DEV.home.path}>
