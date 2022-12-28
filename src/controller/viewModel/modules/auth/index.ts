@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { SERVICE } from '@service/ids';
-import { action, makeObservable, observable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 import { IUserDTO } from '@model/user';
 import { IAuthViewModel } from '@viewModel/modules/auth/interface';
 import { AuthService } from '@service/modules/auth';
@@ -18,8 +18,13 @@ export class AuthViewModel
     makeObservable(this, {
       token: observable,
       setToken: action,
-      login: action,
+
       signup: action,
+      login: action,
+      logout: action,
+      refreshToken: action,
+
+      isAuth: computed,
     });
     this.setValidations([
       { nameSpace: 'username', type: 'required', message: 'Required' },
@@ -35,28 +40,15 @@ export class AuthViewModel
     this.token = data;
   };
 
-  // --- auth
-
-  login = async () => {
-    this.validate();
-    if (this.data && !this.hasErrors) {
-      this.setDataLoading(true);
-      try {
-        await this.serviceAuth.login(this.data);
-        await this.clearChanges();
-        await this.clearData();
-      } finally {
-        this.setDataLoading(false);
-      }
-    }
-  };
+  // --- action
 
   signup = async () => {
     this.validate();
     if (this.data && !this.hasErrors) {
       this.setDataLoading(true);
       try {
-        await this.serviceAuth.signup(this.data);
+        const data = await this.serviceAuth.signup(this.data);
+        this.setToken(data.token);
         await this.clearChanges();
         await this.clearData();
       } finally {
@@ -64,4 +56,44 @@ export class AuthViewModel
       }
     }
   };
+
+  login = async () => {
+    this.validate();
+    if (this.data && !this.hasErrors) {
+      this.setDataLoading(true);
+      try {
+        const data = await this.serviceAuth.login(this.data);
+        this.setToken(data.token);
+        await this.clearChanges();
+        await this.clearData();
+      } finally {
+        this.setDataLoading(false);
+      }
+    }
+  };
+
+  logout = async () => {
+    this.setDataLoading(true);
+    try {
+      await this.serviceAuth.logout();
+      this.setToken();
+    } finally {
+      this.setDataLoading(false);
+    }
+  };
+
+  refreshToken = async () => {
+    try {
+      const data = await this.serviceAuth.refreshToken();
+      this.setToken(data.token);
+    } finally {
+      this.setDataLoading(false);
+    }
+  };
+
+  // --- computed
+
+  get isAuth() {
+    return Boolean(this.token);
+  }
 }

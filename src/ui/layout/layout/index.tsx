@@ -26,6 +26,7 @@ import { Account } from '@ui/layout/account';
 import { useRouter } from 'next/router';
 import { MEDIA_MD, MEDIA_XS, useWindowSize } from '@hooks/useWindowSize';
 import { IconLogo } from '@ui/icons';
+import { useAuth } from '@hooks/useAuth';
 import './index.scss';
 
 export interface ILayoutProps {
@@ -53,6 +54,7 @@ export const Layout = observer((props: TLayoutProps) => {
     useViewModel<IMenuViewModel>(VIEW_MODEL.Menu);
   const { isOpen: isOpenNotify, setOpen: setOpenNotify } =
     useViewModel<INotifyViewModel>(VIEW_MODEL.Notify);
+  const { isAuth } = useAuth();
   const menuClick = () => setOpenMenu(!isOpenMenu);
   const notifyClick = () => setOpenNotify(!isOpenNotify);
 
@@ -122,12 +124,6 @@ export const Layout = observer((props: TLayoutProps) => {
           )}
         </div>
         <div className="layout__top-right">
-          <Link passHref href={ROUTER_CONST_SCHOOL.LOGIN.path}>
-            <Button>Login</Button>
-          </Link>
-          <Link passHref href={ROUTER_CONST_SCHOOL.SIGNUP.path}>
-            <Button>Signup</Button>
-          </Link>
           {process.env.NODE_ENV === 'development' && (
             <Link passHref href={ROUTER_CONST_DEV.home.path}>
               <IconButton color={colorDev} tooltip="Dev library">
@@ -135,26 +131,39 @@ export const Layout = observer((props: TLayoutProps) => {
               </IconButton>
             </Link>
           )}
-          {support && (
-            <IconButton
-              color="grey"
-              tooltip="Support"
-              tooltipPlacement="bottom"
-            >
-              <HeadsetMicIcon />
-            </IconButton>
+          {isAuth ? (
+            <React.Fragment>
+              {support && (
+                <IconButton
+                  color="grey"
+                  tooltip="Support"
+                  tooltipPlacement="bottom"
+                >
+                  <HeadsetMicIcon />
+                </IconButton>
+              )}
+              {notifications && (
+                <IconButton
+                  color="grey"
+                  tooltip="Notifications"
+                  tooltipPlacement="bottom"
+                  onClick={notifyClick}
+                >
+                  <NotificationsIcon />
+                </IconButton>
+              )}
+              <Account />
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <Link passHref href={ROUTER_CONST_SCHOOL.LOGIN.path}>
+                <Button>Login</Button>
+              </Link>
+              <Link passHref href={ROUTER_CONST_SCHOOL.SIGNUP.path}>
+                <Button>Signup</Button>
+              </Link>
+            </React.Fragment>
           )}
-          {notifications && (
-            <IconButton
-              color="grey"
-              tooltip="Notifications"
-              tooltipPlacement="bottom"
-              onClick={notifyClick}
-            >
-              <NotificationsIcon />
-            </IconButton>
-          )}
-          <Account />
         </div>
       </div>
       <div className="layout__middle">

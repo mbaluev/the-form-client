@@ -111,6 +111,14 @@ export const DialogUser = observer((props: IProps) => {
               onChange={changeCheckboxHandler}
             />
           </FormField>
+          <FormField>
+            <CheckboxFieldControl
+              name="admin"
+              label="Admin"
+              value={modalData?.admin}
+              onChange={changeCheckboxHandler}
+            />
+          </FormField>
         </FormSection>
       </Form>
     </Modal>

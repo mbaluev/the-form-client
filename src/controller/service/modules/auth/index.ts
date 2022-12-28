@@ -3,6 +3,7 @@ import { INFRASTRUCTURE_MODULE } from '@infrastructure/ids';
 import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { IUserDTO } from '@model/user';
 import { IAuthService } from '@service/modules/auth/interface';
+import { IAuthResponse } from '@model/auth';
 
 @injectable()
 export class AuthService implements IAuthService {
@@ -10,18 +11,31 @@ export class AuthService implements IAuthService {
 
   API_PREFIX = `${process.env.REACT_APP_CORE_URL}/api/auth`;
 
-  login = async (data: IUserDTO) => {
-    const ret = await this.apiModule.post(`${this.API_PREFIX}/login`, {
+  signup = async (data: IUserDTO) => {
+    return this.apiModule.post<IAuthResponse>(`${this.API_PREFIX}/signup`, {
       username: data.username,
       password: data.password,
     });
-    console.log(ret);
   };
 
-  signup = async (data: IUserDTO) => {
-    await this.apiModule.post(`${this.API_PREFIX}/signup`, {
+  login = async (data: IUserDTO) => {
+    return this.apiModule.post<IAuthResponse>(`${this.API_PREFIX}/login`, {
       username: data.username,
       password: data.password,
     });
+  };
+
+  logout = async (token?: string) => {
+    return this.apiModule.post<IAuthResponse>(
+      `${this.API_PREFIX}/logout`,
+      null,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  };
+
+  refreshToken = async () => {
+    return this.apiModule.post<IAuthResponse>(
+      `${this.API_PREFIX}/refreshToken`
+    );
   };
 }

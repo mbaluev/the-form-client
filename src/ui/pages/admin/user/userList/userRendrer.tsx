@@ -15,6 +15,9 @@ export const UserRenderer = (params: ICellRendererParams) => {
           color={params.value.active.color}
         />
       )}
+      {params.value.admin && (
+        <Tag tag={params.value.admin.status} color={params.value.admin.color} />
+      )}
     </div>
   );
 };

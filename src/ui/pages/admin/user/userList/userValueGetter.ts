@@ -7,5 +7,8 @@ export const userValueGetter = (params: any) => {
     active: Boolean(params.data.active)
       ? { status: 'Active', color: 'blue' }
       : undefined,
+    admin: Boolean(params.data.admin)
+      ? { status: 'Admin', color: 'red' }
+      : undefined,
   };
 };

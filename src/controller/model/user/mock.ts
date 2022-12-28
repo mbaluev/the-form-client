@@ -6,11 +6,13 @@ export const MOCK_USERS: IUserDTO[] = [
     username: 'user1@user.com',
     active: true,
     paid: true,
+    admin: false,
   },
   {
     id: '2',
     username: 'user2@user.com',
-    active: false,
-    paid: true,
+    active: true,
+    paid: false,
+    admin: true,
   },
 ];

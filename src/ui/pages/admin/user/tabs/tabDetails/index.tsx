@@ -50,6 +50,14 @@ export const TabDetails = observer(() => {
             onChange={changeCheckboxHandler}
           />
         </FormField>
+        <FormField isRow title="&nbsp;">
+          <CheckboxFieldControl
+            name="admin"
+            label="Admin"
+            value={data?.admin}
+            onChange={changeCheckboxHandler}
+          />
+        </FormField>
       </FormSection>
     </Form>
   );

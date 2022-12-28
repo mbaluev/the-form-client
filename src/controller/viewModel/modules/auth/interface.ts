@@ -3,6 +3,11 @@ import { IUserDTO } from '@model/user';
 
 export interface IAuthViewModel extends IBaseCardViewModel<IUserDTO> {
   token?: string;
-  login: () => Promise<void>;
+
   signup: () => Promise<void>;
+  login: () => Promise<void>;
+  logout: () => Promise<void>;
+  refreshToken: () => Promise<void>;
+
+  isAuth: boolean;
 }
