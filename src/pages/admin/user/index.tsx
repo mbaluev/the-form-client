@@ -13,14 +13,17 @@ import { IUserService } from '@service/modules/user/interface';
 import { IUserViewModel } from '@viewModel/modules/user/interface';
 import { UserPage } from '@ui/pages/admin/user/userPage';
 import { observer } from 'mobx-react';
+import cookie from '@utils/cookie';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
 ) => {
-  const { query } = context;
+  const { query, req } = context;
+  const { cookies } = req;
   const serviceUser = useService<IUserService>(SERVICE.User);
+  const token = cookies[cookie.names.token];
 
-  const users = (await serviceUser.getUsers(query)) || null;
+  const users = (await serviceUser.getUsers(query, token)) || null;
 
   return { props: { users } };
 };

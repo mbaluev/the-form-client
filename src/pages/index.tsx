@@ -1,16 +1,15 @@
 import React from 'react';
 import { Page } from '@ui/layout/page';
 import { IndexContent } from '@ui/pages/index/indexContent';
-import { MasterSite } from '@ui/masters/masterSite';
+import { MasterSchool } from '@ui/masters/masterSchool';
 
 const Index = () => {
-  const started = false;
   return (
-    <Page title="Manifesto">
-      <IndexContent started={started} />
+    <Page>
+      <IndexContent />
     </Page>
   );
 };
 
-Index.Layout = MasterSite;
+Index.Layout = MasterSchool;
 export default Index;

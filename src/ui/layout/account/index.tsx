@@ -2,15 +2,16 @@ import React, { MouseEvent, useState } from 'react';
 import FaceIcon from '@mui/icons-material/Face';
 import MenuItem from '@mui/material/MenuItem';
 import Logout from '@mui/icons-material/Logout';
-import SettingsIcon from '@mui/icons-material/Settings';
 import { Avatar, Divider } from '@mui/material';
 import { observer } from 'mobx-react';
 import { IconButton } from '@components/iconButton';
 import { AccountImage } from '@ui/layout/account/accountImage';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
-import Link from 'next/link';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
+import { useAuth } from '@hooks/useAuth';
+import { useRouter } from 'next/router';
+import { AccountRoles } from '@ui/layout/account/accountRoles';
 import './index.scss';
 
 export const Account = observer(() => {
@@ -18,12 +19,15 @@ export const Account = observer(() => {
   const open = Boolean(anchorEl);
   const handleOpen = (e: MouseEvent<any>) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
+  const { username, logout, isDataLoading } = useAuth();
 
-  const account = {
-    loading: false,
-    photo: undefined,
-    name: 'MBaluev',
-    email: 'mikhail.baluev@gmail.com',
+  const router = useRouter();
+  const logoutHandler = async () => {
+    if (await logout()) {
+      await router.push({
+        pathname: ROUTER_CONST_SCHOOL.HOME.path,
+      });
+    }
   };
 
   return (
@@ -50,31 +54,22 @@ export const Account = observer(() => {
             <div className="account__avatar">
               <Avatar sx={{ width: 50, height: 50, fontSize: '1.6rem' }}>
                 <AccountImage
-                  loading={account.loading}
-                  src={account.photo}
-                  name={account.name}
+                  loading={isDataLoading}
+                  src={undefined}
+                  name={username}
                 />
               </Avatar>
             </div>
             <div className="account__info">
               <div className="account__user">
-                <div className="account__name">{account.name}</div>
-                <div className="account__email">{account.email}</div>
+                <div className="account__email">{username}</div>
+                <AccountRoles />
               </div>
             </div>
           </div>
         </div>
         <Divider />
-        <Link passHref href={ROUTER_CONST_SCHOOL.PROFILE.path}>
-          <MenuItem>
-            <ListItemIcon>
-              <SettingsIcon fontSize="small" />
-            </ListItemIcon>
-            Profile settings
-          </MenuItem>
-        </Link>
-        <Divider />
-        <MenuItem>
+        <MenuItem onClick={logoutHandler}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

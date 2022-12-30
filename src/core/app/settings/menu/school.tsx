@@ -5,6 +5,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PeopleIcon from '@mui/icons-material/People';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import { ROLES } from '@app/settings/roles';
 
 export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
   {
@@ -19,6 +20,7 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
         pathname === ROUTER_CONST_SCHOOL.BLOCK.path
       );
     },
+    roles: [ROLES.STUDENT],
   },
   {
     name: 'administration',
@@ -64,5 +66,6 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
         },
       },
     ],
+    roles: [ROLES.ADMIN],
   },
 ];

@@ -22,6 +22,7 @@ import dirs from '@utils/locale/dir';
 import { SnackbarProvider } from 'notistack';
 import { IMenuViewModel } from '@viewModel/modules/menu/interface';
 import { IFilterViewModel } from '@viewModel/modules/filter/interfaces';
+import { IAuthViewModel } from '@viewModel/modules/auth/interface';
 import '../core/scss/index.scss';
 
 configure({ enforceActions: 'observed' });
@@ -38,6 +39,7 @@ interface MyAppProps extends AppProps {
 // container init
 const container = initializeDiContainer();
 const app = container.get<IAppViewModel>(VIEW_MODEL.App);
+const auth = container.get<IAuthViewModel>(VIEW_MODEL.Auth);
 const locale = container.get<ILocaleViewModel>(VIEW_MODEL.Locale);
 const menu = container.get<IMenuViewModel>(VIEW_MODEL.Menu);
 const filter = container.get<IFilterViewModel>(VIEW_MODEL.Filter);
@@ -57,6 +59,10 @@ const MyApp = (props: MyAppProps) => {
   useEffect(() => {
     locale.changeLanguage(locale.language);
     menu.initiate();
+
+    auth.refreshToken();
+    const interval = 60 * 15 * 1000; // token expiry
+    setInterval(auth.refreshToken, interval);
 
     const handleStart = (url: string) => app.routeChangeStart(url);
     const handleStop = (url: string) => app.routeChangeComplete(url);

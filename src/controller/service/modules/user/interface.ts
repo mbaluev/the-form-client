@@ -2,11 +2,16 @@ import { ParsedUrlQuery } from 'querystring';
 import { IUserDTO } from '@model/user';
 
 export interface IUserService {
-  getUsers: (query?: ParsedUrlQuery) => Promise<IUserDTO[] | undefined>;
+  getCurrentUser: (token?: string) => Promise<IUserDTO | undefined>;
+  getUsers: (
+    query?: ParsedUrlQuery,
+    token?: string
+  ) => Promise<IUserDTO[] | undefined>;
   getUser: (
     id?: string,
-    query?: ParsedUrlQuery
+    query?: ParsedUrlQuery,
+    token?: string
   ) => Promise<IUserDTO | undefined>;
-  saveUser: (data: IUserDTO) => Promise<IUserDTO | undefined>;
-  deleteUsers: (ids: string[]) => Promise<boolean>;
+  saveUser: (data: IUserDTO, token?: string) => Promise<IUserDTO | undefined>;
+  deleteUsers: (ids: string[], token?: string) => Promise<boolean | undefined>;
 }

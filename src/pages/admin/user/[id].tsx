@@ -13,15 +13,18 @@ import { ParsedUrlQuery } from 'querystring';
 import { IUserService } from '@service/modules/user/interface';
 import { IUserViewModel } from '@viewModel/modules/user/interface';
 import { UserPage } from '@ui/pages/admin/user/userPage';
+import cookie from '@utils/cookie';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
 ) => {
-  const { params, query } = context;
+  const { params, query, req } = context;
+  const { cookies } = req;
   const serviceUser = useService<IUserService>(SERVICE.User);
+  const token = cookies[cookie.names.token];
 
-  const users = (await serviceUser.getUsers(query)) || null;
-  const user = (await serviceUser.getUser(params?.id, query)) || null;
+  const users = (await serviceUser.getUsers(query, token)) || null;
+  const user = (await serviceUser.getUser(params?.id, query, token)) || null;
 
   return { props: { users, user } };
 };

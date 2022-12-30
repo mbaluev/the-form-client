@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { IMenuViewModel } from '@viewModel/modules/menu/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
+import { PermissionWrapper } from '@ui/permission/permissionWrapper';
 import './index.scss';
 
 export interface IMenuProps {
@@ -30,13 +31,17 @@ export const Menu = observer((props: IMenuProps) => {
     <div className={cls}>
       <div className={clsTop}>
         {itemsTop?.map((item, index) => (
-          <MenuItem key={index} {...item} />
+          <PermissionWrapper key={index} roles={item.roles}>
+            <MenuItem {...item} />
+          </PermissionWrapper>
         ))}
       </div>
       {itemsBottom && (
         <div className={clsBottom}>
           {itemsBottom?.map((item, index) => (
-            <MenuItem key={index} {...item} />
+            <PermissionWrapper key={index} roles={item.roles}>
+              <MenuItem {...item} />
+            </PermissionWrapper>
           ))}
         </div>
       )}

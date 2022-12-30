@@ -23,6 +23,7 @@
     & .MuiFormHelperText-root {
       margin: $base 0 0 0;
       font-size: 0.9rem;
+      font-family: $font-family;
 
       &.Mui-error {
         color: $color-red;

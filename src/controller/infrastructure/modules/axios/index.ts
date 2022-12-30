@@ -18,6 +18,7 @@ export class AxiosApiModule implements IAxiosApiModule {
 
   constructor() {
     this.api = axios.create({
+      withCredentials: true,
       baseURL: this.prefixUrl,
     });
   }

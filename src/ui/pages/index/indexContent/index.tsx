@@ -6,12 +6,7 @@ import { IconLogo } from '@ui/icons';
 import { Button } from '@components/button';
 import './index.scss';
 
-interface IProps {
-  started?: boolean;
-}
-
-export const IndexContent = (props: IProps) => {
-  const { started } = props;
+export const IndexContent = () => {
   const cls = classNames('index-content');
   return (
     <div className={cls}>
@@ -21,9 +16,7 @@ export const IndexContent = (props: IProps) => {
         <div className="index-content__description">School of analytics</div>
       </div>
       <Link href={ROUTER_CONST_SCHOOL.MODULES.path} passHref>
-        <Button size="big" color="blue" variant="contained">
-          {started ? 'Go to modules' : 'Start'}
-        </Button>
+        <Button>Go to modules</Button>
       </Link>
     </div>
   );

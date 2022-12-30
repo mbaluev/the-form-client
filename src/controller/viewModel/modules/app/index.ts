@@ -7,13 +7,13 @@ import { BaseViewModel } from '@viewModel/modules/base';
 export class AppViewModel extends BaseViewModel implements IAppViewModel {
   private url?: string;
 
-  routeChangeStart = (url: string): void => {
+  routeChangeStart = async (url: string) => {
     this.setLoading(true);
     this.url = url;
     NProgress.start();
   };
 
-  routeChangeComplete = (url: string): void => {
+  routeChangeComplete = async (url: string) => {
     this.url = url;
     this.setLoading(false);
     NProgress.done();

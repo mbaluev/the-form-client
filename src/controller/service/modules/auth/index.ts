@@ -26,7 +26,7 @@ export class AuthService implements IAuthService {
   };
 
   logout = async (token?: string) => {
-    return this.apiModule.post<IAuthResponse>(
+    return this.apiModule.get<IAuthResponse>(
       `${this.API_PREFIX}/logout`,
       null,
       { headers: { Authorization: `Bearer ${token}` } }

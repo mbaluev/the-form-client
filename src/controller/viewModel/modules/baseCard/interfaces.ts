@@ -13,7 +13,7 @@ export interface IBaseCardField {
 
 export interface IBaseCardValidation {
   nameSpace: string;
-  type: 'required';
+  type: 'required' | 'email';
   message: string;
 }
 

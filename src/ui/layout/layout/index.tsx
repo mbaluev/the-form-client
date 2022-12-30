@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from '@mui/icons-material/Menu';
 import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
@@ -27,6 +27,7 @@ import { useRouter } from 'next/router';
 import { MEDIA_MD, MEDIA_XS, useWindowSize } from '@hooks/useWindowSize';
 import { IconLogo } from '@ui/icons';
 import { useAuth } from '@hooks/useAuth';
+import { isAccess } from '@ui/permission/permissionWrapper';
 import './index.scss';
 
 export interface ILayoutProps {
@@ -54,7 +55,7 @@ export const Layout = observer((props: TLayoutProps) => {
     useViewModel<IMenuViewModel>(VIEW_MODEL.Menu);
   const { isOpen: isOpenNotify, setOpen: setOpenNotify } =
     useViewModel<INotifyViewModel>(VIEW_MODEL.Notify);
-  const { isAuth } = useAuth();
+  const { isAuth, roles: claimRoles } = useAuth();
   const menuClick = () => setOpenMenu(!isOpenMenu);
   const notifyClick = () => setOpenNotify(!isOpenNotify);
 
@@ -73,6 +74,19 @@ export const Layout = observer((props: TLayoutProps) => {
   const isNotifications =
     notifications && isOpenNotify && size.width > MEDIA_MD;
 
+  const [isMenu, setIsMenu] = useState(false);
+  useEffect(() => {
+    if (!isAuth) {
+      setIsMenu(false);
+    } else {
+      menuProps?.items?.forEach((item) => {
+        if (isAccess(claimRoles, item.roles)) {
+          setIsMenu(true);
+        }
+      });
+    }
+  }, [isAuth]);
+
   useEffect(() => {
     const resize = () => window.dispatchEvent(new Event('resize'));
     const interval = setInterval(resize, 10);
@@ -85,7 +99,7 @@ export const Layout = observer((props: TLayoutProps) => {
     <div className={cls}>
       <div className="layout__top">
         <div className="layout__top-left">
-          {menuProps && (
+          {menuProps && isMenu && (
             <IconButton onClick={menuClick} color="grey">
               <MenuIcon />
             </IconButton>
@@ -167,7 +181,7 @@ export const Layout = observer((props: TLayoutProps) => {
         </div>
       </div>
       <div className="layout__middle">
-        {menuProps && (
+        {menuProps && isMenu && (
           <div className="layout__left">
             <Menu {...menuProps} />
           </div>

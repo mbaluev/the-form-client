@@ -28,8 +28,17 @@ export class UserService implements IUserService {
         : true;
     };
 
+  getCurrentUser = async (token?: string): Promise<IUserDTO | undefined> => {
+    return this.apiModule.get<IUserDTO | undefined>(
+      `${this.API_PREFIX}/me`,
+      null,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  };
+
   getUsers = async (
-    query?: ParsedUrlQuery
+    query?: ParsedUrlQuery,
+    token?: string
   ): Promise<IUserDTO[] | undefined> => {
     if (this.MOCK) {
       const users = [...MOCK_USERS];
@@ -40,15 +49,17 @@ export class UserService implements IUserService {
     } else {
       const ret = await this.apiModule.get<IResponseListDTO<IUserDTO>>(
         `${this.API_PREFIX}/list`,
-        { ...query }
+        { ...query },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      return ret.data;
+      return ret ? ret.data : undefined;
     }
   };
 
   getUser = async (
     id?: string,
-    query?: ParsedUrlQuery
+    query?: ParsedUrlQuery,
+    token?: string
   ): Promise<IUserDTO | undefined> => {
     if (this.MOCK) {
       const users = [...MOCK_USERS];
@@ -61,13 +72,14 @@ export class UserService implements IUserService {
     } else {
       const ret = await this.apiModule.get<IResponseItemDTO<IUserDTO>>(
         `${this.API_PREFIX}/get/${id}`,
-        { ...query }
+        { ...query },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      return ret.data;
+      return ret ? ret.data : undefined;
     }
   };
 
-  saveUser = async (data: IUserDTO) => {
+  saveUser = async (data: IUserDTO, token?: string) => {
     if (this.MOCK) {
       if (!data.id) data.id = guid();
       return new Promise<IUserDTO>((resolve) => {
@@ -78,20 +90,22 @@ export class UserService implements IUserService {
         const { id, ...params } = data;
         const ret = await this.apiModule.patch<IResponseItemDTO<IUserDTO>>(
           `${this.API_PREFIX}/update/${data.id}`,
-          { ...params }
+          { ...params },
+          { headers: { Authorization: `Bearer ${token}` } }
         );
-        return ret.data;
+        return ret ? ret.data : undefined;
       } else {
         const ret = await this.apiModule.post<IResponseItemDTO<IUserDTO>>(
           `${this.API_PREFIX}/create`,
-          { ...data }
+          { ...data },
+          { headers: { Authorization: `Bearer ${token}` } }
         );
-        return ret.data;
+        return ret ? ret.data : undefined;
       }
     }
   };
 
-  deleteUsers = async (ids: string[]) => {
+  deleteUsers = async (ids: string[], token?: string) => {
     if (this.MOCK) {
       return new Promise<boolean>((resolve) => {
         setTimeout(() => resolve(true), 1000);
@@ -99,9 +113,10 @@ export class UserService implements IUserService {
     } else {
       const ret = await this.apiModule.delete<IResponseItemDTO<IUserDTO>>(
         `${this.API_PREFIX}/delete`,
-        { ids }
+        { ids },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      return ret.success;
+      return ret ? ret.success : undefined;
     }
   };
 }

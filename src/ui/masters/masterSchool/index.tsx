@@ -4,5 +4,6 @@ import { Layout } from '@ui/layout/layout';
 
 export const MasterSchool: FC<any> = (props) => {
   const { children } = props;
-  return <Layout menuProps={{ items: MENU_CONFIG_SCHOOL }}>{children}</Layout>;
+  const menuProps = { items: MENU_CONFIG_SCHOOL };
+  return <Layout menuProps={menuProps}>{children}</Layout>;
 };

@@ -5,6 +5,10 @@ import { IUserDTO } from '@model/user';
 import { IAuthViewModel } from '@viewModel/modules/auth/interface';
 import { AuthService } from '@service/modules/auth';
 import { BaseCardViewModel } from '@viewModel/modules/baseCard';
+import { setCookies, getCookie, removeCookies } from 'cookies-next';
+import cookie from '@utils/cookie';
+import { UserService } from '@service/modules/user';
+import { Jwt } from '@utils/jwt';
 
 @injectable()
 export class AuthViewModel
@@ -13,11 +17,15 @@ export class AuthViewModel
 {
   @inject(SERVICE.Auth) protected serviceAuth!: AuthService;
 
+  @inject(SERVICE.User) protected serviceUser!: UserService;
+
   constructor() {
     super();
     makeObservable(this, {
       token: observable,
       setToken: action,
+      message: observable,
+      setMessage: action,
 
       signup: action,
       login: action,
@@ -25,11 +33,17 @@ export class AuthViewModel
       refreshToken: action,
 
       isAuth: computed,
+      username: computed,
+      roles: computed,
+
+      clearMessage: action,
     });
     this.setValidations([
       { nameSpace: 'username', type: 'required', message: 'Required' },
+      { nameSpace: 'username', type: 'email', message: 'Not correct email' },
       { nameSpace: 'password', type: 'required', message: 'Required' },
     ]);
+    this.setToken((getCookie(cookie.names.token) as string) || undefined);
   }
 
   // --- observable
@@ -38,6 +52,17 @@ export class AuthViewModel
 
   setToken = (data?: string) => {
     this.token = data;
+    if (data) {
+      setCookies(cookie.names.token, data, cookie.options);
+    } else {
+      removeCookies(cookie.names.token);
+    }
+  };
+
+  message?: string = undefined;
+
+  setMessage = (data?: string) => {
+    this.message = data;
   };
 
   // --- action
@@ -48,13 +73,17 @@ export class AuthViewModel
       this.setDataLoading(true);
       try {
         const data = await this.serviceAuth.signup(this.data);
-        this.setToken(data.token);
-        await this.clearChanges();
-        await this.clearData();
+        if (data && data.token) {
+          this.setToken(data.token);
+          await this.clearChanges();
+          await this.clearData();
+          return true;
+        }
       } finally {
         this.setDataLoading(false);
       }
     }
+    return false;
   };
 
   login = async () => {
@@ -63,31 +92,45 @@ export class AuthViewModel
       this.setDataLoading(true);
       try {
         const data = await this.serviceAuth.login(this.data);
-        this.setToken(data.token);
-        await this.clearChanges();
-        await this.clearData();
+        if (data && data.token) {
+          this.setToken(data.token);
+          await this.clearChanges();
+          return true;
+        } else {
+          this.setMessage('Incorrect username or password');
+        }
       } finally {
         this.setDataLoading(false);
       }
     }
+    return false;
   };
 
   logout = async () => {
     this.setDataLoading(true);
-    try {
-      await this.serviceAuth.logout();
-      this.setToken();
-    } finally {
-      this.setDataLoading(false);
+    if (this.token) {
+      try {
+        const ret = await this.serviceAuth.logout(this.token);
+        if (ret && ret.success) {
+          this.setToken();
+          await this.clearData();
+          return true;
+        }
+      } finally {
+        this.setDataLoading(false);
+      }
     }
+    return false;
   };
 
   refreshToken = async () => {
-    try {
-      const data = await this.serviceAuth.refreshToken();
-      this.setToken(data.token);
-    } finally {
-      this.setDataLoading(false);
+    if (this.isAuth) {
+      try {
+        const data = await this.serviceAuth.refreshToken();
+        if (data) this.setToken(data.token);
+      } finally {
+        this.setDataLoading(false);
+      }
     }
   };
 
@@ -96,4 +139,27 @@ export class AuthViewModel
   get isAuth() {
     return Boolean(this.token);
   }
+
+  get username() {
+    if (this.token) {
+      return new Jwt(this.token).decodedClaims?.username;
+    }
+    return undefined;
+  }
+
+  get roles() {
+    if (this.token) {
+      return new Jwt(this.token).decodedClaims?.roles;
+    }
+    return undefined;
+  }
+
+  // --- clear
+
+  clearMessage = async () => {
+    try {
+      this.setMessage();
+    } finally {
+    }
+  };
 }

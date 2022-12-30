@@ -5,6 +5,8 @@ import { action, makeObservable, observable } from 'mobx';
 import { IUserViewModel } from '@viewModel/modules/user/interface';
 import { IUserDTO } from '@model/user';
 import { UserService } from '@service/modules/user';
+import { VIEW_MODEL } from '@viewModel/ids';
+import { AuthViewModel } from '@viewModel/modules/auth';
 
 @injectable()
 export class UserViewModel
@@ -12,6 +14,8 @@ export class UserViewModel
   implements IUserViewModel
 {
   @inject(SERVICE.User) protected serviceUser!: UserService;
+
+  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
 
   constructor() {
     super();
@@ -22,6 +26,7 @@ export class UserViewModel
     });
     this.setValidations([
       { nameSpace: 'username', type: 'required', message: 'Required' },
+      { nameSpace: 'username', type: 'email', message: 'Not correct email' },
       { nameSpace: 'password', type: 'required', message: 'Required' },
     ]);
   }
@@ -47,7 +52,10 @@ export class UserViewModel
     this.setDataLoading(true);
     try {
       if (this.data && !this.hasErrors) {
-        const data = await this.serviceUser.saveUser(this.data);
+        const data = await this.serviceUser.saveUser(
+          this.data,
+          this.auth.token
+        );
         if (data) {
           this.updateFromList(data);
           await this.clearChanges();
@@ -63,7 +71,10 @@ export class UserViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const data = await this.serviceUser.saveUser(this.modalData);
+        const data = await this.serviceUser.saveUser(
+          this.modalData,
+          this.auth.token
+        );
         if (data) {
           this.updateFromList(data);
           await this.clearModalChanges();
@@ -79,11 +90,16 @@ export class UserViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        await this.serviceUser.deleteUsers(this.deleteIds);
-        this.removeFromList(this.deleteIds);
-        await this.clearDelete();
-        await this.clearData();
-        return true;
+        const data = await this.serviceUser.deleteUsers(
+          this.deleteIds,
+          this.auth.token
+        );
+        if (data) {
+          this.removeFromList(this.deleteIds);
+          await this.clearDelete();
+          await this.clearData();
+        }
+        return data;
       }
     } finally {
       this.setDeleteLoading(false);

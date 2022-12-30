@@ -583,19 +583,30 @@ export class BaseCardViewModel<T extends IBaseCardType>
   };
 
   validateField = (nameSpace: string, value?: any) => {
-    this.validations?.forEach((validation) => {
-      // eslint-disable-next-line sonarjs/no-collapsible-if
-      if (validation.nameSpace === nameSpace) {
-        // eslint-disable-next-line sonarjs/no-collapsible-if
-        if (validation.type === 'required') {
-          if (value) {
-            this.removeError(nameSpace);
-          } else {
-            this.setError(nameSpace, validation.message, value);
+    let valid = true;
+    let message = '';
+
+    this.validations
+      ?.filter((validation) => validation.nameSpace === nameSpace)
+      ?.forEach((validation) => {
+        if (valid && validation.type === 'required' && !value) {
+          valid = false;
+          message = validation.message;
+        }
+        if (valid && validation.type === 'email') {
+          const regex = /\S+@\S+\.\S+/;
+          if (!regex.test(value)) {
+            valid = false;
+            message = validation.message;
           }
         }
-      }
-    });
+      });
+
+    if (valid) {
+      this.removeError(nameSpace);
+    } else {
+      this.setError(nameSpace, message, value);
+    }
   };
 
   validate = () => {

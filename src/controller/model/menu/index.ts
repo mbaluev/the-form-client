@@ -7,6 +7,7 @@ interface IMenuItem {
   icon?: JSX.Element;
   position?: 'top' | 'bottom';
   active?: (pathname: string) => boolean;
+  roles?: string[];
 }
 
 export interface IMenuItemParentDTO {
