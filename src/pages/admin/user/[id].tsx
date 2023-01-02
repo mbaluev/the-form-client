@@ -14,25 +14,29 @@ import { IUserService } from '@service/modules/user/interface';
 import { IUserViewModel } from '@viewModel/modules/user/interface';
 import { UserPage } from '@ui/pages/admin/user/userPage';
 import cookie from '@utils/cookie';
+import { useToken } from '@hooks/useToken';
+import { useAuth } from '@hooks/useAuth';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
 ) => {
   const { params, query, req } = context;
   const { cookies } = req;
+
+  const token = await useToken(cookies[cookie.names.refreshToken]);
   const serviceUser = useService<IUserService>(SERVICE.User);
-  const token = cookies[cookie.names.token];
 
   const users = (await serviceUser.getUsers(query, token)) || null;
   const user = (await serviceUser.getUser(params?.id, query, token)) || null;
 
-  return { props: { users, user } };
+  return { props: { users, user, token } };
 };
 
 const User = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
-  const { users, user } = props;
+  const { users, user, token } = props;
+  const { setToken } = useAuth();
   const {
     setList: setUsers,
     setData: setUser,
@@ -67,6 +71,7 @@ const User = (
   };
 
   useEffect(() => {
+    setToken(token);
     setUsers(users);
     setUser(user);
     setUserData(user);

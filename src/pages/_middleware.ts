@@ -24,30 +24,33 @@ const handleRouteDev = () => {
 const handleRouteSchool = (
   key: string,
   token?: string,
+  refreshToken?: string,
   claimRoles?: string[]
 ) => {
   const routeRoles = ROUTER_CONST_SCHOOL[key].roles || [];
-  const routeHasRoles = routeRoles.length > 0;
   const routeAccess = isAccess(claimRoles, routeRoles);
-  if (routeHasRoles && !routeAccess) {
-    if (token) {
-      return ROUTER_CONST_SCHOOL.ERROR403.path;
-    } else {
-      return ROUTER_CONST_SCHOOL.LOGIN.path;
-    }
+  if (token && refreshToken && !routeAccess) {
+    return ROUTER_CONST_SCHOOL.ERROR403.path;
+  }
+  if (!routeAccess) {
+    return ROUTER_CONST_SCHOOL.LOGIN.path;
   }
   return undefined;
 };
 
 export async function middleware(request: NextRequest) {
+  let response = NextResponse.next();
   const nextPath = request.page.name;
   const token = request.cookies[cookie.names.token];
+  const refreshToken = request.cookies[cookie.names.refreshToken];
   const claimRoles = getClaimRoles(token);
 
   for (const key in ROUTER_CONST_SCHOOL) {
     if (nextPath === ROUTER_CONST_SCHOOL[key].path) {
-      const url = handleRouteSchool(key, token, claimRoles);
-      if (url) return NextResponse.rewrite(new URL(url, request.url));
+      const url = handleRouteSchool(key, token, refreshToken, claimRoles);
+      if (url) {
+        response = NextResponse.rewrite(new URL(url, request.url));
+      }
     }
   }
 
@@ -55,9 +58,15 @@ export async function middleware(request: NextRequest) {
     const path = ROUTER_CONST_DEV[key].path;
     if (nextPath === path && process.env.NODE_ENV !== 'development') {
       const url = handleRouteDev();
-      if (url) return NextResponse.rewrite(new URL(url, request.url));
+      if (url) {
+        response = NextResponse.rewrite(new URL(url, request.url));
+      }
     }
   }
 
-  return NextResponse.next();
+  if (!token || !refreshToken) {
+    response.clearCookie('token');
+    response.clearCookie('refreshToken');
+  }
+  return response;
 }

@@ -5,13 +5,19 @@ export interface IUserService {
   getCurrentUser: (token?: string) => Promise<IUserDTO | undefined>;
   getUsers: (
     query?: ParsedUrlQuery,
-    token?: string
+    token?: string | null
   ) => Promise<IUserDTO[] | undefined>;
   getUser: (
     id?: string,
     query?: ParsedUrlQuery,
-    token?: string
+    token?: string | null
   ) => Promise<IUserDTO | undefined>;
-  saveUser: (data: IUserDTO, token?: string) => Promise<IUserDTO | undefined>;
-  deleteUsers: (ids: string[], token?: string) => Promise<boolean | undefined>;
+  saveUser: (
+    data: IUserDTO,
+    token?: string | null
+  ) => Promise<IUserDTO | undefined>;
+  deleteUsers: (
+    ids: string[],
+    token?: string | null
+  ) => Promise<boolean | undefined>;
 }

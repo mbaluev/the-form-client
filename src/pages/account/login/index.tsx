@@ -8,10 +8,11 @@ import { observer } from 'mobx-react';
 import { IAuthViewModel } from '@viewModel/modules/auth/interface';
 
 const Login = () => {
-  const { clearData, clearChanges, clearMessage } =
+  const { clearData, clearChanges, clearMessage, clearToken } =
     useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
 
   useEffect(() => {
+    clearToken();
     clearData();
     clearChanges();
     clearMessage();

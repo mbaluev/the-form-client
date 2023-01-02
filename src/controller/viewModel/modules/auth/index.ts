@@ -37,6 +37,7 @@ export class AuthViewModel
       roles: computed,
 
       clearMessage: action,
+      clearToken: action,
     });
     this.setValidations([
       { nameSpace: 'username', type: 'required', message: 'Required' },
@@ -48,9 +49,9 @@ export class AuthViewModel
 
   // --- observable
 
-  token?: string = undefined;
+  token?: string | null = undefined;
 
-  setToken = (data?: string) => {
+  setToken = (data?: string | null) => {
     this.token = data;
     if (data) {
       setCookies(cookie.names.token, data, cookie.options);
@@ -159,6 +160,13 @@ export class AuthViewModel
   clearMessage = async () => {
     try {
       this.setMessage();
+    } finally {
+    }
+  };
+
+  clearToken = async () => {
+    try {
+      this.setToken();
     } finally {
     }
   };

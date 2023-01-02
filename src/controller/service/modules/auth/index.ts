@@ -33,6 +33,14 @@ export class AuthService implements IAuthService {
     );
   };
 
+  getToken = async (refreshToken?: string) => {
+    return this.apiModule.post<IAuthResponse>(
+      `${this.API_PREFIX}/token`,
+      null,
+      { headers: { Cookie: `refreshToken=${refreshToken};` } }
+    );
+  };
+
   refreshToken = async () => {
     return this.apiModule.post<IAuthResponse>(
       `${this.API_PREFIX}/refreshToken`

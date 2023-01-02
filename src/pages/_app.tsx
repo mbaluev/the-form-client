@@ -60,7 +60,6 @@ const MyApp = (props: MyAppProps) => {
     locale.changeLanguage(locale.language);
     menu.initiate();
 
-    auth.refreshToken();
     const interval = 60 * 15 * 1000; // token expiry
     setInterval(auth.refreshToken, interval);
 
