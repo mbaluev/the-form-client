@@ -1,6 +1,10 @@
 import { ROLES } from '@app/settings/roles';
 
 export const ROUTER_CONST_SCHOOL: Record<string, any> = {
+  ERROR402: {
+    name: '402',
+    path: '/402',
+  },
   ERROR403: {
     name: '403',
     path: '/403',

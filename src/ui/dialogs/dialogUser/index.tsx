@@ -77,6 +77,24 @@ export const DialogUser = observer((props: IProps) => {
       <Loader loading={isModalLoading} />
       <Form cols={1}>
         <FormSection>
+          <FormField title="First name">
+            <TextFieldControl
+              name="firstname"
+              value={modalData?.firstname}
+              onChange={changeHandler}
+              error={Boolean(getModalError('firstname'))}
+              helperText={getModalError('firstname')?.message}
+            />
+          </FormField>
+          <FormField title="Last name">
+            <TextFieldControl
+              name="lastname"
+              value={modalData?.lastname}
+              onChange={changeHandler}
+              error={Boolean(getModalError('lastname'))}
+              helperText={getModalError('lastname')?.message}
+            />
+          </FormField>
           <FormField title="Email">
             <TextFieldControl
               name="username"

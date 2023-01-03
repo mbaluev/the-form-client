@@ -19,7 +19,7 @@ export const Account = observer(() => {
   const open = Boolean(anchorEl);
   const handleOpen = (e: MouseEvent<any>) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
-  const { username, logout, isDataLoading } = useAuth();
+  const { firstname, lastname, username, logout, isDataLoading } = useAuth();
 
   const router = useRouter();
   const logoutHandler = async () => {
@@ -62,11 +62,12 @@ export const Account = observer(() => {
             </div>
             <div className="account__info">
               <div className="account__user">
+                <div className="account__name">{`${firstname} ${lastname}`}</div>
                 <div className="account__email">{username}</div>
-                <AccountRoles />
               </div>
             </div>
           </div>
+          <AccountRoles />
         </div>
         <Divider />
         <MenuItem onClick={logoutHandler}>

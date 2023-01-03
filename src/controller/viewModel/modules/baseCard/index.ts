@@ -582,10 +582,9 @@ export class BaseCardViewModel<T extends IBaseCardType>
     this.validations = data;
   };
 
-  validateField = (nameSpace: string, value?: any) => {
+  validateTypes = (nameSpace: string, value?: any) => {
     let valid = true;
     let message = '';
-
     this.validations
       ?.filter((validation) => validation.nameSpace === nameSpace)
       ?.forEach((validation) => {
@@ -601,43 +600,50 @@ export class BaseCardViewModel<T extends IBaseCardType>
           }
         }
       });
+    return { valid, message };
+  };
 
-    if (valid) {
+  validateField = (nameSpace: string, value?: any) => {
+    const validated = this.validateTypes(nameSpace, value);
+    if (validated.valid) {
       this.removeError(nameSpace);
     } else {
-      this.setError(nameSpace, message, value);
+      this.setError(nameSpace, validated.message, value);
     }
   };
 
-  validate = () => {
+  validate = (nameSpaces?: string[]) => {
     this.validations?.forEach((validation) => {
-      const data = this.data ? { ...this.data } : {};
-      const value = objectPath.get(data, validation.nameSpace);
-      this.validateField(validation.nameSpace, value);
-    });
-  };
-
-  validateModalField = (nameSpace: string, value?: any) => {
-    this.validations?.forEach((validation) => {
-      // eslint-disable-next-line sonarjs/no-collapsible-if
-      if (validation.nameSpace === nameSpace) {
-        // eslint-disable-next-line sonarjs/no-collapsible-if
-        if (validation.type === 'required') {
-          if (value) {
-            this.removeModalError(nameSpace);
-          } else {
-            this.setModalError(nameSpace, validation.message, value);
-          }
-        }
+      if (
+        !nameSpaces ||
+        (nameSpaces && nameSpaces.includes(validation.nameSpace))
+      ) {
+        const data = this.data ? { ...this.data } : {};
+        const value = objectPath.get(data, validation.nameSpace);
+        this.validateField(validation.nameSpace, value);
       }
     });
   };
 
-  validateModal = () => {
+  validateModalField = (nameSpace: string, value?: any) => {
+    const validated = this.validateTypes(nameSpace, value);
+    if (validated.valid) {
+      this.removeModalError(nameSpace);
+    } else {
+      this.setModalError(nameSpace, validated.message, value);
+    }
+  };
+
+  validateModal = (nameSpaces?: string[]) => {
     this.validations?.forEach((validation) => {
-      const data = this.modalData ? { ...this.modalData } : {};
-      const value = objectPath.get(data, validation.nameSpace);
-      this.validateModalField(validation.nameSpace, value);
+      if (
+        !nameSpaces ||
+        (nameSpaces && nameSpaces.includes(validation.nameSpace))
+      ) {
+        const data = this.modalData ? { ...this.modalData } : {};
+        const value = objectPath.get(data, validation.nameSpace);
+        this.validateModalField(validation.nameSpace, value);
+      }
     });
   };
 

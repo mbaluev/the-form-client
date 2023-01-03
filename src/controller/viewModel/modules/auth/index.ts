@@ -33,6 +33,8 @@ export class AuthViewModel
       refreshToken: action,
 
       isAuth: computed,
+      firstname: computed,
+      lastname: computed,
       username: computed,
       roles: computed,
 
@@ -40,6 +42,8 @@ export class AuthViewModel
       clearToken: action,
     });
     this.setValidations([
+      { nameSpace: 'firstname', type: 'required', message: 'Required' },
+      { nameSpace: 'lastname', type: 'required', message: 'Required' },
       { nameSpace: 'username', type: 'required', message: 'Required' },
       { nameSpace: 'username', type: 'email', message: 'Not correct email' },
       { nameSpace: 'password', type: 'required', message: 'Required' },
@@ -88,7 +92,7 @@ export class AuthViewModel
   };
 
   login = async () => {
-    this.validate();
+    this.validate(['username', 'password']);
     if (this.data && !this.hasErrors) {
       this.setDataLoading(true);
       try {
@@ -139,6 +143,20 @@ export class AuthViewModel
 
   get isAuth() {
     return Boolean(this.token);
+  }
+
+  get firstname() {
+    if (this.token) {
+      return new Jwt(this.token).decodedClaims?.firstname;
+    }
+    return undefined;
+  }
+
+  get lastname() {
+    if (this.token) {
+      return new Jwt(this.token).decodedClaims?.lastname;
+    }
+    return undefined;
   }
 
   get username() {

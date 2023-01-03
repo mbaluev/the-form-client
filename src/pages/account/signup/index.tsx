@@ -8,10 +8,11 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { IAuthViewModel } from '@viewModel/modules/auth/interface';
 
 const Signup = () => {
-  const { clearData, clearChanges, clearMessage } =
+  const { clearData, clearChanges, clearMessage, clearToken } =
     useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
 
   useEffect(() => {
+    clearToken();
     clearData();
     clearChanges();
     clearMessage();

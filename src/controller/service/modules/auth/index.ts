@@ -13,6 +13,8 @@ export class AuthService implements IAuthService {
 
   signup = async (data: IUserDTO) => {
     return this.apiModule.post<IAuthResponse>(`${this.API_PREFIX}/signup`, {
+      firstname: data.firstname,
+      lastname: data.lastname,
       username: data.username,
       password: data.password,
     });

@@ -6,24 +6,69 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { PasswordFieldControl, TextFieldControl } from '@components/fields';
 import { Button } from '@components/button';
 import { IAuthViewModel } from '@viewModel/modules/auth/interface';
+import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
+import { useRouter } from 'next/router';
+import { Loader } from '@components/loader';
+import { Alert } from '@components/alert';
 import './index.scss';
 
 export const SignupForm = observer(() => {
-  const { data, changeField, getError, signup, hasErrors } =
-    useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
+  const {
+    data,
+    changeField,
+    getError,
+    signup,
+    hasErrors,
+    message,
+    clearMessage,
+    isDataLoading,
+  } = useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
 
+  const router = useRouter();
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     changeField(e.target.name, e.target.value);
   };
-  const submitHandler = () => {
-    signup();
+  const submitHandler = async () => {
+    clearMessage();
+    if (await signup()) {
+      await router.replace({
+        pathname: ROUTER_CONST_SCHOOL.ERROR402.path,
+      });
+    }
   };
 
   return (
     <div className="signup-form">
+      <Loader loading={isDataLoading} />
       <Form cols={1}>
         <FormSection>
+          {message && (
+            <Alert
+              message={message}
+              variant="outlined"
+              type="error"
+              shadow={false}
+            />
+          )}
+          <FormField title="First name">
+            <TextFieldControl
+              name="firstname"
+              value={data?.firstname}
+              onChange={changeHandler}
+              error={Boolean(getError('firstname'))}
+              helperText={getError('firstname')?.message}
+            />
+          </FormField>
+          <FormField title="Last name">
+            <TextFieldControl
+              name="lastname"
+              value={data?.lastname}
+              onChange={changeHandler}
+              error={Boolean(getError('lastname'))}
+              helperText={getError('lastname')?.message}
+            />
+          </FormField>
           <FormField title="Email">
             <TextFieldControl
               name="username"
