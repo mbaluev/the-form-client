@@ -10,10 +10,13 @@ import { Alert } from '@components/alert';
 import { Loader } from '@components/loader';
 import { useRouter } from 'next/router';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
+import { NoData } from '@components/noData';
+import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import './index.scss';
 
 export const LoginForm = observer(() => {
   const {
+    isAuth,
     data,
     changeField,
     getError,
@@ -41,41 +44,45 @@ export const LoginForm = observer(() => {
   return (
     <div className="login-form">
       <Loader loading={isDataLoading} />
-      <Form cols={1}>
-        <FormSection>
-          {message && (
-            <Alert
-              message={message}
-              variant="outlined"
-              type="error"
-              shadow={false}
-            />
-          )}
-          <FormField title="Email">
-            <TextFieldControl
-              name="username"
-              value={data?.username}
-              onChange={changeHandler}
-              error={Boolean(getError('username'))}
-              helperText={getError('username')?.message}
-            />
-          </FormField>
-          <FormField title="Password">
-            <PasswordFieldControl
-              name="password"
-              value={data?.password}
-              onChange={changeHandler}
-              error={Boolean(getError('password'))}
-              helperText={getError('password')?.message}
-            />
-          </FormField>
-          <FormField>
-            <Button onClick={submitHandler} disabled={hasErrors}>
-              Login
-            </Button>
-          </FormField>
-        </FormSection>
-      </Form>
+      {isAuth ? (
+        <NoData icon={<HourglassEmptyIcon />} message="Login processing..." />
+      ) : (
+        <Form cols={1}>
+          <FormSection>
+            {message && (
+              <Alert
+                message={message}
+                variant="outlined"
+                type="error"
+                shadow={false}
+              />
+            )}
+            <FormField title="Email">
+              <TextFieldControl
+                name="username"
+                value={data?.username}
+                onChange={changeHandler}
+                error={Boolean(getError('username'))}
+                helperText={getError('username')?.message}
+              />
+            </FormField>
+            <FormField title="Password">
+              <PasswordFieldControl
+                name="password"
+                value={data?.password}
+                onChange={changeHandler}
+                error={Boolean(getError('password'))}
+                helperText={getError('password')?.message}
+              />
+            </FormField>
+            <FormField>
+              <Button onClick={submitHandler} disabled={hasErrors}>
+                Login
+              </Button>
+            </FormField>
+          </FormSection>
+        </Form>
+      )}
     </div>
   );
 });

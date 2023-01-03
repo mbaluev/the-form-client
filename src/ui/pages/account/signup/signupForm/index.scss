@@ -5,7 +5,8 @@
   flex-direction: column;
   flex: 1 1 auto;
   align-items: center;
-  margin-top: $base * 10;
+  justify-content: center;
+  margin: $base * 4 0;
 
   & .form {
     min-width: $base * 60;

@@ -9,14 +9,12 @@ export const DialogControls = () => {
   const [isRow, setIsRow] = useState<boolean>(false);
   const footerButtons: IButtonProps[] = [
     {
-      size: 'medium',
       color: 'grey',
       variant: 'outlined',
       children: isRow ? 'vertical' : 'horizontal',
       onClick: () => setIsRow(!isRow),
     },
     {
-      size: 'medium',
       variant: 'contained',
       children: 'save',
       onClick: () => setIsOpen(false),

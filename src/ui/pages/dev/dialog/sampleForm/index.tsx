@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, FormField, FormSection } from '@components/form';
 import { TextFieldControl } from '@components/fields';
 import { observer } from 'mobx-react';
-import './index.scss';
 
 interface ISimpleModalFormProps {
   isRow?: boolean;
