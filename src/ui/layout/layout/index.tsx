@@ -76,16 +76,12 @@ export const Layout = observer((props: TLayoutProps) => {
 
   const [isMenu, setIsMenu] = useState(false);
   useEffect(() => {
-    if (!isAuth) {
-      setIsMenu(false);
-    } else {
-      menuProps?.items?.forEach((item) => {
-        if (isAccess(claimRoles, item.roles)) {
-          setIsMenu(true);
-        }
-      });
-    }
-  }, [isAuth]);
+    menuProps?.items?.forEach((item) => {
+      if (isAccess(claimRoles, item.roles)) {
+        setIsMenu(true);
+      }
+    });
+  }, [menuProps, claimRoles, isAuth]);
 
   useEffect(() => {
     const resize = () => window.dispatchEvent(new Event('resize'));

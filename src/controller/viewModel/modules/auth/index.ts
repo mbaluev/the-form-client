@@ -78,8 +78,7 @@ export class AuthViewModel
       this.setDataLoading(true);
       try {
         const data = await this.serviceAuth.signup(this.data);
-        if (data && data.token) {
-          this.setToken(data.token);
+        if (data) {
           await this.clearChanges();
           await this.clearData();
           return true;

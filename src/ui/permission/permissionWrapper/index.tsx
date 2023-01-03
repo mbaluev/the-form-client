@@ -8,8 +8,8 @@ interface IProps {
 }
 
 export const isAccess = (claimRoles?: string[], roles?: string[]) => {
-  if (!claimRoles || claimRoles.length === 0) return false;
   if (!roles || roles.length === 0) return true;
+  if (!claimRoles || claimRoles.length === 0) return false;
   return _.intersection(claimRoles, roles).length > 0;
 };
 
