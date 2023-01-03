@@ -2,13 +2,13 @@ export const userValueGetter = (params: any) => {
   return {
     title: `${params.node.rowIndex + 1}. ${params.data?.username}`,
     paid: Boolean(params.data.paid)
-      ? { status: 'Paid', color: 'green' }
+      ? { status: 'paid', color: 'green' }
       : undefined,
     active: Boolean(params.data.active)
-      ? { status: 'Active', color: 'blue' }
+      ? { status: 'active', color: 'blue' }
       : undefined,
     admin: Boolean(params.data.admin)
-      ? { status: 'Admin', color: 'red' }
+      ? { status: 'admin', color: 'red' }
       : undefined,
   };
 };
