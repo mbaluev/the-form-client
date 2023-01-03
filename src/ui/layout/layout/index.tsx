@@ -76,6 +76,7 @@ export const Layout = observer((props: TLayoutProps) => {
 
   const [isMenu, setIsMenu] = useState(false);
   useEffect(() => {
+    setIsMenu(false);
     menuProps?.items?.forEach((item) => {
       if (isAccess(claimRoles, item.roles)) {
         setIsMenu(true);
