@@ -13,17 +13,14 @@ import { ParsedUrlQuery } from 'querystring';
 import { IUserService } from '@service/modules/user/interface';
 import { IUserViewModel } from '@viewModel/modules/user/interface';
 import { UserPage } from '@ui/pages/admin/user/userPage';
-import cookie from '@utils/cookie';
-import { useToken } from '@hooks/useToken';
-import { useAuth } from '@hooks/useAuth';
+import { getCookieToken } from '@utils/cookie/getCookieToken';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
 ) => {
-  const { params, query, req } = context;
-  const { cookies } = req;
+  const { params, query } = context;
+  const token = getCookieToken(context);
 
-  const token = await useToken(cookies[cookie.names.refreshToken]);
   const serviceUser = useService<IUserService>(SERVICE.User);
 
   const users = (await serviceUser.getUsers(query, token)) || null;
@@ -35,8 +32,7 @@ export const getServerSideProps = async (
 const User = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
-  const { users, user, token } = props;
-  const { setToken } = useAuth();
+  const { users, user } = props;
   const {
     setList: setUsers,
     setData: setUser,
@@ -71,7 +67,6 @@ const User = (
   };
 
   useEffect(() => {
-    setToken(token);
     setUsers(users);
     setUser(user);
     setUserData(user);

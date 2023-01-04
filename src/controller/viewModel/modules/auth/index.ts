@@ -5,8 +5,6 @@ import { IUserDTO } from '@model/user';
 import { IAuthViewModel } from '@viewModel/modules/auth/interface';
 import { AuthService } from '@service/modules/auth';
 import { BaseCardViewModel } from '@viewModel/modules/baseCard';
-import { setCookies, getCookie, removeCookies } from 'cookies-next';
-import cookie from '@utils/cookie';
 import { UserService } from '@service/modules/user';
 import { Jwt } from '@utils/jwt';
 
@@ -48,7 +46,6 @@ export class AuthViewModel
       { nameSpace: 'username', type: 'email', message: 'Not correct email' },
       { nameSpace: 'password', type: 'required', message: 'Required' },
     ]);
-    this.setToken((getCookie(cookie.names.token) as string) || undefined);
   }
 
   // --- observable
@@ -57,11 +54,6 @@ export class AuthViewModel
 
   setToken = (data?: string | null) => {
     this.token = data;
-    if (data) {
-      setCookies(cookie.names.token, data, cookie.options);
-    } else {
-      removeCookies(cookie.names.token);
-    }
   };
 
   message?: string = undefined;

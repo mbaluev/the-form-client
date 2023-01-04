@@ -23,6 +23,8 @@ import { SnackbarProvider } from 'notistack';
 import { IMenuViewModel } from '@viewModel/modules/menu/interface';
 import { IFilterViewModel } from '@viewModel/modules/filter/interfaces';
 import { IAuthViewModel } from '@viewModel/modules/auth/interface';
+import { getCookie } from 'cookies-next';
+import cookie from '@utils/cookie';
 import '../core/scss/index.scss';
 
 configure({ enforceActions: 'observed' });
@@ -78,6 +80,11 @@ const MyApp = (props: MyAppProps) => {
   }, []);
 
   useEffect(() => filter.loadFilters(router), [router]);
+
+  useEffect(() => {
+    const token = (getCookie(cookie.names.token) as string) || undefined;
+    auth.setToken(token);
+  }, [getCookie(cookie.names.token)]);
 
   return (
     <DiContainerProvider container={container}>

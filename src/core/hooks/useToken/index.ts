@@ -1,10 +1,22 @@
-import { initializeDiContainer } from '@app/diContainer/diContainer';
-import { IAuthService } from '@service/modules/auth/interface';
-import { SERVICE } from '@service/ids';
+import { HttpMethod } from '@infrastructure/const';
 
 export const useToken = async (refreshToken?: string) => {
-  const container = initializeDiContainer();
-  const serviceAuth = container.get<IAuthService>(SERVICE.Auth);
-  const data = await serviceAuth.getToken(refreshToken);
-  return data?.token || null;
+  const response = await fetch(
+    `${process.env.REACT_APP_CORE_URL}/api/auth/token`,
+    {
+      method: HttpMethod.POST,
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: `refreshToken=${refreshToken};`,
+      },
+    }
+  );
+  if (response.status === 200) {
+    const data = await response.json();
+    return data?.token || null;
+  }
+  return null;
 };

@@ -29,7 +29,7 @@ export class AxiosApiModule implements IAxiosApiModule {
       const response = await this.api(config);
       return response.data;
     } catch (error: any) {
-      if (!options?.ignoreError) {
+      if (this.notify && !options?.ignoreError) {
         const message = this.notify.parseError(error);
         this.notify.add('error', message);
       }

@@ -13,17 +13,14 @@ import { IUserService } from '@service/modules/user/interface';
 import { IUserViewModel } from '@viewModel/modules/user/interface';
 import { UserPage } from '@ui/pages/admin/user/userPage';
 import { observer } from 'mobx-react';
-import { useToken } from '@hooks/useToken';
-import cookie from '@utils/cookie';
-import { useAuth } from '@hooks/useAuth';
+import { getCookieToken } from '@utils/cookie/getCookieToken';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
 ) => {
-  const { query, req } = context;
-  const { cookies } = req;
+  const { query } = context;
+  const token = getCookieToken(context);
 
-  const token = await useToken(cookies[cookie.names.refreshToken]);
   const serviceUser = useService<IUserService>(SERVICE.User);
 
   const users = (await serviceUser.getUsers(query, token)) || null;
@@ -34,8 +31,7 @@ export const getServerSideProps = async (
 const Users = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
-  const { users, token } = props;
-  const { setToken } = useAuth();
+  const { users } = props;
   const {
     setList: setUsers,
     clearData: clearUser,
@@ -62,7 +58,6 @@ const Users = (
   };
 
   useEffect(() => {
-    setToken(token);
     setUsers(users);
     clearUser();
     clearUserData();
