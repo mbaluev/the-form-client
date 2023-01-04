@@ -26,7 +26,7 @@ export const getServerSideProps = async (
   const users = (await serviceUser.getUsers(query, token)) || null;
   const user = (await serviceUser.getUser(params?.id, query, token)) || null;
 
-  return { props: { users, user, token } };
+  return { props: { users, user } };
 };
 
 const User = (
