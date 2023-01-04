@@ -10,8 +10,6 @@ import { Alert } from '@components/alert';
 import { Loader } from '@components/loader';
 import { useRouter } from 'next/router';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
-import { NoData } from '@components/noData';
-import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import './index.scss';
 
 export const LoginForm = observer(() => {
@@ -45,7 +43,7 @@ export const LoginForm = observer(() => {
     <div className="login-form">
       <Loader loading={isDataLoading} />
       {isAuth ? (
-        <NoData icon={<HourglassEmptyIcon />} message="Login processing..." />
+        <Loader loading relative />
       ) : (
         <Form cols={1}>
           <FormSection>
