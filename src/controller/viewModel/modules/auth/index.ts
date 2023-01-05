@@ -26,8 +26,8 @@ export class AuthViewModel
       setMessage: action,
 
       signup: action,
-      login: action,
-      logout: action,
+      signin: action,
+      signout: action,
       refreshToken: action,
 
       isAuth: computed,
@@ -82,12 +82,12 @@ export class AuthViewModel
     return false;
   };
 
-  login = async () => {
+  signin = async () => {
     this.validate(['username', 'password']);
     if (this.data && !this.hasErrors) {
       this.setDataLoading(true);
       try {
-        const data = await this.serviceAuth.login(this.data);
+        const data = await this.serviceAuth.signin(this.data);
         if (data && data.token) {
           this.setToken(data.token);
           await this.clearChanges();
@@ -102,11 +102,11 @@ export class AuthViewModel
     return false;
   };
 
-  logout = async () => {
+  signout = async () => {
     this.setDataLoading(true);
     if (this.token) {
       try {
-        const ret = await this.serviceAuth.logout(this.token);
+        const ret = await this.serviceAuth.signout(this.token);
         if (ret && ret.success) {
           this.setToken();
           await this.clearData();

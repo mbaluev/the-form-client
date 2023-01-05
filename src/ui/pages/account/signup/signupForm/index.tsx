@@ -88,8 +88,8 @@ export const SignupForm = observer(() => {
             />
           </FormField>
           <FormField>
-            <Button onClick={submitHandler} disabled={hasErrors}>
-              Signup
+            <Button onClick={submitHandler} color="green" disabled={hasErrors}>
+              Sign up
             </Button>
           </FormField>
         </FormSection>

@@ -32,7 +32,7 @@ const handleRoute = (
         return ROUTER_CONST_SCHOOL.ERROR403.path;
       }
       if (!routeAccess) {
-        return ROUTER_CONST_SCHOOL.LOGIN.path;
+        return ROUTER_CONST_SCHOOL.SIGNIN.path;
       }
     }
   }

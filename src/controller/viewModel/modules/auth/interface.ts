@@ -7,8 +7,8 @@ export interface IAuthViewModel extends IBaseCardViewModel<IUserDTO> {
   message?: string;
 
   signup: () => Promise<boolean>;
-  login: () => Promise<boolean>;
-  logout: () => Promise<boolean>;
+  signin: () => Promise<boolean>;
+  signout: () => Promise<boolean>;
   refreshToken: () => Promise<void>;
 
   isAuth: boolean;

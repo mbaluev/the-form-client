@@ -46,10 +46,10 @@ export const ROUTER_CONST_SCHOOL: Record<string, any> = {
     path: '/account/profile',
     roles: [ROLES.DISABLE],
   },
-  LOGIN: {
-    name: 'login',
-    label: 'login',
-    path: '/account/login',
+  SIGNIN: {
+    name: 'signin',
+    label: 'signin',
+    path: '/account/signin',
     roles: [ROLES.NONE],
   },
   SIGNUP: {

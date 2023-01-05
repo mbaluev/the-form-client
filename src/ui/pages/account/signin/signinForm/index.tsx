@@ -12,13 +12,13 @@ import { useRouter } from 'next/router';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import './index.scss';
 
-export const LoginForm = observer(() => {
+export const SigninForm = observer(() => {
   const {
     isAuth,
     data,
     changeField,
     getError,
-    login,
+    signin,
     hasErrors,
     message,
     clearMessage,
@@ -32,7 +32,7 @@ export const LoginForm = observer(() => {
   };
   const submitHandler = async () => {
     clearMessage();
-    if (await login()) {
+    if (await signin()) {
       await router.push({
         pathname: ROUTER_CONST_SCHOOL.MODULES.path,
       });
@@ -40,7 +40,7 @@ export const LoginForm = observer(() => {
   };
 
   return (
-    <div className="login-form">
+    <div className="signin-form">
       <Loader loading={isDataLoading} />
       {isAuth ? (
         <Loader loading relative />
@@ -75,7 +75,7 @@ export const LoginForm = observer(() => {
             </FormField>
             <FormField>
               <Button onClick={submitHandler} disabled={hasErrors}>
-                Login
+                Sign in
               </Button>
             </FormField>
           </FormSection>

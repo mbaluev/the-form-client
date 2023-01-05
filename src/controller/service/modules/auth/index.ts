@@ -20,16 +20,16 @@ export class AuthService implements IAuthService {
     });
   };
 
-  login = async (data: IUserDTO) => {
-    return this.apiModule.post<IAuthResponse>(`${this.API_PREFIX}/login`, {
+  signin = async (data: IUserDTO) => {
+    return this.apiModule.post<IAuthResponse>(`${this.API_PREFIX}/signin`, {
       username: data.username,
       password: data.password,
     });
   };
 
-  logout = async (token?: string) => {
+  signout = async (token?: string) => {
     return this.apiModule.get<IAuthResponse>(
-      `${this.API_PREFIX}/logout`,
+      `${this.API_PREFIX}/signout`,
       null,
       { headers: { Authorization: `Bearer ${token}` } }
     );

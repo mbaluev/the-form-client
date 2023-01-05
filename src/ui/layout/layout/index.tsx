@@ -167,11 +167,11 @@ export const Layout = observer((props: TLayoutProps) => {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <Link passHref href={ROUTER_CONST_SCHOOL.LOGIN.path}>
-                <Button>Login</Button>
+              <Link passHref href={ROUTER_CONST_SCHOOL.SIGNIN.path}>
+                <Button>Sign in</Button>
               </Link>
               <Link passHref href={ROUTER_CONST_SCHOOL.SIGNUP.path}>
-                <Button>Signup</Button>
+                <Button color="green">Sign up</Button>
               </Link>
             </React.Fragment>
           )}

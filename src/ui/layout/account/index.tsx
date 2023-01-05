@@ -19,11 +19,11 @@ export const Account = observer(() => {
   const open = Boolean(anchorEl);
   const handleOpen = (e: MouseEvent<any>) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
-  const { firstname, lastname, username, logout, isDataLoading } = useAuth();
+  const { firstname, lastname, username, signout, isDataLoading } = useAuth();
 
   const router = useRouter();
-  const logoutHandler = async () => {
-    if (await logout()) {
+  const signoutHandler = async () => {
+    if (await signout()) {
       await router.push({
         pathname: ROUTER_CONST_SCHOOL.HOME.path,
       });
@@ -70,11 +70,11 @@ export const Account = observer(() => {
           <AccountRoles />
         </div>
         <Divider />
-        <MenuItem onClick={logoutHandler}>
+        <MenuItem onClick={signoutHandler}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Logout
+          Sign out
         </MenuItem>
       </Menu>
     </React.Fragment>
