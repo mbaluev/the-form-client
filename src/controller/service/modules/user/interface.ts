@@ -2,7 +2,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { IUserDTO } from '@model/user';
 
 export interface IUserService {
-  getCurrentUser: (token?: string) => Promise<IUserDTO | undefined>;
+  getCurrentUser: (token?: string | null) => Promise<IUserDTO | undefined>;
   getUsers: (
     query?: ParsedUrlQuery,
     token?: string | null

@@ -2,10 +2,11 @@ import { inject, injectable } from 'inversify';
 import { SERVICE } from '@service/ids';
 import { IModuleDTO } from '@model/module';
 import { ModuleService } from '@service/modules/module';
-import { BlockService } from '@service/modules/block';
 import { IModuleViewModel } from '@viewModel/modules/module/interface';
 import { BaseCardViewModel } from '@viewModel/modules/baseCard';
 import { action, makeObservable, observable } from 'mobx';
+import { VIEW_MODEL } from '@viewModel/ids';
+import { AuthViewModel } from '@viewModel/modules/auth';
 
 @injectable()
 export class ModuleViewModel
@@ -14,7 +15,7 @@ export class ModuleViewModel
 {
   @inject(SERVICE.Module) protected serviceModule!: ModuleService;
 
-  @inject(SERVICE.Block) protected serviceBlock!: BlockService;
+  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
 
   constructor() {
     super();
@@ -50,9 +51,14 @@ export class ModuleViewModel
     this.setDataLoading(true);
     try {
       if (this.data && !this.hasErrors) {
-        const data = await this.serviceModule.saveModule(this.data);
-        this.updateFromList(data);
-        await this.clearChanges();
+        const data = await this.serviceModule.saveModule(
+          this.data,
+          this.auth.token
+        );
+        if (data) {
+          this.updateFromList(data);
+          await this.clearChanges();
+        }
         return data;
       }
     } finally {
@@ -64,9 +70,14 @@ export class ModuleViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const data = await this.serviceModule.saveModule(this.modalData);
-        this.updateFromList(data);
-        await this.clearModalChanges();
+        const data = await this.serviceModule.saveModule(
+          this.modalData,
+          this.auth.token
+        );
+        if (data) {
+          this.updateFromList(data);
+          await this.clearModalChanges();
+        }
         return data;
       }
     } finally {
@@ -78,11 +89,16 @@ export class ModuleViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        await this.serviceModule.deleteModules(this.deleteIds);
-        this.removeFromList(this.deleteIds);
-        await this.clearDelete();
-        await this.clearData();
-        return true;
+        const data = await this.serviceModule.deleteModules(
+          this.deleteIds,
+          this.auth.token
+        );
+        if (data) {
+          this.removeFromList(this.deleteIds);
+          await this.clearDelete();
+          await this.clearData();
+        }
+        return data;
       }
     } finally {
       this.setDeleteLoading(false);

@@ -5,13 +5,17 @@ import { BlockService } from '@service/modules/block';
 import { IBlockViewModel } from '@viewModel/modules/block/interface';
 import { BaseCardViewModel } from '@viewModel/modules/baseCard';
 import { action, makeObservable, observable } from 'mobx';
+import { VIEW_MODEL } from '@viewModel/ids';
+import { AuthViewModel } from '@viewModel/modules/auth';
 
 @injectable()
 export class BlockViewModel
   extends BaseCardViewModel<IBlockDTO>
   implements IBlockViewModel
 {
-  @inject(SERVICE.Block) protected service!: BlockService;
+  @inject(SERVICE.Block) protected serviceBlock!: BlockService;
+
+  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
 
   constructor() {
     super();
@@ -48,9 +52,14 @@ export class BlockViewModel
     this.setDataLoading(true);
     try {
       if (this.data && !this.hasErrors) {
-        const data = await this.service.saveBlock(this.data);
-        this.updateFromList(data);
-        await this.clearChanges();
+        const data = await this.serviceBlock.saveBlock(
+          this.data,
+          this.auth.token
+        );
+        if (data) {
+          this.updateFromList(data);
+          await this.clearChanges();
+        }
         return data;
       }
     } finally {
@@ -62,9 +71,14 @@ export class BlockViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const data = await this.service.saveBlock(this.modalData);
-        this.updateFromList(data);
-        await this.clearModalChanges();
+        const data = await this.serviceBlock.saveBlock(
+          this.modalData,
+          this.auth.token
+        );
+        if (data) {
+          this.updateFromList(data);
+          await this.clearModalChanges();
+        }
         return data;
       }
     } finally {
@@ -76,10 +90,15 @@ export class BlockViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        await this.service.deleteBlocks(this.deleteIds);
-        this.removeFromList(this.deleteIds);
-        await this.clearDelete();
-        await this.clearData();
+        const data = await this.serviceBlock.deleteBlocks(
+          this.deleteIds,
+          this.auth.token
+        );
+        if (data) {
+          this.removeFromList(this.deleteIds);
+          await this.clearDelete();
+          await this.clearData();
+        }
         return true;
       }
     } finally {

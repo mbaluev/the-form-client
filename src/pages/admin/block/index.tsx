@@ -18,17 +18,18 @@ import { useRouter } from 'next/router';
 import { CellClickedEvent } from 'ag-grid-community';
 import { ParsedUrlQuery } from 'querystring';
 import { observer } from 'mobx-react';
+import { getCookieToken } from '@utils/cookie/getCookieToken';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
 ) => {
   const { query } = context;
-
+  const token = getCookieToken(context);
   const serviceBlock = useService<IBlockService>(SERVICE.Block);
   const serviceModule = useService<IModuleService>(SERVICE.Module);
 
-  const blocks = (await serviceBlock.getBlocks(query)) || null;
-  const modules = (await serviceModule.getModules()) || null;
+  const blocks = (await serviceBlock.getBlocks(query, token)) || null;
+  const modules = (await serviceModule.getModules(undefined, token)) || null;
 
   return { props: { blocks, modules } };
 };

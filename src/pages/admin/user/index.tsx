@@ -20,7 +20,6 @@ export const getServerSideProps = async (
 ) => {
   const { query } = context;
   const token = getCookieToken(context);
-
   const serviceUser = useService<IUserService>(SERVICE.User);
 
   const users = (await serviceUser.getUsers(query, token)) || null;

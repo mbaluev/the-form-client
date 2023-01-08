@@ -51,10 +51,8 @@ export class NotifyViewModel extends BaseViewModel implements INotifyViewModel {
     let message;
     if (error.response) {
       message = error.response.statusText;
-      if (error.response.data && error.response.data.error) {
-        message = error.response.data.error;
-        if (error.response.data.error.message)
-          message = error.response.data.error.message;
+      if (error.response.data && error.response.data.message) {
+        message = error.response.data.message;
       }
     } else {
       message = error.message;

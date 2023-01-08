@@ -15,17 +15,21 @@ import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
+import { getCookieToken } from '@utils/cookie/getCookieToken';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
 ) => {
   const { params, query } = context;
+  const id = params?.id;
+  const token = getCookieToken(context);
   const serviceModule = useService<IModuleService>(SERVICE.Module);
   const serviceBlock = useService<IBlockService>(SERVICE.Block);
 
-  const modules = (await serviceModule.getModules(query)) || null;
-  const module = (await serviceModule.getModule(params?.id, query)) || null;
-  const blocks = (await serviceBlock.getBlocksByModuleId(params?.id)) || null;
+  const modules = (await serviceModule.getModules(query, token)) || null;
+  const module = (await serviceModule.getModule(id, undefined, token)) || null;
+  const blocks =
+    (await serviceBlock.getBlocks({ moduleId: id }, token)) || null;
 
   return { props: { modules, module, blocks } };
 };

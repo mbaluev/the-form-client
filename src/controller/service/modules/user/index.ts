@@ -10,9 +10,11 @@ import { IResponseItemDTO, IResponseListDTO } from '@model/response';
 export class UserService implements IUserService {
   @inject(INFRASTRUCTURE_MODULE.Axios) protected apiModule!: IAxiosApiModule;
 
-  API_PREFIX = `${process.env.REACT_APP_CORE_URL}/api/user`;
+  API_PREFIX = `/api/user`;
 
-  getCurrentUser = async (token?: string): Promise<IUserDTO | undefined> => {
+  getCurrentUser = async (
+    token?: string | null
+  ): Promise<IUserDTO | undefined> => {
     return this.apiModule.get<IUserDTO | undefined>(
       `${this.API_PREFIX}/me`,
       null,

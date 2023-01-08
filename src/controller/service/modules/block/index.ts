@@ -3,72 +3,65 @@ import { INFRASTRUCTURE_MODULE } from '@infrastructure/ids';
 import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { IBlockService } from '@service/modules/block/interface';
 import { IBlockDTO } from '@model/block';
-import { BLOCKS } from '@model/block/mock';
 import { ParsedUrlQuery } from 'querystring';
-import { guid } from '@utils/guid/guid';
+import { IResponseItemDTO, IResponseListDTO } from '@model/response';
 
 @injectable()
 export class BlockService implements IBlockService {
   @inject(INFRASTRUCTURE_MODULE.Axios) protected apiModule!: IAxiosApiModule;
 
-  mockFilterByQuery =
-    (query?: ParsedUrlQuery) =>
-    (block: IBlockDTO): boolean => {
-      return query
-        ? (query.search
-            ? block.title
-                .toLowerCase()
-                .includes((query.search as string).toLowerCase()) ||
-              block.name
-                .toLowerCase()
-                .includes((query.search as string).toLowerCase())
-            : true) &&
-            (query.moduleId ? block.moduleId === query.moduleId : true)
-        : true;
-    };
+  API_PREFIX = `/api/block`;
 
   getBlocks = async (
-    query?: ParsedUrlQuery
+    query?: ParsedUrlQuery,
+    token?: string | null
   ): Promise<IBlockDTO[] | undefined> => {
-    const blocks = [...BLOCKS].filter(this.mockFilterByQuery(query));
-    return new Promise<IBlockDTO[] | undefined>((resolve) => {
-      setTimeout(() => resolve(blocks), 0);
-    });
-  };
-
-  getBlocksByModuleId = async (
-    id?: string,
-    query?: ParsedUrlQuery
-  ): Promise<IBlockDTO[] | undefined> => {
-    const blocks = [...BLOCKS].filter((block) => block.moduleId === id);
-    const result = blocks.filter(this.mockFilterByQuery(query));
-    return new Promise<IBlockDTO[] | undefined>((resolve) => {
-      setTimeout(() => resolve(result), 0);
-    });
+    const ret = await this.apiModule.get<IResponseListDTO<IBlockDTO>>(
+      `${this.API_PREFIX}/list`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
   };
 
   getBlock = async (
     id?: string,
-    query?: ParsedUrlQuery
+    query?: ParsedUrlQuery,
+    token?: string | null
   ): Promise<IBlockDTO | undefined> => {
-    const block = BLOCKS.find((item) => item.id === id);
-    const display = block && this.mockFilterByQuery(query)(block);
-    const result = display ? block : undefined;
-    return new Promise<IBlockDTO | undefined>((resolve) => {
-      setTimeout(() => resolve(result), 0);
-    });
+    const ret = await this.apiModule.get<IResponseItemDTO<IBlockDTO>>(
+      `${this.API_PREFIX}/get/${id}`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
   };
 
-  saveBlock = async (data: IBlockDTO) => {
-    if (!data.id) data.id = guid();
-    return new Promise<IBlockDTO>((resolve) => {
-      setTimeout(() => resolve(data), 1000);
-    });
+  saveBlock = async (data: IBlockDTO, token?: string | null) => {
+    if (data.id) {
+      const { id, ...params } = data;
+      const ret = await this.apiModule.patch<IResponseItemDTO<IBlockDTO>>(
+        `${this.API_PREFIX}/update/${data.id}`,
+        { ...params },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      return ret ? ret.data : undefined;
+    } else {
+      const ret = await this.apiModule.post<IResponseItemDTO<IBlockDTO>>(
+        `${this.API_PREFIX}/create`,
+        { ...data },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      return ret ? ret.data : undefined;
+    }
   };
 
-  deleteBlocks = async (ids: string[]) => {
-    return new Promise<boolean>((resolve) => {
-      setTimeout(() => resolve(true), 1000);
-    });
+  deleteBlocks = async (ids: string[], token?: string | null) => {
+    const ret = await this.apiModule.delete<IResponseItemDTO<IBlockDTO>>(
+      `${this.API_PREFIX}/delete`,
+      { ids },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.success : undefined;
   };
 }

@@ -4,7 +4,13 @@ export interface IModuleDTO {
   id: string;
   title: string;
   name: string;
-  complete: boolean;
+}
+
+export interface IModuleUserDTO {
+  id: string;
+  title: string;
+  name: string;
   enable: boolean;
+  complete: boolean;
   blocks?: IBlockDTO[];
 }

@@ -18,18 +18,20 @@ import { FilterText } from '@ui/filter/filterText';
 import { useRouter } from 'next/router';
 import { CellClickedEvent } from 'ag-grid-community';
 import { ParsedUrlQuery } from 'querystring';
+import { getCookieToken } from '@utils/cookie/getCookieToken';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
 ) => {
   const { params, query } = context;
-
+  const id = params?.id;
+  const token = getCookieToken(context);
   const serviceBlock = useService<IBlockService>(SERVICE.Block);
   const serviceModule = useService<IModuleService>(SERVICE.Module);
 
-  const blocks = (await serviceBlock.getBlocks(query)) || null;
-  const block = (await serviceBlock.getBlock(params?.id, query)) || null;
-  const modules = (await serviceModule.getModules()) || null;
+  const blocks = (await serviceBlock.getBlocks(query, token)) || null;
+  const block = (await serviceBlock.getBlock(id, undefined, token)) || null;
+  const modules = (await serviceModule.getModules(undefined, token)) || null;
 
   return { props: { blocks, block, modules } };
 };

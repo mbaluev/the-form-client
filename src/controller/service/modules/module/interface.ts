@@ -2,15 +2,21 @@ import { IModuleDTO } from '@model/module';
 import { ParsedUrlQuery } from 'querystring';
 
 export interface IModuleService {
-  getModules: (query?: ParsedUrlQuery) => Promise<IModuleDTO[] | undefined>;
+  getModules: (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<IModuleDTO[] | undefined>;
   getModule: (
     id?: string,
-    query?: ParsedUrlQuery
+    query?: ParsedUrlQuery,
+    token?: string | null
   ) => Promise<IModuleDTO | undefined>;
-  getModuleByBlockId: (
-    id?: string,
-    query?: ParsedUrlQuery
+  saveModule: (
+    data: IModuleDTO,
+    token?: string | null
   ) => Promise<IModuleDTO | undefined>;
-  saveModule: (data: IModuleDTO) => Promise<IModuleDTO>;
-  deleteModules: (ids: string[]) => Promise<boolean>;
+  deleteModules: (
+    ids: string[],
+    token?: string | null
+  ) => Promise<boolean | undefined>;
 }

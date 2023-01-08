@@ -1,4 +1,4 @@
-import { IBlockDTO } from '@model/block/index';
+import { IBlockDTO, IBlockUserDTO } from '@model/block/index';
 
 export const BLOCKS: IBlockDTO[] = [
   {
@@ -6,90 +6,52 @@ export const BLOCKS: IBlockDTO[] = [
     moduleId: '1',
     title: 'Lecture 1',
     name: 'What is Business Analysis and who is the BA?',
-    complete: true,
-    enable: true,
-    tabs: [
-      { value: 'materials', label: 'Materials', complete: true },
-      { value: 'test', label: 'Test', complete: true },
-      { value: 'homework', label: 'Homework', complete: true },
-    ],
   },
   {
     id: '2',
     moduleId: '1',
     title: 'Lecture 2',
     name: 'What is a Product?',
-    complete: true,
-    enable: true,
-    tabs: [
-      { value: 'materials', label: 'Materials', complete: true },
-      { value: 'test', label: 'Test', complete: true },
-      { value: 'homework', label: 'Homework', complete: true },
-    ],
   },
   {
     id: '3',
     moduleId: '1',
     title: 'Lecture 3',
     name: 'Product Architecture',
-    complete: true,
-    enable: true,
-    tabs: [
-      { value: 'materials', label: 'Materials', complete: true },
-      { value: 'test', label: 'Test', complete: true },
-      { value: 'homework', label: 'Homework', complete: true },
-    ],
   },
   {
     id: '4',
     moduleId: '2',
     title: 'Lecture 1',
     name: 'Analytics in Product Strategy',
-    complete: true,
-    enable: true,
-    tabs: [
-      { value: 'materials', label: 'Materials', complete: true },
-      { value: 'test', label: 'Test', complete: true },
-      { value: 'homework', label: 'Homework', complete: true },
-    ],
   },
   {
     id: '5',
     moduleId: '2',
     title: 'Lecture 2',
     name: 'Module 1 - Lecture 2',
-    complete: false,
-    enable: true,
-    tabs: [
-      { value: 'materials', label: 'Materials', complete: true },
-      { value: 'test', label: 'Test', complete: false },
-      { value: 'homework', label: 'Homework', complete: false },
-    ],
   },
   {
     id: '6',
     moduleId: '2',
     title: 'Lecture 3',
     name: 'Module 1 - Lecture 3',
-    complete: false,
-    enable: false,
-    tabs: [
-      { value: 'materials', label: 'Materials', complete: false },
-      { value: 'test', label: 'Test', complete: false },
-      { value: 'homework', label: 'Homework', complete: false },
-    ],
   },
   {
     id: '7',
     moduleId: '3',
     title: 'Lecture 1',
     name: 'Module 2 - Lecture 1',
-    complete: false,
-    enable: false,
-    tabs: [
-      { value: 'materials', label: 'Materials', complete: false },
-      { value: 'test', label: 'Test', complete: false },
-      { value: 'homework', label: 'Homework', complete: false },
-    ],
   },
 ];
+
+export const BLOCKS_USER: IBlockUserDTO[] = [...BLOCKS].map((block) => {
+  return {
+    ...block,
+    enable: true,
+    complete: true,
+    completeMaterials: true,
+    completeQuestions: true,
+    completeTasks: true,
+  };
+});

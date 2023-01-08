@@ -13,14 +13,16 @@ import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react';
+import { getCookieToken } from '@utils/cookie/getCookieToken';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
 ) => {
   const { query } = context;
+  const token = getCookieToken(context);
   const serviceModule = useService<IModuleService>(SERVICE.Module);
 
-  const modules = (await serviceModule.getModules(query)) || [];
+  const modules = (await serviceModule.getModules(query, token)) || [];
 
   return { props: { modules } };
 };

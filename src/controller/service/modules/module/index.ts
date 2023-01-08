@@ -2,86 +2,66 @@ import { inject, injectable } from 'inversify';
 import { INFRASTRUCTURE_MODULE } from '@infrastructure/ids';
 import { IModuleService } from '@service/modules/module/interface';
 import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
-import { MODULES } from '@model/module/mock';
 import { IModuleDTO } from '@model/module';
-import { BLOCKS } from '@model/block/mock';
-import { SERVICE } from '@service/ids';
-import { IBlockService } from '@service/modules/block/interface';
 import { ParsedUrlQuery } from 'querystring';
-import { guid } from '@utils/guid/guid';
+import { IResponseItemDTO, IResponseListDTO } from '@model/response';
 
 @injectable()
 export class ModuleService implements IModuleService {
   @inject(INFRASTRUCTURE_MODULE.Axios) protected apiModule!: IAxiosApiModule;
 
-  @inject(SERVICE.Block) protected serviceBlock!: IBlockService;
-
-  mockFilterByQuery =
-    (query?: ParsedUrlQuery) =>
-    (module: IModuleDTO): boolean => {
-      return query
-        ? query.search
-          ? module.title
-              .toLowerCase()
-              .includes((query.search as string).toLowerCase()) ||
-            module.name
-              .toLowerCase()
-              .includes((query.search as string).toLowerCase())
-          : true
-        : true;
-    };
+  API_PREFIX = `/api/module`;
 
   getModules = async (
-    query?: ParsedUrlQuery
+    query?: ParsedUrlQuery,
+    token?: string | null
   ): Promise<IModuleDTO[] | undefined> => {
-    const modules = [...MODULES];
-    for (const item of modules) {
-      item.blocks = await this.serviceBlock.getBlocksByModuleId(item.id);
-    }
-    const result = modules.filter(this.mockFilterByQuery(query));
-    return new Promise<IModuleDTO[] | undefined>((resolve) => {
-      setTimeout(() => resolve(result), 0);
-    });
+    const ret = await this.apiModule.get<IResponseListDTO<IModuleDTO>>(
+      `${this.API_PREFIX}/list`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
   };
 
   getModule = async (
     id?: string,
-    query?: ParsedUrlQuery
+    query?: ParsedUrlQuery,
+    token?: string | null
   ): Promise<IModuleDTO | undefined> => {
-    const module = MODULES.find((item) => item.id === id);
-    if (module) {
-      module.blocks = await this.serviceBlock.getBlocksByModuleId(id);
+    const ret = await this.apiModule.get<IResponseItemDTO<IModuleDTO>>(
+      `${this.API_PREFIX}/get/${id}`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
+
+  saveModule = async (data: IModuleDTO, token?: string | null) => {
+    if (data.id) {
+      const { id, ...params } = data;
+      const ret = await this.apiModule.patch<IResponseItemDTO<IModuleDTO>>(
+        `${this.API_PREFIX}/update/${data.id}`,
+        { ...params },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      return ret ? ret.data : undefined;
+    } else {
+      const ret = await this.apiModule.post<IResponseItemDTO<IModuleDTO>>(
+        `${this.API_PREFIX}/create`,
+        { ...data },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      return ret ? ret.data : undefined;
     }
-    const display = module && this.mockFilterByQuery(query)(module);
-    const result = display ? module : undefined;
-    return new Promise<IModuleDTO | undefined>((resolve) => {
-      setTimeout(() => resolve(result), 0);
-    });
   };
 
-  getModuleByBlockId = async (
-    id?: string,
-    query?: ParsedUrlQuery
-  ): Promise<IModuleDTO | undefined> => {
-    const block = BLOCKS.find((b) => b.id === id);
-    const module = await this.getModule(block?.moduleId);
-    const display = module && this.mockFilterByQuery(query)(module);
-    const result = display ? module : undefined;
-    return new Promise<IModuleDTO | undefined>((resolve) => {
-      setTimeout(() => resolve(result), 0);
-    });
-  };
-
-  saveModule = async (data: IModuleDTO) => {
-    if (!data.id) data.id = guid();
-    return new Promise<IModuleDTO>((resolve) => {
-      setTimeout(() => resolve(data), 1000);
-    });
-  };
-
-  deleteModules = async (ids: string[]) => {
-    return new Promise<boolean>((resolve) => {
-      setTimeout(() => resolve(true), 1000);
-    });
+  deleteModules = async (ids: string[], token?: string | null) => {
+    const ret = await this.apiModule.delete<IResponseItemDTO<IModuleDTO>>(
+      `${this.API_PREFIX}/delete`,
+      { ids },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.success : undefined;
   };
 }
