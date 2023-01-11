@@ -49,6 +49,7 @@ export const GridWithData = observer((props: IProps) => {
     isLoading,
     hasRows,
     noDataMessage = 'No data found',
+    autoSizeColumns = [],
   } = propsGrid;
   const router = useRouter();
   const { isRtl } = useViewModel<ILocaleViewModel>(VIEW_MODEL.Locale);
@@ -72,7 +73,7 @@ export const GridWithData = observer((props: IProps) => {
       gridRef.current.columnApi &&
       gridRef.current.api
     ) {
-      gridRef.current.columnApi.autoSizeColumns([]);
+      gridRef.current.columnApi.autoSizeColumns(autoSizeColumns);
       gridRef.current.api.sizeColumnsToFit();
     }
   }, [router]);

@@ -5,7 +5,11 @@ import { DefaultRenderer } from '@ui/layout/grid/renderers/base/defaultRenderer'
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { CellClickedEvent, RowSelectedEvent } from 'ag-grid-community';
+import {
+  CellClickedEvent,
+  ICellRendererParams,
+  RowSelectedEvent,
+} from 'ag-grid-community';
 import { TextFieldControl } from '@components/fields';
 import { InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -14,6 +18,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { IMaterialViewModel } from '@viewModel/modules/material/interface';
 import { DialogMaterial } from '@ui/dialogs/dialogMaterial';
+import { Button } from '@components/button';
 
 export const MaterialList = observer(() => {
   const {
@@ -36,6 +41,7 @@ export const MaterialList = observer(() => {
     deleteClose,
     deleteSubmit,
     hasDelete,
+    download,
   } = useViewModel<IMaterialViewModel>(VIEW_MODEL.Material);
 
   const defaultColDef = useMemo(
@@ -62,6 +68,37 @@ export const MaterialList = observer(() => {
         return `${params.data?.document.description}`;
       },
     },
+    {
+      colId: 'actions',
+      headerName: 'Download',
+      suppressSizeToFit: true,
+      valueGetter: (params: any) => {
+        return params.data;
+      },
+      cellRenderer: (props: ICellRendererParams) => {
+        if (!props.value) return null;
+        const onClick = async () => {
+          await download(
+            props.value.document.file.id,
+            props.value.document.file.name
+          );
+        };
+        return (
+          <div
+            style={{
+              display: 'flex',
+              height: '100%',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+            }}
+          >
+            <Button size="medium" onClick={onClick} variant="text">
+              {props.value.document.file.name}
+            </Button>
+          </div>
+        );
+      },
+    },
   ];
 
   const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +108,12 @@ export const MaterialList = observer(() => {
     setFilter(undefined);
   };
 
-  const onClick = (params: CellClickedEvent) => modalOpen(params.data.id);
+  const onClick = async (params: CellClickedEvent) => {
+    if (params.column.getColId() === 'actions') {
+      return;
+    }
+    await modalOpen(params.data.id);
+  };
   const onRowSelected = (event: RowSelectedEvent) => {
     const selected = event.node.isSelected();
     if (selected) {
@@ -138,6 +180,7 @@ export const MaterialList = observer(() => {
           hasRows: hasList,
           selectedIds: deleteIds,
           noDataMessage: 'No materials found',
+          autoSizeColumns: ['actions'],
         }}
       />
       <DialogConfirm
