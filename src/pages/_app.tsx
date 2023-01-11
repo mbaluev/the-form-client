@@ -62,7 +62,7 @@ const MyApp = (props: MyAppProps) => {
     locale.changeLanguage(locale.language);
     menu.initiate();
 
-    const interval = 60 * 15 * 1000; // token expiry
+    const interval = 60 * 10 * 1000; // token expiry
     setInterval(auth.refreshToken, interval);
 
     const handleStart = (url: string) => app.routeChangeStart(url);

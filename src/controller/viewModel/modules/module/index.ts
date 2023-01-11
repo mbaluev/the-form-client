@@ -51,10 +51,8 @@ export class ModuleViewModel
     this.setDataLoading(true);
     try {
       if (this.data && !this.hasErrors) {
-        const data = await this.serviceModule.saveModule(
-          this.data,
-          this.auth.token
-        );
+        const token = await this.auth.refreshToken();
+        const data = await this.serviceModule.saveModule(this.data, token);
         if (data) {
           this.updateFromList(data);
           await this.clearChanges();
@@ -70,10 +68,8 @@ export class ModuleViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const data = await this.serviceModule.saveModule(
-          this.modalData,
-          this.auth.token
-        );
+        const token = await this.auth.refreshToken();
+        const data = await this.serviceModule.saveModule(this.modalData, token);
         if (data) {
           this.updateFromList(data);
           await this.clearModalChanges();
@@ -89,9 +85,10 @@ export class ModuleViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
+        const token = await this.auth.refreshToken();
         const data = await this.serviceModule.deleteModules(
           this.deleteIds,
-          this.auth.token
+          token
         );
         if (data) {
           this.removeFromList(this.deleteIds);

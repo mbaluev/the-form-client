@@ -18,8 +18,6 @@ import { IMaterialViewModel } from '@viewModel/modules/material/interface';
 import { MaterialViewModel } from '@viewModel/modules/material';
 import { IQuestionViewModel } from '@viewModel/modules/question/interface';
 import { QuestionViewModel } from '@viewModel/modules/question';
-import { ITaskViewModel } from '@viewModel/modules/task/interface';
-import { TaskViewModel } from '@viewModel/modules/task';
 import { IUserViewModel } from '@viewModel/modules/user/interface';
 import { UserViewModel } from '@viewModel/modules/user';
 import { IAuthViewModel } from '@viewModel/modules/auth/interface';
@@ -60,5 +58,3 @@ viewModelContainer
 viewModelContainer
   .bind<IQuestionViewModel>(VIEW_MODEL.Question)
   .to(QuestionViewModel);
-
-viewModelContainer.bind<ITaskViewModel>(VIEW_MODEL.Task).to(TaskViewModel);

@@ -5,36 +5,40 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { Tooltip } from '@components/tooltip';
 import DoneIcon from '@mui/icons-material/Done';
 import fileSize from 'filesize';
-import './index.scss';
 import { FormControl, FormHelperText } from '@mui/material';
 import { IFileDTO } from '@model/file';
-import Link from 'next/link';
+import { Button } from '@components/button';
+import { observer } from 'mobx-react';
+import './index.scss';
 
 interface IAttachmentFileProps {
   name: string;
   size: number;
-  path?: string;
+  onDownload?: () => void;
 }
-const AttachmentFile = (props: IAttachmentFileProps) => {
-  const { name, size, path } = props;
+const AttachmentFile = observer((props: IAttachmentFileProps) => {
+  const { name, size, onDownload } = props;
   return (
     <div className="attachment-file">
       <div className="attachment-file__icon">
         <DoneIcon className="color_green-dark" />
       </div>
       <div className="attachment-file__name">
-        {path ? <Link href={path}>{name}</Link> : name}
+        <Button size="small" variant="text" onClick={onDownload}>
+          {name}
+        </Button>
       </div>
       {size && <div className="attachment-file__size">{fileSize(size)}</div>}
     </div>
   );
-};
+});
 
 interface IProps {
   name?: string;
   className?: string;
   loading?: boolean;
   onUpload?: (files: File[], name?: string) => void;
+  onDownload?: (id: string, filename: string) => void;
   options?: DropzoneOptions;
   tooltip?: string;
   text?: string;
@@ -48,6 +52,7 @@ export const Attachment: FC<IProps> = (props) => {
     className,
     loading,
     onUpload,
+    onDownload,
     options,
     tooltip,
     text = "Drag 'n' drop some files here, or click to select files",
@@ -84,7 +89,7 @@ export const Attachment: FC<IProps> = (props) => {
   const AcceptedFiles = () => {
     return (
       <div className={clsFiles}>
-        {acceptedFiles.map((file, index) => (
+        {acceptedFiles?.map((file, index) => (
           <AttachmentFile key={index} name={file.name} size={file.size} />
         ))}
       </div>
@@ -94,14 +99,19 @@ export const Attachment: FC<IProps> = (props) => {
     if (!files) return null;
     return (
       <div className={clsFiles}>
-        {files.map((file, index) => (
-          <AttachmentFile
-            key={index}
-            name={file.name}
-            size={file.size}
-            path={file.path}
-          />
-        ))}
+        {files?.map((file, index) => {
+          const downloadHandler = () => {
+            if (onDownload) onDownload(file.id, file.name);
+          };
+          return (
+            <AttachmentFile
+              key={index}
+              name={file.name}
+              size={file.size}
+              onDownload={downloadHandler}
+            />
+          );
+        })}
       </div>
     );
   };
@@ -125,7 +135,6 @@ export const Attachment: FC<IProps> = (props) => {
           </div>
         )}
         <Files />
-        {!files && acceptedFiles.length > 0 && <AcceptedFiles />}
       </div>
       {helperText && (
         <FormHelperText error={!!error}>{helperText}</FormHelperText>

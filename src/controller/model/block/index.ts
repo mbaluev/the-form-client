@@ -5,11 +5,7 @@ export interface IBlockDTO {
   name: string;
 }
 
-export interface IBlockUserDTO {
-  id: string;
-  moduleId: string;
-  title: string;
-  name: string;
+export interface IBlockUserDTO extends IBlockDTO {
   enable: boolean;
   complete: boolean;
   completeMaterials: boolean;

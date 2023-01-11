@@ -10,7 +10,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { Loader } from '@components/loader';
 import { Skeleton } from '@components/skeleton';
-import { ITaskViewModel } from '@viewModel/modules/task/interface';
+import { IMaterialViewModel } from '@viewModel/modules/material/interface';
 
 interface IProps {
   isOpen: boolean;
@@ -32,7 +32,7 @@ export const DialogTask = observer((props: IProps) => {
     hasModalErrors,
     hasModalChanges,
     upload,
-  } = useViewModel<ITaskViewModel>(VIEW_MODEL.Task);
+  } = useViewModel<IMaterialViewModel>(VIEW_MODEL.Material);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -52,10 +52,10 @@ export const DialogTask = observer((props: IProps) => {
     if (isModalLoading) {
       return <Skeleton width={200} />;
     }
-    if (!modalData || (modalData && !modalData.name)) {
+    if (!modalData || (modalData && !modalData.document.name)) {
       return <React.Fragment>New task</React.Fragment>;
     }
-    return <React.Fragment>{modalData.name}</React.Fragment>;
+    return <React.Fragment>{modalData.document.name}</React.Fragment>;
   };
   const footerButtons: IButtonProps[] = [
     {
@@ -87,7 +87,7 @@ export const DialogTask = observer((props: IProps) => {
           <FormField title="File name">
             <TextFieldControl
               name="name"
-              value={modalData?.name}
+              value={modalData?.document.name}
               onChange={changeHandler}
               error={Boolean(getModalError('name'))}
               helperText={getModalError('name')?.message}
@@ -98,7 +98,7 @@ export const DialogTask = observer((props: IProps) => {
               name="description"
               multiline
               minRows={10}
-              value={modalData?.description}
+              value={modalData?.document.description}
               onChange={changeHandler}
               error={Boolean(getModalError('description'))}
               helperText={getModalError('description')?.message}
@@ -112,7 +112,11 @@ export const DialogTask = observer((props: IProps) => {
               onUpload={uploadHandler}
               error={Boolean(getModalError('file.path'))}
               helperText={getModalError('file.path')?.message}
-              files={modalData?.file ? [modalData?.file] : undefined}
+              files={
+                modalData?.document.file
+                  ? [modalData?.document.file]
+                  : undefined
+              }
             />
           </FormField>
         </FormSection>

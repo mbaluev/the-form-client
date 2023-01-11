@@ -1,5 +1,13 @@
 import { IFileDTO } from '@model/file';
 
 export interface IFileService {
-  uploadFiles: (files: File[]) => Promise<IFileDTO[]>;
+  uploadFile: (
+    file: File,
+    token?: string | null
+  ) => Promise<IFileDTO | undefined>;
+  downloadFile: (
+    id: string,
+    filename: string,
+    token?: string | null
+  ) => Promise<void>;
 }

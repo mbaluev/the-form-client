@@ -14,7 +14,6 @@ import { InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
-import { ITaskViewModel } from '@viewModel/modules/task/interface';
 import { Loader } from '@components/loader';
 import { NoData } from '@components/noData';
 import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
@@ -25,7 +24,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { DialogTask } from '@ui/dialogs/dialogTask';
+import { IMaterialViewModel } from '@viewModel/modules/material/interface';
 import './index.scss';
+import { IMaterialDTO } from '@model/material';
 
 export const TabHomework = observer(() => {
   const { data: block } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
@@ -51,7 +52,7 @@ export const TabHomework = observer(() => {
     expandData,
     expandList,
     download,
-  } = useViewModel<ITaskViewModel>(VIEW_MODEL.Task);
+  } = useViewModel<IMaterialViewModel>(VIEW_MODEL.Material);
 
   const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value);
@@ -106,14 +107,14 @@ export const TabHomework = observer(() => {
         )}
         {hasListFiltered && (
           <FormSection cols={1}>
-            {listFiltered?.map((file: IDocumentDTO, index: number) => {
-              const expandHandler = () => expandData(file);
-              const openDocumentHandler = () => modalOpen(file.id);
+            {listFiltered?.map((task: IMaterialDTO, index: number) => {
+              const expandHandler = () => expandData(task);
+              const openDocumentHandler = () => modalOpen(task.id);
               const openDeleteHandler = () => {
-                addDeleteId(file.id);
+                addDeleteId(task.id);
                 deleteOpen();
               };
-              const downloadHandler = () => download(file.file.path);
+              const downloadHandler = () => download(task.document.file.id);
               const footerButtons = [
                 <Button
                   size="medium"
@@ -143,12 +144,12 @@ export const TabHomework = observer(() => {
               return (
                 <Accordion
                   key={index}
-                  title={file.name}
+                  title={task.document.name}
                   footerButtons={footerButtons}
-                  expanded={file.expanded}
+                  expanded={task.expanded}
                   onExpand={expandHandler}
                 >
-                  {file.description}
+                  {task.document.description}
                 </Accordion>
               );
             })}

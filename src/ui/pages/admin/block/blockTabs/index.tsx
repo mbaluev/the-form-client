@@ -28,6 +28,7 @@ const BLOCK_TAB_CONFIG: ITabItemProps[] = [
     label: 'Materials',
     value: ProfileTabNames.materials,
     content: <TabMaterials />,
+    padding: false,
   },
   {
     label: 'Test',

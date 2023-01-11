@@ -32,30 +32,41 @@ export const DialogMaterial = observer((props: IProps) => {
     hasModalErrors,
     hasModalChanges,
     upload,
+    download,
   } = useViewModel<IMaterialViewModel>(VIEW_MODEL.Material);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     changeModalField(e.target.name, e.target.value);
   };
+
+  const pathFileId = 'document.file.id';
+  const pathFileName = 'document.file.name';
+  const pathFileSize = 'document.file.size';
+  const pathFileMimeType = 'document.file.mimetype';
+  const pathFilePath = 'document.file.path';
   const uploadHandler = async (files: File[]) => {
-    const newFiles = await upload(files);
-    if (newFiles) {
-      changeModalField('file.id', newFiles[0].id);
-      changeModalField('file.name', newFiles[0].name);
-      changeModalField('file.size', newFiles[0].size);
-      changeModalField('file.path', newFiles[0].path);
+    const newFile = await upload(files[0]);
+    if (newFile) {
+      changeModalField(pathFileId, newFile.id);
+      changeModalField(pathFileName, newFile.name);
+      changeModalField(pathFileSize, newFile.size);
+      changeModalField(pathFileMimeType, newFile.mimetype);
+      changeModalField(pathFilePath, newFile.path);
     }
+  };
+  const downloadHandler = async (id: string, filename: string) => {
+    await download(id, filename);
   };
 
   const Label = () => {
     if (isModalLoading) {
       return <Skeleton width={200} />;
     }
-    if (!modalData || (modalData && !modalData.name)) {
+    if (!modalData || (modalData && !modalData.document.name)) {
       return <React.Fragment>New material</React.Fragment>;
     }
-    return <React.Fragment>{modalData.name}</React.Fragment>;
+    return <React.Fragment>{modalData.document.name}</React.Fragment>;
   };
   const footerButtons: IButtonProps[] = [
     {
@@ -86,22 +97,22 @@ export const DialogMaterial = observer((props: IProps) => {
         <FormSection>
           <FormField title="File name">
             <TextFieldControl
-              name="name"
-              value={modalData?.name}
+              name="document.name"
+              value={modalData?.document.name}
               onChange={changeHandler}
-              error={Boolean(getModalError('name'))}
-              helperText={getModalError('name')?.message}
+              error={Boolean(getModalError('document.name'))}
+              helperText={getModalError('document.name')?.message}
             />
           </FormField>
           <FormField title="Description">
             <TextFieldControl
-              name="description"
+              name="document.description"
               multiline
               minRows={5}
-              value={modalData?.description}
+              value={modalData?.document.description}
               onChange={changeHandler}
-              error={Boolean(getModalError('description'))}
-              helperText={getModalError('description')?.message}
+              error={Boolean(getModalError('document.description'))}
+              helperText={getModalError('document.description')?.message}
             />
           </FormField>
           <FormField title="Attachment">
@@ -110,9 +121,14 @@ export const DialogMaterial = observer((props: IProps) => {
               tooltip={tooltip}
               loading={isModalLoading}
               onUpload={uploadHandler}
-              error={Boolean(getModalError('file.path'))}
-              helperText={getModalError('file.path')?.message}
-              files={modalData?.file ? [modalData?.file] : undefined}
+              onDownload={downloadHandler}
+              error={Boolean(getModalError(pathFileId))}
+              helperText={getModalError(pathFileId)?.message}
+              files={
+                modalData?.document.file
+                  ? [modalData?.document.file]
+                  : undefined
+              }
             />
           </FormField>
         </FormSection>

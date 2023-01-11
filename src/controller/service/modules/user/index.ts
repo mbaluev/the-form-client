@@ -26,7 +26,7 @@ export class UserService implements IUserService {
     query?: ParsedUrlQuery,
     token?: string | null
   ): Promise<IUserDTO[] | undefined> => {
-    const ret = await this.apiModule.get<IResponseListDTO<IUserDTO>>(
+    const ret = await this.apiModule.post<IResponseListDTO<IUserDTO>>(
       `${this.API_PREFIX}/list`,
       { ...query },
       { headers: { Authorization: `Bearer ${token}` } }
@@ -67,7 +67,7 @@ export class UserService implements IUserService {
   };
 
   deleteUsers = async (ids: string[], token?: string | null) => {
-    const ret = await this.apiModule.delete<IResponseItemDTO<IUserDTO>>(
+    const ret = await this.apiModule.delete<IResponseItemDTO<undefined>>(
       `${this.API_PREFIX}/delete`,
       { ids },
       { headers: { Authorization: `Bearer ${token}` } }

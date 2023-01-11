@@ -10,5 +10,4 @@ export const VIEW_MODEL = {
   Filter: Symbol.for('FilterViewModel'),
   Material: Symbol.for('MaterialViewModel'),
   Question: Symbol.for('QuestionViewModel'),
-  Task: Symbol.for('TaskViewModel'),
 };

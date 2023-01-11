@@ -60,6 +60,17 @@ export class AxiosApiModule implements IAxiosApiModule {
     );
   }
 
+  async getDownload(url: string, filename: string, data?: any) {
+    return this.getBlob(url, data).then((response) => {
+      if (response) {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(response);
+        a.setAttribute('download', filename);
+        a.click();
+      }
+    });
+  }
+
   async post(url: string, data?: any, options?: IApiOptions) {
     return this.fetch(
       {
@@ -85,10 +96,12 @@ export class AxiosApiModule implements IAxiosApiModule {
 
   async postDownload(url: string, filename: string, data?: any) {
     return this.postBlob(url, data).then((response) => {
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(response);
-      a.setAttribute('download', filename);
-      a.click();
+      if (response) {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(response);
+        a.setAttribute('download', filename);
+        a.click();
+      }
     });
   }
 

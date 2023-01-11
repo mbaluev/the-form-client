@@ -52,10 +52,8 @@ export class BlockViewModel
     this.setDataLoading(true);
     try {
       if (this.data && !this.hasErrors) {
-        const data = await this.serviceBlock.saveBlock(
-          this.data,
-          this.auth.token
-        );
+        const token = await this.auth.refreshToken();
+        const data = await this.serviceBlock.saveBlock(this.data, token);
         if (data) {
           this.updateFromList(data);
           await this.clearChanges();
@@ -71,10 +69,8 @@ export class BlockViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const data = await this.serviceBlock.saveBlock(
-          this.modalData,
-          this.auth.token
-        );
+        const token = await this.auth.refreshToken();
+        const data = await this.serviceBlock.saveBlock(this.modalData, token);
         if (data) {
           this.updateFromList(data);
           await this.clearModalChanges();
@@ -90,9 +86,10 @@ export class BlockViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
+        const token = await this.auth.refreshToken();
         const data = await this.serviceBlock.deleteBlocks(
           this.deleteIds,
-          this.auth.token
+          token
         );
         if (data) {
           this.removeFromList(this.deleteIds);

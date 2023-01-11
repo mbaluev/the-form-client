@@ -16,7 +16,7 @@ export class ModuleService implements IModuleService {
     query?: ParsedUrlQuery,
     token?: string | null
   ): Promise<IModuleDTO[] | undefined> => {
-    const ret = await this.apiModule.get<IResponseListDTO<IModuleDTO>>(
+    const ret = await this.apiModule.post<IResponseListDTO<IModuleDTO>>(
       `${this.API_PREFIX}/list`,
       { ...query },
       { headers: { Authorization: `Bearer ${token}` } }
@@ -29,7 +29,7 @@ export class ModuleService implements IModuleService {
     query?: ParsedUrlQuery,
     token?: string | null
   ): Promise<IModuleDTO | undefined> => {
-    const ret = await this.apiModule.get<IResponseItemDTO<IModuleDTO>>(
+    const ret = await this.apiModule.post<IResponseItemDTO<IModuleDTO>>(
       `${this.API_PREFIX}/get/${id}`,
       { ...query },
       { headers: { Authorization: `Bearer ${token}` } }
@@ -57,7 +57,7 @@ export class ModuleService implements IModuleService {
   };
 
   deleteModules = async (ids: string[], token?: string | null) => {
-    const ret = await this.apiModule.delete<IResponseItemDTO<IModuleDTO>>(
+    const ret = await this.apiModule.delete<IResponseItemDTO<undefined>>(
       `${this.API_PREFIX}/delete`,
       { ids },
       { headers: { Authorization: `Bearer ${token}` } }

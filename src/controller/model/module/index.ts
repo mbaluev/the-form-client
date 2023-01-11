@@ -6,10 +6,7 @@ export interface IModuleDTO {
   name: string;
 }
 
-export interface IModuleUserDTO {
-  id: string;
-  title: string;
-  name: string;
+export interface IModuleUserDTO extends IModuleDTO {
   enable: boolean;
   complete: boolean;
   blocks?: IBlockDTO[];

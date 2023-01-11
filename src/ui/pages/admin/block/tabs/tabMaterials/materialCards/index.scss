@@ -1,6 +1,6 @@
-@import "../../../../../../core/scss/params";
+@import "../../../../../../../core/scss/params";
 
-.tab-materials-block {
+.materials-card {
   display: flex;
   flex-direction: column;
   gap: $base * 4;
