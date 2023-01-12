@@ -5,5 +5,6 @@ export const SERVICE = {
   Module: Symbol.for('ModuleService'),
   Block: Symbol.for('BlockService'),
   Material: Symbol.for('MaterialService'),
+  Task: Symbol.for('TaskService'),
   Question: Symbol.for('QuestionService'),
 };

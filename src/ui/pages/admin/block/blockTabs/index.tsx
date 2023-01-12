@@ -40,6 +40,7 @@ const BLOCK_TAB_CONFIG: ITabItemProps[] = [
     label: 'Homework',
     value: ProfileTabNames.homework,
     content: <TabHomework />,
+    padding: false,
   },
 ];
 

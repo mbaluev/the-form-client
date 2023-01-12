@@ -14,6 +14,8 @@ import { IAuthService } from '@service/modules/auth/interface';
 import { AuthService } from '@service/modules/auth';
 import { IMaterialService } from '@service/modules/material/interface';
 import { MaterialService } from '@service/modules/material';
+import { ITaskService } from '@service/modules/task/interface';
+import { TaskService } from '@service/modules/task';
 
 export const serviceContainer = new Container();
 
@@ -28,5 +30,7 @@ serviceContainer.bind<IModuleService>(SERVICE.Module).to(ModuleService);
 serviceContainer.bind<IBlockService>(SERVICE.Block).to(BlockService);
 
 serviceContainer.bind<IMaterialService>(SERVICE.Material).to(MaterialService);
+
+serviceContainer.bind<ITaskService>(SERVICE.Task).to(TaskService);
 
 serviceContainer.bind<IQuestionService>(SERVICE.Question).to(QuestionService);

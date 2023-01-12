@@ -9,5 +9,6 @@ export const VIEW_MODEL = {
   Block: Symbol.for('BlockViewModel'),
   Filter: Symbol.for('FilterViewModel'),
   Material: Symbol.for('MaterialViewModel'),
+  Task: Symbol.for('TaskViewModel'),
   Question: Symbol.for('QuestionViewModel'),
 };

@@ -22,6 +22,8 @@ import { IUserViewModel } from '@viewModel/modules/user/interface';
 import { UserViewModel } from '@viewModel/modules/user';
 import { IAuthViewModel } from '@viewModel/modules/auth/interface';
 import { AuthViewModel } from '@viewModel/modules/auth';
+import { ITaskViewModel } from '@viewModel/modules/task/interface';
+import { TaskViewModel } from '@viewModel/modules/task';
 
 export const viewModelContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -54,6 +56,8 @@ viewModelContainer.bind<IBlockViewModel>(VIEW_MODEL.Block).to(BlockViewModel);
 viewModelContainer
   .bind<IMaterialViewModel>(VIEW_MODEL.Material)
   .to(MaterialViewModel);
+
+viewModelContainer.bind<ITaskViewModel>(VIEW_MODEL.Task).to(TaskViewModel);
 
 viewModelContainer
   .bind<IQuestionViewModel>(VIEW_MODEL.Question)
