@@ -5,11 +5,7 @@ import { DefaultRenderer } from '@ui/layout/grid/renderers/base/defaultRenderer'
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {
-  CellClickedEvent,
-  ICellRendererParams,
-  RowSelectedEvent,
-} from 'ag-grid-community';
+import { CellClickedEvent, RowSelectedEvent } from 'ag-grid-community';
 import { TextFieldControl } from '@components/fields';
 import { InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -18,7 +14,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { IMaterialViewModel } from '@viewModel/modules/material/interface';
 import { DialogMaterial } from '@ui/dialogs/dialogMaterial';
-import { Button } from '@components/button';
+import { ButtonRenderer } from '@ui/layout/grid/renderers/base/buttonRenderer';
 
 export const MaterialList = observer(() => {
   const {
@@ -73,31 +69,20 @@ export const MaterialList = observer(() => {
       headerName: 'Download',
       suppressSizeToFit: true,
       valueGetter: (params: any) => {
-        return params.data;
-      },
-      cellRenderer: (props: ICellRendererParams) => {
-        if (!props.value) return null;
         const onClick = async () => {
           await download(
-            props.value.document.file.id,
-            props.value.document.file.name
+            params.data.document.file.id,
+            params.data.document.file.name
           );
         };
-        return (
-          <div
-            style={{
-              display: 'flex',
-              height: '100%',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-            }}
-          >
-            <Button size="medium" onClick={onClick} variant="text">
-              {props.value.document.file.name}
-            </Button>
-          </div>
-        );
+        return {
+          size: 'small',
+          onClick: onClick,
+          variant: 'text',
+          children: params.data.document.file.name,
+        };
       },
+      cellRenderer: ButtonRenderer,
     },
   ];
 

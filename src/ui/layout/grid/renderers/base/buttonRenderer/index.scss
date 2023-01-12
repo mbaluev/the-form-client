@@ -1,0 +1,9 @@
+@import "../../../../../../core/scss/params";
+@import "../../params";
+
+.button-renderer {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-end;
+}
