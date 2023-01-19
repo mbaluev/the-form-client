@@ -12,6 +12,7 @@ export interface IFormFieldProps {
   isRow?: boolean;
   className?: string;
   classNameLabel?: string;
+  classNameContent?: string;
   error?: boolean;
   success?: boolean;
   disabled?: boolean;
@@ -26,6 +27,7 @@ export const FormField: FC<IFormFieldProps> = (props) => {
     isRow,
     className,
     classNameLabel,
+    classNameContent,
     error,
     success,
     disabled,
@@ -43,6 +45,7 @@ export const FormField: FC<IFormFieldProps> = (props) => {
   });
   const clsContent = classNames(
     'form-field__content',
+    classNameContent,
     align ? `form-field__content_${align}` : undefined,
     { 'form-field__content_horizontal': Boolean(actions) }
   );

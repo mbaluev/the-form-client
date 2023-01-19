@@ -4,12 +4,13 @@ import { SERVICE } from '@service/ids';
 import { FileService } from '@service/modules/file';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { AuthViewModel } from '@viewModel/modules/auth';
-import { action, makeObservable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import { BlockViewModel } from '@viewModel/modules/block';
 import { ParsedUrlQuery } from 'querystring';
 import { ITaskViewModel } from '@viewModel/modules/task/interface';
-import { ITaskDTO } from '@model/task';
+import { ITaskDTO, TTaskAnswerType } from '@model/task';
 import { TaskService } from '@service/modules/task';
+import { guid } from '@utils/guid/guid';
 import _ from 'lodash';
 
 @injectable()
@@ -30,6 +31,14 @@ export class TaskViewModel
     makeObservable(this, {
       upload: action,
       download: action,
+
+      type: observable,
+      title: observable,
+      setType: action,
+      setTitle: action,
+
+      addAnswer: action,
+      removeAnswer: action,
     });
     this.setValidations([
       { nameSpace: 'document.name', type: 'required', message: 'Required' },
@@ -43,6 +52,7 @@ export class TaskViewModel
         type: 'required',
         message: 'Required',
       },
+      { nameSpace: 'taskAnswers', type: 'required', message: 'Required' },
     ]);
   }
 
@@ -57,16 +67,16 @@ export class TaskViewModel
         if (_.has(item, 'document.name')) {
           result =
             result ||
-            (item.document.name !== undefined &&
-              item.document.name
+            (item.document?.name !== undefined &&
+              item.document?.name
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'document.description')) {
           result =
             result ||
-            (item.document.description !== undefined &&
-              item.document.description
+            (item.document?.description !== undefined &&
+              item.document?.description
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
@@ -143,7 +153,7 @@ export class TaskViewModel
     }
   };
 
-  // -- other
+  // --- other
 
   upload = async (file: File) => {
     this.setDataLoading(true);
@@ -160,6 +170,41 @@ export class TaskViewModel
       const token = await this.auth.refreshToken();
       await this.serviceFile.downloadFile(id, filename, token);
     } finally {
+    }
+  };
+
+  // --- answer
+
+  type?: TTaskAnswerType = 'file';
+
+  title?: string = undefined;
+
+  setType = (value?: TTaskAnswerType) => {
+    this.type = value;
+  };
+
+  setTitle = (value?: string) => {
+    this.title = value;
+  };
+
+  addAnswer = () => {
+    if (this.type && this.title) {
+      const data = this.modalData;
+      const index = data?.taskAnswers ? data?.taskAnswers.length : 0;
+      const value = { type: this.type, title: this.title, id: guid() };
+      this.changeModalField(`taskAnswers.${index}`, value);
+      this.validateModal();
+      this.setTitle();
+    }
+  };
+
+  removeAnswer = (id: string) => {
+    const data = this.modalData ? { ...this.modalData } : undefined;
+    if (data && data.taskAnswers) {
+      data.taskAnswers = data.taskAnswers.filter((d) => d.id !== id);
+      if (data.taskAnswers.length === 0) data.taskAnswers = undefined;
+      this.setModalData(data);
+      this.validateModal();
     }
   };
 }

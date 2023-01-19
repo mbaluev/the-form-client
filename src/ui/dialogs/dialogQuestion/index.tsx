@@ -40,6 +40,7 @@ export const DialogQuestion = observer((props: IProps) => {
     addOptionCorrect,
     removeOption,
     removeOptionCorrect,
+    hasOption,
   } = useViewModel<IQuestionViewModel>(VIEW_MODEL.Question);
 
   const { list: blocks, data: block } = useViewModel<IBlockViewModel>(
@@ -131,7 +132,11 @@ export const DialogQuestion = observer((props: IProps) => {
           <FormField
             title="Options"
             actions={[
-              <IconButton onClick={addOption}>
+              <IconButton
+                onClick={addOption}
+                disabled={!hasOption}
+                tooltip="Add option"
+              >
                 <Add />
               </IconButton>,
             ]}
@@ -154,7 +159,10 @@ export const DialogQuestion = observer((props: IProps) => {
               <FormField
                 key={index}
                 actions={[
-                  <IconButton onClick={deleteOptionHandler}>
+                  <IconButton
+                    onClick={deleteOptionHandler}
+                    tooltip="Remove option"
+                  >
                     <Delete />
                   </IconButton>,
                 ]}

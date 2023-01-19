@@ -15,30 +15,40 @@ export interface IFormSectionProps {
   collapsible?: boolean;
   isOpen?: boolean;
   cols?: number;
+  classNameLabel?: string;
+  error?: boolean;
+  success?: boolean;
 }
 
-export const FormSection: FC<IFormSectionProps> = ({
-  id,
-  title,
-  subtitle,
-  titleClassName,
-  align,
-  className,
-  rightBlock,
-  collapsible,
-  isOpen = true,
-  cols,
-  children,
-}) => {
+export const FormSection: FC<IFormSectionProps> = (props) => {
+  const {
+    id,
+    title,
+    subtitle,
+    titleClassName,
+    align,
+    className,
+    rightBlock,
+    collapsible,
+    isOpen = true,
+    cols,
+    error,
+    classNameLabel,
+    success,
+    children,
+  } = props;
+
   const [isCollapse, setIsCollapse] = useState<boolean | undefined>(!isOpen);
 
   const clsMain = classNames('form-section', className, {
     'form-section_collapsible': Boolean(collapsible),
     'form-section_collapsed': Boolean(isCollapse),
   });
-
   const clsTitle = classNames('form-section__title', titleClassName);
-
+  const clsLabel = classNames('form-section__label', classNameLabel, {
+    'form-section__label-error': Boolean(error),
+    'form-section__label-success': Boolean(success),
+  });
   const clsContent = classNames('form-section__content', {
     [`form-section__content_${align}`]: Boolean(align),
     'form-section__content_collapsed': Boolean(collapsible && isCollapse),
@@ -53,7 +63,7 @@ export const FormSection: FC<IFormSectionProps> = ({
     if (title) {
       return (
         <div className="form-section__title-left-text">
-          <label className="form-section__label">{title}</label>
+          <label className={clsLabel}>{title}</label>
         </div>
       );
     }

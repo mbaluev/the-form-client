@@ -1,0 +1,18 @@
+@import "../../../core/scss/params";
+
+.dialog-task {
+  & .no-data {
+    align-items: flex-start;
+  }
+  & .no-data__message {
+    font-size: 0.9rem;
+    font-weight: normal;
+  }
+  &__answer {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: $base * 65;
+  }
+}

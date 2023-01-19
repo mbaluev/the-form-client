@@ -6,7 +6,7 @@ import { IQuestionDTO } from '@model/question';
 import { QuestionService } from '@service/modules/question';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { BlockViewModel } from '@viewModel/modules/block';
-import { action, makeObservable, observable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 import { guid } from '@utils/guid/guid';
 
 @injectable()
@@ -27,6 +27,7 @@ export class QuestionViewModel
       addOptionCorrect: action,
       removeOption: action,
       removeOptionCorrect: action,
+      hasOption: computed,
     });
     this.setValidations([
       { nameSpace: 'blockId', type: 'required', message: 'Required' },
@@ -45,12 +46,14 @@ export class QuestionViewModel
   };
 
   addOption = () => {
-    const data = this.modalData;
-    const index = data?.options ? data?.options.length : 0;
-    const value = { id: guid(), title: this.option };
-    this.changeModalField(`options.${index}`, value);
-    this.validateModal();
-    this.setOption();
+    if (this.option) {
+      const data = this.modalData;
+      const index = data?.options ? data?.options.length : 0;
+      const value = { id: guid(), title: this.option };
+      this.changeModalField(`options.${index}`, value);
+      this.validateModal();
+      this.setOption();
+    }
   };
 
   addOptionCorrect = (id: string) => {
@@ -79,6 +82,10 @@ export class QuestionViewModel
       this.validateModal();
     }
   };
+
+  get hasOption() {
+    return Boolean(this.option);
+  }
 
   // --- override
 

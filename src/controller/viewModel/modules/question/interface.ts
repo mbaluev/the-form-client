@@ -8,4 +8,5 @@ export interface IQuestionViewModel extends IBaseCardViewModel<IQuestionDTO> {
   addOptionCorrect: (id: string) => void;
   removeOption: (id: string) => void;
   removeOptionCorrect: (id: string) => void;
+  hasOption: boolean;
 }

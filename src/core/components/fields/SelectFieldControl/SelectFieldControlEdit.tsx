@@ -29,10 +29,14 @@ export const SelectFieldControlEdit = (props: SelectFieldControlProps) => {
     displayEmpty,
     style,
     size,
+    required,
+    disabled,
     ...other
   } = props;
 
-  const [state, setState] = useState(value || '');
+  const [state, setState] = useState(
+    required ? value || items?.[0].value || '' : value || ''
+  );
 
   useUpdateEffect(() => {
     setState(value || '');
@@ -49,18 +53,19 @@ export const SelectFieldControlEdit = (props: SelectFieldControlProps) => {
     }
   };
   const hasState = Boolean(state);
-  const IconComponent = hasState ? () => null : ExpandMoreIcon;
+  const IconComponent = hasState && !required ? () => null : ExpandMoreIcon;
   const clear = () => {
     const e = {
       target: { value: '', name: other.name },
     } as SelectChangeEvent<any>;
     onChangeHandler(e);
   };
-  const endAdornment = hasState ? (
-    <IconButton onClick={clear}>
-      <CloseIcon />
-    </IconButton>
-  ) : undefined;
+  const endAdornment =
+    hasState && !required && !disabled ? (
+      <IconButton onClick={clear}>
+        <CloseIcon />
+      </IconButton>
+    ) : undefined;
 
   return (
     <FormControl variant="outlined" className={cls} style={style}>
@@ -75,6 +80,7 @@ export const SelectFieldControlEdit = (props: SelectFieldControlProps) => {
         displayEmpty={Boolean(placeholder)}
         placeholder={placeholder}
         error={!!error}
+        disabled={disabled}
         MenuProps={{
           anchorOrigin: { vertical: 'bottom', horizontal: 0 },
           transformOrigin: { vertical: -8, horizontal: 0 },

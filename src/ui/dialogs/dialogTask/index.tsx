@@ -3,7 +3,7 @@ import { Modal } from '@components/modal';
 import { Attachment } from '@components/attachment';
 import { DropzoneOptions } from 'react-dropzone';
 import { Form, FormField, FormSection } from '@components/form';
-import { TextFieldControl } from '@components/fields';
+import { SelectFieldControl, TextFieldControl } from '@components/fields';
 import { IButtonProps } from '@components/button';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
@@ -11,6 +11,12 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { Loader } from '@components/loader';
 import { Skeleton } from '@components/skeleton';
 import { ITaskViewModel } from '@viewModel/modules/task/interface';
+import { IconButton } from '@components/iconButton';
+import { Add, Delete } from '@mui/icons-material';
+import { TTaskAnswerType } from '@model/task';
+import { Divider, SelectChangeEvent } from '@mui/material';
+import './index.scss';
+import { NoData } from '@components/noData';
 
 interface IProps {
   isOpen: boolean;
@@ -33,12 +39,13 @@ export const DialogTask = observer((props: IProps) => {
     hasModalChanges,
     upload,
     download,
+    type,
+    title,
+    setType,
+    setTitle,
+    addAnswer,
+    removeAnswer,
   } = useViewModel<ITaskViewModel>(VIEW_MODEL.Task);
-
-  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    changeModalField(e.target.name, e.target.value);
-  };
 
   const pathFileId = 'document.file.id';
   const pathFileName = 'document.file.name';
@@ -63,10 +70,10 @@ export const DialogTask = observer((props: IProps) => {
     if (isModalLoading) {
       return <Skeleton width={200} />;
     }
-    if (!modalData || (modalData && !modalData.document.name)) {
-      return <React.Fragment>New material</React.Fragment>;
+    if (!modalData || (modalData && !modalData.document?.name)) {
+      return <React.Fragment>New homework task</React.Fragment>;
     }
-    return <React.Fragment>{modalData.document.name}</React.Fragment>;
+    return <React.Fragment>{modalData.document?.name}</React.Fragment>;
   };
   const footerButtons: IButtonProps[] = [
     {
@@ -84,6 +91,17 @@ export const DialogTask = observer((props: IProps) => {
     },
   ];
 
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    changeModalField(e.target.name, e.target.value);
+  };
+  const onChangeType = (e: SelectChangeEvent<unknown>) => {
+    setType(e.target.value as TTaskAnswerType);
+  };
+  const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
   return (
     <Modal
       className="dialog-task"
@@ -93,12 +111,12 @@ export const DialogTask = observer((props: IProps) => {
       footerButtons={footerButtons}
     >
       <Loader loading={isModalLoading} />
-      <Form cols={1}>
+      <Form cols={2}>
         <FormSection>
           <FormField title="File name">
             <TextFieldControl
               name="document.name"
-              value={modalData?.document.name}
+              value={modalData?.document?.name}
               onChange={changeHandler}
               error={Boolean(getModalError('document.name'))}
               helperText={getModalError('document.name')?.message}
@@ -109,7 +127,7 @@ export const DialogTask = observer((props: IProps) => {
               name="document.description"
               multiline
               minRows={5}
-              value={modalData?.document.description}
+              value={modalData?.document?.description}
               onChange={changeHandler}
               error={Boolean(getModalError('document.description'))}
               helperText={getModalError('document.description')?.message}
@@ -125,12 +143,71 @@ export const DialogTask = observer((props: IProps) => {
               error={Boolean(getModalError(pathFileId))}
               helperText={getModalError(pathFileId)?.message}
               files={
-                modalData?.document.file
-                  ? [modalData?.document.file]
+                modalData?.document?.file
+                  ? [modalData?.document?.file]
                   : undefined
               }
             />
           </FormField>
+        </FormSection>
+        <FormSection>
+          <FormField title="Answer types">
+            <SelectFieldControl
+              name="type"
+              required
+              items={[
+                { label: 'File', value: 'file' },
+                { label: 'Link', value: 'link' },
+              ]}
+              value={type}
+              onChange={onChangeType}
+            />
+          </FormField>
+          <FormField
+            actions={[
+              <IconButton
+                tooltip="Add"
+                onClick={addAnswer}
+                disabled={!Boolean(title)}
+              >
+                <Add />
+              </IconButton>,
+            ]}
+          >
+            <TextFieldControl
+              name="title"
+              placeholder="Title"
+              value={title}
+              onChange={onChangeTitle}
+              error={Boolean(getModalError('taskAnswers'))}
+              className="dialog-task__answer"
+            />
+          </FormField>
+          {modalData?.taskAnswers ? (
+            modalData?.taskAnswers.map((answer, index) => (
+              <React.Fragment>
+                <Divider />
+                <FormField
+                  key={index}
+                  actions={[
+                    <IconButton
+                      tooltip="Delete"
+                      onClick={() => removeAnswer(answer.id)}
+                    >
+                      <Delete />
+                    </IconButton>,
+                  ]}
+                >
+                  <div className="dialog-task__answer">{`${answer.type}: ${answer.title}`}</div>
+                </FormField>
+              </React.Fragment>
+            ))
+          ) : (
+            <NoData
+              message="No answer types found"
+              messageClassName="color_red"
+            />
+          )}
         </FormSection>
       </Form>
     </Modal>

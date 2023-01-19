@@ -55,7 +55,7 @@ export const Attachment: FC<IProps> = (props) => {
     onDownload,
     options,
     tooltip,
-    text = "Drag 'n' drop some files here, or click to select files",
+    text = "Drag 'n' drop or click to select files",
     error,
     helperText,
     files,

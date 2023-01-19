@@ -47,9 +47,16 @@
   }
 
   &__label {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     line-height: normal;
     font-weight: 500;
+
+    &-error {
+      color: $color-red;
+    }
+    &-success {
+      color: $color-green;
+    }
   }
   &_collapsible &__label {
     cursor: pointer;
