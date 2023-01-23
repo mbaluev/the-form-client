@@ -3,10 +3,20 @@ import { ParsedUrlQuery } from 'querystring';
 
 export interface IQuestionService {
   getQuestions: (
-    blockId?: string,
-    query?: ParsedUrlQuery
+    query?: ParsedUrlQuery,
+    token?: string | null
   ) => Promise<IQuestionDTO[] | undefined>;
-  getQuestion: (id?: string) => Promise<IQuestionDTO | undefined>;
-  saveQuestion: (data: IQuestionDTO) => Promise<IQuestionDTO>;
-  deleteQuestions: (ids: string[]) => Promise<boolean>;
+  getQuestion: (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<IQuestionDTO | undefined>;
+  saveQuestion: (
+    data: IQuestionDTO,
+    token?: string | null
+  ) => Promise<IQuestionDTO | undefined>;
+  deleteQuestions: (
+    ids: string[],
+    token?: string | null
+  ) => Promise<boolean | undefined>;
 }

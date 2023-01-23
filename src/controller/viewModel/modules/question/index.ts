@@ -8,6 +8,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { BlockViewModel } from '@viewModel/modules/block';
 import { action, computed, makeObservable, observable } from 'mobx';
 import { guid } from '@utils/guid/guid';
+import { AuthViewModel } from '@viewModel/modules/auth';
 
 @injectable()
 export class QuestionViewModel
@@ -16,6 +17,8 @@ export class QuestionViewModel
 {
   @inject(SERVICE.Question) protected serviceQuestion!: QuestionService;
 
+  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
+
   @inject(VIEW_MODEL.Block) protected block!: BlockViewModel;
 
   constructor() {
@@ -23,11 +26,13 @@ export class QuestionViewModel
     makeObservable(this, {
       option: observable,
       setOption: action,
-      addOption: action,
-      addOptionCorrect: action,
-      removeOption: action,
-      removeOptionCorrect: action,
       hasOption: computed,
+
+      addOption: action,
+      removeOption: action,
+
+      addOptionCorrect: action,
+      removeOptionCorrect: action,
     });
     this.setValidations([
       { nameSpace: 'blockId', type: 'required', message: 'Required' },
@@ -45,6 +50,10 @@ export class QuestionViewModel
     this.option = value;
   };
 
+  get hasOption() {
+    return Boolean(this.option);
+  }
+
   addOption = () => {
     if (this.option) {
       const data = this.modalData;
@@ -54,13 +63,6 @@ export class QuestionViewModel
       this.validateModal();
       this.setOption();
     }
-  };
-
-  addOptionCorrect = (id: string) => {
-    const data = this.modalData;
-    const index = data?.optionsCorrectId ? data?.optionsCorrectId.length : 0;
-    this.changeModalField(`optionsCorrectId.${index}`, id);
-    this.validateModal();
   };
 
   removeOption = (id: string) => {
@@ -73,6 +75,13 @@ export class QuestionViewModel
     }
   };
 
+  addOptionCorrect = (id: string) => {
+    const data = this.modalData;
+    const index = data?.optionsCorrectId ? data?.optionsCorrectId.length : 0;
+    this.changeModalField(`optionsCorrectId.${index}`, id);
+    this.validateModal();
+  };
+
   removeOptionCorrect = (id: string) => {
     const data = this.modalData ? { ...this.modalData } : undefined;
     if (data && data.optionsCorrectId) {
@@ -83,10 +92,6 @@ export class QuestionViewModel
     }
   };
 
-  get hasOption() {
-    return Boolean(this.option);
-  }
-
   // --- override
 
   getList = async () => {
@@ -95,8 +100,10 @@ export class QuestionViewModel
     this.setListLoading(true);
     try {
       if (this.block.data) {
+        const token = await this.auth.refreshToken();
         const data = await this.serviceQuestion.getQuestions(
-          this.block.data.id
+          { blockId: this.block.data.id },
+          token
         );
         if (data) this.setList(data);
       }
@@ -108,7 +115,8 @@ export class QuestionViewModel
   getModalData = async (id: string) => {
     this.setModalLoading(true);
     try {
-      const data = await this.serviceQuestion.getQuestion(id);
+      const token = await this.auth.refreshToken();
+      const data = await this.serviceQuestion.getQuestion(id, undefined, token);
       if (data) {
         this.setModalData(data);
       }
@@ -121,9 +129,16 @@ export class QuestionViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const data = await this.serviceQuestion.saveQuestion(this.modalData);
-        this.updateFromList(data);
-        await this.clearModalChanges();
+        this.changeModalField('blockId', this.block.data?.id);
+        const token = await this.auth.refreshToken();
+        const data = await this.serviceQuestion.saveQuestion(
+          this.modalData,
+          token
+        );
+        if (data) {
+          this.updateFromList(data);
+          await this.clearModalChanges();
+        }
         return data;
       }
     } finally {
@@ -135,10 +150,16 @@ export class QuestionViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        await this.serviceQuestion.deleteQuestions(this.deleteIds);
-        this.removeFromList(this.deleteIds);
-        await this.clearDelete();
-        await this.clearData();
+        const token = await this.auth.refreshToken();
+        const data = await this.serviceQuestion.deleteQuestions(
+          this.deleteIds,
+          token
+        );
+        if (data) {
+          this.removeFromList(this.deleteIds);
+          await this.clearDelete();
+          await this.clearData();
+        }
         return true;
       }
     } finally {
