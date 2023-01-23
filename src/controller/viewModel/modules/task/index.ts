@@ -201,9 +201,11 @@ export class TaskViewModel
   removeAnswer = (id: string) => {
     const data = this.modalData ? { ...this.modalData } : undefined;
     if (data && data.taskAnswers) {
-      data.taskAnswers = data.taskAnswers.filter((d) => d.id !== id);
-      if (data.taskAnswers.length === 0) data.taskAnswers = undefined;
-      this.setModalData(data);
+      data.taskAnswers.forEach((d, index) => {
+        if (d.id === id) {
+          this.changeModalField(`taskAnswers.${index}`, undefined);
+        }
+      });
       this.validateModal();
     }
   };

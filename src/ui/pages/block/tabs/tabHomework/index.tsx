@@ -5,8 +5,8 @@ import { Accordion } from '@components/accordion';
 import { Alert } from '@components/alert';
 import SendIcon from '@mui/icons-material/Send';
 import { Button } from '@components/button';
-import './index.scss';
 import DownloadIcon from '@mui/icons-material/Download';
+import './index.scss';
 
 const MOCK_TASKS = [
   {

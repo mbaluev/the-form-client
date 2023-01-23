@@ -12,11 +12,11 @@ import { Loader } from '@components/loader';
 import { Skeleton } from '@components/skeleton';
 import { ITaskViewModel } from '@viewModel/modules/task/interface';
 import { IconButton } from '@components/iconButton';
-import { Add, Delete } from '@mui/icons-material';
+import { Add } from '@mui/icons-material';
 import { TTaskAnswerType } from '@model/task';
-import { Divider, SelectChangeEvent } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material';
+import { TaskAnswers } from '@ui/dialogs/dialogTask/taskAnswers';
 import './index.scss';
-import { NoData } from '@components/noData';
 
 interface IProps {
   isOpen: boolean;
@@ -44,7 +44,6 @@ export const DialogTask = observer((props: IProps) => {
     setType,
     setTitle,
     addAnswer,
-    removeAnswer,
   } = useViewModel<ITaskViewModel>(VIEW_MODEL.Task);
 
   const pathFileId = 'document.file.id';
@@ -183,31 +182,7 @@ export const DialogTask = observer((props: IProps) => {
               className="dialog-task__answer"
             />
           </FormField>
-          {modalData?.taskAnswers ? (
-            modalData?.taskAnswers.map((answer, index) => (
-              <React.Fragment>
-                <Divider />
-                <FormField
-                  key={index}
-                  actions={[
-                    <IconButton
-                      tooltip="Delete"
-                      onClick={() => removeAnswer(answer.id)}
-                    >
-                      <Delete />
-                    </IconButton>,
-                  ]}
-                >
-                  <div className="dialog-task__answer">{`${answer.type}: ${answer.title}`}</div>
-                </FormField>
-              </React.Fragment>
-            ))
-          ) : (
-            <NoData
-              message="No answer types found"
-              messageClassName="color_red"
-            />
-          )}
+          <TaskAnswers />
         </FormSection>
       </Form>
     </Modal>

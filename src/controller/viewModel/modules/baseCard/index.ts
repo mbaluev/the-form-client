@@ -428,7 +428,7 @@ export class BaseCardViewModel<T extends IBaseCardType>
     this.setListExpanded(isListExpanded);
   };
 
-  // --- fields
+  // --- changes
 
   fields?: IBaseCardField[] = undefined;
 
@@ -492,7 +492,11 @@ export class BaseCardViewModel<T extends IBaseCardType>
 
     // --- set data
     const data = this.modalData ? { ...this.modalData } : {};
-    objectPath.set(data, nameSpace, newValue);
+    if (newValue) {
+      objectPath.set(data, nameSpace, newValue);
+    } else {
+      objectPath.del(data, nameSpace);
+    }
     this.setModalData(data as T);
   };
 
@@ -588,8 +592,12 @@ export class BaseCardViewModel<T extends IBaseCardType>
     this.validations
       ?.filter((validation) => validation.nameSpace === nameSpace)
       ?.forEach((validation) => {
-        if (valid && validation.type === 'required' && !value) {
-          valid = false;
+        if (valid && validation.type === 'required') {
+          if (!value) {
+            valid = false;
+          } else {
+            if (Array.isArray(value) && value.length === 0) valid = false;
+          }
           message = validation.message;
         }
         if (valid && validation.type === 'email') {
