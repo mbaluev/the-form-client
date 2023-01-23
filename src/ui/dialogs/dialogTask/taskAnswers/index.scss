@@ -1,0 +1,15 @@
+@import "../../../../core/scss/params";
+
+.task-answers {
+  display: flex;
+  flex-direction: column;
+  gap: $base;
+
+  & .no-data {
+    align-items: flex-start;
+  }
+  & .no-data__message {
+    font-size: 0.9rem;
+    font-weight: normal;
+  }
+}

@@ -7,6 +7,8 @@ import { ITaskViewModel } from '@viewModel/modules/task/interface';
 import { IconButton } from '@components/iconButton';
 import { Delete } from '@mui/icons-material';
 import { NoData } from '@components/noData';
+import { Divider } from '@mui/material';
+import './index.scss';
 
 export const TaskAnswers = observer(() => {
   const { isModalLoading, modalData, removeAnswer } =
@@ -16,27 +18,31 @@ export const TaskAnswers = observer(() => {
 
   if (!modalData?.taskAnswers || modalData?.taskAnswers.length === 0) {
     return (
-      <NoData message="No answers types found" messageClassName="color_red" />
+      <div className="task-answers">
+        <NoData message="No answers found" messageClassName="color_red" />
+      </div>
     );
   }
 
   return (
-    <React.Fragment>
+    <div className="task-answers">
       {modalData?.taskAnswers.map((answer, index) => (
-        <FormField
-          key={index}
-          actions={[
-            <IconButton
-              tooltip="Delete"
-              onClick={() => removeAnswer(answer.id)}
-            >
-              <Delete />
-            </IconButton>,
-          ]}
-        >
-          <div className="dialog-task__answer">{`${answer.type}: ${answer.title}`}</div>
-        </FormField>
+        <React.Fragment key={index}>
+          {index > 0 && <Divider />}
+          <FormField
+            actions={[
+              <IconButton
+                tooltip="Delete"
+                onClick={() => removeAnswer(answer.id)}
+              >
+                <Delete />
+              </IconButton>,
+            ]}
+          >
+            <div className="dialog-task__answer">{`${answer.type}: ${answer.title}`}</div>
+          </FormField>
+        </React.Fragment>
       ))}
-    </React.Fragment>
+    </div>
   );
 });
