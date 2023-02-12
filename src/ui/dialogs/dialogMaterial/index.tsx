@@ -95,7 +95,7 @@ export const DialogMaterial = observer((props: IProps) => {
       <Loader loading={isModalLoading} />
       <Form cols={1}>
         <FormSection>
-          <FormField title="File name">
+          <FormField title="Material name">
             <TextFieldControl
               name="document.name"
               value={modalData?.document.name}

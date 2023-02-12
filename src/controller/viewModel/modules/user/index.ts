@@ -7,6 +7,7 @@ import { IUserDTO } from '@model/user';
 import { UserService } from '@service/modules/user';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { AuthViewModel } from '@viewModel/modules/auth';
+import { FilterViewModel } from '@viewModel/modules/filter';
 
 @injectable()
 export class UserViewModel
@@ -16,6 +17,8 @@ export class UserViewModel
   @inject(SERVICE.User) protected serviceUser!: UserService;
 
   @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
+
+  @inject(VIEW_MODEL.Filter) protected filters!: FilterViewModel;
 
   constructor() {
     super();
@@ -44,11 +47,23 @@ export class UserViewModel
   clearUserData = async () => {
     try {
       this.setUserData();
+    } catch (err) {
     } finally {
     }
   };
 
   // --- override
+
+  getList = async () => {
+    this.setListLoading(true);
+    try {
+      const token = await this.auth.refreshToken();
+      const data = await this.serviceUser.getUsers(this.filters.filters, token);
+      this.setList(data);
+    } catch (err) {
+    } finally {
+    }
+  };
 
   saveData = async () => {
     this.setDataLoading(true);
@@ -56,12 +71,11 @@ export class UserViewModel
       if (this.data && !this.hasErrors) {
         const token = await this.auth.refreshToken();
         const data = await this.serviceUser.saveUser(this.data, token);
-        if (data) {
-          this.updateFromList(data);
-          await this.clearChanges();
-        }
+        await this.getList();
+        await this.clearChanges();
         return data;
       }
+    } catch (err) {
     } finally {
       this.setDataLoading(false);
     }
@@ -73,12 +87,11 @@ export class UserViewModel
       if (this.modalData && !this.hasModalErrors) {
         const token = await this.auth.refreshToken();
         const data = await this.serviceUser.saveUser(this.modalData, token);
-        if (data) {
-          this.updateFromList(data);
-          await this.clearModalChanges();
-        }
+        await this.getList();
+        await this.clearModalChanges();
         return data;
       }
+    } catch (err) {
     } finally {
       this.setModalLoading(false);
     }
@@ -89,14 +102,15 @@ export class UserViewModel
     try {
       if (this.deleteIds) {
         const token = await this.auth.refreshToken();
-        const data = await this.serviceUser.deleteUsers(this.deleteIds, token);
-        if (data) {
-          this.removeFromList(this.deleteIds);
-          await this.clearDelete();
-          await this.clearData();
-        }
-        return data;
+        await this.serviceUser.deleteUsers(this.deleteIds, token);
+        await this.getList();
+        await this.clearDelete();
+        await this.clearData();
+        await this.clearUserData();
+        return true;
       }
+    } catch (err) {
+      return false;
     } finally {
       this.setDeleteLoading(false);
     }

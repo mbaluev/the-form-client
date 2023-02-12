@@ -87,8 +87,9 @@ export class MaterialViewModel
           { blockId: this.block.data.id },
           token
         );
-        if (data) this.setList(data);
+        this.setList(data);
       }
+    } catch (err) {
     } finally {
       this.setListLoading(false);
     }
@@ -99,9 +100,8 @@ export class MaterialViewModel
     try {
       const token = await this.auth.refreshToken();
       const data = await this.serviceMaterial.getMaterial(id, undefined, token);
-      if (data) {
-        this.setModalData(data);
-      }
+      this.setModalData(data);
+    } catch (err) {
     } finally {
       this.setModalLoading(false);
     }
@@ -117,12 +117,11 @@ export class MaterialViewModel
           this.modalData,
           token
         );
-        if (data) {
-          this.updateFromList(data);
-          await this.clearModalChanges();
-        }
+        await this.getList();
+        await this.clearModalChanges();
         return data;
       }
+    } catch (err) {
     } finally {
       this.setModalLoading(false);
     }
@@ -133,17 +132,14 @@ export class MaterialViewModel
     try {
       if (this.deleteIds) {
         const token = await this.auth.refreshToken();
-        const data = await this.serviceMaterial.deleteMaterials(
-          this.deleteIds,
-          token
-        );
-        if (data) {
-          this.removeFromList(this.deleteIds);
-          await this.clearDelete();
-          await this.clearData();
-        }
+        await this.serviceMaterial.deleteMaterials(this.deleteIds, token);
+        await this.getList();
+        await this.clearDelete();
+        await this.clearData();
         return true;
       }
+    } catch (err) {
+      return false;
     } finally {
       this.setDeleteLoading(false);
     }
@@ -156,6 +152,7 @@ export class MaterialViewModel
     try {
       const token = await this.auth.refreshToken();
       return await this.serviceFile.uploadFile(file, token);
+    } catch (err) {
     } finally {
       this.setDataLoading(false);
     }
@@ -165,6 +162,7 @@ export class MaterialViewModel
     try {
       const token = await this.auth.refreshToken();
       await this.serviceFile.downloadFile(id, filename, token);
+    } catch (err) {
     } finally {
     }
   };

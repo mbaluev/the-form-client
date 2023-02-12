@@ -16,10 +16,12 @@
     & .MuiAlert-message {
       font-weight: 500;
     }
-
     & .MuiTypography-root {
       margin: 0;
       font-family: $font-family;
+    }
+    & .MuiAlert-action {
+      margin: 0;
     }
   }
 

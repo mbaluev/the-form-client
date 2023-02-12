@@ -49,7 +49,7 @@ const Modules = (
   ];
   const router = useRouter();
   const onNewCallback = (id: string) => {
-    const query: ParsedUrlQuery = { id };
+    const query: ParsedUrlQuery = { moduleId: id };
     router.push({
       pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE.path,
       query,

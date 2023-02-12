@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { classNames } from '@utils/classNames';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import { IModuleDTO } from '@model/module';
+import { IModuleUserDTO } from '@model/module';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { ModuleItemStatus } from '@ui/pages/module/index/moduleItemStatus';
 import {
@@ -13,7 +13,7 @@ import {
 import './index.scss';
 
 interface IModuleItemProps {
-  module: IModuleDTO;
+  module: IModuleUserDTO;
 }
 
 const ModuleItemContent = (props: IModuleItemProps) => {

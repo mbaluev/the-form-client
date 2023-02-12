@@ -11,21 +11,24 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { Loader } from '@components/loader';
 import { observer } from 'mobx-react';
+import { getCookieToken } from '@utils/cookie/getCookieToken';
+import { IBlockService } from '@service/modules/block/interface';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
 ) => {
-  const { params } = context;
-
+  const { params, query } = context;
+  const id = params?.id;
+  const token = getCookieToken(context);
   const serviceModule = useService<IModuleService>(SERVICE.Module);
+  const serviceBlock = useService<IBlockService>(SERVICE.Block);
 
-  const modules = (await serviceModule.getModules()) || null;
-  const module = (await serviceModule.getModule(params?.id)) || null;
+  const modules = (await serviceModule.getModules(query, token)) || null;
+  const module = (await serviceModule.getModule(id, undefined, token)) || null;
+  const blocks =
+    (await serviceBlock.getBlocks({ moduleId: id }, token)) || null;
 
-  return {
-    props: { modules, module },
-    notFound: !Boolean(module),
-  };
+  return { props: { modules, module, blocks } };
 };
 
 const Module = (

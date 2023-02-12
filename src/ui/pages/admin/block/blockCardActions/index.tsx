@@ -36,8 +36,8 @@ export const BlockCardActions = observer((props: IProps) => {
     deleteOpen();
   };
   const handleDeleteSubmit = async () => {
-    await deleteSubmit();
-    if (onDelete) await onDelete();
+    const result = await deleteSubmit();
+    if (result && onDelete) await onDelete();
   };
 
   return (

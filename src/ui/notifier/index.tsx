@@ -11,7 +11,7 @@ import { NOTIFY_DURATION } from '@model/notify';
 export const Notifier = withSnackbar(
   observer(() => {
     const { items, remove } = useViewModel<INotifyViewModel>(VIEW_MODEL.Notify);
-    const { enqueueSnackbar } = useSnackbar();
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const [displayed, setDisplayed] = useState<string[]>([]);
 
@@ -25,11 +25,13 @@ export const Notifier = withSnackbar(
         enqueueSnackbar(item.message, {
           autoHideDuration: NOTIFY_DURATION,
           variant: item.variant,
+          key: item.guid,
           content: (
             <Alert
               type={item.variant}
               message={item.message}
               title={item.title}
+              onClose={() => closeSnackbar(item.guid)}
             />
           ),
         });

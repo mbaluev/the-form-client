@@ -11,10 +11,18 @@ export interface IAlertProps {
   message: string;
   shadow?: boolean;
   variant?: AlertProps['variant'];
+  onClose?: AlertProps['onClose'];
 }
 
 export const Alert = forwardRef<HTMLDivElement, IAlertProps>((props, ref) => {
-  const { type, title, message, shadow = true, variant = 'filled' } = props;
+  const {
+    type,
+    title,
+    message,
+    shadow = true,
+    variant = 'filled',
+    onClose,
+  } = props;
   const cls = classNames('alert', {
     alert_shadow: Boolean(shadow),
   });
@@ -24,6 +32,7 @@ export const Alert = forwardRef<HTMLDivElement, IAlertProps>((props, ref) => {
       severity={type as AlertColor}
       ref={ref}
       variant={variant}
+      onClose={onClose}
     >
       {title && <AlertTitle>{title}</AlertTitle>}
       {message}

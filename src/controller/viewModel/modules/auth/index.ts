@@ -78,6 +78,7 @@ export class AuthViewModel
           await this.clearData();
           return true;
         }
+      } catch (err) {
       } finally {
         this.setDataLoading(false);
       }
@@ -98,6 +99,7 @@ export class AuthViewModel
         } else {
           this.setMessage('Incorrect username or password');
         }
+      } catch (err) {
       } finally {
         this.setDataLoading(false);
       }
@@ -115,6 +117,7 @@ export class AuthViewModel
           await this.clearData();
           return true;
         }
+      } catch (err) {
       } finally {
         this.setDataLoading(false);
       }
@@ -130,6 +133,7 @@ export class AuthViewModel
           this.setToken(data.token);
           return data.token;
         }
+      } catch (err) {
       } finally {
         this.setDataLoading(false);
       }
@@ -175,6 +179,7 @@ export class AuthViewModel
   clearMessage = async () => {
     try {
       this.setMessage();
+    } catch (err) {
     } finally {
     }
   };
@@ -182,6 +187,7 @@ export class AuthViewModel
   clearToken = async () => {
     try {
       this.setToken();
+    } catch (err) {
     } finally {
     }
   };

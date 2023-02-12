@@ -15,8 +15,6 @@ import { IUserViewModel } from '@viewModel/modules/user/interface';
 export const UserCardActions = observer(() => {
   const {
     data,
-    clearData,
-    clearUserData,
     hasChanges,
     saveData,
     isDeleteOpen,
@@ -39,12 +37,12 @@ export const UserCardActions = observer(() => {
     });
   };
   const handleDeleteSubmit = async () => {
-    await deleteSubmit();
-    await clearData();
-    await clearUserData();
-    await router.push({
-      pathname: ROUTER_CONST_SCHOOL.ADMIN_USERS.path,
-    });
+    const result = await deleteSubmit();
+    if (result) {
+      await router.push({
+        pathname: ROUTER_CONST_SCHOOL.ADMIN_USERS.path,
+      });
+    }
   };
 
   return (

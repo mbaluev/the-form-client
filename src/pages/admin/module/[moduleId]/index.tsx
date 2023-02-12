@@ -18,10 +18,10 @@ import { ParsedUrlQuery } from 'querystring';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
 
 export const getServerSideProps = async (
-  context: GetServerSidePropsContext<{ id: string }>
+  context: GetServerSidePropsContext<{ moduleId: string }>
 ) => {
   const { params, query } = context;
-  const id = params?.id;
+  const id = params?.moduleId;
   const token = getCookieToken(context);
   const serviceModule = useService<IModuleService>(SERVICE.Module);
   const serviceBlock = useService<IBlockService>(SERVICE.Block);
@@ -62,14 +62,14 @@ const Module = (
       label: module ? `${module?.title}. ${module.name}` : 'Not found',
       url: {
         pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE.path,
-        query: { id: module?.id },
+        query: { moduleId: module?.id },
       },
       disabled: !Boolean(module),
     },
   ];
   const router = useRouter();
   const onNewCallback = (id: string) => {
-    const query: ParsedUrlQuery = { id };
+    const query: ParsedUrlQuery = { moduleId: id };
     router.push({
       pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE.path,
       query,

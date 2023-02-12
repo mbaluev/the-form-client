@@ -67,7 +67,7 @@ export const ModuleList = observer((props: IProps) => {
   const onClick = (params: CellClickedEvent) => {
     router.push({
       pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE.path,
-      query: { ...router.query, id: params.data.id },
+      query: { ...router.query, moduleId: params.data.id },
     });
   };
 

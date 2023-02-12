@@ -112,7 +112,7 @@ export const DialogTask = observer((props: IProps) => {
       <Loader loading={isModalLoading} />
       <Form cols={2}>
         <FormSection>
-          <FormField title="File name">
+          <FormField title="Task name">
             <TextFieldControl
               name="document.name"
               value={modalData?.document?.name}

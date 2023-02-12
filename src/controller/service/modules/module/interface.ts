@@ -1,4 +1,4 @@
-import { IModuleDTO } from '@model/module';
+import { IModuleDTO, IModuleUserDTO } from '@model/module';
 import { ParsedUrlQuery } from 'querystring';
 
 export interface IModuleService {
@@ -19,4 +19,9 @@ export interface IModuleService {
     ids: string[],
     token?: string | null
   ) => Promise<boolean | undefined>;
+
+  getModulesUser: (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<IModuleUserDTO[] | undefined>;
 }

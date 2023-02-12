@@ -94,6 +94,7 @@ export const DialogBlock = observer((props: IProps) => {
               onChange={changeSelectHandler}
               error={Boolean(getModalError('moduleId'))}
               helperText={getModalError('moduleId')?.message}
+              required
             />
           </FormField>
           <FormField title="Title">
@@ -114,6 +115,16 @@ export const DialogBlock = observer((props: IProps) => {
               onChange={changeHandler}
               error={Boolean(getModalError('name'))}
               helperText={getModalError('name')?.message}
+            />
+          </FormField>
+          <FormField title="Position">
+            <TextFieldControl
+              name="position"
+              type="number"
+              value={modalData?.position}
+              onChange={changeHandler}
+              error={Boolean(getModalError('position'))}
+              helperText={getModalError('position')?.message}
             />
           </FormField>
         </FormSection>

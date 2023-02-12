@@ -7,6 +7,7 @@ import { BaseCardViewModel } from '@viewModel/modules/baseCard';
 import { action, makeObservable, observable } from 'mobx';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { AuthViewModel } from '@viewModel/modules/auth';
+import { FilterViewModel } from '@viewModel/modules/filter';
 
 @injectable()
 export class ModuleViewModel
@@ -16,6 +17,8 @@ export class ModuleViewModel
   @inject(SERVICE.Module) protected serviceModule!: ModuleService;
 
   @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
+
+  @inject(VIEW_MODEL.Filter) protected filters!: FilterViewModel;
 
   constructor() {
     super();
@@ -27,6 +30,7 @@ export class ModuleViewModel
     this.setValidations([
       { nameSpace: 'title', type: 'required', message: 'Required' },
       { nameSpace: 'name', type: 'required', message: 'Required' },
+      { nameSpace: 'position', type: 'required', message: 'Required' },
     ]);
   }
 
@@ -41,11 +45,26 @@ export class ModuleViewModel
   clearModuleData = async () => {
     try {
       this.setModuleData();
+    } catch (err) {
     } finally {
     }
   };
 
   // --- override
+
+  getList = async () => {
+    this.setListLoading(true);
+    try {
+      const token = await this.auth.refreshToken();
+      const data = await this.serviceModule.getModules(
+        this.filters.filters,
+        token
+      );
+      this.setList(data);
+    } catch (err) {
+    } finally {
+    }
+  };
 
   saveData = async () => {
     this.setDataLoading(true);
@@ -53,12 +72,11 @@ export class ModuleViewModel
       if (this.data && !this.hasErrors) {
         const token = await this.auth.refreshToken();
         const data = await this.serviceModule.saveModule(this.data, token);
-        if (data) {
-          this.updateFromList(data);
-          await this.clearChanges();
-        }
+        await this.getList();
+        await this.clearChanges();
         return data;
       }
+    } catch (err) {
     } finally {
       this.setDataLoading(false);
     }
@@ -70,12 +88,11 @@ export class ModuleViewModel
       if (this.modalData && !this.hasModalErrors) {
         const token = await this.auth.refreshToken();
         const data = await this.serviceModule.saveModule(this.modalData, token);
-        if (data) {
-          this.updateFromList(data);
-          await this.clearModalChanges();
-        }
+        await this.getList();
+        await this.clearModalChanges();
         return data;
       }
+    } catch (err) {
     } finally {
       this.setModalLoading(false);
     }
@@ -86,17 +103,15 @@ export class ModuleViewModel
     try {
       if (this.deleteIds) {
         const token = await this.auth.refreshToken();
-        const data = await this.serviceModule.deleteModules(
-          this.deleteIds,
-          token
-        );
-        if (data) {
-          this.removeFromList(this.deleteIds);
-          await this.clearDelete();
-          await this.clearData();
-        }
-        return data;
+        await this.serviceModule.deleteModules(this.deleteIds, token);
+        await this.getList();
+        await this.clearDelete();
+        await this.clearData();
+        await this.clearModuleData();
+        return true;
       }
+    } catch (err) {
+      return false;
     } finally {
       this.setDeleteLoading(false);
     }

@@ -42,6 +42,16 @@ export const TabDetails = observer(() => {
             helperText={getError('name')?.message}
           />
         </FormField>
+        <FormField isRow title="Position">
+          <TextFieldControl
+            name="position"
+            type="number"
+            value={data?.position}
+            onChange={changeHandler}
+            error={Boolean(getError('position'))}
+            helperText={getError('position')?.message}
+          />
+        </FormField>
       </FormSection>
     </Form>
   );

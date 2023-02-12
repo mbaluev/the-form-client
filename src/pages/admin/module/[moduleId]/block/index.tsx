@@ -20,11 +20,10 @@ import { ParsedUrlQuery } from 'querystring';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
 
 export const getServerSideProps = async (
-  context: GetServerSidePropsContext<{ id: string; blockId: string }>
+  context: GetServerSidePropsContext<{ moduleId: string }>
 ) => {
   const { params, query } = context;
-  const id = params?.id;
-  const blockId = params?.blockId;
+  const id = params?.moduleId;
   const token = getCookieToken(context);
   const serviceModule = useService<IModuleService>(SERVICE.Module);
   const serviceBlock = useService<IBlockService>(SERVICE.Block);
@@ -33,16 +32,14 @@ export const getServerSideProps = async (
   const module = (await serviceModule.getModule(id, undefined, token)) || null;
   const blocks =
     (await serviceBlock.getBlocks({ ...query, moduleId: id }, token)) || null;
-  const block =
-    (await serviceBlock.getBlock(blockId, undefined, token)) || null;
 
-  return { props: { modules, module, blocks, block } };
+  return { props: { modules, module, blocks } };
 };
 
-const Block = (
+const Blocks = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
-  const { modules, module, blocks, block } = props;
+  const { modules, module, blocks } = props;
   const {
     setList: setModules,
     setData: setModule,
@@ -50,8 +47,6 @@ const Block = (
   } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
   const {
     setList: setBlocks,
-    setData: setBlock,
-    setBlockData,
     clearData: clearBlock,
     clearBlockData,
   } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
@@ -69,7 +64,7 @@ const Block = (
       label: module ? `${module?.title}. ${module.name}` : 'Not found',
       url: {
         pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE.path,
-        query: { id: module?.id },
+        query: { moduleId: module?.id },
       },
       disabled: !Boolean(module),
     },
@@ -77,19 +72,9 @@ const Block = (
       label: ROUTER_CONST_SCHOOL.ADMIN_MODULE_BLOCKS.label,
       url: {
         pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE_BLOCKS.path,
-        query: {
-          id: module?.id,
-        },
+        query: { moduleId: module?.id },
       },
       disabled: !Boolean(module),
-    },
-    {
-      label: block ? `${block?.title}. ${block.name}` : 'Not found',
-      url: {
-        pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE_BLOCK.path,
-        query: { id: module?.id, blockId: block?.id },
-      },
-      disabled: !Boolean(block),
     },
   ];
   const filtersLeft: JSX.Element[] = [
@@ -107,22 +92,16 @@ const Block = (
       query,
     });
   };
-  const onClose = async () => {
-    await router.push({
-      pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE.path,
-      query: { id: module?.id },
-    });
-  };
   const onDelete = async () => {
     await clearBlock();
     await clearBlockData();
     await router.push({
-      pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE_BLOCKS.path,
-      query: { id: module?.id },
+      pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE.path,
+      query: { moduleId: module?.id },
     });
   };
   const onNewCallback = (id: string) => {
-    const query: ParsedUrlQuery = { id: module?.id, blockId: id };
+    const query: ParsedUrlQuery = { moduleId: module?.id, blockId: id };
     router.push({
       pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE_BLOCK.path,
       query,
@@ -134,8 +113,8 @@ const Block = (
     setModule(module);
     setModuleData(module);
     setBlocks(blocks);
-    setBlock(block);
-    setBlockData(block);
+    clearBlock();
+    clearBlockData();
   });
 
   return (
@@ -143,12 +122,11 @@ const Block = (
       breadCrumbs={breadCrumbs}
       filtersLeft={filtersLeft}
       onClick={onClick}
-      onClose={onClose}
       onDelete={onDelete}
       // onNewCallback={onNewCallback}
     />
   );
 };
 
-Block.Layout = MasterSchool;
-export default observer(Block);
+Blocks.Layout = MasterSchool;
+export default observer(Blocks);

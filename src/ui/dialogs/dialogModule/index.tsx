@@ -90,6 +90,16 @@ export const DialogModule = observer((props: IProps) => {
               helperText={getModalError('name')?.message}
             />
           </FormField>
+          <FormField title="Position">
+            <TextFieldControl
+              name="position"
+              type="number"
+              value={modalData?.position}
+              onChange={changeHandler}
+              error={Boolean(getModalError('position'))}
+              helperText={getModalError('position')?.message}
+            />
+          </FormField>
         </FormSection>
       </Form>
     </Modal>

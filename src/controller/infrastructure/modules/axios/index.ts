@@ -33,8 +33,7 @@ export class AxiosApiModule implements IAxiosApiModule {
         const message = this.notify.parseError(error);
         this.notify.add('error', message);
       }
-      // return Promise.reject(error);
-      return undefined;
+      return Promise.reject(error);
     }
   }
 

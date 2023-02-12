@@ -46,14 +46,17 @@ export const TabBlocks = observer(() => {
   ];
 
   const onClick = (params: CellClickedEvent) => {
-    const query: ParsedUrlQuery = { id: data?.id, blockId: params.data.id };
+    const query: ParsedUrlQuery = {
+      moduleId: data?.id,
+      blockId: params.data.id,
+    };
     router.push({
       pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE_BLOCK.path,
       query,
     });
   };
   const onNewCallback = (id: string) => {
-    const query: ParsedUrlQuery = { id: data?.id, blockId: id };
+    const query: ParsedUrlQuery = { moduleId: data?.id, blockId: id };
     router.push({
       pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULE_BLOCK.path,
       query,

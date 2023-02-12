@@ -67,19 +67,19 @@ export const ROUTER_CONST_SCHOOL: Record<string, any> = {
   ADMIN_MODULE: {
     name: 'adminModule',
     label: 'Module',
-    path: '/admin/module/[id]',
+    path: '/admin/module/[moduleId]',
     roles: [ROLES.ADMIN],
   },
   ADMIN_MODULE_BLOCKS: {
     name: 'adminModuleBlocks',
     label: 'Blocks',
-    path: '/admin/module/[id]/block',
+    path: '/admin/module/[moduleId]/block',
     roles: [ROLES.ADMIN],
   },
   ADMIN_MODULE_BLOCK: {
     name: 'adminModuleBlock',
     label: 'Block',
-    path: '/admin/module/[id]/block/[blockId]',
+    path: '/admin/module/[moduleId]/block/[blockId]',
     roles: [ROLES.ADMIN],
   },
   ADMIN_BLOCKS: {

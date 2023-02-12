@@ -39,12 +39,12 @@ export const ModuleCardActions = observer(() => {
     });
   };
   const handleDeleteSubmit = async () => {
-    await deleteSubmit();
-    await clearData();
-    await clearModuleData();
-    await router.push({
-      pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULES.path,
-    });
+    const result = await deleteSubmit();
+    if (result) {
+      await router.push({
+        pathname: ROUTER_CONST_SCHOOL.ADMIN_MODULES.path,
+      });
+    }
   };
 
   return (

@@ -4,8 +4,24 @@ import { Tag } from '@components/tag';
 
 export const UserRenderer = (params: ICellRendererParams) => {
   return (
-    <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-      <div style={{ flex: '1 1 auto' }}>{params.value.title}</div>
+    <div
+      style={{
+        display: 'flex',
+        gap: 10,
+        alignItems: 'center',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        style={{
+          flex: '1 1 auto',
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+        }}
+      >
+        {params.value.title}
+      </div>
       {params.value.active && (
         <Tag
           tag={params.value.active.status}

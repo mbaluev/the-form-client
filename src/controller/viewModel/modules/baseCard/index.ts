@@ -660,6 +660,7 @@ export class BaseCardViewModel<T extends IBaseCardType>
   clearList = async () => {
     try {
       this.setList();
+    } catch (err) {
     } finally {
     }
   };
@@ -667,6 +668,7 @@ export class BaseCardViewModel<T extends IBaseCardType>
   clearData = async () => {
     try {
       this.setData();
+    } catch (err) {
     } finally {
     }
   };
@@ -674,6 +676,7 @@ export class BaseCardViewModel<T extends IBaseCardType>
   clearModalData = async () => {
     try {
       this.setModalData();
+    } catch (err) {
     } finally {
     }
   };
@@ -682,6 +685,7 @@ export class BaseCardViewModel<T extends IBaseCardType>
     try {
       this.setFields();
       this.setErrors();
+    } catch (err) {
     } finally {
     }
   };
@@ -690,6 +694,7 @@ export class BaseCardViewModel<T extends IBaseCardType>
     try {
       this.setModalFields();
       this.setModalErrors();
+    } catch (err) {
     } finally {
     }
   };
@@ -697,6 +702,7 @@ export class BaseCardViewModel<T extends IBaseCardType>
   clearDelete = async () => {
     try {
       this.setDeleteIds();
+    } catch (err) {
     } finally {
     }
   };

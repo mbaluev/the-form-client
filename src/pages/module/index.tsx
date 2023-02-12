@@ -6,15 +6,22 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { useService } from '@hooks/useService';
 import { IModuleService } from '@service/modules/module/interface';
 import { SERVICE } from '@service/ids';
-import { InferGetServerSidePropsType } from 'next';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { ModulesPage } from '@ui/pages/module/index/modulesPage';
 import { useRouter } from 'next/router';
 import { Loader } from '@components/loader';
 import { observer } from 'mobx-react';
+import { getCookieToken } from '@utils/cookie/getCookieToken';
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext<{ id: string }>
+) => {
+  const { query } = context;
+  const token = getCookieToken(context);
   const serviceModule = useService<IModuleService>(SERVICE.Module);
-  const modules = await serviceModule.getModules();
+
+  const modules = (await serviceModule.getModulesUser(query, token)) || [];
+
   return { props: { modules } };
 };
 

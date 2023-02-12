@@ -105,8 +105,9 @@ export class QuestionViewModel
           { blockId: this.block.data.id },
           token
         );
-        if (data) this.setList(data);
+        this.setList(data);
       }
+    } catch (err) {
     } finally {
       this.setListLoading(false);
     }
@@ -117,9 +118,8 @@ export class QuestionViewModel
     try {
       const token = await this.auth.refreshToken();
       const data = await this.serviceQuestion.getQuestion(id, undefined, token);
-      if (data) {
-        this.setModalData(data);
-      }
+      this.setModalData(data);
+    } catch (err) {
     } finally {
       this.setModalLoading(false);
     }
@@ -135,12 +135,11 @@ export class QuestionViewModel
           this.modalData,
           token
         );
-        if (data) {
-          this.updateFromList(data);
-          await this.clearModalChanges();
-        }
+        await this.getList();
+        await this.clearModalChanges();
         return data;
       }
+    } catch (err) {
     } finally {
       this.setModalLoading(false);
     }
@@ -151,17 +150,14 @@ export class QuestionViewModel
     try {
       if (this.deleteIds) {
         const token = await this.auth.refreshToken();
-        const data = await this.serviceQuestion.deleteQuestions(
-          this.deleteIds,
-          token
-        );
-        if (data) {
-          this.removeFromList(this.deleteIds);
-          await this.clearDelete();
-          await this.clearData();
-        }
+        await this.serviceQuestion.deleteQuestions(this.deleteIds, token);
+        await this.getList();
+        await this.clearDelete();
+        await this.clearData();
         return true;
       }
+    } catch (err) {
+      return false;
     } finally {
       this.setDeleteLoading(false);
     }
