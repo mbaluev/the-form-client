@@ -19,7 +19,7 @@ interface IModuleItemProps {
 const ModuleItemContent = (props: IModuleItemProps) => {
   const { module } = props;
   const progressValues = module.blocks?.reduce((prev: boolean[], curr) => {
-    return prev.concat(curr.tabs.map((t) => t.complete));
+    return prev.concat(curr.complete);
   }, []);
   const progress = getProgress(progressValues);
   return (
@@ -57,8 +57,8 @@ export const ModuleItem = (props: IModuleItemProps) => {
   const { module } = props;
 
   const cls = classNames('module-item', 'card', {
-    card_complete: module.complete,
-    card_disable: !module.enable,
+    card_complete: Boolean(module.complete),
+    card_disable: !Boolean(module.enable),
   });
 
   if (!module.enable) {

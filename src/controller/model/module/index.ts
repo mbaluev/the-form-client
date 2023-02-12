@@ -8,7 +8,7 @@ export interface IModuleDTO {
 }
 
 export interface IModuleUserDTO extends IModuleDTO {
-  enable: boolean;
-  complete: boolean;
+  enable?: boolean;
+  complete?: boolean;
   blocks?: IBlockUserDTO[];
 }

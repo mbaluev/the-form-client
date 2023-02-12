@@ -22,7 +22,8 @@ export const getServerSideProps = async (
   const serviceModule = useService<IModuleService>(SERVICE.Module);
   const serviceBlock = useService<IBlockService>(SERVICE.Block);
 
-  const module = (await serviceModule.getModuleByBlockId(params?.id)) || null;
+  const query = { blockId: params?.id };
+  const module = (await serviceModule.getModule(undefined, query)) || null;
   const block = (await serviceBlock.getBlock(params?.id)) || null;
 
   return {
