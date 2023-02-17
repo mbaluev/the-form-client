@@ -49,7 +49,11 @@ export const ModulePage = observer(() => {
     'module-page_complete': Boolean(module && module.complete),
   });
   const progressValues = module?.blocks?.reduce((prev: boolean[], curr) => {
-    return prev.concat(curr.tabs.map((t) => t.complete));
+    return prev.concat([
+      Boolean(curr.completeMaterials),
+      Boolean(curr.completeQuestions),
+      Boolean(curr.completeTasks),
+    ]);
   }, []);
   const progress = getProgress(progressValues);
   return (

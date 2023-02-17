@@ -24,4 +24,9 @@ export interface IModuleService {
     query?: ParsedUrlQuery,
     token?: string | null
   ) => Promise<IModuleUserDTO[] | undefined>;
+  getModuleUser: (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<IModuleUserDTO | undefined>;
 }

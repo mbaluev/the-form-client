@@ -19,7 +19,11 @@ interface IModuleItemProps {
 const ModuleItemContent = (props: IModuleItemProps) => {
   const { module } = props;
   const progressValues = module.blocks?.reduce((prev: boolean[], curr) => {
-    return prev.concat(curr.complete);
+    return prev.concat([
+      Boolean(curr.completeMaterials),
+      Boolean(curr.completeQuestions),
+      Boolean(curr.completeTasks),
+    ]);
   }, []);
   const progress = getProgress(progressValues);
   return (

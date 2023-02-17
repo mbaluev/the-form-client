@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { classNames } from '@utils/classNames';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import { IBlockDTO } from '@model/block';
+import { IBlockUserDTO } from '@model/block';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { ModuleBlockStatus } from '@ui/pages/module/[id]/moduleBlockStatus';
 import {
@@ -13,12 +13,28 @@ import {
 import './index.scss';
 
 interface IModuleBlockProps {
-  block: IBlockDTO;
+  block: IBlockUserDTO;
 }
 
 const ModuleBlockContent = (props: IModuleBlockProps) => {
   const { block } = props;
-  const progress = getProgress(block?.tabs.map((t) => t.complete));
+  const progress = getProgress([
+    Boolean(block.completeMaterials),
+    Boolean(block.completeQuestions),
+    Boolean(block.completeTasks),
+  ]);
+
+  const clsLi = classNames('module-block__li');
+  const clsLiMaterials = classNames(clsLi, {
+    'module-block__li_complete': block.completeMaterials,
+  });
+  const clsLiQuestions = classNames(clsLi, {
+    'module-block__li_complete': block.completeMaterials,
+  });
+  const clsLiTasks = classNames(clsLi, {
+    'module-block__li_complete': block.completeMaterials,
+  });
+
   return (
     <React.Fragment>
       <div className="module-block__title">
@@ -27,19 +43,36 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
       </div>
       <div className="module-block__name">{block.name}</div>
       <ul className="module-block__ul">
-        {block.tabs.map((tab, index) => {
-          const clsLi = classNames('module-block__li', {
-            'module-block__li_complete': tab.complete,
-          });
-          return (
-            <li key={index} className={clsLi}>
-              <div className="module-block__li-icon">
-                {tab.complete ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
-              </div>
-              <div className="module-block__li-label">{tab.label}</div>
-            </li>
-          );
-        })}
+        <li className={clsLiMaterials}>
+          <div className="module-block__li-icon">
+            {block.completeMaterials ? (
+              <CheckBoxIcon />
+            ) : (
+              <CheckBoxOutlineBlankIcon />
+            )}
+          </div>
+          <div className="module-block__li-label">Materials downloaded</div>
+        </li>
+        <li className={clsLiQuestions}>
+          <div className="module-block__li-icon">
+            {block.completeQuestions ? (
+              <CheckBoxIcon />
+            ) : (
+              <CheckBoxOutlineBlankIcon />
+            )}
+          </div>
+          <div className="module-block__li-label">Test passed</div>
+        </li>
+        <li className={clsLiTasks}>
+          <div className="module-block__li-icon">
+            {block.completeTasks ? (
+              <CheckBoxIcon />
+            ) : (
+              <CheckBoxOutlineBlankIcon />
+            )}
+          </div>
+          <div className="module-block__li-label">Homework done</div>
+        </li>
       </ul>
       <ModuleProgress value={progress} />
     </React.Fragment>

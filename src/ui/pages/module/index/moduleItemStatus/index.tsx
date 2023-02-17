@@ -1,9 +1,9 @@
 import React from 'react';
-import { IModuleDTO } from '@model/module';
+import { IModuleUserDTO } from '@model/module';
 import { ITagProps, Tag } from '@components/tag';
 
 interface IModuleItemStatusProps {
-  module?: IModuleDTO | null;
+  module?: IModuleUserDTO | null;
 }
 
 export const ModuleItemStatus = (props: IModuleItemStatusProps) => {

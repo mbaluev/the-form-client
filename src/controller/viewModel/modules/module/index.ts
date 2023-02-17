@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { SERVICE } from '@service/ids';
-import { IModuleDTO } from '@model/module';
+import { IModuleUserDTO } from '@model/module';
 import { ModuleService } from '@service/modules/module';
 import { IModuleViewModel } from '@viewModel/modules/module/interface';
 import { BaseCardViewModel } from '@viewModel/modules/baseCard';
@@ -11,7 +11,7 @@ import { FilterViewModel } from '@viewModel/modules/filter';
 
 @injectable()
 export class ModuleViewModel
-  extends BaseCardViewModel<IModuleDTO>
+  extends BaseCardViewModel<IModuleUserDTO>
   implements IModuleViewModel
 {
   @inject(SERVICE.Module) protected serviceModule!: ModuleService;
@@ -36,9 +36,9 @@ export class ModuleViewModel
 
   // --- observable
 
-  moduleData?: IModuleDTO | null = undefined;
+  moduleData?: IModuleUserDTO | null = undefined;
 
-  setModuleData = (data?: IModuleDTO | null) => {
+  setModuleData = (data?: IModuleUserDTO | null) => {
     this.moduleData = data;
   };
 

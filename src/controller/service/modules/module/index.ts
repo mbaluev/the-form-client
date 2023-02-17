@@ -76,4 +76,17 @@ export class ModuleService implements IModuleService {
     );
     return ret ? ret.data : undefined;
   };
+
+  getModuleUser = async (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<IModuleUserDTO | undefined> => {
+    const ret = await this.apiModule.post<IResponseItemDTO<IModuleUserDTO>>(
+      `${this.API_PREFIX}/get/user/${id}`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
 }

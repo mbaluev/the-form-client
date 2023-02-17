@@ -1,9 +1,9 @@
 import React from 'react';
-import { IModuleDTO } from '@model/module';
+import { IModuleUserDTO } from '@model/module';
 import { ITagProps, Tag } from '@components/tag';
 
 interface IModuleBlockStatusProps {
-  block?: IModuleDTO | null;
+  block?: IModuleUserDTO | null;
 }
 
 export const ModuleBlockStatus = (props: IModuleBlockStatusProps) => {

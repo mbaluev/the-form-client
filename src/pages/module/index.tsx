@@ -19,9 +19,7 @@ export const getServerSideProps = async (
   const { query } = context;
   const token = getCookieToken(context);
   const serviceModule = useService<IModuleService>(SERVICE.Module);
-
   const modules = (await serviceModule.getModulesUser(query, token)) || [];
-
   return { props: { modules } };
 };
 
