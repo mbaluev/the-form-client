@@ -59,8 +59,8 @@ export class AxiosApiModule implements IAxiosApiModule {
     );
   }
 
-  async getDownload(url: string, filename: string, data?: any) {
-    return this.getBlob(url, data).then((response) => {
+  async getDownload(url: string, filename: string, options?: IApiOptions) {
+    return this.getBlob(url, options).then((response) => {
       if (response) {
         const a = document.createElement('a');
         a.href = URL.createObjectURL(response);

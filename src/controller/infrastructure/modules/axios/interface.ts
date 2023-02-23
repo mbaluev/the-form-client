@@ -1,7 +1,11 @@
 export interface IAxiosApiModule {
   get: <T>(url: string, data?: any, options?: IApiOptions) => Promise<T>;
   getBlob: <T>(url: string, options?: IApiOptions) => Promise<T>;
-  getDownload: (url: string, filename: string, data?: any) => Promise<void>;
+  getDownload: (
+    url: string,
+    filename: string,
+    options?: IApiOptions
+  ) => Promise<void>;
 
   post: <T>(url: string, data?: any, options?: IApiOptions) => Promise<T>;
   postBlob: <T>(url: string, data?: any, options?: IApiOptions) => Promise<T>;
