@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import { INFRASTRUCTURE_MODULE } from '@infrastructure/ids';
 import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { IBlockService } from '@service/modules/block/interface';
-import { IBlockDTO } from '@model/block';
+import { IBlockDTO, IBlockUserDTO } from '@model/block';
 import { ParsedUrlQuery } from 'querystring';
 import { IResponseItemDTO, IResponseListDTO } from '@model/response';
 
@@ -29,7 +29,7 @@ export class BlockService implements IBlockService {
     query?: ParsedUrlQuery,
     token?: string | null
   ): Promise<IBlockDTO | undefined> => {
-    const ret = await this.apiModule.get<IResponseItemDTO<IBlockDTO>>(
+    const ret = await this.apiModule.post<IResponseItemDTO<IBlockDTO>>(
       `${this.API_PREFIX}/get/${id}`,
       { ...query },
       { headers: { Authorization: `Bearer ${token}` } }
@@ -63,5 +63,18 @@ export class BlockService implements IBlockService {
       { headers: { Authorization: `Bearer ${token}` } }
     );
     return ret ? ret.success : undefined;
+  };
+
+  getBlockUser = async (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<IBlockUserDTO | undefined> => {
+    const ret = await this.apiModule.post<IResponseItemDTO<IBlockUserDTO>>(
+      `${this.API_PREFIX}/get/user/${id}`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
   };
 }

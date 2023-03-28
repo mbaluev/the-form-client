@@ -10,7 +10,7 @@ import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { Button } from '@components/button';
 
-const MOCK_EXPAND = true;
+const MOCK_EXPAND = false;
 const MOCK_DOCUMENTS = [
   {
     name: 'File 1',

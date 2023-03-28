@@ -1,4 +1,4 @@
-import { IBlockDTO } from '@model/block';
+import { IBlockDTO, IBlockUserDTO } from '@model/block';
 import { ParsedUrlQuery } from 'querystring';
 
 export interface IBlockService {
@@ -19,4 +19,10 @@ export interface IBlockService {
     ids: string[],
     token?: string | null
   ) => Promise<boolean | undefined>;
+
+  getBlockUser: (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<IBlockUserDTO | undefined>;
 }

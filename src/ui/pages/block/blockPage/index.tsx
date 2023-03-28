@@ -55,7 +55,12 @@ export const BlockPage = observer(() => {
   const cls = classNames('block-page', {
     'block-page_complete': Boolean(module && module.complete),
   });
-  const progress = getProgress(block?.tabs.map((t) => t.complete));
+  const progress = getProgress([
+    Boolean(block?.completeMaterials),
+    Boolean(block?.completeQuestions),
+    Boolean(block?.completeTasks),
+  ]);
+
   return (
     <Page
       title={block?.name}
