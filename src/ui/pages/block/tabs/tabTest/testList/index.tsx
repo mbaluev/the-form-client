@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { classNames } from '@utils/classNames';
 import { Form, FormField, FormSection } from '@components/form';
 import { Accordion } from '@components/accordion';
@@ -15,7 +15,6 @@ import { IconButton } from '@components/iconButton';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
-import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 import { IQuestionUserViewModel } from '@viewModel/modules/question/user/interface';
 
 const AlertPassed = () => {
@@ -78,74 +77,25 @@ const AlertStart = (props: IStartProps) => {
 };
 
 export const TestList = observer(() => {
-  const { data: block } = useViewModel<IBlockUserViewModel>(
-    VIEW_MODEL.BlockUser
-  );
-  const { list } = useViewModel<IQuestionUserViewModel>(
-    VIEW_MODEL.QuestionUser
-  );
+  const { list, status, play, prev, next, repeat, finish, expand } =
+    useViewModel<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser);
+
+  const finishHandler = () => {
+    window.scrollTo(0, 0);
+    finish();
+  };
 
   const cls = classNames('tab-test');
-  const [quest, setQuest] = useState<any[]>(list || []);
-  const [success, setSuccess] = useState<boolean | undefined>(
-    block?.completeQuestions
-  );
-  const [play, setPlay] = useState<boolean>(false);
-
-  const goTopHandler = () => window.scrollTo(0, 0);
-  const prevHandler = (index: number) => {
-    const newQuest = [...quest];
-    newQuest.forEach((q, i) => (q.expanded = i === index - 1));
-    setQuest(newQuest);
-  };
-  const nextHandler = (index: number) => {
-    const newQuest = [...quest];
-    newQuest.forEach((q, i) => (q.expanded = i === index + 1));
-    setQuest(newQuest);
-  };
-  const finishHandlerSuccess = () => {
-    const newQuest = [...quest];
-    newQuest.forEach((q) => (q.expanded = false));
-    setQuest(newQuest);
-    setSuccess(true);
-    setPlay(false);
-    goTopHandler();
-  };
-  const finishHandlerFailed = () => {
-    const newQuest = [...quest];
-    newQuest.forEach((q) => (q.expanded = false));
-    setQuest(newQuest);
-    setSuccess(false);
-    setPlay(false);
-    goTopHandler();
-  };
-  const expandHandler = (index: number) => {
-    const newQuest = [...quest];
-    newQuest.forEach((file, i) => {
-      file.expanded = i === index;
-    });
-    setQuest(newQuest);
-  };
-  const repeatHandler = () => {
-    const newQuest = [...quest];
-    newQuest.forEach((q, i) => (q.expanded = i === 0));
-    setQuest(newQuest);
-    setPlay(true);
-  };
 
   return (
     <Form className={cls}>
-      {success === undefined && (
-        <AlertStart play={play} onStart={repeatHandler} />
-      )}
-      {success === true && <AlertPassed />}
-      {success === false && (
-        <AlertFailed play={play} onRepeat={repeatHandler} />
-      )}
+      {status.code === 'new' && <AlertStart play={play} onStart={repeat} />}
+      {status.code === 'success' && <AlertPassed />}
+      {status.code === 'fail' && <AlertFailed play={play} onRepeat={repeat} />}
       <FormSection>
-        {list?.map((q, index, arr) => {
+        {list?.map((q, i, arr) => {
           const footerButtons = [];
-          if (index > 0) {
+          if (i > 0) {
             footerButtons.push(
               <Button
                 color="blue"
@@ -153,12 +103,12 @@ export const TestList = observer(() => {
                 size="medium"
                 children="Previous"
                 startIcon={<NavigateBeforeIcon />}
-                onClick={() => prevHandler(index)}
+                onClick={prev}
                 disabled={!play}
               />
             );
           }
-          if (index < arr.length - 1) {
+          if (i < arr.length - 1) {
             footerButtons.push(
               <Button
                 color="blue"
@@ -166,7 +116,7 @@ export const TestList = observer(() => {
                 size="medium"
                 children="Next"
                 endIcon={<NavigateNextIcon />}
-                onClick={() => nextHandler(index)}
+                onClick={next}
                 disabled={!play}
               />
             );
@@ -176,31 +126,20 @@ export const TestList = observer(() => {
                 color="green"
                 variant="text"
                 size="medium"
-                children="Finish success"
+                children="Finish"
                 startIcon={<SportsScoreIcon />}
-                onClick={finishHandlerSuccess}
-                disabled={!play}
-              />
-            );
-            footerButtons.push(
-              <Button
-                color="red"
-                variant="text"
-                size="medium"
-                children="Finish failed"
-                startIcon={<SportsScoreIcon />}
-                onClick={finishHandlerFailed}
+                onClick={finishHandler}
                 disabled={!play}
               />
             );
           }
           return (
             <Accordion
-              key={index}
+              key={i}
               title={q.title}
               footerButtons={footerButtons}
               expanded={q.expanded}
-              onExpand={() => expandHandler(index)}
+              onExpand={() => expand(i)}
             >
               <FormField title={q.title} classNameLabel="color_black">
                 <RadioGroupFieldControl
@@ -210,7 +149,7 @@ export const TestList = observer(() => {
                       label: option.title,
                     };
                   })}
-                  disabled={success}
+                  disabled={!play}
                 />
               </FormField>
             </Accordion>

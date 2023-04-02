@@ -20,6 +20,7 @@ export interface IQuestionService {
     token?: string | null
   ) => Promise<boolean | undefined>;
 
+  // --- user
   getQuestionsUser: (
     query?: ParsedUrlQuery,
     token?: string | null

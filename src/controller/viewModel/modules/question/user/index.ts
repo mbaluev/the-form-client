@@ -4,10 +4,13 @@ import { BaseCardViewModel } from '@viewModel/modules/baseCard';
 import { IQuestionUserDTO } from '@model/question';
 import { QuestionService } from '@service/modules/question';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { BlockViewModel } from '@viewModel/modules/block';
 import { AuthViewModel } from '@viewModel/modules/auth';
-import { IQuestionUserViewModel } from '@viewModel/modules/question/user/interface';
+import {
+  IQuestionUserViewModel,
+  ITestStatusCode,
+} from '@viewModel/modules/question/user/interface';
 import { BlockUserViewModel } from '@viewModel/modules/block/user';
+import { action, computed, makeObservable, observable } from 'mobx';
 
 @injectable()
 export class QuestionUserViewModel
@@ -20,11 +23,25 @@ export class QuestionUserViewModel
 
   @inject(VIEW_MODEL.BlockUser) protected block!: BlockUserViewModel;
 
+  constructor() {
+    super();
+    makeObservable(this, {
+      index: observable,
+      setIndex: action,
+      status: computed,
+      play: computed,
+      prev: action,
+      next: action,
+      repeat: action,
+      finish: action,
+      expand: action,
+    });
+  }
+
   // --- override
 
   getList = async () => {
     await this.clearList();
-    await this.clearDelete();
     this.setListLoading(true);
     try {
       if (this.block.data) {
@@ -33,11 +50,78 @@ export class QuestionUserViewModel
           { blockId: this.block.data.id },
           token
         );
+        if (data) data[0].expanded = true;
         this.setList(data);
       }
     } catch (err) {
     } finally {
       this.setListLoading(false);
+    }
+  };
+
+  // --- actions
+
+  index?: number = undefined;
+
+  setIndex = (value?: number) => {
+    this.index = value;
+  };
+
+  get status() {
+    const success = this.block.data?.completeQuestions || false;
+    const hasAnswers = this.list?.reduce((prev, curr) => {
+      if (curr.answers) return prev || curr.answers.length > 0;
+      return prev;
+    }, false);
+    const correct =
+      this.list?.reduce((prev, curr) => {
+        if (curr.answers)
+          return prev + curr.answers.filter((answer) => answer.correct).length;
+        return prev;
+      }, 0) || 0;
+
+    let code: ITestStatusCode = 'new';
+    if (hasAnswers && success) code = 'success';
+    if (hasAnswers && !success) code = 'fail';
+    return { code, correct };
+  }
+
+  get play() {
+    return this.index !== undefined;
+  }
+
+  prev = () => {
+    if (this.index !== undefined) {
+      const index = this.index > 0 ? this.index - 1 : 0;
+      this.setIndex(index);
+      this.expand(index);
+    }
+  };
+
+  next = () => {
+    if (this.index !== undefined && this.list) {
+      const index =
+        this.index < this.list.length - 1 ? this.index + 1 : this.index;
+      this.setIndex(index);
+      this.expand(index);
+    }
+  };
+
+  repeat = () => {
+    this.setIndex(0);
+    this.expand(0);
+  };
+
+  finish = () => {
+    this.setIndex();
+    this.expand(0);
+  };
+
+  expand = (index: number) => {
+    if (this.list) {
+      const newList = [...this.list];
+      newList.forEach((q, i) => (q.expanded = i === index));
+      this.setList(newList);
     }
   };
 }

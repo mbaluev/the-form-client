@@ -65,6 +65,8 @@ export class QuestionService implements IQuestionService {
     return ret ? ret.success : undefined;
   };
 
+  // --- user
+
   getQuestionsUser = async (
     query?: ParsedUrlQuery,
     token?: string | null
