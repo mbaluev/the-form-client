@@ -25,6 +25,7 @@ export const BlockTabs = observer(() => {
         <BlockTabsLabel label="Materials" complete={block?.completeMaterials} />
       ),
       content: <TabMaterials />,
+      padding: false,
     },
     {
       value: 'test',

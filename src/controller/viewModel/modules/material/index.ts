@@ -70,6 +70,14 @@ export class MaterialViewModel
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
+        if (_.has(item, 'document.file.name')) {
+          result =
+            result ||
+            (item.document.file.name !== undefined &&
+              item.document.file.name
+                .toLowerCase()
+                .includes((query.filter as string).toLowerCase()));
+        }
       } else {
         result = true;
       }
@@ -163,6 +171,45 @@ export class MaterialViewModel
       const token = await this.auth.refreshToken();
       await this.serviceFile.downloadFile(id, filename, token);
     } catch (err) {
+    } finally {
+    }
+  };
+
+  // --- user
+
+  getListUser = async () => {
+    await this.clearList();
+    await this.clearDelete();
+    this.setListLoading(true);
+    try {
+      if (this.block.data) {
+        const token = await this.auth.refreshToken();
+        const data = await this.serviceMaterial.getMaterialsUser(
+          { blockId: this.block.data.id },
+          token
+        );
+        this.setList(data);
+      }
+    } catch (err) {
+    } finally {
+      this.setListLoading(false);
+    }
+  };
+
+  downloadUser = async (
+    id: string,
+    filename: string,
+    materialId: string,
+    blockId: string
+  ) => {
+    try {
+      const token = await this.auth.refreshToken();
+      await this.serviceFile.downloadFile(id, filename, token);
+      await this.serviceMaterial.updateMaterialUser(materialId, token);
+      await this.block.getDataUser(blockId);
+      return true;
+    } catch (err) {
+      return false;
     } finally {
     }
   };

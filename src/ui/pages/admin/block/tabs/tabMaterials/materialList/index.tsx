@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { observer } from 'mobx-react';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
-import { DefaultRenderer } from '@ui/layout/grid/renderers/base/defaultRenderer';
+import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -14,7 +14,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { IMaterialViewModel } from '@viewModel/modules/material/interface';
 import { DialogMaterial } from '@ui/dialogs/dialogMaterial';
-import { ButtonRenderer } from '@ui/layout/grid/renderers/base/buttonRenderer';
+import { ButtonRenderer } from 'ui/layout/grid/renderers/buttonRenderer';
 
 export const MaterialList = observer(() => {
   const {

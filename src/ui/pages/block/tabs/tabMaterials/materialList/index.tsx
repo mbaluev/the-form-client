@@ -3,40 +3,28 @@ import { observer } from 'mobx-react';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
 import { IconButton } from '@components/iconButton';
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { CellClickedEvent, RowSelectedEvent } from 'ag-grid-community';
 import { TextFieldControl } from '@components/fields';
 import { InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
-import { IQuestionViewModel } from '@viewModel/modules/question/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
-import { DialogQuestion } from '@ui/dialogs/dialogQuestion';
+import { IMaterialViewModel } from '@viewModel/modules/material/interface';
+import { ButtonRenderer } from 'ui/layout/grid/renderers/buttonRenderer';
+import { MaterialRenderer } from '@ui/pages/block/tabs/tabMaterials/materialList/materialRendrer';
 
-export const TestList = observer(() => {
+export const MaterialList = observer(() => {
   const {
     isListLoading,
-    listFiltered: questions,
+    listFiltered: materials,
     hasListFiltered: hasList,
     filter,
     setFilter,
-    addDeleteId,
-    removeDeleteId,
     isModalOpen,
-    modalNew,
-    modalOpen,
-    modalClose,
-    modalSubmit,
     isDeleteOpen,
     isDeleteLoading,
     deleteIds,
-    deleteOpen,
-    deleteClose,
-    deleteSubmit,
-    hasDelete,
-  } = useViewModel<IQuestionViewModel>(VIEW_MODEL.Question);
+    downloadUser,
+  } = useViewModel<IMaterialViewModel>(VIEW_MODEL.Material);
 
   const defaultColDef = useMemo(
     () => ({
@@ -49,11 +37,44 @@ export const TestList = observer(() => {
   );
   const columnDefs = [
     {
-      headerName: 'Tests',
-      checkboxSelection: true,
+      headerName: 'Materials',
+      suppressSizeToFit: true,
       valueGetter: (params: any) => {
-        return `${params.node.rowIndex + 1}. ${params.data?.title}`;
+        return {
+          index: params.node.rowIndex + 1,
+          name: params.data?.document.name,
+          complete: params.data?.complete,
+        };
       },
+      cellRenderer: MaterialRenderer,
+    },
+    {
+      headerName: 'Description',
+      valueGetter: (params: any) => {
+        return `${params.data?.document.description}`;
+      },
+    },
+    {
+      colId: 'actions',
+      headerName: 'Download',
+      suppressSizeToFit: true,
+      valueGetter: (params: any) => {
+        const onClick = async () => {
+          await downloadUser(
+            params.data.document.file.id,
+            params.data.document.file.name,
+            params.data.id,
+            params.data.blockId
+          );
+        };
+        return {
+          size: 'small',
+          onClick: onClick,
+          variant: 'text',
+          children: params.data.document.file.name,
+        };
+      },
+      cellRenderer: ButtonRenderer,
     },
   ];
 
@@ -63,18 +84,6 @@ export const TestList = observer(() => {
   const searchClearHandler = () => {
     setFilter(undefined);
   };
-
-  const onClick = (params: CellClickedEvent) => modalOpen(params.data.id);
-  const onRowSelected = (event: RowSelectedEvent) => {
-    const selected = event.node.isSelected();
-    if (selected) {
-      addDeleteId(event.data.id);
-    } else {
-      removeDeleteId(event.data.id);
-    }
-  };
-  const handleDelete = async () => deleteOpen();
-  const handleSubmit = async () => modalSubmit();
 
   const itemsLeft: JSX.Element[] = [
     <TextFieldControl
@@ -94,18 +103,6 @@ export const TestList = observer(() => {
       }}
     />,
   ];
-  const itemsRight: JSX.Element[] = [
-    <IconButton tooltip="Add new question" onClick={modalNew}>
-      <AddIcon />
-    </IconButton>,
-    <IconButton
-      tooltip="Delete questions"
-      onClick={handleDelete}
-      disabled={!hasDelete}
-    >
-      <DeleteIcon />
-    </IconButton>,
-  ];
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
@@ -115,38 +112,22 @@ export const TestList = observer(() => {
     <React.Fragment>
       <GridWithData
         propsAG={{
-          rowData: questions,
+          rowData: materials,
           columnDefs,
           defaultColDef,
           rowHeight: 40,
-          onRowSelected,
         }}
         propsGrid={{
-          onClick,
           sizeToFit: true,
-          totalItems: questions?.length,
-          toolbar: { itemsLeft, itemsRight },
+          totalItems: materials?.length,
+          toolbar: { itemsLeft },
           className: 'ag-grid_no-header',
           isLoading: isListLoading,
           hasRows: hasList,
           selectedIds: deleteIds,
-          noDataMessage: 'No questions found',
+          noDataMessage: 'No materials found',
+          autoSizeColumns: ['actions'],
         }}
-      />
-      <DialogConfirm
-        isOpen={isDeleteOpen}
-        isLoading={isDeleteLoading}
-        onClose={deleteClose}
-        onCancel={deleteClose}
-        onSubmit={deleteSubmit}
-        title="Delete questions"
-        message="Are you sure you want to delete selected questions?"
-      />
-      <DialogQuestion
-        isOpen={isModalOpen}
-        onClose={modalClose}
-        onCancel={modalClose}
-        onSubmit={handleSubmit}
       />
     </React.Fragment>
   );

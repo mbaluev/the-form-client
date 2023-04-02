@@ -5,16 +5,16 @@ export interface IBlockService {
   getBlocks: (
     query?: ParsedUrlQuery,
     token?: string | null
-  ) => Promise<IBlockDTO[] | undefined>;
+  ) => Promise<IBlockUserDTO[] | undefined>;
   getBlock: (
     id?: string,
     query?: ParsedUrlQuery,
     token?: string | null
-  ) => Promise<IBlockDTO | undefined>;
+  ) => Promise<IBlockUserDTO | undefined>;
   saveBlock: (
     data: IBlockDTO,
     token?: string | null
-  ) => Promise<IBlockDTO | undefined>;
+  ) => Promise<IBlockUserDTO | undefined>;
   deleteBlocks: (
     ids: string[],
     token?: string | null

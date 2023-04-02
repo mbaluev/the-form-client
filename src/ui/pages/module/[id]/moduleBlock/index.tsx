@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { classNames } from '@utils/classNames';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import { IBlockUserDTO } from '@model/block';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { ModuleBlockStatus } from '@ui/pages/module/[id]/moduleBlockStatus';
@@ -46,9 +46,9 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
         <li className={clsLiMaterials}>
           <div className="module-block__li-icon">
             {block.completeMaterials ? (
-              <CheckBoxIcon />
+              <CheckCircleIcon />
             ) : (
-              <CheckBoxOutlineBlankIcon />
+              <RadioButtonUncheckedIcon />
             )}
           </div>
           <div className="module-block__li-label">Materials downloaded</div>
@@ -56,9 +56,9 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
         <li className={clsLiQuestions}>
           <div className="module-block__li-icon">
             {block.completeQuestions ? (
-              <CheckBoxIcon />
+              <CheckCircleIcon />
             ) : (
-              <CheckBoxOutlineBlankIcon />
+              <RadioButtonUncheckedIcon />
             )}
           </div>
           <div className="module-block__li-label">Test passed</div>
@@ -66,9 +66,9 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
         <li className={clsLiTasks}>
           <div className="module-block__li-icon">
             {block.completeTasks ? (
-              <CheckBoxIcon />
+              <CheckCircleIcon />
             ) : (
-              <CheckBoxOutlineBlankIcon />
+              <RadioButtonUncheckedIcon />
             )}
           </div>
           <div className="module-block__li-label">Homework done</div>

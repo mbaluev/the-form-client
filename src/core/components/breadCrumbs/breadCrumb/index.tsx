@@ -9,8 +9,8 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Link from 'next/link';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import './index.scss';
 
 export type TBreadCrumb = {
@@ -73,9 +73,12 @@ export const BreadCrumb: FC<TBreadCrumb> = (props) => {
                     {item.complete !== undefined && (
                       <ListItemIcon>
                         {item.complete ? (
-                          <CheckBoxIcon fontSize="small" className={clsIcon} />
+                          <CheckCircleIcon
+                            fontSize="small"
+                            className={clsIcon}
+                          />
                         ) : (
-                          <CheckBoxOutlineBlankIcon
+                          <RadioButtonUncheckedIcon
                             fontSize="small"
                             className={clsIcon}
                           />

@@ -15,8 +15,8 @@ export class BlockService implements IBlockService {
   getBlocks = async (
     query?: ParsedUrlQuery,
     token?: string | null
-  ): Promise<IBlockDTO[] | undefined> => {
-    const ret = await this.apiModule.post<IResponseListDTO<IBlockDTO>>(
+  ): Promise<IBlockUserDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<IBlockUserDTO>>(
       `${this.API_PREFIX}/list`,
       { ...query },
       { headers: { Authorization: `Bearer ${token}` } }
@@ -28,8 +28,8 @@ export class BlockService implements IBlockService {
     id?: string,
     query?: ParsedUrlQuery,
     token?: string | null
-  ): Promise<IBlockDTO | undefined> => {
-    const ret = await this.apiModule.post<IResponseItemDTO<IBlockDTO>>(
+  ): Promise<IBlockUserDTO | undefined> => {
+    const ret = await this.apiModule.post<IResponseItemDTO<IBlockUserDTO>>(
       `${this.API_PREFIX}/get/${id}`,
       { ...query },
       { headers: { Authorization: `Bearer ${token}` } }
@@ -40,14 +40,14 @@ export class BlockService implements IBlockService {
   saveBlock = async (data: IBlockDTO, token?: string | null) => {
     if (data.id) {
       const { id, ...params } = data;
-      const ret = await this.apiModule.patch<IResponseItemDTO<IBlockDTO>>(
+      const ret = await this.apiModule.patch<IResponseItemDTO<IBlockUserDTO>>(
         `${this.API_PREFIX}/update/${data.id}`,
         { ...params },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       return ret ? ret.data : undefined;
     } else {
-      const ret = await this.apiModule.post<IResponseItemDTO<IBlockDTO>>(
+      const ret = await this.apiModule.post<IResponseItemDTO<IBlockUserDTO>>(
         `${this.API_PREFIX}/create`,
         { ...data },
         { headers: { Authorization: `Bearer ${token}` } }

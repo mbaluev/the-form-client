@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
-import { DefaultRenderer } from '@ui/layout/grid/renderers/base/defaultRenderer';
+import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
 import { CellClickedEvent } from 'ag-grid-community';
 import { IBlockViewModel } from '@viewModel/modules/block/interface';
 import { IconButton } from '@components/iconButton';

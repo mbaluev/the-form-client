@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
-import { SkeletonRenderer } from '@ui/layout/grid/renderers/base/skeletonRenderer';
+import { SkeletonRenderer } from '@ui/layout/grid/renderers/skeletonRenderer';
 import { classNames } from '@utils/classNames';
-import { EmptyRenderer } from '@ui/layout/grid/renderers/base/emptyRenderer';
+import { EmptyRenderer } from '@ui/layout/grid/renderers/emptyRenderer';
 import './index.scss';
 
 export const DefaultRenderer = (props: ICellRendererParams) => {

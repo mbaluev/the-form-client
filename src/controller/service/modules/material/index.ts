@@ -3,7 +3,7 @@ import { INFRASTRUCTURE_MODULE } from '@infrastructure/ids';
 import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { ParsedUrlQuery } from 'querystring';
 import { IResponseItemDTO, IResponseListDTO } from '@model/response';
-import { IMaterialDTO } from '@model/material';
+import { IMaterialDTO, IMaterialUserDTO } from '@model/material';
 import { IMaterialService } from '@service/modules/material/interface';
 
 @injectable()
@@ -60,6 +60,27 @@ export class MaterialService implements IMaterialService {
     const ret = await this.apiModule.delete<IResponseItemDTO<undefined>>(
       `${this.API_PREFIX}/delete`,
       { ids },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.success : undefined;
+  };
+
+  getMaterialsUser = async (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<IMaterialUserDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<IMaterialUserDTO>>(
+      `${this.API_PREFIX}/list/user`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
+
+  updateMaterialUser = async (id: string, token?: string | null) => {
+    const ret = await this.apiModule.post<IResponseItemDTO<undefined>>(
+      `${this.API_PREFIX}/update/user/${id}`,
+      undefined,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     return ret ? ret.success : undefined;

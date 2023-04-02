@@ -5,4 +5,6 @@ export interface IBlockViewModel extends IBaseCardViewModel<IBlockUserDTO> {
   blockData?: IBlockUserDTO | null;
   setBlockData: (data?: IBlockUserDTO | null) => void;
   clearBlockData: () => Promise<void>;
+
+  getDataUser: (id: string) => Promise<void>;
 }

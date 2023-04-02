@@ -1,7 +1,7 @@
 import React from 'react';
 import { classNames } from '@utils/classNames';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import './index.scss';
 
 interface IModuleTabLabelProps {
@@ -17,7 +17,7 @@ export const BlockTabsLabel = (props: IModuleTabLabelProps) => {
   return (
     <div className={cls}>
       <div className="block-tabs-label__icon">
-        {complete ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
+        {complete ? <CheckCircleIcon /> : <RadioButtonUncheckedIcon />}
       </div>
       <div className="block-tabs-label__label">{label}</div>
     </div>

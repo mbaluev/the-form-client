@@ -4,7 +4,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { IModuleViewModel } from '@viewModel/modules/module/interface';
-import { DefaultRenderer } from '@ui/layout/grid/renderers/base/defaultRenderer';
+import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
 import { CellClickedEvent } from 'ag-grid-community';
 import { FilterText } from '@ui/filter/filterText';
 import { useRouter } from 'next/router';

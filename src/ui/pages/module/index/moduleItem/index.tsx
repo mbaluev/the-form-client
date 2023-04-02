@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { classNames } from '@utils/classNames';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import { IModuleUserDTO } from '@model/module';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { ModuleItemStatus } from '@ui/pages/module/index/moduleItemStatus';
@@ -42,9 +42,9 @@ const ModuleItemContent = (props: IModuleItemProps) => {
             <li key={index} className={clsLi}>
               <div className="module-item__li-icon">
                 {block.complete ? (
-                  <CheckBoxIcon />
+                  <CheckCircleIcon />
                 ) : (
-                  <CheckBoxOutlineBlankIcon />
+                  <RadioButtonUncheckedIcon />
                 )}
               </div>
               <div className="module-item__li-label">{block.name}</div>

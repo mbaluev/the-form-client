@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
-import { SkeletonRenderer } from '@ui/layout/grid/renderers/base/skeletonRenderer';
+import { SkeletonRenderer } from '@ui/layout/grid/renderers/skeletonRenderer';
 import { classNames } from '@utils/classNames';
-import { EmptyRenderer } from '@ui/layout/grid/renderers/base/emptyRenderer';
+import { EmptyRenderer } from '@ui/layout/grid/renderers/emptyRenderer';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import './index.scss';

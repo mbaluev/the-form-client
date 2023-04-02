@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { observer } from 'mobx-react';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
-import { DefaultRenderer } from '@ui/layout/grid/renderers/base/defaultRenderer';
+import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -12,7 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
-import { ButtonRenderer } from '@ui/layout/grid/renderers/base/buttonRenderer';
+import { ButtonRenderer } from 'ui/layout/grid/renderers/buttonRenderer';
 import { ITaskViewModel } from '@viewModel/modules/task/interface';
 import { DialogTask } from '@ui/dialogs/dialogTask';
 
