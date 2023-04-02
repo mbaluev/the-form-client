@@ -20,6 +20,7 @@ export interface IModuleService {
     token?: string | null
   ) => Promise<boolean | undefined>;
 
+  // --- user
   getModulesUser: (
     query?: ParsedUrlQuery,
     token?: string | null

@@ -65,6 +65,8 @@ export class MaterialService implements IMaterialService {
     return ret ? ret.success : undefined;
   };
 
+  // --- user
+
   getMaterialsUser = async (
     query?: ParsedUrlQuery,
     token?: string | null

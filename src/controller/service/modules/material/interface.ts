@@ -20,6 +20,7 @@ export interface IMaterialService {
     token?: string | null
   ) => Promise<boolean | undefined>;
 
+  // --- user
   getMaterialsUser: (
     query?: ParsedUrlQuery,
     token?: string | null

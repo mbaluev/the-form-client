@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import { INFRASTRUCTURE_MODULE } from '@infrastructure/ids';
 import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { IQuestionService } from '@service/modules/question/interface';
-import { IQuestionDTO } from '@model/question';
+import { IQuestionDTO, IQuestionUserDTO } from '@model/question';
 import { ParsedUrlQuery } from 'querystring';
 import { IResponseItemDTO, IResponseListDTO } from '@model/response';
 
@@ -63,5 +63,17 @@ export class QuestionService implements IQuestionService {
       { headers: { Authorization: `Bearer ${token}` } }
     );
     return ret ? ret.success : undefined;
+  };
+
+  getQuestionsUser = async (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<IQuestionUserDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<IQuestionUserDTO>>(
+      `${this.API_PREFIX}/list/user`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
   };
 }

@@ -10,14 +10,14 @@ import {
   ModuleProgress,
 } from '@ui/pages/module/index/moduleProgress';
 import { useViewModel } from '@hooks/useViewModel';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { ModuleSubTitle } from '@ui/pages/module/[id]/moduleSubTitle';
+import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
 import './index.scss';
 
 export const ModulePage = observer(() => {
-  const { list: modules, data: module } = useViewModel<IModuleViewModel>(
-    VIEW_MODEL.Module
+  const { list: modules, data: module } = useViewModel<IModuleUserViewModel>(
+    VIEW_MODEL.ModuleUser
   );
   const breadCrumbs: TBreadCrumb[] = [
     {

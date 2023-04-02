@@ -1,4 +1,4 @@
-import { IQuestionDTO } from '@model/question';
+import { IQuestionDTO, IQuestionUserDTO } from '@model/question';
 import { ParsedUrlQuery } from 'querystring';
 
 export interface IQuestionService {
@@ -19,4 +19,9 @@ export interface IQuestionService {
     ids: string[],
     token?: string | null
   ) => Promise<boolean | undefined>;
+
+  getQuestionsUser: (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<IQuestionUserDTO[] | undefined>;
 }

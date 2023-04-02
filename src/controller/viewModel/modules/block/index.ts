@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { SERVICE } from '@service/ids';
-import { IBlockUserDTO } from '@model/block';
+import { IBlockDTO } from '@model/block';
 import { BlockService } from '@service/modules/block';
 import { IBlockViewModel } from '@viewModel/modules/block/interface';
 import { BaseCardViewModel } from '@viewModel/modules/baseCard';
@@ -11,7 +11,7 @@ import { FilterViewModel } from '@viewModel/modules/filter';
 
 @injectable()
 export class BlockViewModel
-  extends BaseCardViewModel<IBlockUserDTO>
+  extends BaseCardViewModel<IBlockDTO>
   implements IBlockViewModel
 {
   @inject(SERVICE.Block) protected serviceBlock!: BlockService;
@@ -37,9 +37,9 @@ export class BlockViewModel
 
   // --- observable
 
-  blockData?: IBlockUserDTO | null = undefined;
+  blockData?: IBlockDTO | null = undefined;
 
-  setBlockData = (data?: IBlockUserDTO | null) => {
+  setBlockData = (data?: IBlockDTO | null) => {
     this.blockData = data;
   };
 
@@ -115,19 +115,6 @@ export class BlockViewModel
       return false;
     } finally {
       this.setDeleteLoading(false);
-    }
-  };
-
-  // --- user
-
-  getDataUser = async (id: string) => {
-    try {
-      const token = await this.auth.refreshToken();
-      const data = await this.serviceBlock.getBlockUser(id, undefined, token);
-      this.setData(data);
-      this.setBlockData(data);
-    } catch (err) {
-    } finally {
     }
   };
 }

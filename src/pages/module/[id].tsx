@@ -3,7 +3,6 @@ import { MasterSchool } from '@ui/masters/masterSchool';
 import { ModulePage } from '@ui/pages/module/[id]/modulePage';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
 import { useService } from '@hooks/useService';
 import { IModuleService } from '@service/modules/module/interface';
 import { SERVICE } from '@service/ids';
@@ -12,6 +11,7 @@ import { useRouter } from 'next/router';
 import { Loader } from '@components/loader';
 import { observer } from 'mobx-react';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
+import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
@@ -32,16 +32,14 @@ const Module = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
   const { modules, module } = props;
-  const {
-    setList: setModules,
-    setData: setModule,
-    setModuleData,
-  } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
+  const { setList: setModules, setData: setModule } =
+    useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
+
   useEffect(() => {
     setModules(modules);
     setModule(module);
-    setModuleData(module);
   });
+
   const router = useRouter();
   if (router.isFallback || !module) return <Loader loading={true} relative />;
   return <ModulePage />;

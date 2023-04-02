@@ -1,10 +1,8 @@
-import { IBlockUserDTO } from '@model/block';
+import { IBlockDTO } from '@model/block';
 import { IBaseCardViewModel } from '@viewModel/modules/baseCard/interfaces';
 
-export interface IBlockViewModel extends IBaseCardViewModel<IBlockUserDTO> {
-  blockData?: IBlockUserDTO | null;
-  setBlockData: (data?: IBlockUserDTO | null) => void;
+export interface IBlockViewModel extends IBaseCardViewModel<IBlockDTO> {
+  blockData?: IBlockDTO | null;
+  setBlockData: (data?: IBlockDTO | null) => void;
   clearBlockData: () => Promise<void>;
-
-  getDataUser: (id: string) => Promise<void>;
 }

@@ -10,15 +10,19 @@ import {
   ModuleProgress,
 } from '@ui/pages/module/index/moduleProgress';
 import { useViewModel } from '@hooks/useViewModel';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
 import { BlockSubTitle } from '@ui/pages/block/blockSubTitle';
+import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
+import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
 import './index.scss';
 
 export const BlockPage = observer(() => {
-  const { data: module } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
-  const { data: block } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
+  const { data: module } = useViewModel<IModuleUserViewModel>(
+    VIEW_MODEL.ModuleUser
+  );
+  const { data: block } = useViewModel<IBlockUserViewModel>(
+    VIEW_MODEL.BlockUser
+  );
   const breadCrumbs: TBreadCrumb[] = [
     {
       label: ROUTER_CONST_SCHOOL.HOME.label,

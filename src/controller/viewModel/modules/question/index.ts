@@ -37,6 +37,7 @@ export class QuestionViewModel
     this.setValidations([
       { nameSpace: 'blockId', type: 'required', message: 'Required' },
       { nameSpace: 'title', type: 'required', message: 'Required' },
+      { nameSpace: 'position', type: 'required', message: 'Required' },
       { nameSpace: 'options', type: 'required', message: 'Required' },
       { nameSpace: 'optionsCorrectId', type: 'required', message: 'Required' },
     ]);
@@ -69,7 +70,6 @@ export class QuestionViewModel
     const data = this.modalData ? { ...this.modalData } : undefined;
     if (data && data.options) {
       data.options = data.options.filter((d) => d.id !== id);
-      if (data.options.length === 0) data.options = undefined;
       this.setModalData(data);
       this.validateModal();
     }

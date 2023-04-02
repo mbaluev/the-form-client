@@ -1,8 +1,8 @@
-import { IModuleUserDTO } from '@model/module';
+import { IModuleDTO } from '@model/module';
 import { IBaseCardViewModel } from '@viewModel/modules/baseCard/interfaces';
 
-export interface IModuleViewModel extends IBaseCardViewModel<IModuleUserDTO> {
-  moduleData?: IModuleUserDTO | null;
-  setModuleData: (data?: IModuleUserDTO | null) => void;
+export interface IModuleViewModel extends IBaseCardViewModel<IModuleDTO> {
+  moduleData?: IModuleDTO | null;
+  setModuleData: (data?: IModuleDTO | null) => void;
   clearModuleData: () => Promise<void>;
 }

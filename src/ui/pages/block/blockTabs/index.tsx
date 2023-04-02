@@ -6,11 +6,13 @@ import { TabTest } from '@ui/pages/block/tabs/tabTest';
 import { TabHomework } from '@ui/pages/block/tabs/tabHomework';
 import { BlockTabsLabel } from '@ui/pages/block/blockTabsLabel';
 import { useViewModel } from '@hooks/useViewModel';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
+import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 
 export const BlockTabs = observer(() => {
-  const { data: block } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
+  const { data: block } = useViewModel<IBlockUserViewModel>(
+    VIEW_MODEL.BlockUser
+  );
 
   const [active, setActive] = useState<string>('materials');
 

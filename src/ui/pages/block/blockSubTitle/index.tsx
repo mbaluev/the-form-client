@@ -2,11 +2,13 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
 import { ModuleBlockStatus } from '@ui/pages/module/[id]/moduleBlockStatus';
+import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 
 export const BlockSubTitle = observer(() => {
-  const { data: block } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
+  const { data: block } = useViewModel<IBlockUserViewModel>(
+    VIEW_MODEL.BlockUser
+  );
   return (
     <React.Fragment>
       <ModuleBlockStatus block={block} />

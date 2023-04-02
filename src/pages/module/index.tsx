@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { MasterSchool } from '@ui/masters/masterSchool';
 import { useViewModel } from '@hooks/useViewModel';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { useService } from '@hooks/useService';
 import { IModuleService } from '@service/modules/module/interface';
@@ -12,6 +11,7 @@ import { useRouter } from 'next/router';
 import { Loader } from '@components/loader';
 import { observer } from 'mobx-react';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
+import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
@@ -27,8 +27,8 @@ const Module = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
   const { modules } = props;
-  const { setList: setModules } = useViewModel<IModuleViewModel>(
-    VIEW_MODEL.Module
+  const { setList: setModules } = useViewModel<IModuleUserViewModel>(
+    VIEW_MODEL.ModuleUser
   );
   useEffect(() => {
     setModules(modules);

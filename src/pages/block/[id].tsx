@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import { MasterSchool } from '@ui/masters/masterSchool';
 import { BlockPage } from '@ui/pages/block/blockPage';
 import { useViewModel } from '@hooks/useViewModel';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useService } from '@hooks/useService';
 import { IModuleService } from '@service/modules/module/interface';
@@ -14,6 +12,8 @@ import { observer } from 'mobx-react';
 import { Loader } from '@components/loader';
 import { useRouter } from 'next/router';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
+import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
+import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
@@ -40,17 +40,15 @@ const Block = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
   const { module, block } = props;
-  const { setData: setModule, setModuleData } = useViewModel<IModuleViewModel>(
-    VIEW_MODEL.Module
+  const { setData: setModule } = useViewModel<IModuleUserViewModel>(
+    VIEW_MODEL.ModuleUser
   );
-  const { setData: setBlock, setBlockData } = useViewModel<IBlockViewModel>(
-    VIEW_MODEL.Block
+  const { setData: setBlock } = useViewModel<IBlockUserViewModel>(
+    VIEW_MODEL.BlockUser
   );
   useEffect(() => {
     setModule(module);
-    setModuleData(module);
     setBlock(block);
-    setBlockData(block);
   });
   const router = useRouter();
   if (router.isFallback || !block) return <Loader loading={true} relative />;

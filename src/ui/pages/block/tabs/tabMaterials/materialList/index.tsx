@@ -8,9 +8,9 @@ import { InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IMaterialViewModel } from '@viewModel/modules/material/interface';
 import { ButtonRenderer } from 'ui/layout/grid/renderers/buttonRenderer';
 import { MaterialRenderer } from '@ui/pages/block/tabs/tabMaterials/materialList/materialRendrer';
+import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
 
 export const MaterialList = observer(() => {
   const {
@@ -23,8 +23,8 @@ export const MaterialList = observer(() => {
     isDeleteOpen,
     isDeleteLoading,
     deleteIds,
-    downloadUser,
-  } = useViewModel<IMaterialViewModel>(VIEW_MODEL.Material);
+    download,
+  } = useViewModel<IMaterialUserViewModel>(VIEW_MODEL.MaterialUser);
 
   const defaultColDef = useMemo(
     () => ({
@@ -60,7 +60,7 @@ export const MaterialList = observer(() => {
       suppressSizeToFit: true,
       valueGetter: (params: any) => {
         const onClick = async () => {
-          await downloadUser(
+          await download(
             params.data.document.file.id,
             params.data.document.file.name,
             params.data.id,

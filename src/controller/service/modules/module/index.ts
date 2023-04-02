@@ -65,6 +65,8 @@ export class ModuleService implements IModuleService {
     return ret ? ret.success : undefined;
   };
 
+  // --- user
+
   getModulesUser = async (
     query?: ParsedUrlQuery,
     token?: string | null

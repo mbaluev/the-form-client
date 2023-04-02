@@ -3,14 +3,16 @@ import { classNames } from '@utils/classNames';
 import { ModuleBlocks } from '@ui/pages/module/[id]/moduleBlocks';
 import { Page403 } from '@ui/pages/errors/403';
 import { useViewModel } from '@hooks/useViewModel';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Loader } from '@components/loader';
+import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
 import './index.scss';
 
 export const ModuleContent = observer(() => {
-  const { data: module } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
+  const { data: module } = useViewModel<IModuleUserViewModel>(
+    VIEW_MODEL.ModuleUser
+  );
   const cls = classNames('module-content');
   if (!module) return <Loader loading relative />;
   return module.enable ? (
