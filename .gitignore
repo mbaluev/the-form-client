@@ -12,9 +12,7 @@
 # misc
 .idea
 .DS_Store
-yarn.lock
-yarn-error.log
-package-lock.json
+*.pem
 
 # debug
 npm-debug.log*

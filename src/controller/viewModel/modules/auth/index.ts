@@ -7,7 +7,7 @@ import { AuthService } from '@service/modules/auth';
 import { BaseCardViewModel } from '@viewModel/modules/baseCard';
 import { UserService } from '@service/modules/user';
 import { Jwt } from '@utils/jwt';
-import { setCookie } from 'cookies-next';
+import { setCookies } from 'cookies-next';
 import cookie from '@utils/cookie';
 
 @injectable()
@@ -56,7 +56,7 @@ export class AuthViewModel
 
   setToken = (data?: string | null) => {
     this.token = data;
-    setCookie(cookie.names.token, data, cookie.options);
+    setCookies(cookie.names.token, data, cookie.options);
   };
 
   message?: string = undefined;
