@@ -1,6 +1,6 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { injectable } from 'inversify';
-import { setCookies, removeCookies } from 'cookies-next';
+import { setCookie, removeCookies } from 'cookies-next';
 import { BaseViewModel } from '@viewModel/modules/base';
 import { ILocaleViewModel } from '@viewModel/modules/locale/interface';
 import locales from '@utils/locale/locale';
@@ -93,33 +93,33 @@ export class LocaleViewModel extends BaseViewModel implements ILocaleViewModel {
   dir = dirs.getDir(this.language);
 
   setCountry = (value: string) => {
-    setCookies(cookie.names.country, value, cookie.options);
+    setCookie(cookie.names.country, value, cookie.options);
     this.country = value;
   };
 
   setLanguage = (value: string) => {
-    setCookies(cookie.names.language, value, cookie.options);
+    setCookie(cookie.names.language, value, cookie.options);
     this.language = value;
   };
 
   setFormat = (value: string) => {
-    setCookies(cookie.names.format, value, cookie.options);
+    setCookie(cookie.names.format, value, cookie.options);
     this.format = value;
   };
 
   setCurrency = (value: string) => {
-    setCookies(cookie.names.currency, value, cookie.options);
+    setCookie(cookie.names.currency, value, cookie.options);
     this.currency = value;
   };
 
   setDigit = (value: string) => {
-    setCookies(cookie.names.digit, value, cookie.options);
+    setCookie(cookie.names.digit, value, cookie.options);
     this.digit = value;
   };
 
   setHourCycle = (value?: string) => {
     if (value) {
-      setCookies(cookie.names.hourCycle, value, cookie.options);
+      setCookie(cookie.names.hourCycle, value, cookie.options);
       this.hourCycle = value;
     } else {
       removeCookies(cookie.names.hourCycle);
@@ -129,7 +129,7 @@ export class LocaleViewModel extends BaseViewModel implements ILocaleViewModel {
 
   setFirstDayWeek = (value?: string) => {
     if (value) {
-      setCookies(cookie.names.firstDayWeek, value, cookie.options);
+      setCookie(cookie.names.firstDayWeek, value, cookie.options);
       this.firstDayWeek = value;
     } else {
       removeCookies(cookie.names.firstDayWeek);
@@ -139,7 +139,7 @@ export class LocaleViewModel extends BaseViewModel implements ILocaleViewModel {
 
   setFirstWeekYear = (value?: string) => {
     if (value) {
-      setCookies(cookie.names.firstWeekYear, value, cookie.options);
+      setCookie(cookie.names.firstWeekYear, value, cookie.options);
       this.firstWeekYear = value;
     } else {
       removeCookies(cookie.names.firstWeekYear);
@@ -149,7 +149,7 @@ export class LocaleViewModel extends BaseViewModel implements ILocaleViewModel {
 
   setTimeZone = (value?: string) => {
     if (value) {
-      setCookies(cookie.names.timeZone, value, cookie.options);
+      setCookie(cookie.names.timeZone, value, cookie.options);
       this.timeZone = value;
     } else {
       removeCookies(cookie.names.timeZone);
