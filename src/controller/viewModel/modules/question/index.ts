@@ -30,9 +30,7 @@ export class QuestionViewModel
 
       addOption: action,
       removeOption: action,
-
-      addOptionCorrect: action,
-      removeOptionCorrect: action,
+      changeOptionCorrect: action,
     });
     this.setValidations([
       { nameSpace: 'blockId', type: 'required', message: 'Required' },
@@ -75,11 +73,22 @@ export class QuestionViewModel
     }
   };
 
-  addOptionCorrect = (id: string) => {
+  changeOptionCorrect = (id: string, value: boolean) => {
     const data = this.modalData;
-    const index = data?.optionsCorrectId ? data?.optionsCorrectId.length : 0;
-    this.changeModalField(`optionsCorrectId.${index}`, id);
+    const index = data?.options.findIndex((d) => d.id === id);
+    this.changeModalField(`options.${index}.correct`, value);
+    if (value) this.addOptionCorrect(id);
+    else this.removeOptionCorrect(id);
     this.validateModal();
+  };
+
+  addOptionCorrect = (id: string) => {
+    const data = this.modalData ? { ...this.modalData } : undefined;
+    if (data) {
+      data.optionsCorrectId = data.optionsCorrectId || [];
+      data.optionsCorrectId.push(id);
+      this.setModalData(data);
+    }
   };
 
   removeOptionCorrect = (id: string) => {
@@ -88,7 +97,6 @@ export class QuestionViewModel
       data.optionsCorrectId = data.optionsCorrectId.filter((d) => d !== id);
       if (data.optionsCorrectId.length === 0) data.optionsCorrectId = undefined;
       this.setModalData(data);
-      this.validateModal();
     }
   };
 
@@ -118,6 +126,11 @@ export class QuestionViewModel
     try {
       const token = await this.auth.refreshToken();
       const data = await this.serviceQuestion.getQuestion(id, undefined, token);
+      if (data) {
+        data.optionsCorrectId = data.options
+          .filter((d) => d.correct)
+          .map((d) => d.id);
+      }
       this.setModalData(data);
     } catch (err) {
     } finally {
@@ -129,12 +142,10 @@ export class QuestionViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
+        const { optionsCorrectId, ...saveData } = { ...this.modalData };
         this.changeModalField('blockId', this.block.data?.id);
         const token = await this.auth.refreshToken();
-        const data = await this.serviceQuestion.saveQuestion(
-          this.modalData,
-          token
-        );
+        const data = await this.serviceQuestion.saveQuestion(saveData, token);
         await this.getList();
         await this.clearModalChanges();
         return data;

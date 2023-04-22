@@ -37,9 +37,8 @@ export const DialogQuestion = observer((props: IProps) => {
     option,
     setOption,
     addOption,
-    addOptionCorrect,
     removeOption,
-    removeOptionCorrect,
+    changeOptionCorrect,
     hasOption,
   } = useViewModel<IQuestionViewModel>(VIEW_MODEL.Question);
 
@@ -80,14 +79,9 @@ export const DialogQuestion = observer((props: IProps) => {
   };
   const removeOptionHandler = (id: string) => {
     removeOption(id);
-    removeOptionCorrect(id);
   };
   const changeOptionCorrectHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      addOptionCorrect(e.target.name);
-    } else {
-      removeOptionCorrect(e.target.name);
-    }
+    changeOptionCorrect(e.target.name, e.target.checked);
   };
 
   useEffect(() => {
@@ -152,6 +146,8 @@ export const DialogQuestion = observer((props: IProps) => {
             ]}
           >
             <TextFieldControl
+              multiline
+              minRows={5}
               name="option"
               placeholder="Text option"
               value={option}
@@ -161,9 +157,6 @@ export const DialogQuestion = observer((props: IProps) => {
             />
           </FormField>
           {modalData?.options?.map((item, index) => {
-            const checked = modalData?.optionsCorrectId
-              ? modalData?.optionsCorrectId.includes(item.id)
-              : false;
             const deleteOptionHandler = () => removeOptionHandler(item.id);
             return (
               <FormField
@@ -179,7 +172,7 @@ export const DialogQuestion = observer((props: IProps) => {
               >
                 <CheckboxFieldControl
                   label={item.title}
-                  value={checked}
+                  value={item.correct}
                   name={item.id}
                   onChange={changeOptionCorrectHandler}
                   error={Boolean(getModalError('optionsCorrectId'))}

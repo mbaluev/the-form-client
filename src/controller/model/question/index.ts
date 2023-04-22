@@ -1,6 +1,7 @@
 export interface IOptionDTO {
   id: string;
   title: string;
+  correct: boolean;
 }
 
 export interface IQuestionDTO {
@@ -9,18 +10,25 @@ export interface IQuestionDTO {
   title: string;
   position: number;
   options: IOptionDTO[];
-  optionsCorrectId?: string[];
+
+  optionsCorrectId?: string[]; // ui validation
 }
 
-export interface IQuestionUserAnswerDTO {
+// user
+
+export interface IOptionUserDTO {
   id: string;
-  questionId: string;
-  questionAnswerId: string;
-  userId: string;
-  correct: boolean;
+  title: string;
 }
 
-export interface IQuestionUserDTO extends IQuestionDTO {
-  answers?: IQuestionUserAnswerDTO[];
-  expanded?: boolean;
+export interface IQuestionUserDTO {
+  blockId: string;
+  id: string;
+  title: string;
+  position: number;
+  complete?: boolean;
+  options: IOptionUserDTO[];
+  answers: string[];
+
+  expanded?: boolean; // ui accordion
 }

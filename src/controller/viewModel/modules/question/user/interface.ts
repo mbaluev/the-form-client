@@ -4,7 +4,9 @@ import { IQuestionUserDTO } from '@model/question';
 export type ITestStatusCode = 'new' | 'success' | 'fail';
 export interface ITestStatus {
   code: ITestStatusCode;
-  correct: number;
+  total: number;
+  complete: number;
+  fail: number;
 }
 
 export interface IQuestionUserViewModel

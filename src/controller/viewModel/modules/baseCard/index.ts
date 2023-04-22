@@ -492,7 +492,7 @@ export class BaseCardViewModel<T extends IBaseCardType>
 
     // --- set data
     const data = this.modalData ? { ...this.modalData } : {};
-    if (newValue) {
+    if (newValue !== undefined) {
       objectPath.set(data, nameSpace, newValue);
     } else {
       objectPath.del(data, nameSpace);

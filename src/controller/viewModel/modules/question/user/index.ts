@@ -7,7 +7,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { AuthViewModel } from '@viewModel/modules/auth';
 import {
   IQuestionUserViewModel,
-  ITestStatusCode,
+  ITestStatus,
 } from '@viewModel/modules/question/user/interface';
 import { BlockUserViewModel } from '@viewModel/modules/block/user';
 import { action, computed, makeObservable, observable } from 'mobx';
@@ -68,22 +68,20 @@ export class QuestionUserViewModel
   };
 
   get status() {
-    const success = this.block.data?.completeQuestions || false;
-    const hasAnswers = this.list?.reduce((prev, curr) => {
-      if (curr.answers) return prev || curr.answers.length > 0;
-      return prev;
-    }, false);
-    const correct =
-      this.list?.reduce((prev, curr) => {
-        if (curr.answers)
-          return prev + curr.answers.filter((answer) => answer.correct).length;
-        return prev;
-      }, 0) || 0;
-
-    let code: ITestStatusCode = 'new';
-    if (hasAnswers && success) code = 'success';
-    if (hasAnswers && !success) code = 'fail';
-    return { code, correct };
+    const status: ITestStatus = {
+      code: 'new',
+      total: 0,
+      complete: 0,
+      fail: 0,
+    };
+    if (this.list) {
+      status.total = this.list.length;
+      status.complete = this.list.filter((d) => d.complete === true).length;
+      status.fail = this.list.filter((d) => d.complete === false).length;
+      if (status.fail > 0) status.code = 'fail';
+      if (status.complete === status.total) status.code = 'success';
+    }
+    return status;
   }
 
   get play() {
