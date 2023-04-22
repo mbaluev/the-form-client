@@ -6,9 +6,9 @@ import {
 } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import { classNames } from '@utils/classNames';
-import { Button } from '@components/button';
 import './index.scss';
 
+export type TAccordionColor = undefined | 'red' | 'green' | 'orange' | 'blue';
 interface IProps {
   id?: string;
   title: string;
@@ -17,6 +17,7 @@ interface IProps {
   footerButtons?: JSX.Element[];
   expanded?: boolean;
   onExpand?: () => void;
+  color: TAccordionColor;
 }
 
 export const Accordion: FC<IProps> = (props) => {
@@ -29,6 +30,7 @@ export const Accordion: FC<IProps> = (props) => {
     footerButtons,
     expanded: isExpanded,
     onExpand,
+    color,
   } = props;
   const [expanded, setExpanded] = useState<boolean>(Boolean(isExpanded));
 
@@ -36,6 +38,7 @@ export const Accordion: FC<IProps> = (props) => {
 
   const cls = classNames('accordion', className, {
     accordion_expanded: expanded,
+    [`accordion_${color}`]: Boolean(color),
   });
 
   const onChange = () => {

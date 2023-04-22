@@ -35,6 +35,8 @@ export class QuestionUserViewModel
       repeat: action,
       finish: action,
       expand: action,
+      changeAnswer: action,
+      checkAnswers: action,
     });
   }
 
@@ -113,6 +115,7 @@ export class QuestionUserViewModel
   finish = () => {
     this.setIndex();
     this.expand(0);
+    this.checkAnswers();
   };
 
   expand = (index: number) => {
@@ -120,6 +123,47 @@ export class QuestionUserViewModel
       const newList = [...this.list];
       newList.forEach((q, i) => (q.expanded = i === index));
       this.setList(newList);
+    }
+  };
+
+  changeAnswer = (questionId: string, optionId: string, checked: boolean) => {
+    if (this.list) {
+      const newList = [...this.list];
+      newList.forEach((q) => {
+        if (q.id === questionId) {
+          if (checked) {
+            q.answers.push(optionId);
+          } else {
+            q.answers = q.answers.filter((a) => a !== optionId);
+          }
+        }
+      });
+      this.setList(newList);
+    }
+  };
+
+  checkAnswers = async () => {
+    this.setDataLoading(true);
+    try {
+      if (this.list && this.block.data) {
+        const token = await this.auth.refreshToken();
+        const blockId = this.block.data.id;
+        const questions = this.list.map((q) => ({
+          id: q.id,
+          answers: q.answers,
+        }));
+        const data = await this.serviceQuestion.checkAnswers(
+          blockId,
+          questions,
+          token
+        );
+        await this.getList();
+        await this.clearChanges();
+        return data;
+      }
+    } catch (err) {
+    } finally {
+      this.setDataLoading(false);
     }
   };
 }

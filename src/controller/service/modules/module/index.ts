@@ -72,7 +72,7 @@ export class ModuleService implements IModuleService {
     token?: string | null
   ): Promise<IModuleUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IModuleUserDTO>>(
-      `${this.API_PREFIX}/list/user`,
+      `${this.API_PREFIX}/user/list`,
       { ...query },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -85,7 +85,7 @@ export class ModuleService implements IModuleService {
     token?: string | null
   ): Promise<IModuleUserDTO | undefined> => {
     const ret = await this.apiModule.post<IResponseItemDTO<IModuleUserDTO>>(
-      `${this.API_PREFIX}/get/user/${id}`,
+      `${this.API_PREFIX}/user/get/${id}`,
       { ...query },
       { headers: { Authorization: `Bearer ${token}` } }
     );

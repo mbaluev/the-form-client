@@ -2,7 +2,11 @@ import { inject, injectable } from 'inversify';
 import { INFRASTRUCTURE_MODULE } from '@infrastructure/ids';
 import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { IQuestionService } from '@service/modules/question/interface';
-import { IQuestionDTO, IQuestionUserDTO } from '@model/question';
+import {
+  IQuestionCheckDTO,
+  IQuestionDTO,
+  IQuestionUserDTO,
+} from '@model/question';
 import { ParsedUrlQuery } from 'querystring';
 import { IResponseItemDTO, IResponseListDTO } from '@model/response';
 
@@ -72,8 +76,21 @@ export class QuestionService implements IQuestionService {
     token?: string | null
   ): Promise<IQuestionUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IQuestionUserDTO>>(
-      `${this.API_PREFIX}/list/user`,
+      `${this.API_PREFIX}/user/list`,
       { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
+
+  checkAnswers = async (
+    blockId: string,
+    questions: IQuestionCheckDTO[],
+    token?: string | null
+  ): Promise<IQuestionUserDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<IQuestionUserDTO>>(
+      `${this.API_PREFIX}/user/check`,
+      { blockId, questions },
       { headers: { Authorization: `Bearer ${token}` } }
     );
     return ret ? ret.data : undefined;

@@ -5,18 +5,21 @@ import { observer } from 'mobx-react';
 import { TestList } from '@ui/pages/block/tabs/tabTest/testList';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 import { IQuestionUserViewModel } from '@viewModel/modules/question/user/interface';
+import { Loader } from '@components/loader';
 
 export const TabTest = observer(() => {
   const { data: block } = useViewModel<IBlockUserViewModel>(
     VIEW_MODEL.BlockUser
   );
-  const { getList } = useViewModel<IQuestionUserViewModel>(
+  const { getList, isListLoading } = useViewModel<IQuestionUserViewModel>(
     VIEW_MODEL.QuestionUser
   );
 
   useEffect(() => {
     if (block) getList();
   }, [block]);
+
+  if (isListLoading) return <Loader loading={true} />;
 
   return <TestList />;
 });

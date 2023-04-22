@@ -18,4 +18,10 @@ export interface IQuestionUserViewModel
   repeat: () => void;
   finish: () => void;
   expand: (index: number) => void;
+
+  changeAnswer: (
+    questionId: string,
+    optionId: string,
+    checked: boolean
+  ) => void;
 }

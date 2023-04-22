@@ -72,7 +72,7 @@ export class MaterialService implements IMaterialService {
     token?: string | null
   ): Promise<IMaterialUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IMaterialUserDTO>>(
-      `${this.API_PREFIX}/list/user`,
+      `${this.API_PREFIX}/user/list`,
       { ...query },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -81,7 +81,7 @@ export class MaterialService implements IMaterialService {
 
   updateMaterialUser = async (id: string, token?: string | null) => {
     const ret = await this.apiModule.post<IResponseItemDTO<undefined>>(
-      `${this.API_PREFIX}/update/user/${id}`,
+      `${this.API_PREFIX}/user/update/${id}`,
       undefined,
       { headers: { Authorization: `Bearer ${token}` } }
     );

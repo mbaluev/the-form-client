@@ -32,3 +32,8 @@ export interface IQuestionUserDTO {
 
   expanded?: boolean; // ui accordion
 }
+
+export interface IQuestionCheckDTO {
+  id: string;
+  answers: string[];
+}

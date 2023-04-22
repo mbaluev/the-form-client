@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { classNames } from '@utils/classNames';
 import { Form, FormField, FormSection } from '@components/form';
-import { Accordion } from '@components/accordion';
-import { RadioGroupFieldControl } from '@components/fields';
+import { Accordion, TAccordionColor } from '@components/accordion';
+import { CheckboxFieldControl } from '@components/fields';
 import { Alert } from '@components/alert';
 import { Button } from '@components/button';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
@@ -16,6 +16,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { IQuestionUserViewModel } from '@viewModel/modules/question/user/interface';
+import { Loader } from '@components/loader';
 
 const AlertPassed = () => {
   return (
@@ -77,9 +78,25 @@ const AlertStart = (props: IStartProps) => {
 };
 
 export const TestList = observer(() => {
-  const { list, status, play, prev, next, repeat, finish, expand } =
-    useViewModel<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser);
+  const {
+    list,
+    status,
+    play,
+    prev,
+    next,
+    repeat,
+    finish,
+    expand,
+    changeAnswer,
+    isDataLoading,
+  } = useViewModel<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser);
 
+  const changeAnswerHandler = (
+    questionId: string,
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    changeAnswer(questionId, e.target.name, e.target.checked);
+  };
   const finishHandler = () => {
     window.scrollTo(0, 0);
     finish();
@@ -89,6 +106,7 @@ export const TestList = observer(() => {
 
   return (
     <Form className={cls}>
+      <Loader loading={isDataLoading} backdrop />
       {status.code === 'new' && <AlertStart play={play} onStart={repeat} />}
       {status.code === 'success' && <AlertPassed />}
       {status.code === 'fail' && <AlertFailed play={play} onRepeat={repeat} />}
@@ -133,24 +151,32 @@ export const TestList = observer(() => {
               />
             );
           }
+          let color: TAccordionColor = undefined;
+          if (q.complete === true) color = 'green';
+          if (q.complete === false) color = 'red';
           return (
             <Accordion
-              key={i}
-              title={q.title}
+              key={q.id}
+              title={`Question ${i + 1}`}
               footerButtons={footerButtons}
               expanded={q.expanded}
               onExpand={() => expand(i)}
+              color={color}
             >
               <FormField title={q.title} classNameLabel="color_black">
-                <RadioGroupFieldControl
-                  items={q.options.map((option) => {
-                    return {
-                      value: option.id,
-                      label: option.title,
-                    };
-                  })}
-                  disabled={!play}
-                />
+                {q.options.map((option) => {
+                  const checked = q.answers.includes(option.id);
+                  return (
+                    <CheckboxFieldControl
+                      key={option.id}
+                      name={option.id}
+                      label={option.title}
+                      checked={checked}
+                      onChange={(e) => changeAnswerHandler(q.id, e)}
+                      disabled={!play}
+                    />
+                  );
+                })}
               </FormField>
             </Accordion>
           );

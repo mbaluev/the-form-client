@@ -73,7 +73,7 @@ export class BlockService implements IBlockService {
     token?: string | null
   ): Promise<IBlockUserDTO | undefined> => {
     const ret = await this.apiModule.post<IResponseItemDTO<IBlockUserDTO>>(
-      `${this.API_PREFIX}/get/user/${id}`,
+      `${this.API_PREFIX}/user/get/${id}`,
       { ...query },
       { headers: { Authorization: `Bearer ${token}` } }
     );
