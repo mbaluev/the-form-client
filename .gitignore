@@ -1,16 +1,6 @@
+
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# sonar
-/.scannerwork
-sonar-project.properties
-setup-env.sh
-test-report.xml
 
 # next.js
 /.next/
@@ -22,7 +12,9 @@ test-report.xml
 # misc
 .idea
 .DS_Store
-*.pem
+yarn.lock
+yarn-error.log
+package-lock.json
 
 # debug
 npm-debug.log*
@@ -34,9 +26,6 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
-
-# vercel
-.vercel
 
 # typescript
 *.tsbuildinfo
