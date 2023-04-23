@@ -11,17 +11,32 @@
   &.MuiAlert-root {
     font-size: 1rem;
     border-radius: $border-radius-default;
-    padding: $base $base * 2;
+    padding: $base * 2;
+    gap: $base * 2;
+    align-items: center;
 
+    & .MuiAlert-icon {
+      padding: 0;
+      margin: 0;
+    }
     & .MuiAlert-message {
       font-weight: 500;
+      padding: 0;
+      flex: 1 1 auto;
     }
     & .MuiTypography-root {
       margin: 0;
       font-family: $font-family;
     }
     & .MuiAlert-action {
+      padding: 0;
       margin: 0;
+    }
+  }
+
+  &_message {
+    &.MuiAlert-root {
+      align-items: flex-start;
     }
   }
 
@@ -50,20 +65,32 @@
     background-color: rgba($color-green-dark, 0.1);
     border-color: $color-green-dark;
     color: $color-green-dark;
+    & .MuiAlert-icon {
+      color: $color-green-dark;
+    }
   }
   &.MuiAlert-outlinedInfo {
     background-color: rgba($color-blue, 0.1);
     border-color: $color-blue;
     color: $color-blue;
+    & .MuiAlert-icon {
+      color: $color-blue;
+    }
   }
   &.MuiAlert-outlinedWarning {
     background-color: rgba($color-orange, 0.1);
     border-color: $color-orange;
     color: $color-orange;
+    & .MuiAlert-icon {
+      color: $color-orange;
+    }
   }
   &.MuiAlert-outlinedError {
     background-color: rgba($color-red, 0.1);
     border-color: $color-red;
     color: $color-red;
+    & .MuiAlert-icon {
+      color: $color-red;
+    }
   }
 }

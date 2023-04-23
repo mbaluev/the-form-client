@@ -11,7 +11,7 @@ import { TabMaterials } from '@ui/pages/admin/block/tabs/tabMaterials';
 import { TabTest } from '@ui/pages/admin/block/tabs/tabTest';
 import { TabHomework } from '@ui/pages/admin/block/tabs/tabHomework';
 
-enum ProfileTabNames {
+enum TabNames {
   details = 'details',
   materials = 'materials',
   test = 'test',
@@ -21,31 +21,31 @@ enum ProfileTabNames {
 const BLOCK_TAB_CONFIG: ITabItemProps[] = [
   {
     label: 'Details',
-    value: ProfileTabNames.details,
+    value: TabNames.details,
     content: <TabDetails />,
   },
   {
     label: 'Materials',
-    value: ProfileTabNames.materials,
+    value: TabNames.materials,
     content: <TabMaterials />,
     padding: false,
   },
   {
     label: 'Test',
-    value: ProfileTabNames.test,
+    value: TabNames.test,
     content: <TabTest />,
     padding: false,
   },
   {
     label: 'Homework',
-    value: ProfileTabNames.homework,
+    value: TabNames.homework,
     content: <TabHomework />,
     padding: false,
   },
 ];
 
 export const BlockTabs = observer(() => {
-  const [active, setActive] = useState<string>(ProfileTabNames.details);
+  const [active, setActive] = useState<string>(TabNames.details);
   const onChangeTab = (_: React.ChangeEvent<unknown>, value: string) => {
     setActive(value);
   };

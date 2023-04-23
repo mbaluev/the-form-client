@@ -45,7 +45,7 @@ export const SignupForm = observer(() => {
         <FormSection>
           {message && (
             <Alert
-              message={message}
+              title={message}
               variant="outlined"
               type="error"
               shadow={false}

@@ -11,6 +11,7 @@ import {
 } from '@viewModel/modules/question/user/interface';
 import { BlockUserViewModel } from '@viewModel/modules/block/user';
 import { action, computed, makeObservable, observable } from 'mobx';
+import { BlockTabNames } from '@ui/pages/block/blockTabs';
 
 @injectable()
 export class QuestionUserViewModel
@@ -160,6 +161,7 @@ export class QuestionUserViewModel
         await this.getList();
         await this.clearChanges();
         await this.block.getData(blockId);
+        this.block.changeTab(BlockTabNames.test);
         return data;
       }
     } catch (err) {

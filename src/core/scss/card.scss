@@ -6,6 +6,9 @@
   transition-duration: $transition-duration;
   border: solid 2px $color-grey-30;
   color: $color-black;
+  display: flex;
+  flex-direction: column;
+  gap: $base;
 
   &:hover {
     cursor: pointer;

@@ -9,6 +9,7 @@ import { action, makeObservable } from 'mobx';
 import { MaterialService } from '@service/modules/material';
 import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
 import { BlockUserViewModel } from '@viewModel/modules/block/user';
+import { BlockTabNames } from '@ui/pages/block/blockTabs';
 
 @injectable()
 export class MaterialUserViewModel
@@ -62,6 +63,7 @@ export class MaterialUserViewModel
       await this.serviceFile.downloadFile(id, filename, token);
       await this.serviceMaterial.updateMaterialUser(materialId, token);
       await this.block.getData(blockId);
+      this.block.changeTab(BlockTabNames.materials);
       return true;
     } catch (err) {
       return false;

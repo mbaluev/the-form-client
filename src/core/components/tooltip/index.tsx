@@ -5,22 +5,26 @@ import {
   TooltipProps,
 } from '@mui/material';
 
-export const Tooltip = styled(({ className, ...props }: TooltipProps) => {
-  if (props.title) {
-    return (
-      <MuiTooltip
-        classes={{ popper: className }}
-        placement="top"
-        arrow
-        {...props}
-      />
-    );
-  } else {
-    return props.children;
+export const Tooltip = styled(
+  ({ className, children, ...props }: TooltipProps) => {
+    if (props.title) {
+      return (
+        <MuiTooltip
+          classes={{ popper: className }}
+          placement="top"
+          arrow
+          {...props}
+        >
+          {children}
+        </MuiTooltip>
+      );
+    } else {
+      return children;
+    }
   }
-})(() => ({
+)(() => ({
   [`& .${tooltipClasses.tooltip}`]: {
-    fontSize: 13,
+    fontSize: '1rem',
     padding: '7px 12px',
     lineHeight: 'normal',
     marginRight: '10px',

@@ -18,23 +18,32 @@ import { observer } from 'mobx-react';
 import { IQuestionUserViewModel } from '@viewModel/modules/question/user/interface';
 import { Loader } from '@components/loader';
 
-const AlertPassed = () => {
+interface IPassedProps {
+  complete: number;
+  total: number;
+}
+const AlertPassed = (props: IPassedProps) => {
+  const { complete, total } = props;
   return (
     <Alert
       type="success"
-      message="Test passed (7/10)"
+      title="title"
+      message={`Test passed (${complete}/${total})`}
       shadow={false}
       variant="outlined"
+      onClose={() => {}}
     />
   );
 };
 
 interface IFailedProps {
+  complete: number;
+  total: number;
   play: boolean;
   onRepeat: () => void;
 }
 const AlertFailed = (props: IFailedProps) => {
-  const { play, onRepeat } = props;
+  const { complete, total, play, onRepeat } = props;
   const buttons = [
     <IconButton
       color="red"
@@ -49,7 +58,7 @@ const AlertFailed = (props: IFailedProps) => {
     <React.Fragment>
       <Alert
         type="error"
-        message="Test failed (2/10). Please try again"
+        title={`Test failed (${complete}/${total}). Please try again`}
         shadow={false}
         variant="outlined"
       />
@@ -108,8 +117,17 @@ export const TestList = observer(() => {
     <Form className={cls}>
       <Loader loading={isDataLoading} backdrop />
       {status.code === 'new' && <AlertStart play={play} onStart={repeat} />}
-      {status.code === 'success' && <AlertPassed />}
-      {status.code === 'fail' && <AlertFailed play={play} onRepeat={repeat} />}
+      {status.code === 'success' && (
+        <AlertPassed complete={status.complete} total={status.total} />
+      )}
+      {status.code === 'fail' && (
+        <AlertFailed
+          complete={status.complete}
+          total={status.total}
+          play={play}
+          onRepeat={repeat}
+        />
+      )}
       <FormSection>
         {list?.map((q, i, arr) => {
           const footerButtons = [];

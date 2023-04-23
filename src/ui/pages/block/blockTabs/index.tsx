@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Tabs } from '@components/tab';
 import { observer } from 'mobx-react';
 import { TabMaterials } from '@ui/pages/block/tabs/tabMaterials';
@@ -9,20 +9,26 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 
-export const BlockTabs = observer(() => {
-  const { data: block } = useViewModel<IBlockUserViewModel>(
-    VIEW_MODEL.BlockUser
-  );
+export enum BlockTabNames {
+  materials = 'materials',
+  test = 'test',
+  homework = 'homework',
+}
 
-  const [active, setActive] = useState<string>('materials');
+export const BlockTabs = observer(() => {
+  const {
+    data: block,
+    tab,
+    changeTab,
+  } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
 
   const onChangeTab = (_: React.ChangeEvent<unknown>, value: string) => {
-    setActive(value);
+    changeTab(value);
   };
 
   const tabs = [
     {
-      value: 'materials',
+      value: BlockTabNames.materials,
       label: (
         <BlockTabsLabel label="Materials" complete={block?.completeMaterials} />
       ),
@@ -30,14 +36,14 @@ export const BlockTabs = observer(() => {
       padding: false,
     },
     {
-      value: 'test',
+      value: BlockTabNames.test,
       label: (
         <BlockTabsLabel label="Test" complete={block?.completeQuestions} />
       ),
       content: <TabTest />,
     },
     {
-      value: 'homework',
+      value: BlockTabNames.homework,
       label: (
         <BlockTabsLabel label="Homework" complete={block?.completeTasks} />
       ),
@@ -48,7 +54,7 @@ export const BlockTabs = observer(() => {
   return (
     <Tabs
       tabs={tabs}
-      activeTab={active}
+      activeTab={tab}
       onChangeTab={onChangeTab}
       orientation="horizontal"
     />

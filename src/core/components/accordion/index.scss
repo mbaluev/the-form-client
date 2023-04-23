@@ -16,7 +16,7 @@
 
   & .MuiAccordionDetails-root {
     flex-direction: column;
-    padding: $base * 4;
+    padding: $base * 3;
   }
 
   & .MuiAccordionSummary-root {
@@ -69,7 +69,7 @@
       flex-wrap: wrap;
       align-items: center;
       gap: $base * 2;
-      padding: $base * 3 $base * 3;
+      padding: $base * 2;
     }
   }
 

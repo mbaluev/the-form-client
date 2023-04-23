@@ -17,7 +17,7 @@ interface IProps {
   footerButtons?: JSX.Element[];
   expanded?: boolean;
   onExpand?: () => void;
-  color: TAccordionColor;
+  color?: TAccordionColor;
 }
 
 export const Accordion: FC<IProps> = (props) => {

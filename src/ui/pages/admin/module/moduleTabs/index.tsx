@@ -9,7 +9,7 @@ import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import { IModuleViewModel } from '@viewModel/modules/module/interface';
 import { observer } from 'mobx-react';
 
-enum ProfileTabNames {
+enum TabNames {
   details = 'details',
   blocks = 'blocks',
 }
@@ -17,19 +17,19 @@ enum ProfileTabNames {
 const MODULE_TAB_CONFIG: ITabItemProps[] = [
   {
     label: 'Details',
-    value: ProfileTabNames.details,
+    value: TabNames.details,
     content: <TabDetails />,
   },
   {
     label: 'Blocks',
-    value: ProfileTabNames.blocks,
+    value: TabNames.blocks,
     content: <TabBlocks />,
     padding: false,
   },
 ];
 
 export const ModuleTabs = observer(() => {
-  const [active, setActive] = useState<string>(ProfileTabNames.details);
+  const [active, setActive] = useState<string>(TabNames.details);
 
   const onChangeTab = (_: React.ChangeEvent<unknown>, value: string) => {
     setActive(value);

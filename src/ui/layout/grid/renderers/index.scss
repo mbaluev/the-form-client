@@ -3,7 +3,7 @@
 
 .ag-grid {
   height: 100%;
-  font-size: $font-size;
+  font-size: 1rem;
   color: $color-black;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@
 
   &.ag-theme-material {
     font-family: $font-family;
-    font-size: $font-size;
+    font-size: 1rem;
 
     // row
     & .ag-row {
@@ -43,7 +43,7 @@
 
     // header
     & .ag-header {
-      font-size: $font-size;
+      font-size: 1rem;
       border-bottom: solid 2px $color-grey-20;
     }
     & .ag-header-row:not(:first-child) .ag-header-cell {
@@ -51,7 +51,7 @@
     }
     & .ag-header-cell,
     & .ag-header-row {
-      font-size: $font-size;
+      font-size: 1rem;
       font-weight: 500;
       color: $color-grey-200;
     }
@@ -63,7 +63,7 @@
     & .ag-panel-title-bar-title,
     & .ag-side-button-button,
     & .ag-multi-filter-group-title-bar {
-      font-size: $font-size;
+      font-size: 1rem;
       font-weight: 500;
       color: $color-black;
       border-top: none;

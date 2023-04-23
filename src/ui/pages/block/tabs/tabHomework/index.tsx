@@ -24,11 +24,10 @@ const MOCK_TASKS = [
 export const TabHomework = () => {
   const cls = classNames('tab-homework');
   const clsAccordion = classNames('tab-homework__accordion');
-  const tasks = MOCK_TASKS;
   return (
     <Form className={cls}>
       <FormSection cols={2}>
-        {tasks.map((t, index) => {
+        {MOCK_TASKS.map((t, index) => {
           return (
             <Accordion
               className={clsAccordion}
@@ -55,19 +54,19 @@ export const TabHomework = () => {
             >
               <Alert
                 type="info"
-                message="Homework has sent"
+                title="Homework has sent"
                 shadow={false}
                 variant="outlined"
               />
               <Alert
                 type="success"
-                message="Homework passed"
+                title="Homework passed"
                 shadow={false}
                 variant="outlined"
               />
               <Alert
                 type="error"
-                message="Homework has mistakes"
+                title="Homework has mistakes"
                 shadow={false}
                 variant="outlined"
               />
