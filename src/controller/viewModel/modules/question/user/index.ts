@@ -159,6 +159,7 @@ export class QuestionUserViewModel
         );
         await this.getList();
         await this.clearChanges();
+        await this.block.getData(blockId);
         return data;
       }
     } catch (err) {
