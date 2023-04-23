@@ -8,7 +8,7 @@
   color: $color-black;
   display: flex;
   flex-direction: column;
-  gap: $base;
+  gap: $base * 2;
 
   &:hover {
     cursor: pointer;

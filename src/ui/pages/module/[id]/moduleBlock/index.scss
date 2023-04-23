@@ -8,6 +8,8 @@
     font-weight: 500;
     color: $color-grey-100;
     flex: 0 0 auto;
+    gap: $base * 2;
+    align-items: flex-start;
   }
   &__name {
     display: flex;
