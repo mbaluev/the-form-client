@@ -9,3 +9,11 @@
     width: $base * 65;
   }
 }
+
+@media (max-width: $media-xs) {
+  .dialog-task {
+    &__answer {
+      width: auto;
+    }
+  }
+}

@@ -14,3 +14,14 @@ export interface ITaskDTO {
   document?: IDocumentDTO;
   taskAnswers?: ITaskAnswerDTO[];
 }
+
+// user
+
+export interface ITaskUserDTO {
+  id: string;
+  blockId: string;
+  document?: IDocumentDTO;
+  taskAnswers?: ITaskAnswerDTO[];
+
+  expanded?: boolean; // ui accordion
+}

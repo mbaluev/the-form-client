@@ -4,7 +4,7 @@ export const NOTIFY_DURATION = 5000;
 
 export interface INotifyItem {
   guid: string;
-  message: string;
+  title: string;
   variant: VariantType;
-  title?: string;
+  message?: string;
 }

@@ -51,22 +51,19 @@ export const TaskList = observer(() => {
   );
   const columnDefs = [
     {
-      headerName: 'Tasks',
       checkboxSelection: true,
-      suppressSizeToFit: true,
       valueGetter: (params: any) => {
         return `${params.node.rowIndex + 1}. ${params.data?.document.name}`;
       },
     },
-    {
-      headerName: 'Description',
-      valueGetter: (params: any) => {
-        return `${params.data?.document.description}`;
-      },
-    },
+    // {
+    //   headerName: 'Description',
+    //   valueGetter: (params: any) => {
+    //     return `${params.data?.document.description}`;
+    //   },
+    // },
     {
       colId: 'actions',
-      headerName: 'Download',
       suppressSizeToFit: true,
       valueGetter: (params: any) => {
         const onClick = async () => {

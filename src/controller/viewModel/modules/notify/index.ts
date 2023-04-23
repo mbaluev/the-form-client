@@ -32,12 +32,12 @@ export class NotifyViewModel extends BaseViewModel implements INotifyViewModel {
     this.setItems(items);
   };
 
-  add = (variant: VariantType, message: string, title?: string) => {
+  add = (variant: VariantType, title: string, message?: string) => {
     const data: INotifyItem = {
       guid: guid(),
-      message,
-      variant,
       title,
+      variant,
+      message,
     };
     this.setItem(data);
   };

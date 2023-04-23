@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { BaseCardViewModel } from '@viewModel/modules/baseCard';
-import { IMaterialUserDTO } from '@model/material';
+import { IMaterialDTO, IMaterialUserDTO } from '@model/material';
 import { SERVICE } from '@service/ids';
 import { FileService } from '@service/modules/file';
 import { VIEW_MODEL } from '@viewModel/ids';
@@ -10,6 +10,8 @@ import { MaterialService } from '@service/modules/material';
 import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
 import { BlockUserViewModel } from '@viewModel/modules/block/user';
 import { BlockTabNames } from '@ui/pages/block/blockTabs';
+import { ParsedUrlQuery } from 'querystring';
+import _ from 'lodash';
 
 @injectable()
 export class MaterialUserViewModel
@@ -32,6 +34,42 @@ export class MaterialUserViewModel
   }
 
   // --- user
+
+  filterByQuery =
+    (query?: ParsedUrlQuery) =>
+    (item: IMaterialDTO): boolean => {
+      let result = false;
+      const filter = query?.filter;
+      if (filter) {
+        if (_.has(item, 'document.name')) {
+          result =
+            result ||
+            (item.document.name !== undefined &&
+              item.document.name
+                .toLowerCase()
+                .includes((query.filter as string).toLowerCase()));
+        }
+        if (_.has(item, 'document.description')) {
+          result =
+            result ||
+            (item.document.description !== undefined &&
+              item.document.description
+                .toLowerCase()
+                .includes((query.filter as string).toLowerCase()));
+        }
+        if (_.has(item, 'document.file.name')) {
+          result =
+            result ||
+            (item.document.file.name !== undefined &&
+              item.document.file.name
+                .toLowerCase()
+                .includes((query.filter as string).toLowerCase()));
+        }
+      } else {
+        result = true;
+      }
+      return result;
+    };
 
   getList = async () => {
     await this.clearList();

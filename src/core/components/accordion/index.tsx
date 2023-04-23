@@ -11,7 +11,7 @@ import './index.scss';
 export type TAccordionColor = undefined | 'red' | 'green' | 'orange' | 'blue';
 interface IProps {
   id?: string;
-  title: string;
+  title?: string;
   className?: string;
   footer?: boolean;
   footerButtons?: JSX.Element[];

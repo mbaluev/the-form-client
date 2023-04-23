@@ -4,7 +4,7 @@ import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { ParsedUrlQuery } from 'querystring';
 import { IResponseItemDTO, IResponseListDTO } from '@model/response';
 import { ITaskService } from '@service/modules/task/interface';
-import { ITaskDTO } from '@model/task';
+import { ITaskDTO, ITaskUserDTO } from '@model/task';
 
 @injectable()
 export class TaskService implements ITaskService {
@@ -63,5 +63,19 @@ export class TaskService implements ITaskService {
       { headers: { Authorization: `Bearer ${token}` } }
     );
     return ret ? ret.success : undefined;
+  };
+
+  // user
+
+  getTasksUser = async (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<ITaskUserDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<ITaskUserDTO>>(
+      `${this.API_PREFIX}/user/list`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
   };
 }

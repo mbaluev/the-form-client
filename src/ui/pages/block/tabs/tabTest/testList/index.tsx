@@ -17,6 +17,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { IQuestionUserViewModel } from '@viewModel/modules/question/user/interface';
 import { Loader } from '@components/loader';
+import './index.scss';
 
 interface IPassedProps {
   complete: number;
@@ -27,11 +28,9 @@ const AlertPassed = (props: IPassedProps) => {
   return (
     <Alert
       type="success"
-      title="title"
-      message={`Test passed (${complete}/${total})`}
+      title={`Test passed (${complete}/${total})`}
       shadow={false}
       variant="outlined"
-      onClose={() => {}}
     />
   );
 };
@@ -111,7 +110,7 @@ export const TestList = observer(() => {
     finish();
   };
 
-  const cls = classNames('tab-test');
+  const cls = classNames('test-list');
 
   return (
     <Form className={cls}>
@@ -170,7 +169,6 @@ export const TestList = observer(() => {
             );
           }
           let color: TAccordionColor = undefined;
-          if (q.complete === true) color = 'green';
           if (q.complete === false) color = 'red';
           return (
             <Accordion

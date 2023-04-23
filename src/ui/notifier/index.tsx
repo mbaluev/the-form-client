@@ -29,8 +29,8 @@ export const Notifier = withSnackbar(
           content: (
             <Alert
               type={item.variant}
-              message={item.message}
               title={item.title}
+              message={item.message}
               onClose={() => closeSnackbar(item.guid)}
             />
           ),

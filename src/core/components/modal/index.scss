@@ -129,7 +129,7 @@ $dialog-min-width: $base * 100;
     }
     &-dialog {
       margin: $base * 2;
-      min-width: calc(100% - #{$dialog-margin-right + $dialog-margin-left});
+      min-width: calc(100% - #{$base * 4});
     }
   }
 }

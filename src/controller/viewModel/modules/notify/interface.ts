@@ -4,7 +4,7 @@ import { IBaseViewModel } from '@viewModel/modules/base/interface';
 
 export interface INotifyViewModel extends IBaseViewModel {
   items?: INotifyItem[];
-  add: (variant: VariantType, message: string, title?: string) => void;
+  add: (variant: VariantType, title: string, message?: string) => void;
   remove: (guid: string) => void;
   parseError: (error: any) => string;
 }

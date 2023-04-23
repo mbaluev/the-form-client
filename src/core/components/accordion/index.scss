@@ -13,16 +13,14 @@
     box-shadow: none;
     overflow: hidden;
   }
-
   & .MuiAccordionDetails-root {
     flex-direction: column;
     padding: $base * 3;
   }
-
   & .MuiAccordionSummary-root {
     height: $input-height;
     min-height: $input-height;
-    padding: 0 $base * 2 + 2;
+    padding: 0 $base * 2;
     font-weight: 500;
     font-size: 1.1rem;
     flex-direction: row-reverse;
@@ -32,7 +30,7 @@
     &.Mui-expanded {
       height: $input-height;
       min-height: $input-height;
-      padding: 0 $base * 2 + 2;
+      padding: 0 $base * 2;
     }
 
     & .MuiSvgIcon-root {

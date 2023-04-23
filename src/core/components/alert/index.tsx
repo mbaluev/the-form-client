@@ -7,7 +7,7 @@ import './index.scss';
 
 export interface IAlertProps {
   type?: VariantType;
-  title: string;
+  title?: string;
   message?: string;
   shadow?: boolean;
   variant?: AlertProps['variant'];
@@ -35,7 +35,7 @@ export const Alert = forwardRef<HTMLDivElement, IAlertProps>((props, ref) => {
       variant={variant}
       onClose={onClose}
     >
-      <AlertTitle>{title}</AlertTitle>
+      {title && <AlertTitle>{title}</AlertTitle>}
       {message && <AlertTitle>{message}</AlertTitle>}
     </MuiAlert>
   );

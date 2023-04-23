@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from 'querystring';
-import { ITaskDTO } from '@model/task';
+import { ITaskDTO, ITaskUserDTO } from '@model/task';
 
 export interface ITaskService {
   getTasks: (
@@ -19,4 +19,9 @@ export interface ITaskService {
     ids: string[],
     token?: string | null
   ) => Promise<boolean | undefined>;
+
+  getTasksUser: (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<ITaskUserDTO[] | undefined>;
 }
