@@ -2,10 +2,13 @@
 
 .alert {
   font-family: $font-family;
-  border: solid 2px;
+  border: none;
 
   &_shadow {
     box-shadow: 0 5px 10px -5px rgba($color-black, 0.2);
+  }
+  &_border {
+    border: solid 2px;
   }
 
   &.MuiAlert-root {

@@ -29,8 +29,9 @@ const AlertPassed = (props: IPassedProps) => {
     <Alert
       type="success"
       title={`Test passed (${complete}/${total})`}
-      shadow={false}
       variant="outlined"
+      shadow={false}
+      border={false}
     />
   );
 };
@@ -58,8 +59,9 @@ const AlertFailed = (props: IFailedProps) => {
       <Alert
         type="error"
         title={`Test failed (${complete}/${total}). Please try again`}
-        shadow={false}
         variant="outlined"
+        shadow={false}
+        border={false}
       />
       <Toolbar itemsLeft={buttons} />
     </React.Fragment>
