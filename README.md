@@ -39,3 +39,10 @@ module.exports = {
   },
 }
 ```
+
+## SSH keygen & copy
+
+#### MacOs:
+
+1. `cd ~/.ssh && ssh-keygen`
+2. `cat id_rsa.pub | pbcopy`
