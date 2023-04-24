@@ -14,7 +14,7 @@
   &.MuiAlert-root {
     font-size: 1rem;
     border-radius: $border-radius-default;
-    padding: $base * 2;
+    padding: $base + 1 $base * 2;
     gap: $base * 2;
     align-items: center;
 

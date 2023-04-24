@@ -53,7 +53,6 @@ export class QuestionUserViewModel
           { blockId: this.block.data.id },
           token
         );
-        if (data) data[0].expanded = true;
         this.setList(data);
       }
     } catch (err) {

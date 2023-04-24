@@ -54,8 +54,10 @@ const AlertFailed = (props: IFailedProps) => {
       <ReplayIcon />
     </IconButton>,
   ];
+  const cls = classNames('test-list__top');
   return (
-    <React.Fragment>
+    <div className={cls}>
+      <Toolbar itemsLeft={buttons} />
       <Alert
         type="error"
         title={`Test failed (${complete}/${total}). Please try again`}
@@ -63,8 +65,7 @@ const AlertFailed = (props: IFailedProps) => {
         shadow={false}
         border={false}
       />
-      <Toolbar itemsLeft={buttons} />
-    </React.Fragment>
+    </div>
   );
 };
 
@@ -84,7 +85,19 @@ const AlertStart = (props: IStartProps) => {
       <PlayArrowIcon />
     </IconButton>,
   ];
-  return <Toolbar itemsLeft={buttons} />;
+  const cls = classNames('test-list__top');
+  return (
+    <div className={cls}>
+      <Toolbar itemsLeft={buttons} />
+      <Alert
+        type="info"
+        title={`Click play button to start test`}
+        variant="outlined"
+        shadow={false}
+        border={false}
+      />
+    </div>
+  );
 };
 
 export const TestList = observer(() => {

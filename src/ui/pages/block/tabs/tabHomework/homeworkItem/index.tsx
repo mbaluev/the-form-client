@@ -9,8 +9,11 @@ import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
 import { observer } from 'mobx-react';
 import { ITaskUserDTO } from '@model/task';
 import SendIcon from '@mui/icons-material/Send';
-import { FormField } from '@components/form';
+import { FormField, FormSection } from '@components/form';
 import { Attachment } from '@components/attachment';
+import { TextFieldControl } from '@components/fields';
+// import { VariantType } from 'notistack';
+// import { Alert } from '@components/alert';
 import './index.scss';
 
 // interface IHomeworkItemAlert {
@@ -63,11 +66,15 @@ export const HomeworkItem = observer((props: IProps) => {
           size="medium"
           children="Send"
           startIcon={<SendIcon />}
+          disabled
         />,
       ]}
       expanded={task.expanded}
     >
-      <FormField title={task.document?.description}>
+      {/*<HomeworkItemAlert type="info" title="Homework has sent" />*/}
+      {/*<HomeworkItemAlert type="success" title="Homework passed" />*/}
+      {/*<HomeworkItemAlert type="error" title="Homework has mistakes" />*/}
+      <FormSection title={task.document?.description}>
         {task.taskAnswers?.map((taskAnswer) => {
           if (taskAnswer.type === 'file') {
             return (
@@ -81,11 +88,16 @@ export const HomeworkItem = observer((props: IProps) => {
                 />
               </FormField>
             );
-          } else {
-            return null;
+          }
+          if (taskAnswer.type === 'link') {
+            return (
+              <FormField key={taskAnswer.id} title={taskAnswer.title}>
+                <TextFieldControl />
+              </FormField>
+            );
           }
         })}
-      </FormField>
+      </FormSection>
     </Accordion>
   );
 });
