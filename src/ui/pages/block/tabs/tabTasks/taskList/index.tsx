@@ -8,13 +8,12 @@ import { Box, InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { ButtonRenderer } from 'ui/layout/grid/renderers/buttonRenderer';
 import { MaterialRenderer } from '@ui/pages/block/tabs/tabMaterials/materialList/materialRendrer';
-import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
 import { Alert } from '@components/alert';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
+import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
 
-export const MaterialList = observer(() => {
+export const TaskList = observer(() => {
   const { data: block } = useViewModel<IBlockUserViewModel>(
     VIEW_MODEL.BlockUser
   );
@@ -24,8 +23,9 @@ export const MaterialList = observer(() => {
     hasListFiltered: hasList,
     filter,
     setFilter,
-    download,
-  } = useViewModel<IMaterialUserViewModel>(VIEW_MODEL.MaterialUser);
+    isModalOpen,
+    deleteIds,
+  } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
 
   const defaultColDef = useMemo(
     () => ({
@@ -38,7 +38,6 @@ export const MaterialList = observer(() => {
   );
   const columnDefs = [
     {
-      headerName: 'Materials',
       suppressSizeToFit: true,
       valueGetter: (params: any) => {
         return {
@@ -50,32 +49,9 @@ export const MaterialList = observer(() => {
       cellRenderer: MaterialRenderer,
     },
     {
-      headerName: 'Description',
       valueGetter: (params: any) => {
         return `${params.data?.document.description}`;
       },
-    },
-    {
-      colId: 'actions',
-      headerName: 'Download',
-      suppressSizeToFit: true,
-      valueGetter: (params: any) => {
-        const onClick = async () => {
-          await download(
-            params.data.document.file.id,
-            params.data.document.file.name,
-            params.data.id,
-            params.data.blockId
-          );
-        };
-        return {
-          size: 'small',
-          onClick: onClick,
-          variant: 'text',
-          children: params.data.document.file.name,
-        };
-      },
-      cellRenderer: ButtonRenderer,
     },
   ];
 
@@ -107,7 +83,7 @@ export const MaterialList = observer(() => {
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
-  }, [filter]);
+  }, [filter, isModalOpen]);
 
   return (
     <React.Fragment>
@@ -136,6 +112,7 @@ export const MaterialList = observer(() => {
           className: 'ag-grid_no-header',
           isLoading: isListLoading,
           hasRows: hasList,
+          selectedIds: deleteIds,
           noDataMessage: 'No materials found',
           autoSizeColumns: ['actions'],
         }}

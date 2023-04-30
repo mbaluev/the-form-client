@@ -12,26 +12,26 @@ import SendIcon from '@mui/icons-material/Send';
 import { FormField, FormSection } from '@components/form';
 import { Attachment } from '@components/attachment';
 import { TextFieldControl } from '@components/fields';
-// import { VariantType } from 'notistack';
-// import { Alert } from '@components/alert';
+import { VariantType } from 'notistack';
+import { Alert } from '@components/alert';
 import './index.scss';
 
-// interface IHomeworkItemAlert {
-//   type?: VariantType;
-//   title: string;
-// }
-// const HomeworkItemAlert = (props: IHomeworkItemAlert) => {
-//   const { type, title } = props;
-//   return (
-//     <Alert
-//       type={type}
-//       title={title}
-//       variant="outlined"
-//       shadow={false}
-//       border={false}
-//     />
-//   );
-// };
+interface IHomeworkItemAlert {
+  type?: VariantType;
+  title: string;
+}
+const HomeworkItemAlert = (props: IHomeworkItemAlert) => {
+  const { type, title } = props;
+  return (
+    <Alert
+      type={type}
+      title={title}
+      variant="outlined"
+      shadow={false}
+      border={false}
+    />
+  );
+};
 
 interface IProps {
   task: ITaskUserDTO;
@@ -73,12 +73,16 @@ export const HomeworkItem = observer((props: IProps) => {
     >
       {/*<HomeworkItemAlert type="info" title="Homework has sent" />*/}
       {/*<HomeworkItemAlert type="success" title="Homework passed" />*/}
-      {/*<HomeworkItemAlert type="error" title="Homework has mistakes" />*/}
+      <HomeworkItemAlert type="error" title="Homework has mistakes" />
       <FormSection title={task.document?.description}>
         {task.taskAnswers?.map((taskAnswer) => {
           if (taskAnswer.type === 'file') {
             return (
-              <FormField key={taskAnswer.id} title={taskAnswer.title}>
+              <FormField
+                key={taskAnswer.id}
+                title={taskAnswer.title}
+                overflow="hidden"
+              >
                 <Attachment
                 // loading={isModalLoading}
                 // onUpload={uploadHandler}

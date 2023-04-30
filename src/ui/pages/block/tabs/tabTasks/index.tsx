@@ -3,16 +3,16 @@ import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
-import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
 import { Loader } from '@components/loader';
-import { MaterialList } from '@ui/pages/block/tabs/tabMaterials/materialList';
+import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
+import { TaskList } from '@ui/pages/block/tabs/tabTasks/taskList';
 
-export const TabMaterials = observer(() => {
+export const TabTasks = observer(() => {
   const { data: block } = useViewModel<IBlockUserViewModel>(
     VIEW_MODEL.BlockUser
   );
   const { isListLoading, getList, clearList } =
-    useViewModel<IMaterialUserViewModel>(VIEW_MODEL.MaterialUser);
+    useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
 
   useEffect(() => {
     if (block) getList();
@@ -23,5 +23,5 @@ export const TabMaterials = observer(() => {
 
   if (isListLoading) return <Loader loading={true} />;
 
-  return <MaterialList />;
+  return <TaskList />;
 });

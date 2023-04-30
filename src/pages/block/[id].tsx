@@ -40,16 +40,20 @@ const Block = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
   const { module, block } = props;
-  const { setData: setModule } = useViewModel<IModuleUserViewModel>(
-    VIEW_MODEL.ModuleUser
-  );
-  const { setData: setBlock } = useViewModel<IBlockUserViewModel>(
-    VIEW_MODEL.BlockUser
-  );
+  const { setData: setModule, clearData: clearModule } =
+    useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
+  const { setData: setBlock, clearData: clearBlock } =
+    useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
+
   useEffect(() => {
     setModule(module);
     setBlock(block);
+    return () => {
+      clearModule();
+      clearBlock();
+    };
   });
+
   const router = useRouter();
   if (router.isFallback || !block) return <Loader loading={true} relative />;
   return <BlockPage />;

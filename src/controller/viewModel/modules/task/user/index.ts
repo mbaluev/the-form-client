@@ -9,6 +9,8 @@ import { IAuthViewModel } from '@viewModel/modules/auth/interface';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 import { IFileService } from '@service/modules/file/interface';
 import { action, makeObservable } from 'mobx';
+import { ParsedUrlQuery } from 'querystring';
+import _ from 'lodash';
 
 @injectable()
 export class TaskUserViewModel
@@ -30,7 +32,41 @@ export class TaskUserViewModel
     });
   }
 
-  // --- override
+  filterByQuery =
+    (query?: ParsedUrlQuery) =>
+    (item: ITaskUserDTO): boolean => {
+      let result = false;
+      const filter = query?.filter;
+      if (filter) {
+        if (_.has(item, 'document.name')) {
+          result =
+            result ||
+            (item.document?.name !== undefined &&
+              item.document?.name
+                .toLowerCase()
+                .includes((query.filter as string).toLowerCase()));
+        }
+        if (_.has(item, 'document.description')) {
+          result =
+            result ||
+            (item.document?.description !== undefined &&
+              item.document?.description
+                .toLowerCase()
+                .includes((query.filter as string).toLowerCase()));
+        }
+        if (_.has(item, 'document.file.name')) {
+          result =
+            result ||
+            (item.document?.file.name !== undefined &&
+              item.document?.file.name
+                .toLowerCase()
+                .includes((query.filter as string).toLowerCase()));
+        }
+      } else {
+        result = true;
+      }
+      return result;
+    };
 
   getList = async () => {
     await this.clearList();

@@ -8,10 +8,12 @@ import { BlockTabsLabel } from '@ui/pages/block/blockTabsLabel';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
+import { TabTasks } from '@ui/pages/block/tabs/tabTasks';
 
 export enum BlockTabNames {
   materials = 'materials',
   test = 'test',
+  tasks = 'tests',
   homework = 'homework',
 }
 
@@ -23,7 +25,7 @@ export const BlockTabs = observer(() => {
   } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
 
   const onChangeTab = (_: React.ChangeEvent<unknown>, value: string) => {
-    changeTab(value);
+    changeTab(value as BlockTabNames);
   };
 
   const tabs = [
@@ -41,6 +43,12 @@ export const BlockTabs = observer(() => {
         <BlockTabsLabel label="Test" complete={block?.completeQuestions} />
       ),
       content: <TabTest />,
+    },
+    {
+      value: BlockTabNames.tasks,
+      label: <BlockTabsLabel label="Tasks" complete={block?.completeTasks} />,
+      content: <TabTasks />,
+      padding: false,
     },
     {
       value: BlockTabNames.homework,

@@ -11,12 +11,14 @@ export const TabTest = observer(() => {
   const { data: block } = useViewModel<IBlockUserViewModel>(
     VIEW_MODEL.BlockUser
   );
-  const { getList, isListLoading } = useViewModel<IQuestionUserViewModel>(
-    VIEW_MODEL.QuestionUser
-  );
+  const { isListLoading, getList, clearList } =
+    useViewModel<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser);
 
   useEffect(() => {
     if (block) getList();
+    return () => {
+      clearList();
+    };
   }, [block]);
 
   if (isListLoading) return <Loader loading={true} />;

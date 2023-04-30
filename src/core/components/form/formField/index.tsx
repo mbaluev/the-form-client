@@ -17,6 +17,7 @@ export interface IFormFieldProps {
   success?: boolean;
   disabled?: boolean;
   actions?: JSX.Element[];
+  overflow?: string;
 }
 
 export const FormField: FC<IFormFieldProps> = (props) => {
@@ -33,11 +34,13 @@ export const FormField: FC<IFormFieldProps> = (props) => {
     disabled,
     actions,
     children,
+    overflow,
   } = props;
 
   const clsMain = classNames('form-field', className, {
     'form-field_row': Boolean(isRow),
     'form-field_disabled': Boolean(disabled),
+    [`form-field_overflow_${overflow}`]: Boolean(overflow),
   });
   const clsLabel = classNames('form-field__label', classNameLabel, {
     'form-field__label-error': Boolean(error),

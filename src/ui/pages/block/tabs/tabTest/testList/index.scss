@@ -1,12 +1,6 @@
 @import "../../../../../../core/scss/params";
 
 .test-list {
-  & .accordion {
-    & .form-field__content {
-      gap: 0
-    }
-  }
-
   &__top {
     display: flex;
     flex-direction: row;

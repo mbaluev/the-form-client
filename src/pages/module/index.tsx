@@ -27,12 +27,16 @@ const Module = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
   const { modules } = props;
-  const { setList: setModules } = useViewModel<IModuleUserViewModel>(
-    VIEW_MODEL.ModuleUser
-  );
+  const { setList: setModules, clearList: clearModules } =
+    useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
+
   useEffect(() => {
     setModules(modules);
+    return () => {
+      clearModules();
+    };
   });
+
   const router = useRouter();
   if (router.isFallback) return <Loader loading={true} relative />;
   return <ModulesPage />;

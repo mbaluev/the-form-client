@@ -1,0 +1,9 @@
+@import "../../../../../../core/scss/params";
+
+.test-item {
+  &.accordion {
+    & .form-field__content {
+      gap: 0
+    }
+  }
+}

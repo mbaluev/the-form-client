@@ -32,12 +32,20 @@ const Module = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
   const { modules, module } = props;
-  const { setList: setModules, setData: setModule } =
-    useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
+  const {
+    setList: setModules,
+    setData: setModule,
+    clearList: clearModules,
+    clearData: clearModule,
+  } = useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
 
   useEffect(() => {
     setModules(modules);
     setModule(module);
+    return () => {
+      clearModules();
+      clearModule();
+    };
   });
 
   const router = useRouter();

@@ -33,8 +33,6 @@ export class MaterialUserViewModel
     });
   }
 
-  // --- user
-
   filterByQuery =
     (query?: ParsedUrlQuery) =>
     (item: IMaterialDTO): boolean => {

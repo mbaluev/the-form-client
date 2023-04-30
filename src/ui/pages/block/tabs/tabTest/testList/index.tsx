@@ -1,13 +1,7 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { classNames } from '@utils/classNames';
-import { Form, FormField, FormSection } from '@components/form';
-import { Accordion, TAccordionColor } from '@components/accordion';
-import { CheckboxFieldControl } from '@components/fields';
+import { Form, FormSection } from '@components/form';
 import { Alert } from '@components/alert';
-import { Button } from '@components/button';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import SportsScoreIcon from '@mui/icons-material/SportsScore';
 import ReplayIcon from '@mui/icons-material/Replay';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { Toolbar } from '@components/toolbar';
@@ -17,6 +11,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { IQuestionUserViewModel } from '@viewModel/modules/question/user/interface';
 import { Loader } from '@components/loader';
+import { TestItem } from 'ui/pages/block/tabs/tabTest/testItem';
 import './index.scss';
 
 interface IPassedProps {
@@ -101,29 +96,8 @@ const AlertStart = (props: IStartProps) => {
 };
 
 export const TestList = observer(() => {
-  const {
-    list,
-    status,
-    play,
-    prev,
-    next,
-    repeat,
-    finish,
-    expand,
-    changeAnswer,
-    isDataLoading,
-  } = useViewModel<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser);
-
-  const changeAnswerHandler = (
-    questionId: string,
-    e: ChangeEvent<HTMLInputElement>
-  ) => {
-    changeAnswer(questionId, e.target.name, e.target.checked);
-  };
-  const finishHandler = () => {
-    window.scrollTo(0, 0);
-    finish();
-  };
+  const { list, status, play, repeat, isDataLoading } =
+    useViewModel<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser);
 
   const cls = classNames('test-list');
 
@@ -143,75 +117,9 @@ export const TestList = observer(() => {
         />
       )}
       <FormSection>
-        {list?.map((q, i, arr) => {
-          const footerButtons = [];
-          if (i > 0) {
-            footerButtons.push(
-              <Button
-                color="blue"
-                variant="text"
-                size="medium"
-                children="Previous"
-                startIcon={<NavigateBeforeIcon />}
-                onClick={prev}
-                disabled={!play}
-              />
-            );
-          }
-          if (i < arr.length - 1) {
-            footerButtons.push(
-              <Button
-                color="blue"
-                variant="text"
-                size="medium"
-                children="Next"
-                endIcon={<NavigateNextIcon />}
-                onClick={next}
-                disabled={!play}
-              />
-            );
-          } else {
-            footerButtons.push(
-              <Button
-                color="green"
-                variant="text"
-                size="medium"
-                children="Finish"
-                startIcon={<SportsScoreIcon />}
-                onClick={finishHandler}
-                disabled={!play}
-              />
-            );
-          }
-          let color: TAccordionColor = undefined;
-          if (q.complete === false) color = 'red';
-          return (
-            <Accordion
-              key={q.id}
-              title={`Question ${i + 1}`}
-              footerButtons={footerButtons}
-              expanded={q.expanded}
-              onExpand={() => expand(i)}
-              color={color}
-            >
-              <FormField title={q.title} classNameLabel="color_black">
-                {q.options.map((option) => {
-                  const checked = q.answers.includes(option.id);
-                  return (
-                    <CheckboxFieldControl
-                      key={option.id}
-                      name={option.id}
-                      label={option.title}
-                      checked={checked}
-                      onChange={(e) => changeAnswerHandler(q.id, e)}
-                      disabled={!play}
-                    />
-                  );
-                })}
-              </FormField>
-            </Accordion>
-          );
-        })}
+        {list?.map((q, i, arr) => (
+          <TestItem key={q.id} index={i} total={arr.length} question={q} />
+        ))}
       </FormSection>
     </Form>
   );

@@ -5,6 +5,10 @@
   flex-direction: column;
   gap: $base * 3;
 
+  &_overflow_hidden {
+    overflow: hidden;
+  }
+
   &__label {
     display: flex;
     gap: $base * 2;
