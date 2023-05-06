@@ -3,10 +3,10 @@ import { TMenuItemDTO } from '@model/menu';
 import { MenuItem as LayoutMenuItem } from '@ui/layout/menu/menuItem';
 import { classNames } from '@utils/classNames';
 import Collapse from '@mui/material/Collapse';
+import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { IMenuViewModel } from '@viewModel/modules/menu/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { observer } from 'mobx-react';
 import './index.scss';
 
 type TMenuItemChild = TMenuItemDTO & {
@@ -15,12 +15,13 @@ type TMenuItemChild = TMenuItemDTO & {
 
 export const MenuItemChild = observer((props: TMenuItemChild) => {
   const { isOpen } = useViewModel<IMenuViewModel>(VIEW_MODEL.Menu);
+  const open = Boolean(props.open && isOpen);
   if ('items' in props) {
     const cls = classNames('menu-item-child', {
-      'menu-item-child_open': Boolean(props.open) && isOpen,
+      'menu-item-child_open': Boolean(open),
     });
     return (
-      <Collapse className="SubMenu" in={props.open && isOpen}>
+      <Collapse className="SubMenu" in={open}>
         <div className={cls}>
           {props.items?.map((item, index) => (
             <LayoutMenuItem key={index} {...item} isChild={true} />

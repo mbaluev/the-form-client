@@ -40,14 +40,12 @@ const Block = (
   const { blocks, modules } = props;
   const {
     setList: setBlocks,
+    clearList: clearBlocks,
     clearData: clearBlock,
     clearBlockData,
   } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
-  const {
-    setList: setModules,
-    clearData: clearModule,
-    clearModuleData,
-  } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
+  const { setList: setModules, clearList: clearModules } =
+    useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
 
   const breadCrumbs: TBreadCrumb[] = [
     {
@@ -99,11 +97,11 @@ const Block = (
 
   useEffect(() => {
     setBlocks(blocks);
-    clearBlock();
-    clearBlockData();
     setModules(modules);
-    clearModule();
-    clearModuleData();
+    return () => {
+      clearBlocks();
+      clearModules();
+    };
   });
 
   return (

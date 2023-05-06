@@ -31,11 +31,8 @@ const Modules = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
   const { modules } = props;
-  const {
-    setList: setModules,
-    clearData: clearModule,
-    clearModuleData,
-  } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
+  const { setList: setModules, clearList: clearModules } =
+    useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
 
   const breadCrumbs: TBreadCrumb[] = [
     {
@@ -58,8 +55,9 @@ const Modules = (
 
   useEffect(() => {
     setModules(modules);
-    clearModule();
-    clearModuleData();
+    return () => {
+      clearModules();
+    };
   });
 
   return (

@@ -3,9 +3,9 @@ import { TMenuItemDTO } from '@model/menu';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import SchoolIcon from '@mui/icons-material/School';
 import SettingsIcon from '@mui/icons-material/Settings';
-import PeopleIcon from '@mui/icons-material/People';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import { ROLES } from '@app/settings/roles';
+// import PeopleIcon from '@mui/icons-material/People';
+// import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
   {
@@ -31,7 +31,7 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
         name: ROUTER_CONST_SCHOOL.ADMIN_MODULES.name,
         label: ROUTER_CONST_SCHOOL.ADMIN_MODULES.label,
         path: ROUTER_CONST_SCHOOL.ADMIN_MODULES.path,
-        icon: <SchoolIcon />,
+        // icon: <SchoolIcon />,
         active: (pathname: string) => {
           return (
             pathname === ROUTER_CONST_SCHOOL.ADMIN_MODULES.path ||
@@ -45,7 +45,7 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
         name: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.name,
         label: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.label,
         path: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.path,
-        icon: <LibraryBooksIcon />,
+        // icon: <LibraryBooksIcon />,
         active: (pathname: string) => {
           return (
             pathname === ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.path ||
@@ -57,7 +57,7 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
         name: ROUTER_CONST_SCHOOL.ADMIN_USERS.name,
         label: ROUTER_CONST_SCHOOL.ADMIN_USERS.label,
         path: ROUTER_CONST_SCHOOL.ADMIN_USERS.path,
-        icon: <PeopleIcon />,
+        // icon: <PeopleIcon />,
         active: (pathname: string) => {
           return (
             pathname === ROUTER_CONST_SCHOOL.ADMIN_USERS.path ||

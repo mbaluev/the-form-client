@@ -34,6 +34,17 @@
       background-color: $color-grey-10;
       cursor: pointer;
     }
+
+    // row new
+    & .ag-row-green {
+      font-weight: 500;
+      background-color: rgba($color-green-dark, 0.1);
+    }
+    & .ag-row-green.ag-row-hover {
+      background-color: rgba($color-green-dark, 0.15);
+    }
+
+    // row selected
     & .ag-row-selected {
       background-color: rgba($color-blue, 0.1);
     }

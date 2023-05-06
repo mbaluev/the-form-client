@@ -36,6 +36,9 @@ const User = (
     setList: setUsers,
     setData: setUser,
     setUserData,
+    clearList: clearUsers,
+    clearData: clearUser,
+    clearUserData,
   } = useViewModel<IUserViewModel>(VIEW_MODEL.User);
 
   const breadCrumbs: TBreadCrumb[] = [
@@ -69,6 +72,11 @@ const User = (
     setUsers(users);
     setUser(user);
     setUserData(user);
+    return () => {
+      clearUsers();
+      clearUser();
+      clearUserData();
+    };
   });
 
   return (

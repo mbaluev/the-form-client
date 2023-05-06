@@ -1,5 +1,6 @@
 import { IDocumentDTO } from '@model/document';
 
+export type TTaskStatus = 'done' | 'sent' | 'inbox';
 export type TTaskAnswerType = 'file' | 'link';
 
 export interface ITaskAnswerDTO {
@@ -22,6 +23,7 @@ export interface ITaskUserDTO {
   blockId: string;
   document?: IDocumentDTO;
   taskAnswers?: ITaskAnswerDTO[];
+  status: TTaskStatus;
 
   expanded?: boolean; // ui accordion
 }

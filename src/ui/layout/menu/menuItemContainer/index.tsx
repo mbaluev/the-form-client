@@ -18,11 +18,13 @@ type TMenuItemContainer = TMenuItemDTO & {
   isChild?: boolean;
 };
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export const MenuItemContainer = observer((props: TMenuItemContainer) => {
   const { isOpen, setOpen } = useViewModel<IMenuViewModel>(VIEW_MODEL.Menu);
   const router = useRouter();
   const active = menuIsActive(props, router.pathname);
   const color = active ? 'blue' : 'grey';
+  const icon = props.icon;
   let endIcon = undefined;
   let path = undefined;
   if ('items' in props) {
@@ -32,7 +34,6 @@ export const MenuItemContainer = observer((props: TMenuItemContainer) => {
     path = props.path;
   }
   if (isOpen) {
-    const icon = props.icon;
     let onClick = undefined;
     if ('items' in props) {
       onClick = () => {
@@ -65,7 +66,6 @@ export const MenuItemContainer = observer((props: TMenuItemContainer) => {
       </Button>
     );
   } else {
-    const icon = props.icon;
     let tooltip: TooltipProps['title'] = props.label;
     let onClick = undefined;
     if ('items' in props) {

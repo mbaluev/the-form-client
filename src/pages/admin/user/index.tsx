@@ -31,11 +31,8 @@ const Users = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
   const { users } = props;
-  const {
-    setList: setUsers,
-    clearData: clearUser,
-    clearUserData,
-  } = useViewModel<IUserViewModel>(VIEW_MODEL.User);
+  const { setList: setUsers, clearList: clearUsers } =
+    useViewModel<IUserViewModel>(VIEW_MODEL.User);
 
   const breadCrumbs: TBreadCrumb[] = [
     {
@@ -58,8 +55,9 @@ const Users = (
 
   useEffect(() => {
     setUsers(users);
-    clearUser();
-    clearUserData();
+    return () => {
+      clearUsers();
+    };
   });
 
   return (

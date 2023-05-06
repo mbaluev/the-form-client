@@ -8,10 +8,12 @@ import { Box, InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { MaterialRenderer } from '@ui/pages/school/block/tabs/tabMaterials/materialList/materialRendrer';
 import { Alert } from '@components/alert';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
+import { TaskRenderer } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskRendrer';
+import { RowClassParams } from 'ag-grid-community';
+import { ButtonRenderer } from '@ui/layout/grid/renderers/buttonRenderer';
 
 export const TaskList = observer(() => {
   const { data: block } = useViewModel<IBlockUserViewModel>(
@@ -19,12 +21,12 @@ export const TaskList = observer(() => {
   );
   const {
     isListLoading,
-    listFiltered: materials,
-    hasListFiltered: hasList,
+    listFiltered: tasks,
+    hasListFiltered: hasTasks,
     filter,
     setFilter,
     isModalOpen,
-    deleteIds,
+    download,
   } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
 
   const defaultColDef = useMemo(
@@ -38,22 +40,50 @@ export const TaskList = observer(() => {
   );
   const columnDefs = [
     {
+      headerName: 'Tasks',
       suppressSizeToFit: true,
       valueGetter: (params: any) => {
         return {
           index: params.node.rowIndex + 1,
           name: params.data?.document.name,
           complete: params.data?.complete,
+          status: params.data?.status,
         };
       },
-      cellRenderer: MaterialRenderer,
+      cellRenderer: TaskRenderer,
     },
     {
+      headerName: 'Description',
       valueGetter: (params: any) => {
         return `${params.data?.document.description}`;
       },
     },
+    {
+      headerName: 'Download',
+      colId: 'actions',
+      suppressSizeToFit: true,
+      valueGetter: (params: any) => {
+        const onClick = async () => {
+          await download(
+            params.data.document.file.id,
+            params.data.document.file.name
+          );
+        };
+        return {
+          size: 'small',
+          onClick: onClick,
+          variant: 'text',
+          children: params.data.document.file.name,
+        };
+      },
+      cellRenderer: ButtonRenderer,
+    },
   ];
+  const getRowClass = (params: RowClassParams) => {
+    if (params.node.data.status === 'inbox') {
+      return 'ag-row-green';
+    }
+  };
 
   const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value);
@@ -87,7 +117,7 @@ export const TaskList = observer(() => {
 
   return (
     <React.Fragment>
-      {block?.completeMaterials && (
+      {block?.completeTasks && (
         <Box style={{ padding: '0 20px 20px' }}>
           <Alert
             type="success"
@@ -100,19 +130,19 @@ export const TaskList = observer(() => {
       )}
       <GridWithData
         propsAG={{
-          rowData: materials,
+          rowData: tasks,
+          rowHeight: 40,
           columnDefs,
           defaultColDef,
-          rowHeight: 40,
+          getRowClass,
         }}
         propsGrid={{
           sizeToFit: true,
-          totalItems: materials?.length,
+          totalItems: tasks?.length,
           toolbar: { itemsLeft },
           className: 'ag-grid_no-header',
           isLoading: isListLoading,
-          hasRows: hasList,
-          selectedIds: deleteIds,
+          hasRows: hasTasks,
           noDataMessage: 'No materials found',
           autoSizeColumns: ['actions'],
         }}

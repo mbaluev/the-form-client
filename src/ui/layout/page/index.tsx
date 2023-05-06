@@ -14,6 +14,7 @@ interface IProps {
   quickFilter?: JSX.Element;
   padding?: boolean;
   pageRight?: JSX.Element;
+  gridTemplateColumns?: string;
 }
 
 export const Page: FC<IProps> = (props) => {
@@ -27,6 +28,7 @@ export const Page: FC<IProps> = (props) => {
     children,
     padding = true,
     pageRight,
+    gridTemplateColumns = '2fr 3fr',
   } = props;
 
   const clsWrapper = classNames('page__wrapper');
@@ -79,7 +81,7 @@ export const Page: FC<IProps> = (props) => {
     return (
       <React.Fragment>
         <BreadCrumbsRenderer />
-        <div className={clsWrapper}>
+        <div className={clsWrapper} style={{ gridTemplateColumns }}>
           <PageRenderer />
           {pageRight}
         </div>

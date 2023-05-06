@@ -14,6 +14,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { BlockSubTitle } from '@ui/pages/school/block/blockSubTitle';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
+import { BlockCard } from '@ui/pages/school/block/blockCard';
 import './index.scss';
 
 export const BlockPage = observer(() => {
@@ -72,6 +73,8 @@ export const BlockPage = observer(() => {
       breadCrumbs={breadCrumbs}
       quickFilter={<ModuleProgress value={progress} />}
       className={cls}
+      pageRight={<BlockCard />}
+      gridTemplateColumns="3fr 2fr"
     >
       <BlockContent />
     </Page>

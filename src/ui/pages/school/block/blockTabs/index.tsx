@@ -3,7 +3,6 @@ import { Tabs } from '@components/tab';
 import { observer } from 'mobx-react';
 import { TabMaterials } from '@ui/pages/school/block/tabs/tabMaterials';
 import { TabTest } from '@ui/pages/school/block/tabs/tabTest';
-import { TabHomework } from '@ui/pages/school/block/tabs/tabHomework';
 import { BlockTabsLabel } from '@ui/pages/school/block/blockTabsLabel';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
@@ -14,7 +13,6 @@ export enum BlockTabNames {
   materials = 'materials',
   test = 'test',
   tasks = 'tests',
-  homework = 'homework',
 }
 
 export const BlockTabs = observer(() => {
@@ -46,16 +44,11 @@ export const BlockTabs = observer(() => {
     },
     {
       value: BlockTabNames.tasks,
-      label: <BlockTabsLabel label="Tasks" complete={block?.completeTasks} />,
-      content: <TabTasks />,
-      padding: false,
-    },
-    {
-      value: BlockTabNames.homework,
       label: (
         <BlockTabsLabel label="Homework" complete={block?.completeTasks} />
       ),
-      content: <TabHomework />,
+      content: <TabTasks />,
+      padding: false,
     },
   ];
 

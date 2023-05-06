@@ -44,9 +44,13 @@ const Blocks = (
     setList: setModules,
     setData: setModule,
     setModuleData,
+    clearList: clearModules,
+    clearData: clearModule,
+    clearModuleData,
   } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
   const {
     setList: setBlocks,
+    clearList: clearBlocks,
     clearData: clearBlock,
     clearBlockData,
   } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
@@ -113,8 +117,12 @@ const Blocks = (
     setModule(module);
     setModuleData(module);
     setBlocks(blocks);
-    clearBlock();
-    clearBlockData();
+    return () => {
+      clearModules();
+      clearModule();
+      clearModuleData();
+      clearBlocks();
+    };
   });
 
   return (

@@ -42,12 +42,12 @@ const Module = (
     setList: setModules,
     setData: setModule,
     setModuleData,
+    clearList: clearModules,
+    clearData: clearModule,
+    clearModuleData,
   } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
-  const {
-    setList: setBlocks,
-    clearData: clearBlock,
-    clearBlockData,
-  } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
+  const { setList: setBlocks, clearList: clearBlocks } =
+    useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
 
   const breadCrumbs: TBreadCrumb[] = [
     {
@@ -81,8 +81,12 @@ const Module = (
     setModule(module);
     setModuleData(module);
     setBlocks(blocks);
-    clearBlock();
-    clearBlockData();
+    return () => {
+      clearModules();
+      clearModule();
+      clearModuleData();
+      clearBlocks();
+    };
   });
 
   return (
