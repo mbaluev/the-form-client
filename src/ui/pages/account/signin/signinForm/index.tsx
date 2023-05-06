@@ -34,7 +34,7 @@ export const SigninForm = observer(() => {
     clearMessage();
     if (await signin()) {
       await router.push({
-        pathname: ROUTER_CONST_SCHOOL.MODULES.path,
+        pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.path,
       });
     }
   };

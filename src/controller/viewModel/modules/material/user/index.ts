@@ -9,7 +9,7 @@ import { action, makeObservable } from 'mobx';
 import { MaterialService } from '@service/modules/material';
 import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
 import { BlockUserViewModel } from '@viewModel/modules/block/user';
-import { BlockTabNames } from '@ui/pages/block/blockTabs';
+import { BlockTabNames } from '@ui/pages/school/block/blockTabs';
 import { ParsedUrlQuery } from 'querystring';
 import _ from 'lodash';
 

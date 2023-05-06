@@ -9,15 +9,15 @@ import { ROLES } from '@app/settings/roles';
 
 export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
   {
-    name: ROUTER_CONST_SCHOOL.MODULES.name,
-    label: ROUTER_CONST_SCHOOL.MODULES.label,
-    path: ROUTER_CONST_SCHOOL.MODULES.path,
+    name: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.name,
+    label: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.label,
+    path: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.path,
     icon: <SchoolIcon />,
     active: (pathname: string) => {
       return (
-        pathname === ROUTER_CONST_SCHOOL.MODULES.path ||
-        pathname === ROUTER_CONST_SCHOOL.MODULE.path ||
-        pathname === ROUTER_CONST_SCHOOL.BLOCK.path
+        pathname === ROUTER_CONST_SCHOOL.SCHOOL_MODULES.path ||
+        pathname === ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path ||
+        pathname === ROUTER_CONST_SCHOOL.SCHOOL_BLOCK.path
       );
     },
     roles: [ROLES.STUDENT],

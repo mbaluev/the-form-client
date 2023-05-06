@@ -41,6 +41,7 @@ export interface ILayoutProps {
 
 type TLayoutProps = React.PropsWithChildren<ILayoutProps>;
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export const Layout = observer((props: TLayoutProps) => {
   const {
     className,
@@ -167,10 +168,10 @@ export const Layout = observer((props: TLayoutProps) => {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <Link passHref href={ROUTER_CONST_SCHOOL.SIGNIN.path}>
+              <Link passHref href={ROUTER_CONST_SCHOOL.ACCOUNT_SIGN_IN.path}>
                 <Button>Sign in</Button>
               </Link>
-              <Link passHref href={ROUTER_CONST_SCHOOL.SIGNUP.path}>
+              <Link passHref href={ROUTER_CONST_SCHOOL.ACCOUNT_SIGN_UP.path}>
                 <Button color="green">Sign up</Button>
               </Link>
             </React.Fragment>

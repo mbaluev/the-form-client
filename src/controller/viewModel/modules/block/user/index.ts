@@ -8,7 +8,7 @@ import { AuthViewModel } from '@viewModel/modules/auth';
 import { FilterViewModel } from '@viewModel/modules/filter';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 import { action, makeObservable, observable } from 'mobx';
-import { BlockTabNames } from '@ui/pages/block/blockTabs';
+import { BlockTabNames } from '@ui/pages/school/block/blockTabs';
 
 @injectable()
 export class BlockUserViewModel

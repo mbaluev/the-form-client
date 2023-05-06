@@ -15,7 +15,7 @@ export const IndexContent = () => {
         <div className="index-content__title">The Form</div>
         <div className="index-content__description">School of analytics</div>
       </div>
-      <Link href={ROUTER_CONST_SCHOOL.MODULES.path} passHref>
+      <Link href={ROUTER_CONST_SCHOOL.SCHOOL_MODULES.path} passHref>
         <Button>Go to modules</Button>
       </Link>
     </div>

@@ -22,41 +22,41 @@ export const ROUTER_CONST_SCHOOL: Record<string, any> = {
     label: 'The Form',
     path: '/',
   },
-  MODULES: {
-    name: 'modules',
-    label: 'Modules',
-    path: '/module',
-    roles: [ROLES.STUDENT],
-  },
-  MODULE: {
-    name: 'module',
-    label: 'Module',
-    path: '/module/[id]',
-    roles: [ROLES.STUDENT],
-  },
-  BLOCK: {
-    name: 'block',
-    label: 'Block',
-    path: '/block/[id]',
-    roles: [ROLES.STUDENT],
-  },
-  PROFILE: {
-    name: 'profile',
+  ACCOUNT_PROFILE: {
+    name: 'accountProfile',
     label: 'Profile',
     path: '/account/profile',
     roles: [ROLES.DISABLE],
   },
-  SIGNIN: {
-    name: 'signin',
+  ACCOUNT_SIGN_IN: {
+    name: 'accountSignin',
     label: 'signin',
     path: '/account/signin',
     roles: [ROLES.NONE],
   },
-  SIGNUP: {
-    name: 'signup',
+  ACCOUNT_SIGN_UP: {
+    name: 'accountSignup',
     label: 'signup',
     path: '/account/signup',
     roles: [ROLES.NONE],
+  },
+  SCHOOL_MODULES: {
+    name: 'userModules',
+    label: 'Modules',
+    path: '/school/module',
+    roles: [ROLES.STUDENT],
+  },
+  SCHOOL_MODULE: {
+    name: 'userModule',
+    label: 'Module',
+    path: '/school/module/[id]',
+    roles: [ROLES.STUDENT],
+  },
+  SCHOOL_BLOCK: {
+    name: 'userBlock',
+    label: 'Block',
+    path: '/school/block/[id]',
+    roles: [ROLES.STUDENT],
   },
   ADMIN_MODULES: {
     name: 'adminModules',

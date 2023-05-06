@@ -12,8 +12,8 @@ const Profile = () => {
       url: { pathname: ROUTER_CONST_SCHOOL.HOME.path },
     },
     {
-      label: ROUTER_CONST_SCHOOL.PROFILE.label,
-      url: { pathname: ROUTER_CONST_SCHOOL.PROFILE.path },
+      label: ROUTER_CONST_SCHOOL.ACCOUNT_PROFILE.label,
+      url: { pathname: ROUTER_CONST_SCHOOL.ACCOUNT_PROFILE.path },
     },
   ];
   return (
