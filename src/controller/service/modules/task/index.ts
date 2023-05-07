@@ -78,4 +78,17 @@ export class TaskService implements ITaskService {
     );
     return ret ? ret.data : undefined;
   };
+
+  getTaskUser = async (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<ITaskUserDTO | undefined> => {
+    const ret = await this.apiModule.get<IResponseItemDTO<ITaskUserDTO>>(
+      `${this.API_PREFIX}/user/get/${id}`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
 }

@@ -87,6 +87,18 @@ export class TaskUserViewModel
     }
   };
 
+  getData = async (id: string) => {
+    this.setModalLoading(true);
+    try {
+      const token = await this.auth.refreshToken();
+      const data = await this.serviceTask.getTaskUser(id, undefined, token);
+      this.setData(data);
+    } catch (err) {
+    } finally {
+      this.setModalLoading(false);
+    }
+  };
+
   download = async (id: string, filename: string) => {
     try {
       const token = await this.auth.refreshToken();

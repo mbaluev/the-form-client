@@ -24,4 +24,9 @@ export interface ITaskService {
     query?: ParsedUrlQuery,
     token?: string | null
   ) => Promise<ITaskUserDTO[] | undefined>;
+  getTaskUser: (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<ITaskUserDTO | undefined>;
 }

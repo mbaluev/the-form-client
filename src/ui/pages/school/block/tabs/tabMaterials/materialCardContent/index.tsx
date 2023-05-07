@@ -8,18 +8,18 @@ import { TextFieldControl } from '@components/fields';
 import { Button } from '@components/button';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
-export const MaterialTabs = observer(() => {
-  const { data: material, download } = useViewModel<IMaterialUserViewModel>(
+export const MaterialCardContent = observer(() => {
+  const { data, download } = useViewModel<IMaterialUserViewModel>(
     VIEW_MODEL.MaterialUser
   );
 
   const handleDownload = async () => {
-    if (material)
+    if (data)
       await download(
-        material.document.file.id,
-        material.document.file.name,
-        material.id,
-        material.blockId
+        data.document.file.id,
+        data.document.file.name,
+        data.id,
+        data.blockId
       );
   };
 
@@ -34,7 +34,7 @@ export const MaterialTabs = observer(() => {
             startIcon={<FileDownloadIcon />}
             sx={{ width: 'fit-content !important' }}
           >
-            {material?.document.file.name}
+            {data?.document.file.name}
           </Button>
         </FormField>
         <FormField title="Description">
@@ -42,7 +42,7 @@ export const MaterialTabs = observer(() => {
             name="document.description"
             multiline
             minRows={5}
-            value={material?.document?.description}
+            value={data?.document?.description}
             isEdit={false}
             heightAuto
           />

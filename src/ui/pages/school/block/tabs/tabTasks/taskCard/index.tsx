@@ -5,10 +5,10 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Page204 } from '@ui/pages/errors/204';
 import { Loader } from '@components/loader';
-import { UserLabel } from '@ui/pages/admin/user/userLabel';
-import { UserCardActions } from '@ui/pages/admin/user/userCardActions';
-import { UserTabs } from '@ui/pages/admin/user/userTabs';
 import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
+import { TaskCardActions } from '@ui/pages/school/block/tabs/tabTasks/taskCardActions';
+import { TaskCardContent } from '@ui/pages/school/block/tabs/tabTasks/taskCardContent';
+import { TaskLabel } from '@ui/pages/school/block/tabs/tabTasks/taskLabel';
 
 export const TaskCard = observer(() => {
   const { data, isDataLoading } = useViewModel<ITaskUserViewModel>(
@@ -18,9 +18,9 @@ export const TaskCard = observer(() => {
   if (!data) return <Page204 />;
 
   return (
-    <Page title={<UserLabel />} quickFilter={<UserCardActions />}>
+    <Page title={<TaskLabel />} quickFilter={<TaskCardActions />}>
       <Loader loading={isDataLoading} />
-      <UserTabs />
+      <TaskCardContent />
     </Page>
   );
 });

@@ -16,7 +16,7 @@ import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
 import { BlockTabNames } from '@ui/pages/school/block/blockTabs';
 import { MaterialCard } from '@ui/pages/school/block/tabs/tabMaterials/materialCard';
-import { TaskCard } from 'ui/pages/school/block/tabs/tabTasks/taskCard';
+import { TaskCard } from '@ui/pages/school/block/tabs/tabTasks/taskCard';
 import './index.scss';
 
 export const BlockPage = observer(() => {

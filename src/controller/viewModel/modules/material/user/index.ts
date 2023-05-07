@@ -88,6 +88,22 @@ export class MaterialUserViewModel
     }
   };
 
+  getData = async (id: string) => {
+    this.setModalLoading(true);
+    try {
+      const token = await this.auth.refreshToken();
+      const data = await this.serviceMaterial.getMaterialUser(
+        id,
+        undefined,
+        token
+      );
+      this.setData(data);
+    } catch (err) {
+    } finally {
+      this.setModalLoading(false);
+    }
+  };
+
   download = async (
     id: string,
     filename: string,
@@ -104,22 +120,6 @@ export class MaterialUserViewModel
     } catch (err) {
       return false;
     } finally {
-    }
-  };
-
-  getData = async (id: string) => {
-    this.setModalLoading(true);
-    try {
-      const token = await this.auth.refreshToken();
-      const data = await this.serviceMaterial.getMaterialUser(
-        id,
-        undefined,
-        token
-      );
-      this.setData(data);
-    } catch (err) {
-    } finally {
-      this.setModalLoading(false);
     }
   };
 }

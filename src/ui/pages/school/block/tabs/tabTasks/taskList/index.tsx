@@ -12,7 +12,7 @@ import { Alert } from '@components/alert';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
 import { TaskRenderer } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskRendrer';
-import { RowClassParams } from 'ag-grid-community';
+import { CellClickedEvent, RowClassParams } from 'ag-grid-community';
 import { ButtonRenderer } from '@ui/layout/grid/renderers/buttonRenderer';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
@@ -28,6 +28,8 @@ export const TaskList = observer(() => {
     setFilter,
     isModalOpen,
     download,
+    getData,
+    data: taskData,
   } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
 
   const [preventClick, setPreventClick] = useState(false);
@@ -47,7 +49,7 @@ export const TaskList = observer(() => {
       valueGetter: (params: any) => {
         return {
           index: params.node.rowIndex + 1,
-          name: params.data?.document.name,
+          name: params.data?.document?.name,
           complete: params.data?.complete,
           status: params.data?.status,
         };
@@ -89,6 +91,10 @@ export const TaskList = observer(() => {
     }
   };
 
+  const onClick = async (params: CellClickedEvent) => {
+    if (!preventClick) await getData(params.data.id);
+    setPreventClick(false);
+  };
   const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value);
   };
@@ -117,7 +123,7 @@ export const TaskList = observer(() => {
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
-  }, [filter, isModalOpen, preventClick]);
+  }, [filter, isModalOpen, preventClick, taskData]);
 
   return (
     <React.Fragment>
@@ -141,6 +147,7 @@ export const TaskList = observer(() => {
           getRowClass,
         }}
         propsGrid={{
+          onClick,
           sizeToFit: true,
           totalItems: tasks?.length,
           toolbar: { itemsLeft },
@@ -149,6 +156,7 @@ export const TaskList = observer(() => {
           hasRows: hasTasks,
           noDataMessage: 'No materials found',
           autoSizeColumns: ['actions'],
+          selectedIds: taskData ? [taskData.id] : undefined,
         }}
       />
     </React.Fragment>

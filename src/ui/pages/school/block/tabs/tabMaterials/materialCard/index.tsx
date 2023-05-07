@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 import { Page204 } from '@ui/pages/errors/204';
 import { Loader } from '@components/loader';
 import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
-import { MaterialTabs } from '@ui/pages/school/block/tabs/tabMaterials/materialTabs';
+import { MaterialCardContent } from 'ui/pages/school/block/tabs/tabMaterials/materialCardContent';
 import { MaterialCardActions } from '@ui/pages/school/block/tabs/tabMaterials/materialCardActions';
 import { MaterialLabel } from '@ui/pages/school/block/tabs/tabMaterials/materialLabel';
 
@@ -20,7 +20,7 @@ export const MaterialCard = observer(() => {
   return (
     <Page title={<MaterialLabel />} quickFilter={<MaterialCardActions />}>
       <Loader loading={isDataLoading} />
-      <MaterialTabs />
+      <MaterialCardContent />
     </Page>
   );
 });
