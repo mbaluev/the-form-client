@@ -25,6 +25,11 @@ export interface IMaterialService {
     query?: ParsedUrlQuery,
     token?: string | null
   ) => Promise<IMaterialUserDTO[] | undefined>;
+  getMaterialUser: (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<IMaterialUserDTO | undefined>;
   updateMaterialUser: (
     id: string,
     token?: string | null

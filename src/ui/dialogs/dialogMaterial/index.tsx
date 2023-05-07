@@ -1,9 +1,9 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import { Modal } from '@components/modal';
 import { Attachment } from '@components/attachment';
 import { DropzoneOptions } from 'react-dropzone';
 import { Form, FormField, FormSection } from '@components/form';
-import { TextFieldControl } from '@components/fields';
+import { SelectFieldControl, TextFieldControl } from '@components/fields';
 import { IButtonProps } from '@components/button';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
@@ -11,6 +11,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { IMaterialViewModel } from '@viewModel/modules/material/interface';
 import { Loader } from '@components/loader';
 import { Skeleton } from '@components/skeleton';
+import { IBlockViewModel } from '@viewModel/modules/block/interface';
 
 interface IProps {
   isOpen: boolean;
@@ -34,6 +35,10 @@ export const DialogMaterial = observer((props: IProps) => {
     upload,
     download,
   } = useViewModel<IMaterialViewModel>(VIEW_MODEL.Material);
+
+  const { list: blocks, data: block } = useViewModel<IBlockViewModel>(
+    VIEW_MODEL.Block
+  );
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -63,7 +68,7 @@ export const DialogMaterial = observer((props: IProps) => {
     if (isModalLoading) {
       return <Skeleton width={200} />;
     }
-    if (!modalData || (modalData && !modalData.document.name)) {
+    if (!modalData || (modalData && !modalData?.document?.name)) {
       return <React.Fragment>New material</React.Fragment>;
     }
     return <React.Fragment>{modalData.document.name}</React.Fragment>;
@@ -84,6 +89,10 @@ export const DialogMaterial = observer((props: IProps) => {
     },
   ];
 
+  useEffect(() => {
+    if (block) changeModalField('blockId', block.id);
+  }, [isOpen]);
+
   return (
     <Modal
       className="dialog-material"
@@ -95,10 +104,25 @@ export const DialogMaterial = observer((props: IProps) => {
       <Loader loading={isModalLoading} />
       <Form cols={1}>
         <FormSection>
+          <FormField title="Block">
+            <SelectFieldControl
+              name="blockId"
+              value={modalData?.blockId}
+              items={blocks?.map((d) => {
+                return {
+                  value: d.id,
+                  label: d.title,
+                };
+              })}
+              error={Boolean(getModalError('blockId'))}
+              helperText={getModalError('blockId')?.message}
+              disabled
+            />
+          </FormField>
           <FormField title="Material name">
             <TextFieldControl
               name="document.name"
-              value={modalData?.document.name}
+              value={modalData?.document?.name}
               onChange={changeHandler}
               error={Boolean(getModalError('document.name'))}
               helperText={getModalError('document.name')?.message}
@@ -109,7 +133,7 @@ export const DialogMaterial = observer((props: IProps) => {
               name="document.description"
               multiline
               minRows={5}
-              value={modalData?.document.description}
+              value={modalData?.document?.description}
               onChange={changeHandler}
               error={Boolean(getModalError('document.description'))}
               helperText={getModalError('document.description')?.message}
@@ -125,8 +149,8 @@ export const DialogMaterial = observer((props: IProps) => {
               error={Boolean(getModalError(pathFileId))}
               helperText={getModalError(pathFileId)?.message}
               files={
-                modalData?.document.file
-                  ? [modalData?.document.file]
+                modalData?.document?.file
+                  ? [modalData.document.file]
                   : undefined
               }
             />

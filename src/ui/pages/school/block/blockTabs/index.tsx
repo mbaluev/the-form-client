@@ -11,8 +11,8 @@ import { TabTasks } from '@ui/pages/school/block/tabs/tabTasks';
 
 export enum BlockTabNames {
   materials = 'materials',
-  test = 'test',
   tasks = 'tests',
+  test = 'test',
 }
 
 export const BlockTabs = observer(() => {
@@ -36,19 +36,19 @@ export const BlockTabs = observer(() => {
       padding: false,
     },
     {
-      value: BlockTabNames.test,
-      label: (
-        <BlockTabsLabel label="Test" complete={block?.completeQuestions} />
-      ),
-      content: <TabTest />,
-    },
-    {
       value: BlockTabNames.tasks,
       label: (
         <BlockTabsLabel label="Homework" complete={block?.completeTasks} />
       ),
       content: <TabTasks />,
       padding: false,
+    },
+    {
+      value: BlockTabNames.test,
+      label: (
+        <BlockTabsLabel label="Test" complete={block?.completeQuestions} />
+      ),
+      content: <TabTest />,
     },
   ];
 

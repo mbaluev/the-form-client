@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { observer } from 'mobx-react';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { DefaultRenderer } from '@ui/layout/grid/renderers/defaultRenderer';
@@ -13,6 +13,8 @@ import { MaterialRenderer } from '@ui/pages/school/block/tabs/tabMaterials/mater
 import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
 import { Alert } from '@components/alert';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { CellClickedEvent } from 'ag-grid-community';
 
 export const MaterialList = observer(() => {
   const { data: block } = useViewModel<IBlockUserViewModel>(
@@ -25,7 +27,11 @@ export const MaterialList = observer(() => {
     filter,
     setFilter,
     download,
+    getData,
+    data: materialData,
   } = useViewModel<IMaterialUserViewModel>(VIEW_MODEL.MaterialUser);
+
+  const [preventClick, setPreventClick] = useState(false);
 
   const defaultColDef = useMemo(
     () => ({
@@ -39,7 +45,6 @@ export const MaterialList = observer(() => {
   const columnDefs = [
     {
       headerName: 'Materials',
-      suppressSizeToFit: true,
       valueGetter: (params: any) => {
         return {
           index: params.node.rowIndex + 1,
@@ -49,18 +54,19 @@ export const MaterialList = observer(() => {
       },
       cellRenderer: MaterialRenderer,
     },
-    {
-      headerName: 'Description',
-      valueGetter: (params: any) => {
-        return `${params.data?.document.description}`;
-      },
-    },
+    // {
+    //   headerName: 'Description',
+    //   valueGetter: (params: any) => {
+    //     return `${params.data?.document.description}`;
+    //   },
+    // },
     {
       colId: 'actions',
       headerName: 'Download',
       suppressSizeToFit: true,
       valueGetter: (params: any) => {
         const onClick = async () => {
+          setPreventClick(true);
           await download(
             params.data.document.file.id,
             params.data.document.file.name,
@@ -72,6 +78,7 @@ export const MaterialList = observer(() => {
           size: 'small',
           onClick: onClick,
           variant: 'text',
+          endIcon: <FileDownloadIcon />,
           children: params.data.document.file.name,
         };
       },
@@ -79,6 +86,10 @@ export const MaterialList = observer(() => {
     },
   ];
 
+  const onClick = async (params: CellClickedEvent) => {
+    if (!preventClick) await getData(params.data.id);
+    setPreventClick(false);
+  };
   const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value);
   };
@@ -107,7 +118,7 @@ export const MaterialList = observer(() => {
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
-  }, [filter]);
+  }, [filter, preventClick, materialData]);
 
   return (
     <React.Fragment>
@@ -130,6 +141,7 @@ export const MaterialList = observer(() => {
           rowHeight: 40,
         }}
         propsGrid={{
+          onClick,
           sizeToFit: true,
           totalItems: materials?.length,
           toolbar: { itemsLeft },
@@ -138,6 +150,7 @@ export const MaterialList = observer(() => {
           hasRows: hasList,
           noDataMessage: 'No materials found',
           autoSizeColumns: ['actions'],
+          selectedIds: materialData ? [materialData.id] : undefined,
         }}
       />
     </React.Fragment>

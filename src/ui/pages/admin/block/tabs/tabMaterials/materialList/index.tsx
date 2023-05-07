@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { observer } from 'mobx-react';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
@@ -15,6 +15,7 @@ import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { IMaterialViewModel } from '@viewModel/modules/material/interface';
 import { DialogMaterial } from '@ui/dialogs/dialogMaterial';
 import { ButtonRenderer } from 'ui/layout/grid/renderers/buttonRenderer';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 export const MaterialList = observer(() => {
   const {
@@ -40,6 +41,8 @@ export const MaterialList = observer(() => {
     download,
   } = useViewModel<IMaterialViewModel>(VIEW_MODEL.Material);
 
+  const [preventClick, setPreventClick] = useState(false);
+
   const defaultColDef = useMemo(
     () => ({
       sortable: false,
@@ -53,23 +56,24 @@ export const MaterialList = observer(() => {
     {
       headerName: 'Materials',
       checkboxSelection: true,
-      suppressSizeToFit: true,
+      // suppressSizeToFit: true,
       valueGetter: (params: any) => {
         return `${params.node.rowIndex + 1}. ${params.data?.document.name}`;
       },
     },
-    {
-      headerName: 'Description',
-      valueGetter: (params: any) => {
-        return `${params.data?.document.description}`;
-      },
-    },
+    // {
+    //   headerName: 'Description',
+    //   valueGetter: (params: any) => {
+    //     return `${params.data?.document.description}`;
+    //   },
+    // },
     {
       colId: 'actions',
       headerName: 'Download',
       suppressSizeToFit: true,
       valueGetter: (params: any) => {
         const onClick = async () => {
+          setPreventClick(true);
           await download(
             params.data.document.file.id,
             params.data.document.file.name
@@ -79,6 +83,7 @@ export const MaterialList = observer(() => {
           size: 'small',
           onClick: onClick,
           variant: 'text',
+          endIcon: <FileDownloadIcon />,
           children: params.data.document.file.name,
         };
       },
@@ -94,10 +99,8 @@ export const MaterialList = observer(() => {
   };
 
   const onClick = async (params: CellClickedEvent) => {
-    if (params.column.getColId() === 'actions') {
-      return;
-    }
-    await modalOpen(params.data.id);
+    if (!preventClick) await modalOpen(params.data.id);
+    setPreventClick(false);
   };
   const onRowSelected = (event: RowSelectedEvent) => {
     const selected = event.node.isSelected();
@@ -143,7 +146,14 @@ export const MaterialList = observer(() => {
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
-  }, [filter, deleteIds, isDeleteOpen, isDeleteLoading, isModalOpen]);
+  }, [
+    filter,
+    deleteIds,
+    isDeleteOpen,
+    isDeleteLoading,
+    isModalOpen,
+    preventClick,
+  ]);
 
   return (
     <React.Fragment>

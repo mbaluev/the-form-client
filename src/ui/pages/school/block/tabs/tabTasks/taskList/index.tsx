@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { observer } from 'mobx-react';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { DefaultRenderer } from '@ui/layout/grid/renderers/defaultRenderer';
@@ -14,6 +14,7 @@ import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
 import { TaskRenderer } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskRendrer';
 import { RowClassParams } from 'ag-grid-community';
 import { ButtonRenderer } from '@ui/layout/grid/renderers/buttonRenderer';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 export const TaskList = observer(() => {
   const { data: block } = useViewModel<IBlockUserViewModel>(
@@ -29,6 +30,8 @@ export const TaskList = observer(() => {
     download,
   } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
 
+  const [preventClick, setPreventClick] = useState(false);
+
   const defaultColDef = useMemo(
     () => ({
       sortable: false,
@@ -41,7 +44,6 @@ export const TaskList = observer(() => {
   const columnDefs = [
     {
       headerName: 'Tasks',
-      suppressSizeToFit: true,
       valueGetter: (params: any) => {
         return {
           index: params.node.rowIndex + 1,
@@ -52,18 +54,19 @@ export const TaskList = observer(() => {
       },
       cellRenderer: TaskRenderer,
     },
-    {
-      headerName: 'Description',
-      valueGetter: (params: any) => {
-        return `${params.data?.document.description}`;
-      },
-    },
+    // {
+    //   headerName: 'Description',
+    //   valueGetter: (params: any) => {
+    //     return `${params.data?.document.description}`;
+    //   },
+    // },
     {
       headerName: 'Download',
       colId: 'actions',
       suppressSizeToFit: true,
       valueGetter: (params: any) => {
         const onClick = async () => {
+          setPreventClick(true);
           await download(
             params.data.document.file.id,
             params.data.document.file.name
@@ -73,6 +76,7 @@ export const TaskList = observer(() => {
           size: 'small',
           onClick: onClick,
           variant: 'text',
+          endIcon: <FileDownloadIcon />,
           children: params.data.document.file.name,
         };
       },
@@ -113,7 +117,7 @@ export const TaskList = observer(() => {
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
-  }, [filter, isModalOpen]);
+  }, [filter, isModalOpen, preventClick]);
 
   return (
     <React.Fragment>

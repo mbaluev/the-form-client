@@ -79,6 +79,19 @@ export class MaterialService implements IMaterialService {
     return ret ? ret.data : undefined;
   };
 
+  getMaterialUser = async (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<IMaterialUserDTO | undefined> => {
+    const ret = await this.apiModule.get<IResponseItemDTO<IMaterialUserDTO>>(
+      `${this.API_PREFIX}/user/get/${id}`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
+
   updateMaterialUser = async (id: string, token?: string | null) => {
     const ret = await this.apiModule.post<IResponseItemDTO<undefined>>(
       `${this.API_PREFIX}/user/update/${id}`,

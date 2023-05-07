@@ -14,14 +14,16 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { BlockSubTitle } from '@ui/pages/school/block/blockSubTitle';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
-import { BlockCard } from '@ui/pages/school/block/blockCard';
+import { BlockTabNames } from '@ui/pages/school/block/blockTabs';
+import { MaterialCard } from '@ui/pages/school/block/tabs/tabMaterials/materialCard';
+import { TaskCard } from 'ui/pages/school/block/tabs/tabTasks/taskCard';
 import './index.scss';
 
 export const BlockPage = observer(() => {
   const { data: module } = useViewModel<IModuleUserViewModel>(
     VIEW_MODEL.ModuleUser
   );
-  const { data: block } = useViewModel<IBlockUserViewModel>(
+  const { data: block, tab } = useViewModel<IBlockUserViewModel>(
     VIEW_MODEL.BlockUser
   );
   const breadCrumbs: TBreadCrumb[] = [
@@ -66,6 +68,12 @@ export const BlockPage = observer(() => {
     Boolean(block?.completeTasks),
   ]);
 
+  const getPageRight = () => {
+    if (tab === BlockTabNames.materials) return <MaterialCard />;
+    if (tab === BlockTabNames.tasks) return <TaskCard />;
+    return undefined;
+  };
+
   return (
     <Page
       title={block?.name}
@@ -73,8 +81,7 @@ export const BlockPage = observer(() => {
       breadCrumbs={breadCrumbs}
       quickFilter={<ModuleProgress value={progress} />}
       className={cls}
-      pageRight={<BlockCard />}
-      gridTemplateColumns="3fr 2fr"
+      pageRight={getPageRight()}
     >
       <BlockContent />
     </Page>

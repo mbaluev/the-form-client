@@ -25,10 +25,10 @@ export const TabDetails = observer(() => {
   return (
     <Form cols={1}>
       <FormSection>
-        <FormField isRow title="Id">
+        <FormField title="Id">
           <TextFieldControl name="id" disabled value={data?.id} />
         </FormField>
-        <FormField isRow title="Module">
+        <FormField title="Module">
           <SelectFieldControl
             name="moduleId"
             value={data?.moduleId}
@@ -44,7 +44,7 @@ export const TabDetails = observer(() => {
             required
           />
         </FormField>
-        <FormField isRow title="Title">
+        <FormField title="Title">
           <TextFieldControl
             name="title"
             value={data?.title}
@@ -53,7 +53,7 @@ export const TabDetails = observer(() => {
             helperText={getError('title')?.message}
           />
         </FormField>
-        <FormField isRow title="Name">
+        <FormField title="Name">
           <TextFieldControl
             name="name"
             value={data?.name}
@@ -64,7 +64,7 @@ export const TabDetails = observer(() => {
             helperText={getError('name')?.message}
           />
         </FormField>
-        <FormField isRow title="Position">
+        <FormField title="Position">
           <TextFieldControl
             name="position"
             type="number"

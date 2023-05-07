@@ -28,12 +28,13 @@ export const Page: FC<IProps> = (props) => {
     children,
     padding = true,
     pageRight,
-    gridTemplateColumns = '2fr 3fr',
+    gridTemplateColumns = '1fr 1fr',
   } = props;
 
   const clsWrapper = classNames('page__wrapper');
   const cls = classNames('page', className);
   const clsTop = classNames('page__top');
+  const clsTopRow = classNames('page__top-row');
   const clsTopColumn = classNames('page__top-column');
   const clsBreadCrumbs = classNames('page__bread-crumbs');
   const clsQuickFilter = classNames('page__quick-filter');
@@ -61,13 +62,29 @@ export const Page: FC<IProps> = (props) => {
       <div className={cls}>
         {(subTitle || title || quickFilter) && (
           <div className={clsTop}>
-            <div className={clsTopColumn}>
-              {subTitle && <div className={clsSubTitle}>{subTitle}</div>}
-              {title && <div className={clsTitle}>{title}</div>}
+            <div className={clsTopRow}>
+              {subTitle ? (
+                <div className={clsTopColumn}>
+                  {subTitle && <div className={clsSubTitle}>{subTitle}</div>}
+                </div>
+              ) : (
+                <div className={clsTopColumn}>
+                  {title && <div className={clsTitle}>{title}</div>}
+                </div>
+              )}
+              {quickFilter && (
+                <div className={clsTopColumn}>
+                  <div className={clsQuickFilter}>{quickFilter}</div>
+                </div>
+              )}
             </div>
-            <div className={clsTopColumn}>
-              <div className={clsQuickFilter}>{quickFilter}</div>
-            </div>
+            {subTitle && (
+              <div className={clsTopRow}>
+                <div className={clsTopColumn}>
+                  {title && <div className={clsTitle}>{title}</div>}
+                </div>
+              </div>
+            )}
           </div>
         )}
         <div className={clsContainer}>

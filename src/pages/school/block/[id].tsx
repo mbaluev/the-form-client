@@ -14,6 +14,8 @@ import { useRouter } from 'next/router';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
+import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
+import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
@@ -44,6 +46,12 @@ const Block = (
     useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
   const { setData: setBlock, clearData: clearBlock } =
     useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
+  const { clearData: clearMaterial } = useViewModel<IMaterialUserViewModel>(
+    VIEW_MODEL.MaterialUser
+  );
+  const { clearData: clearTask } = useViewModel<ITaskUserViewModel>(
+    VIEW_MODEL.TaskUser
+  );
 
   useEffect(() => {
     setModule(module);
@@ -51,6 +59,8 @@ const Block = (
     return () => {
       clearModule();
       clearBlock();
+      clearMaterial();
+      clearTask();
     };
   });
 

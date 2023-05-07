@@ -10,12 +10,12 @@ import { UserCardActions } from '@ui/pages/admin/user/userCardActions';
 import { UserTabs } from '@ui/pages/admin/user/userTabs';
 import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
 
-export const BlockCard = observer(() => {
+export const TaskCard = observer(() => {
   const { data, isDataLoading } = useViewModel<ITaskUserViewModel>(
     VIEW_MODEL.TaskUser
   );
 
-  if (!data) return <Page204 message="No content. Please select homework" />;
+  if (!data) return <Page204 />;
 
   return (
     <Page title={<UserLabel />} quickFilter={<UserCardActions />}>

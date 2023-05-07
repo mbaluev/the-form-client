@@ -22,10 +22,10 @@ export const TabDetails = observer(() => {
   return (
     <Form cols={1}>
       <FormSection>
-        <FormField isRow title="Id">
+        <FormField title="Id">
           <TextFieldControl name="id" disabled value={data?.id} />
         </FormField>
-        <FormField isRow title="Email">
+        <FormField title="Email">
           <TextFieldControl
             name="username"
             value={data?.username}
@@ -34,7 +34,7 @@ export const TabDetails = observer(() => {
             helperText={getError('username')?.message}
           />
         </FormField>
-        <FormField isRow title="&nbsp;">
+        <FormField>
           <CheckboxFieldControl
             name="active"
             label="Active"
@@ -42,7 +42,7 @@ export const TabDetails = observer(() => {
             onChange={changeCheckboxHandler}
           />
         </FormField>
-        <FormField isRow title="&nbsp;">
+        <FormField>
           <CheckboxFieldControl
             name="paid"
             label="Paid"
@@ -50,7 +50,7 @@ export const TabDetails = observer(() => {
             onChange={changeCheckboxHandler}
           />
         </FormField>
-        <FormField isRow title="&nbsp;">
+        <FormField>
           <CheckboxFieldControl
             name="admin"
             label="Admin"

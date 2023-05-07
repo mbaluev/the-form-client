@@ -106,4 +106,20 @@ export class MaterialUserViewModel
     } finally {
     }
   };
+
+  getData = async (id: string) => {
+    this.setModalLoading(true);
+    try {
+      const token = await this.auth.refreshToken();
+      const data = await this.serviceMaterial.getMaterialUser(
+        id,
+        undefined,
+        token
+      );
+      this.setData(data);
+    } catch (err) {
+    } finally {
+      this.setModalLoading(false);
+    }
+  };
 }

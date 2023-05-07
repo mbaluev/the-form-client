@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { observer } from 'mobx-react';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
@@ -15,6 +15,7 @@ import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { ButtonRenderer } from 'ui/layout/grid/renderers/buttonRenderer';
 import { ITaskViewModel } from '@viewModel/modules/task/interface';
 import { DialogTask } from '@ui/dialogs/dialogTask';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 export const TaskList = observer(() => {
   const {
@@ -40,6 +41,8 @@ export const TaskList = observer(() => {
     download,
   } = useViewModel<ITaskViewModel>(VIEW_MODEL.Task);
 
+  const [preventClick, setPreventClick] = useState(false);
+
   const defaultColDef = useMemo(
     () => ({
       sortable: false,
@@ -52,6 +55,7 @@ export const TaskList = observer(() => {
   const columnDefs = [
     {
       checkboxSelection: true,
+      // suppressSizeToFit: true,
       valueGetter: (params: any) => {
         return `${params.node.rowIndex + 1}. ${params.data?.document.name}`;
       },
@@ -67,6 +71,7 @@ export const TaskList = observer(() => {
       suppressSizeToFit: true,
       valueGetter: (params: any) => {
         const onClick = async () => {
+          setPreventClick(true);
           await download(
             params.data.document.file.id,
             params.data.document.file.name
@@ -76,6 +81,7 @@ export const TaskList = observer(() => {
           size: 'small',
           onClick: onClick,
           variant: 'text',
+          endIcon: <FileDownloadIcon />,
           children: params.data.document.file.name,
         };
       },
@@ -91,10 +97,8 @@ export const TaskList = observer(() => {
   };
 
   const onClick = async (params: CellClickedEvent) => {
-    if (params.column.getColId() === 'actions') {
-      return;
-    }
-    await modalOpen(params.data.id);
+    if (!preventClick) await modalOpen(params.data.id);
+    setPreventClick(false);
   };
   const onRowSelected = (event: RowSelectedEvent) => {
     const selected = event.node.isSelected();
@@ -140,7 +144,14 @@ export const TaskList = observer(() => {
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
-  }, [filter, deleteIds, isDeleteOpen, isDeleteLoading, isModalOpen]);
+  }, [
+    filter,
+    deleteIds,
+    isDeleteOpen,
+    isDeleteLoading,
+    isModalOpen,
+    preventClick,
+  ]);
 
   return (
     <React.Fragment>

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import { Modal } from '@components/modal';
 import { Attachment } from '@components/attachment';
 import { DropzoneOptions } from 'react-dropzone';
@@ -17,6 +17,7 @@ import { TTaskAnswerType } from '@model/task';
 import { SelectChangeEvent } from '@mui/material';
 import { TaskAnswers } from '@ui/dialogs/dialogTask/taskAnswers';
 import './index.scss';
+import { IBlockViewModel } from '@viewModel/modules/block/interface';
 
 interface IProps {
   isOpen: boolean;
@@ -45,6 +46,10 @@ export const DialogTask = observer((props: IProps) => {
     setTitle,
     addAnswer,
   } = useViewModel<ITaskViewModel>(VIEW_MODEL.Task);
+
+  const { list: blocks, data: block } = useViewModel<IBlockViewModel>(
+    VIEW_MODEL.Block
+  );
 
   const pathFileId = 'document.file.id';
   const pathFileName = 'document.file.name';
@@ -101,6 +106,10 @@ export const DialogTask = observer((props: IProps) => {
     setTitle(e.target.value);
   };
 
+  useEffect(() => {
+    if (block) changeModalField('blockId', block.id);
+  }, [isOpen]);
+
   return (
     <Modal
       className="dialog-task"
@@ -112,6 +121,21 @@ export const DialogTask = observer((props: IProps) => {
       <Loader loading={isModalLoading} />
       <Form cols={2}>
         <FormSection>
+          <FormField title="Block">
+            <SelectFieldControl
+              name="blockId"
+              value={modalData?.blockId}
+              items={blocks?.map((d) => {
+                return {
+                  value: d.id,
+                  label: d.title,
+                };
+              })}
+              error={Boolean(getModalError('blockId'))}
+              helperText={getModalError('blockId')?.message}
+              disabled
+            />
+          </FormField>
           <FormField title="Task name">
             <TextFieldControl
               name="document.name"

@@ -14,8 +14,8 @@ import { TabHomework } from '@ui/pages/admin/block/tabs/tabHomework';
 enum TabNames {
   details = 'details',
   materials = 'materials',
-  test = 'test',
   homework = 'homework',
+  test = 'test',
 }
 
 const BLOCK_TAB_CONFIG: ITabItemProps[] = [
@@ -31,15 +31,15 @@ const BLOCK_TAB_CONFIG: ITabItemProps[] = [
     padding: false,
   },
   {
-    label: 'Test',
-    value: TabNames.test,
-    content: <TabTest />,
-    padding: false,
-  },
-  {
     label: 'Homework',
     value: TabNames.homework,
     content: <TabHomework />,
+    padding: false,
+  },
+  {
+    label: 'Test',
+    value: TabNames.test,
+    content: <TabTest />,
     padding: false,
   },
 ];

@@ -67,7 +67,11 @@ export const DialogBlock = observer((props: IProps) => {
   ];
 
   useEffect(() => {
-    if (module) changeModalField('moduleId', module.id);
+    if (module) {
+      changeModalField('moduleId', module.id);
+    } else {
+      // changeModalField('moduleId', modules?.[0].id);
+    }
   }, [isOpen]);
 
   return (

@@ -34,9 +34,7 @@ export const SelectFieldControlEdit = (props: SelectFieldControlProps) => {
     ...other
   } = props;
 
-  const [state, setState] = useState(
-    required ? value || items?.[0].value || '' : value || ''
-  );
+  const [state, setState] = useState(value || '');
 
   useUpdateEffect(() => {
     setState(value || '');
