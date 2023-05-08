@@ -7,8 +7,9 @@ import { TextFieldControl } from '@components/fields';
 import { Button } from '@components/button';
 import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { useLocale } from '@hooks/useLocale';
 
-export const TaskCardContent = observer(() => {
+export const TabDetails = observer(() => {
   const { data, download } = useViewModel<ITaskUserViewModel>(
     VIEW_MODEL.TaskUser
   );
@@ -17,10 +18,17 @@ export const TaskCardContent = observer(() => {
     if (data && data.document)
       await download(data.document.file.id, data.document.file.name);
   };
+  const downloadColor = data?.status === 'income' ? 'green' : 'blue';
+
+  const { fDateTime } = useLocale();
+  const userName = 'Alina Chelnokova';
+  const date = fDateTime(new Date());
+  const title = Boolean(data?.status) ? `${userName}, ${date}` : undefined;
 
   return (
     <Form cols={1}>
       <FormSection>
+        {data?.status && <FormField title="Updated By">{title}</FormField>}
         <FormField>
           <Button
             size="medium"
@@ -28,6 +36,7 @@ export const TaskCardContent = observer(() => {
             variant="outlined"
             startIcon={<FileDownloadIcon />}
             sx={{ width: 'fit-content !important' }}
+            color={downloadColor}
           >
             {data?.document?.file.name}
           </Button>

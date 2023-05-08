@@ -5,7 +5,7 @@ import { MultiSelectFieldControlProps } from '@components/fields';
 export const MultiSelectFieldControlView = (
   props: MultiSelectFieldControlProps
 ) => {
-  const { className, value, items, emptyLabel = 'empty' } = props;
+  const { className, value, items, emptyLabel = '-' } = props;
 
   const cls = classNames(className, {
     'field-control_no-data': !value || value.length === 0,

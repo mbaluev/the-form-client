@@ -13,7 +13,7 @@ export const AutocompleteFieldControlView = <T,>(
     className,
     value,
     options,
-    emptyLabel = 'empty',
+    emptyLabel = '-',
     valueField = 'value' as keyof T,
     labelField = 'label' as keyof T,
   } = props;

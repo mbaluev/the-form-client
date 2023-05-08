@@ -7,8 +7,9 @@ import { Page204 } from '@ui/pages/errors/204';
 import { Loader } from '@components/loader';
 import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
 import { TaskCardActions } from '@ui/pages/school/block/tabs/tabTasks/taskCardActions';
-import { TaskCardContent } from '@ui/pages/school/block/tabs/tabTasks/taskCardContent';
-import { TaskLabel } from '@ui/pages/school/block/tabs/tabTasks/taskLabel';
+import { TaskTitle } from 'ui/pages/school/block/tabs/tabTasks/taskTitle';
+import { TaskSubTitle } from '@ui/pages/school/block/tabs/tabTasks/taskSubTitle';
+import { TaskCardTabs } from '@ui/pages/school/block/tabs/tabTasks/taskCardTabs';
 
 export const TaskCard = observer(() => {
   const { data, isDataLoading } = useViewModel<ITaskUserViewModel>(
@@ -18,9 +19,13 @@ export const TaskCard = observer(() => {
   if (!data) return <Page204 />;
 
   return (
-    <Page title={<TaskLabel />} quickFilter={<TaskCardActions />}>
+    <Page
+      subTitle={<TaskSubTitle />}
+      title={<TaskTitle />}
+      quickFilter={<TaskCardActions />}
+    >
       <Loader loading={isDataLoading} />
-      <TaskCardContent />
+      <TaskCardTabs />
     </Page>
   );
 });

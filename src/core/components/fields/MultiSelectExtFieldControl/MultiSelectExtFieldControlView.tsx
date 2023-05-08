@@ -16,7 +16,7 @@ export const MultiSelectExtFieldControlView = <ItemType,>(
     placeholder,
     valueField = 'value' as keyof ItemType,
     labelField = 'label' as keyof ItemType,
-    emptyLabel = 'empty',
+    emptyLabel = '-',
   } = props;
 
   const cls = classNames(className, {

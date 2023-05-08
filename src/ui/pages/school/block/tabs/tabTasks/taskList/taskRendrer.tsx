@@ -4,18 +4,31 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CallReceivedRoundedIcon from '@mui/icons-material/CallReceivedRounded';
 import CallMadeRoundedIcon from '@mui/icons-material/CallMadeRounded';
+import { Tooltip } from '@components/tooltip';
 
 export const getTaskIcon = (status?: string, style?: object) => {
   let icon = (
-    <RadioButtonUncheckedIcon className="color_grey-50" style={style} />
+    <Tooltip title="Todo">
+      <RadioButtonUncheckedIcon className="color_grey-50" style={style} />
+    </Tooltip>
   );
   if (status === 'done')
-    icon = <CheckCircleIcon className="color_blue" style={style} />;
-  if (status === 'sent')
-    icon = <CallMadeRoundedIcon className="color_blue" style={style} />;
-  if (status === 'inbox')
     icon = (
-      <CallReceivedRoundedIcon className="color_green-dark" style={style} />
+      <Tooltip title="Done">
+        <CheckCircleIcon className="color_blue" style={style} />
+      </Tooltip>
+    );
+  if (status === 'sent')
+    icon = (
+      <Tooltip title="Sent">
+        <CallMadeRoundedIcon className="color_blue" style={style} />
+      </Tooltip>
+    );
+  if (status === 'income')
+    icon = (
+      <Tooltip title="Income">
+        <CallReceivedRoundedIcon className="color_green-dark" style={style} />
+      </Tooltip>
     );
   return icon;
 };

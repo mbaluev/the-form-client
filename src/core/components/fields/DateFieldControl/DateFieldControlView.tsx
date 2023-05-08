@@ -7,7 +7,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { ILocaleViewModel } from '@viewModel/modules/locale/interface';
 
 export const DateFieldControlView = (props: DateFieldControlProps) => {
-  const { className, value, emptyLabel = 'empty' } = props;
+  const { className, value, emptyLabel = '-' } = props;
 
   const { fDate } = useViewModel<ILocaleViewModel>(VIEW_MODEL.Locale);
 

@@ -6,7 +6,7 @@ import {
 } from '@components/fields';
 
 export const PasswordFieldControlView = (props: PasswordFieldControlProps) => {
-  const { className, value, emptyLabel = 'empty' } = props;
+  const { className, value, emptyLabel = '-' } = props;
 
   const cls = classNames(className, {
     'field-control_no-data': !isTextFieldControlHasData(value),

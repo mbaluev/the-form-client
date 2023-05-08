@@ -11,7 +11,7 @@ export const RangeFieldControlView = (props: RangeFieldControlProps) => {
   const {
     className,
     value,
-    emptyLabel = 'empty',
+    emptyLabel = '-',
     format,
     min = RANGE_MIN,
     max = RANGE_MAX,

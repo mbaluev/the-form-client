@@ -5,7 +5,7 @@ import { IRadioItem, RadioGroupFieldControlProps } from '@components/fields';
 export const RadioGroupFieldControlView = (
   props: RadioGroupFieldControlProps
 ) => {
-  const { className, value, emptyLabel = 'empty' } = props;
+  const { className, value, emptyLabel = '-' } = props;
 
   const cls = classNames(className, {
     'field-control_no-data': typeof value === 'undefined',

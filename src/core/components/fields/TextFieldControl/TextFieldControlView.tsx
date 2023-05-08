@@ -12,7 +12,7 @@ export const TextFieldControlView = (props: TextFieldControlProps) => {
     value,
     inputType = 'text',
     adornment,
-    emptyLabel = 'empty',
+    emptyLabel = '-',
   } = props;
 
   const cls = classNames(className, {

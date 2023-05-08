@@ -74,19 +74,22 @@ export const TaskList = observer(() => {
             params.data.document.file.name
           );
         };
+        let color = 'blue';
+        if (params.data.status === 'income') color = 'green';
         return {
           size: 'small',
           onClick: onClick,
           variant: 'text',
           endIcon: <FileDownloadIcon />,
           children: params.data.document.file.name,
+          color,
         };
       },
       cellRenderer: ButtonRenderer,
     },
   ];
   const getRowClass = (params: RowClassParams) => {
-    if (params.node.data.status === 'inbox') {
+    if (params.node.data.status === 'income') {
       return 'ag-row-green';
     }
   };

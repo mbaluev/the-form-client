@@ -267,6 +267,14 @@ export class LocaleViewModel extends BaseViewModel implements ILocaleViewModel {
     return new Intl.DateTimeFormat(this.locale, options).format(value);
   };
 
+  fDateTime = (
+    value?: Date,
+    opts?: Intl.DateTimeFormatOptions,
+    locale?: string
+  ) => {
+    return `${this.fDate(value, opts, locale)}, ${this.fTime(value, opts)}`;
+  };
+
   fNumber = (value?: any, opts?: Intl.NumberFormatOptions) => {
     const options = {
       style: 'decimal',

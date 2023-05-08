@@ -7,7 +7,7 @@ const getDisplayValue = (value: boolean) => {
 };
 
 export const SwitchFieldControlView = (props: SwitchFieldControlProps) => {
-  const { className, value, emptyLabel = 'empty' } = props;
+  const { className, value, emptyLabel = '-' } = props;
 
   const cls = classNames(className, {
     'field-control_no-data': typeof value === 'undefined',

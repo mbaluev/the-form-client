@@ -41,6 +41,11 @@ export interface ILocaleViewModel {
     opts?: Intl.DateTimeFormatOptions,
     locale?: string
   ) => string;
+  fDateTime: (
+    value?: Date,
+    opts?: Intl.DateTimeFormatOptions,
+    locale?: string
+  ) => string;
 
   fNumber: (value?: any, opts?: Intl.NumberFormatOptions) => string;
   fDecimalSeparator: string;

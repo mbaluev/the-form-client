@@ -9,7 +9,7 @@ import {
 export const ToggleButtonGroupFieldControlView = (
   props: ToggleButtonGroupFieldControlProps
 ) => {
-  const { className, value, exclusive, emptyLabel = 'empty' } = props;
+  const { className, value, exclusive, emptyLabel = '-' } = props;
 
   const cls = classNames(className, {
     'field-control_no-data': !isToggleButtonGroupFieldControlHasData(value),

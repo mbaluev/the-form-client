@@ -6,7 +6,7 @@ import {
 } from '@components/fields';
 
 export const SliderFieldControlView = (props: SliderFieldControlProps) => {
-  const { className, value, emptyLabel = 'empty', format } = props;
+  const { className, value, emptyLabel = '-', format } = props;
 
   const cls = classNames(className, {
     'field-control_no-data': !Boolean(value),

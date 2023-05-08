@@ -67,7 +67,8 @@
     color: $color-grey-100;
     display: flex;
     align-items: baseline;
-    gap: $base * 3;
+    gap: $base $base * 3;
+    flex-wrap: wrap;
   }
   &__children {
     display: flex;
