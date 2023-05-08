@@ -4,7 +4,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
 import { observer } from 'mobx-react';
-import { HomeworkItem } from '@ui/pages/school/block/tabs/tabHomework/homeworkItem';
+import { HomeworkItem } from '@ui/pages/school/block/tabs/_tabHomework/homeworkItem';
 import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
 import { Alert } from '@components/alert';
 

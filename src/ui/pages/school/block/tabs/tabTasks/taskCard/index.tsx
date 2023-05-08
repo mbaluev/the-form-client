@@ -20,8 +20,8 @@ export const TaskCard = observer(() => {
 
   return (
     <Page
-      subTitle={<TaskSubTitle />}
       title={<TaskTitle />}
+      subTitle={<TaskSubTitle />}
       quickFilter={<TaskCardActions />}
     >
       <Loader loading={isDataLoading} />

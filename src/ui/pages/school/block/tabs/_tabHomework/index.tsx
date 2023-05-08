@@ -5,7 +5,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { Loader } from '@components/loader';
 import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
 import { observer } from 'mobx-react';
-import { HomeworkList } from '@ui/pages/school/block/tabs/tabHomework/homeworkList';
+import { HomeworkList } from '@ui/pages/school/block/tabs/_tabHomework/homeworkList';
 
 export const TabHomework = observer(() => {
   const { data: block } = useViewModel<IBlockUserViewModel>(

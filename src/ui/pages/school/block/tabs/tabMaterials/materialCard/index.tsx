@@ -8,7 +8,8 @@ import { Loader } from '@components/loader';
 import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
 import { MaterialCardContent } from 'ui/pages/school/block/tabs/tabMaterials/materialCardContent';
 import { MaterialCardActions } from '@ui/pages/school/block/tabs/tabMaterials/materialCardActions';
-import { MaterialLabel } from '@ui/pages/school/block/tabs/tabMaterials/materialLabel';
+import { MaterialTitle } from '@ui/pages/school/block/tabs/tabMaterials/materialTitle';
+import { MaterialSubTitle } from '@ui/pages/school/block/tabs/tabMaterials/materialSubTitle';
 
 export const MaterialCard = observer(() => {
   const { data, isDataLoading } = useViewModel<IMaterialUserViewModel>(
@@ -18,7 +19,11 @@ export const MaterialCard = observer(() => {
   if (!data) return <Page204 />;
 
   return (
-    <Page title={<MaterialLabel />} quickFilter={<MaterialCardActions />}>
+    <Page
+      title={<MaterialTitle />}
+      subTitle={<MaterialSubTitle />}
+      quickFilter={<MaterialCardActions />}
+    >
       <Loader loading={isDataLoading} />
       <MaterialCardContent />
     </Page>
