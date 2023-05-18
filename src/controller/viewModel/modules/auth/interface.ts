@@ -12,6 +12,7 @@ export interface IAuthViewModel extends IBaseCardViewModel<IUserDTO> {
   refreshToken: () => Promise<string | undefined>;
 
   isAuth: boolean;
+  id?: string;
   firstname?: string;
   lastname?: string;
   username?: string;

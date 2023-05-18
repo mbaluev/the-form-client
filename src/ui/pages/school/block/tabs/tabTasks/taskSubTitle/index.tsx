@@ -17,8 +17,8 @@ export const TaskSubTitle = observer(() => {
     tag.tag = 'Sent';
     tag.color = 'blue';
   }
-  if (data?.status === 'done') {
-    tag.tag = 'Done';
+  if (data?.complete) {
+    tag.tag = 'Complete';
     tag.color = 'blue';
   }
 

@@ -5,6 +5,7 @@ import { INotifyViewModel } from '@viewModel/modules/notify/interface';
 import { INotifyItem } from '@model/notify';
 import { VariantType } from 'notistack';
 import { BaseViewModel } from '@viewModel/modules/base';
+import { SStorage } from '@utils/storage/storage';
 
 @injectable()
 export class NotifyViewModel extends BaseViewModel implements INotifyViewModel {
@@ -59,5 +60,12 @@ export class NotifyViewModel extends BaseViewModel implements INotifyViewModel {
     }
     if (!message) message = error;
     return message;
+  };
+
+  // --- override
+
+  setOpen = (value: boolean) => {
+    super.setOpen(value);
+    SStorage.notifyState = value;
   };
 }

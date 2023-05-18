@@ -60,12 +60,6 @@ export const TaskList = observer(() => {
         return `${params.node.rowIndex + 1}. ${params.data?.document.name}`;
       },
     },
-    // {
-    //   headerName: 'Description',
-    //   valueGetter: (params: any) => {
-    //     return `${params.data?.document.description}`;
-    //   },
-    // },
     {
       colId: 'actions',
       suppressSizeToFit: true,

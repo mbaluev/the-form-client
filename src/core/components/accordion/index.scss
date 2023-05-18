@@ -40,6 +40,10 @@
   & .MuiAccordionSummary-content {
     margin-top: 0;
     margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
   }
 
   & .MuiAccordion-rounded:last-child {

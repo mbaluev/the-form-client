@@ -1,9 +1,0 @@
-@import "../../../../../../../core/scss/params";
-
-.homework-item {
-  & .MuiAccordionDetails-root {
-    display: flex;
-    flex-direction: column;
-    gap: $base * 3;
-  }
-}

@@ -4,31 +4,40 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Form, FormField, FormSection } from '@components/form';
 import { TextFieldControl } from '@components/fields';
-import { Button } from '@components/button';
+import { Button, TButtonColorTypes } from '@components/button';
 import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { useLocale } from '@hooks/useLocale';
+import { useAuth } from '@hooks/useAuth';
+import { NoData } from '@components/noData';
 
 export const TabDetails = observer(() => {
+  const { id } = useAuth();
+  const { fDateTime } = useLocale();
   const { data, download } = useViewModel<ITaskUserViewModel>(
     VIEW_MODEL.TaskUser
   );
 
-  const handleDownload = async () => {
-    if (data && data.document)
-      await download(data.document.file.id, data.document.file.name);
-  };
-  const downloadColor = data?.status === 'income' ? 'green' : 'blue';
+  if (!data || !data.documentLatest) return <NoData />;
 
-  const { fDateTime } = useLocale();
-  const userName = 'Alina Chelnokova';
-  const date = fDateTime(new Date());
-  const title = Boolean(data?.status) ? `${userName}, ${date}` : undefined;
+  const latestUser = data.documentLatest.user;
+  const latestDate = data.documentLatest.date;
+  const latestDocument = data.documentLatest.document;
+  let latestColor = 'blue' as TButtonColorTypes;
+  if (latestUser) latestColor = latestUser.id !== id ? 'green' : 'blue';
+
+  const userName = `${latestUser?.firstname} ${latestUser?.lastname}`;
+  const date = latestDate ? fDateTime(new Date(latestDate)) : undefined;
+  const title = Boolean(latestUser) ? `${userName}, ${date}` : undefined;
+
+  const handleDownload = async () => {
+    await download(latestDocument.file.id, latestDocument.file.name);
+  };
 
   return (
     <Form cols={1}>
       <FormSection>
-        {data?.status && <FormField title="Updated By">{title}</FormField>}
+        {title && <FormField title="Updated By">{title}</FormField>}
         <FormField>
           <Button
             size="medium"
@@ -36,9 +45,9 @@ export const TabDetails = observer(() => {
             variant="outlined"
             startIcon={<FileDownloadIcon />}
             sx={{ width: 'fit-content !important' }}
-            color={downloadColor}
+            color={latestColor}
           >
-            {data?.document?.file.name}
+            {latestDocument.file.name}
           </Button>
         </FormField>
         <FormField title="Description">
@@ -46,7 +55,7 @@ export const TabDetails = observer(() => {
             name="document.description"
             multiline
             minRows={5}
-            value={data?.document?.description}
+            value={latestDocument.description}
             isEdit={false}
             heightAuto
           />

@@ -29,7 +29,6 @@ export interface IQuestionUserDTO {
   complete?: boolean;
   options: IOptionUserDTO[];
   answers: string[];
-
   expanded?: boolean; // ui accordion
 }
 

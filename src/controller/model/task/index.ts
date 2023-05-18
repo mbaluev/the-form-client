@@ -18,12 +18,26 @@ export interface ITaskDTO {
 
 // user
 
+export interface ITaskUserMessageDTO {
+  id: string;
+  document: IDocumentDTO;
+  user?: {
+    id: string;
+    firstname: string;
+    lastname: string;
+    username: string;
+  };
+  date?: string;
+}
 export interface ITaskUserDTO {
   id: string;
   blockId: string;
-  document?: IDocumentDTO;
-  taskAnswers?: ITaskAnswerDTO[];
+  document: IDocumentDTO;
+  complete: boolean;
   status: TTaskStatus;
-
+  taskAnswers: ITaskAnswerDTO[];
   expanded?: boolean; // ui accordion
+
+  documentLatest?: ITaskUserMessageDTO;
+  documentHistory?: ITaskUserMessageDTO[];
 }

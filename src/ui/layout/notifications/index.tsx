@@ -2,10 +2,11 @@ import React from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { classNames } from '@utils/classNames';
 import { IconButton } from '@components/iconButton';
-import './index.scss';
 import { useViewModel } from '@hooks/useViewModel';
 import { INotifyViewModel } from '@viewModel/modules/notify/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
+import { Alert } from '@components/alert';
+import './index.scss';
 
 export const Notifications = () => {
   const cls = classNames('notifications');
@@ -21,7 +22,36 @@ export const Notifications = () => {
           <CloseIcon />
         </IconButton>
       </div>
-      <div className={clsContent}>...</div>
+      <div className={clsContent}>
+        <Alert
+          title="info"
+          variant="outlined"
+          type="info"
+          shadow={false}
+          border={false}
+        />
+        <Alert
+          title="success"
+          variant="outlined"
+          type="success"
+          shadow={false}
+          border={false}
+        />
+        <Alert
+          title="warning"
+          variant="outlined"
+          type="warning"
+          shadow={false}
+          border={false}
+        />
+        <Alert
+          title="error"
+          variant="outlined"
+          type="error"
+          shadow={false}
+          border={false}
+        />
+      </div>
     </div>
   );
 };

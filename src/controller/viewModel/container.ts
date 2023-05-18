@@ -34,6 +34,8 @@ import { IQuestionUserViewModel } from '@viewModel/modules/question/user/interfa
 import { QuestionUserViewModel } from '@viewModel/modules/question/user';
 import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
 import { TaskUserViewModel } from '@viewModel/modules/task/user';
+import { ITaskHistoryViewModel } from '@viewModel/modules/task/history/interface';
+import { TaskHistoryViewModel } from '@viewModel/modules/task/history';
 
 export const viewModelContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -92,3 +94,7 @@ viewModelContainer
 viewModelContainer
   .bind<ITaskUserViewModel>(VIEW_MODEL.TaskUser)
   .to(TaskUserViewModel);
+
+viewModelContainer
+  .bind<ITaskHistoryViewModel>(VIEW_MODEL.TaskHistory)
+  .to(TaskHistoryViewModel);

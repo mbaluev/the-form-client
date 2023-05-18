@@ -24,7 +24,7 @@ import { IconButton } from '@components/iconButton';
 import { INotifyViewModel } from '@viewModel/modules/notify/interface';
 import { Account } from '@ui/layout/account';
 import { useRouter } from 'next/router';
-import { MEDIA_MD, MEDIA_XS, useWindowSize } from '@hooks/useWindowSize';
+import { MEDIA_SM, MEDIA_XS, useWindowSize } from '@hooks/useWindowSize';
 import { IconLogo } from '@ui/icons';
 import { useAuth } from '@hooks/useAuth';
 import { isAccess } from '@ui/permission/permissionWrapper';
@@ -73,7 +73,7 @@ export const Layout = observer((props: TLayoutProps) => {
     : 'grey';
 
   const isNotifications =
-    notifications && isOpenNotify && size.width > MEDIA_MD;
+    notifications && isOpenNotify && size.width > MEDIA_SM;
 
   const [isMenu, setIsMenu] = useState(false);
   useEffect(() => {

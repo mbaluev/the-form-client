@@ -33,6 +33,7 @@ export class AuthViewModel
       refreshToken: action,
 
       isAuth: computed,
+      id: computed,
       firstname: computed,
       lastname: computed,
       username: computed,
@@ -144,6 +145,13 @@ export class AuthViewModel
 
   get isAuth() {
     return Boolean(this.token);
+  }
+
+  get id() {
+    if (this.token) {
+      return new Jwt(this.token).decodedClaims?.id;
+    }
+    return undefined;
   }
 
   get firstname() {

@@ -180,7 +180,7 @@ export const DialogTask = observer((props: IProps) => {
               required
               items={[
                 { label: 'File', value: 'file' },
-                { label: 'Link', value: 'link' },
+                // { label: 'Link', value: 'link' },
               ]}
               value={type}
               onChange={onChangeType}

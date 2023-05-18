@@ -6,7 +6,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import CloseIcon from '@mui/icons-material/Close';
 import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
-import SendIcon from '@mui/icons-material/Send';
+import AddIcon from '@mui/icons-material/Add';
 
 export const TaskCardActions = observer(() => {
   const { clearData } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
@@ -17,8 +17,8 @@ export const TaskCardActions = observer(() => {
   return (
     <Toolbar
       itemsLeft={[
-        <IconButton onClick={handleSend} tooltip="Send">
-          <SendIcon />
+        <IconButton onClick={handleSend} tooltip="Send homework">
+          <AddIcon />
         </IconButton>,
         <IconButton onClick={handleClose} tooltip="Close">
           <CloseIcon />

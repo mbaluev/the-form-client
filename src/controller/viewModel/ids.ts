@@ -17,4 +17,5 @@ export const VIEW_MODEL = {
   MaterialUser: Symbol.for('MaterialUserViewModel'),
   QuestionUser: Symbol.for('QuestionUserViewModel'),
   TaskUser: Symbol.for('TaskUserViewModel'),
+  TaskHistory: Symbol.for('TaskHistoryViewModel'),
 };

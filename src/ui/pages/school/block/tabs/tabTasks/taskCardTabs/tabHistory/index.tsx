@@ -1,27 +1,23 @@
 import React, { useEffect } from 'react';
+import { observer } from 'mobx-react';
+import { TabHistoryList } from '@ui/pages/school/block/tabs/tabTasks/taskCardTabs/tabHistory/tabHistoryList';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { observer } from 'mobx-react';
 import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
-import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
-import { Loader } from '@components/loader';
-import { TaskList } from '@ui/pages/school/block/tabs/tabTasks/taskList';
+import { ITaskHistoryViewModel } from '@viewModel/modules/task/history/interface';
 
 export const TabHistory = observer(() => {
-  const { data: block } = useViewModel<IBlockUserViewModel>(
-    VIEW_MODEL.BlockUser
+  const { data: task } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
+  const { setList, clearList } = useViewModel<ITaskHistoryViewModel>(
+    VIEW_MODEL.TaskHistory
   );
-  const { isListLoading, getList, clearList } =
-    useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
 
   useEffect(() => {
-    if (block) getList();
+    if (task) setList(task.documentHistory);
     return () => {
       clearList();
     };
-  }, [block]);
+  }, [task]);
 
-  if (isListLoading) return <Loader loading={true} />;
-
-  return <TaskList />;
+  return <TabHistoryList />;
 });
