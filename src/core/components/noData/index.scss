@@ -29,6 +29,7 @@
     color: $color-grey-120;
     line-height: 1.8rem;
     padding: 0 10%;
+    max-width: $base * 80;
   }
   &_row &__message {
     text-align: left;
