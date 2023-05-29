@@ -16,16 +16,21 @@
     border-radius: $border-radius-default;
     padding: $base + 1 $base * 2;
     gap: $base * 2;
-    align-items: center;
+    align-items: flex-start;
 
     & .MuiAlert-icon {
       padding: 0;
       margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: $base * 5;
+      width: $base * 5;
     }
     & .MuiAlert-message {
       font-weight: 500;
-      padding: 0;
       flex: 1 1 auto;
+      padding: 3px 0;
     }
     & .MuiTypography-root {
       margin: 0;

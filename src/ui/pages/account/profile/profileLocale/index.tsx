@@ -40,6 +40,7 @@ export const ProfileLocale = observer(() => {
             onChange={(value) => {
               if (value) changeCountry(value.value);
             }}
+            renderInput={(params) => <TextFieldControl {...params} />}
             disableClearable
           />
         </FormField>
@@ -50,6 +51,7 @@ export const ProfileLocale = observer(() => {
             onChange={(value) => {
               if (value) changeFormat(value.value);
             }}
+            renderInput={(params) => <TextFieldControl {...params} />}
             disableClearable
           />
         </FormField>
@@ -63,6 +65,7 @@ export const ProfileLocale = observer(() => {
             onChange={(value: any) => {
               if (value) changeHourCycle(value.value);
             }}
+            renderInput={(params) => <TextFieldControl {...params} />}
             disableClearable
           />
         </FormField>
@@ -73,6 +76,7 @@ export const ProfileLocale = observer(() => {
             onChange={(value: any) => {
               if (value) changeTimeZone(value.value);
             }}
+            renderInput={(params) => <TextFieldControl {...params} />}
             disableClearable
           />
           <div

@@ -3,8 +3,8 @@ import { observer } from 'mobx-react';
 import { TestList } from '@ui/pages/admin/block/tabs/tabTest/testList';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IQuestionViewModel } from '@viewModel/modules/question/interface';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
+import { IQuestionViewModel } from '@viewModel/modules/entities/question/interface';
+import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 
 export const TabTest = observer(() => {
   const { data: block } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);

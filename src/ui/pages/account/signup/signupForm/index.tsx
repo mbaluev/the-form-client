@@ -5,7 +5,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { PasswordFieldControl, TextFieldControl } from '@components/fields';
 import { Button } from '@components/button';
-import { IAuthViewModel } from '@viewModel/modules/auth/interface';
+import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { useRouter } from 'next/router';
 import { Loader } from '@components/loader';

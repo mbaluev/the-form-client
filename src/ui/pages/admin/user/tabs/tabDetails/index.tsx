@@ -4,7 +4,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Form, FormField, FormSection } from '@components/form';
 import { CheckboxFieldControl, TextFieldControl } from '@components/fields';
-import { IUserViewModel } from '@viewModel/modules/user/interface';
+import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 
 export const TabDetails = observer(() => {
   const { data, changeField, getError } = useViewModel<IUserViewModel>(
@@ -24,6 +24,24 @@ export const TabDetails = observer(() => {
       <FormSection>
         <FormField title="Id">
           <TextFieldControl name="id" disabled value={data?.id} />
+        </FormField>
+        <FormField title="First name">
+          <TextFieldControl
+            name="firstname"
+            value={data?.firstname}
+            onChange={changeHandler}
+            error={Boolean(getError('firstname'))}
+            helperText={getError('firstname')?.message}
+          />
+        </FormField>
+        <FormField title="Last name">
+          <TextFieldControl
+            name="lastname"
+            value={data?.lastname}
+            onChange={changeHandler}
+            error={Boolean(getError('lastname'))}
+            helperText={getError('lastname')?.message}
+          />
         </FormField>
         <FormField title="Email">
           <TextFieldControl

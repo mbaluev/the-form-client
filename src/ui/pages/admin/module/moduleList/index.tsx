@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
+import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
 import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
 import { CellClickedEvent } from 'ag-grid-community';
 import { FilterText } from '@ui/filter/filterText';
@@ -99,7 +99,7 @@ export const ModuleList = observer((props: IProps) => {
           selectedIds: moduleData ? [moduleData.id] : undefined,
           className: 'ag-grid_no-header',
           hasRows: hasList,
-          noDataMessage: 'No modules found',
+          noDataMessage: 'No data found',
         }}
       />
       <DialogModule

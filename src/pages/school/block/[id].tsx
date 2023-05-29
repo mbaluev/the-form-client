@@ -5,30 +5,30 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useService } from '@hooks/useService';
-import { IModuleService } from '@service/modules/module/interface';
+import { IModuleService } from '@service/modules/entities/module/interface';
 import { SERVICE } from '@service/ids';
-import { IBlockService } from '@service/modules/block/interface';
+import { IBlockService } from '@service/modules/entities/block/interface';
 import { observer } from 'mobx-react';
 import { Loader } from '@components/loader';
 import { useRouter } from 'next/router';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
-import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
-import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
-import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
-import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
+import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
+import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
+import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
+import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
 ) => {
   const { params } = context;
-  const id = params?.id;
   const token = getCookieToken(context);
 
   const serviceModule = useService<IModuleService>(SERVICE.Module);
   const serviceBlock = useService<IBlockService>(SERVICE.Block);
 
   const query = { blockId: params?.id };
-  const module = (await serviceModule.getModuleUser(id, query, token)) || null;
+  const module =
+    (await serviceModule.getModuleUser(undefined, query, token)) || null;
   const block =
     (await serviceBlock.getBlockUser(query.blockId, undefined, token)) || null;
 

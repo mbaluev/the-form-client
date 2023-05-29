@@ -15,14 +15,14 @@ import {
 import { initializeDiContainer } from '@app/diContainer/diContainer';
 import { DiContainerProvider } from '@app/diContainer/diContainerProvider';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IAppViewModel } from '@viewModel/modules/app/interface';
+import { IAppViewModel } from '@viewModel/modules/common/app/interface';
 import { LayoutEmpty } from '@ui/layout/layout';
-import { ILocaleViewModel } from '@viewModel/modules/locale/interface';
+import { ILocaleViewModel } from '@viewModel/modules/common/locale/interface';
 import dirs from '@utils/locale/dir';
 import { SnackbarProvider } from 'notistack';
-import { IMenuViewModel } from '@viewModel/modules/menu/interface';
-import { IFilterViewModel } from '@viewModel/modules/filter/interfaces';
-import { IAuthViewModel } from '@viewModel/modules/auth/interface';
+import { IMenuViewModel } from '@viewModel/modules/common/menu/interface';
+import { IFilterViewModel } from '@viewModel/modules/common/filter/interfaces';
+import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
 import { getCookie } from 'cookies-next';
 import cookie from '@utils/cookie';
 import '../core/scss/index.scss';
@@ -105,7 +105,7 @@ const MyApp = (props: MyAppProps) => {
             maxSnack={10}
             anchorOrigin={{
               vertical: 'bottom',
-              horizontal: 'left',
+              horizontal: 'right',
             }}
           >
             <Layout>

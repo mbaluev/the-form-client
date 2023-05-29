@@ -5,7 +5,7 @@ import { MasterSchool } from '@ui/masters/masterSchool';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
-import { IAuthViewModel } from '@viewModel/modules/auth/interface';
+import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
 
 const Signin = () => {
   const { clearData, clearChanges, clearMessage, clearToken } =

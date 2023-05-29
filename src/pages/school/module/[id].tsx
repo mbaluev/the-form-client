@@ -4,14 +4,14 @@ import { ModulePage } from '@ui/pages/school/module/[id]/modulePage';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { useService } from '@hooks/useService';
-import { IModuleService } from '@service/modules/module/interface';
+import { IModuleService } from '@service/modules/entities/module/interface';
 import { SERVICE } from '@service/ids';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { Loader } from '@components/loader';
 import { observer } from 'mobx-react';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
-import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
+import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>

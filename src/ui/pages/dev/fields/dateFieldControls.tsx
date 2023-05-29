@@ -4,7 +4,7 @@ import { Button } from '@components/button';
 import { DateFieldControl } from '@components/fields';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { ILocaleViewModel } from '@viewModel/modules/locale/interface';
+import { ILocaleViewModel } from '@viewModel/modules/common/locale/interface';
 import { observer } from 'mobx-react';
 
 export const DateFieldControls = observer((props: { id?: string }) => {

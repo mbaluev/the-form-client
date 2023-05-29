@@ -10,7 +10,7 @@ import { TextFieldControl } from '@components/fields';
 import { InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
-import { IQuestionViewModel } from '@viewModel/modules/question/interface';
+import { IQuestionViewModel } from '@viewModel/modules/entities/question/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { DialogQuestion } from '@ui/dialogs/dialogQuestion';
@@ -130,7 +130,7 @@ export const TestList = observer(() => {
           isLoading: isListLoading,
           hasRows: hasList,
           selectedIds: deleteIds,
-          noDataMessage: 'No questions found',
+          noDataMessage: 'No data found',
         }}
       />
       <DialogConfirm

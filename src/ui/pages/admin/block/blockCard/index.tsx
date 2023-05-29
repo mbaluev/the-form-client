@@ -7,7 +7,7 @@ import { Page204 } from '@ui/pages/errors/204';
 import { BlockTabs } from '@ui/pages/admin/block/blockTabs';
 import { BlockCardActions } from '@ui/pages/admin/block/blockCardActions';
 import { BlockLabel } from '@ui/pages/admin/block/blockLabel';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
+import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { Loader } from '@components/loader';
 
 interface IProps {

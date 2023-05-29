@@ -9,15 +9,14 @@ import {
 } from '@components/fields';
 
 export type AutocompleteFieldControlProps<T> = BaseFieldControlProps<
-  Omit<
-    AutocompleteProps<T, false, true, false>,
-    'renderInput' | 'value' | 'onChange'
-  >
+  // Omit<AutocompleteProps<T, false, true, false>, 'value' | 'onChange'>
+  AutocompleteProps<T, false, true, false>
 > & {
-  value?: T[keyof T];
+  name?: string;
   valueField?: keyof T;
   labelField?: keyof T;
-  onChange?: (value?: T) => void;
+  // value?: T[keyof T];
+  // onChange?: (name?: string, value?: T) => void;
 };
 
 export const isControlHasData = <T,>(value?: T) => {

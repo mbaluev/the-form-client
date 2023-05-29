@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-identical-functions */
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { inject, injectable } from 'inversify';
 import { HttpMethod } from '@infrastructure/const';
@@ -5,7 +6,7 @@ import {
   IApiOptions,
   IAxiosApiModule,
 } from '@infrastructure/modules/axios/interface';
-import { INotifyViewModel } from '@viewModel/modules/notify/interface';
+import { INotifyViewModel } from '@viewModel/modules/common/notify/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 
 @injectable()

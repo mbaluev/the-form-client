@@ -12,8 +12,8 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { Loader } from '@components/loader';
 import { Skeleton } from '@components/skeleton';
-import { IQuestionViewModel } from '@viewModel/modules/question/interface';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
+import { IQuestionViewModel } from '@viewModel/modules/entities/question/interface';
+import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { Add, Delete } from '@mui/icons-material';
 import { IconButton } from '@components/iconButton';
 

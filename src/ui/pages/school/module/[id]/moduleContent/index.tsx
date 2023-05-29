@@ -6,7 +6,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Loader } from '@components/loader';
-import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
+import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 import './index.scss';
 
 export const ModuleContent = observer(() => {

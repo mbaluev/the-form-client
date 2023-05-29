@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { MasterSchool } from '@ui/masters/masterSchool';
 import { useService } from '@hooks/useService';
-import { IModuleService } from '@service/modules/module/interface';
+import { IModuleService } from '@service/modules/entities/module/interface';
 import { SERVICE } from '@service/ids';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useViewModel } from '@hooks/useViewModel';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
+import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { ModulePage } from '@ui/pages/admin/module/modulePage';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';

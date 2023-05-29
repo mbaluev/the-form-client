@@ -1,7 +1,7 @@
 import React, { useRef, useMemo, useCallback, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
-import { ILocaleViewModel } from '@viewModel/modules/locale/interface';
+import { ILocaleViewModel } from '@viewModel/modules/common/locale/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
 import { AgGridReact, AgGridReactProps } from 'ag-grid-react';
@@ -123,7 +123,7 @@ export const GridWithData = observer((props: IProps) => {
         {isLoading && <Loader loading={isLoading} relative />}
         {!isLoading && hasRows && (
           <AgGridReact
-            overlayNoRowsTemplate="Data not found"
+            overlayNoRowsTemplate="No data found"
             ref={gridRef} // Ref for accessing Grid's API
             defaultColDef={defaultColDef} // Default Column Properties
             animateRows={false} // Optional - set to 'true' to have rows animate when sorted

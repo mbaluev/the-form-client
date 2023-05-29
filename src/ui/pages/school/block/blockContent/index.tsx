@@ -6,7 +6,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Loader } from '@components/loader';
-import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
+import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import './index.scss';
 
 export const BlockContent = observer(() => {

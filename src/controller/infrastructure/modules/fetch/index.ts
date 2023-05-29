@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { INotifyViewModel } from '@viewModel/modules/notify/interface';
+import { INotifyViewModel } from '@viewModel/modules/common/notify/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { IFetchApiModule } from '@infrastructure/modules/fetch/interface';
 import { HttpMethod } from '@infrastructure/const';

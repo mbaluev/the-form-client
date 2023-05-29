@@ -7,7 +7,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { Loader } from '@components/loader';
 import { Skeleton } from '@components/skeleton';
-import { IUserViewModel } from '@viewModel/modules/user/interface';
+import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 import {
   CheckboxFieldControl,
   PasswordFieldControl,

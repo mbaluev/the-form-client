@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
-import { IUserViewModel } from '@viewModel/modules/user/interface';
+import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 import { DialogUser } from '@ui/dialogs/dialogUser';
 import { UserRenderer } from '@ui/pages/admin/user/userList/userRendrer';
 import { userValueGetter } from '@ui/pages/admin/user/userList/userValueGetter';
@@ -97,7 +97,7 @@ export const UserList = observer((props: IProps) => {
           selectedIds: userData ? [userData.id] : undefined,
           className: 'ag-grid_no-header',
           hasRows: hasList,
-          noDataMessage: 'No users found',
+          noDataMessage: 'No data found',
         }}
       />
       <DialogUser

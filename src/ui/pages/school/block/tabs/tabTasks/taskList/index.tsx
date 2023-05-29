@@ -9,17 +9,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { Alert } from '@components/alert';
-import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
-import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
-import { TaskRenderer } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskRendrer';
+import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
+import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { CellClickedEvent, RowClassParams } from 'ag-grid-community';
-import { ButtonRenderer } from '@ui/layout/grid/renderers/buttonRenderer';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import { TButtonColorTypes } from '@components/button';
-import { useAuth } from '@hooks/useAuth';
+import { taskValueGetter } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskValueGetter';
+import { TaskRenderer } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskRendrer';
 
 export const TaskList = observer(() => {
-  const { id } = useAuth();
   const { data: block } = useViewModel<IBlockUserViewModel>(
     VIEW_MODEL.BlockUser
   );
@@ -30,7 +26,6 @@ export const TaskList = observer(() => {
     filter,
     setFilter,
     isModalOpen,
-    download,
     getData,
     data: taskData,
   } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
@@ -48,46 +43,14 @@ export const TaskList = observer(() => {
   );
   const columnDefs = [
     {
-      headerName: 'Tasks',
-      valueGetter: (params: any) => {
-        return {
-          index: params.node.rowIndex + 1,
-          name: params.data?.document?.name,
-          complete: params.data?.complete,
-          status: params.data?.status,
-        };
-      },
+      valueGetter: taskValueGetter,
       cellRenderer: TaskRenderer,
     },
-    {
-      headerName: 'Download',
-      colId: 'actions',
-      suppressSizeToFit: true,
-      valueGetter: (params: any) => {
-        const latestUser = params.data.documentLatest.user;
-        const latestDocument = params.data.documentLatest.document;
-        let latestColor = 'blue' as TButtonColorTypes;
-        if (latestUser) latestColor = latestUser.id !== id ? 'green' : 'blue';
-        const onClick = async () => {
-          setPreventClick(true);
-          await download(latestDocument.file.id, latestDocument.file.name);
-        };
-        return {
-          size: 'small',
-          onClick: onClick,
-          variant: 'text',
-          endIcon: <FileDownloadIcon />,
-          children: latestDocument.file.name,
-          color: latestColor,
-        };
-      },
-      cellRenderer: ButtonRenderer,
-    },
   ];
+
   const getRowClass = (params: RowClassParams) => {
-    if (params.node.data.status === 'income') {
-      return 'ag-row-green';
-    }
+    const status = params.data.status;
+    if (status === 'income') return 'ag-row-green';
   };
 
   const onClick = async (params: CellClickedEvent) => {
@@ -130,7 +93,7 @@ export const TaskList = observer(() => {
         <Box style={{ padding: '0 20px 20px' }}>
           <Alert
             type="success"
-            title="All materials have been dowloaded"
+            title="Complete"
             variant="outlined"
             shadow={false}
             border={false}
@@ -153,7 +116,7 @@ export const TaskList = observer(() => {
           className: 'ag-grid_no-header',
           isLoading: isListLoading,
           hasRows: hasTasks,
-          noDataMessage: 'No tasks found',
+          noDataMessage: 'No data found',
           autoSizeColumns: ['actions'],
           selectedIds: taskData ? [taskData.id] : undefined,
         }}

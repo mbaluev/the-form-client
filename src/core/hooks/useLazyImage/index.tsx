@@ -1,7 +1,7 @@
 import React from 'react';
 import { default as NextImage } from 'next/image';
 import { classNames } from '@utils/classNames';
-import { IMediaDTO } from '@model/media';
+import { IMediaDTO } from 'controller/model/common/media';
 import './index.scss';
 
 export const useLazyImage = (media: IMediaDTO) => {

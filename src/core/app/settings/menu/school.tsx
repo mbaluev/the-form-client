@@ -1,5 +1,5 @@
 import React from 'react';
-import { TMenuItemDTO } from '@model/menu';
+import { TMenuItemDTO } from 'controller/model/common/menu';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import SchoolIcon from '@mui/icons-material/School';
 import SettingsIcon from '@mui/icons-material/Settings';

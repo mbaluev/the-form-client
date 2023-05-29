@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
+import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 
 interface IProps {

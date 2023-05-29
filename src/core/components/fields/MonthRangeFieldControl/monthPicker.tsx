@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { setMonth, isWithinInterval, isSameMonth } from 'date-fns';
 import { Month } from '@components/fields/MonthRangeFieldControl/month';
-import { YearMonthRange } from '@components/fields/MonthRangeFieldControl/index';
+import { YearMonthRange } from '@components/fields';
 import { useViewModel } from '@hooks/useViewModel';
-import { ILocaleViewModel } from '@viewModel/modules/locale/interface';
+import { ILocaleViewModel } from '@viewModel/modules/common/locale/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 
 interface IMonthPicker {

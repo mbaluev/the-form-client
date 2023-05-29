@@ -6,7 +6,7 @@ import { Tooltip } from '@components/tooltip';
 import DoneIcon from '@mui/icons-material/Done';
 import fileSize from 'filesize';
 import { FormControl, FormHelperText } from '@mui/material';
-import { IFileDTO } from '@model/file';
+import { IFileDTO } from 'controller/model/common/file';
 import { Button } from '@components/button';
 import { observer } from 'mobx-react';
 import './index.scss';

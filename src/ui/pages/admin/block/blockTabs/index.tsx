@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { ITabItemProps, Tabs } from '@components/tab';
 import { useViewModel } from '@hooks/useViewModel';
-import { INotifyViewModel } from '@viewModel/modules/notify/interface';
+import { INotifyViewModel } from '@viewModel/modules/common/notify/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import { observer } from 'mobx-react';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
+import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { TabDetails } from '@ui/pages/admin/block/tabs/tabDetails';
 import { TabMaterials } from '@ui/pages/admin/block/tabs/tabMaterials';
 import { TabTest } from '@ui/pages/admin/block/tabs/tabTest';
-import { TabHomework } from '@ui/pages/admin/block/tabs/tabHomework';
+import { TabTasks } from 'ui/pages/admin/block/tabs/tabTasks';
 
 enum TabNames {
   details = 'details',
   materials = 'materials',
-  homework = 'homework',
+  tasks = 'tasks',
   test = 'test',
 }
 
@@ -32,8 +32,8 @@ const BLOCK_TAB_CONFIG: ITabItemProps[] = [
   },
   {
     label: 'Homework',
-    value: TabNames.homework,
-    content: <TabHomework />,
+    value: TabNames.tasks,
+    content: <TabTasks />,
     padding: false,
   },
   {

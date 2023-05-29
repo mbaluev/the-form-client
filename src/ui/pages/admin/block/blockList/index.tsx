@@ -5,7 +5,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
 import { CellClickedEvent } from 'ag-grid-community';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
+import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
 import { DialogBlock } from '@ui/dialogs/dialogBlock';
@@ -81,7 +81,7 @@ export const BlockList = observer((props: IProps) => {
           selectedIds: blockData ? [blockData.id] : undefined,
           className: 'ag-grid_no-header',
           hasRows: hasListFiltered,
-          noDataMessage: 'No blocks found',
+          noDataMessage: 'No data found',
         }}
       />
       <DialogBlock

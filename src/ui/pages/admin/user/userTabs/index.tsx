@@ -1,11 +1,11 @@
 import React from 'react';
 import { TabDetails } from '@ui/pages/admin/user/tabs/tabDetails';
 import { useViewModel } from '@hooks/useViewModel';
-import { INotifyViewModel } from '@viewModel/modules/notify/interface';
+import { INotifyViewModel } from '@viewModel/modules/common/notify/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import { observer } from 'mobx-react';
-import { IUserViewModel } from '@viewModel/modules/user/interface';
+import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 
 export const UserTabs = observer(() => {
   const { hasChanges, saveData, clearChanges } = useViewModel<IUserViewModel>(

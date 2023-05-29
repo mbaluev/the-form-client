@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import React, { ChangeEvent, useEffect } from 'react';
 import { Modal } from '@components/modal';
 import { Attachment } from '@components/attachment';
@@ -8,10 +9,12 @@ import { IButtonProps } from '@components/button';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IMaterialViewModel } from '@viewModel/modules/material/interface';
+import { IMaterialViewModel } from '@viewModel/modules/entities/material/interface';
 import { Loader } from '@components/loader';
 import { Skeleton } from '@components/skeleton';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
+import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
+import { AsyncAutocompleteFieldControl } from '@components/fields/AsyncAutocompleteFieldControl';
+import { IOptionViewModel } from '@viewModel/modules/common/option/interface';
 
 interface IProps {
   isOpen: boolean;
@@ -22,8 +25,11 @@ interface IProps {
   tooltip?: string;
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export const DialogMaterial = observer((props: IProps) => {
   const { isOpen, onClose, onCancel, onSubmit, options, tooltip } = props;
+  const optionModel = useViewModel<IOptionViewModel>(VIEW_MODEL.Option);
+  const { isLoading, getDocumentTypes } = optionModel;
 
   const {
     isModalLoading,
@@ -34,6 +40,7 @@ export const DialogMaterial = observer((props: IProps) => {
     hasModalChanges,
     upload,
     download,
+    validateModal,
   } = useViewModel<IMaterialViewModel>(VIEW_MODEL.Material);
 
   const { list: blocks, data: block } = useViewModel<IBlockViewModel>(
@@ -45,19 +52,11 @@ export const DialogMaterial = observer((props: IProps) => {
     changeModalField(e.target.name, e.target.value);
   };
 
-  const pathFileId = 'document.file.id';
-  const pathFileName = 'document.file.name';
-  const pathFileSize = 'document.file.size';
-  const pathFileMimeType = 'document.file.mimetype';
-  const pathFilePath = 'document.file.path';
   const uploadHandler = async (files: File[]) => {
     const newFile = await upload(files[0]);
     if (newFile) {
-      changeModalField(pathFileId, newFile.id);
-      changeModalField(pathFileName, newFile.name);
-      changeModalField(pathFileSize, newFile.size);
-      changeModalField(pathFileMimeType, newFile.mimetype);
-      changeModalField(pathFilePath, newFile.path);
+      changeModalField('document.file', newFile);
+      changeModalField('document.fileId', newFile.id);
     }
   };
   const downloadHandler = async (id: string, filename: string) => {
@@ -104,7 +103,7 @@ export const DialogMaterial = observer((props: IProps) => {
       <Loader loading={isModalLoading} />
       <Form cols={1}>
         <FormSection>
-          <FormField title="Block">
+          <FormField isRow title="Block">
             <SelectFieldControl
               name="blockId"
               value={modalData?.blockId}
@@ -119,7 +118,26 @@ export const DialogMaterial = observer((props: IProps) => {
               disabled
             />
           </FormField>
-          <FormField title="Material name">
+          <FormField isRow title="Material type">
+            <AsyncAutocompleteFieldControl
+              value={{
+                value: modalData?.document?.documentType?.id,
+                label: modalData?.document?.documentType?.name || '',
+              }}
+              loading={isModalLoading || isLoading}
+              promise={getDocumentTypes}
+              error={Boolean(getModalError('document.documentTypeId'))}
+              helperText={getModalError('document.documentTypeId')?.message}
+              onChange={(e, value) => {
+                changeModalField('document.documentTypeId', value?.value);
+                changeModalField('document.documentType.id', value?.value);
+                changeModalField('document.documentType.name', value?.label);
+                validateModal();
+              }}
+              disableClearable
+            />
+          </FormField>
+          <FormField title="Name">
             <TextFieldControl
               name="document.name"
               value={modalData?.document?.name}
@@ -139,22 +157,36 @@ export const DialogMaterial = observer((props: IProps) => {
               helperText={getModalError('document.description')?.message}
             />
           </FormField>
-          <FormField title="Attachment">
-            <Attachment
-              options={options}
-              tooltip={tooltip}
-              loading={isModalLoading}
-              onUpload={uploadHandler}
-              onDownload={downloadHandler}
-              error={Boolean(getModalError(pathFileId))}
-              helperText={getModalError(pathFileId)?.message}
-              files={
-                modalData?.document?.file
-                  ? [modalData.document.file]
-                  : undefined
-              }
-            />
-          </FormField>
+          {(modalData?.document?.documentType?.name === 'link' ||
+            modalData?.document?.documentType?.name === 'video') && (
+            <FormField title="Link">
+              <TextFieldControl
+                name="document.url"
+                value={modalData?.document?.url}
+                onChange={changeHandler}
+                error={Boolean(getModalError('document.url'))}
+                helperText={getModalError('document.url')?.message}
+              />
+            </FormField>
+          )}
+          {modalData?.document?.documentType?.name === 'file' && (
+            <FormField title="Attachment">
+              <Attachment
+                options={options}
+                tooltip={tooltip}
+                loading={isModalLoading}
+                onUpload={uploadHandler}
+                onDownload={downloadHandler}
+                error={Boolean(getModalError('document.fileId'))}
+                helperText={getModalError('document.fileId')?.message}
+                files={
+                  modalData?.document?.file
+                    ? [modalData.document.file]
+                    : undefined
+                }
+              />
+            </FormField>
+          )}
         </FormSection>
       </Form>
     </Modal>

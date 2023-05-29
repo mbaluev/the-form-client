@@ -1,41 +1,43 @@
 import { Container } from 'inversify';
 import { VIEW_MODEL } from './ids';
-import { AppViewModel } from '@viewModel/modules/app';
-import { IAppViewModel } from '@viewModel/modules/app/interface';
-import { ILocaleViewModel } from '@viewModel/modules/locale/interface';
-import { LocaleViewModel } from '@viewModel/modules/locale';
-import { INotifyViewModel } from '@viewModel/modules/notify/interface';
-import { NotifyViewModel } from '@viewModel/modules/notify';
-import { IMenuViewModel } from '@viewModel/modules/menu/interface';
-import { MenuViewModel } from '@viewModel/modules/menu';
-import { IFilterViewModel } from '@viewModel/modules/filter/interfaces';
-import { FilterViewModel } from '@viewModel/modules/filter';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
-import { ModuleViewModel } from '@viewModel/modules/module';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
-import { BlockViewModel } from '@viewModel/modules/block';
-import { IMaterialViewModel } from '@viewModel/modules/material/interface';
-import { MaterialViewModel } from '@viewModel/modules/material';
-import { IQuestionViewModel } from '@viewModel/modules/question/interface';
-import { QuestionViewModel } from '@viewModel/modules/question';
-import { IUserViewModel } from '@viewModel/modules/user/interface';
-import { UserViewModel } from '@viewModel/modules/user';
-import { IAuthViewModel } from '@viewModel/modules/auth/interface';
-import { AuthViewModel } from '@viewModel/modules/auth';
-import { ITaskViewModel } from '@viewModel/modules/task/interface';
-import { TaskViewModel } from '@viewModel/modules/task';
-import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
-import { BlockUserViewModel } from '@viewModel/modules/block/user';
-import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
-import { ModuleUserViewModel } from '@viewModel/modules/module/user';
-import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
-import { MaterialUserViewModel } from '@viewModel/modules/material/user';
-import { IQuestionUserViewModel } from '@viewModel/modules/question/user/interface';
-import { QuestionUserViewModel } from '@viewModel/modules/question/user';
-import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
-import { TaskUserViewModel } from '@viewModel/modules/task/user';
-import { ITaskHistoryViewModel } from '@viewModel/modules/task/history/interface';
-import { TaskHistoryViewModel } from '@viewModel/modules/task/history';
+import { AppViewModel } from 'controller/viewModel/modules/common/app';
+import { IAppViewModel } from '@viewModel/modules/common/app/interface';
+import { ILocaleViewModel } from '@viewModel/modules/common/locale/interface';
+import { LocaleViewModel } from 'controller/viewModel/modules/common/locale';
+import { INotifyViewModel } from '@viewModel/modules/common/notify/interface';
+import { NotifyViewModel } from 'controller/viewModel/modules/common/notify';
+import { IMenuViewModel } from '@viewModel/modules/common/menu/interface';
+import { MenuViewModel } from 'controller/viewModel/modules/common/menu';
+import { IFilterViewModel } from '@viewModel/modules/common/filter/interfaces';
+import { FilterViewModel } from 'controller/viewModel/modules/common/filter';
+import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
+import { ModuleViewModel } from 'controller/viewModel/modules/entities/module';
+import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
+import { BlockViewModel } from 'controller/viewModel/modules/entities/block';
+import { IMaterialViewModel } from '@viewModel/modules/entities/material/interface';
+import { MaterialViewModel } from 'controller/viewModel/modules/entities/material';
+import { IQuestionViewModel } from '@viewModel/modules/entities/question/interface';
+import { QuestionViewModel } from 'controller/viewModel/modules/entities/question';
+import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
+import { UserViewModel } from 'controller/viewModel/modules/entities/user';
+import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
+import { AuthViewModel } from 'controller/viewModel/modules/common/auth';
+import { ITaskViewModel } from '@viewModel/modules/entities/task/interface';
+import { TaskViewModel } from 'controller/viewModel/modules/entities/task';
+import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
+import { BlockUserViewModel } from '@viewModel/modules/entities/block/user';
+import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
+import { ModuleUserViewModel } from '@viewModel/modules/entities/module/user';
+import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
+import { MaterialUserViewModel } from '@viewModel/modules/entities/material/user';
+import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
+import { QuestionUserViewModel } from '@viewModel/modules/entities/question/user';
+import { IOptionViewModel } from '@viewModel/modules/common/option/interface';
+import { OptionViewModel } from 'controller/viewModel/modules/common/option';
+import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
+import { TaskUserViewModel } from '@viewModel/modules/entities/task/user';
+import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
+import { TaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument';
 
 export const viewModelContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -56,6 +58,10 @@ viewModelContainer
 viewModelContainer
   .bind<IFilterViewModel>(VIEW_MODEL.Filter)
   .to(FilterViewModel);
+
+viewModelContainer
+  .bind<IOptionViewModel>(VIEW_MODEL.Option)
+  .to(OptionViewModel);
 
 viewModelContainer.bind<IUserViewModel>(VIEW_MODEL.User).to(UserViewModel);
 
@@ -96,5 +102,5 @@ viewModelContainer
   .to(TaskUserViewModel);
 
 viewModelContainer
-  .bind<ITaskHistoryViewModel>(VIEW_MODEL.TaskHistory)
-  .to(TaskHistoryViewModel);
+  .bind<ITaskUserDocumentViewModel>(VIEW_MODEL.TaskUserDocument)
+  .to(TaskUserDocumentViewModel);

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { classNames } from '@utils/classNames';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import { IBlockUserDTO } from '@model/block';
+import { IBlockUserDTO } from 'controller/model/entities/block';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { ModuleBlockStatus } from '@ui/pages/school/module/[id]/moduleBlockStatus';
 import {
@@ -29,10 +29,10 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
     'module-block__li_complete': block.completeMaterials,
   });
   const clsLiQuestions = classNames(clsLi, {
-    'module-block__li_complete': block.completeMaterials,
+    'module-block__li_complete': block.completeQuestions,
   });
   const clsLiTasks = classNames(clsLi, {
-    'module-block__li_complete': block.completeMaterials,
+    'module-block__li_complete': block.completeTasks,
   });
 
   return (
@@ -51,17 +51,7 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
               <RadioButtonUncheckedIcon />
             )}
           </div>
-          <div className="module-block__li-label">Materials downloaded</div>
-        </li>
-        <li className={clsLiQuestions}>
-          <div className="module-block__li-icon">
-            {block.completeQuestions ? (
-              <CheckCircleIcon />
-            ) : (
-              <RadioButtonUncheckedIcon />
-            )}
-          </div>
-          <div className="module-block__li-label">Test passed</div>
+          <div className="module-block__li-label">Materials</div>
         </li>
         <li className={clsLiTasks}>
           <div className="module-block__li-icon">
@@ -71,7 +61,17 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
               <RadioButtonUncheckedIcon />
             )}
           </div>
-          <div className="module-block__li-label">Homework done</div>
+          <div className="module-block__li-label">Homework</div>
+        </li>
+        <li className={clsLiQuestions}>
+          <div className="module-block__li-icon">
+            {block.completeQuestions ? (
+              <CheckCircleIcon />
+            ) : (
+              <RadioButtonUncheckedIcon />
+            )}
+          </div>
+          <div className="module-block__li-label">Test</div>
         </li>
       </ul>
       <ModuleProgress value={progress} />

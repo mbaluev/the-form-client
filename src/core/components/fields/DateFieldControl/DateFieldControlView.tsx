@@ -4,7 +4,7 @@ import { classNames } from '@utils/classNames';
 import { DateFieldControlProps } from '@components/fields';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { ILocaleViewModel } from '@viewModel/modules/locale/interface';
+import { ILocaleViewModel } from '@viewModel/modules/common/locale/interface';
 
 export const DateFieldControlView = (props: DateFieldControlProps) => {
   const { className, value, emptyLabel = '-' } = props;

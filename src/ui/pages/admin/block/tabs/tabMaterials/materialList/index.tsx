@@ -12,10 +12,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
-import { IMaterialViewModel } from '@viewModel/modules/material/interface';
+import { IMaterialViewModel } from '@viewModel/modules/entities/material/interface';
 import { DialogMaterial } from '@ui/dialogs/dialogMaterial';
 import { ButtonRenderer } from 'ui/layout/grid/renderers/buttonRenderer';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { documentButtonValueGetter } from '@ui/components/documentButtonValueGetter';
 
 export const MaterialList = observer(() => {
   const {
@@ -56,38 +56,18 @@ export const MaterialList = observer(() => {
     {
       headerName: 'Materials',
       checkboxSelection: true,
-      // suppressSizeToFit: true,
       valueGetter: (params: any) => {
         return `${params.node.rowIndex + 1}. ${params.data?.document.name}`;
       },
     },
-    // {
-    //   headerName: 'Description',
-    //   valueGetter: (params: any) => {
-    //     return `${params.data?.document.description}`;
-    //   },
-    // },
     {
       colId: 'actions',
       headerName: 'Download',
       suppressSizeToFit: true,
-      valueGetter: (params: any) => {
-        const onClick = async () => {
-          setPreventClick(true);
-          await download(
-            params.data.document.file.id,
-            params.data.document.file.name
-          );
-        };
-        return {
-          size: 'small',
-          onClick: onClick,
-          variant: 'text',
-          endIcon: <FileDownloadIcon />,
-          children: params.data.document.file.name,
-        };
-      },
+      valueGetter: (params: any) =>
+        documentButtonValueGetter(params, setPreventClick, download),
       cellRenderer: ButtonRenderer,
+      maxWidth: 300,
     },
   ];
 
@@ -174,7 +154,7 @@ export const MaterialList = observer(() => {
           isLoading: isListLoading,
           hasRows: hasList,
           selectedIds: deleteIds,
-          noDataMessage: 'No materials found',
+          noDataMessage: 'No data found',
           autoSizeColumns: ['actions'],
         }}
       />

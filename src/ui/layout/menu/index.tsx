@@ -1,10 +1,10 @@
 import React from 'react';
-import { TMenuItemDTO } from '@model/menu';
+import { TMenuItemDTO } from 'controller/model/common/menu';
 import { classNames } from '@utils/classNames';
 import { MenuItem } from '@ui/layout/menu/menuItem';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
-import { IMenuViewModel } from '@viewModel/modules/menu/interface';
+import { IMenuViewModel } from '@viewModel/modules/common/menu/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { PermissionWrapper } from '@ui/permission/permissionWrapper';
 import './index.scss';

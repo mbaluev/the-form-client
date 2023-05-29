@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { classNames } from '@utils/classNames';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import { IModuleUserDTO } from '@model/module';
+import { IModuleUserDTO } from 'controller/model/entities/module';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { ModuleItemStatus } from '@ui/pages/school/module/index/moduleItemStatus';
 import {

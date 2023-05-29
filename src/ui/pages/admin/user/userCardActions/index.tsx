@@ -10,7 +10,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { IUserViewModel } from '@viewModel/modules/user/interface';
+import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 
 export const UserCardActions = observer(() => {
   const {

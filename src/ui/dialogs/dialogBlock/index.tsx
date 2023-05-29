@@ -9,8 +9,8 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { Loader } from '@components/loader';
 import { Skeleton } from '@components/skeleton';
 import { SelectChangeEvent } from '@mui/material';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
+import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
+import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 
 interface IProps {
   isOpen: boolean;

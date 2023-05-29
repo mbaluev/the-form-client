@@ -5,7 +5,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Page204 } from '@ui/pages/errors/204';
 import { Loader } from '@components/loader';
-import { IUserViewModel } from '@viewModel/modules/user/interface';
+import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 import { UserLabel } from '@ui/pages/admin/user/userLabel';
 import { UserCardActions } from '@ui/pages/admin/user/userCardActions';
 import { UserTabs } from '@ui/pages/admin/user/userTabs';

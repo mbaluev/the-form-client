@@ -1,5 +1,5 @@
 import { ISelectItem } from '@components/fields';
-import { IDictionaryDTO } from '@model/dictionary';
+import { IDictionaryDTO } from 'controller/model/common/dictionary';
 
 export const getSelectItemsFromDictionary = (
   dictionary?: IDictionaryDTO

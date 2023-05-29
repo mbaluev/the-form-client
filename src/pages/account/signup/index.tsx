@@ -5,7 +5,7 @@ import { SignupForm } from '@ui/pages/account/signup/signupForm';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IAuthViewModel } from '@viewModel/modules/auth/interface';
+import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
 
 const Signup = () => {
   const { clearData, clearChanges, clearMessage, clearToken } =

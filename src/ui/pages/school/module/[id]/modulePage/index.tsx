@@ -12,7 +12,7 @@ import {
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { ModuleSubTitle } from '@ui/pages/school/module/[id]/moduleSubTitle';
-import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
+import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 import './index.scss';
 
 export const ModulePage = observer(() => {

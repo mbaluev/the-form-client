@@ -2,52 +2,42 @@ import React from 'react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
-import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
-import { Form, FormField, FormSection } from '@components/form';
-import { TextFieldControl } from '@components/fields';
-import { Button } from '@components/button';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
+import { FormField, FormSection } from '@components/form';
+import { Box, Stack } from '@mui/material';
+import ReactPlayer from 'react-player';
+import { NoData } from '@components/noData';
+import { DocumentButton } from '@ui/components/documentButton';
 
 export const MaterialCardContent = observer(() => {
   const { data, download } = useViewModel<IMaterialUserViewModel>(
     VIEW_MODEL.MaterialUser
   );
 
-  const handleDownload = async () => {
-    if (data)
-      await download(
-        data.document.file.id,
-        data.document.file.name,
-        data.id,
-        data.blockId
-      );
-  };
+  if (!data) return <NoData />;
 
   return (
-    <Form cols={1}>
+    <Stack height="100%" spacing="20px">
       <FormSection>
-        <FormField>
-          <Button
-            size="medium"
-            onClick={handleDownload}
-            variant="outlined"
-            startIcon={<FileDownloadIcon />}
-            sx={{ width: 'fit-content !important' }}
-          >
-            {data?.document.file.name}
-          </Button>
-        </FormField>
+        <DocumentButton doc={data.document} download={download} />
         <FormField title="Description">
-          <TextFieldControl
-            name="document.description"
-            multiline
-            minRows={5}
-            value={data?.document?.description}
-            isEdit={false}
-            heightAuto
-          />
+          <Box style={{ lineHeight: 1.9 }}>{data.document?.description}</Box>
         </FormField>
       </FormSection>
-    </Form>
+      <Stack flex="1 1 auto" borderRadius="5px" overflow="hidden">
+        <ReactPlayer
+          url={data.document.url}
+          width="auto"
+          height="100%"
+          config={{
+            youtube: {
+              playerVars: {
+                controls: 1,
+              },
+            },
+          }}
+        />
+      </Stack>
+    </Stack>
   );
 });

@@ -1,4 +1,4 @@
-import { TMenuItemDTO } from '@model/menu';
+import { TMenuItemDTO } from 'controller/model/common/menu';
 import { ROUTER_CONST_DEV } from '@app/settings/routerConst/dev';
 import TextFieldsIcon from '@mui/icons-material/TextFields';
 import SmartButtonIcon from '@mui/icons-material/SmartButton';

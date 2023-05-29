@@ -6,8 +6,11 @@ import { TabTest } from '@ui/pages/school/block/tabs/tabTest';
 import { BlockTabsLabel } from '@ui/pages/school/block/blockTabsLabel';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
+import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import { TabTasks } from '@ui/pages/school/block/tabs/tabTasks';
+import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
+import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
+import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 
 export enum BlockTabNames {
   materials = 'materials',
@@ -22,8 +25,21 @@ export const BlockTabs = observer(() => {
     changeTab,
   } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
 
+  const { clearData: clearDataMaterial } = useViewModel<IMaterialUserViewModel>(
+    VIEW_MODEL.MaterialUser
+  );
+  const { clearData: clearDataQuestion } = useViewModel<IQuestionUserViewModel>(
+    VIEW_MODEL.QuestionUser
+  );
+  const { clearData: clearDataTask } = useViewModel<ITaskUserViewModel>(
+    VIEW_MODEL.TaskUser
+  );
+
   const onChangeTab = (_: React.ChangeEvent<unknown>, value: string) => {
     changeTab(value as BlockTabNames);
+    clearDataMaterial();
+    clearDataQuestion();
+    clearDataTask();
   };
 
   const tabs = [

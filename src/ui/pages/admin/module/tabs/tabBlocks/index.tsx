@@ -6,13 +6,13 @@ import { CellClickedEvent } from 'ag-grid-community';
 import { ParsedUrlQuery } from 'querystring';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { useViewModel } from '@hooks/useViewModel';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
+import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { TextFieldControl } from '@components/fields';
 import { InputAdornment } from '@mui/material';
 import { IconButton } from '@components/iconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
+import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 
 export const TabBlocks = observer(() => {
   const { data } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);

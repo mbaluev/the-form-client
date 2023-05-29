@@ -4,8 +4,8 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Form, FormField, FormSection } from '@components/form';
 import { SelectFieldControl, TextFieldControl } from '@components/fields';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
+import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
+import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
 import { SelectChangeEvent } from '@mui/material';
 
 export const TabDetails = observer(() => {

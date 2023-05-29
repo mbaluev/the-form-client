@@ -1,7 +1,7 @@
 import { isSameMonth, isSameYear, getMonth } from 'date-fns';
-import { YearMonthRange } from '@components/fields/MonthRangeFieldControl/index';
+import { YearMonthRange } from '@components/fields';
 import { useViewModel } from '@hooks/useViewModel';
-import { ILocaleViewModel } from '@viewModel/modules/locale/interface';
+import { ILocaleViewModel } from '@viewModel/modules/common/locale/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 
 export const valueFormatter = (value?: YearMonthRange) => {

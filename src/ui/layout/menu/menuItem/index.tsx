@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { menuIsActive, TMenuItemDTO } from '@model/menu';
+import { menuIsActive, TMenuItemDTO } from 'controller/model/common/menu';
 import { MenuItemContainer } from '@ui/layout/menu/menuItemContainer';
 import { MenuItemChild } from '@ui/layout/menu/menuItemChild';
 import { classNames } from '@utils/classNames';

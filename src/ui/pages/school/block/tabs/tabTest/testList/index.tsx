@@ -9,7 +9,7 @@ import { IconButton } from '@components/iconButton';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
-import { IQuestionUserViewModel } from '@viewModel/modules/question/user/interface';
+import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
 import { Loader } from '@components/loader';
 import { TestItem } from '@ui/pages/school/block/tabs/tabTest/testItem';
 import './index.scss';

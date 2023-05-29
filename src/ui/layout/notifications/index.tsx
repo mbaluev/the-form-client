@@ -3,7 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { classNames } from '@utils/classNames';
 import { IconButton } from '@components/iconButton';
 import { useViewModel } from '@hooks/useViewModel';
-import { INotifyViewModel } from '@viewModel/modules/notify/interface';
+import { INotifyViewModel } from '@viewModel/modules/common/notify/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { Alert } from '@components/alert';
 import './index.scss';

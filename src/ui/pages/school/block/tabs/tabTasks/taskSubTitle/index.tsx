@@ -2,7 +2,7 @@ import React from 'react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
-import { ITaskUserViewModel } from '@viewModel/modules/task/user/interface';
+import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { ITagProps, Tag } from '@components/tag';
 
 export const TaskSubTitle = observer(() => {
@@ -19,7 +19,7 @@ export const TaskSubTitle = observer(() => {
   }
   if (data?.complete) {
     tag.tag = 'Complete';
-    tag.color = 'blue';
+    tag.color = 'green';
   }
 
   return <Tag {...tag} />;

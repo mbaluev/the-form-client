@@ -1,6 +1,6 @@
 import { useContainer } from '@hooks/useContainer';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IAuthViewModel } from '@viewModel/modules/auth/interface';
+import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
 
 export const useAuth = () => {
   const container = useContainer();

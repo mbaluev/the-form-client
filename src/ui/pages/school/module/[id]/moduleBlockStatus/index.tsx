@@ -1,5 +1,5 @@
 import React from 'react';
-import { IModuleUserDTO } from '@model/module';
+import { IModuleUserDTO } from 'controller/model/entities/module';
 import { ITagProps, Tag } from '@components/tag';
 
 interface IModuleBlockStatusProps {

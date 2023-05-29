@@ -10,8 +10,8 @@ import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
-import { IUserService } from '@service/modules/user/interface';
-import { IUserViewModel } from '@viewModel/modules/user/interface';
+import { IUserService } from '@service/modules/entities/user/interface';
+import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 import { UserPage } from '@ui/pages/admin/user/userPage';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
 

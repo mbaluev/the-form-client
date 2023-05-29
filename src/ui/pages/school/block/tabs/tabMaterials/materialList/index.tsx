@@ -10,11 +10,11 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { ButtonRenderer } from '@ui/layout/grid/renderers/buttonRenderer';
 import { MaterialRenderer } from '@ui/pages/school/block/tabs/tabMaterials/materialList/materialRendrer';
-import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
+import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
 import { Alert } from '@components/alert';
-import { IBlockUserViewModel } from '@viewModel/modules/block/user/interface';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import { CellClickedEvent } from 'ag-grid-community';
+import { documentButtonValueGetter } from '@ui/components/documentButtonValueGetter';
 
 export const MaterialList = observer(() => {
   const { data: block } = useViewModel<IBlockUserViewModel>(
@@ -28,6 +28,7 @@ export const MaterialList = observer(() => {
     setFilter,
     download,
     getData,
+    update,
     data: materialData,
   } = useViewModel<IMaterialUserViewModel>(VIEW_MODEL.MaterialUser);
 
@@ -54,40 +55,21 @@ export const MaterialList = observer(() => {
       },
       cellRenderer: MaterialRenderer,
     },
-    // {
-    //   headerName: 'Description',
-    //   valueGetter: (params: any) => {
-    //     return `${params.data?.document.description}`;
-    //   },
-    // },
     {
       colId: 'actions',
       headerName: 'Download',
       suppressSizeToFit: true,
-      valueGetter: (params: any) => {
-        const onClick = async () => {
-          setPreventClick(true);
-          await download(
-            params.data.document.file.id,
-            params.data.document.file.name,
-            params.data.id,
-            params.data.blockId
-          );
-        };
-        return {
-          size: 'small',
-          onClick: onClick,
-          variant: 'text',
-          endIcon: <FileDownloadIcon />,
-          children: params.data.document.file.name,
-        };
-      },
+      valueGetter: (params: any) =>
+        documentButtonValueGetter(params, setPreventClick, download),
       cellRenderer: ButtonRenderer,
     },
   ];
 
   const onClick = async (params: CellClickedEvent) => {
-    if (!preventClick) await getData(params.data.id);
+    if (!preventClick) {
+      await update(params.data.id, params.data.complete);
+      await getData(params.data.id);
+    }
     setPreventClick(false);
   };
   const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,7 +108,7 @@ export const MaterialList = observer(() => {
         <Box style={{ padding: '0 20px 20px' }}>
           <Alert
             type="success"
-            title="All materials have been dowloaded"
+            title="Complete"
             variant="outlined"
             shadow={false}
             border={false}
@@ -148,7 +130,7 @@ export const MaterialList = observer(() => {
           className: 'ag-grid_no-header',
           isLoading: isListLoading,
           hasRows: hasList,
-          noDataMessage: 'No materials found',
+          noDataMessage: 'No data found',
           autoSizeColumns: ['actions'],
           selectedIds: materialData ? [materialData.id] : undefined,
         }}

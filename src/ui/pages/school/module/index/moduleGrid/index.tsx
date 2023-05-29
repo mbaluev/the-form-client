@@ -3,7 +3,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { ModuleItem } from '@ui/pages/school/module/index/moduleItem';
-import { IModuleUserViewModel } from '@viewModel/modules/module/user/interface';
+import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 
 export const ModuleGrid = observer(() => {
   const { list: modules } = useViewModel<IModuleUserViewModel>(

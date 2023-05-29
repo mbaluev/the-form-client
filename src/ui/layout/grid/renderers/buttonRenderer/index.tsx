@@ -5,7 +5,7 @@ import { classNames } from '@utils/classNames';
 import './index.scss';
 
 export const ButtonRenderer = (props: ICellRendererParams) => {
-  if (!props.value && !props.value.children) return null;
+  if (!props.value || !props.value.children) return null;
   const cls = classNames('button-renderer');
   return (
     <div className={cls}>

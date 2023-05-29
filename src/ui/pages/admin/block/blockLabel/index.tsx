@@ -2,7 +2,7 @@ import React from 'react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
-import { IBlockViewModel } from '@viewModel/modules/block/interface';
+import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 
 export const BlockLabel = observer(() => {
   const { data } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);

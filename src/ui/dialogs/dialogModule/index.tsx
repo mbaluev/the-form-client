@@ -8,7 +8,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { Loader } from '@components/loader';
 import { Skeleton } from '@components/skeleton';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
+import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
 
 interface IProps {
   isOpen: boolean;

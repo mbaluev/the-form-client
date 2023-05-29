@@ -1,6 +1,6 @@
 import { useContainer } from '@hooks/useContainer';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { ILocaleViewModel } from '@viewModel/modules/locale/interface';
+import { ILocaleViewModel } from '@viewModel/modules/common/locale/interface';
 
 export const useLocale = () => {
   const container = useContainer();

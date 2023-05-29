@@ -1,12 +1,12 @@
 import { withSnackbar } from 'notistack';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
-import { INotifyViewModel } from '@viewModel/modules/notify/interface';
+import { INotifyViewModel } from '@viewModel/modules/common/notify/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { Alert } from '@components/alert';
-import { NOTIFY_DURATION } from '@model/notify';
+import { NOTIFY_DURATION } from 'controller/model/common/notify';
 
 export const Notifier = withSnackbar(
   observer(() => {

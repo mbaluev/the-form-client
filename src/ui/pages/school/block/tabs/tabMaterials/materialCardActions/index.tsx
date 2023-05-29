@@ -4,7 +4,7 @@ import { IconButton } from '@components/iconButton';
 import { Toolbar } from '@components/toolbar';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { IMaterialUserViewModel } from '@viewModel/modules/material/user/interface';
+import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
 import CloseIcon from '@mui/icons-material/Close';
 
 export const MaterialCardActions = observer(() => {

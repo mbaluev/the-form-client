@@ -6,11 +6,11 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { FormField } from '@components/form';
 import { CheckboxFieldControl } from '@components/fields';
-import { IQuestionUserDTO } from '@model/question';
+import { IQuestionUserDTO } from 'controller/model/entities/question';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import SportsScoreIcon from '@mui/icons-material/SportsScore';
-import { IQuestionUserViewModel } from '@viewModel/modules/question/user/interface';
+import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
 import { classNames } from '@utils/classNames';
 import './index.scss';
 

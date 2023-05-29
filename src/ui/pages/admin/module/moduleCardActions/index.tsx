@@ -7,7 +7,7 @@ import { Toolbar } from '@components/toolbar';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
-import { IModuleViewModel } from '@viewModel/modules/module/interface';
+import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -15,8 +15,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 export const ModuleCardActions = observer(() => {
   const {
     data,
-    clearData,
-    clearModuleData,
     hasChanges,
     saveData,
     isDeleteOpen,
