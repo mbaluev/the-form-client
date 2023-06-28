@@ -36,8 +36,12 @@ export class QuestionViewModel
       { nameSpace: 'blockId', type: 'required', message: 'Required' },
       { nameSpace: 'title', type: 'required', message: 'Required' },
       { nameSpace: 'position', type: 'required', message: 'Required' },
-      { nameSpace: 'options', type: 'required', message: 'Required' },
-      { nameSpace: 'optionsCorrectId', type: 'required', message: 'Required' },
+      { nameSpace: 'questionOptions', type: 'required', message: 'Required' },
+      {
+        nameSpace: 'questionOptionsCorrectId',
+        type: 'required',
+        message: 'Required',
+      },
     ]);
   }
 
@@ -56,9 +60,9 @@ export class QuestionViewModel
   addOption = () => {
     if (this.option) {
       const data = this.modalData;
-      const index = data?.options ? data?.options.length : 0;
+      const index = data?.questionOptions ? data?.questionOptions.length : 0;
       const value = { id: guid(), title: this.option };
-      this.changeModalField(`options.${index}`, value);
+      this.changeModalField(`questionOptions.${index}`, value);
       this.validateModal();
       this.setOption();
     }
@@ -66,8 +70,8 @@ export class QuestionViewModel
 
   removeOption = (id: string) => {
     const data = this.modalData ? { ...this.modalData } : undefined;
-    if (data && data.options) {
-      data.options = data.options.filter((d) => d.id !== id);
+    if (data && data.questionOptions) {
+      data.questionOptions = data.questionOptions.filter((d) => d.id !== id);
       this.setModalData(data);
       this.validateModal();
     }
@@ -75,8 +79,8 @@ export class QuestionViewModel
 
   changeOptionCorrect = (id: string, value: boolean) => {
     const data = this.modalData;
-    const index = data?.options.findIndex((d) => d.id === id);
-    this.changeModalField(`options.${index}.correct`, value);
+    const index = data?.questionOptions.findIndex((d) => d.id === id);
+    this.changeModalField(`questionOptions.${index}.correct`, value);
     if (value) this.addOptionCorrect(id);
     else this.removeOptionCorrect(id);
     this.validateModal();
@@ -85,17 +89,20 @@ export class QuestionViewModel
   addOptionCorrect = (id: string) => {
     const data = this.modalData ? { ...this.modalData } : undefined;
     if (data) {
-      data.optionsCorrectId = data.optionsCorrectId || [];
-      data.optionsCorrectId.push(id);
+      data.questionOptionsCorrectId = data.questionOptionsCorrectId || [];
+      data.questionOptionsCorrectId.push(id);
       this.setModalData(data);
     }
   };
 
   removeOptionCorrect = (id: string) => {
     const data = this.modalData ? { ...this.modalData } : undefined;
-    if (data && data.optionsCorrectId) {
-      data.optionsCorrectId = data.optionsCorrectId.filter((d) => d !== id);
-      if (data.optionsCorrectId.length === 0) data.optionsCorrectId = undefined;
+    if (data && data.questionOptionsCorrectId) {
+      data.questionOptionsCorrectId = data.questionOptionsCorrectId.filter(
+        (d) => d !== id
+      );
+      if (data.questionOptionsCorrectId.length === 0)
+        data.questionOptionsCorrectId = undefined;
       this.setModalData(data);
     }
   };
@@ -127,7 +134,7 @@ export class QuestionViewModel
       const token = await this.auth.refreshToken();
       const data = await this.serviceQuestion.getQuestion(id, undefined, token);
       if (data) {
-        data.optionsCorrectId = data.options
+        data.questionOptionsCorrectId = data.questionOptions
           .filter((d) => d.correct)
           .map((d) => d.id);
       }
@@ -142,7 +149,7 @@ export class QuestionViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const { optionsCorrectId, ...saveData } = { ...this.modalData };
+        const { questionOptionsCorrectId, ...saveData } = { ...this.modalData };
         this.changeModalField('blockId', this.block.data?.id);
         const token = await this.auth.refreshToken();
         const data = await this.serviceQuestion.saveQuestion(saveData, token);

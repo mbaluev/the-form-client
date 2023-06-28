@@ -14,13 +14,17 @@ import { DialogTaskUserDocument } from '@ui/dialogs/dialogTaskUserDocument';
 import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
 
 export const TaskCard = observer(() => {
-  const { data, isDataLoading, isListLoading } =
+  const { data, isDataLoading, isListLoading, getData, getList } =
     useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
 
   const { isModalOpen, modalClose, modalSubmit } =
     useViewModel<ITaskUserDocumentViewModel>(VIEW_MODEL.TaskUserDocument);
 
-  const handleSubmit = async () => modalSubmit();
+  const handleSubmit = async () => {
+    await modalSubmit();
+    if (data?.id) await getData(data.id);
+    await getList();
+  };
 
   if (isListLoading || isDataLoading) {
     return (

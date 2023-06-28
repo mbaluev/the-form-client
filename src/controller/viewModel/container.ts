@@ -38,6 +38,8 @@ import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interf
 import { TaskUserViewModel } from '@viewModel/modules/entities/task/user';
 import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
 import { TaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument';
+import { ITaskAdminViewModel } from '@viewModel/modules/entities/task/admin/interface';
+import { TaskAdminViewModel } from '@viewModel/modules/entities/task/admin';
 
 export const viewModelContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -104,3 +106,7 @@ viewModelContainer
 viewModelContainer
   .bind<ITaskUserDocumentViewModel>(VIEW_MODEL.TaskUserDocument)
   .to(TaskUserDocumentViewModel);
+
+viewModelContainer
+  .bind<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin)
+  .to(TaskAdminViewModel);

@@ -20,7 +20,7 @@ export const MaterialCardContent = observer(() => {
     <Stack height="100%" spacing="20px">
       <FormSection>
         <DocumentButton doc={data.document} download={download} />
-        <FormField title="Description">
+        <FormField title="Document description">
           <Box style={{ lineHeight: 1.9 }}>{data.document?.description}</Box>
         </FormField>
       </FormSection>

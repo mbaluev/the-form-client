@@ -2,7 +2,7 @@ import React from 'react';
 import { Tabs } from '@components/tab';
 import { observer } from 'mobx-react';
 import { TabMaterials } from '@ui/pages/school/block/tabs/tabMaterials';
-import { TabTest } from '@ui/pages/school/block/tabs/tabTest';
+import { TabQuestions } from 'ui/pages/school/block/tabs/tabQuestions';
 import { BlockTabsLabel } from '@ui/pages/school/block/blockTabsLabel';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
@@ -15,7 +15,7 @@ import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interf
 export enum BlockTabNames {
   materials = 'materials',
   tasks = 'tests',
-  test = 'test',
+  questions = 'questions',
 }
 
 export const BlockTabs = observer(() => {
@@ -60,11 +60,12 @@ export const BlockTabs = observer(() => {
       padding: false,
     },
     {
-      value: BlockTabNames.test,
+      value: BlockTabNames.questions,
       label: (
         <BlockTabsLabel label="Test" complete={block?.completeQuestions} />
       ),
-      content: <TabTest />,
+      content: <TabQuestions />,
+      padding: false,
     },
   ];
 

@@ -24,9 +24,7 @@
 
   &.field-control_error {
     &.MuiFormControl-root {
-      & .MuiIconButton-root {
-        color: $color-red;
-
+      & .MuiRadio-root {
         & .MuiSvgIcon-root {
           color: $color-red;
         }

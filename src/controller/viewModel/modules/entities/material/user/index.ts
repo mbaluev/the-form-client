@@ -35,6 +35,8 @@ export class MaterialUserViewModel
     });
   }
 
+  // --- override
+
   filterByQuery =
     (query?: ParsedUrlQuery) =>
     (item: IMaterialDTO): boolean => {

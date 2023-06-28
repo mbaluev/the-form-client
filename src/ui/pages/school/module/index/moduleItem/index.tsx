@@ -6,6 +6,7 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import { IModuleUserDTO } from 'controller/model/entities/module';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { ModuleItemStatus } from '@ui/pages/school/module/index/moduleItemStatus';
+import DoDisturbAltOutlinedIcon from '@mui/icons-material/DoDisturbAltOutlined';
 import {
   getProgress,
   ModuleProgress,
@@ -41,10 +42,12 @@ const ModuleItemContent = (props: IModuleItemProps) => {
           return (
             <li key={index} className={clsLi}>
               <div className="module-item__li-icon">
-                {block.complete ? (
-                  <CheckCircleIcon />
-                ) : (
+                {block.complete && <CheckCircleIcon />}
+                {!block.complete && block.enable && (
                   <RadioButtonUncheckedIcon />
+                )}
+                {!block.complete && !block.enable && (
+                  <DoDisturbAltOutlinedIcon />
                 )}
               </div>
               <div className="module-item__li-label">{block.name}</div>

@@ -13,7 +13,6 @@ import { TaskService } from '@service/modules/entities/task';
 import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
 import { action, makeObservable } from 'mobx';
 import objectPath from 'object-path';
-import { TaskUserViewModel } from '@viewModel/modules/entities/task/user';
 
 @injectable()
 export class TaskUserDocumentViewModel
@@ -25,8 +24,6 @@ export class TaskUserDocumentViewModel
   @inject(SERVICE.File) protected serviceFile!: FileService;
 
   @inject(VIEW_MODEL.Auth) protected modelAuth!: AuthViewModel;
-
-  @inject(VIEW_MODEL.TaskUser) protected modelUserTask!: TaskUserViewModel;
 
   constructor() {
     super();
@@ -140,7 +137,6 @@ export class TaskUserDocumentViewModel
       if (this.modalData && !this.hasModalErrors) {
         const token = await this.modelAuth.refreshToken();
         const data = await this.serviceTask.sentTaskUser(this.modalData, token);
-        await this.getList();
         await this.clearModalChanges();
         return data;
       }
@@ -150,7 +146,7 @@ export class TaskUserDocumentViewModel
     }
   };
 
-  // -- other
+  // --- actions
 
   upload = async (file: File) => {
     this.setDataLoading(true);

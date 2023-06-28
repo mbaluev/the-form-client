@@ -39,8 +39,8 @@ export const DocumentButton = observer((props: IProps) => {
     size: 'medium',
     variant: 'outlined',
   };
-  const titleOpenLink = 'Open link in new tab';
-  const titleDownload = 'download file';
+  const titleOpenLink = 'Open document in new tab';
+  const titleDownload = 'Download document';
 
   if (documentType === 'link') {
     return (

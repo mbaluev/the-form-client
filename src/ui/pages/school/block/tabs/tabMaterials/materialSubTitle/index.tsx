@@ -13,7 +13,7 @@ export const MaterialSubTitle = observer(() => {
   const tag: ITagProps = { tag: 'New', color: 'grey' };
   if (data?.complete) {
     tag.tag = 'Downloaded';
-    tag.color = 'blue';
+    tag.color = 'green';
   }
 
   return <Tag {...tag} />;

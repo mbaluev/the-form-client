@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react';
-import { TestList } from '@ui/pages/admin/block/tabs/tabTest/testList';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { IQuestionViewModel } from '@viewModel/modules/entities/question/interface';
 import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
+import { QuestionList } from 'ui/pages/admin/block/tabs/tabQuestions/questionList';
 
-export const TabTest = observer(() => {
+export const TabQuestions = observer(() => {
   const { data: block } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
   const { getList } = useViewModel<IQuestionViewModel>(VIEW_MODEL.Question);
 
@@ -14,5 +14,5 @@ export const TabTest = observer(() => {
     if (block) getList();
   }, [block]);
 
-  return <TestList />;
+  return <QuestionList />;
 });

@@ -12,6 +12,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import './index.scss';
+import { ListItemText } from '@mui/material';
 
 export type TBreadCrumb = {
   label: string;
@@ -30,6 +31,7 @@ export const BreadCrumb: FC<TBreadCrumb> = (props) => {
   const cls = classNames('bread-crumb', className);
   const clsItem = classNames('bread-crumb__item');
   const clsSeparator = classNames('bread-crumb__separator');
+  const clsDropDown = classNames('bread-crumb__dropdown');
 
   if (Boolean(neighbors)) {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -52,8 +54,7 @@ export const BreadCrumb: FC<TBreadCrumb> = (props) => {
           </Button>
           <Menu
             anchorEl={anchorEl}
-            id="menu-account"
-            className="account"
+            className={clsDropDown}
             open={open}
             onClose={handleClose}
             onClick={handleClose}
@@ -85,7 +86,7 @@ export const BreadCrumb: FC<TBreadCrumb> = (props) => {
                         )}
                       </ListItemIcon>
                     )}
-                    {item.label}
+                    <ListItemText>{item.label}</ListItemText>
                   </MenuItem>
                 </Link>
               );

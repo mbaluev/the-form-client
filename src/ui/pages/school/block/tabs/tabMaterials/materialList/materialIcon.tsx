@@ -8,17 +8,17 @@ interface IProps {
   style?: object;
 }
 
-export const TaskCompleteIcon = (props: IProps) => {
+export const MaterialIcon = (props: IProps) => {
   const { complete, style } = props;
   let icon = (
-    <Tooltip title="Todo">
+    <Tooltip title="New">
       <RadioButtonUncheckedIcon className="color_grey-50" style={style} />
     </Tooltip>
   );
   if (complete)
     icon = (
-      <Tooltip title="Complete">
-        <CheckCircleIcon className="color_blue" style={style} />
+      <Tooltip title="Donwloaded">
+        <CheckCircleIcon className="color_green" style={style} />
       </Tooltip>
     );
   return icon;

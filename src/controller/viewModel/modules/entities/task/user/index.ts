@@ -12,6 +12,7 @@ import { ITaskUserDTO } from '@model/entities/task';
 import { TaskService } from '@service/modules/entities/task';
 import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { BlockUserViewModel } from '@viewModel/modules/entities/block/user';
+import { action, makeObservable } from 'mobx';
 
 @injectable()
 export class TaskUserViewModel
@@ -25,6 +26,13 @@ export class TaskUserViewModel
   @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
 
   @inject(VIEW_MODEL.BlockUser) protected block!: BlockUserViewModel;
+
+  constructor() {
+    super();
+    makeObservable(this, {
+      download: action,
+    });
+  }
 
   // --- override
 
@@ -84,6 +92,17 @@ export class TaskUserViewModel
     } catch (err) {
     } finally {
       this.setDataLoading(false);
+    }
+  };
+
+  // --- actions
+
+  download = async (id: string, filename: string) => {
+    try {
+      const token = await this.auth.refreshToken();
+      await this.serviceFile.downloadFile(id, filename, token);
+    } catch (err) {
+    } finally {
     }
   };
 }

@@ -2,11 +2,7 @@ import { inject, injectable } from 'inversify';
 import { INFRASTRUCTURE_MODULE } from '@infrastructure/ids';
 import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { IQuestionService } from '@service/modules/entities/question/interface';
-import {
-  IQuestionCheckDTO,
-  IQuestionDTO,
-  IQuestionUserDTO,
-} from '@model/entities/question';
+import { IQuestionDTO, IQuestionUserDTO } from '@model/entities/question';
 import { ParsedUrlQuery } from 'querystring';
 import { IResponseItemDTO, IResponseListDTO } from '@model/common/response';
 
@@ -83,16 +79,39 @@ export class QuestionService implements IQuestionService {
     return ret ? ret.data : undefined;
   };
 
-  checkAnswers = async (
-    blockId: string,
-    questions: IQuestionCheckDTO[],
+  getQuestionUser = async (
+    id?: string,
+    query?: ParsedUrlQuery,
     token?: string | null
-  ): Promise<IQuestionUserDTO[] | undefined> => {
-    const ret = await this.apiModule.post<IResponseListDTO<IQuestionUserDTO>>(
-      `${this.API_PREFIX}/user/check`,
-      { blockId, questions },
+  ): Promise<IQuestionUserDTO | undefined> => {
+    const ret = await this.apiModule.get<IResponseItemDTO<IQuestionUserDTO>>(
+      `${this.API_PREFIX}/user/item/${id}`,
+      { ...query },
       { headers: { Authorization: `Bearer ${token}` } }
     );
     return ret ? ret.data : undefined;
+  };
+
+  saveQuestionAnswers = async (
+    questionId: string,
+    questionAnswers: string[],
+    token?: string | null
+  ): Promise<void> => {
+    return this.apiModule.post<void>(
+      `${this.API_PREFIX}/user/save`,
+      { questionId, questionAnswers },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  };
+
+  checkQuestions = async (
+    blockId: string,
+    token?: string | null
+  ): Promise<void> => {
+    return this.apiModule.post<void>(
+      `${this.API_PREFIX}/user/check`,
+      { blockId },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
   };
 }

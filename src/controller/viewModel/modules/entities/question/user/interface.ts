@@ -12,16 +12,15 @@ export interface ITestStatus {
 export interface IQuestionUserViewModel
   extends IBaseCardViewModel<IQuestionUserDTO> {
   status: ITestStatus;
-  play: boolean;
+
+  start: () => void;
+  stop: () => void;
   prev: () => void;
   next: () => void;
   repeat: () => void;
   finish: () => void;
-  expand: (index: number) => void;
 
-  changeAnswer: (
-    questionId: string,
-    optionId: string,
-    checked: boolean
-  ) => void;
+  changeAnswer: (optionId: string, checked: boolean) => void;
+  saveQuestionAnswers: () => Promise<void>;
+  checkQuestions: () => Promise<void>;
 }

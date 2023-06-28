@@ -9,11 +9,11 @@ export const TaskSubTitle = observer(() => {
   const { data } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
 
   const tag: ITagProps = { tag: 'Todo', color: 'grey' };
-  if (data?.status === 'income') {
+  if (data?.sent === false) {
     tag.tag = 'Income';
-    tag.color = 'green';
+    tag.color = 'red';
   }
-  if (data?.status === 'sent') {
+  if (data?.sent === true) {
     tag.tag = 'Sent';
     tag.color = 'blue';
   }

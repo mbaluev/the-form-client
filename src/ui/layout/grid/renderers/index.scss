@@ -35,13 +35,28 @@
       cursor: pointer;
     }
 
-    // row new
+    // row green
     & .ag-row-green {
-      font-weight: 500;
       background-color: rgba($color-green-dark, 0.1);
     }
     & .ag-row-green.ag-row-hover {
       background-color: rgba($color-green-dark, 0.15);
+    }
+
+    // row orange
+    & .ag-row-orange {
+      background-color: rgba($color-orange, 0.1);
+    }
+    & .ag-row-orange.ag-row-hover {
+      background-color: rgba($color-orange, 0.15);
+    }
+
+    // row red
+    & .ag-row-red {
+      background-color: rgba($color-red, 0.1);
+    }
+    & .ag-row-red.ag-row-hover {
+      background-color: rgba($color-red, 0.15);
     }
 
     // row selected

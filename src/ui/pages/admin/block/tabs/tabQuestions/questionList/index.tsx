@@ -15,7 +15,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { DialogQuestion } from '@ui/dialogs/dialogQuestion';
 
-export const TestList = observer(() => {
+export const QuestionList = observer(() => {
   const {
     isListLoading,
     listFiltered: questions,

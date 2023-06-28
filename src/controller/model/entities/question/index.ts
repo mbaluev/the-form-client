@@ -1,4 +1,4 @@
-export interface IOptionDTO {
+export interface IQuestionOptionDTO {
   id: string;
   title: string;
   correct: boolean;
@@ -9,14 +9,15 @@ export interface IQuestionDTO {
   blockId: string;
   title: string;
   position: number;
-  options: IOptionDTO[];
-
-  optionsCorrectId?: string[]; // ui validation
+  questionOptions: IQuestionOptionDTO[];
+  questionOptionsCorrectId?: string[]; // ui validation
 }
 
 // user
 
-export interface IOptionUserDTO {
+export type TQuestionType = 'radio' | 'checkbox';
+
+export interface IQuestionOptionUserDTO {
   id: string;
   title: string;
 }
@@ -27,12 +28,12 @@ export interface IQuestionUserDTO {
   title: string;
   position: number;
   complete?: boolean;
-  options: IOptionUserDTO[];
-  answers: string[];
-  expanded?: boolean; // ui accordion
+  questionOptions: IQuestionOptionUserDTO[];
+  questionAnswers: string[];
+  type: TQuestionType;
 }
 
 export interface IQuestionCheckDTO {
   id: string;
-  answers: string[];
+  questionAnswers: string[];
 }

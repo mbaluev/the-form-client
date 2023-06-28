@@ -49,8 +49,8 @@ export const TaskList = observer(() => {
   ];
 
   const getRowClass = (params: RowClassParams) => {
-    const status = params.data.status;
-    if (status === 'income') return 'ag-row-green';
+    if (!params.data.complete && params.data.sent === false)
+      return 'ag-row-red';
   };
 
   const onClick = async (params: CellClickedEvent) => {

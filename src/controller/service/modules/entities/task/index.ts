@@ -5,6 +5,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { IResponseItemDTO, IResponseListDTO } from '@model/common/response';
 import { ITaskService } from '@service/modules/entities/task/interface';
 import {
+  ITaskAdminDTO,
   ITaskDTO,
   ITaskUserDocumentDTO,
   ITaskUserDTO,
@@ -102,6 +103,45 @@ export class TaskService implements ITaskService {
     >(
       `${this.API_PREFIX}/user/sent`,
       { ...data },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
+
+  // admin
+
+  getTasksAdmin = async (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<ITaskAdminDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<ITaskAdminDTO>>(
+      `${this.API_PREFIX}/admin/list`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
+
+  getTaskAdmin = async (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<ITaskAdminDTO | undefined> => {
+    const ret = await this.apiModule.get<IResponseItemDTO<ITaskAdminDTO>>(
+      `${this.API_PREFIX}/admin/item/${id}`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
+
+  completeAdmin = async (
+    id?: string,
+    token?: string | null
+  ): Promise<ITaskAdminDTO | undefined> => {
+    const ret = await this.apiModule.post<IResponseItemDTO<ITaskAdminDTO>>(
+      `${this.API_PREFIX}/admin/complete/${id}`,
+      undefined,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     return ret ? ret.data : undefined;

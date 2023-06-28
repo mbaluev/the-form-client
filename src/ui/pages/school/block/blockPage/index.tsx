@@ -18,6 +18,7 @@ import { BlockTabNames } from '@ui/pages/school/block/blockTabs';
 import { MaterialCard } from '@ui/pages/school/block/tabs/tabMaterials/materialCard';
 import { TaskCard } from '@ui/pages/school/block/tabs/tabTasks/taskCard';
 import './index.scss';
+import { QuestionCard } from '@ui/pages/school/block/tabs/tabQuestions/questionCard';
 
 export const BlockPage = observer(() => {
   const { data: module } = useViewModel<IModuleUserViewModel>(
@@ -71,6 +72,7 @@ export const BlockPage = observer(() => {
   const getPageRight = () => {
     if (tab === BlockTabNames.materials) return <MaterialCard />;
     if (tab === BlockTabNames.tasks) return <TaskCard />;
+    if (tab === BlockTabNames.questions) return <QuestionCard />;
     return undefined;
   };
 

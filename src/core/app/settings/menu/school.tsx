@@ -4,8 +4,6 @@ import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import SchoolIcon from '@mui/icons-material/School';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { ROLES } from '@app/settings/roles';
-// import PeopleIcon from '@mui/icons-material/People';
-// import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
   {
@@ -31,7 +29,6 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
         name: ROUTER_CONST_SCHOOL.ADMIN_MODULES.name,
         label: ROUTER_CONST_SCHOOL.ADMIN_MODULES.label,
         path: ROUTER_CONST_SCHOOL.ADMIN_MODULES.path,
-        // icon: <SchoolIcon />,
         active: (pathname: string) => {
           return (
             pathname === ROUTER_CONST_SCHOOL.ADMIN_MODULES.path ||
@@ -45,7 +42,6 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
         name: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.name,
         label: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.label,
         path: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.path,
-        // icon: <LibraryBooksIcon />,
         active: (pathname: string) => {
           return (
             pathname === ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.path ||
@@ -57,11 +53,21 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
         name: ROUTER_CONST_SCHOOL.ADMIN_USERS.name,
         label: ROUTER_CONST_SCHOOL.ADMIN_USERS.label,
         path: ROUTER_CONST_SCHOOL.ADMIN_USERS.path,
-        // icon: <PeopleIcon />,
         active: (pathname: string) => {
           return (
             pathname === ROUTER_CONST_SCHOOL.ADMIN_USERS.path ||
             pathname === ROUTER_CONST_SCHOOL.ADMIN_USER.path
+          );
+        },
+      },
+      {
+        name: ROUTER_CONST_SCHOOL.ADMIN_TASKS.name,
+        label: ROUTER_CONST_SCHOOL.ADMIN_TASKS.label,
+        path: ROUTER_CONST_SCHOOL.ADMIN_TASKS.path,
+        active: (pathname: string) => {
+          return (
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_TASKS.path ||
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_TASK.path
           );
         },
       },

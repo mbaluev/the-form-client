@@ -8,14 +8,14 @@ import { observer } from 'mobx-react';
 import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { TabDetails } from '@ui/pages/admin/block/tabs/tabDetails';
 import { TabMaterials } from '@ui/pages/admin/block/tabs/tabMaterials';
-import { TabTest } from '@ui/pages/admin/block/tabs/tabTest';
+import { TabQuestions } from 'ui/pages/admin/block/tabs/tabQuestions';
 import { TabTasks } from 'ui/pages/admin/block/tabs/tabTasks';
 
 enum TabNames {
   details = 'details',
   materials = 'materials',
   tasks = 'tasks',
-  test = 'test',
+  questions = 'questions',
 }
 
 const BLOCK_TAB_CONFIG: ITabItemProps[] = [
@@ -38,8 +38,8 @@ const BLOCK_TAB_CONFIG: ITabItemProps[] = [
   },
   {
     label: 'Test',
-    value: TabNames.test,
-    content: <TabTest />,
+    value: TabNames.questions,
+    content: <TabQuestions />,
     padding: false,
   },
 ];

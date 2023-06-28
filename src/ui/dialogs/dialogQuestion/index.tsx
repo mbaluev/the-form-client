@@ -134,7 +134,7 @@ export const DialogQuestion = observer((props: IProps) => {
             />
           </FormField>
           <FormField
-            title="Options"
+            title="Question options"
             actions={[
               <IconButton
                 onClick={addOption}
@@ -152,11 +152,11 @@ export const DialogQuestion = observer((props: IProps) => {
               placeholder="Text option"
               value={option}
               onChange={changeOptionHandler}
-              error={Boolean(getModalError('options'))}
-              helperText={getModalError('options')?.message}
+              error={Boolean(getModalError('questionOptions'))}
+              helperText={getModalError('questionOptions')?.message}
             />
           </FormField>
-          {modalData?.options?.map((item, index) => {
+          {modalData?.questionOptions?.map((item, index) => {
             const deleteOptionHandler = () => removeOptionHandler(item.id);
             return (
               <FormField
@@ -175,7 +175,7 @@ export const DialogQuestion = observer((props: IProps) => {
                   value={item.correct}
                   name={item.id}
                   onChange={changeOptionCorrectHandler}
-                  error={Boolean(getModalError('optionsCorrectId'))}
+                  error={Boolean(getModalError('questionOptionsCorrectId'))}
                 />
               </FormField>
             );

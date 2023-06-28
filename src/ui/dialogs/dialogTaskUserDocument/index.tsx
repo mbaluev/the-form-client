@@ -88,7 +88,7 @@ export const DialogTaskUserDocument = observer((props: IProps) => {
       <Loader loading={isModalLoading} />
       <Form cols={1}>
         <FormSection>
-          <FormField title="Name">
+          <FormField title="Document name">
             <TextFieldControl
               name="document.name"
               value={modalData?.document?.name}
@@ -97,7 +97,7 @@ export const DialogTaskUserDocument = observer((props: IProps) => {
               helperText={getModalError('document.name')?.message}
             />
           </FormField>
-          <FormField title="Description">
+          <FormField title="Document description">
             <TextFieldControl
               name="document.description"
               multiline

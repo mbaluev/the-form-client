@@ -1,8 +1,4 @@
-import {
-  IQuestionCheckDTO,
-  IQuestionDTO,
-  IQuestionUserDTO,
-} from '@model/entities/question';
+import { IQuestionDTO, IQuestionUserDTO } from '@model/entities/question';
 import { ParsedUrlQuery } from 'querystring';
 
 export interface IQuestionService {
@@ -29,9 +25,15 @@ export interface IQuestionService {
     query?: ParsedUrlQuery,
     token?: string | null
   ) => Promise<IQuestionUserDTO[] | undefined>;
-  checkAnswers: (
-    blockId: string,
-    questions: IQuestionCheckDTO[],
+  getQuestionUser: (
+    id?: string,
+    query?: ParsedUrlQuery,
     token?: string | null
-  ) => Promise<IQuestionUserDTO[] | undefined>;
+  ) => Promise<IQuestionUserDTO | undefined>;
+  saveQuestionAnswers: (
+    questionId: string,
+    questionAnswers: string[],
+    token?: string | null
+  ) => Promise<void>;
+  checkQuestions: (blockId: string, token?: string | null) => Promise<void>;
 }

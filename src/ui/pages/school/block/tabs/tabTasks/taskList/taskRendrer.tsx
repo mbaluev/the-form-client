@@ -1,8 +1,7 @@
 import React from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
 import { Tag } from '@components/tag';
-import { TaskCompleteIcon } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskCompleteIcon';
-import { TaskStatusIcon } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskStatusIcon';
+import { TaskIcon } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskIcon';
 
 export const TaskRenderer = (params: ICellRendererParams) => {
   return (
@@ -16,9 +15,10 @@ export const TaskRenderer = (params: ICellRendererParams) => {
         }}
       >
         <span>{params.value.index}.</span>
-        <TaskCompleteIcon complete={params.value.complete} />
-        <TaskStatusIcon sent={params.value.sent} />
-        <span>{params.value.name}</span>
+        <TaskIcon complete={params.value.complete} sent={params.value.sent} />
+        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {params.value.name}
+        </span>
       </div>
       <Tag tag={params.value.type.name} color={params.value.type.color} />
     </div>

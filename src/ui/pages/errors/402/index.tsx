@@ -7,7 +7,7 @@ export const Page402 = () => {
     <ErrorPage
       className="color_green-dark"
       icon={<DoneIcon className="color_green-dark" />}
-      description="Sign up success. Wait for confirmation"
+      message="Sign up success. Wait for confirmation"
     />
   );
 };

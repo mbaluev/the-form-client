@@ -6,7 +6,8 @@ import React from 'react';
 export const documentButtonValueGetter = (
   params: any,
   setPreventClick: React.Dispatch<React.SetStateAction<boolean>>,
-  download: (id: string, name: string) => Promise<void>
+  download: (id: string, name: string) => Promise<void>,
+  callback?: () => Promise<void>
 ) => {
   const documentType = params.data.document.documentType.name;
   const iconLink = <OpenInNewIcon />;
@@ -18,6 +19,7 @@ export const documentButtonValueGetter = (
     a.href = params.data.document.url;
     a.target = '_blank';
     a.click();
+    if (callback) await callback();
   };
   const onClickFile = async () => {
     setPreventClick(true);
@@ -25,6 +27,7 @@ export const documentButtonValueGetter = (
       params.data.document.file?.id,
       params.data.document.file?.name
     );
+    if (callback) await callback();
   };
   if (documentType === 'link') {
     return {

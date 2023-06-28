@@ -30,14 +30,16 @@ export class QuestionUserViewModel
       index: observable,
       setIndex: action,
       status: computed,
-      play: computed,
+      start: action,
+      stop: action,
       prev: action,
       next: action,
       repeat: action,
       finish: action,
-      expand: action,
+
       changeAnswer: action,
-      checkAnswers: action,
+      saveQuestionAnswers: action,
+      checkQuestions: action,
     });
   }
 
@@ -58,6 +60,22 @@ export class QuestionUserViewModel
     } catch (err) {
     } finally {
       this.setListLoading(false);
+    }
+  };
+
+  getData = async (id: string) => {
+    this.setDataLoading(true);
+    try {
+      const token = await this.auth.refreshToken();
+      const data = await this.serviceQuestion.getQuestionUser(
+        id,
+        undefined,
+        token
+      );
+      this.setData(data);
+    } catch (err) {
+    } finally {
+      this.setDataLoading(false);
     }
   };
 
@@ -87,15 +105,19 @@ export class QuestionUserViewModel
     return status;
   }
 
-  get play() {
-    return this.index !== undefined;
-  }
+  start = () => {
+    this.setIndex(0);
+  };
+
+  stop = () => {
+    this.clearData();
+    this.setIndex();
+  };
 
   prev = () => {
     if (this.index !== undefined) {
       const index = this.index > 0 ? this.index - 1 : 0;
       this.setIndex(index);
-      this.expand(index);
     }
   };
 
@@ -104,64 +126,80 @@ export class QuestionUserViewModel
       const index =
         this.index < this.list.length - 1 ? this.index + 1 : this.index;
       this.setIndex(index);
-      this.expand(index);
     }
   };
 
   repeat = () => {
     this.setIndex(0);
-    this.expand(0);
   };
 
   finish = () => {
     this.setIndex();
-    this.expand(0);
-    this.checkAnswers();
+    this.checkQuestions();
   };
 
-  expand = (index: number) => {
-    if (this.list) {
+  changeAnswer = (optionId: string, checked: boolean) => {
+    if (this.list && this.data) {
       const newList = [...this.list];
-      newList.forEach((q, i) => (q.expanded = i === index));
-      this.setList(newList);
-    }
-  };
-
-  changeAnswer = (questionId: string, optionId: string, checked: boolean) => {
-    if (this.list) {
-      const newList = [...this.list];
+      const newData = { ...this.data };
       newList.forEach((q) => {
-        if (q.id === questionId) {
-          if (checked) {
-            q.answers.push(optionId);
-          } else {
-            q.answers = q.answers.filter((a) => a !== optionId);
+        if (q.id === newData.id) {
+          switch (newData.type) {
+            case 'checkbox':
+              if (checked) {
+                q.questionAnswers.push(optionId);
+                newData.questionAnswers.push(optionId);
+              } else {
+                q.questionAnswers = q.questionAnswers.filter(
+                  (a) => a !== optionId
+                );
+                newData.questionAnswers = newData.questionAnswers.filter(
+                  (a) => a !== optionId
+                );
+              }
+              break;
+            case 'radio':
+              q.questionAnswers = [optionId];
+              newData.questionAnswers = [optionId];
+              break;
           }
         }
       });
       this.setList(newList);
+      this.setData(newData);
     }
   };
 
-  checkAnswers = async () => {
+  saveQuestionAnswers = async () => {
+    try {
+      if (this.data) {
+        const token = await this.auth.refreshToken();
+        await this.serviceQuestion.saveQuestionAnswers(
+          this.data.id,
+          this.data.questionAnswers,
+          token
+        );
+        // await this.getList();
+        // await this.clearChanges();
+        // await this.block.getData(blockId);
+        // this.block.changeTab(BlockTabNames.questions);
+      }
+    } catch (err) {
+    } finally {
+    }
+  };
+
+  checkQuestions = async () => {
     this.setDataLoading(true);
     try {
       if (this.list && this.block.data) {
         const token = await this.auth.refreshToken();
         const blockId = this.block.data.id;
-        const questions = this.list.map((q) => ({
-          id: q.id,
-          answers: q.answers,
-        }));
-        const data = await this.serviceQuestion.checkAnswers(
-          blockId,
-          questions,
-          token
-        );
+        const data = await this.serviceQuestion.checkQuestions(blockId, token);
         await this.getList();
         await this.clearChanges();
         await this.block.getData(blockId);
-        this.block.changeTab(BlockTabNames.test);
+        this.block.changeTab(BlockTabNames.questions);
         return data;
       }
     } catch (err) {

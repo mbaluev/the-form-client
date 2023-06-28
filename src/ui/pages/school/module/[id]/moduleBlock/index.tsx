@@ -11,6 +11,7 @@ import {
   ModuleProgress,
 } from '@ui/pages/school/module/index/moduleProgress';
 import './index.scss';
+import DoDisturbAltOutlinedIcon from '@mui/icons-material/DoDisturbAltOutlined';
 
 interface IModuleBlockProps {
   block: IBlockUserDTO;
@@ -45,9 +46,9 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
       <ul className="module-block__ul">
         <li className={clsLiMaterials}>
           <div className="module-block__li-icon">
-            {block.completeMaterials ? (
-              <CheckCircleIcon />
-            ) : (
+            {!block.enable && <DoDisturbAltOutlinedIcon />}
+            {block.enable && block.completeMaterials && <CheckCircleIcon />}
+            {block.enable && !block.completeMaterials && (
               <RadioButtonUncheckedIcon />
             )}
           </div>
@@ -55,9 +56,9 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
         </li>
         <li className={clsLiTasks}>
           <div className="module-block__li-icon">
-            {block.completeTasks ? (
-              <CheckCircleIcon />
-            ) : (
+            {!block.enable && <DoDisturbAltOutlinedIcon />}
+            {block.enable && block.completeTasks && <CheckCircleIcon />}
+            {block.enable && !block.completeTasks && (
               <RadioButtonUncheckedIcon />
             )}
           </div>
@@ -65,9 +66,9 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
         </li>
         <li className={clsLiQuestions}>
           <div className="module-block__li-icon">
-            {block.completeQuestions ? (
-              <CheckCircleIcon />
-            ) : (
+            {!block.enable && <DoDisturbAltOutlinedIcon />}
+            {block.enable && block.completeQuestions && <CheckCircleIcon />}
+            {block.enable && !block.completeQuestions && (
               <RadioButtonUncheckedIcon />
             )}
           </div>

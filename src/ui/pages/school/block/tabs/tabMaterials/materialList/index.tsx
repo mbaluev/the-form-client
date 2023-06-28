@@ -59,8 +59,17 @@ export const MaterialList = observer(() => {
       colId: 'actions',
       headerName: 'Download',
       suppressSizeToFit: true,
-      valueGetter: (params: any) =>
-        documentButtonValueGetter(params, setPreventClick, download),
+      valueGetter: (params: any) => {
+        const callback = async () => {
+          await update(params.data.id, params.data.complete);
+        };
+        return documentButtonValueGetter(
+          params,
+          setPreventClick,
+          download,
+          callback
+        );
+      },
       cellRenderer: ButtonRenderer,
     },
   ];
