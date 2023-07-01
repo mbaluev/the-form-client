@@ -1,7 +1,6 @@
 @import "../../scss/params";
 
 .alert {
-  font-family: $font-family;
   border: none;
 
   &_shadow {
@@ -34,7 +33,6 @@
     }
     & .MuiTypography-root {
       margin: 0;
-      font-family: $font-family;
     }
     & .MuiAlert-action {
       padding: 0;
