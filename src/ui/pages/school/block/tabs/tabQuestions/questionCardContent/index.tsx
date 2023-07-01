@@ -6,6 +6,10 @@ import { FormField, FormSection } from '@components/form';
 import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
 import { CheckboxFieldControl } from '@components/fields';
 import { RadioGroupFieldControl } from '@components/fields';
+import { Button } from '@components/button';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import SportsScoreIcon from '@mui/icons-material/SportsScore';
 
 export const QuestionCardContent = observer(() => {
   const { data, changeAnswer, saveQuestionAnswers } =
@@ -60,6 +64,15 @@ export const QuestionCardContent = observer(() => {
           />
         </FormField>
       )}
+      <FormField>
+        <Button variant="outlined" startIcon={<ArrowBackIcon />}>
+          Previous question
+        </Button>
+        <Button endIcon={<ArrowForwardIcon />}>Next question</Button>
+        <Button startIcon={<SportsScoreIcon />} color="green">
+          Finish
+        </Button>
+      </FormField>
     </FormSection>
   );
 });

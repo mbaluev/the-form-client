@@ -92,6 +92,9 @@ const MyApp = (props: MyAppProps) => {
         <ThemeProvider
           theme={createTheme({
             direction: dirs.getDir(router.locale) as Direction,
+            typography: {
+              fontFamily: '"Roboto Mono", "Roboto", "Montserrat", sans-serif',
+            },
           })}
         >
           <Head>
