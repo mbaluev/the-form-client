@@ -6,25 +6,19 @@ import { FormField, FormSection } from '@components/form';
 import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
 import { CheckboxFieldControl } from '@components/fields';
 import { RadioGroupFieldControl } from '@components/fields';
-import { Button } from '@components/button';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import SportsScoreIcon from '@mui/icons-material/SportsScore';
 
 export const QuestionCardContent = observer(() => {
-  const { data, changeAnswer, saveQuestionAnswers } =
+  const { data, changeAnswer, saveQuestionAnswers, isStart } =
     useViewModel<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser);
 
   const changeOptionCheckbox = async (e: ChangeEvent<HTMLInputElement>) => {
     changeAnswer(e.target.name, e.target.checked);
     await saveQuestionAnswers();
   };
-
   const changeOptionRadio = async (e: ChangeEvent<HTMLInputElement>) => {
     changeAnswer(e.target.value, true);
     await saveQuestionAnswers();
   };
-
   if (!data) return null;
 
   return (
@@ -32,19 +26,24 @@ export const QuestionCardContent = observer(() => {
       <FormField title="Title">{data.title}</FormField>
       {data.type === 'checkbox' && (
         <FormField title="Select options">
-          {data.questionOptions.map((item, index) => {
-            const checked = Boolean(
-              data.questionAnswers.find((d) => d === item.id)
+          {data.questionOptions.map((item, i) => {
+            const questionAnswer = data.questionAnswers?.find(
+              (d) => d.questionOptionId === item.id
             );
+            const checked = Boolean(questionAnswer);
+            const error = Boolean(data?.error);
+            const comment = questionAnswer?.comment;
+
             return (
               <CheckboxFieldControl
-                key={index}
+                key={i}
                 label={item.title}
                 name={item.id}
                 value={checked}
                 onChange={changeOptionCheckbox}
-                // error
-                // helperText="helperText"
+                disabled={!isStart}
+                error={error}
+                helperText={comment}
               />
             );
           })}
@@ -57,22 +56,14 @@ export const QuestionCardContent = observer(() => {
               value: item.id,
               label: item.title,
             }))}
-            value={data.questionAnswers[0]}
+            value={data.questionAnswers?.[0]?.questionOptionId}
             onChange={changeOptionRadio}
-            // error
-            // helperText="helperText"
+            disabled={!isStart}
+            error={data.error}
+            helperText={data.questionAnswers?.[0]?.comment}
           />
         </FormField>
       )}
-      <FormField>
-        <Button variant="outlined" startIcon={<ArrowBackIcon />}>
-          Previous question
-        </Button>
-        <Button endIcon={<ArrowForwardIcon />}>Next question</Button>
-        <Button startIcon={<SportsScoreIcon />} color="green">
-          Finish
-        </Button>
-      </FormField>
     </FormSection>
   );
 });

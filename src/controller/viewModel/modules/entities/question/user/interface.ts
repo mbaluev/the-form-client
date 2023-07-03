@@ -11,14 +11,21 @@ export interface ITestStatus {
 
 export interface IQuestionUserViewModel
   extends IBaseCardViewModel<IQuestionUserDTO> {
-  status: ITestStatus;
+  getData: (id: string, setIndex?: boolean) => Promise<void>;
 
-  start: () => void;
-  stop: () => void;
-  prev: () => void;
-  next: () => void;
-  repeat: () => void;
-  finish: () => void;
+  status: ITestStatus;
+  isStart: boolean;
+  isNext: boolean;
+  isPrev: boolean;
+  isFinish: boolean;
+
+  index?: number;
+
+  start: () => Promise<void>;
+  stop: () => Promise<void>;
+  prev: () => Promise<void>;
+  next: () => Promise<void>;
+  finish: () => Promise<void>;
 
   changeAnswer: (optionId: string, checked: boolean) => void;
   saveQuestionAnswers: () => Promise<void>;

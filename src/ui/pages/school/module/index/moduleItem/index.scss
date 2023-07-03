@@ -30,7 +30,7 @@
   &__li {
     display: flex;
     gap: $base * 2;
-    align-items: flex-start;
+    align-items: center;
 
     &-icon {
       display: flex;
@@ -39,6 +39,7 @@
     &-label {
       display: flex;
       padding: 2px 0;
+      flex: 1 1 auto;
     }
 
     &_complete &-icon {

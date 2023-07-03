@@ -20,10 +20,12 @@ interface IPassedProps {
 }
 const AlertPassed = (props: IPassedProps) => {
   const { complete, total } = props;
+  const title =
+    complete && total ? `Complete (${complete}/${total})` : `Complete`;
   return (
     <Alert
       type="success"
-      title={`Test passed (${complete}/${total})`}
+      title={title}
       variant="outlined"
       shadow={false}
       border={false}
@@ -37,10 +39,7 @@ interface IFailedProps {
 }
 const AlertFailed = (props: IFailedProps) => {
   const { complete, total } = props;
-  const title =
-    complete && total
-      ? `Test failed (${complete}/${total}). Please try again`
-      : `Test failed. Please try again`;
+  const title = complete && total ? `Failed (${complete}/${total})` : `Failed`;
   return (
     <Alert
       type="error"
@@ -85,7 +84,7 @@ export const QuestionList = observer(() => {
   ];
 
   const onClick = async (params: CellClickedEvent) => {
-    if (!preventClick) await getData(params.data.id);
+    if (!preventClick) await getData(params.data.id, true);
     setPreventClick(false);
   };
   const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,12 +119,12 @@ export const QuestionList = observer(() => {
 
   return (
     <React.Fragment>
-      {block?.completeQuestions === true && (
+      {block?.completeQuestions && !block?.errorQuestions && (
         <Box style={{ padding: '0 20px 20px' }}>
           <AlertPassed />
         </Box>
       )}
-      {block?.completeQuestions === false && (
+      {block?.completeQuestions && block?.errorQuestions && (
         <Box style={{ padding: '0 20px 20px' }}>
           <AlertFailed />
         </Box>

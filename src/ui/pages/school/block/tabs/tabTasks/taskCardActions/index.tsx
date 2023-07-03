@@ -26,7 +26,7 @@ export const TaskCardActions = observer(() => {
   };
   const handleClose = async () => clearData();
 
-  const disabledNew = data?.sent === null || data?.complete;
+  const disabledNew = data?.sent || data?.complete;
 
   return (
     <Toolbar

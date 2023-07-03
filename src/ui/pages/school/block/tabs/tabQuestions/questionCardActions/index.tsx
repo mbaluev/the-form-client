@@ -12,7 +12,7 @@ export const QuestionCardActions = observer(() => {
     VIEW_MODEL.QuestionUser
   );
 
-  const handleClose = async () => stop();
+  const handleClose = () => stop();
 
   return (
     <Toolbar

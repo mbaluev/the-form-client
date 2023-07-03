@@ -62,7 +62,11 @@ export const BlockTabs = observer(() => {
     {
       value: BlockTabNames.questions,
       label: (
-        <BlockTabsLabel label="Test" complete={block?.completeQuestions} />
+        <BlockTabsLabel
+          label="Test"
+          complete={block?.completeQuestions}
+          error={block?.errorQuestions}
+        />
       ),
       content: <TabQuestions />,
       padding: false,

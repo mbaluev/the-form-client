@@ -12,6 +12,8 @@ import {
   ModuleProgress,
 } from '@ui/pages/school/module/index/moduleProgress';
 import './index.scss';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { Tooltip } from '@components/tooltip';
 
 interface IModuleItemProps {
   module: IModuleUserDTO;
@@ -51,6 +53,11 @@ const ModuleItemContent = (props: IModuleItemProps) => {
                 )}
               </div>
               <div className="module-item__li-label">{block.name}</div>
+              {block.errorQuestions && (
+                <Tooltip title="Test failed">
+                  <InfoOutlinedIcon className="color_red" />
+                </Tooltip>
+              )}
             </li>
           );
         })}

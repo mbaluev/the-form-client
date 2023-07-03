@@ -50,7 +50,10 @@
         color: $color-red;
 
         & .MuiSvgIcon-root {
-          color: $color-red;
+          fill: $color-red;
+        }
+        &.Mui-disabled .MuiSvgIcon-root {
+          fill: lighten($color-red, 20%);
         }
 
         &:hover {

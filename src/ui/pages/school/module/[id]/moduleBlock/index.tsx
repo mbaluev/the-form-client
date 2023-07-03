@@ -12,6 +12,8 @@ import {
 } from '@ui/pages/school/module/index/moduleProgress';
 import './index.scss';
 import DoDisturbAltOutlinedIcon from '@mui/icons-material/DoDisturbAltOutlined';
+import { Tooltip } from '@components/tooltip';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 interface IModuleBlockProps {
   block: IBlockUserDTO;
@@ -30,7 +32,7 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
     'module-block__li_complete': block.completeMaterials,
   });
   const clsLiQuestions = classNames(clsLi, {
-    'module-block__li_complete': block.completeQuestions,
+    'module-block__li_complete': Boolean(block.completeQuestions),
   });
   const clsLiTasks = classNames(clsLi, {
     'module-block__li_complete': block.completeTasks,
@@ -73,6 +75,11 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
             )}
           </div>
           <div className="module-block__li-label">Test</div>
+          {block.errorQuestions && (
+            <Tooltip title="Test failed">
+              <InfoOutlinedIcon className="color_red" />
+            </Tooltip>
+          )}
         </li>
       </ul>
       <ModuleProgress value={progress} />

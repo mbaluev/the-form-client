@@ -27,14 +27,19 @@ export class QuestionUserViewModel
   constructor() {
     super();
     makeObservable(this, {
+      status: computed,
+      isStart: computed,
+      isNext: computed,
+      isPrev: computed,
+      isFinish: computed,
+
       index: observable,
       setIndex: action,
-      status: computed,
+
       start: action,
       stop: action,
       prev: action,
       next: action,
-      repeat: action,
       finish: action,
 
       changeAnswer: action,
@@ -63,8 +68,9 @@ export class QuestionUserViewModel
     }
   };
 
-  getData = async (id: string) => {
+  getData = async (id: string, setIndex?: boolean) => {
     this.setDataLoading(true);
+    if (setIndex) this.setIndex(this.getIndexById(id));
     try {
       const token = await this.auth.refreshToken();
       const data = await this.serviceQuestion.getQuestionUser(
@@ -79,13 +85,22 @@ export class QuestionUserViewModel
     }
   };
 
-  // --- actions
-
-  index?: number = undefined;
-
-  setIndex = (value?: number) => {
-    this.index = value;
+  getDataByIndex = async (index: number) => {
+    if (this.list) {
+      const id = this.list[index].id;
+      await this.getData(id);
+    }
   };
+
+  getIndexById = (id: string) => {
+    let index;
+    this.list?.forEach((d, i) => {
+      if (d.id === id) index = i;
+    });
+    return index;
+  };
+
+  // --- computed
 
   get status() {
     const status: ITestStatus = {
@@ -105,37 +120,84 @@ export class QuestionUserViewModel
     return status;
   }
 
-  start = () => {
+  get isStart() {
+    return !this.block.data?.completeQuestions;
+  }
+
+  get isNext() {
+    return (
+      this.index !== undefined &&
+      this.list !== undefined &&
+      this.list !== null &&
+      this.index < this.list.length - 1
+    );
+  }
+
+  get isPrev() {
+    return this.index !== undefined && this.index > 0;
+  }
+
+  get isFinish() {
+    return (
+      !this.block.data?.completeQuestions &&
+      Boolean(
+        this.list?.reduce((prev, curr) => {
+          return prev && curr.questionAnswers.length !== 0;
+        }, true)
+      )
+    );
+  }
+
+  // --- actions
+
+  index?: number = undefined;
+
+  setIndex = (value?: number) => {
+    this.index = value;
+  };
+
+  start = async () => {
     this.setIndex(0);
+    await this.getDataByIndex(0);
   };
 
-  stop = () => {
-    this.clearData();
+  stop = async () => {
     this.setIndex();
+    await this.clearData();
   };
 
-  prev = () => {
-    if (this.index !== undefined) {
-      const index = this.index > 0 ? this.index - 1 : 0;
+  prev = async () => {
+    if (
+      this.isPrev &&
+      this.index !== undefined &&
+      !this.isListLoading &&
+      !this.isDataLoading
+    ) {
+      const index = this.index - 1;
       this.setIndex(index);
+      await this.getDataByIndex(index);
     }
   };
 
-  next = () => {
-    if (this.index !== undefined && this.list) {
-      const index =
-        this.index < this.list.length - 1 ? this.index + 1 : this.index;
+  next = async () => {
+    if (
+      this.isNext &&
+      this.index !== undefined &&
+      this.list &&
+      !this.isListLoading &&
+      !this.isDataLoading
+    ) {
+      const index = this.index + 1;
       this.setIndex(index);
+      await this.getDataByIndex(index);
     }
   };
 
-  repeat = () => {
-    this.setIndex(0);
-  };
-
-  finish = () => {
-    this.setIndex();
-    this.checkQuestions();
+  finish = async () => {
+    if (this.isFinish && !this.isListLoading && !this.isDataLoading) {
+      await this.stop();
+      await this.checkQuestions();
+    }
   };
 
   changeAnswer = (optionId: string, checked: boolean) => {
@@ -147,20 +209,20 @@ export class QuestionUserViewModel
           switch (newData.type) {
             case 'checkbox':
               if (checked) {
-                q.questionAnswers.push(optionId);
-                newData.questionAnswers.push(optionId);
+                q.questionAnswers.push({ questionOptionId: optionId });
+                newData.questionAnswers.push({ questionOptionId: optionId });
               } else {
                 q.questionAnswers = q.questionAnswers.filter(
-                  (a) => a !== optionId
+                  (a) => a.questionOptionId !== optionId
                 );
                 newData.questionAnswers = newData.questionAnswers.filter(
-                  (a) => a !== optionId
+                  (a) => a.questionOptionId !== optionId
                 );
               }
               break;
             case 'radio':
-              q.questionAnswers = [optionId];
-              newData.questionAnswers = [optionId];
+              q.questionAnswers = [{ questionOptionId: optionId }];
+              newData.questionAnswers = [{ questionOptionId: optionId }];
               break;
           }
         }
@@ -176,13 +238,9 @@ export class QuestionUserViewModel
         const token = await this.auth.refreshToken();
         await this.serviceQuestion.saveQuestionAnswers(
           this.data.id,
-          this.data.questionAnswers,
+          this.data.questionAnswers.map((d) => d.questionOptionId),
           token
         );
-        // await this.getList();
-        // await this.clearChanges();
-        // await this.block.getData(blockId);
-        // this.block.changeTab(BlockTabNames.questions);
       }
     } catch (err) {
     } finally {
@@ -190,21 +248,18 @@ export class QuestionUserViewModel
   };
 
   checkQuestions = async () => {
-    this.setDataLoading(true);
+    this.setListLoading(true);
     try {
       if (this.list && this.block.data) {
         const token = await this.auth.refreshToken();
         const blockId = this.block.data.id;
-        const data = await this.serviceQuestion.checkQuestions(blockId, token);
-        await this.getList();
-        await this.clearChanges();
+        await this.serviceQuestion.checkQuestions(blockId, token);
         await this.block.getData(blockId);
         this.block.changeTab(BlockTabNames.questions);
-        return data;
       }
     } catch (err) {
     } finally {
-      this.setDataLoading(false);
+      this.setListLoading(false);
     }
   };
 }

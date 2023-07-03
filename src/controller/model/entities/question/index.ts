@@ -22,18 +22,19 @@ export interface IQuestionOptionUserDTO {
   title: string;
 }
 
+export interface IQuestionAnswerUserDTO {
+  questionOptionId: string;
+  comment?: string;
+}
+
 export interface IQuestionUserDTO {
   blockId: string;
   id: string;
   title: string;
   position: number;
   complete?: boolean;
+  error?: boolean;
   questionOptions: IQuestionOptionUserDTO[];
-  questionAnswers: string[];
+  questionAnswers: IQuestionAnswerUserDTO[];
   type: TQuestionType;
-}
-
-export interface IQuestionCheckDTO {
-  id: string;
-  questionAnswers: string[];
 }
