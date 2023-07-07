@@ -13,4 +13,5 @@ export interface IBlockUserDTO extends IBlockDTO {
   completeQuestions: boolean;
   completeTasks: boolean;
   errorQuestions: boolean;
+  commentQuestions: boolean;
 }

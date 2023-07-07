@@ -66,6 +66,7 @@ export const BlockTabs = observer(() => {
           label="Test"
           complete={block?.completeQuestions}
           error={block?.errorQuestions}
+          comment={block?.commentQuestions}
         />
       ),
       content: <TabQuestions />,

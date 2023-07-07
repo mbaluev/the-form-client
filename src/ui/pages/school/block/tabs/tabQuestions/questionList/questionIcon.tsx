@@ -4,7 +4,8 @@ import { Tooltip } from '@components/tooltip';
 import { IQuestionUserDTO } from '@model/entities/question';
 import { observer } from 'mobx-react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import React from 'react';
+import React, { Fragment } from 'react';
+import MarkChatUnreadOutlinedIcon from '@mui/icons-material/MarkChatUnreadOutlined';
 
 interface IProps {
   data?: IQuestionUserDTO | null;
@@ -32,9 +33,16 @@ export const QuestionIcon = observer((props: IProps) => {
     );
   if (data && data.error)
     icon = (
-      <Tooltip title="Failed">
-        <InfoOutlinedIcon className="color_red" style={style} />
-      </Tooltip>
+      <Fragment>
+        <Tooltip title="Failed">
+          <InfoOutlinedIcon className="color_red" style={style} />
+        </Tooltip>
+        {data.comment && (
+          <Tooltip title="Has a comments">
+            <MarkChatUnreadOutlinedIcon className="color_red" style={style} />
+          </Tooltip>
+        )}
+      </Fragment>
     );
   return icon;
 });

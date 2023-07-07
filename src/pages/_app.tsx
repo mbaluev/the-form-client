@@ -1,13 +1,12 @@
-import * as React from 'react';
-import { useEffect } from 'react';
 import 'reflect-metadata';
+import { useEffect } from 'react';
 import { configure } from 'mobx';
 import { enableStaticRendering, observer } from 'mobx-react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import { createTheme, Direction, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import {
   createEmotionCache,
   createEmotionCacheRtl,
@@ -18,12 +17,12 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { IAppViewModel } from '@viewModel/modules/common/app/interface';
 import { LayoutEmpty } from '@ui/layout/layout';
 import { ILocaleViewModel } from '@viewModel/modules/common/locale/interface';
-import dirs from '@utils/locale/dir';
 import { SnackbarProvider } from 'notistack';
 import { IMenuViewModel } from '@viewModel/modules/common/menu/interface';
 import { IFilterViewModel } from '@viewModel/modules/common/filter/interfaces';
 import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
 import { getCookie } from 'cookies-next';
+import { theme } from '../core/mui/theme';
 import cookie from '@utils/cookie';
 import '../core/scss/index.scss';
 
@@ -89,14 +88,7 @@ const MyApp = (props: MyAppProps) => {
   return (
     <DiContainerProvider container={container}>
       <CacheProvider value={emotionCache}>
-        <ThemeProvider
-          theme={createTheme({
-            direction: dirs.getDir(router.locale) as Direction,
-            typography: {
-              fontFamily: '"Roboto Mono", "Roboto", "Montserrat", sans-serif',
-            },
-          })}
-        >
+        <ThemeProvider theme={theme(router)}>
           <Head>
             <title>The Form</title>
             <meta

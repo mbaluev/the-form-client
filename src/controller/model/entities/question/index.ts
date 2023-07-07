@@ -24,7 +24,7 @@ export interface IQuestionOptionUserDTO {
 
 export interface IQuestionAnswerUserDTO {
   questionOptionId: string;
-  comment?: string;
+  commentText?: string;
 }
 
 export interface IQuestionUserDTO {
@@ -34,6 +34,7 @@ export interface IQuestionUserDTO {
   position: number;
   complete?: boolean;
   error?: boolean;
+  comment?: boolean;
   questionOptions: IQuestionOptionUserDTO[];
   questionAnswers: IQuestionAnswerUserDTO[];
   type: TQuestionType;

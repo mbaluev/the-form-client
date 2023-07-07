@@ -14,6 +14,7 @@ import {
 import './index.scss';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Tooltip } from '@components/tooltip';
+import MarkChatUnreadOutlinedIcon from '@mui/icons-material/MarkChatUnreadOutlined';
 
 interface IModuleItemProps {
   module: IModuleUserDTO;
@@ -56,6 +57,11 @@ const ModuleItemContent = (props: IModuleItemProps) => {
               {block.errorQuestions && (
                 <Tooltip title="Test failed">
                   <InfoOutlinedIcon className="color_red" />
+                </Tooltip>
+              )}
+              {block.commentQuestions && (
+                <Tooltip title="Has a comments">
+                  <MarkChatUnreadOutlinedIcon className="color_red" />
                 </Tooltip>
               )}
             </li>
