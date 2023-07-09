@@ -20,8 +20,9 @@ import { documentButtonValueGetter } from '@ui/components/documentButtonValueGet
 export const MaterialList = observer(() => {
   const {
     isListLoading,
-    listFiltered: materials,
-    hasListFiltered: hasList,
+    list,
+    listFiltered,
+    hasListFiltered,
     filter,
     setFilter,
     addDeleteId,
@@ -139,7 +140,7 @@ export const MaterialList = observer(() => {
     <React.Fragment>
       <GridWithData
         propsAG={{
-          rowData: materials,
+          rowData: listFiltered,
           columnDefs,
           defaultColDef,
           rowHeight: 40,
@@ -148,11 +149,11 @@ export const MaterialList = observer(() => {
         propsGrid={{
           onClick,
           sizeToFit: true,
-          totalItems: materials?.length,
+          totalItems: list?.length,
           toolbar: { itemsLeft, itemsRight },
           className: 'ag-grid_no-header',
           isLoading: isListLoading,
-          hasRows: hasList,
+          hasRows: hasListFiltered,
           selectedIds: deleteIds,
           noDataMessage: 'No data found',
           autoSizeColumns: ['actions'],

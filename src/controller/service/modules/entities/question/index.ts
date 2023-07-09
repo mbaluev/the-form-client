@@ -2,11 +2,7 @@ import { inject, injectable } from 'inversify';
 import { INFRASTRUCTURE_MODULE } from '@infrastructure/ids';
 import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { IQuestionService } from '@service/modules/entities/question/interface';
-import {
-  IQuestionAdminDTO,
-  IQuestionDTO,
-  IQuestionUserDTO,
-} from '@model/entities/question';
+import { IQuestionDTO, IQuestionUserDTO } from '@model/entities/question';
 import { ParsedUrlQuery } from 'querystring';
 import { IResponseItemDTO, IResponseListDTO } from '@model/common/response';
 
@@ -124,8 +120,8 @@ export class QuestionService implements IQuestionService {
   getQuestionsAdmin = async (
     query?: ParsedUrlQuery,
     token?: string | null
-  ): Promise<IQuestionAdminDTO[] | undefined> => {
-    const ret = await this.apiModule.post<IResponseListDTO<IQuestionAdminDTO>>(
+  ): Promise<IQuestionUserDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<IQuestionUserDTO>>(
       `${this.API_PREFIX}/admin/list`,
       { ...query },
       { headers: { Authorization: `Bearer ${token}` } }
@@ -137,8 +133,8 @@ export class QuestionService implements IQuestionService {
     id?: string,
     query?: ParsedUrlQuery,
     token?: string | null
-  ): Promise<IQuestionAdminDTO | undefined> => {
-    const ret = await this.apiModule.get<IResponseItemDTO<IQuestionAdminDTO>>(
+  ): Promise<IQuestionUserDTO | undefined> => {
+    const ret = await this.apiModule.get<IResponseItemDTO<IQuestionUserDTO>>(
       `${this.API_PREFIX}/admin/item/${id}`,
       { ...query },
       { headers: { Authorization: `Bearer ${token}` } }

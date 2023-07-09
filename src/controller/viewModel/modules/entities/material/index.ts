@@ -95,36 +95,36 @@ export class MaterialViewModel
         if (_.has(item, 'document.name')) {
           result =
             result ||
-            (item.document.name !== undefined &&
-              item.document.name !== null &&
-              item.document.name
+            (item.document?.name !== undefined &&
+              item.document?.name !== null &&
+              item.document?.name
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'document.description')) {
           result =
             result ||
-            (item.document.description !== undefined &&
-              item.document.description !== null &&
-              item.document.description
+            (item.document?.description !== undefined &&
+              item.document?.description !== null &&
+              item.document?.description
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'document.file.name')) {
           result =
             result ||
-            (item.document.file.name !== undefined &&
-              item.document.file.name !== null &&
-              item.document.file.name
+            (item.document?.file.name !== undefined &&
+              item.document?.file.name !== null &&
+              item.document?.file.name
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'document.url')) {
           result =
             result ||
-            (item.document.url !== undefined &&
-              item.document.url !== null &&
-              item.document.url
+            (item.document?.url !== undefined &&
+              item.document?.url !== null &&
+              item.document?.url
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }

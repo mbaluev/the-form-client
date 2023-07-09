@@ -1,8 +1,4 @@
-import {
-  IQuestionAdminDTO,
-  IQuestionDTO,
-  IQuestionUserDTO,
-} from '@model/entities/question';
+import { IQuestionDTO, IQuestionUserDTO } from '@model/entities/question';
 import { ParsedUrlQuery } from 'querystring';
 
 export interface IQuestionService {
@@ -45,10 +41,10 @@ export interface IQuestionService {
   getQuestionsAdmin: (
     query?: ParsedUrlQuery,
     token?: string | null
-  ) => Promise<IQuestionAdminDTO[] | undefined>;
+  ) => Promise<IQuestionUserDTO[] | undefined>;
   getQuestionAdmin: (
     id?: string,
     query?: ParsedUrlQuery,
     token?: string | null
-  ) => Promise<IQuestionAdminDTO | undefined>;
+  ) => Promise<IQuestionUserDTO | undefined>;
 }

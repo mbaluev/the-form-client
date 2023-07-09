@@ -19,6 +19,7 @@ export const BlockList = observer((props: IProps) => {
   const { filtersLeft, onClick, onNewCallback } = props;
   const {
     blockData,
+    list,
     listFiltered,
     hasListFiltered,
     isModalOpen,
@@ -76,7 +77,7 @@ export const BlockList = observer((props: IProps) => {
         propsGrid={{
           onClick,
           sizeToFit: true,
-          totalItems: listFiltered?.length,
+          totalItems: list?.length,
           toolbar: { itemsLeft: filtersLeft, itemsRight: filtersRight },
           selectedIds: blockData ? [blockData.id] : undefined,
           className: 'ag-grid_no-header',

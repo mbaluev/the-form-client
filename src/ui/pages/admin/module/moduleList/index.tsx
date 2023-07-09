@@ -23,7 +23,8 @@ export const ModuleList = observer((props: IProps) => {
   const {
     moduleData,
     list,
-    hasList,
+    listFiltered,
+    hasListFiltered,
     isModalOpen,
     modalNew,
     modalClose,
@@ -86,7 +87,7 @@ export const ModuleList = observer((props: IProps) => {
     <React.Fragment>
       <GridWithData
         propsAG={{
-          rowData: list,
+          rowData: listFiltered,
           columnDefs,
           defaultColDef,
           rowHeight: 40,
@@ -98,7 +99,7 @@ export const ModuleList = observer((props: IProps) => {
           toolbar: { itemsLeft, itemsRight },
           selectedIds: moduleData ? [moduleData.id] : undefined,
           className: 'ag-grid_no-header',
-          hasRows: hasList,
+          hasRows: hasListFiltered,
           noDataMessage: 'No data found',
         }}
       />

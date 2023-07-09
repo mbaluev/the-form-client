@@ -18,8 +18,9 @@ import { DialogQuestion } from '@ui/dialogs/dialogQuestion';
 export const QuestionList = observer(() => {
   const {
     isListLoading,
-    listFiltered: questions,
-    hasListFiltered: hasList,
+    list,
+    listFiltered,
+    hasListFiltered,
     filter,
     setFilter,
     addDeleteId,
@@ -115,7 +116,7 @@ export const QuestionList = observer(() => {
     <React.Fragment>
       <GridWithData
         propsAG={{
-          rowData: questions,
+          rowData: listFiltered,
           columnDefs,
           defaultColDef,
           rowHeight: 40,
@@ -124,11 +125,11 @@ export const QuestionList = observer(() => {
         propsGrid={{
           onClick,
           sizeToFit: true,
-          totalItems: questions?.length,
+          totalItems: list?.length,
           toolbar: { itemsLeft, itemsRight },
           className: 'ag-grid_no-header',
           isLoading: isListLoading,
-          hasRows: hasList,
+          hasRows: hasListFiltered,
           selectedIds: deleteIds,
           noDataMessage: 'No data found',
         }}

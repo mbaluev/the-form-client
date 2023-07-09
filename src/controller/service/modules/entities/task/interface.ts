@@ -1,6 +1,5 @@
 import { ParsedUrlQuery } from 'querystring';
 import {
-  ITaskAdminDTO,
   ITaskDTO,
   ITaskUserDocumentDTO,
   ITaskUserDTO,
@@ -42,14 +41,14 @@ export interface ITaskService {
   getTasksAdmin: (
     query?: ParsedUrlQuery,
     token?: string | null
-  ) => Promise<ITaskAdminDTO[] | undefined>;
+  ) => Promise<ITaskUserDTO[] | undefined>;
   getTaskAdmin: (
     id?: string,
     query?: ParsedUrlQuery,
     token?: string | null
-  ) => Promise<ITaskAdminDTO | undefined>;
+  ) => Promise<ITaskUserDTO | undefined>;
   completeAdmin: (
     id?: string,
     token?: string | null
-  ) => Promise<ITaskAdminDTO | undefined>;
+  ) => Promise<ITaskUserDTO | undefined>;
 }

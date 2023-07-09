@@ -20,8 +20,9 @@ import { TaskRenderer } from '@ui/pages/admin/block/tabs/tabTasks/taskList/taskR
 export const TaskList = observer(() => {
   const {
     isListLoading,
-    listFiltered: tasks,
-    hasListFiltered: hasList,
+    list,
+    listFiltered,
+    hasListFiltered,
     filter,
     setFilter,
     addDeleteId,
@@ -127,7 +128,7 @@ export const TaskList = observer(() => {
     <React.Fragment>
       <GridWithData
         propsAG={{
-          rowData: tasks,
+          rowData: listFiltered,
           columnDefs,
           defaultColDef,
           rowHeight: 40,
@@ -136,11 +137,11 @@ export const TaskList = observer(() => {
         propsGrid={{
           onClick,
           sizeToFit: true,
-          totalItems: tasks?.length,
+          totalItems: list?.length,
           toolbar: { itemsLeft, itemsRight },
           className: 'ag-grid_no-header',
           isLoading: isListLoading,
-          hasRows: hasList,
+          hasRows: hasListFiltered,
           selectedIds: deleteIds,
           noDataMessage: 'No data found',
           autoSizeColumns: ['actions'],
