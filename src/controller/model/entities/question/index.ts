@@ -1,59 +1,73 @@
 import { IUserDTO } from '@model/entities/user';
-import { IBlockDTO } from '@model/entities/block';
+import { IBlockDTO, IBlockUserDTO } from '@model/entities/block';
 
+export type TQuestionType = 'radio' | 'checkbox';
+
+export interface IQuestionDTO {
+  id: string;
+  title: string;
+  position: number;
+  createdAt: string;
+  updatedAt: string;
+
+  // foreign keys
+  blockId: string;
+  block?: IBlockDTO;
+
+  // references
+  questionOptions?: IQuestionOptionDTO[];
+  userQuestions?: IQuestionUserDTO[];
+
+  // additional
+  _type?: TQuestionType;
+}
 export interface IQuestionOptionDTO {
   id: string;
   title: string;
   correct: boolean;
-}
+  createdAt: string;
+  updatedAt: string;
 
-export interface IQuestionDTO {
-  id: string;
-  blockId: string;
-  block: IBlockDTO;
-  title: string;
-  position: number;
-  questionOptions: IQuestionOptionDTO[];
-  questionOptionsCorrectId?: string[]; // ui validation
+  // foreign keys
+  questionId: string;
+  question?: IQuestionDTO;
+
+  // references
+  userQuestionAnswers?: IQuestionAnswerUserDTO[];
 }
 
 // user
 
-export type TQuestionType = 'radio' | 'checkbox';
-
-export interface IQuestionOptionUserDTO {
-  id: string;
-  title: string;
-}
-
-export interface IQuestionAnswerUserDTO {
-  questionOptionId: string;
-  commentText?: string;
-}
-
 export interface IQuestionUserDTO {
-  blockId: string;
   id: string;
-  title: string;
-  position: number;
   complete?: boolean;
   error?: boolean;
   comment?: boolean;
-  questionOptions: IQuestionOptionUserDTO[];
-  questionAnswers: IQuestionAnswerUserDTO[];
-  type: TQuestionType;
-}
+  createdAt: string;
+  updatedAt: string;
 
-export interface IQuestionAdminDTO {
-  id: string;
+  // foreign keys
   questionId: string;
-  question: IQuestionDTO;
+  question?: IQuestionDTO;
   userId: string;
-  user: IUserDTO;
-  complete?: boolean;
-  error?: boolean;
-  comment?: boolean;
-  questionOptions?: IQuestionOptionUserDTO[];
-  questionAnswers?: IQuestionAnswerUserDTO[];
-  type?: TQuestionType;
+  user?: IUserDTO;
+  userBlockId: string;
+  userBlock?: IBlockUserDTO;
+
+  // references
+  userQuestionAnswers?: IQuestionAnswerUserDTO[];
+}
+export interface IQuestionAnswerUserDTO {
+  id: string;
+  commentText?: string;
+  createdAt: string;
+  updatedAt: string;
+
+  // foreign keys
+  questionOptionId: string;
+  questionOption?: IQuestionOptionDTO;
+  userId: string;
+  user?: IUserDTO;
+  userQuestionId: string;
+  userQuestion?: IQuestionUserDTO;
 }
