@@ -1,14 +1,14 @@
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Tooltip } from '@components/tooltip';
-import { IQuestionUserDTO } from '@model/entities/question';
+import { IQuestionAdminDTO } from '@model/entities/question';
 import { observer } from 'mobx-react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import React, { Fragment } from 'react';
 import MarkChatUnreadOutlinedIcon from '@mui/icons-material/MarkChatUnreadOutlined';
 
 interface IProps {
-  data?: IQuestionUserDTO | null;
+  data?: IQuestionAdminDTO | null;
   style?: object;
 }
 

@@ -71,6 +71,17 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
           );
         },
       },
+      {
+        name: ROUTER_CONST_SCHOOL.ADMIN_QUESTIONS.name,
+        label: ROUTER_CONST_SCHOOL.ADMIN_QUESTIONS.label,
+        path: ROUTER_CONST_SCHOOL.ADMIN_QUESTIONS.path,
+        active: (pathname: string) => {
+          return (
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_QUESTIONS.path ||
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_QUESTION.path
+          );
+        },
+      },
     ],
     roles: [ROLES.ADMIN],
   },

@@ -2,7 +2,11 @@ import { inject, injectable } from 'inversify';
 import { INFRASTRUCTURE_MODULE } from '@infrastructure/ids';
 import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { IQuestionService } from '@service/modules/entities/question/interface';
-import { IQuestionDTO, IQuestionUserDTO } from '@model/entities/question';
+import {
+  IQuestionAdminDTO,
+  IQuestionDTO,
+  IQuestionUserDTO,
+} from '@model/entities/question';
 import { ParsedUrlQuery } from 'querystring';
 import { IResponseItemDTO, IResponseListDTO } from '@model/common/response';
 
@@ -113,5 +117,32 @@ export class QuestionService implements IQuestionService {
       { blockId },
       { headers: { Authorization: `Bearer ${token}` } }
     );
+  };
+
+  // --- admin
+
+  getQuestionsAdmin = async (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<IQuestionAdminDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<IQuestionAdminDTO>>(
+      `${this.API_PREFIX}/admin/list`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
+
+  getQuestionAdmin = async (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<IQuestionAdminDTO | undefined> => {
+    const ret = await this.apiModule.get<IResponseItemDTO<IQuestionAdminDTO>>(
+      `${this.API_PREFIX}/admin/item/${id}`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
   };
 }

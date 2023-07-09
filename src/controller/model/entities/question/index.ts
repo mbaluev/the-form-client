@@ -1,3 +1,6 @@
+import { IUserDTO } from '@model/entities/user';
+import { IBlockDTO } from '@model/entities/block';
+
 export interface IQuestionOptionDTO {
   id: string;
   title: string;
@@ -7,6 +10,7 @@ export interface IQuestionOptionDTO {
 export interface IQuestionDTO {
   id: string;
   blockId: string;
+  block: IBlockDTO;
   title: string;
   position: number;
   questionOptions: IQuestionOptionDTO[];
@@ -38,4 +42,18 @@ export interface IQuestionUserDTO {
   questionOptions: IQuestionOptionUserDTO[];
   questionAnswers: IQuestionAnswerUserDTO[];
   type: TQuestionType;
+}
+
+export interface IQuestionAdminDTO {
+  id: string;
+  questionId: string;
+  question: IQuestionDTO;
+  userId: string;
+  user: IUserDTO;
+  complete?: boolean;
+  error?: boolean;
+  comment?: boolean;
+  questionOptions?: IQuestionOptionUserDTO[];
+  questionAnswers?: IQuestionAnswerUserDTO[];
+  type?: TQuestionType;
 }
