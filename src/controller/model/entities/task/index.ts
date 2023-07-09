@@ -17,6 +17,7 @@ export interface ITaskDTO {
   userTasks?: ITaskUserDTO[];
 }
 
+// user
 export interface ITaskUserDTO {
   id: string;
   complete?: boolean;

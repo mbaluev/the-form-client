@@ -14,6 +14,7 @@ export interface IModuleDTO {
   userModules?: IModuleUserDTO[];
 }
 
+// user
 export interface IModuleUserDTO {
   id: string;
   enable: boolean;

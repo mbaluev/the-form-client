@@ -17,6 +17,7 @@ export interface IMaterialDTO {
   userMaterials?: IMaterialUserDTO[];
 }
 
+// user
 export interface IMaterialUserDTO {
   id: string;
   complete?: boolean;

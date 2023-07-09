@@ -17,6 +17,7 @@ export interface IBlockDTO {
   module?: IModuleDTO;
 }
 
+// user
 export interface IBlockUserDTO extends IBlockDTO {
   id: string;
   enable: boolean;

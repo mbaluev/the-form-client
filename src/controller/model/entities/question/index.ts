@@ -37,7 +37,6 @@ export interface IQuestionOptionDTO {
 }
 
 // user
-
 export interface IQuestionUserDTO {
   id: string;
   complete?: boolean;
