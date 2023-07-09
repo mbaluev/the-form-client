@@ -18,7 +18,7 @@ export interface IBlockDTO {
 }
 
 // user
-export interface IBlockUserDTO extends IBlockDTO {
+export interface IBlockUserDTO {
   id: string;
   enable: boolean;
   complete: boolean;

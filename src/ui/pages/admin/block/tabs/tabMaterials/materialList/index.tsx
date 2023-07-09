@@ -66,7 +66,11 @@ export const MaterialList = observer(() => {
       headerName: 'Download',
       suppressSizeToFit: true,
       valueGetter: (params: any) =>
-        documentButtonValueGetter(params, setPreventClick, download),
+        documentButtonValueGetter(
+          params.data.document,
+          setPreventClick,
+          download
+        ),
       cellRenderer: ButtonRenderer,
       maxWidth: 300,
     },

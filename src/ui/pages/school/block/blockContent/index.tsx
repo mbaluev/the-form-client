@@ -10,12 +10,12 @@ import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/inte
 import './index.scss';
 
 export const BlockContent = observer(() => {
-  const { data: block } = useViewModel<IBlockUserViewModel>(
+  const { data: userBlock } = useViewModel<IBlockUserViewModel>(
     VIEW_MODEL.BlockUser
   );
   const cls = classNames('block-content');
-  if (!block) return <Loader loading relative />;
-  return block.enable ? (
+  if (!userBlock) return <Loader loading relative />;
+  return userBlock.enable ? (
     <div className={cls}>
       <BlockTabs />
     </div>

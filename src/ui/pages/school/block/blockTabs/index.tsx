@@ -20,7 +20,7 @@ export enum BlockTabNames {
 
 export const BlockTabs = observer(() => {
   const {
-    data: block,
+    data: userBlock,
     tab,
     changeTab,
   } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
@@ -46,7 +46,10 @@ export const BlockTabs = observer(() => {
     {
       value: BlockTabNames.materials,
       label: (
-        <BlockTabsLabel label="Materials" complete={block?.completeMaterials} />
+        <BlockTabsLabel
+          label="Materials"
+          complete={userBlock?.completeMaterials}
+        />
       ),
       content: <TabMaterials />,
       padding: false,
@@ -54,7 +57,7 @@ export const BlockTabs = observer(() => {
     {
       value: BlockTabNames.tasks,
       label: (
-        <BlockTabsLabel label="Homework" complete={block?.completeTasks} />
+        <BlockTabsLabel label="Homework" complete={userBlock?.completeTasks} />
       ),
       content: <TabTasks />,
       padding: false,
@@ -64,9 +67,9 @@ export const BlockTabs = observer(() => {
       label: (
         <BlockTabsLabel
           label="Test"
-          complete={block?.completeQuestions}
-          error={block?.errorQuestions}
-          comment={block?.commentQuestions}
+          complete={userBlock?.completeQuestions}
+          error={userBlock?.errorQuestions}
+          comment={userBlock?.commentQuestions}
         />
       ),
       content: <TabQuestions />,

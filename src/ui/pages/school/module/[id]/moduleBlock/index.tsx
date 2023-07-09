@@ -17,41 +17,43 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import MarkChatUnreadOutlinedIcon from '@mui/icons-material/MarkChatUnreadOutlined';
 
 interface IModuleBlockProps {
-  block: IBlockUserDTO;
+  userBlock: IBlockUserDTO;
 }
 
 const ModuleBlockContent = (props: IModuleBlockProps) => {
-  const { block } = props;
+  const { userBlock } = props;
   const progress = getProgress([
-    Boolean(block.completeMaterials),
-    Boolean(block.completeQuestions),
-    Boolean(block.completeTasks),
+    Boolean(userBlock.completeMaterials),
+    Boolean(userBlock.completeQuestions),
+    Boolean(userBlock.completeTasks),
   ]);
 
   const clsLi = classNames('module-block__li');
   const clsLiMaterials = classNames(clsLi, {
-    'module-block__li_complete': block.completeMaterials,
+    'module-block__li_complete': userBlock.completeMaterials,
   });
   const clsLiQuestions = classNames(clsLi, {
-    'module-block__li_complete': Boolean(block.completeQuestions),
+    'module-block__li_complete': Boolean(userBlock.completeQuestions),
   });
   const clsLiTasks = classNames(clsLi, {
-    'module-block__li_complete': block.completeTasks,
+    'module-block__li_complete': userBlock.completeTasks,
   });
 
   return (
     <React.Fragment>
       <div className="module-block__title">
-        {block.title}
-        <ModuleBlockStatus block={block} />
+        {userBlock.block?.title}
+        <ModuleBlockStatus userModuleBlock={userBlock} />
       </div>
-      <div className="module-block__name">{block.name}</div>
+      <div className="module-block__name">{userBlock.block?.name}</div>
       <ul className="module-block__ul">
         <li className={clsLiMaterials}>
           <div className="module-block__li-icon">
-            {!block.enable && <DoDisturbAltOutlinedIcon />}
-            {block.enable && block.completeMaterials && <CheckCircleIcon />}
-            {block.enable && !block.completeMaterials && (
+            {!userBlock.enable && <DoDisturbAltOutlinedIcon />}
+            {userBlock.enable && userBlock.completeMaterials && (
+              <CheckCircleIcon />
+            )}
+            {userBlock.enable && !userBlock.completeMaterials && (
               <RadioButtonUncheckedIcon />
             )}
           </div>
@@ -59,9 +61,9 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
         </li>
         <li className={clsLiTasks}>
           <div className="module-block__li-icon">
-            {!block.enable && <DoDisturbAltOutlinedIcon />}
-            {block.enable && block.completeTasks && <CheckCircleIcon />}
-            {block.enable && !block.completeTasks && (
+            {!userBlock.enable && <DoDisturbAltOutlinedIcon />}
+            {userBlock.enable && userBlock.completeTasks && <CheckCircleIcon />}
+            {userBlock.enable && !userBlock.completeTasks && (
               <RadioButtonUncheckedIcon />
             )}
           </div>
@@ -69,19 +71,21 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
         </li>
         <li className={clsLiQuestions}>
           <div className="module-block__li-icon">
-            {!block.enable && <DoDisturbAltOutlinedIcon />}
-            {block.enable && block.completeQuestions && <CheckCircleIcon />}
-            {block.enable && !block.completeQuestions && (
+            {!userBlock.enable && <DoDisturbAltOutlinedIcon />}
+            {userBlock.enable && userBlock.completeQuestions && (
+              <CheckCircleIcon />
+            )}
+            {userBlock.enable && !userBlock.completeQuestions && (
               <RadioButtonUncheckedIcon />
             )}
           </div>
           <div className="module-block__li-label">Test</div>
-          {block.errorQuestions && (
+          {userBlock.errorQuestions && (
             <Tooltip title="Test failed">
               <InfoOutlinedIcon className="color_red" />
             </Tooltip>
           )}
-          {block.commentQuestions && (
+          {userBlock.commentQuestions && (
             <Tooltip title="Has a comments">
               <MarkChatUnreadOutlinedIcon className="color_red" />
             </Tooltip>
@@ -94,13 +98,13 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
 };
 
 export const ModuleBlock = (props: IModuleBlockProps) => {
-  const { block } = props;
+  const { userBlock } = props;
   const cls = classNames('module-block', 'card', {
-    card_complete: block.complete,
-    card_disable: !block.enable,
+    card_complete: userBlock.complete,
+    card_disable: !userBlock.enable,
   });
 
-  if (!block.enable) {
+  if (!userBlock.enable) {
     return (
       <div className={cls}>
         <ModuleBlockContent {...props} />
@@ -113,7 +117,7 @@ export const ModuleBlock = (props: IModuleBlockProps) => {
       passHref
       href={{
         pathname: ROUTER_CONST_SCHOOL.SCHOOL_BLOCK.path,
-        query: { id: block.id },
+        query: { id: userBlock.id },
       }}
     >
       <a className={cls}>

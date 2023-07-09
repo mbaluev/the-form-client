@@ -16,9 +16,8 @@ import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/in
 import './index.scss';
 
 export const ModulePage = observer(() => {
-  const { list: modules, data: module } = useViewModel<IModuleUserViewModel>(
-    VIEW_MODEL.ModuleUser
-  );
+  const { list: userModules, data: userModule } =
+    useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
   const breadCrumbs: TBreadCrumb[] = [
     {
       label: ROUTER_CONST_SCHOOL.HOME.label,
@@ -29,11 +28,13 @@ export const ModulePage = observer(() => {
       url: { pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.path },
     },
     {
-      label: module ? `${module.title}. ${module.name}` : 'loading...',
+      label: userModule
+        ? `${userModule.module?.title}. ${userModule.module?.name}`
+        : 'loading...',
       url: { pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path },
-      neighbors: modules?.map((d) => {
+      neighbors: userModules?.map((d) => {
         return {
-          label: `${d.title}. ${d.name}`,
+          label: `${d.module?.title}. ${d.module?.name}`,
           url: {
             pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path,
             query: { id: d.id },
@@ -46,19 +47,22 @@ export const ModulePage = observer(() => {
     },
   ];
   const cls = classNames('module-page', {
-    'module-page_complete': Boolean(module && module.complete),
+    'module-page_complete': Boolean(userModule && userModule.complete),
   });
-  const progressValues = module?.blocks?.reduce((prev: boolean[], curr) => {
-    return prev.concat([
-      Boolean(curr.completeMaterials),
-      Boolean(curr.completeQuestions),
-      Boolean(curr.completeTasks),
-    ]);
-  }, []);
+  const progressValues = userModule?.userBlocks?.reduce(
+    (prev: boolean[], curr) => {
+      return prev.concat([
+        Boolean(curr.completeMaterials),
+        Boolean(curr.completeQuestions),
+        Boolean(curr.completeTasks),
+      ]);
+    },
+    []
+  );
   const progress = getProgress(progressValues);
   return (
     <Page
-      title={module?.name}
+      title={userModule?.module?.name}
       subTitle={<ModuleSubTitle />}
       breadCrumbs={breadCrumbs}
       quickFilter={<ModuleProgress value={progress} />}

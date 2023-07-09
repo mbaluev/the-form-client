@@ -10,12 +10,12 @@ import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/in
 import './index.scss';
 
 export const ModuleContent = observer(() => {
-  const { data: module } = useViewModel<IModuleUserViewModel>(
+  const { data: userModule } = useViewModel<IModuleUserViewModel>(
     VIEW_MODEL.ModuleUser
   );
   const cls = classNames('module-content');
-  if (!module) return <Loader loading relative />;
-  return module.enable ? (
+  if (!userModule) return <Loader loading relative />;
+  return userModule.enable ? (
     <div className={cls}>
       <ModuleBlocks />
     </div>

@@ -57,7 +57,7 @@ export class QuestionUserViewModel
       if (this.block.data) {
         const token = await this.auth.refreshToken();
         const data = await this.serviceQuestion.getQuestionsUser(
-          { blockId: this.block.data.id },
+          { userBlockId: this.block.data.id },
           token
         );
         this.setList(data);

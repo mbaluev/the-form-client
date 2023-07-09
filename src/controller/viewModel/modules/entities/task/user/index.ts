@@ -72,7 +72,7 @@ export class TaskUserViewModel
       if (this.block.data) {
         const token = await this.auth.refreshToken();
         const data = await this.serviceTask.getTasksUser(
-          { blockId: this.block.data.id },
+          { userBlockId: this.block.data.id },
           token
         );
         this.setList(data);

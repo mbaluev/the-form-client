@@ -17,49 +17,54 @@ import { Tooltip } from '@components/tooltip';
 import MarkChatUnreadOutlinedIcon from '@mui/icons-material/MarkChatUnreadOutlined';
 
 interface IModuleItemProps {
-  module: IModuleUserDTO;
+  userModule: IModuleUserDTO;
 }
 
 const ModuleItemContent = (props: IModuleItemProps) => {
-  const { module } = props;
-  const progressValues = module.blocks?.reduce((prev: boolean[], curr) => {
-    return prev.concat([
-      Boolean(curr.completeMaterials),
-      Boolean(curr.completeQuestions),
-      Boolean(curr.completeTasks),
-    ]);
-  }, []);
+  const { userModule } = props;
+  const progressValues = userModule.userBlocks?.reduce(
+    (prev: boolean[], curr) => {
+      return prev.concat([
+        Boolean(curr.completeMaterials),
+        Boolean(curr.completeQuestions),
+        Boolean(curr.completeTasks),
+      ]);
+    },
+    []
+  );
   const progress = getProgress(progressValues);
   return (
     <React.Fragment>
       <div className="module-item__title">
-        {module.title}
-        <ModuleItemStatus module={module} />
+        {userModule.module?.title}
+        <ModuleItemStatus userModule={userModule} />
       </div>
-      <div className="module-item__name">{module.name}</div>
+      <div className="module-item__name">{userModule.module?.name}</div>
       <ul className="module-item__ul">
-        {module.blocks?.map((block, index) => {
+        {userModule.userBlocks?.map((userBlock, index) => {
           const clsLi = classNames('module-item__li', {
-            'module-item__li_complete': block.complete,
+            'module-item__li_complete': userBlock.complete,
           });
           return (
             <li key={index} className={clsLi}>
               <div className="module-item__li-icon">
-                {block.complete && <CheckCircleIcon />}
-                {!block.complete && block.enable && (
+                {userBlock.complete && <CheckCircleIcon />}
+                {!userBlock.complete && userBlock.enable && (
                   <RadioButtonUncheckedIcon />
                 )}
-                {!block.complete && !block.enable && (
+                {!userBlock.complete && !userBlock.enable && (
                   <DoDisturbAltOutlinedIcon />
                 )}
               </div>
-              <div className="module-item__li-label">{block.name}</div>
-              {block.errorQuestions && (
+              <div className="module-item__li-label">
+                {userBlock.block?.name}
+              </div>
+              {userBlock.errorQuestions && (
                 <Tooltip title="Test failed">
                   <InfoOutlinedIcon className="color_red" />
                 </Tooltip>
               )}
-              {block.commentQuestions && (
+              {userBlock.commentQuestions && (
                 <Tooltip title="Has a comments">
                   <MarkChatUnreadOutlinedIcon className="color_red" />
                 </Tooltip>
@@ -74,14 +79,14 @@ const ModuleItemContent = (props: IModuleItemProps) => {
 };
 
 export const ModuleItem = (props: IModuleItemProps) => {
-  const { module } = props;
+  const { userModule } = props;
 
   const cls = classNames('module-item', 'card', {
-    card_complete: Boolean(module.complete),
-    card_disable: !Boolean(module.enable),
+    card_complete: Boolean(userModule.complete),
+    card_disable: !Boolean(userModule.enable),
   });
 
-  if (!module.enable) {
+  if (!userModule.enable) {
     return (
       <div className={cls}>
         <ModuleItemContent {...props} />
@@ -94,7 +99,7 @@ export const ModuleItem = (props: IModuleItemProps) => {
       passHref
       href={{
         pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path,
-        query: { id: module.id },
+        query: { id: userModule.id },
       }}
     >
       <a className={cls}>

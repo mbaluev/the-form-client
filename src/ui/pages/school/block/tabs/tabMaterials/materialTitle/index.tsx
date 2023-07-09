@@ -13,7 +13,7 @@ export const MaterialTitle = observer(() => {
   return (
     <Stack direction="row" spacing="10px">
       <MaterialIcon complete={data?.complete} style={{ marginTop: '4px' }} />
-      {data ? <div>{data.document.name}</div> : undefined}
+      {data ? <div>{data.material?.document?.name}</div> : undefined}
     </Stack>
   );
 });

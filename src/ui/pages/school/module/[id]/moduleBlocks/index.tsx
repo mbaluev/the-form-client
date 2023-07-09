@@ -6,13 +6,13 @@ import { observer } from 'mobx-react';
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 
 export const ModuleBlocks = observer(() => {
-  const { data: module } = useViewModel<IModuleUserViewModel>(
+  const { data: userModule } = useViewModel<IModuleUserViewModel>(
     VIEW_MODEL.ModuleUser
   );
   return (
     <div className="cols_4">
-      {module?.blocks?.map((block, index) => {
-        return <ModuleBlock key={index} block={block} />;
+      {userModule?.userBlocks?.map((userBlock, index) => {
+        return <ModuleBlock key={index} userBlock={userBlock} />;
       })}
     </div>
   );

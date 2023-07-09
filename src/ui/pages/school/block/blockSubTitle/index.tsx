@@ -6,13 +6,13 @@ import { ModuleBlockStatus } from '@ui/pages/school/module/[id]/moduleBlockStatu
 import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 
 export const BlockSubTitle = observer(() => {
-  const { data: block } = useViewModel<IBlockUserViewModel>(
+  const { data: userBlock } = useViewModel<IBlockUserViewModel>(
     VIEW_MODEL.BlockUser
   );
   return (
     <React.Fragment>
-      <ModuleBlockStatus block={block} />
-      {block?.title}
+      <ModuleBlockStatus userModuleBlock={userBlock} />
+      {userBlock?.block?.title}
     </React.Fragment>
   );
 });

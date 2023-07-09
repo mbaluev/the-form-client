@@ -19,14 +19,16 @@ export const MaterialCardContent = observer(() => {
   return (
     <Stack height="100%" spacing="20px">
       <FormSection>
-        <DocumentButton doc={data.document} download={download} />
+        <DocumentButton doc={data.material?.document} download={download} />
         <FormField title="Document description">
-          <Box style={{ lineHeight: 1.9 }}>{data.document?.description}</Box>
+          <Box style={{ lineHeight: 1.9 }}>
+            {data.material?.document?.description}
+          </Box>
         </FormField>
       </FormSection>
       <Stack flex="1 1 auto" borderRadius="5px" overflow="hidden">
         <ReactPlayer
-          url={data.document.url}
+          url={data.material?.document?.url}
           width="auto"
           height="100%"
           config={{

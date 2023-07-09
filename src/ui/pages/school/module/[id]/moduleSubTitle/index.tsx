@@ -6,13 +6,13 @@ import { ModuleItemStatus } from '@ui/pages/school/module/index/moduleItemStatus
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 
 export const ModuleSubTitle = observer(() => {
-  const { data: module } = useViewModel<IModuleUserViewModel>(
+  const { data: userModule } = useViewModel<IModuleUserViewModel>(
     VIEW_MODEL.ModuleUser
   );
   return (
     <React.Fragment>
-      <ModuleItemStatus module={module} />
-      {module?.title}
+      <ModuleItemStatus userModule={userModule} />
+      {userModule?.module?.title}
     </React.Fragment>
   );
 });

@@ -21,10 +21,10 @@ import './index.scss';
 import { QuestionCard } from '@ui/pages/school/block/tabs/tabQuestions/questionCard';
 
 export const BlockPage = observer(() => {
-  const { data: module } = useViewModel<IModuleUserViewModel>(
+  const { data: userModule } = useViewModel<IModuleUserViewModel>(
     VIEW_MODEL.ModuleUser
   );
-  const { data: block, tab } = useViewModel<IBlockUserViewModel>(
+  const { data: userBlock, tab } = useViewModel<IBlockUserViewModel>(
     VIEW_MODEL.BlockUser
   );
   const breadCrumbs: TBreadCrumb[] = [
@@ -37,36 +37,40 @@ export const BlockPage = observer(() => {
       url: { pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.path },
     },
     {
-      label: module ? `${module.title}. ${module.name}` : 'loading...',
+      label: userModule
+        ? `${userModule.module?.title}. ${userModule.module?.name}`
+        : 'loading...',
       url: {
         pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path,
-        query: { id: module?.id },
+        query: { id: userModule?.id },
       },
     },
     {
-      label: block ? `${block.title}. ${block.name}` : 'loading...',
+      label: userBlock
+        ? `${userBlock.block?.title}. ${userBlock.block?.name}`
+        : 'loading...',
       url: { pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path },
-      neighbors: module?.blocks?.map((d) => {
+      neighbors: userModule?.userBlocks?.map((d) => {
         return {
-          label: `${d.title}. ${d.name}`,
+          label: `${d.block?.title}. ${d.block?.name}`,
           url: {
             pathname: ROUTER_CONST_SCHOOL.SCHOOL_BLOCK.path,
             query: { id: d.id },
           },
           disabled: !d.enable,
           complete: d.complete,
-          selected: d.id === block?.id,
+          selected: d.id === userBlock?.id,
         };
       }),
     },
   ];
   const cls = classNames('block-page', {
-    'block-page_complete': Boolean(module && module.complete),
+    'block-page_complete': Boolean(userModule && userModule.complete),
   });
   const progress = getProgress([
-    Boolean(block?.completeMaterials),
-    Boolean(block?.completeQuestions),
-    Boolean(block?.completeTasks),
+    Boolean(userBlock?.completeMaterials),
+    Boolean(userBlock?.completeQuestions),
+    Boolean(userBlock?.completeTasks),
   ]);
 
   const getPageRight = () => {
@@ -78,7 +82,7 @@ export const BlockPage = observer(() => {
 
   return (
     <Page
-      title={block?.name}
+      title={userBlock?.block?.name}
       subTitle={<BlockSubTitle />}
       breadCrumbs={breadCrumbs}
       quickFilter={<ModuleProgress value={progress} />}

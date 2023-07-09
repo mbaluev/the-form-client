@@ -1,7 +1,7 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 import { inject, injectable } from 'inversify';
 import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
-import { IMaterialDTO, IMaterialUserDTO } from '@model/entities/material';
+import { IMaterialUserDTO } from '@model/entities/material';
 import { SERVICE } from '@service/ids';
 import { FileService } from 'controller/service/modules/common/file';
 import { VIEW_MODEL } from '@viewModel/ids';
@@ -39,43 +39,43 @@ export class MaterialUserViewModel
 
   filterByQuery =
     (query?: ParsedUrlQuery) =>
-    (item: IMaterialDTO): boolean => {
+    (item: IMaterialUserDTO): boolean => {
       let result = false;
       const filter = query?.filter;
       if (filter) {
         if (_.has(item, 'document.name')) {
           result =
             result ||
-            (item.document.name !== undefined &&
-              item.document.name !== null &&
-              item.document.name
+            (item.material?.document?.name !== undefined &&
+              item.material?.document?.name !== null &&
+              item.material?.document?.name
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'document.description')) {
           result =
             result ||
-            (item.document.description !== undefined &&
-              item.document.description !== null &&
-              item.document.description
+            (item.material?.document?.description !== undefined &&
+              item.material?.document?.description !== null &&
+              item.material?.document?.description
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'document.file.name')) {
           result =
             result ||
-            (item.document.file.name !== undefined &&
-              item.document.file.name !== null &&
-              item.document.file.name
+            (item.material?.document?.file.name !== undefined &&
+              item.material?.document?.file.name !== null &&
+              item.material?.document?.file.name
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'document.url')) {
           result =
             result ||
-            (item.document.url !== undefined &&
-              item.document.url !== null &&
-              item.document.url
+            (item.material?.document?.url !== undefined &&
+              item.material?.document?.url !== null &&
+              item.material?.document?.url
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
@@ -91,7 +91,7 @@ export class MaterialUserViewModel
       if (this.block.data) {
         const token = await this.auth.refreshToken();
         const data = await this.serviceMaterial.getMaterialsUser(
-          { blockId: this.block.data.id },
+          { userBlockId: this.block.data.id },
           token
         );
         this.setList(data);

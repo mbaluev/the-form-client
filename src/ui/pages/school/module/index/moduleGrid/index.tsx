@@ -6,13 +6,13 @@ import { ModuleItem } from '@ui/pages/school/module/index/moduleItem';
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 
 export const ModuleGrid = observer(() => {
-  const { list: modules } = useViewModel<IModuleUserViewModel>(
+  const { list: userModules } = useViewModel<IModuleUserViewModel>(
     VIEW_MODEL.ModuleUser
   );
   return (
     <div className="cols_4">
-      {modules?.map((module, index) => (
-        <ModuleItem key={index} module={module} />
+      {userModules?.map((userModule, index) => (
+        <ModuleItem key={index} userModule={userModule} />
       ))}
     </div>
   );

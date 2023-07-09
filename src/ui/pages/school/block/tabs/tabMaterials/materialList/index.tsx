@@ -49,7 +49,7 @@ export const MaterialList = observer(() => {
       valueGetter: (params: any) => {
         return {
           index: params.node.rowIndex + 1,
-          name: params.data?.document.name,
+          name: params.data?.material?.document.name,
           complete: params.data?.complete,
         };
       },
@@ -64,7 +64,7 @@ export const MaterialList = observer(() => {
           await update(params.data.id, params.data.complete);
         };
         return documentButtonValueGetter(
-          params,
+          params.data.material?.document,
           setPreventClick,
           download,
           callback
