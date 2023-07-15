@@ -57,16 +57,16 @@ export interface IQuestionUserDTO {
   userQuestionAnswers?: IQuestionAnswerUserDTO[];
 }
 export interface IQuestionAnswerUserDTO {
-  id: string;
+  id?: string;
   commentText?: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   // foreign keys
   questionOptionId: string;
   questionOption?: IQuestionOptionDTO;
-  userId: string;
+  userId?: string;
   user?: IUserDTO;
-  userQuestionId: string;
+  userQuestionId?: string;
   userQuestion?: IQuestionUserDTO;
 }

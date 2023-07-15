@@ -48,7 +48,7 @@ export const RadioGroupFieldControlEdit = (
         }}
         {...other}
       >
-        {items.map((item, index) => {
+        {items?.map((item, index) => {
           return (
             <FormControlLabel
               key={index}

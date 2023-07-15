@@ -42,21 +42,21 @@ export class TaskUserViewModel
       let result = false;
       const filter = query?.filter;
       if (filter) {
-        if (_.has(item, 'document.name')) {
+        if (_.has(item, 'task.document.name')) {
           result =
             result ||
-            (item.document.name !== undefined &&
-              item.document.name !== null &&
-              item.document.name
+            (item.task?.document?.name !== undefined &&
+              item.task?.document?.name !== null &&
+              item.task?.document?.name
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'document.description')) {
           result =
             result ||
-            (item.document.description !== undefined &&
-              item.document.description !== null &&
-              item.document.description
+            (item.task?.document?.description !== undefined &&
+              item.task?.document?.description !== null &&
+              item.task?.document?.description
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }

@@ -15,7 +15,7 @@ export const TaskTitle = observer(() => {
         sent={data?.sent}
         style={{ marginTop: '4px' }}
       />
-      {data ? <div>{data.document?.name}</div> : undefined}
+      {data ? <div>{data.task?.document?.name}</div> : undefined}
     </Stack>
   );
 });

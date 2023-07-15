@@ -23,16 +23,16 @@ export const QuestionCardContent = observer(() => {
 
   return (
     <FormSection>
-      <FormField title="Title">{data.title}</FormField>
-      {data.type === 'checkbox' && (
+      <FormField title="Title">{data.question?.title}</FormField>
+      {data.question?._type === 'checkbox' && (
         <FormField title="Select options">
-          {data.questionOptions.map((item, i) => {
-            const questionAnswer = data.questionAnswers?.find(
+          {data.question?.questionOptions?.map((item, i) => {
+            const questionAnswer = data.userQuestionAnswers?.find(
               (d) => d.questionOptionId === item.id
             );
             const checked = Boolean(questionAnswer);
             const error = Boolean(data?.error);
-            const comment = questionAnswer?.comment;
+            const commentText = questionAnswer?.commentText;
 
             return (
               <CheckboxFieldControl
@@ -43,24 +43,24 @@ export const QuestionCardContent = observer(() => {
                 onChange={changeOptionCheckbox}
                 disabled={!isStart}
                 error={error}
-                helperText={comment}
+                helperText={commentText}
               />
             );
           })}
         </FormField>
       )}
-      {data.type === 'radio' && (
+      {data.question?._type === 'radio' && (
         <FormField title="Select option">
           <RadioGroupFieldControl
-            items={data.questionOptions.map((item) => ({
+            items={data.question?.questionOptions?.map((item) => ({
               value: item.id,
               label: item.title,
             }))}
-            value={data.questionAnswers?.[0]?.questionOptionId}
+            value={data.userQuestionAnswers?.[0]?.questionOptionId}
             onChange={changeOptionRadio}
             disabled={!isStart}
             error={data.error}
-            helperText={data.questionAnswers?.[0]?.comment}
+            helperText={data.userQuestionAnswers?.[0]?.commentText}
           />
         </FormField>
       )}

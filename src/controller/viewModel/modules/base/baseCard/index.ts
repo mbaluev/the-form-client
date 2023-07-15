@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 import { injectable } from 'inversify';
 import { action, computed, makeObservable, observable } from 'mobx';
 import { ParsedUrlQuery } from 'querystring';
@@ -594,7 +595,6 @@ export class BaseCardViewModel<T extends IBaseCardType>
     let message = '';
     this.validations
       ?.filter((validation) => validation.nameSpace === nameSpace)
-      // eslint-disable-next-line sonarjs/cognitive-complexity
       ?.forEach((validation) => {
         const isCheck = !validation.condition || validation.condition();
         if (isCheck && valid && validation.type === 'required') {
@@ -619,6 +619,20 @@ export class BaseCardViewModel<T extends IBaseCardType>
             valid = false;
             message = validation.message;
           }
+        }
+        if (isCheck && valid && validation.type === 'any') {
+          valid = false;
+          const nameSpaces = nameSpace.split('.[].');
+          const data = this.modalData ? { ...this.modalData } : {};
+          const arr = objectPath.get(data, nameSpaces[0]);
+          if (Array.isArray(arr)) {
+            arr.forEach((item, i) => {
+              const path = `${nameSpaces[0]}.${i}.${nameSpaces[1]}`;
+              const val = objectPath.get(data, path);
+              if (val) valid = true;
+            });
+          }
+          message = validation.message;
         }
       });
     return { valid, message };

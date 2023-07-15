@@ -7,13 +7,13 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { ParsedUrlQuery } from 'querystring';
 import _ from 'lodash';
 import { IQuestionAdminViewModel } from '@viewModel/modules/entities/question/admin/interface';
-import { IQuestionAdminDTO } from '@model/entities/question';
 import { IQuestionService } from '@service/modules/entities/question/interface';
 import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
+import { IQuestionUserDTO } from '@model/entities/question';
 
 @injectable()
 export class QuestionAdminViewModel
-  extends BaseCardViewModel<IQuestionAdminDTO>
+  extends BaseCardViewModel<IQuestionUserDTO>
   implements IQuestionAdminViewModel
 {
   @inject(SERVICE.Question) protected serviceQuestion!: IQuestionService;
@@ -24,43 +24,43 @@ export class QuestionAdminViewModel
 
   filterByQuery =
     (query?: ParsedUrlQuery) =>
-    (item: IQuestionAdminDTO): boolean => {
+    (item: IQuestionUserDTO): boolean => {
       let result = false;
       const filter = query?.filter;
       if (filter) {
         if (_.has(item, 'user.firstname')) {
           result =
             result ||
-            (item.user.firstname !== undefined &&
-              item.user.firstname !== null &&
-              item.user.firstname
+            (item.user?.firstname !== undefined &&
+              item.user?.firstname !== null &&
+              item.user?.firstname
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'user.lastname')) {
           result =
             result ||
-            (item.user.lastname !== undefined &&
-              item.user.lastname !== null &&
-              item.user.lastname
+            (item.user?.lastname !== undefined &&
+              item.user?.lastname !== null &&
+              item.user?.lastname
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'user.username')) {
           result =
             result ||
-            (item.user.username !== undefined &&
-              item.user.username !== null &&
-              item.user.username
+            (item.user?.username !== undefined &&
+              item.user?.username !== null &&
+              item.user?.username
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'question.document.name')) {
           result =
             result ||
-            (item.question.block.name !== undefined &&
-              item.question.block.name !== null &&
-              item.question.block.name
+            (item.question?.block?.name !== undefined &&
+              item.question?.block?.name !== null &&
+              item.question?.block?.name
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }

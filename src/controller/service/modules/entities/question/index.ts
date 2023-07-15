@@ -2,7 +2,11 @@ import { inject, injectable } from 'inversify';
 import { INFRASTRUCTURE_MODULE } from '@infrastructure/ids';
 import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { IQuestionService } from '@service/modules/entities/question/interface';
-import { IQuestionDTO, IQuestionUserDTO } from '@model/entities/question';
+import {
+  IQuestionAnswerUserDTO,
+  IQuestionDTO,
+  IQuestionUserDTO,
+} from '@model/entities/question';
 import { ParsedUrlQuery } from 'querystring';
 import { IResponseItemDTO, IResponseListDTO } from '@model/common/response';
 
@@ -93,24 +97,24 @@ export class QuestionService implements IQuestionService {
   };
 
   saveQuestionAnswers = async (
-    questionId: string,
-    questionAnswers: string[],
+    userQuestionId: string,
+    userQuestionAnswers?: IQuestionAnswerUserDTO[],
     token?: string | null
   ): Promise<void> => {
     return this.apiModule.post<void>(
       `${this.API_PREFIX}/user/save`,
-      { questionId, questionAnswers },
+      { userQuestionId, userQuestionAnswers },
       { headers: { Authorization: `Bearer ${token}` } }
     );
   };
 
   checkQuestions = async (
-    blockId: string,
+    userBlockId: string,
     token?: string | null
   ): Promise<void> => {
     return this.apiModule.post<void>(
       `${this.API_PREFIX}/user/check`,
-      { blockId },
+      { userBlockId },
       { headers: { Authorization: `Bearer ${token}` } }
     );
   };

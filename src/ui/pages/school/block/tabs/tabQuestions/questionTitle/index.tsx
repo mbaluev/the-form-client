@@ -13,7 +13,7 @@ export const QuestionTitle = observer(() => {
   return (
     <Stack direction="row" spacing="10px">
       <QuestionIcon data={data} style={{ marginTop: '4px' }} />
-      {data ? <div>{`Question #${data.position}`}</div> : undefined}
+      {data ? <div>{`Question #${data.question?.position}`}</div> : undefined}
     </Stack>
   );
 });

@@ -33,13 +33,13 @@ export const TaskCardContent = observer(() => {
           download={download}
         />
         <FormField title="Document name">
-          <Box>{data.userTaskDocuments[0].document.name}</Box>
+          <Box>{data.userTaskDocuments[0].document?.name}</Box>
         </FormField>
         <FormField title="Document description">
-          <Box>{data.userTaskDocuments[0].document.description}</Box>
+          <Box>{data.userTaskDocuments[0].document?.description}</Box>
         </FormField>
         <FormField title="Updated by">
-          <Box>{data.userTaskDocuments[0].user.username}</Box>
+          <Box>{data.userTaskDocuments[0].user?.username}</Box>
           <Box>{fDateTime(new Date(data.userTaskDocuments[0].createdAt))}</Box>
         </FormField>
       </FormSection>

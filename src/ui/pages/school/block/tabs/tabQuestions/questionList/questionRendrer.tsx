@@ -13,10 +13,10 @@ export const QuestionRenderer = (params: ICellRendererParams) => {
           alignItems: 'center',
         }}
       >
-        <span>{params.data.position}.</span>
+        <span>{params.data.question?.position}.</span>
         <QuestionIcon data={params.data} />
         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {params.data.title}
+          {params.data.question?.title}
         </span>
       </div>
     </div>

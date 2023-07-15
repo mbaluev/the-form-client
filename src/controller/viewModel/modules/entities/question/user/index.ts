@@ -142,7 +142,7 @@ export class QuestionUserViewModel
       !this.block.data?.completeQuestions &&
       Boolean(
         this.list?.reduce((prev, curr) => {
-          return prev && curr.questionAnswers.length !== 0;
+          return prev && curr.userQuestionAnswers?.length !== 0;
         }, true)
       )
     );
@@ -206,23 +206,28 @@ export class QuestionUserViewModel
       const newData = { ...this.data };
       newList.forEach((q) => {
         if (q.id === newData.id) {
-          switch (newData.type) {
+          switch (newData.question?._type) {
             case 'checkbox':
               if (checked) {
-                q.questionAnswers.push({ questionOptionId: optionId });
-                newData.questionAnswers.push({ questionOptionId: optionId });
+                q.userQuestionAnswers?.push({
+                  questionOptionId: optionId,
+                });
+                newData.userQuestionAnswers?.push({
+                  questionOptionId: optionId,
+                });
               } else {
-                q.questionAnswers = q.questionAnswers.filter(
+                q.userQuestionAnswers = q.userQuestionAnswers?.filter(
                   (a) => a.questionOptionId !== optionId
                 );
-                newData.questionAnswers = newData.questionAnswers.filter(
-                  (a) => a.questionOptionId !== optionId
-                );
+                newData.userQuestionAnswers =
+                  newData.userQuestionAnswers?.filter(
+                    (a) => a.questionOptionId !== optionId
+                  );
               }
               break;
             case 'radio':
-              q.questionAnswers = [{ questionOptionId: optionId }];
-              newData.questionAnswers = [{ questionOptionId: optionId }];
+              q.userQuestionAnswers = [{ questionOptionId: optionId }];
+              newData.userQuestionAnswers = [{ questionOptionId: optionId }];
               break;
           }
         }
@@ -238,7 +243,7 @@ export class QuestionUserViewModel
         const token = await this.auth.refreshToken();
         await this.serviceQuestion.saveQuestionAnswers(
           this.data.id,
-          this.data.questionAnswers.map((d) => d.questionOptionId),
+          this.data.userQuestionAnswers,
           token
         );
       }

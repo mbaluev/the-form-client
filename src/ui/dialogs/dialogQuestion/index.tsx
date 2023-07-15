@@ -175,7 +175,7 @@ export const DialogQuestion = observer((props: IProps) => {
                   value={item.correct}
                   name={item.id}
                   onChange={changeOptionCorrectHandler}
-                  error={Boolean(getModalError('questionOptionsCorrectId'))}
+                  error={Boolean(getModalError('questionOptions.[].correct'))}
                 />
               </FormField>
             );

@@ -19,7 +19,7 @@ export const QuestionIcon = observer((props: IProps) => {
       <RadioButtonUncheckedIcon className="color_grey-50" style={style} />
     </Tooltip>
   );
-  if (data && data.questionAnswers && data.questionAnswers.length > 0)
+  if (data && data.userQuestionAnswers && data.userQuestionAnswers.length > 0)
     icon = (
       <Tooltip title="Selected">
         <CheckCircleIcon className="color_grey-50" style={style} />

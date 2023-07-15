@@ -8,14 +8,14 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { AuthViewModel } from '@viewModel/modules/common/auth';
 import { ParsedUrlQuery } from 'querystring';
 import _ from 'lodash';
-import { ITaskAdminDTO } from '@model/entities/task';
 import { TaskService } from '@service/modules/entities/task';
 import { action, makeObservable } from 'mobx';
 import { ITaskAdminViewModel } from '@viewModel/modules/entities/task/admin/interface';
+import { ITaskUserDTO } from '@model/entities/task';
 
 @injectable()
 export class TaskAdminViewModel
-  extends BaseCardViewModel<ITaskAdminDTO>
+  extends BaseCardViewModel<ITaskUserDTO>
   implements ITaskAdminViewModel
 {
   @inject(SERVICE.Task) protected serviceTask!: TaskService;
@@ -35,70 +35,70 @@ export class TaskAdminViewModel
 
   filterByQuery =
     (query?: ParsedUrlQuery) =>
-    (item: ITaskAdminDTO): boolean => {
+    (item: ITaskUserDTO): boolean => {
       let result = false;
       const filter = query?.filter;
       if (filter) {
         if (_.has(item, 'task.document.name')) {
           result =
             result ||
-            (item.task.document.name !== undefined &&
-              item.task.document.name !== null &&
-              item.task.document.name
+            (item.task?.document?.name !== undefined &&
+              item.task?.document?.name !== null &&
+              item.task?.document?.name
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'task.document.description')) {
           result =
             result ||
-            (item.task.document.description !== undefined &&
-              item.task.document.description !== null &&
-              item.task.document.description
+            (item.task?.document?.description !== undefined &&
+              item.task?.document?.description !== null &&
+              item.task?.document?.description
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'task.document.url')) {
           result =
             result ||
-            (item.task.document.url !== undefined &&
-              item.task.document.url !== null &&
-              item.task.document.url
+            (item.task?.document?.url !== undefined &&
+              item.task?.document?.url !== null &&
+              item.task?.document?.url
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'task.document.file.name')) {
           result =
             result ||
-            (item.task.document.file.name !== undefined &&
-              item.task.document.file.name !== null &&
-              item.task.document.file.name
+            (item.task?.document?.file.name !== undefined &&
+              item.task?.document?.file.name !== null &&
+              item.task?.document?.file.name
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'user.firstname')) {
           result =
             result ||
-            (item.user.firstname !== undefined &&
-              item.user.firstname !== null &&
-              item.user.firstname
+            (item.user?.firstname !== undefined &&
+              item.user?.firstname !== null &&
+              item.user?.firstname
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'user.lastname')) {
           result =
             result ||
-            (item.user.lastname !== undefined &&
-              item.user.lastname !== null &&
-              item.user.lastname
+            (item.user?.lastname !== undefined &&
+              item.user?.lastname !== null &&
+              item.user?.lastname
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'user.username')) {
           result =
             result ||
-            (item.user.username !== undefined &&
-              item.user.username !== null &&
-              item.user.username
+            (item.user?.username !== undefined &&
+              item.user?.username !== null &&
+              item.user?.username
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }

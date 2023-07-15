@@ -17,7 +17,7 @@ export const TaskCardActions = observer(() => {
     useViewModel<ITaskUserDocumentViewModel>(VIEW_MODEL.TaskUserDocument);
 
   const handleNew = async () => {
-    const document = data?.document;
+    const document = data?.task?.document;
     modalNew();
     changeModalField('sent', true);
     changeModalField('taskId', data?.id);

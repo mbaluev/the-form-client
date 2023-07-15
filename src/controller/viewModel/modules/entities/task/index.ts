@@ -49,18 +49,18 @@ export class TaskViewModel
         if (_.has(item, 'document.name')) {
           result =
             result ||
-            (item.document.name !== undefined &&
-              item.document.name !== null &&
-              item.document.name
+            (item.document?.name !== undefined &&
+              item.document?.name !== null &&
+              item.document?.name
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'document.description')) {
           result =
             result ||
-            (item.document.description !== undefined &&
-              item.document.description !== null &&
-              item.document.description
+            (item.document?.description !== undefined &&
+              item.document?.description !== null &&
+              item.document?.description
                 .toLowerCase()
                 .includes((query.filter as string).toLowerCase()));
         }

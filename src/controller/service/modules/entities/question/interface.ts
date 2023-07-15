@@ -1,4 +1,8 @@
-import { IQuestionDTO, IQuestionUserDTO } from '@model/entities/question';
+import {
+  IQuestionAnswerUserDTO,
+  IQuestionDTO,
+  IQuestionUserDTO,
+} from '@model/entities/question';
 import { ParsedUrlQuery } from 'querystring';
 
 export interface IQuestionService {
@@ -31,11 +35,11 @@ export interface IQuestionService {
     token?: string | null
   ) => Promise<IQuestionUserDTO | undefined>;
   saveQuestionAnswers: (
-    questionId: string,
-    questionAnswers: string[],
+    userQuestionId: string,
+    userQuestionAnswers?: IQuestionAnswerUserDTO[],
     token?: string | null
   ) => Promise<void>;
-  checkQuestions: (blockId: string, token?: string | null) => Promise<void>;
+  checkQuestions: (userBlockId: string, token?: string | null) => Promise<void>;
 
   // --- admin
   getQuestionsAdmin: (

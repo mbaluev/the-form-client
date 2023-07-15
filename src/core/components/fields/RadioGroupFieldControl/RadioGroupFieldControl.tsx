@@ -15,7 +15,7 @@ export interface IRadioItem {
 
 export type RadioGroupFieldControlProps =
   BaseFieldControlProps<RadioGroupProps> & {
-    items: IRadioItem[];
+    items?: IRadioItem[];
     value?: string;
     disabled?: boolean;
     layout?: 'vertical' | 'horizontal';
