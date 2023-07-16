@@ -17,12 +17,16 @@ export const TaskCardActions = observer(() => {
     useViewModel<ITaskUserDocumentViewModel>(VIEW_MODEL.TaskUserDocument);
 
   const handleNew = async () => {
-    const document = data?.task?.document;
     modalNew();
-    changeModalField('sent', true);
-    changeModalField('taskId', data?.id);
-    changeModalField('document.documentTypeId', document?.documentTypeId);
-    changeModalField('document.documentType', document?.documentType);
+    changeModalField('userTaskId', data?.id);
+    changeModalField(
+      'document.documentTypeId',
+      data?.task?.document?.documentTypeId
+    );
+    changeModalField(
+      'document.documentType',
+      data?.task?.document?.documentType
+    );
   };
   const handleClose = async () => clearData();
 

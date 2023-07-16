@@ -9,16 +9,16 @@ import { TaskTitle } from '@ui/pages/admin/task/taskTitle';
 import { TaskSubTitle } from '@ui/pages/admin/task/taskSubTitle';
 import { TaskCardActions } from '@ui/pages/admin/task/taskCardActions';
 import { TaskCardContent } from '@ui/pages/admin/task/taskCardContent';
-import { DialogTaskUserDocument } from '@ui/dialogs/dialogTaskUserDocument';
-import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
 import { Loader } from '@components/loader';
+import { DialogTaskAdminDocument } from '@ui/dialogs/dialogTaskAdminDocument';
+import { ITaskAdminDocumentViewModel } from '@viewModel/modules/entities/task/adminDocument/interface';
 
 export const TaskCard = observer(() => {
   const { data, isDataLoading, isListLoading, getData, getList } =
     useViewModel<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin);
 
   const { isModalOpen, modalClose, modalSubmit } =
-    useViewModel<ITaskUserDocumentViewModel>(VIEW_MODEL.TaskUserDocument);
+    useViewModel<ITaskAdminDocumentViewModel>(VIEW_MODEL.TaskAdminDocument);
 
   const handleSubmit = async () => {
     await modalSubmit();
@@ -45,7 +45,7 @@ export const TaskCard = observer(() => {
       quickFilter={<TaskCardActions />}
     >
       <TaskCardContent />
-      <DialogTaskUserDocument
+      <DialogTaskAdminDocument
         isOpen={isModalOpen}
         onClose={modalClose}
         onCancel={modalClose}

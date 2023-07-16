@@ -11,7 +11,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { Loader } from '@components/loader';
 import { Skeleton } from '@components/skeleton';
-import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
+import { ITaskAdminDocumentViewModel } from '@viewModel/modules/entities/task/adminDocument/interface';
 
 interface IProps {
   isOpen: boolean;
@@ -22,7 +22,7 @@ interface IProps {
   tooltip?: string;
 }
 
-export const DialogTaskUserDocument = observer((props: IProps) => {
+export const DialogTaskAdminDocument = observer((props: IProps) => {
   const { isOpen, onClose, onCancel, onSubmit, options, tooltip } = props;
 
   const {
@@ -34,7 +34,7 @@ export const DialogTaskUserDocument = observer((props: IProps) => {
     hasModalChanges,
     upload,
     download,
-  } = useViewModel<ITaskUserDocumentViewModel>(VIEW_MODEL.TaskUserDocument);
+  } = useViewModel<ITaskAdminDocumentViewModel>(VIEW_MODEL.TaskAdminDocument);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();

@@ -50,13 +50,12 @@ export const ModulePage = observer(() => {
     'module-page_complete': Boolean(userModule && userModule.complete),
   });
   const progressValues = userModule?.userBlocks?.reduce(
-    (prev: boolean[], curr) => {
-      return prev.concat([
+    (prev: boolean[], curr) =>
+      prev.concat([
         Boolean(curr.completeMaterials),
         Boolean(curr.completeQuestions),
         Boolean(curr.completeTasks),
-      ]);
-    },
+      ]),
     []
   );
   const progress = getProgress(progressValues);

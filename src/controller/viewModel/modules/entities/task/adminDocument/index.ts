@@ -8,14 +8,14 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { AuthViewModel } from '@viewModel/modules/common/auth';
 import { ITaskUserDocumentDTO } from '@model/entities/task';
 import { TaskService } from '@service/modules/entities/task';
-import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
 import { action, makeObservable } from 'mobx';
 import objectPath from 'object-path';
+import { ITaskAdminDocumentViewModel } from '@viewModel/modules/entities/task/adminDocument/interface';
 
 @injectable()
-export class TaskUserDocumentViewModel
+export class TaskAdminDocumentViewModel
   extends BaseCardViewModel<ITaskUserDocumentDTO>
-  implements ITaskUserDocumentViewModel
+  implements ITaskAdminDocumentViewModel
 {
   @inject(SERVICE.Task) protected serviceTask!: TaskService;
 
@@ -90,7 +90,10 @@ export class TaskUserDocumentViewModel
     try {
       if (this.modalData && !this.hasModalErrors) {
         const token = await this.modelAuth.refreshToken();
-        const data = await this.serviceTask.sentTaskUser(this.modalData, token);
+        const data = await this.serviceTask.sentTaskAdmin(
+          this.modalData,
+          token
+        );
         await this.clearModalChanges();
         return data;
       }

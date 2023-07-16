@@ -64,10 +64,12 @@ export interface IBaseCardViewModel<T extends IBaseCardType> {
   modalData?: T | null;
   isModalOpen: boolean;
   isModalLoading: boolean;
+  setModalData: (data?: T | null) => void;
   modalNew: () => Promise<void>;
   modalOpen: (id?: string) => Promise<void>;
   modalClose: () => Promise<void>;
   modalSubmit: () => Promise<T | null | undefined>;
+  hasModalData: boolean;
 
   // --- delete
 

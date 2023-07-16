@@ -134,6 +134,17 @@ export class TaskService implements ITaskService {
     return ret ? ret.data : undefined;
   };
 
+  sentTaskAdmin = async (data: ITaskUserDocumentDTO, token?: string | null) => {
+    const ret = await this.apiModule.post<
+      IResponseItemDTO<ITaskUserDocumentDTO>
+    >(
+      `${this.API_PREFIX}/admin/sent`,
+      { ...data },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
+
   completeAdmin = async (
     id?: string,
     token?: string | null

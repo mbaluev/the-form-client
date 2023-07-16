@@ -65,6 +65,7 @@ export class BaseCardViewModel<T extends IBaseCardType>
       modalOpen: action,
       modalClose: action,
       modalSubmit: action,
+      hasModalData: computed,
 
       // --- delete
 
@@ -334,6 +335,10 @@ export class BaseCardViewModel<T extends IBaseCardType>
       return data;
     }
   };
+
+  get hasModalData() {
+    return Boolean(this.modalData);
+  }
 
   // --- delete ----
 

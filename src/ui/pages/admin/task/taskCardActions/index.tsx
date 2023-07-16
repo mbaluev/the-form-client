@@ -11,7 +11,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { ITaskAdminViewModel } from '@viewModel/modules/entities/task/admin/interface';
-import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
+import { ITaskAdminDocumentViewModel } from '@viewModel/modules/entities/task/adminDocument/interface';
 
 export const TaskCardActions = observer(() => {
   const router = useRouter();
@@ -19,7 +19,7 @@ export const TaskCardActions = observer(() => {
     useViewModel<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin);
 
   const { modalNew, changeModalField } =
-    useViewModel<ITaskUserDocumentViewModel>(VIEW_MODEL.TaskUserDocument);
+    useViewModel<ITaskAdminDocumentViewModel>(VIEW_MODEL.TaskAdminDocument);
 
   const handleComplete = async () => {
     await complete();
@@ -27,12 +27,16 @@ export const TaskCardActions = observer(() => {
     await getList();
   };
   const handleNew = async () => {
-    const document = data?.task.document;
     modalNew();
-    changeModalField('sent', false);
-    changeModalField('taskId', data?.task.id);
-    changeModalField('document.documentTypeId', document?.documentTypeId);
-    changeModalField('document.documentType', document?.documentType);
+    changeModalField('userTaskId', data?.id);
+    changeModalField(
+      'document.documentTypeId',
+      data?.task?.document?.documentTypeId
+    );
+    changeModalField(
+      'document.documentType',
+      data?.task?.document?.documentType
+    );
   };
   const handleHistory = async () => {};
   const handleClose = async () => {

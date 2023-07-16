@@ -49,7 +49,7 @@ const Task = (
     },
     {
       label: task
-        ? `${task.user.username} - ${task.task.block.name} - ${task.task.document.name}`
+        ? `${task.user?.username} - ${task.task?.block?.name} - ${task.task?.document?.name}`
         : 'Not found',
       url: {
         pathname: ROUTER_CONST_SCHOOL.ADMIN_TASK.path,

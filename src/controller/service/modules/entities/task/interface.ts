@@ -47,6 +47,10 @@ export interface ITaskService {
     query?: ParsedUrlQuery,
     token?: string | null
   ) => Promise<ITaskUserDTO | undefined>;
+  sentTaskAdmin: (
+    data: ITaskUserDocumentDTO,
+    token?: string | null
+  ) => Promise<ITaskUserDocumentDTO | undefined>;
   completeAdmin: (
     id?: string,
     token?: string | null
