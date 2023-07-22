@@ -45,6 +45,7 @@ export const UserList = observer((props: IProps) => {
     {
       valueGetter: userValueGetter,
       cellRenderer: UserRenderer,
+      cellClass: 'ag-first-cell ag-last-cell',
     },
   ];
 

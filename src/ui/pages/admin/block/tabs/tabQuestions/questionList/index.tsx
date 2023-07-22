@@ -55,6 +55,7 @@ export const QuestionList = observer(() => {
       valueGetter: (params: any) => {
         return `${params.node.rowIndex + 1}. ${params.data?.title}`;
       },
+      cellClass: 'ag-first-cell ag-last-cell',
     },
   ];
 

@@ -60,6 +60,7 @@ export const MaterialList = observer(() => {
       valueGetter: (params: any) => {
         return `${params.node.rowIndex + 1}. ${params.data?.document.name}`;
       },
+      cellClass: 'ag-first-cell',
     },
     {
       colId: 'actions',
@@ -73,6 +74,7 @@ export const MaterialList = observer(() => {
         ),
       cellRenderer: ButtonRenderer,
       maxWidth: 300,
+      cellClass: 'ag-last-cell',
     },
   ];
 

@@ -1,6 +1,3 @@
-import { IBaseCardViewModel } from '@viewModel/modules/base/baseCard/interfaces';
-import { ITaskUserDTO } from '@model/entities/task';
+import { ITaskBaseViewModel } from '@viewModel/modules/entities/task/base/interface';
 
-export interface ITaskUserViewModel extends IBaseCardViewModel<ITaskUserDTO> {
-  download: (id: string, filename: string) => Promise<void>;
-}
+export type ITaskUserViewModel = ITaskBaseViewModel;

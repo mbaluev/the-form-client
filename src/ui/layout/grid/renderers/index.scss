@@ -112,9 +112,15 @@
     & .ag-header-group-cell,
     & .ag-cell,
     & .ag-full-width-row .ag-cell-wrapper.ag-row-group {
-      padding: 0 $padding * 2;
+      padding: 0 $base * 2;
       border-top: none;
       border-bottom: none;
+    }
+    & .ag-cell.ag-first-cell {
+      padding-left: $base * 4;
+    }
+    & .ag-cell.ag-last-cell {
+      padding-right: $base * 4;
     }
 
     // cell editing

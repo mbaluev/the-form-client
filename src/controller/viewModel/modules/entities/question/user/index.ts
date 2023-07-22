@@ -1,47 +1,25 @@
 import { inject, injectable } from 'inversify';
-import { SERVICE } from '@service/ids';
-import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
-import { IQuestionUserDTO } from '@model/entities/question';
-import { QuestionService } from 'controller/service/modules/entities/question';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { AuthViewModel } from '@viewModel/modules/common/auth';
-import {
-  IQuestionUserViewModel,
-  ITestStatus,
-} from '@viewModel/modules/entities/question/user/interface';
 import { BlockUserViewModel } from '@viewModel/modules/entities/block/user';
-import { action, computed, makeObservable, observable } from 'mobx';
-import { BlockTabNames } from '@ui/pages/school/block/blockTabs';
+import { action, computed, makeObservable } from 'mobx';
+import { BlockTabNames } from 'ui/pages/school/block/[id]/blockTabs';
+import { QuestionBaseViewModel } from '@viewModel/modules/entities/question/base';
+import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
 
 @injectable()
 export class QuestionUserViewModel
-  extends BaseCardViewModel<IQuestionUserDTO>
+  extends QuestionBaseViewModel
   implements IQuestionUserViewModel
 {
-  @inject(SERVICE.Question) protected serviceQuestion!: QuestionService;
-
-  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
-
-  @inject(VIEW_MODEL.BlockUser) protected block!: BlockUserViewModel;
+  @inject(VIEW_MODEL.BlockUser) protected userBlock!: BlockUserViewModel;
 
   constructor() {
     super();
     makeObservable(this, {
-      status: computed,
       isStart: computed,
-      isNext: computed,
-      isPrev: computed,
       isFinish: computed,
 
-      index: observable,
-      setIndex: action,
-
-      start: action,
-      stop: action,
-      prev: action,
-      next: action,
       finish: action,
-
       changeAnswer: action,
       saveQuestionAnswers: action,
       checkQuestions: action,
@@ -54,10 +32,10 @@ export class QuestionUserViewModel
     await this.clearList();
     this.setListLoading(true);
     try {
-      if (this.block.data) {
+      if (this.userBlock.data) {
         const token = await this.auth.refreshToken();
         const data = await this.serviceQuestion.getQuestionsUser(
-          { userBlockId: this.block.data.id },
+          { userBlockId: this.userBlock.data.id },
           token
         );
         this.setList(data);
@@ -85,61 +63,15 @@ export class QuestionUserViewModel
     }
   };
 
-  getDataByIndex = async (index: number) => {
-    if (this.list) {
-      const id = this.list[index].id;
-      await this.getData(id);
-    }
-  };
-
-  getIndexById = (id: string) => {
-    let index;
-    this.list?.forEach((d, i) => {
-      if (d.id === id) index = i;
-    });
-    return index;
-  };
-
   // --- computed
 
-  get status() {
-    const status: ITestStatus = {
-      code: undefined,
-      total: 0,
-      complete: 0,
-      fail: 0,
-    };
-    if (this.list) {
-      status.total = this.list.length;
-      status.complete = this.list.filter((d) => d.complete === true).length;
-      status.fail = this.list.filter((d) => d.complete === false).length;
-      if (status.total > 0) status.code = 'new';
-      if (status.fail > 0) status.code = 'fail';
-      if (status.complete === status.total) status.code = 'success';
-    }
-    return status;
-  }
-
   get isStart() {
-    return !this.block.data?.completeQuestions;
-  }
-
-  get isNext() {
-    return (
-      this.index !== undefined &&
-      this.list !== undefined &&
-      this.list !== null &&
-      this.index < this.list.length - 1
-    );
-  }
-
-  get isPrev() {
-    return this.index !== undefined && this.index > 0;
+    return !this.userBlock.data?.completeQuestions;
   }
 
   get isFinish() {
     return (
-      !this.block.data?.completeQuestions &&
+      !this.userBlock.data?.completeQuestions &&
       Boolean(
         this.list?.reduce((prev, curr) => {
           return prev && curr.userQuestionAnswers?.length !== 0;
@@ -149,49 +81,6 @@ export class QuestionUserViewModel
   }
 
   // --- actions
-
-  index?: number = undefined;
-
-  setIndex = (value?: number) => {
-    this.index = value;
-  };
-
-  start = async () => {
-    this.setIndex(0);
-    await this.getDataByIndex(0);
-  };
-
-  stop = async () => {
-    this.setIndex();
-    await this.clearData();
-  };
-
-  prev = async () => {
-    if (
-      this.isPrev &&
-      this.index !== undefined &&
-      !this.isListLoading &&
-      !this.isDataLoading
-    ) {
-      const index = this.index - 1;
-      this.setIndex(index);
-      await this.getDataByIndex(index);
-    }
-  };
-
-  next = async () => {
-    if (
-      this.isNext &&
-      this.index !== undefined &&
-      this.list &&
-      !this.isListLoading &&
-      !this.isDataLoading
-    ) {
-      const index = this.index + 1;
-      this.setIndex(index);
-      await this.getDataByIndex(index);
-    }
-  };
 
   finish = async () => {
     if (this.isFinish && !this.isListLoading && !this.isDataLoading) {
@@ -255,12 +144,12 @@ export class QuestionUserViewModel
   checkQuestions = async () => {
     this.setListLoading(true);
     try {
-      if (this.list && this.block.data) {
+      if (this.list && this.userBlock.data) {
         const token = await this.auth.refreshToken();
-        const blockId = this.block.data.id;
+        const blockId = this.userBlock.data.id;
         await this.serviceQuestion.checkQuestions(blockId, token);
-        await this.block.getData(blockId);
-        this.block.changeTab(BlockTabNames.questions);
+        await this.userBlock.getData(blockId);
+        this.userBlock.changeTab(BlockTabNames.questions);
       }
     } catch (err) {
     } finally {

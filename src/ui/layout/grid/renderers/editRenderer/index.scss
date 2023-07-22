@@ -3,7 +3,7 @@
 
 .edit-renderer {
   line-height: $line-height;
-  padding: $padding 0;
+  padding: $base * 2 0;
   height: 100%;
   text-align: right;
   overflow: hidden;

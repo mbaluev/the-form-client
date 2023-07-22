@@ -1,9 +1,3 @@
-import { IBlockUserDTO } from '@model/entities/block';
-import { IBaseCardViewModel } from '@viewModel/modules/base/baseCard/interfaces';
-import { BlockTabNames } from '@ui/pages/school/block/blockTabs';
+import { IBlockBaseViewModel } from '@viewModel/modules/entities/block/base/interface';
 
-export interface IBlockAdminViewModel
-  extends IBaseCardViewModel<IBlockUserDTO> {
-  tab: BlockTabNames;
-  changeTab: (value: BlockTabNames) => void;
-}
+export type IBlockAdminViewModel = IBlockBaseViewModel;

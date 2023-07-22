@@ -17,10 +17,8 @@ import { InputAdornment, Stack, Typography } from '@mui/material';
 import { IconButton } from '@components/iconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { IconRenderer } from '@ui/pages/admin/userBlock/index/userBlocksList/iconRendrer';
-import { useLocale } from '@hooks/useLocale';
 
 export const UserBlocksList = observer(() => {
-  const { fDateTime } = useLocale();
   const { list, listFiltered, hasList, filter, setFilter } =
     useViewModel<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin);
 
@@ -39,6 +37,7 @@ export const UserBlocksList = observer(() => {
       headerName: 'Statuses',
       cellRenderer: IconRenderer,
       suppressSizeToFit: true,
+      cellClass: 'ag-first-cell',
     },
     {
       colId: 'user',
@@ -53,7 +52,9 @@ export const UserBlocksList = observer(() => {
           <Stack direction="row" spacing={2} alignItems="center" height="100%">
             <Typography>{props.data.block?.module?.title}</Typography>
             <Typography>-</Typography>
-            <Typography>{props.data.block?.module?.name}</Typography>
+            <Typography overflow="hidden" textOverflow="ellipsis">
+              {props.data.block?.module?.name}
+            </Typography>
           </Stack>
         );
       },
@@ -65,22 +66,19 @@ export const UserBlocksList = observer(() => {
           <Stack direction="row" spacing={2} alignItems="center" height="100%">
             <Typography>{props.data.block?.title}</Typography>
             <Typography>-</Typography>
-            <Typography>{props.data.block?.name}</Typography>
+            <Typography overflow="hidden" textOverflow="ellipsis">
+              {props.data.block?.name}
+            </Typography>
           </Stack>
         );
       },
-    },
-    {
-      headerName: 'Date',
-      suppressSizeToFit: true,
-      cellRenderer: (props: ICellRendererParams) =>
-        fDateTime(new Date(props.data.updatedAt)),
+      cellClass: 'ag-last-cell',
     },
   ];
 
   const getRowClass = (params: RowClassParams) => {
     if (params.data.complete) return 'ag-row-green';
-    if (params.data.sentTasks) return 'ag-row-red';
+    if (params.data.sentTasksUser) return 'ag-row-red';
     if (!params.data.enable) return 'ag-row-disable';
   };
 

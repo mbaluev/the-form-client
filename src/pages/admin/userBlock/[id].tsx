@@ -1,55 +1,78 @@
 import React, { useEffect } from 'react';
 import { MasterSchool } from '@ui/masters/masterSchool';
+import { BlockPage } from 'ui/pages/school/block/[id]/blockPage';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { useService } from '@hooks/useService';
-import { SERVICE } from '@service/ids';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import { observer } from 'mobx-react';
-import { IBlockService } from '@service/modules/entities/block/interface';
-import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
-import { BlockPage } from '@ui/pages/admin/block/blockPage';
+import { useService } from '@hooks/useService';
 import { IModuleService } from '@service/modules/entities/module/interface';
-import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
+import { SERVICE } from '@service/ids';
+import { IBlockService } from '@service/modules/entities/block/interface';
+import { observer } from 'mobx-react';
+import { getCookieToken } from '@utils/cookie/getCookieToken';
+import { IModuleAdminViewModel } from '@viewModel/modules/entities/module/admin/interface';
+import { IBlockAdminViewModel } from '@viewModel/modules/entities/block/admin/interface';
+import { IMaterialAdminViewModel } from '@viewModel/modules/entities/material/admin/interface';
+import { ITaskAdminViewModel } from '@viewModel/modules/entities/task/admin/interface';
+import { IQuestionAdminViewModel } from '@viewModel/modules/entities/question/admin/interface';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
-import { FilterSelect } from '@ui/filter/filterSelect';
-import { FilterText } from '@ui/filter/filterText';
-import { useRouter } from 'next/router';
-import { CellClickedEvent } from 'ag-grid-community';
-import { ParsedUrlQuery } from 'querystring';
-import { getCookieToken } from '@utils/cookie/getCookieToken';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
 ) => {
-  const { params, query } = context;
-  const id = params?.id;
+  const { params } = context;
   const token = getCookieToken(context);
-  const serviceBlock = useService<IBlockService>(SERVICE.Block);
+
   const serviceModule = useService<IModuleService>(SERVICE.Module);
+  const serviceBlock = useService<IBlockService>(SERVICE.Block);
 
-  const blocks = (await serviceBlock.getBlocks(query, token)) || null;
-  const block = (await serviceBlock.getBlock(id, undefined, token)) || null;
-  const modules = (await serviceModule.getModules(undefined, token)) || null;
+  const query = { userBlockId: params?.id };
+  const userModule =
+    (await serviceModule.getModuleUser(undefined, query, token)) || null;
+  const userBlock =
+    (await serviceBlock.getBlockAdmin(query.userBlockId, undefined, token)) ||
+    null;
 
-  return { props: { blocks, block, modules } };
+  return {
+    props: { userModule, userBlock },
+    notFound: !Boolean(userModule) || !Boolean(userBlock),
+  };
 };
 
 const Block = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
-  const { blocks, block, modules } = props;
+  const { userModule, userBlock } = props;
+  const { setData: setModule, clearData: clearModule } =
+    useViewModel<IModuleAdminViewModel>(VIEW_MODEL.ModuleAdmin);
   const {
-    setList: setBlocks,
+    tab,
     setData: setBlock,
-    setBlockData,
-    clearList: clearBlocks,
     clearData: clearBlock,
-    clearBlockData,
-  } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
-  const { setList: setModules, clearList: clearModules } =
-    useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
+  } = useViewModel<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin);
+
+  const { clearData: clearMaterial } = useViewModel<IMaterialAdminViewModel>(
+    VIEW_MODEL.MaterialAdmin
+  );
+  const { clearData: clearTask } = useViewModel<ITaskAdminViewModel>(
+    VIEW_MODEL.TaskAdmin
+  );
+  const { clearData: clearQuestion } = useViewModel<IQuestionAdminViewModel>(
+    VIEW_MODEL.QuestionAdmin
+  );
+
+  useEffect(() => {
+    setModule(userModule);
+    setBlock(userBlock);
+    return () => {
+      clearModule();
+      clearBlock();
+      clearMaterial();
+      clearTask();
+      clearQuestion();
+    };
+  });
 
   const breadCrumbs: TBreadCrumb[] = [
     {
@@ -57,82 +80,29 @@ const Block = (
       url: { pathname: ROUTER_CONST_SCHOOL.HOME.path },
     },
     {
-      label: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.label,
-      url: { pathname: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.path },
+      label: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.label,
+      url: { pathname: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.path },
     },
     {
-      label: block ? `${block?.title}. ${block.name}` : 'Not found',
+      label:
+        userModule && userBlock
+          ? `${userBlock.user?.username} - 
+             ${userModule.module?.title}. ${userModule.module?.name} - 
+             ${userBlock.block?.title}. ${userBlock.block?.name}`
+          : 'loading...',
       url: {
-        pathname: ROUTER_CONST_SCHOOL.ADMIN_BLOCK.path,
-        query: { id: block?.id },
+        pathname: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCK.path,
+        query: { id: userBlock?.id },
       },
-      disabled: !Boolean(block),
     },
   ];
-  const filtersLeft: JSX.Element[] = [
-    <FilterSelect
-      name="moduleId"
-      placeholder="Module"
-      style={{ flexBasis: '50%' }}
-      items={modules?.map((item) => {
-        return {
-          value: item.id,
-          label: item.title,
-        };
-      })}
-    />,
-    <FilterText
-      name="search"
-      placeholder="Search"
-      style={{ flexBasis: '50%' }}
-    />,
-  ];
-  const router = useRouter();
-  const onClick = (params: CellClickedEvent) => {
-    const query: ParsedUrlQuery = { ...router.query, id: params.data.id };
-    router.push({ pathname: ROUTER_CONST_SCHOOL.ADMIN_BLOCK.path, query });
-  };
-  const onClose = async () => {
-    await router.push({
-      pathname: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.path,
-    });
-  };
-  const onDelete = async () => {
-    await clearBlock();
-    await clearBlockData();
-    await router.push({
-      pathname: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.path,
-    });
-  };
-  const onNewCallback = (id: string) => {
-    const query: ParsedUrlQuery = { id: id };
-    router.push({
-      pathname: ROUTER_CONST_SCHOOL.ADMIN_BLOCK.path,
-      query,
-    });
-  };
-
-  useEffect(() => {
-    setBlocks(blocks);
-    setBlock(block);
-    setBlockData(block);
-    setModules(modules);
-    return () => {
-      clearBlocks();
-      clearBlock();
-      clearBlockData();
-      clearModules();
-    };
-  });
 
   return (
     <BlockPage
+      userModule={userModule}
+      userBlock={userBlock}
       breadCrumbs={breadCrumbs}
-      filtersLeft={filtersLeft}
-      onClick={onClick}
-      onClose={onClose}
-      onDelete={onDelete}
-      // onNewCallback={onNewCallback}
+      tab={tab}
     />
   );
 };

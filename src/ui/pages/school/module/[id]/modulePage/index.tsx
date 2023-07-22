@@ -16,8 +16,9 @@ import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/in
 import './index.scss';
 
 export const ModulePage = observer(() => {
-  const { list: userModules, data: userModule } =
-    useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
+  const { data: userModule } = useViewModel<IModuleUserViewModel>(
+    VIEW_MODEL.ModuleUser
+  );
   const breadCrumbs: TBreadCrumb[] = [
     {
       label: ROUTER_CONST_SCHOOL.HOME.label,
@@ -31,19 +32,22 @@ export const ModulePage = observer(() => {
       label: userModule
         ? `${userModule.module?.title}. ${userModule.module?.name}`
         : 'loading...',
-      url: { pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path },
-      neighbors: userModules?.map((d) => {
-        return {
-          label: `${d.module?.title}. ${d.module?.name}`,
-          url: {
-            pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path,
-            query: { id: d.id },
-          },
-          disabled: !d.enable,
-          complete: d.complete,
-          selected: d.id === module?.id,
-        };
-      }),
+      url: {
+        pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path,
+        query: { id: userModule?.id },
+      },
+      // neighbors: userModules?.map((d) => {
+      //   return {
+      //     label: `${d.module?.title}. ${d.module?.name}`,
+      //     url: {
+      //       pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path,
+      //       query: { id: d.id },
+      //     },
+      //     disabled: !d.enable,
+      //     complete: d.complete,
+      //     selected: d.id === module?.id,
+      //   };
+      // }),
     },
   ];
   const cls = classNames('module-page', {

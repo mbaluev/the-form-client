@@ -5,7 +5,7 @@
   height: 100%;
   display: block;
   line-height: $line-height;
-  padding: $padding 0;
+  padding: $base * 2 0;
   white-space: normal;
   word-break: break-word;
 }

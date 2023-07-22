@@ -29,6 +29,7 @@ export const TestList = observer(() => {
     {
       valueGetter: testValueGetter,
       cellRenderer: TestRenderer,
+      cellClass: 'ag-first-cell ag-last-cell',
     },
   ];
 

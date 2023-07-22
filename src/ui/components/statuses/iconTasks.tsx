@@ -19,20 +19,20 @@ export const IconTasks = (props: IProps) => {
   if (userBlock?.enable && !userBlock?.completeTasks) {
     icon = <CircleOutlinedIcon className="color_grey-50" />;
   }
+  if (!admin && userBlock?.sentTasksAdmin === false) {
+    icon = <CallMadeRoundedIcon className="color_blue" />;
+  }
+  if (!admin && userBlock?.sentTasksAdmin === true) {
+    icon = <CallReceivedRoundedIcon className="color_red" />;
+  }
+  if (admin && userBlock?.sentTasksUser === true) {
+    icon = <CallReceivedRoundedIcon className="color_red" />;
+  }
+  if (admin && userBlock?.sentTasksUser === false) {
+    icon = <CallMadeRoundedIcon className="color_blue" />;
+  }
   if (userBlock?.completeTasks) {
     icon = <CheckCircleIcon className="color_green" />;
-  }
-  if (!admin && userBlock?.sentTasks === true) {
-    icon = <CallMadeRoundedIcon className="color_blue" />;
-  }
-  if (!admin && userBlock?.sentTasks === false) {
-    icon = <CallReceivedRoundedIcon className="color_red" />;
-  }
-  if (admin && userBlock?.sentTasks === true) {
-    icon = <CallReceivedRoundedIcon className="color_red" />;
-  }
-  if (admin && userBlock?.sentTasks === false) {
-    icon = <CallMadeRoundedIcon className="color_blue" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

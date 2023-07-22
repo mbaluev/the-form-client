@@ -45,6 +45,7 @@ export const BlockList = observer((props: IProps) => {
           params.data?.name
         }`;
       },
+      cellClass: 'ag-first-cell ag-last-cell',
     },
   ];
 

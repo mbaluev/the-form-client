@@ -1,9 +1,3 @@
-import { IBaseCardViewModel } from '@viewModel/modules/base/baseCard/interfaces';
-import { ITaskUserDocumentDTO } from '@model/entities/task';
-import { IFileDTO } from '@model/common/file';
+import { ITaskBaseDocumentViewModel } from '@viewModel/modules/entities/task/baseDocument/interface';
 
-export interface ITaskAdminDocumentViewModel
-  extends IBaseCardViewModel<ITaskUserDocumentDTO> {
-  upload: (file: File) => Promise<IFileDTO | undefined>;
-  download: (id: string, filename: string) => Promise<void>;
-}
+export type ITaskAdminDocumentViewModel = ITaskBaseDocumentViewModel;

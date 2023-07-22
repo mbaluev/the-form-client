@@ -1,4 +1,3 @@
-import { IBaseCardViewModel } from '@viewModel/modules/base/baseCard/interfaces';
-import { IQuestionUserDTO } from '@model/entities/question';
+import { IQuestionBaseViewModel } from '@viewModel/modules/entities/question/base/interface';
 
-export type IQuestionAdminViewModel = IBaseCardViewModel<IQuestionUserDTO>;
+export type IQuestionAdminViewModel = IQuestionBaseViewModel;

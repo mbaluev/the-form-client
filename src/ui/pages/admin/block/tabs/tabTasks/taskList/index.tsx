@@ -57,6 +57,7 @@ export const TaskList = observer(() => {
       checkboxSelection: true,
       valueGetter: taskValueGetter,
       cellRenderer: TaskRenderer,
+      cellClass: 'ag-first-cell ag-last-cell',
     },
   ];
 

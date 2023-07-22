@@ -7,8 +7,6 @@ import { IModuleService } from '@service/modules/entities/module/interface';
 import { SERVICE } from '@service/ids';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { ModulesPage } from '@ui/pages/school/module/index/modulesPage';
-import { useRouter } from 'next/router';
-import { Loader } from '@components/loader';
 import { observer } from 'mobx-react';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
@@ -37,8 +35,6 @@ const Module = (
     };
   });
 
-  const router = useRouter();
-  if (router.isFallback) return <Loader loading={true} relative />;
   return <ModulesPage />;
 };
 

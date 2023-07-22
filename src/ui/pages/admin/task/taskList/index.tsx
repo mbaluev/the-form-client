@@ -29,6 +29,7 @@ export const TaskList = observer(() => {
     {
       valueGetter: taskValueGetter,
       cellRenderer: TaskRenderer,
+      cellClass: 'ag-first-cell ag-last-cell',
     },
   ];
 

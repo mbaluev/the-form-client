@@ -14,15 +14,17 @@ export const VIEW_MODEL = {
   Task: Symbol.for('TaskViewModel'),
   User: Symbol.for('UserViewModel'),
 
+  ModuleUser: Symbol.for('ModuleUserViewModel'),
   BlockUser: Symbol.for('BlockUserViewModel'),
   MaterialUser: Symbol.for('MaterialUserViewModel'),
-  ModuleUser: Symbol.for('ModuleUserViewModel'),
   QuestionUser: Symbol.for('QuestionUserViewModel'),
   TaskUser: Symbol.for('TaskUserViewModel'),
   TaskUserDocument: Symbol.for('TaskUserDocumentViewModel'),
 
+  ModuleAdmin: Symbol.for('ModuleAdminViewModel'),
   BlockAdmin: Symbol.for('BlockAdminViewModel'),
+  MaterialAdmin: Symbol.for('MaterialAdminViewModel'),
+  QuestionAdmin: Symbol.for('QuestionAdminViewModel'),
   TaskAdmin: Symbol.for('TaskAdminViewModel'),
   TaskAdminDocument: Symbol.for('TaskAdminDocumentViewModel'),
-  QuestionAdmin: Symbol.for('QuestionAdminViewModel'),
 };

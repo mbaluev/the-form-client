@@ -3,7 +3,7 @@
 
 .default-renderer {
   line-height: $line-height;
-  padding: $padding 0;
+  padding: $base * 2 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

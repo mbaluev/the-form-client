@@ -1,4 +1,3 @@
-import { IModuleUserDTO } from '@model/entities/module';
-import { IBaseCardViewModel } from '@viewModel/modules/base/baseCard/interfaces';
+import { IModuleBaseViewModel } from '@viewModel/modules/entities/module/base/interface';
 
-export type IModuleUserViewModel = IBaseCardViewModel<IModuleUserDTO>;
+export type IModuleUserViewModel = IModuleBaseViewModel;

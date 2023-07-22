@@ -1,9 +1,8 @@
 import { injectable } from 'inversify';
-import { IModuleUserDTO } from '@model/entities/module';
-import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
+import { ModuleBaseViewModel } from '@viewModel/modules/entities/module/base';
 
 @injectable()
 export class ModuleUserViewModel
-  extends BaseCardViewModel<IModuleUserDTO>
+  extends ModuleBaseViewModel
   implements IModuleUserViewModel {}

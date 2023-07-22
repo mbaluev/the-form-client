@@ -1,9 +1,10 @@
 import React from 'react';
 import { TMenuItemDTO } from 'controller/model/common/menu';
+import { ROLES } from '@app/settings/roles';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import SchoolIcon from '@mui/icons-material/School';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { ROLES } from '@app/settings/roles';
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 
 export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
   {
@@ -19,6 +20,19 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
       );
     },
     roles: [ROLES.STUDENT],
+  },
+  {
+    name: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.name,
+    label: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.label,
+    path: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.path,
+    icon: <AssignmentTurnedInIcon />,
+    active: (pathname: string) => {
+      return (
+        pathname === ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.path ||
+        pathname === ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCK.path
+      );
+    },
+    roles: [ROLES.ADMIN],
   },
   {
     name: 'administration',
@@ -57,17 +71,6 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
           return (
             pathname === ROUTER_CONST_SCHOOL.ADMIN_USERS.path ||
             pathname === ROUTER_CONST_SCHOOL.ADMIN_USER.path
-          );
-        },
-      },
-      {
-        name: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.name,
-        label: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.label,
-        path: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.path,
-        active: (pathname: string) => {
-          return (
-            pathname === ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.path ||
-            pathname === ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCK.path
           );
         },
       },

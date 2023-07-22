@@ -46,6 +46,10 @@ import { ITaskAdminDocumentViewModel } from '@viewModel/modules/entities/task/ad
 import { TaskAdminDocumentViewModel } from '@viewModel/modules/entities/task/adminDocument';
 import { IBlockAdminViewModel } from '@viewModel/modules/entities/block/admin/interface';
 import { BlockAdminViewModel } from '@viewModel/modules/entities/block/admin';
+import { IModuleAdminViewModel } from '@viewModel/modules/entities/module/admin/interface';
+import { ModuleAdminViewModel } from '@viewModel/modules/entities/module/admin';
+import { IMaterialAdminViewModel } from '@viewModel/modules/entities/material/admin/interface';
+import { MaterialAdminViewModel } from '@viewModel/modules/entities/material/admin';
 
 export const viewModelContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -122,8 +126,20 @@ viewModelContainer
 // admin
 
 viewModelContainer
+  .bind<IModuleAdminViewModel>(VIEW_MODEL.ModuleAdmin)
+  .to(ModuleAdminViewModel);
+
+viewModelContainer
   .bind<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin)
   .to(BlockAdminViewModel);
+
+viewModelContainer
+  .bind<IMaterialAdminViewModel>(VIEW_MODEL.MaterialAdmin)
+  .to(MaterialAdminViewModel);
+
+viewModelContainer
+  .bind<IQuestionAdminViewModel>(VIEW_MODEL.QuestionAdmin)
+  .to(QuestionAdminViewModel);
 
 viewModelContainer
   .bind<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin)
@@ -132,7 +148,3 @@ viewModelContainer
 viewModelContainer
   .bind<ITaskAdminDocumentViewModel>(VIEW_MODEL.TaskAdminDocument)
   .to(TaskAdminDocumentViewModel);
-
-viewModelContainer
-  .bind<IQuestionAdminViewModel>(VIEW_MODEL.QuestionAdmin)
-  .to(QuestionAdminViewModel);

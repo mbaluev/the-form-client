@@ -27,7 +27,8 @@ export interface IBlockUserDTO {
   completeTasks: boolean;
   errorQuestions: boolean;
   commentQuestions: boolean;
-  sentTasks?: boolean;
+  sentTasksUser?: boolean;
+  sentTasksAdmin?: boolean;
   createdAt: string;
   updatedAt: string;
 

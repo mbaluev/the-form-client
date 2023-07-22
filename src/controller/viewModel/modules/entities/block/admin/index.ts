@@ -1,48 +1,16 @@
 /* eslint-disable sonarjs/cognitive-complexity */
-import { inject, injectable } from 'inversify';
-import { SERVICE } from '@service/ids';
+import { injectable } from 'inversify';
 import { IBlockUserDTO } from '@model/entities/block';
-import { BlockService } from 'controller/service/modules/entities/block';
-import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
-import { VIEW_MODEL } from '@viewModel/ids';
-import { AuthViewModel } from '@viewModel/modules/common/auth';
-import { FilterViewModel } from '@viewModel/modules/common/filter';
-import { action, makeObservable, observable } from 'mobx';
-import { BlockTabNames } from '@ui/pages/school/block/blockTabs';
 import { IBlockAdminViewModel } from '@viewModel/modules/entities/block/admin/interface';
 import { ParsedUrlQuery } from 'querystring';
 import _ from 'lodash';
+import { BlockBaseViewModel } from '@viewModel/modules/entities/block/base';
 
 @injectable()
 export class BlockAdminViewModel
-  extends BaseCardViewModel<IBlockUserDTO>
+  extends BlockBaseViewModel
   implements IBlockAdminViewModel
 {
-  @inject(SERVICE.Block) protected serviceBlock!: BlockService;
-
-  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
-
-  @inject(VIEW_MODEL.Filter) protected filters!: FilterViewModel;
-
-  constructor() {
-    super();
-    makeObservable(this, {
-      tab: observable,
-      setTab: action,
-      changeTab: action,
-    });
-  }
-
-  tab = BlockTabNames.materials;
-
-  setTab = (value: BlockTabNames) => (this.tab = value);
-
-  changeTab = (value: BlockTabNames) => {
-    this.setTab(value);
-  };
-
-  // --- override
-
   filterByQuery =
     (query?: ParsedUrlQuery) =>
     (item: IBlockUserDTO): boolean => {

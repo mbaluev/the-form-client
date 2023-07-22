@@ -1,0 +1,13 @@
+@import "../../../../../../core/scss/params";
+
+.block-page {
+  & .page__quick-filter {
+    & .progress {
+      height: $input-height;
+      width: $base * 50;
+      display: flex;
+      align-items: center;
+      padding-right: $base * 2;
+    }
+  }
+}

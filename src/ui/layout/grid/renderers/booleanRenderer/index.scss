@@ -4,7 +4,7 @@
 .boolean-renderer {
   display: flex;
   line-height: $line-height;
-  padding: $padding 0;
+  padding: $base * 2 0;
 
   & .MuiSvgIcon-root {
     color: $color-grey-80;
