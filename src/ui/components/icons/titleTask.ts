@@ -1,16 +1,9 @@
-import { IBlockUserDTO } from '@model/entities/block';
+import { ITaskUserDTO } from '@model/entities/task';
 
-export const titleTask = (
-  userBlock?: IBlockUserDTO | null,
-  admin?: boolean
-) => {
-  let title = 'Homework: disabled';
-  if (userBlock?.enable && !userBlock?.completeTasks)
-    title = 'Homework: in progress';
-  if (userBlock?.completeTasks) title = 'Homework: complete';
-  if (!admin && userBlock?.sentTasks === true) title = 'Homework: answered';
-  if (!admin && userBlock?.sentTasks === false) title = 'Homework: incoming';
-  if (admin && userBlock?.sentTasks === true) title = 'Homework: incoming';
-  if (admin && userBlock?.sentTasks === false) title = 'Homework: answered';
+export const titleTask = (userTask?: ITaskUserDTO | null) => {
+  let title = 'Todo';
+  if (userTask?.sent === false) title = 'Income';
+  if (userTask?.sent === true) title = 'Sent';
+  if (userTask?.complete) title = 'Complete';
   return title;
 };

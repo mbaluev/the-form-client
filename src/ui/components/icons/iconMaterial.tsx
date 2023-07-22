@@ -1,24 +1,20 @@
-import { Tooltip } from '@components/tooltip';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { IBlockUserDTO } from '@model/entities/block';
+import { IMaterialUserDTO } from '@model/entities/material';
 import { titleMaterial } from '@ui/components/icons/titleMaterial';
-import DoDisturbIcon from '@mui/icons-material/DoDisturb';
-import React from 'react';
+import { Tooltip } from '@components/tooltip';
+import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 interface IProps {
-  userBlock?: IBlockUserDTO | null;
+  userMaterial?: IMaterialUserDTO | null;
+  style?: object;
 }
 
 export const IconMaterial = (props: IProps) => {
-  const { userBlock } = props;
-  const title = titleMaterial(userBlock);
-  let icon = <DoDisturbIcon className="color_grey-50" />;
-  if (userBlock?.enable && !userBlock?.completeMaterials) {
-    icon = <RadioButtonUncheckedIcon className="color_grey-50" />;
-  }
-  if (userBlock?.completeMaterials) {
-    icon = <CheckCircleIcon className="color_green" />;
+  const { userMaterial, style } = props;
+  const title = titleMaterial(userMaterial);
+  let icon = <CircleOutlinedIcon className="color_grey-50" style={style} />;
+  if (userMaterial?.complete) {
+    icon = <CheckCircleIcon className="color_green" style={style} />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

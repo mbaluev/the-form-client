@@ -1,9 +1,7 @@
-import { IBlockUserDTO } from '@model/entities/block';
+import { IMaterialUserDTO } from '@model/entities/material';
 
-export const titleMaterial = (userBlock?: IBlockUserDTO | null) => {
-  let title = 'Materials: disabled';
-  if (userBlock?.enable && !userBlock?.completeMaterials)
-    title = 'Materials: in progress';
-  if (userBlock?.completeMaterials) title = 'Materials: complete';
+export const titleMaterial = (userMaterial?: IMaterialUserDTO | null) => {
+  let title = 'New';
+  if (userMaterial?.complete) title = 'Downloaded';
   return title;
 };

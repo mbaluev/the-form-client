@@ -1,9 +1,9 @@
 import React from 'react';
 import { classNames } from '@utils/classNames';
 import { IBlockUserDTO } from '@model/entities/block';
-import { IconMaterial } from '@ui/components/icons/iconMaterial';
-import { IconTask } from '@ui/components/icons/iconTask';
-import { IconQuestion } from '@ui/components/icons/iconQuestion';
+import { IconMaterials } from '@ui/components/icons/iconMaterials';
+import { IconTasks } from '@ui/components/icons/iconTasks';
+import { IconQuestions } from '@ui/components/icons/iconQuestions';
 import './index.scss';
 
 interface IModuleTabLabelProps {
@@ -16,9 +16,9 @@ export const BlockTabsLabel = (props: IModuleTabLabelProps) => {
   const cls = classNames('block-tabs-label');
   return (
     <div className={cls}>
-      {label === 'Materials' && <IconMaterial userBlock={userBlock} />}
-      {label === 'Homework' && <IconTask userBlock={userBlock} />}
-      {label === 'Test' && <IconQuestion userBlock={userBlock} />}
+      {label === 'Materials' && <IconMaterials userBlock={userBlock} />}
+      {label === 'Homework' && <IconTasks userBlock={userBlock} />}
+      {label === 'Test' && <IconQuestions userBlock={userBlock} />}
       <div className="block-tabs-label__label">{label}</div>
     </div>
   );

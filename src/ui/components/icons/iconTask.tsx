@@ -1,39 +1,28 @@
+import { ITaskUserDTO } from '@model/entities/task';
+import { titleTask } from '@ui/components/icons/titleTask';
 import { Tooltip } from '@components/tooltip';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import React from 'react';
-import { IBlockUserDTO } from '@model/entities/block';
+import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CallReceivedRoundedIcon from '@mui/icons-material/CallReceivedRounded';
 import CallMadeRoundedIcon from '@mui/icons-material/CallMadeRounded';
-import { titleTask } from '@ui/components/icons/titleTask';
-import DoDisturbIcon from '@mui/icons-material/DoDisturb';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 interface IProps {
-  userBlock?: IBlockUserDTO | null;
-  admin?: boolean;
+  userTask?: ITaskUserDTO | null;
+  style?: object;
 }
 
 export const IconTask = (props: IProps) => {
-  const { userBlock, admin } = props;
-  const title = titleTask(userBlock, admin);
-  let icon = <DoDisturbIcon className="color_grey-50" />;
-  if (userBlock?.enable && !userBlock?.completeTasks) {
-    icon = <RadioButtonUncheckedIcon className="color_grey-50" />;
+  const { userTask, style } = props;
+  const title = titleTask(userTask);
+  let icon = <CircleOutlinedIcon className="color_grey-50" style={style} />;
+  if (userTask?.sent === false) {
+    icon = <CallReceivedRoundedIcon className="color_red" style={style} />;
   }
-  if (userBlock?.completeTasks) {
-    icon = <CheckCircleIcon className="color_green" />;
+  if (userTask?.sent === true) {
+    icon = <CallMadeRoundedIcon className="color_blue" style={style} />;
   }
-  if (!admin && userBlock?.sentTasks === true) {
-    icon = <CallMadeRoundedIcon className="color_blue" />;
-  }
-  if (!admin && userBlock?.sentTasks === false) {
-    icon = <CallReceivedRoundedIcon className="color_red" />;
-  }
-  if (admin && userBlock?.sentTasks === true) {
-    icon = <CallReceivedRoundedIcon className="color_red" />;
-  }
-  if (admin && userBlock?.sentTasks === false) {
-    icon = <CallMadeRoundedIcon className="color_blue" />;
+  if (userTask?.complete) {
+    icon = <CheckCircleIcon className="color_green" style={style} />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

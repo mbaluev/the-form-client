@@ -12,7 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { QuestionRenderer } from '@ui/pages/school/block/tabs/tabQuestions/questionList/questionRendrer';
 import { CellClickedEvent } from 'ag-grid-community';
-import { AlertQuestion } from '@ui/components/icons/alertQuestion';
+import { AlertQuestions } from '@ui/components/icons/alertQuestions';
 
 export const QuestionList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockUserViewModel>(
@@ -82,7 +82,7 @@ export const QuestionList = observer(() => {
 
   return (
     <React.Fragment>
-      <AlertQuestion userBlock={userBlock} />
+      <AlertQuestions userBlock={userBlock} />
       <GridWithData
         propsAG={{
           rowData: questions,

@@ -4,17 +4,18 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { ITagProps, Tag } from '@components/tag';
 import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
+import { titleMaterial } from '@ui/components/icons/titleMaterial';
 
 export const MaterialSubTitle = observer(() => {
-  const { data } = useViewModel<IMaterialUserViewModel>(
+  const { data: userMaterial } = useViewModel<IMaterialUserViewModel>(
     VIEW_MODEL.MaterialUser
   );
-
-  const tag: ITagProps = { tag: 'New', color: 'grey' };
-  if (data?.complete) {
-    tag.tag = 'Downloaded';
+  const tag: ITagProps = {
+    tag: titleMaterial(userMaterial),
+    color: 'grey',
+  };
+  if (userMaterial?.complete) {
     tag.color = 'green';
   }
-
   return <Tag {...tag} />;
 });

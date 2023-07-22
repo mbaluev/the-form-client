@@ -1,26 +1,29 @@
 import React from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
 import { Tag } from '@components/tag';
-import { TaskIcon } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskIcon';
+import { Stack, Typography } from '@mui/material';
+import { IconTask } from '@ui/components/icons/iconTask';
 
 export const TaskRenderer = (params: ICellRendererParams) => {
+  const index = Number(params.node.rowIndex) + 1;
+  const name = params.data?.task?.document?.name;
+  const type = params.data?.task?.document?.documentType?.name;
   return (
-    <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-      <div
-        style={{
-          flex: '1 1 auto',
-          display: 'flex',
-          gap: 10,
-          alignItems: 'center',
-        }}
+    <Stack direction="row" spacing={2} alignItems="center" height="100%">
+      <Stack
+        direction="row"
+        spacing={2}
+        alignItems="center"
+        height="100%"
+        flex="1 1 auto"
       >
-        <span>{params.value.index}.</span>
-        <TaskIcon complete={params.value.complete} sent={params.value.sent} />
-        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {params.value.name}
-        </span>
-      </div>
-      <Tag tag={params.value.type.name} color={params.value.type.color} />
-    </div>
+        <Typography>{index}.</Typography>
+        <IconTask userTask={params.data} />
+        <Typography style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {name}
+        </Typography>
+      </Stack>
+      <Tag tag={type} color="blue" />
+    </Stack>
   );
 };

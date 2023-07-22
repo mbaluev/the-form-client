@@ -11,9 +11,8 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { CellClickedEvent, RowClassParams } from 'ag-grid-community';
-import { taskValueGetter } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskValueGetter';
 import { TaskRenderer } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskRendrer';
-import { AlertTask } from '@ui/components/icons/alertTask';
+import { AlertTasks } from '@ui/components/icons/alertTasks';
 
 export const TaskList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockUserViewModel>(
@@ -43,7 +42,6 @@ export const TaskList = observer(() => {
   );
   const columnDefs = [
     {
-      valueGetter: taskValueGetter,
       cellRenderer: TaskRenderer,
     },
   ];
@@ -89,7 +87,7 @@ export const TaskList = observer(() => {
 
   return (
     <React.Fragment>
-      <AlertTask userBlock={userBlock} />
+      <AlertTasks userBlock={userBlock} />
       <GridWithData
         propsAG={{
           rowData: tasks,

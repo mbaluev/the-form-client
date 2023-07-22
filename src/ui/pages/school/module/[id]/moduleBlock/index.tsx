@@ -8,12 +8,12 @@ import {
   ModuleProgress,
 } from '@ui/pages/school/module/index/moduleProgress';
 import './index.scss';
-import { IconMaterial } from '@ui/components/icons/iconMaterial';
-import { IconTask } from '@ui/components/icons/iconTask';
-import { IconQuestion } from '@ui/components/icons/iconQuestion';
-import { titleMaterial } from '@ui/components/icons/titleMaterial';
-import { titleTask } from '@ui/components/icons/titleTask';
-import { titleQuestion } from '@ui/components/icons/titleQuestion';
+import { IconMaterials } from '@ui/components/icons/iconMaterials';
+import { IconTasks } from '@ui/components/icons/iconTasks';
+import { IconQuestions } from '@ui/components/icons/iconQuestions';
+import { titleMaterials } from '@ui/components/icons/titleMaterials';
+import { titleTasks } from '@ui/components/icons/titleTasks';
+import { titleQuestions } from '@ui/components/icons/titleQuestions';
 import { StatusBlock } from '@ui/components/statuses/statusBlock';
 
 interface IModuleBlockProps {
@@ -42,19 +42,19 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
       <div className="module-block__name">{userBlock.block?.name}</div>
       <ul className="module-block__ul">
         <li className={clsLiMaterials}>
-          <IconMaterial userBlock={userBlock} />
+          <IconMaterials userBlock={userBlock} />
           <div className="module-block__li-label">
-            {titleMaterial(userBlock)}
+            {titleMaterials(userBlock)}
           </div>
         </li>
         <li className={clsLiTasks}>
-          <IconTask userBlock={userBlock} />
-          <div className="module-block__li-label">{titleTask(userBlock)}</div>
+          <IconTasks userBlock={userBlock} />
+          <div className="module-block__li-label">{titleTasks(userBlock)}</div>
         </li>
         <li className={clsLiQuestions}>
-          <IconQuestion userBlock={userBlock} />
+          <IconQuestions userBlock={userBlock} />
           <div className="module-block__li-label">
-            {titleQuestion(userBlock)}
+            {titleQuestions(userBlock)}
           </div>
         </li>
       </ul>

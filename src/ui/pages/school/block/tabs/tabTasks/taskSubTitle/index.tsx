@@ -4,23 +4,24 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { ITagProps, Tag } from '@components/tag';
+import { titleTask } from '@ui/components/icons/titleTask';
 
 export const TaskSubTitle = observer(() => {
-  const { data } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
-
-  const tag: ITagProps = { tag: 'Todo', color: 'grey' };
-  if (data?.sent === false) {
-    tag.tag = 'Income';
+  const { data: userTask } = useViewModel<ITaskUserViewModel>(
+    VIEW_MODEL.TaskUser
+  );
+  const tag: ITagProps = {
+    tag: titleTask(userTask),
+    color: 'grey',
+  };
+  if (userTask?.sent === false) {
     tag.color = 'red';
   }
-  if (data?.sent === true) {
-    tag.tag = 'Sent';
+  if (userTask?.sent === true) {
     tag.color = 'blue';
   }
-  if (data?.complete) {
-    tag.tag = 'Complete';
+  if (userTask?.complete) {
     tag.color = 'green';
   }
-
   return <Tag {...tag} />;
 });

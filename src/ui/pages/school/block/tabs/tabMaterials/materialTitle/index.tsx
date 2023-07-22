@@ -4,16 +4,17 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Stack } from '@mui/material';
 import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
-import { MaterialIcon } from '@ui/pages/school/block/tabs/tabMaterials/materialList/materialIcon';
+import { IconMaterial } from '@ui/components/icons/iconMaterial';
 
 export const MaterialTitle = observer(() => {
-  const { data } = useViewModel<IMaterialUserViewModel>(
+  const { data: userMaterial } = useViewModel<IMaterialUserViewModel>(
     VIEW_MODEL.MaterialUser
   );
+  const name = userMaterial?.material?.document?.name;
   return (
     <Stack direction="row" spacing="10px">
-      <MaterialIcon complete={data?.complete} style={{ marginTop: '4px' }} />
-      {data ? <div>{data.material?.document?.name}</div> : undefined}
+      <IconMaterial userMaterial={userMaterial} style={{ marginTop: '4px' }} />
+      {name && <div>{name}</div>}
     </Stack>
   );
 });

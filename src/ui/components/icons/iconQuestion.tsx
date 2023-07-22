@@ -1,30 +1,33 @@
-import { IBlockUserDTO } from '@model/entities/block';
+import { IQuestionUserDTO } from '@model/entities/question';
 import { titleQuestion } from '@ui/components/icons/titleQuestion';
 import { Tooltip } from '@components/tooltip';
-import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ChatIcon from '@mui/icons-material/Chat';
 
 interface IProps {
-  userBlock?: IBlockUserDTO | null;
+  userQuestion?: IQuestionUserDTO | null;
+  style?: object;
 }
 
 export const IconQuestion = (props: IProps) => {
-  const { userBlock } = props;
-  const title = titleQuestion(userBlock);
-  let icon = <DoDisturbIcon className="color_grey-50" />;
-  if (userBlock?.enable && !userBlock?.completeQuestions) {
-    icon = <CircleOutlinedIcon className="color_grey-50" />;
+  const { userQuestion, style } = props;
+  const title = titleQuestion(userQuestion);
+  let icon = <CircleOutlinedIcon className="color_grey-50" style={style} />;
+  if (
+    userQuestion?.userQuestionAnswers &&
+    userQuestion?.userQuestionAnswers.length > 0
+  ) {
+    icon = <CheckCircleIcon className="color_grey-50" style={style} />;
   }
-  if (userBlock?.completeQuestions) {
-    icon = <CheckCircleIcon className="color_green" />;
+  if (userQuestion?.complete) {
+    icon = <CheckCircleIcon className="color_green" style={style} />;
   }
-  if (userBlock?.errorQuestions) {
-    icon = <CheckCircleIcon className="color_red" />;
+  if (userQuestion?.error) {
+    icon = <CheckCircleIcon className="color_red" style={style} />;
   }
-  if (userBlock?.commentQuestions) {
-    icon = <ChatIcon className="color_red" />;
+  if (userQuestion?.comment) {
+    icon = <ChatIcon className="color_red" style={style} />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

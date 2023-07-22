@@ -1,24 +1,26 @@
 import React from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
-import { QuestionIcon } from '@ui/pages/school/block/tabs/tabQuestions/questionList/questionIcon';
+import { IconQuestion } from '@ui/components/icons/iconQuestion';
+import { Stack, Typography } from '@mui/material';
 
 export const QuestionRenderer = (params: ICellRendererParams) => {
+  const position = params.data?.question?.position;
+  const title = params.data.question?.title;
   return (
-    <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-      <div
-        style={{
-          flex: '1 1 auto',
-          display: 'flex',
-          gap: 10,
-          alignItems: 'center',
-        }}
+    <Stack direction="row" spacing={2} alignItems="center" height="100%">
+      <Stack
+        direction="row"
+        spacing={2}
+        alignItems="center"
+        height="100%"
+        flex="1 1 auto"
       >
-        <span>{params.data.question?.position}.</span>
-        <QuestionIcon data={params.data} />
-        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {params.data.question?.title}
-        </span>
-      </div>
-    </div>
+        <Typography>{position}.</Typography>
+        <IconQuestion userQuestion={params.data} />
+        <Typography style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {title}
+        </Typography>
+      </Stack>
+    </Stack>
   );
 };

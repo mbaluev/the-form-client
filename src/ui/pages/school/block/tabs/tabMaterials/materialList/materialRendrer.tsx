@@ -1,19 +1,15 @@
-import React from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
-import { MaterialIcon } from '@ui/pages/school/block/tabs/tabMaterials/materialList/materialIcon';
+import { IconMaterial } from '@ui/components/icons/iconMaterial';
+import { Stack, Typography } from '@mui/material';
 
-export const MaterialRenderer = (props: ICellRendererParams) => {
+export const MaterialRenderer = (params: ICellRendererParams) => {
+  const index = Number(params.node.rowIndex) + 1;
+  const name = params.data?.material?.document.name;
   return (
-    <div
-      style={{
-        display: 'flex',
-        gap: 10,
-        alignItems: 'center',
-      }}
-    >
-      <span>{props.value.index}.</span>
-      <MaterialIcon complete={props.value.complete} />
-      <span>{props.value.name}</span>
-    </div>
+    <Stack direction="row" spacing={2} alignItems="center" height="100%">
+      <Typography>{index}.</Typography>
+      <IconMaterial userMaterial={params.data} />
+      <Typography>{name}</Typography>
+    </Stack>
   );
 };

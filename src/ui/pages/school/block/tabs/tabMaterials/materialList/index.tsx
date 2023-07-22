@@ -14,7 +14,7 @@ import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/use
 import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import { CellClickedEvent } from 'ag-grid-community';
 import { documentButtonValueGetter } from '@ui/components/documentButtonValueGetter';
-import { AlertMaterial } from '@ui/components/icons/alertMaterial';
+import { AlertMaterials } from '@ui/components/icons/alertMaterials';
 
 export const MaterialList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockUserViewModel>(
@@ -46,13 +46,6 @@ export const MaterialList = observer(() => {
   const columnDefs = [
     {
       headerName: 'Materials',
-      valueGetter: (params: any) => {
-        return {
-          index: params.node.rowIndex + 1,
-          name: params.data?.material?.document.name,
-          complete: params.data?.complete,
-        };
-      },
       cellRenderer: MaterialRenderer,
     },
     {
@@ -113,7 +106,7 @@ export const MaterialList = observer(() => {
 
   return (
     <React.Fragment>
-      <AlertMaterial userBlock={userBlock} />
+      <AlertMaterials userBlock={userBlock} />
       <GridWithData
         propsAG={{
           rowData: materials,
