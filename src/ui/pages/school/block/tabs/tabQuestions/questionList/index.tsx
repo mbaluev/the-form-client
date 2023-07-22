@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Alert } from '@components/alert';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
@@ -7,52 +6,16 @@ import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/use
 import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import { DefaultRenderer } from '@ui/layout/grid/renderers/defaultRenderer';
 import { TextFieldControl } from '@components/fields';
-import { Box, InputAdornment } from '@mui/material';
+import { InputAdornment } from '@mui/material';
 import { IconButton } from '@components/iconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { QuestionRenderer } from '@ui/pages/school/block/tabs/tabQuestions/questionList/questionRendrer';
 import { CellClickedEvent } from 'ag-grid-community';
-
-interface IPassedProps {
-  complete?: number;
-  total?: number;
-}
-const AlertPassed = (props: IPassedProps) => {
-  const { complete, total } = props;
-  const title =
-    complete && total ? `Complete (${complete}/${total})` : `Complete`;
-  return (
-    <Alert
-      type="success"
-      title={title}
-      variant="outlined"
-      shadow={false}
-      border={false}
-    />
-  );
-};
-
-interface IFailedProps {
-  complete?: number;
-  total?: number;
-}
-const AlertFailed = (props: IFailedProps) => {
-  const { complete, total } = props;
-  const title = complete && total ? `Failed (${complete}/${total})` : `Failed`;
-  return (
-    <Alert
-      type="error"
-      title={title}
-      variant="outlined"
-      shadow={false}
-      border={false}
-    />
-  );
-};
+import { AlertQuestion } from '@ui/components/icons/alertQuestion';
 
 export const QuestionList = observer(() => {
-  const { data: block } = useViewModel<IBlockUserViewModel>(
+  const { data: userBlock } = useViewModel<IBlockUserViewModel>(
     VIEW_MODEL.BlockUser
   );
   const {
@@ -119,16 +82,7 @@ export const QuestionList = observer(() => {
 
   return (
     <React.Fragment>
-      {block?.completeQuestions && !block?.errorQuestions && (
-        <Box style={{ padding: '0 20px 20px' }}>
-          <AlertPassed />
-        </Box>
-      )}
-      {block?.completeQuestions && block?.errorQuestions && (
-        <Box style={{ padding: '0 20px 20px' }}>
-          <AlertFailed />
-        </Box>
-      )}
+      <AlertQuestion userBlock={userBlock} />
       <GridWithData
         propsAG={{
           rowData: questions,

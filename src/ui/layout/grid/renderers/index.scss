@@ -67,6 +67,11 @@
       background-color: rgba($color-blue, 0.15);
     }
 
+    // row disable
+    & .ag-row-disable {
+      color: $color-grey-50;
+    }
+
     // header
     & .ag-header {
       font-size: 1rem;

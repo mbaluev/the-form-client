@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
-import { DialogModule } from '@ui/dialogs/dialogModule';
+import { DialogModule } from 'ui/dialogs/settings/dialogModule';
 
 interface IProps {
   onNewCallback?: (id: string) => void;

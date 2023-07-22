@@ -26,4 +26,15 @@ export interface IBlockService {
     query?: ParsedUrlQuery,
     token?: string | null
   ) => Promise<IBlockUserDTO | undefined>;
+
+  // --- admin
+  getBlocksAdmin: (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<IBlockUserDTO[] | undefined>;
+  getBlockAdmin: (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<IBlockUserDTO | undefined>;
 }

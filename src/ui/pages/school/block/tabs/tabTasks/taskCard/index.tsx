@@ -10,7 +10,7 @@ import { TaskCardActions } from '@ui/pages/school/block/tabs/tabTasks/taskCardAc
 import { TaskTitle } from 'ui/pages/school/block/tabs/tabTasks/taskTitle';
 import { TaskSubTitle } from '@ui/pages/school/block/tabs/tabTasks/taskSubTitle';
 import { TaskCardContent } from 'ui/pages/school/block/tabs/tabTasks/taskCardContent';
-import { DialogTaskUserDocument } from '@ui/dialogs/dialogTaskUserDocument';
+import { DialogTaskUserDocument } from 'ui/dialogs/user/dialogTaskUserDocument';
 import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
 
 export const TaskCard = observer(() => {

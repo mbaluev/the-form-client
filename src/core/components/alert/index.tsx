@@ -7,6 +7,7 @@ import './index.scss';
 
 export interface IAlertProps {
   type?: VariantType;
+  icon?: JSX.Element;
   title?: string;
   message?: string;
   shadow?: boolean;
@@ -18,6 +19,7 @@ export interface IAlertProps {
 export const Alert = forwardRef<HTMLDivElement, IAlertProps>((props, ref) => {
   const {
     type,
+    icon,
     title,
     message,
     shadow = true,
@@ -34,6 +36,7 @@ export const Alert = forwardRef<HTMLDivElement, IAlertProps>((props, ref) => {
     <MuiAlert
       className={cls}
       severity={type as AlertColor}
+      icon={icon}
       ref={ref}
       variant={variant}
       onClose={onClose}

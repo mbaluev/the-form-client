@@ -61,6 +61,17 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
         },
       },
       {
+        name: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.name,
+        label: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.label,
+        path: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.path,
+        active: (pathname: string) => {
+          return (
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.path ||
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCK.path
+          );
+        },
+      },
+      {
         name: ROUTER_CONST_SCHOOL.ADMIN_TASKS.name,
         label: ROUTER_CONST_SCHOOL.ADMIN_TASKS.label,
         path: ROUTER_CONST_SCHOOL.ADMIN_TASKS.path,

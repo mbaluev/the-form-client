@@ -1,4 +1,4 @@
-export const questionValueGetter = (params: any) => {
+export const testValueGetter = (params: any) => {
   return {
     index: params.node.rowIndex + 1,
     data: params.data,

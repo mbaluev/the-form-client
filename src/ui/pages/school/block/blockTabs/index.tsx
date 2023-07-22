@@ -45,33 +45,19 @@ export const BlockTabs = observer(() => {
   const tabs = [
     {
       value: BlockTabNames.materials,
-      label: (
-        <BlockTabsLabel
-          label="Materials"
-          complete={userBlock?.completeMaterials}
-        />
-      ),
+      label: <BlockTabsLabel label="Materials" userBlock={userBlock} />,
       content: <TabMaterials />,
       padding: false,
     },
     {
       value: BlockTabNames.tasks,
-      label: (
-        <BlockTabsLabel label="Homework" complete={userBlock?.completeTasks} />
-      ),
+      label: <BlockTabsLabel label="Homework" userBlock={userBlock} />,
       content: <TabTasks />,
       padding: false,
     },
     {
       value: BlockTabNames.questions,
-      label: (
-        <BlockTabsLabel
-          label="Test"
-          complete={userBlock?.completeQuestions}
-          error={userBlock?.errorQuestions}
-          comment={userBlock?.commentQuestions}
-        />
-      ),
+      label: <BlockTabsLabel label="Test" userBlock={userBlock} />,
       content: <TabQuestions />,
       padding: false,
     },

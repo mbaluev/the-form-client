@@ -1,25 +1,25 @@
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Tooltip } from '@components/tooltip';
-import { IQuestionAdminDTO } from '@model/entities/question';
 import { observer } from 'mobx-react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import React, { Fragment } from 'react';
 import MarkChatUnreadOutlinedIcon from '@mui/icons-material/MarkChatUnreadOutlined';
+import { IQuestionUserDTO } from '@model/entities/question';
 
 interface IProps {
-  data?: IQuestionAdminDTO | null;
+  data?: IQuestionUserDTO | null;
   style?: object;
 }
 
-export const QuestionIcon = observer((props: IProps) => {
+export const TestIcon = observer((props: IProps) => {
   const { data, style } = props;
   let icon = (
     <Tooltip title="Todo">
       <RadioButtonUncheckedIcon className="color_grey-50" style={style} />
     </Tooltip>
   );
-  if (data && data.questionAnswers && data.questionAnswers.length > 0)
+  if (data && data.userQuestionAnswers && data.userQuestionAnswers.length > 0)
     icon = (
       <Tooltip title="Selected">
         <CheckCircleIcon className="color_grey-50" style={style} />

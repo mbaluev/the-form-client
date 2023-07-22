@@ -4,19 +4,19 @@ import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { DefaultRenderer } from '@ui/layout/grid/renderers/defaultRenderer';
 import { IconButton } from '@components/iconButton';
 import { TextFieldControl } from '@components/fields';
-import { Box, InputAdornment } from '@mui/material';
+import { InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { Alert } from '@components/alert';
 import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { CellClickedEvent, RowClassParams } from 'ag-grid-community';
 import { taskValueGetter } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskValueGetter';
 import { TaskRenderer } from '@ui/pages/school/block/tabs/tabTasks/taskList/taskRendrer';
+import { AlertTask } from '@ui/components/icons/alertTask';
 
 export const TaskList = observer(() => {
-  const { data: block } = useViewModel<IBlockUserViewModel>(
+  const { data: userBlock } = useViewModel<IBlockUserViewModel>(
     VIEW_MODEL.BlockUser
   );
   const {
@@ -89,17 +89,7 @@ export const TaskList = observer(() => {
 
   return (
     <React.Fragment>
-      {block?.completeTasks && (
-        <Box style={{ padding: '0 20px 20px' }}>
-          <Alert
-            type="success"
-            title="Complete"
-            variant="outlined"
-            shadow={false}
-            border={false}
-          />
-        </Box>
-      )}
+      <AlertTask userBlock={userBlock} />
       <GridWithData
         propsAG={{
           rowData: tasks,

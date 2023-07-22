@@ -8,7 +8,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
+import { DialogConfirm } from 'ui/dialogs/common/dialogConfirm';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 

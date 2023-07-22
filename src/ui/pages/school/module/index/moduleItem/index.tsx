@@ -1,20 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import { classNames } from '@utils/classNames';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import { IModuleUserDTO } from 'controller/model/entities/module';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
-import { ModuleItemStatus } from '@ui/pages/school/module/index/moduleItemStatus';
-import DoDisturbAltOutlinedIcon from '@mui/icons-material/DoDisturbAltOutlined';
+import { IconBlock } from '@ui/components/statuses/iconBlock';
+import { StatusModule } from '@ui/components/statuses/statusModule';
 import {
   getProgress,
   ModuleProgress,
 } from '@ui/pages/school/module/index/moduleProgress';
 import './index.scss';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { Tooltip } from '@components/tooltip';
-import MarkChatUnreadOutlinedIcon from '@mui/icons-material/MarkChatUnreadOutlined';
 
 interface IModuleItemProps {
   userModule: IModuleUserDTO;
@@ -37,7 +32,7 @@ const ModuleItemContent = (props: IModuleItemProps) => {
     <React.Fragment>
       <div className="module-item__title">
         {userModule.module?.title}
-        <ModuleItemStatus userModule={userModule} />
+        <StatusModule userModule={userModule} />
       </div>
       <div className="module-item__name">{userModule.module?.name}</div>
       <ul className="module-item__ul">
@@ -48,27 +43,11 @@ const ModuleItemContent = (props: IModuleItemProps) => {
           return (
             <li key={index} className={clsLi}>
               <div className="module-item__li-icon">
-                {userBlock.complete && <CheckCircleIcon />}
-                {!userBlock.complete && userBlock.enable && (
-                  <RadioButtonUncheckedIcon />
-                )}
-                {!userBlock.complete && !userBlock.enable && (
-                  <DoDisturbAltOutlinedIcon />
-                )}
+                <IconBlock userBlock={userBlock} />
               </div>
               <div className="module-item__li-label">
                 {userBlock.block?.name}
               </div>
-              {userBlock.errorQuestions && (
-                <Tooltip title="Test failed">
-                  <InfoOutlinedIcon className="color_red" />
-                </Tooltip>
-              )}
-              {userBlock.commentQuestions && (
-                <Tooltip title="Has a comments">
-                  <MarkChatUnreadOutlinedIcon className="color_red" />
-                </Tooltip>
-              )}
             </li>
           );
         })}

@@ -4,20 +4,20 @@ import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { DefaultRenderer } from '@ui/layout/grid/renderers/defaultRenderer';
 import { IconButton } from '@components/iconButton';
 import { TextFieldControl } from '@components/fields';
-import { Box, InputAdornment } from '@mui/material';
+import { InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { ButtonRenderer } from '@ui/layout/grid/renderers/buttonRenderer';
 import { MaterialRenderer } from '@ui/pages/school/block/tabs/tabMaterials/materialList/materialRendrer';
 import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
-import { Alert } from '@components/alert';
 import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import { CellClickedEvent } from 'ag-grid-community';
 import { documentButtonValueGetter } from '@ui/components/documentButtonValueGetter';
+import { AlertMaterial } from '@ui/components/icons/alertMaterial';
 
 export const MaterialList = observer(() => {
-  const { data: block } = useViewModel<IBlockUserViewModel>(
+  const { data: userBlock } = useViewModel<IBlockUserViewModel>(
     VIEW_MODEL.BlockUser
   );
   const {
@@ -113,17 +113,7 @@ export const MaterialList = observer(() => {
 
   return (
     <React.Fragment>
-      {block?.completeMaterials && (
-        <Box style={{ padding: '0 20px 20px' }}>
-          <Alert
-            type="success"
-            title="Complete"
-            variant="outlined"
-            shadow={false}
-            border={false}
-          />
-        </Box>
-      )}
+      <AlertMaterial userBlock={userBlock} />
       <GridWithData
         propsAG={{
           rowData: materials,

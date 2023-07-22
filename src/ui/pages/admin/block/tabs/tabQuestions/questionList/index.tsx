@@ -12,8 +12,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { IQuestionViewModel } from '@viewModel/modules/entities/question/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
-import { DialogQuestion } from '@ui/dialogs/dialogQuestion';
+import { DialogConfirm } from 'ui/dialogs/common/dialogConfirm';
+import { DialogQuestion } from 'ui/dialogs/settings/dialogQuestion';
 
 export const QuestionList = observer(() => {
   const {

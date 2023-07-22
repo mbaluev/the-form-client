@@ -11,9 +11,9 @@ import { InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
+import { DialogConfirm } from 'ui/dialogs/common/dialogConfirm';
 import { ITaskViewModel } from '@viewModel/modules/entities/task/interface';
-import { DialogTask } from '@ui/dialogs/dialogTask';
+import { DialogTask } from 'ui/dialogs/settings/dialogTask';
 import { taskValueGetter } from '@ui/pages/admin/block/tabs/tabTasks/taskList/taskValueGetter';
 import { TaskRenderer } from '@ui/pages/admin/block/tabs/tabTasks/taskList/taskRendrer';
 

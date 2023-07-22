@@ -2,7 +2,8 @@ import React from 'react';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { Page } from '@ui/layout/page';
 import { observer } from 'mobx-react';
-import { QuestionList } from '@ui/pages/admin/question/questionList';
+import { TestList } from 'ui/pages/admin/question/testList';
+import { TestCard } from 'ui/pages/admin/question/testCard';
 
 interface IProps {
   breadCrumbs: TBreadCrumb[];
@@ -16,9 +17,9 @@ export const QuestionPage = observer((props: IProps) => {
       title="Tests"
       breadCrumbs={breadCrumbs}
       padding={false}
-      pageRight={<>...</>}
+      pageRight={<TestCard />}
     >
-      <QuestionList {...other} />
+      <TestList {...other} />
     </Page>
   );
 });

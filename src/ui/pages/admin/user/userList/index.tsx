@@ -11,7 +11,7 @@ import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
 import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
-import { DialogUser } from '@ui/dialogs/dialogUser';
+import { DialogUser } from 'ui/dialogs/settings/dialogUser';
 import { UserRenderer } from '@ui/pages/admin/user/userList/userRendrer';
 import { userValueGetter } from '@ui/pages/admin/user/userList/userValueGetter';
 

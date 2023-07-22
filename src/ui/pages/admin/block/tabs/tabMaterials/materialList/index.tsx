@@ -11,9 +11,9 @@ import { InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
+import { DialogConfirm } from 'ui/dialogs/common/dialogConfirm';
 import { IMaterialViewModel } from '@viewModel/modules/entities/material/interface';
-import { DialogMaterial } from '@ui/dialogs/dialogMaterial';
+import { DialogMaterial } from 'ui/dialogs/settings/dialogMaterial';
 import { ButtonRenderer } from 'ui/layout/grid/renderers/buttonRenderer';
 import { documentButtonValueGetter } from '@ui/components/documentButtonValueGetter';
 

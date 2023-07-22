@@ -1,7 +1,7 @@
 import { ICellRendererParams } from 'ag-grid-community';
-import { QuestionIcon } from '@ui/pages/admin/question/questionList/questionIcon';
+import { TestIcon } from '@ui/pages/admin/question/testList/testIcon';
 
-export const QuestionRenderer = (params: ICellRendererParams) => {
+export const TestRenderer = (params: ICellRendererParams) => {
   return (
     <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
       <div
@@ -14,7 +14,7 @@ export const QuestionRenderer = (params: ICellRendererParams) => {
         }}
       >
         <span>{params.value.index}.</span>
-        <QuestionIcon data={params.value.data} />
+        <TestIcon data={params.value.data} />
         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {`${params.value.user} - ${params.value.block}`}
         </span>

@@ -1,20 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
 import { classNames } from '@utils/classNames';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import { IBlockUserDTO } from 'controller/model/entities/block';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
-import { ModuleBlockStatus } from '@ui/pages/school/module/[id]/moduleBlockStatus';
 import {
   getProgress,
   ModuleProgress,
 } from '@ui/pages/school/module/index/moduleProgress';
 import './index.scss';
-import DoDisturbAltOutlinedIcon from '@mui/icons-material/DoDisturbAltOutlined';
-import { Tooltip } from '@components/tooltip';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import MarkChatUnreadOutlinedIcon from '@mui/icons-material/MarkChatUnreadOutlined';
+import { IconMaterial } from '@ui/components/icons/iconMaterial';
+import { IconTask } from '@ui/components/icons/iconTask';
+import { IconQuestion } from '@ui/components/icons/iconQuestion';
+import { titleMaterial } from '@ui/components/icons/titleMaterial';
+import { titleTask } from '@ui/components/icons/titleTask';
+import { titleQuestion } from '@ui/components/icons/titleQuestion';
+import { StatusBlock } from '@ui/components/statuses/statusBlock';
 
 interface IModuleBlockProps {
   userBlock: IBlockUserDTO;
@@ -29,67 +29,33 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
   ]);
 
   const clsLi = classNames('module-block__li');
-  const clsLiMaterials = classNames(clsLi, {
-    'module-block__li_complete': userBlock.completeMaterials,
-  });
-  const clsLiQuestions = classNames(clsLi, {
-    'module-block__li_complete': Boolean(userBlock.completeQuestions),
-  });
-  const clsLiTasks = classNames(clsLi, {
-    'module-block__li_complete': userBlock.completeTasks,
-  });
+  const clsLiMaterials = classNames(clsLi, {});
+  const clsLiQuestions = classNames(clsLi, {});
+  const clsLiTasks = classNames(clsLi, {});
 
   return (
     <React.Fragment>
       <div className="module-block__title">
         {userBlock.block?.title}
-        <ModuleBlockStatus userModuleBlock={userBlock} />
+        <StatusBlock userBlock={userBlock} />
       </div>
       <div className="module-block__name">{userBlock.block?.name}</div>
       <ul className="module-block__ul">
         <li className={clsLiMaterials}>
-          <div className="module-block__li-icon">
-            {!userBlock.enable && <DoDisturbAltOutlinedIcon />}
-            {userBlock.enable && userBlock.completeMaterials && (
-              <CheckCircleIcon />
-            )}
-            {userBlock.enable && !userBlock.completeMaterials && (
-              <RadioButtonUncheckedIcon />
-            )}
+          <IconMaterial userBlock={userBlock} />
+          <div className="module-block__li-label">
+            {titleMaterial(userBlock)}
           </div>
-          <div className="module-block__li-label">Materials</div>
         </li>
         <li className={clsLiTasks}>
-          <div className="module-block__li-icon">
-            {!userBlock.enable && <DoDisturbAltOutlinedIcon />}
-            {userBlock.enable && userBlock.completeTasks && <CheckCircleIcon />}
-            {userBlock.enable && !userBlock.completeTasks && (
-              <RadioButtonUncheckedIcon />
-            )}
-          </div>
-          <div className="module-block__li-label">Homework</div>
+          <IconTask userBlock={userBlock} />
+          <div className="module-block__li-label">{titleTask(userBlock)}</div>
         </li>
         <li className={clsLiQuestions}>
-          <div className="module-block__li-icon">
-            {!userBlock.enable && <DoDisturbAltOutlinedIcon />}
-            {userBlock.enable && userBlock.completeQuestions && (
-              <CheckCircleIcon />
-            )}
-            {userBlock.enable && !userBlock.completeQuestions && (
-              <RadioButtonUncheckedIcon />
-            )}
+          <IconQuestion userBlock={userBlock} />
+          <div className="module-block__li-label">
+            {titleQuestion(userBlock)}
           </div>
-          <div className="module-block__li-label">Test</div>
-          {userBlock.errorQuestions && (
-            <Tooltip title="Test failed">
-              <InfoOutlinedIcon className="color_red" />
-            </Tooltip>
-          )}
-          {userBlock.commentQuestions && (
-            <Tooltip title="Has a comments">
-              <MarkChatUnreadOutlinedIcon className="color_red" />
-            </Tooltip>
-          )}
         </li>
       </ul>
       <ModuleProgress value={progress} />

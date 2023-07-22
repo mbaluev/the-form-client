@@ -9,10 +9,10 @@ import { FilterText } from '@ui/filter/filterText';
 import { useRouter } from 'next/router';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { IQuestionAdminViewModel } from '@viewModel/modules/entities/question/admin/interface';
-import { questionValueGetter } from '@ui/pages/admin/question/questionList/questionValueGetter';
-import { QuestionRenderer } from '@ui/pages/admin/question/questionList/questionRendrer';
+import { testValueGetter } from '@ui/pages/admin/question/testList/testValueGetter';
+import { TestRenderer } from '@ui/pages/admin/question/testList/testRendrer';
 
-export const QuestionList = observer(() => {
+export const TestList = observer(() => {
   const { data, list, hasList, isModalOpen } =
     useViewModel<IQuestionAdminViewModel>(VIEW_MODEL.QuestionAdmin);
 
@@ -27,13 +27,14 @@ export const QuestionList = observer(() => {
   );
   const columnDefs = [
     {
-      valueGetter: questionValueGetter,
-      cellRenderer: QuestionRenderer,
+      valueGetter: testValueGetter,
+      cellRenderer: TestRenderer,
     },
   ];
 
   const getRowClass = (params: RowClassParams) => {
-    if (params.data.comment === null) return 'ag-row-red';
+    if (params.data.complete && params.data.comment === null)
+      return 'ag-row-red';
   };
 
   const itemsLeft: JSX.Element[] = [

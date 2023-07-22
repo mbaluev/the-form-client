@@ -79,4 +79,31 @@ export class BlockService implements IBlockService {
     );
     return ret ? ret.data : undefined;
   };
+
+  // --- admin
+
+  getBlocksAdmin = async (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<IBlockUserDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<IBlockUserDTO>>(
+      `${this.API_PREFIX}/admin/list`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
+
+  getBlockAdmin = async (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<IBlockUserDTO | undefined> => {
+    const ret = await this.apiModule.post<IResponseItemDTO<IBlockUserDTO>>(
+      `${this.API_PREFIX}/admin/item/${id}`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
 }

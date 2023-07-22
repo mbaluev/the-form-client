@@ -8,7 +8,7 @@ import { CellClickedEvent } from 'ag-grid-community';
 import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
-import { DialogBlock } from '@ui/dialogs/dialogBlock';
+import { DialogBlock } from 'ui/dialogs/settings/dialogBlock';
 
 interface IProps {
   filtersLeft?: JSX.Element[];

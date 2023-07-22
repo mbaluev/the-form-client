@@ -24,6 +24,7 @@ export interface ITaskService {
     token?: string | null
   ) => Promise<boolean | undefined>;
 
+  // --- user
   getTasksUser: (
     query?: ParsedUrlQuery,
     token?: string | null
@@ -38,6 +39,7 @@ export interface ITaskService {
     token?: string | null
   ) => Promise<ITaskUserDocumentDTO | undefined>;
 
+  // --- admin
   getTasksAdmin: (
     query?: ParsedUrlQuery,
     token?: string | null

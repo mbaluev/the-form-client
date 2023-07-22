@@ -1,40 +1,25 @@
 import React from 'react';
 import { classNames } from '@utils/classNames';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import { IBlockUserDTO } from '@model/entities/block';
+import { IconMaterial } from '@ui/components/icons/iconMaterial';
+import { IconTask } from '@ui/components/icons/iconTask';
+import { IconQuestion } from '@ui/components/icons/iconQuestion';
 import './index.scss';
-import { Tooltip } from '@components/tooltip';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import MarkChatUnreadOutlinedIcon from '@mui/icons-material/MarkChatUnreadOutlined';
 
 interface IModuleTabLabelProps {
-  label: string;
-  complete?: boolean;
-  error?: boolean;
-  comment?: boolean;
+  label?: string;
+  userBlock?: IBlockUserDTO | null;
 }
 
 export const BlockTabsLabel = (props: IModuleTabLabelProps) => {
-  const { label, complete, error, comment } = props;
-  const cls = classNames('block-tabs-label', {
-    'block-tabs-label_complete': Boolean(complete),
-  });
+  const { label, userBlock } = props;
+  const cls = classNames('block-tabs-label');
   return (
     <div className={cls}>
-      <div className="block-tabs-label__icon">
-        {complete ? <CheckCircleIcon /> : <RadioButtonUncheckedIcon />}
-      </div>
+      {label === 'Materials' && <IconMaterial userBlock={userBlock} />}
+      {label === 'Homework' && <IconTask userBlock={userBlock} />}
+      {label === 'Test' && <IconQuestion userBlock={userBlock} />}
       <div className="block-tabs-label__label">{label}</div>
-      {error && (
-        <Tooltip title="Failed">
-          <InfoOutlinedIcon className="color_red" />
-        </Tooltip>
-      )}
-      {comment && (
-        <Tooltip title="Has a comments">
-          <MarkChatUnreadOutlinedIcon className="color_red" />
-        </Tooltip>
-      )}
     </div>
   );
 };

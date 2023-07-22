@@ -50,7 +50,7 @@ const Question = (
     },
     {
       label: question
-        ? `${question.user.username} - ${question.question.block.name}`
+        ? `${question.user?.username} - ${question.question?.block?.name}`
         : 'Not found',
       url: {
         pathname: ROUTER_CONST_SCHOOL.ADMIN_QUESTION.path,

@@ -10,7 +10,7 @@ import { TaskSubTitle } from '@ui/pages/admin/task/taskSubTitle';
 import { TaskCardActions } from '@ui/pages/admin/task/taskCardActions';
 import { TaskCardContent } from '@ui/pages/admin/task/taskCardContent';
 import { Loader } from '@components/loader';
-import { DialogTaskAdminDocument } from '@ui/dialogs/dialogTaskAdminDocument';
+import { DialogTaskAdminDocument } from 'ui/dialogs/admin/dialogTaskAdminDocument';
 import { ITaskAdminDocumentViewModel } from '@viewModel/modules/entities/task/adminDocument/interface';
 
 export const TaskCard = observer(() => {
