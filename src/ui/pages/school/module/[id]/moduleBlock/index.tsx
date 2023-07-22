@@ -8,12 +8,12 @@ import {
   ModuleProgress,
 } from '@ui/pages/school/module/index/moduleProgress';
 import './index.scss';
-import { IconMaterials } from '@ui/components/icons/iconMaterials';
-import { IconTasks } from '@ui/components/icons/iconTasks';
-import { IconQuestions } from '@ui/components/icons/iconQuestions';
-import { titleMaterials } from '@ui/components/icons/titleMaterials';
-import { titleTasks } from '@ui/components/icons/titleTasks';
-import { titleQuestions } from '@ui/components/icons/titleQuestions';
+import { IconMaterials } from '@ui/components/statuses/iconMaterials';
+import { IconTasks } from '@ui/components/statuses/iconTasks';
+import { IconQuestions } from '@ui/components/statuses/iconQuestions';
+import { titleMaterials } from '@ui/components/statuses/titleMaterials';
+import { titleTasks } from '@ui/components/statuses/titleTasks';
+import { titleQuestions } from '@ui/components/statuses/titleQuestions';
 import { StatusBlock } from '@ui/components/statuses/statusBlock';
 
 interface IModuleBlockProps {

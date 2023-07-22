@@ -4,7 +4,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { ITagProps, Tag } from '@components/tag';
 import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
-import { titleQuestion } from '@ui/components/icons/titleQuestion';
+import { titleQuestion } from '@ui/components/statuses/titleQuestion';
 
 export const QuestionSubTitle = observer(() => {
   const { data: userQuestion } = useViewModel<IQuestionUserViewModel>(

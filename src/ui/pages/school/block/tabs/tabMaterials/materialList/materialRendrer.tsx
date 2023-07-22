@@ -1,5 +1,5 @@
 import { ICellRendererParams } from 'ag-grid-community';
-import { IconMaterial } from '@ui/components/icons/iconMaterial';
+import { IconMaterial } from '@ui/components/statuses/iconMaterial';
 import { Stack, Typography } from '@mui/material';
 
 export const MaterialRenderer = (params: ICellRendererParams) => {

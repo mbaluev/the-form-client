@@ -1,6 +1,6 @@
 import React from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
-import { IconQuestion } from '@ui/components/icons/iconQuestion';
+import { IconQuestion } from '@ui/components/statuses/iconQuestion';
 import { Stack, Typography } from '@mui/material';
 
 export const QuestionRenderer = (params: ICellRendererParams) => {

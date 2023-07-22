@@ -1,5 +1,5 @@
 import { IMaterialUserDTO } from '@model/entities/material';
-import { titleMaterial } from '@ui/components/icons/titleMaterial';
+import { titleMaterial } from '@ui/components/statuses/titleMaterial';
 import { Tooltip } from '@components/tooltip';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';

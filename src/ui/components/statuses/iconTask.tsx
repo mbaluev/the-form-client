@@ -1,5 +1,5 @@
 import { ITaskUserDTO } from '@model/entities/task';
-import { titleTask } from '@ui/components/icons/titleTask';
+import { titleTask } from '@ui/components/statuses/titleTask';
 import { Tooltip } from '@components/tooltip';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CallReceivedRoundedIcon from '@mui/icons-material/CallReceivedRounded';

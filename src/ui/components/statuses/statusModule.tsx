@@ -1,4 +1,4 @@
-import { IModuleUserDTO } from 'controller/model/entities/module';
+import { IModuleUserDTO } from '@model/entities/module';
 import { ITagProps, Tag } from '@components/tag';
 import { titleModule } from '@ui/components/statuses/titleModule';
 

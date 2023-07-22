@@ -14,7 +14,7 @@ import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/use
 import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import { CellClickedEvent } from 'ag-grid-community';
 import { documentButtonValueGetter } from '@ui/components/documentButtonValueGetter';
-import { AlertMaterials } from '@ui/components/icons/alertMaterials';
+import { AlertMaterials } from '@ui/components/statuses/alertMaterials';
 
 export const MaterialList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockUserViewModel>(

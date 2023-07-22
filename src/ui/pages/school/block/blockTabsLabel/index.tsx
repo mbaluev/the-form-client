@@ -1,9 +1,9 @@
 import React from 'react';
 import { classNames } from '@utils/classNames';
 import { IBlockUserDTO } from '@model/entities/block';
-import { IconMaterials } from '@ui/components/icons/iconMaterials';
-import { IconTasks } from '@ui/components/icons/iconTasks';
-import { IconQuestions } from '@ui/components/icons/iconQuestions';
+import { IconMaterials } from '@ui/components/statuses/iconMaterials';
+import { IconTasks } from '@ui/components/statuses/iconTasks';
+import { IconQuestions } from '@ui/components/statuses/iconQuestions';
 import './index.scss';
 
 interface IModuleTabLabelProps {

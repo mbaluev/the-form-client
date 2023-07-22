@@ -4,7 +4,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { ITagProps, Tag } from '@components/tag';
 import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
-import { titleMaterial } from '@ui/components/icons/titleMaterial';
+import { titleMaterial } from '@ui/components/statuses/titleMaterial';
 
 export const MaterialSubTitle = observer(() => {
   const { data: userMaterial } = useViewModel<IMaterialUserViewModel>(

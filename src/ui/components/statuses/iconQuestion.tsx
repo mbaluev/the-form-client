@@ -1,5 +1,5 @@
 import { IQuestionUserDTO } from '@model/entities/question';
-import { titleQuestion } from '@ui/components/icons/titleQuestion';
+import { titleQuestion } from '@ui/components/statuses/titleQuestion';
 import { Tooltip } from '@components/tooltip';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';

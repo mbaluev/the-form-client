@@ -4,7 +4,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { ITagProps, Tag } from '@components/tag';
-import { titleTask } from '@ui/components/icons/titleTask';
+import { titleTask } from '@ui/components/statuses/titleTask';
 
 export const TaskSubTitle = observer(() => {
   const { data: userTask } = useViewModel<ITaskUserViewModel>(

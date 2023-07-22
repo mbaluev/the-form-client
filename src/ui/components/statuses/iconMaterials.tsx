@@ -1,5 +1,5 @@
 import { IBlockUserDTO } from '@model/entities/block';
-import { titleMaterials } from '@ui/components/icons/titleMaterials';
+import { titleMaterials } from '@ui/components/statuses/titleMaterials';
 import { Tooltip } from '@components/tooltip';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';

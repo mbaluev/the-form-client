@@ -4,7 +4,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Stack } from '@mui/material';
 import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
-import { IconTask } from '@ui/components/icons/iconTask';
+import { IconTask } from '@ui/components/statuses/iconTask';
 
 export const TaskTitle = observer(() => {
   const { data: userTask } = useViewModel<ITaskUserViewModel>(

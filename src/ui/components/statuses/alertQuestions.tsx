@@ -1,22 +1,22 @@
 import { IBlockUserDTO } from '@model/entities/block';
 import { Alert } from '@components/alert';
 import { Box } from '@mui/material';
-import { IconTasks } from '@ui/components/icons/iconTasks';
-import { titleTasks } from '@ui/components/icons/titleTasks';
+import { IconQuestions } from '@ui/components/statuses/iconQuestions';
+import { titleQuestions } from '@ui/components/statuses/titleQuestions';
 
 interface IProps {
   userBlock?: IBlockUserDTO | null;
 }
 
-export const AlertTasks = (props: IProps) => {
+export const AlertQuestions = (props: IProps) => {
   const { userBlock } = props;
-  if (userBlock?.completeTasks) {
+  if (userBlock?.completeQuestions) {
     return (
       <Box style={{ padding: '0 20px 20px' }}>
         <Alert
-          type="success"
-          icon={<IconTasks userBlock={userBlock} />}
-          title={titleTasks(userBlock)}
+          type={userBlock?.errorQuestions ? 'error' : 'success'}
+          icon={<IconQuestions userBlock={userBlock} />}
+          title={titleQuestions(userBlock)}
           variant="outlined"
           shadow={false}
           border={false}

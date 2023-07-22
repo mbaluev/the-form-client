@@ -4,7 +4,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Stack } from '@mui/material';
 import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
-import { IconQuestion } from '@ui/components/icons/iconQuestion';
+import { IconQuestion } from '@ui/components/statuses/iconQuestion';
 
 export const QuestionTitle = observer(() => {
   const { data: userQuestion } = useViewModel<IQuestionUserViewModel>(

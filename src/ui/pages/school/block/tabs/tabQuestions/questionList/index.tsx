@@ -12,7 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { QuestionRenderer } from '@ui/pages/school/block/tabs/tabQuestions/questionList/questionRendrer';
 import { CellClickedEvent } from 'ag-grid-community';
-import { AlertQuestions } from '@ui/components/icons/alertQuestions';
+import { AlertQuestions } from '@ui/components/statuses/alertQuestions';
 
 export const QuestionList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockUserViewModel>(

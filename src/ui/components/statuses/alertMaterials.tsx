@@ -1,7 +1,7 @@
 import { IBlockUserDTO } from '@model/entities/block';
-import { titleMaterials } from '@ui/components/icons/titleMaterials';
+import { titleMaterials } from '@ui/components/statuses/titleMaterials';
 import { Alert } from '@components/alert';
-import { IconMaterials } from '@ui/components/icons/iconMaterials';
+import { IconMaterials } from '@ui/components/statuses/iconMaterials';
 import { Box } from '@mui/material';
 
 interface IProps {
