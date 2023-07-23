@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { observer } from 'mobx-react';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
-import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
+import { DefaultRenderer } from '@ui/layout/grid/renderers/defaultRenderer';
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -12,8 +12,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { IQuestionViewModel } from '@viewModel/modules/entities/question/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { DialogConfirm } from 'ui/dialogs/common/dialogConfirm';
-import { DialogQuestion } from 'ui/dialogs/settings/dialogQuestion';
+import { DialogConfirm } from '@ui/dialogs/common/dialogConfirm';
+import { DialogQuestion } from '@ui/dialogs/settings/dialogQuestion';
 
 export const QuestionList = observer(() => {
   const {

@@ -3,13 +3,15 @@
 $height: $base;
 
 .progress {
-  padding: 0;
   color: $color-grey-150;
   display: flex;
   align-items: center;
   gap: $base * 2;
-  width: 100%;
   transition-duration: $transition-duration;
+
+  height: $input-height;
+  width: $base * 50;
+  padding-right: $base * 2;
 
   &__label {
     font-weight: 500;

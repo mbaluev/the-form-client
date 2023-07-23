@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { observer } from 'mobx-react';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
-import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
+import { DefaultRenderer } from '@ui/layout/grid/renderers/defaultRenderer';
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -11,9 +11,9 @@ import { InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { DialogConfirm } from 'ui/dialogs/common/dialogConfirm';
+import { DialogConfirm } from '@ui/dialogs/common/dialogConfirm';
 import { ITaskViewModel } from '@viewModel/modules/entities/task/interface';
-import { DialogTask } from 'ui/dialogs/settings/dialogTask';
+import { DialogTask } from '@ui/dialogs/settings/dialogTask';
 import { taskValueGetter } from '@ui/pages/admin/block/tabs/tabTasks/taskList/taskValueGetter';
 import { TaskRenderer } from '@ui/pages/admin/block/tabs/tabTasks/taskList/taskRendrer';
 

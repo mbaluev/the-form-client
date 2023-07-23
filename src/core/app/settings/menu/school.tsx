@@ -4,7 +4,7 @@ import { ROLES } from '@app/settings/roles';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import SchoolIcon from '@mui/icons-material/School';
 import SettingsIcon from '@mui/icons-material/Settings';
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import BarChartRoundedIcon from '@mui/icons-material/BarChartRounded';
 
 export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
   {
@@ -25,7 +25,7 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
     name: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.name,
     label: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.label,
     path: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.path,
-    icon: <AssignmentTurnedInIcon />,
+    icon: <BarChartRoundedIcon />,
     active: (pathname: string) => {
       return (
         pathname === ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.path ||

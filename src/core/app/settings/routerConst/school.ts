@@ -108,13 +108,13 @@ export const ROUTER_CONST_SCHOOL: Record<string, any> = {
   },
   ADMIN_USER_BLOCKS: {
     name: 'adminUserTasks',
-    label: 'Users blocks',
+    label: 'Users progress',
     path: '/admin/userBlock',
     roles: [ROLES.ADMIN],
   },
   ADMIN_USER_BLOCK: {
     name: 'adminUserBlock',
-    label: 'Users block',
+    label: 'User progress',
     path: '/admin/userBlock/[id]',
     roles: [ROLES.ADMIN],
   },

@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { classNames } from '@utils/classNames';
 import { IModuleUserDTO } from 'controller/model/entities/module';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
-import { IconBlock } from '@ui/components/statuses/iconBlock';
-import { StatusModule } from '@ui/components/statuses/statusModule';
+import { IconBlock } from '@ui/components/icon/iconBlock';
+import { TagModule } from '@ui/components/tag/tagModule';
 import {
   getProgress,
   ModuleProgress,
@@ -32,7 +32,7 @@ const ModuleItemContent = (props: IModuleItemProps) => {
     <React.Fragment>
       <div className="module-item__title">
         {userModule.module?.title}
-        <StatusModule userModule={userModule} />
+        <TagModule userModule={userModule} />
       </div>
       <div className="module-item__name">{userModule.module?.name}</div>
       <ul className="module-item__ul">

@@ -4,7 +4,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { IQuestionViewModel } from '@viewModel/modules/entities/question/interface';
 import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
-import { QuestionList } from 'ui/pages/admin/block/tabs/tabQuestions/questionList';
+import { QuestionList } from '@ui/pages/admin/block/tabs/tabQuestions/questionList';
 
 export const TabQuestions = observer(() => {
   const { data: block } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);

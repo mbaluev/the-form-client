@@ -5,12 +5,12 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Page204 } from '@ui/pages/errors/204';
 import { ITaskAdminViewModel } from '@viewModel/modules/entities/task/admin/interface';
-import { TaskTitle } from '@ui/pages/admin/task/taskTitle';
-import { TaskSubTitle } from '@ui/pages/admin/task/taskSubTitle';
+import { TitleTask } from '@ui/pages/admin/task/TitleTask';
+import { TagTask } from '@ui/pages/admin/task/TagTask';
 import { TaskCardActions } from '@ui/pages/admin/task/taskCardActions';
 import { TaskCardContent } from '@ui/pages/admin/task/taskCardContent';
 import { Loader } from '@components/loader';
-import { DialogTaskAdminDocument } from 'ui/dialogs/admin/dialogTaskAdminDocument';
+import { DialogTaskAdminDocument } from '@ui/dialogs/admin/dialogTaskAdminDocument';
 import { ITaskAdminDocumentViewModel } from '@viewModel/modules/entities/task/adminDocument/interface';
 
 export const TaskCard = observer(() => {
@@ -40,8 +40,8 @@ export const TaskCard = observer(() => {
 
   return (
     <Page
-      title={<TaskTitle />}
-      subTitle={<TaskSubTitle />}
+      title={<TitleTask />}
+      subTitle={<TagTask />}
       quickFilter={<TaskCardActions />}
     >
       <TaskCardContent />

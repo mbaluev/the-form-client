@@ -13,8 +13,8 @@ import { MaterialRenderer } from '@ui/pages/school/block/[id]/tabs/tabMaterials/
 import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
 import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import { CellClickedEvent } from 'ag-grid-community';
-import { documentButtonValueGetter } from '@ui/components/documentButtonValueGetter';
-import { AlertMaterials } from '@ui/components/statuses/alertMaterials';
+import { documentButtonValueGetter } from '@ui/components/documentButton/valueGetter';
+import { AlertMaterials } from '@ui/components/alert/alertMaterials';
 
 export const MaterialList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockUserViewModel>(

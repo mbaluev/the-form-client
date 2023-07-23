@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { RouterEvent, useRouter } from 'next/router';
-import { DialogUnsaved } from 'ui/dialogs/common/dialogUnsaved';
+import { DialogUnsaved } from '@ui/dialogs/common/dialogUnsaved';
 
 interface IPromptProps {
   onCancel?: () => Promise<void>;

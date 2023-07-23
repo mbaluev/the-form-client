@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 import { ITagProps, Tag } from '@components/tag';
 import { ITaskAdminViewModel } from '@viewModel/modules/entities/task/admin/interface';
 
-export const TaskSubTitle = observer(() => {
+export const TagTask = observer(() => {
   const { data } = useViewModel<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin);
 
   const tag: ITagProps = { tag: 'Todo', color: 'grey' };

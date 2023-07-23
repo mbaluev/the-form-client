@@ -9,7 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useViewModel } from '@hooks/useViewModel';
 import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { DialogConfirm } from 'ui/dialogs/common/dialogConfirm';
+import { DialogConfirm } from '@ui/dialogs/common/dialogConfirm';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export const ModuleCardActions = observer(() => {

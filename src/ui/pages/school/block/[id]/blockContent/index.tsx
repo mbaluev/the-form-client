@@ -1,24 +1,22 @@
 import React from 'react';
-import { classNames } from '@utils/classNames';
-import { BlockTabs } from '@ui/pages/school/block/[id]/blockTabs';
 import { Page403 } from '@ui/pages/errors/403';
 import { observer } from 'mobx-react';
 import { Loader } from '@components/loader';
-import { IBlockUserDTO } from '@model/entities/block';
-import './index.scss';
+import { useViewModel } from '@hooks/useViewModel';
+import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
+import { VIEW_MODEL } from '@viewModel/ids';
+import { BlockTabs } from '@ui/pages/school/block/[id]/blockTabs';
+import { Box } from '@mui/material';
 
-interface IProps {
-  userBlock?: IBlockUserDTO | null;
-}
-
-export const BlockContent = observer((props: IProps) => {
-  const { userBlock } = props;
-  const cls = classNames('block-content');
+export const BlockContent = observer(() => {
+  const { data: userBlock } = useViewModel<IBlockUserViewModel>(
+    VIEW_MODEL.BlockUser
+  );
   if (!userBlock) return <Loader loading relative />;
   return userBlock.enable ? (
-    <div className={cls}>
+    <Box flex="1 1 auto">
       <BlockTabs />
-    </div>
+    </Box>
   ) : (
     <Page403 />
   );

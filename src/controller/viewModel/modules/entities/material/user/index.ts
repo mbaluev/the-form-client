@@ -3,7 +3,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { action, makeObservable } from 'mobx';
 import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
 import { BlockUserViewModel } from '@viewModel/modules/entities/block/user';
-import { BlockTabNames } from 'ui/pages/school/block/[id]/blockTabs';
+import { BlockTabNames } from '@ui/components/blockTab/blockTabNames';
 import { MaterialBaseViewModel } from '@viewModel/modules/entities/material/base';
 
 @injectable()
@@ -23,6 +23,7 @@ export class MaterialUserViewModel
   // --- override
 
   getList = async () => {
+    await this.clearList();
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {

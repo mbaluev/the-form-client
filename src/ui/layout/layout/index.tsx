@@ -25,9 +25,9 @@ import { INotifyViewModel } from '@viewModel/modules/common/notify/interface';
 import { Account } from '@ui/layout/account';
 import { useRouter } from 'next/router';
 import { MEDIA_SM, MEDIA_XS, useWindowSize } from '@hooks/useWindowSize';
-import { IconLogo } from '@ui/icons';
 import { useAuth } from '@hooks/useAuth';
 import { isAccess } from '@ui/permission/permissionWrapper';
+import IconTheForm from '../../../core/icons/theForm';
 import './index.scss';
 
 export interface ILayoutProps {
@@ -104,12 +104,12 @@ export const Layout = observer((props: TLayoutProps) => {
           )}
           <Link passHref href={ROUTER_CONST_SCHOOL.HOME.path}>
             {size.width > MEDIA_XS ? (
-              <Button startIcon={<IconLogo />} size="medium" variant="text">
+              <Button startIcon={<IconTheForm />} size="medium" variant="text">
                 The Form
               </Button>
             ) : (
               <IconButton>
-                <IconLogo />
+                <IconTheForm />
               </IconButton>
             )}
           </Link>

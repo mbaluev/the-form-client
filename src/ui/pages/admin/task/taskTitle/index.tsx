@@ -6,7 +6,7 @@ import { Stack } from '@mui/material';
 import { TaskIcon } from '@ui/pages/admin/task/taskList/taskIcon';
 import { ITaskAdminViewModel } from '@viewModel/modules/entities/task/admin/interface';
 
-export const TaskTitle = observer(() => {
+export const TitleTask = observer(() => {
   const { data } = useViewModel<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin);
   return (
     <Stack direction="row" spacing="10px">

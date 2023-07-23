@@ -3,12 +3,12 @@ import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
-import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
+import { DefaultRenderer } from '@ui/layout/grid/renderers/defaultRenderer';
 import { CellClickedEvent } from 'ag-grid-community';
 import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
-import { DialogBlock } from 'ui/dialogs/settings/dialogBlock';
+import { DialogBlock } from '@ui/dialogs/settings/dialogBlock';
 
 interface IProps {
   filtersLeft?: JSX.Element[];

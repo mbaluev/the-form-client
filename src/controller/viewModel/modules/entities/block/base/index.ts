@@ -6,7 +6,7 @@ import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { AuthViewModel } from '@viewModel/modules/common/auth';
 import { action, makeObservable, observable } from 'mobx';
-import { BlockTabNames } from 'ui/pages/school/block/[id]/blockTabs';
+import { BlockTabNames } from '@ui/components/blockTab/blockTabNames';
 import { IBlockBaseViewModel } from '@viewModel/modules/entities/block/base/interface';
 
 @injectable()

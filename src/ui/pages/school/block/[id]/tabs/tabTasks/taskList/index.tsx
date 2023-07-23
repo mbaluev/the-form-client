@@ -12,7 +12,7 @@ import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/inte
 import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { CellClickedEvent, RowClassParams } from 'ag-grid-community';
 import { TaskRenderer } from '@ui/pages/school/block/[id]/tabs/tabTasks/taskList/taskRendrer';
-import { AlertTasks } from '@ui/components/statuses/alertTasks';
+import { AlertTasks } from '@ui/components/alert/alertTasks';
 
 export const TaskList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockUserViewModel>(

@@ -4,7 +4,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Loader } from '@components/loader';
-import { QuestionTitle } from '@ui/pages/school/block/[id]/tabs/tabQuestions/questionTitle';
+import { TitleQuestion } from '@ui/components/title/titleQuestion';
 import { QuestionCardContent } from '@ui/pages/school/block/[id]/tabs/tabQuestions/questionCardContent';
 import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
 import { ErrorPage } from '@ui/pages/errors/errorPage';
@@ -16,7 +16,7 @@ import ChecklistIcon from '@mui/icons-material/Checklist';
 import { IButtonProps } from '@components/button';
 import { Page204 } from '@ui/pages/errors/204';
 import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
-import { QuestionSubTitle } from '@ui/pages/school/block/[id]/tabs/tabQuestions/questionSubTitle';
+import { TagQuestion } from '@ui/components/tag/tagQuestion';
 
 export const QuestionCard = observer(() => {
   const { data: block } = useViewModel<IBlockUserViewModel>(
@@ -77,8 +77,8 @@ export const QuestionCard = observer(() => {
 
   return (
     <Page
-      title={<QuestionTitle />}
-      subTitle={<QuestionSubTitle />}
+      title={<TitleQuestion userQuestion={data} />}
+      subTitle={<TagQuestion userQuestion={data} />}
       quickFilter={<QuestionCardActions />}
     >
       <Stack justifyContent="space-between" flex="1 1 auto">

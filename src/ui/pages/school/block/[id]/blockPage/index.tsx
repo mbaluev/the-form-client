@@ -3,29 +3,29 @@ import { observer } from 'mobx-react';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { Page } from '@ui/layout/page';
 import { classNames } from '@utils/classNames';
-import { BlockContent } from '@ui/pages/school/block/[id]/blockContent';
 import {
   getProgress,
   ModuleProgress,
 } from '@ui/pages/school/module/index/moduleProgress';
-import { BlockSubTitle } from '@ui/pages/school/block/[id]/blockSubTitle';
-import { BlockTabNames } from '@ui/pages/school/block/[id]/blockTabs';
+import { SubTitleBlock } from '@ui/components/subTitle/subTitleBlock';
+import { BlockTabNames } from '@ui/components/blockTab/blockTabNames';
 import { MaterialCard } from '@ui/pages/school/block/[id]/tabs/tabMaterials/materialCard';
 import { TaskCard } from '@ui/pages/school/block/[id]/tabs/tabTasks/taskCard';
 import { QuestionCard } from '@ui/pages/school/block/[id]/tabs/tabQuestions/questionCard';
-import { IModuleUserDTO } from '@model/entities/module';
-import { IBlockUserDTO } from '@model/entities/block';
-import './index.scss';
+import { useViewModel } from '@hooks/useViewModel';
+import { VIEW_MODEL } from '@viewModel/ids';
+import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
+import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
+import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
+import { BlockContent } from '@ui/pages/school/block/[id]/blockContent';
 
-interface IProps {
-  userModule?: IModuleUserDTO | null;
-  userBlock?: IBlockUserDTO | null;
-  breadCrumbs: TBreadCrumb[];
-  tab: string;
-}
-
-export const BlockPage = observer((props: IProps) => {
-  const { userModule, userBlock, breadCrumbs, tab } = props;
+export const BlockPage = observer(() => {
+  const { data: userModule } = useViewModel<IModuleUserViewModel>(
+    VIEW_MODEL.ModuleUser
+  );
+  const { data: userBlock, tab } = useViewModel<IBlockUserViewModel>(
+    VIEW_MODEL.BlockUser
+  );
 
   const cls = classNames('block-page', {
     'block-page_complete': Boolean(userModule && userModule.complete),
@@ -36,9 +36,38 @@ export const BlockPage = observer((props: IProps) => {
     Boolean(userBlock?.completeTasks),
   ]);
 
+  const breadCrumbs: TBreadCrumb[] = [
+    {
+      label: ROUTER_CONST_SCHOOL.HOME.label,
+      url: { pathname: ROUTER_CONST_SCHOOL.HOME.path },
+    },
+    {
+      label: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.label,
+      url: { pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.path },
+    },
+    {
+      label: userModule
+        ? `${userModule.module?.title}. ${userModule.module?.name}`
+        : 'loading...',
+      url: {
+        pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path,
+        query: { id: userModule?.id },
+      },
+    },
+    {
+      label: userBlock
+        ? `${userBlock.block?.title}. ${userBlock.block?.name}`
+        : 'loading...',
+      url: {
+        pathname: ROUTER_CONST_SCHOOL.SCHOOL_BLOCK.path,
+        query: { id: userBlock?.id },
+      },
+    },
+  ];
+
   const getPageRight = () => {
     if (tab === BlockTabNames.materials) return <MaterialCard />;
-    if (tab === BlockTabNames.tasks) return <TaskCard />;
+    if (tab === BlockTabNames.homeworks) return <TaskCard />;
     if (tab === BlockTabNames.questions) return <QuestionCard />;
     return undefined;
   };
@@ -46,13 +75,13 @@ export const BlockPage = observer((props: IProps) => {
   return (
     <Page
       title={userBlock?.block?.name}
-      subTitle={<BlockSubTitle userBlock={userBlock} />}
+      subTitle={<SubTitleBlock userBlock={userBlock} />}
       breadCrumbs={breadCrumbs}
       quickFilter={<ModuleProgress value={progress} />}
       className={cls}
       pageRight={getPageRight()}
     >
-      <BlockContent userBlock={userBlock} />
+      <BlockContent />
     </Page>
   );
 });

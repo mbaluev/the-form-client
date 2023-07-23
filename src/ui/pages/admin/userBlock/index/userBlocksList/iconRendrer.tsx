@@ -1,9 +1,9 @@
 import React from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
 import { Stack } from '@mui/material';
-import { IconMaterials } from '@ui/components/statuses/iconMaterials';
-import { IconTasks } from '@ui/components/statuses/iconTasks';
-import { IconQuestions } from '@ui/components/statuses/iconQuestions';
+import { IconMaterials } from '@ui/components/icon/iconMaterials';
+import { IconTasks } from '@ui/components/icon/iconTasks';
+import { IconQuestions } from '@ui/components/icon/iconQuestions';
 
 export const IconRenderer = (props: ICellRendererParams) => {
   return (

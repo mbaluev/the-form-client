@@ -6,9 +6,9 @@ import { observer } from 'mobx-react';
 import { Page204 } from '@ui/pages/errors/204';
 import { Loader } from '@components/loader';
 import { IQuestionAdminViewModel } from '@viewModel/modules/entities/question/admin/interface';
-import { TestTitle } from 'ui/pages/admin/question/testTitle';
-import { TestSubTitle } from 'ui/pages/admin/question/testSubTitle';
-import { TestCardContent } from 'ui/pages/admin/question/testCardContent';
+import { TestTitle } from '@ui/pages/admin/question/testTitle';
+import { TestSubTitle } from '@ui/pages/admin/question/testSubTitle';
+import { TestCardContent } from '@ui/pages/admin/question/testCardContent';
 import { TestCardActions } from '@ui/pages/admin/question/testCardActions';
 
 export const TestCard = observer(() => {

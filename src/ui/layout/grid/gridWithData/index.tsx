@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { ILocaleViewModel } from '@viewModel/modules/common/locale/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
+import { DefaultRenderer } from '@ui/layout/grid/renderers/defaultRenderer';
 import { AgGridReact, AgGridReactProps } from 'ag-grid-react';
 import { CellClickedEvent, GridReadyEvent, RowNode } from 'ag-grid-community';
 import { classNames } from '@utils/classNames';

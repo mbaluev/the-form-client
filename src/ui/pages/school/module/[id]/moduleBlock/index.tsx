@@ -8,13 +8,13 @@ import {
   ModuleProgress,
 } from '@ui/pages/school/module/index/moduleProgress';
 import './index.scss';
-import { IconMaterials } from '@ui/components/statuses/iconMaterials';
-import { IconTasks } from '@ui/components/statuses/iconTasks';
-import { IconQuestions } from '@ui/components/statuses/iconQuestions';
-import { titleMaterials } from '@ui/components/statuses/titleMaterials';
-import { titleTasks } from '@ui/components/statuses/titleTasks';
-import { titleQuestions } from '@ui/components/statuses/titleQuestions';
-import { StatusBlock } from '@ui/components/statuses/statusBlock';
+import { IconMaterials } from '@ui/components/icon/iconMaterials';
+import { IconTasks } from '@ui/components/icon/iconTasks';
+import { IconQuestions } from '@ui/components/icon/iconQuestions';
+import { statusMaterials } from '@ui/components/status/statusMaterials';
+import { statusTasks } from '@ui/components/status/statusTasks';
+import { statusQuestions } from '@ui/components/status/statusQuestions';
+import { TagBlock } from '@ui/components/tag/tagBlock';
 
 interface IModuleBlockProps {
   userBlock: IBlockUserDTO;
@@ -37,24 +37,24 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
     <React.Fragment>
       <div className="module-block__title">
         {userBlock.block?.title}
-        <StatusBlock userBlock={userBlock} />
+        <TagBlock userBlock={userBlock} />
       </div>
       <div className="module-block__name">{userBlock.block?.name}</div>
       <ul className="module-block__ul">
         <li className={clsLiMaterials}>
           <IconMaterials userBlock={userBlock} />
           <div className="module-block__li-label">
-            {titleMaterials(userBlock)}
+            {statusMaterials(userBlock)}
           </div>
         </li>
         <li className={clsLiTasks}>
           <IconTasks userBlock={userBlock} />
-          <div className="module-block__li-label">{titleTasks(userBlock)}</div>
+          <div className="module-block__li-label">{statusTasks(userBlock)}</div>
         </li>
         <li className={clsLiQuestions}>
           <IconQuestions userBlock={userBlock} />
           <div className="module-block__li-label">
-            {titleQuestions(userBlock)}
+            {statusQuestions(userBlock)}
           </div>
         </li>
       </ul>

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { MasterSchool } from '@ui/masters/masterSchool';
-import { BlockPage } from 'ui/pages/school/block/[id]/blockPage';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
@@ -15,8 +14,7 @@ import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/in
 import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
 import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
-import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
-import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
+import { BlockPage } from '@ui/pages/school/block/[id]/blockPage';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
@@ -46,11 +44,8 @@ const Block = (
   const { userModule, userBlock } = props;
   const { setData: setModule, clearData: clearModule } =
     useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
-  const {
-    tab,
-    setData: setBlock,
-    clearData: clearBlock,
-  } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
+  const { setData: setBlock, clearData: clearBlock } =
+    useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
 
   const { clearData: clearMaterial } = useViewModel<IMaterialUserViewModel>(
     VIEW_MODEL.MaterialUser
@@ -74,55 +69,7 @@ const Block = (
     };
   });
 
-  const breadCrumbs: TBreadCrumb[] = [
-    {
-      label: ROUTER_CONST_SCHOOL.HOME.label,
-      url: { pathname: ROUTER_CONST_SCHOOL.HOME.path },
-    },
-    {
-      label: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.label,
-      url: { pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.path },
-    },
-    {
-      label: userModule
-        ? `${userModule.module?.title}. ${userModule.module?.name}`
-        : 'loading...',
-      url: {
-        pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path,
-        query: { id: userModule?.id },
-      },
-    },
-    {
-      label: userBlock
-        ? `${userBlock.block?.title}. ${userBlock.block?.name}`
-        : 'loading...',
-      url: {
-        pathname: ROUTER_CONST_SCHOOL.SCHOOL_BLOCK.path,
-        query: { id: userBlock?.id },
-      },
-      // neighbors: userModule?.userBlocks?.map((d) => {
-      //   return {
-      //     label: `${d.block?.title}. ${d.block?.name}`,
-      //     url: {
-      //       pathname: ROUTER_CONST_SCHOOL.SCHOOL_BLOCK.path,
-      //       query: { id: d.id },
-      //     },
-      //     disabled: !d.enable,
-      //     complete: d.complete,
-      //     selected: d.id === userBlock?.id,
-      //   };
-      // }),
-    },
-  ];
-
-  return (
-    <BlockPage
-      userModule={userModule}
-      userBlock={userBlock}
-      breadCrumbs={breadCrumbs}
-      tab={tab}
-    />
-  );
+  return <BlockPage />;
 };
 
 Block.Layout = MasterSchool;

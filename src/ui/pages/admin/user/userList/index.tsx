@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
-import { DefaultRenderer } from 'ui/layout/grid/renderers/defaultRenderer';
+import { DefaultRenderer } from '@ui/layout/grid/renderers/defaultRenderer';
 import { CellClickedEvent } from 'ag-grid-community';
 import { FilterText } from '@ui/filter/filterText';
 import { useRouter } from 'next/router';
@@ -11,7 +11,7 @@ import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { IconButton } from '@components/iconButton';
 import AddIcon from '@mui/icons-material/Add';
 import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
-import { DialogUser } from 'ui/dialogs/settings/dialogUser';
+import { DialogUser } from '@ui/dialogs/settings/dialogUser';
 import { UserRenderer } from '@ui/pages/admin/user/userList/userRendrer';
 import { userValueGetter } from '@ui/pages/admin/user/userList/userValueGetter';
 

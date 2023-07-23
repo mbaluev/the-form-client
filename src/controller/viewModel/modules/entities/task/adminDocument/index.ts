@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { ITaskAdminDocumentViewModel } from '@viewModel/modules/entities/task/adminDocument/interface';
-import { BlockTabNames } from 'ui/pages/school/block/[id]/blockTabs';
+import { BlockTabNames } from '@ui/components/blockTab/blockTabNames';
 import { BlockUserViewModel } from '@viewModel/modules/entities/block/user';
 import { TaskBaseDocumentViewModel } from '@viewModel/modules/entities/task/baseDocument';
 
@@ -27,7 +27,7 @@ export class TaskAdminDocumentViewModel
         if (this.userBlock.data) {
           const blockId = this.userBlock.data.id;
           await this.userBlock.getData(blockId);
-          this.userBlock.changeTab(BlockTabNames.tasks);
+          this.userBlock.changeTab(BlockTabNames.homeworks);
         }
         return data;
       }

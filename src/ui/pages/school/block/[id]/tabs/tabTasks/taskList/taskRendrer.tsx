@@ -2,7 +2,7 @@ import React from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
 import { Tag } from '@components/tag';
 import { Stack, Typography } from '@mui/material';
-import { IconTask } from '@ui/components/statuses/iconTask';
+import { IconTask } from '@ui/components/icon/iconTask';
 
 export const TaskRenderer = (params: ICellRendererParams) => {
   const index = Number(params.node.rowIndex) + 1;

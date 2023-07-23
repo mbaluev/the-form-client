@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { MasterSchool } from '@ui/masters/masterSchool';
-import { BlockPage } from 'ui/pages/school/block/[id]/blockPage';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
@@ -15,8 +14,7 @@ import { IBlockAdminViewModel } from '@viewModel/modules/entities/block/admin/in
 import { IMaterialAdminViewModel } from '@viewModel/modules/entities/material/admin/interface';
 import { ITaskAdminViewModel } from '@viewModel/modules/entities/task/admin/interface';
 import { IQuestionAdminViewModel } from '@viewModel/modules/entities/question/admin/interface';
-import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
-import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
+import { BlockPage } from '@ui/pages/admin/userBlock/[id]/blockPage';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
@@ -46,11 +44,8 @@ const Block = (
   const { userModule, userBlock } = props;
   const { setData: setModule, clearData: clearModule } =
     useViewModel<IModuleAdminViewModel>(VIEW_MODEL.ModuleAdmin);
-  const {
-    tab,
-    setData: setBlock,
-    clearData: clearBlock,
-  } = useViewModel<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin);
+  const { setData: setBlock, clearData: clearBlock } =
+    useViewModel<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin);
 
   const { clearData: clearMaterial } = useViewModel<IMaterialAdminViewModel>(
     VIEW_MODEL.MaterialAdmin
@@ -74,37 +69,7 @@ const Block = (
     };
   });
 
-  const breadCrumbs: TBreadCrumb[] = [
-    {
-      label: ROUTER_CONST_SCHOOL.HOME.label,
-      url: { pathname: ROUTER_CONST_SCHOOL.HOME.path },
-    },
-    {
-      label: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.label,
-      url: { pathname: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.path },
-    },
-    {
-      label:
-        userModule && userBlock
-          ? `${userBlock.user?.username} - 
-             ${userModule.module?.title}. ${userModule.module?.name} - 
-             ${userBlock.block?.title}. ${userBlock.block?.name}`
-          : 'loading...',
-      url: {
-        pathname: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCK.path,
-        query: { id: userBlock?.id },
-      },
-    },
-  ];
-
-  return (
-    <BlockPage
-      userModule={userModule}
-      userBlock={userBlock}
-      breadCrumbs={breadCrumbs}
-      tab={tab}
-    />
-  );
+  return <BlockPage />;
 };
 
 Block.Layout = MasterSchool;

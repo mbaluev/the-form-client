@@ -8,8 +8,8 @@ import { observer } from 'mobx-react';
 import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { TabDetails } from '@ui/pages/admin/block/tabs/tabDetails';
 import { TabMaterials } from '@ui/pages/admin/block/tabs/tabMaterials';
-import { TabQuestions } from 'ui/pages/admin/block/tabs/tabQuestions';
-import { TabTasks } from 'ui/pages/admin/block/tabs/tabTasks';
+import { TabQuestions } from '@ui/pages/admin/block/tabs/tabQuestions';
+import { TabTasks } from '@ui/pages/admin/block/tabs/tabTasks';
 
 enum TabNames {
   details = 'details',

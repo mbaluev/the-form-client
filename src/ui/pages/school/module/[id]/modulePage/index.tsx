@@ -11,7 +11,7 @@ import {
 } from '@ui/pages/school/module/index/moduleProgress';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { ModuleSubTitle } from '@ui/pages/school/module/[id]/moduleSubTitle';
+import { SubTitleModule } from '@ui/components/subTitle/subTitleModule';
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 import './index.scss';
 
@@ -66,7 +66,7 @@ export const ModulePage = observer(() => {
   return (
     <Page
       title={userModule?.module?.name}
-      subTitle={<ModuleSubTitle />}
+      subTitle={<SubTitleModule userModule={userModule} />}
       breadCrumbs={breadCrumbs}
       quickFilter={<ModuleProgress value={progress} />}
       className={cls}

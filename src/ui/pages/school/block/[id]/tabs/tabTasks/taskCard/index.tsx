@@ -7,8 +7,8 @@ import { Page204 } from '@ui/pages/errors/204';
 import { Loader } from '@components/loader';
 import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { TaskCardActions } from '@ui/pages/school/block/[id]/tabs/tabTasks/taskCardActions';
-import { TaskTitle } from '@ui/pages/school/block/[id]/tabs/tabTasks/taskTitle';
-import { TaskSubTitle } from '@ui/pages/school/block/[id]/tabs/tabTasks/taskSubTitle';
+import { TitleTask } from '@ui/components/title/titleTask';
+import { TagTask } from '@ui/components/tag/tagTask';
 import { TaskCardContent } from '@ui/pages/school/block/[id]/tabs/tabTasks/taskCardContent';
 import { DialogTaskUserDocument } from '@ui/dialogs/user/dialogTaskUserDocument';
 import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
@@ -40,8 +40,8 @@ export const TaskCard = observer(() => {
 
   return (
     <Page
-      title={<TaskTitle />}
-      subTitle={<TaskSubTitle />}
+      title={<TitleTask userTask={data} />}
+      subTitle={<TagTask userTask={data} />}
       quickFilter={<TaskCardActions />}
     >
       <TaskCardContent />

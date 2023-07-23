@@ -14,6 +14,7 @@ export class TaskUserViewModel
   // --- override
 
   getList = async () => {
+    await this.clearList();
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {
