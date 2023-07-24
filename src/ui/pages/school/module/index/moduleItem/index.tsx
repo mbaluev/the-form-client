@@ -30,29 +30,31 @@ const ModuleItemContent = (props: IModuleItemProps) => {
   const progress = getProgress(progressValues);
   return (
     <React.Fragment>
-      <div className="module-item__title">
-        {userModule.module?.title}
-        <TagModule userModule={userModule} />
+      <TagModule userModule={userModule} />
+      <div className="module-item__header">
+        <div className="module-item__name">{userModule.module?.name}</div>
+        <div className="module-item__title">{userModule.module?.title}</div>
       </div>
-      <div className="module-item__name">{userModule.module?.name}</div>
-      <ul className="module-item__ul">
-        {userModule.userBlocks?.map((userBlock, index) => {
-          const clsLi = classNames('module-item__li', {
-            'module-item__li_complete': userBlock.complete,
-          });
-          return (
-            <li key={index} className={clsLi}>
-              <div className="module-item__li-icon">
-                <IconBlock userBlock={userBlock} />
-              </div>
-              <div className="module-item__li-label">
-                {userBlock.block?.name}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-      <ModuleProgress value={progress} width="100%" />
+      <div className="module-item__content">
+        <ul className="module-item__ul">
+          {userModule.userBlocks?.map((userBlock, index) => {
+            const clsLi = classNames('module-item__li', {
+              'module-item__li_complete': userBlock.complete,
+            });
+            return (
+              <li key={index} className={clsLi}>
+                <div className="module-item__li-icon">
+                  <IconBlock userBlock={userBlock} />
+                </div>
+                <div className="module-item__li-label">
+                  {userBlock.block?.name}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        <ModuleProgress value={progress} width="100%" />
+      </div>
     </React.Fragment>
   );
 };

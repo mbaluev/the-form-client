@@ -35,30 +35,34 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
 
   return (
     <React.Fragment>
-      <div className="module-block__title">
-        {userBlock.block?.title}
-        <TagBlock userBlock={userBlock} />
+      <TagBlock userBlock={userBlock} />
+      <div className="module-block__header">
+        <div className="module-block__name">{userBlock.block?.name}</div>
+        <div className="module-block__title">{userBlock.block?.title}</div>
       </div>
-      <div className="module-block__name">{userBlock.block?.name}</div>
-      <ul className="module-block__ul">
-        <li className={clsLiMaterials}>
-          <IconMaterials userBlock={userBlock} />
-          <div className="module-block__li-label">
-            {statusMaterials(userBlock)}
-          </div>
-        </li>
-        <li className={clsLiTasks}>
-          <IconTasks userBlock={userBlock} />
-          <div className="module-block__li-label">{statusTasks(userBlock)}</div>
-        </li>
-        <li className={clsLiQuestions}>
-          <IconQuestions userBlock={userBlock} />
-          <div className="module-block__li-label">
-            {statusQuestions(userBlock)}
-          </div>
-        </li>
-      </ul>
-      <ModuleProgress value={progress} width="100%" />
+      <div className="module-block__content">
+        <ul className="module-block__ul">
+          <li className={clsLiMaterials}>
+            <IconMaterials userBlock={userBlock} />
+            <div className="module-block__li-label">
+              {statusMaterials(userBlock)}
+            </div>
+          </li>
+          <li className={clsLiTasks}>
+            <IconTasks userBlock={userBlock} />
+            <div className="module-block__li-label">
+              {statusTasks(userBlock)}
+            </div>
+          </li>
+          <li className={clsLiQuestions}>
+            <IconQuestions userBlock={userBlock} />
+            <div className="module-block__li-label">
+              {statusQuestions(userBlock)}
+            </div>
+          </li>
+        </ul>
+        <ModuleProgress value={progress} width="100%" />
+      </div>
     </React.Fragment>
   );
 };

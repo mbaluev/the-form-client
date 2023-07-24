@@ -18,6 +18,7 @@ import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import { BlockContent } from '@ui/pages/school/block/[id]/blockContent';
+import { TitleBlock } from '@ui/components/title/titleBlock';
 
 export const BlockPage = observer(() => {
   const { data: userModule } = useViewModel<IModuleUserViewModel>(
@@ -74,7 +75,7 @@ export const BlockPage = observer(() => {
 
   return (
     <Page
-      title={userBlock?.block?.name}
+      title={<TitleBlock userBlock={userBlock} />}
       subTitle={<SubTitleBlock userBlock={userBlock} />}
       breadCrumbs={breadCrumbs}
       quickFilter={<ModuleProgress value={progress} width="150px" />}

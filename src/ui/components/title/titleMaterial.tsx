@@ -13,7 +13,7 @@ export const TitleMaterial = observer((props: IProps) => {
   const name = userMaterial?.material?.document?.name;
   return (
     <Stack direction="row" spacing="10px">
-      <IconMaterial userMaterial={userMaterial} style={{ marginTop: '4px' }} />
+      <IconMaterial userMaterial={userMaterial} style={{ marginTop: '5px' }} />
       {name && <div>{name}</div>}
     </Stack>
   );

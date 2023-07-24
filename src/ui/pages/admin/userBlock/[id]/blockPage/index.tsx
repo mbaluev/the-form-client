@@ -18,6 +18,7 @@ import { IBlockAdminViewModel } from '@viewModel/modules/entities/block/admin/in
 import { IModuleAdminViewModel } from '@viewModel/modules/entities/module/admin/interface';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { BlockContent } from '@ui/pages/admin/userBlock/[id]/blockContent';
+import { TitleBlock } from '@ui/components/title/titleBlock';
 
 export const BlockPage = observer(() => {
   const { data: userModule } = useViewModel<IModuleAdminViewModel>(
@@ -68,7 +69,7 @@ export const BlockPage = observer(() => {
 
   return (
     <Page
-      title={userBlock?.block?.name}
+      title={<TitleBlock userBlock={userBlock} />}
       subTitle={<SubTitleBlock userBlock={userBlock} />}
       breadCrumbs={breadCrumbs}
       quickFilter={<ModuleProgress value={progress} width="150px" />}

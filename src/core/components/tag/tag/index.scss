@@ -8,6 +8,7 @@
   line-height: $base * 3 + 1;
   display: inline-block;
   white-space: nowrap;
+  width: fit-content;
 
   &_color_grey {
     background-color: $color-grey-20;

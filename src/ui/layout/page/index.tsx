@@ -63,15 +63,9 @@ export const Page: FC<IProps> = (props) => {
         {(subTitle || title || quickFilter) && (
           <div className={clsTop}>
             <div className={clsTopRow}>
-              {subTitle ? (
-                <div className={clsTopColumn}>
-                  {subTitle && <div className={clsSubTitle}>{subTitle}</div>}
-                </div>
-              ) : (
-                <div className={clsTopColumn}>
-                  {title && <div className={clsTitle}>{title}</div>}
-                </div>
-              )}
+              <div className={clsTopColumn}>
+                {title && <div className={clsTitle}>{title}</div>}
+              </div>
               {quickFilter && (
                 <div className={clsTopColumn}>
                   <div className={clsQuickFilter}>{quickFilter}</div>
@@ -81,7 +75,7 @@ export const Page: FC<IProps> = (props) => {
             {subTitle && (
               <div className={clsTopRow}>
                 <div className={clsTopColumn}>
-                  {title && <div className={clsTitle}>{title}</div>}
+                  {subTitle && <div className={clsSubTitle}>{subTitle}</div>}
                 </div>
               </div>
             )}

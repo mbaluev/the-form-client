@@ -12,8 +12,9 @@ import { useViewModel } from '@hooks/useViewModel';
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { classNames } from '@utils/classNames';
+import { TitleModules } from '@ui/components/title/titleModules';
+import { SubTitleModules } from '@ui/components/subTitle/subTitleModules';
 import './index.scss';
-import { ModulesStatus } from '@ui/pages/school/module/index/modulesStatus';
 
 export const ModulesPage = observer(() => {
   const { list: userModules } = useViewModel<IModuleUserViewModel>(
@@ -50,8 +51,8 @@ export const ModulesPage = observer(() => {
   const progress = getProgress(progressValues);
   return (
     <Page
-      title={ROUTER_CONST_SCHOOL.SCHOOL_MODULES.label}
-      subTitle={<ModulesStatus />}
+      title={<TitleModules userModules={userModules} />}
+      subTitle={<SubTitleModules userModules={userModules} />}
       breadCrumbs={breadCrumbs}
       quickFilter={<ModuleProgress value={progress} width="150px" />}
       className={cls}

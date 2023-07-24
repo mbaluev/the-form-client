@@ -3,12 +3,13 @@
 .card {
   border-radius: $border-radius-default * 2;
   padding: $base * 4;
+  padding-bottom: $base * 2;
   transition-duration: $transition-duration;
   border: solid 2px $color-grey-30;
   color: $color-black;
   display: flex;
   flex-direction: column;
-  gap: $base * 2;
+  gap: $base * 3;
 
   &:hover {
     cursor: pointer;

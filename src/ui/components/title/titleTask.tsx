@@ -16,7 +16,7 @@ export const TitleTask = observer((props: IProps) => {
     <Stack direction="row" spacing={2}>
       <IconTask
         userTask={userTask}
-        style={{ marginTop: '4px' }}
+        style={{ marginTop: '5px' }}
         admin={admin}
       />
       {name && <div>{name}</div>}
