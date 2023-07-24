@@ -53,7 +53,7 @@ export const ModulesPage = observer(() => {
       title={ROUTER_CONST_SCHOOL.SCHOOL_MODULES.label}
       subTitle={<ModulesStatus />}
       breadCrumbs={breadCrumbs}
-      quickFilter={<ModuleProgress value={progress} />}
+      quickFilter={<ModuleProgress value={progress} width="150px" />}
       className={cls}
     >
       <ModuleGrid />

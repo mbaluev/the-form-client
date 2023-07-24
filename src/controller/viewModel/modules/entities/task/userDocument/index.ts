@@ -2,7 +2,6 @@ import { inject, injectable } from 'inversify';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
 import { BlockUserViewModel } from '@viewModel/modules/entities/block/user';
-import { BlockTabNames } from '@ui/components/blockTab/blockTabNames';
 import { TaskBaseDocumentViewModel } from '@viewModel/modules/entities/task/baseDocument';
 
 @injectable()
@@ -24,7 +23,6 @@ export class TaskUserDocumentViewModel
         if (this.userBlock.data) {
           const blockId = this.userBlock.data.id;
           await this.userBlock.getData(blockId);
-          this.userBlock.changeTab(BlockTabNames.homeworks);
         }
         return data;
       }

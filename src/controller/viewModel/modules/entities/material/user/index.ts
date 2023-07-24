@@ -3,7 +3,6 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { action, makeObservable } from 'mobx';
 import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
 import { BlockUserViewModel } from '@viewModel/modules/entities/block/user';
-import { BlockTabNames } from '@ui/components/blockTab/blockTabNames';
 import { MaterialBaseViewModel } from '@viewModel/modules/entities/material/base';
 
 @injectable()
@@ -64,7 +63,6 @@ export class MaterialUserViewModel
         await this.serviceMaterial.updateMaterialUser(id, token);
         if (this.userBlock.data) {
           await this.userBlock.getData(this.userBlock.data.id);
-          this.userBlock.changeTab(BlockTabNames.materials);
         }
         return true;
       } catch (err) {

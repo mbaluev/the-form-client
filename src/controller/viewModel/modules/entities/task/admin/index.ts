@@ -58,6 +58,10 @@ export class TaskAdminViewModel
       if (this.data) {
         const token = await this.auth.refreshToken();
         await this.serviceTask.completeAdmin(this.data.id, token);
+        if (this.userBlock.data) {
+          const blockId = this.userBlock.data.id;
+          await this.userBlock.getData(blockId);
+        }
       }
     } catch (err) {
     } finally {

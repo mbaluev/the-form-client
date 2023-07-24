@@ -52,7 +52,7 @@ const ModuleItemContent = (props: IModuleItemProps) => {
           );
         })}
       </ul>
-      <ModuleProgress value={progress} />
+      <ModuleProgress value={progress} width="100%" />
     </React.Fragment>
   );
 };

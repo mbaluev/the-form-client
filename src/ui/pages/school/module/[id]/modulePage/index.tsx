@@ -68,7 +68,7 @@ export const ModulePage = observer(() => {
       title={userModule?.module?.name}
       subTitle={<SubTitleModule userModule={userModule} />}
       breadCrumbs={breadCrumbs}
-      quickFilter={<ModuleProgress value={progress} />}
+      quickFilter={<ModuleProgress value={progress} width="150px" />}
       className={cls}
     >
       <ModuleContent />

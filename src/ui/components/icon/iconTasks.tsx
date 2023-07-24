@@ -19,16 +19,24 @@ export const IconTasks = (props: IProps) => {
   if (userBlock?.enable && !userBlock?.completeTasks) {
     icon = <CircleOutlinedIcon className="color_grey-50" />;
   }
-  if (!admin && userBlock?.sentTasksAdmin === false) {
-    icon = <CallMadeRoundedIcon className="color_blue" />;
-  }
-  if (!admin && userBlock?.sentTasksAdmin === true) {
+  if (
+    (!admin &&
+      (userBlock?.sentTasksAdmin === true ||
+        userBlock?.sentTasksUser === false)) ||
+    (admin &&
+      (userBlock?.sentTasksUser === true ||
+        userBlock?.sentTasksAdmin === false))
+  ) {
     icon = <CallReceivedRoundedIcon className="color_red" />;
   }
-  if (admin && userBlock?.sentTasksUser === true) {
-    icon = <CallReceivedRoundedIcon className="color_red" />;
-  }
-  if (admin && userBlock?.sentTasksUser === false) {
+  if (
+    (admin &&
+      (userBlock?.sentTasksUser === false ||
+        userBlock?.sentTasksAdmin === true)) ||
+    (!admin &&
+      (userBlock?.sentTasksAdmin === false ||
+        userBlock?.sentTasksUser === true))
+  ) {
     icon = <CallMadeRoundedIcon className="color_blue" />;
   }
   if (userBlock?.completeTasks) {

@@ -17,6 +17,10 @@ import { InputAdornment, Stack, Typography } from '@mui/material';
 import { IconButton } from '@components/iconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { IconRenderer } from '@ui/pages/admin/userBlock/index/userBlocksList/iconRendrer';
+import {
+  getProgress,
+  ModuleProgress,
+} from '@ui/pages/school/module/index/moduleProgress';
 
 export const UserBlocksList = observer(() => {
   const { list, listFiltered, hasList, filter, setFilter } =
@@ -73,6 +77,25 @@ export const UserBlocksList = observer(() => {
         );
       },
       cellClass: 'ag-last-cell',
+    },
+    {
+      headerName: 'Progress',
+      suppressSizeToFit: true,
+      valueGetter: (params: any) => {
+        const userBlock = params.data;
+        return getProgress([
+          Boolean(userBlock?.completeMaterials),
+          Boolean(userBlock?.completeQuestions),
+          Boolean(userBlock?.completeTasks),
+        ]);
+      },
+      cellRenderer: (props: ICellRendererParams) => {
+        return (
+          <Stack direction="row" justifyContent="flex-end">
+            <ModuleProgress value={props.value} width="150px" />
+          </Stack>
+        );
+      },
     },
   ];
 

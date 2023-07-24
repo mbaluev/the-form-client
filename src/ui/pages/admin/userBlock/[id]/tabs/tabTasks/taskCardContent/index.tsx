@@ -20,7 +20,7 @@ export const TaskCardContent = observer(() => {
     return (
       <NoData
         icon={<DoNotDisturbIcon />}
-        message={`Click to "+" button at upper right corner to send your homework`}
+        message={`Homework has not been sent yet`}
       />
     );
   }

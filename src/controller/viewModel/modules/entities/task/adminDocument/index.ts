@@ -1,16 +1,15 @@
 import { inject, injectable } from 'inversify';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { ITaskAdminDocumentViewModel } from '@viewModel/modules/entities/task/adminDocument/interface';
-import { BlockTabNames } from '@ui/components/blockTab/blockTabNames';
-import { BlockUserViewModel } from '@viewModel/modules/entities/block/user';
 import { TaskBaseDocumentViewModel } from '@viewModel/modules/entities/task/baseDocument';
+import { BlockAdminViewModel } from '@viewModel/modules/entities/block/admin';
 
 @injectable()
 export class TaskAdminDocumentViewModel
   extends TaskBaseDocumentViewModel
   implements ITaskAdminDocumentViewModel
 {
-  @inject(VIEW_MODEL.BlockUser) protected userBlock!: BlockUserViewModel;
+  @inject(VIEW_MODEL.BlockAdmin) protected userBlock!: BlockAdminViewModel;
 
   // --- override
 
@@ -27,7 +26,6 @@ export class TaskAdminDocumentViewModel
         if (this.userBlock.data) {
           const blockId = this.userBlock.data.id;
           await this.userBlock.getData(blockId);
-          this.userBlock.changeTab(BlockTabNames.homeworks);
         }
         return data;
       }

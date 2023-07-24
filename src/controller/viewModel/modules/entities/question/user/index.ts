@@ -2,7 +2,6 @@ import { inject, injectable } from 'inversify';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { BlockUserViewModel } from '@viewModel/modules/entities/block/user';
 import { action, computed, makeObservable } from 'mobx';
-import { BlockTabNames } from '@ui/components/blockTab/blockTabNames';
 import { QuestionBaseViewModel } from '@viewModel/modules/entities/question/base';
 import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
 
@@ -149,7 +148,6 @@ export class QuestionUserViewModel
         const blockId = this.userBlock.data.id;
         await this.serviceQuestion.checkQuestions(blockId, token);
         await this.userBlock.getData(blockId);
-        this.userBlock.changeTab(BlockTabNames.questions);
       }
     } catch (err) {
     } finally {

@@ -5,12 +5,13 @@ import './index.scss';
 interface IProgressProps {
   value?: number;
   classNameBar?: string;
+  width?: string;
 }
 
 export const Progress = (props: IProgressProps) => {
-  const { value = 0, classNameBar } = props;
+  const { value = 0, classNameBar, width } = props;
   return (
-    <div className="progress">
+    <div className="progress" style={{ width }}>
       <LinearProgress
         value={value}
         classes={{ bar: classNameBar }}

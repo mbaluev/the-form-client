@@ -118,29 +118,4 @@ export const ROUTER_CONST_SCHOOL: Record<string, any> = {
     path: '/admin/userBlock/[id]',
     roles: [ROLES.ADMIN],
   },
-
-  ADMIN_TASKS: {
-    name: 'adminTasks',
-    label: 'Homeworks',
-    path: '/admin/task',
-    roles: [ROLES.ADMIN],
-  },
-  ADMIN_TASK: {
-    name: 'adminTask',
-    label: 'Homeworks',
-    path: '/admin/task/[id]',
-    roles: [ROLES.ADMIN],
-  },
-  ADMIN_QUESTIONS: {
-    name: 'adminQuestions',
-    label: 'Tests',
-    path: '/admin/question',
-    roles: [ROLES.ADMIN],
-  },
-  ADMIN_QUESTION: {
-    name: 'adminQuestion',
-    label: 'Tests',
-    path: '/admin/question/[id]',
-    roles: [ROLES.ADMIN],
-  },
 };

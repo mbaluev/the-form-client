@@ -1,17 +1,17 @@
-import * as React from 'react';
 import { classNames } from '@utils/classNames';
 import { Progress } from '@components/progress';
 
 interface IModuleProgressProps {
   value?: number;
+  width?: string;
 }
 
 export const ModuleProgress = (props: IModuleProgressProps) => {
-  const { value } = props;
+  const { value, width } = props;
   const clsProgress = classNames({
     'background-color_green': value === 100,
   });
-  return <Progress value={value} classNameBar={clsProgress} />;
+  return <Progress value={value} classNameBar={clsProgress} width={width} />;
 };
 
 export const getProgress = (values?: boolean[]) => {

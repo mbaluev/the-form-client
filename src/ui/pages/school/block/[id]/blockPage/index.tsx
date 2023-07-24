@@ -77,7 +77,7 @@ export const BlockPage = observer(() => {
       title={userBlock?.block?.name}
       subTitle={<SubTitleBlock userBlock={userBlock} />}
       breadCrumbs={breadCrumbs}
-      quickFilter={<ModuleProgress value={progress} />}
+      quickFilter={<ModuleProgress value={progress} width="150px" />}
       className={cls}
       pageRight={getPageRight()}
     >

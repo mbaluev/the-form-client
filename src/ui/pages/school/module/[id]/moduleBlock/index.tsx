@@ -58,7 +58,7 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
           </div>
         </li>
       </ul>
-      <ModuleProgress value={progress} />
+      <ModuleProgress value={progress} width="100%" />
     </React.Fragment>
   );
 };
