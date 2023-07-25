@@ -1,5 +1,6 @@
 @import "../../../scss/params";
 
 .content__panel {
-  padding-top: $base * 6;
+  display: flex;
+  flex-direction: column;
 }

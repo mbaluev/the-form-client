@@ -7,7 +7,7 @@ import './index.scss';
 export interface IContentItemProps {
   id: string;
   label: string;
-  content: JSX.Element | string;
+  content?: JSX.Element | string;
   className?: string;
 }
 

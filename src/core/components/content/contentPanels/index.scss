@@ -1,13 +1,7 @@
 @import "../../../scss/params";
 
 .content__panels {
-  margin-top: -$base * 6;
-  gap: $base * 8;
-  display: grid;
-}
-
-@media (max-width: $media-md) {
-  .content__panels {
-    grid-column: span 2;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: $base * 3;
 }
