@@ -5,10 +5,14 @@ export const statusModules = (userModules?: IModuleUserDTO[] | null) => {
   userModules?.forEach((userModule) => {
     if (userModule?.enable && !userModule.complete) title = 'In progress';
   });
-  const complete = userModules?.reduce(
-    (prev: boolean, userModule: IModuleUserDTO) => prev && userModule.complete,
-    true
-  );
+  let complete = false;
+  if (userModules && userModules.length > 0) {
+    complete = userModules?.reduce(
+      (prev: boolean, userModule: IModuleUserDTO) =>
+        prev && userModule.complete,
+      true
+    );
+  }
   if (complete) {
     title = 'Complete';
   }

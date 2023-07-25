@@ -24,7 +24,7 @@ export interface IUserDTO {
 
   // references
   userDocuments?: IDocumentDTO[];
-  userModules?: IModuleUserDTO;
+  userModules?: IModuleUserDTO[];
   userBlocks?: IBlockUserDTO[];
   userMaterials?: IMaterialUserDTO[];
   userTasks?: ITaskUserDTO[];

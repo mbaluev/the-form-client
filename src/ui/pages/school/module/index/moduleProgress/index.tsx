@@ -16,7 +16,7 @@ export const ModuleProgress = (props: IModuleProgressProps) => {
 
 export const getProgress = (values?: boolean[]) => {
   let value = 0;
-  if (values) {
+  if (values && values.length > 0) {
     const trues = values.filter((v) => v);
     value = (trues.length / values.length) * 100;
   }

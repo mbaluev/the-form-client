@@ -14,14 +14,18 @@ export const IconModules = (props: IProps) => {
   const { userModules, style } = props;
   const title = statusModules(userModules);
   let icon = <DoDisturbIcon className="color_grey-50" style={style} />;
-  userModules?.forEach((userModule) => {
+  userModules?.forEach((userModule: IModuleUserDTO) => {
     if (userModule?.enable && !userModule.complete)
       icon = <CircleOutlinedIcon className="color_grey-50" style={style} />;
   });
-  const complete = userModules?.reduce(
-    (prev: boolean, userModule: IModuleUserDTO) => prev && userModule.complete,
-    true
-  );
+  let complete = false;
+  if (userModules && userModules.length > 0) {
+    complete = userModules?.reduce(
+      (prev: boolean, userModule: IModuleUserDTO) =>
+        prev && userModule.complete,
+      true
+    );
+  }
   if (complete) {
     icon = <CheckCircleIcon className="color_green" style={style} />;
   }

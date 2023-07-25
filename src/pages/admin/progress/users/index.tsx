@@ -11,7 +11,7 @@ import { observer } from 'mobx-react';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
 import { IUserService } from '@service/modules/entities/user/interface';
 import { IUserAdminViewModel } from '@viewModel/modules/entities/user/admin/interface';
-import { Page } from '@ui/layout/page';
+import { UsersPage } from '@ui/pages/admin/progress/index/usersPage';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ id: string }>
@@ -49,13 +49,7 @@ const Users = (
     };
   });
 
-  return (
-    <Page
-      title={ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_USERS.label}
-      breadCrumbs={breadCrumbs}
-      padding={false}
-    />
-  );
+  return <UsersPage breadCrumbs={breadCrumbs} />;
 };
 
 Users.Layout = MasterSchool;
