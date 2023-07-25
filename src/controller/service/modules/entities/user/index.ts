@@ -74,4 +74,18 @@ export class UserService implements IUserService {
     );
     return ret ? ret.success : undefined;
   };
+
+  // admin
+
+  getUsersAdmin = async (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<IUserDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<IUserDTO>>(
+      `${this.API_PREFIX}/admin/list`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
 }

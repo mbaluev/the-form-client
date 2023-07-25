@@ -37,7 +37,7 @@ export interface ITaskService {
   sentTaskUser: (
     data: ITaskUserDocumentDTO,
     token?: string | null
-  ) => Promise<ITaskUserDocumentDTO | undefined>;
+  ) => Promise<void>;
 
   // --- admin
   getTasksAdmin: (
@@ -52,9 +52,6 @@ export interface ITaskService {
   sentTaskAdmin: (
     data: ITaskUserDocumentDTO,
     token?: string | null
-  ) => Promise<ITaskUserDocumentDTO | undefined>;
-  completeAdmin: (
-    id?: string,
-    token?: string | null
-  ) => Promise<ITaskUserDTO | undefined>;
+  ) => Promise<void>;
+  completeAdmin: (id?: string, token?: string | null) => Promise<void>;
 }

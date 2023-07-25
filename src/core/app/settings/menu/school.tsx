@@ -21,56 +21,69 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
     },
     roles: [ROLES.STUDENT],
   },
+
   {
-    name: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.name,
-    label: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.label,
-    path: ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.path,
+    name: ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_USERS.name,
+    label: ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_USERS.label,
+    path: ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_USERS.path,
+    icon: <BarChartRoundedIcon />,
+    active: (pathname: string) => {
+      return pathname === ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_USERS.path;
+    },
+    roles: [ROLES.ADMIN],
+  },
+
+  {
+    name: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USER_BLOCKS.name,
+    label: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USER_BLOCKS.label,
+    path: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USER_BLOCKS.path,
     icon: <BarChartRoundedIcon />,
     active: (pathname: string) => {
       return (
-        pathname === ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCKS.path ||
-        pathname === ROUTER_CONST_SCHOOL.ADMIN_USER_BLOCK.path
+        pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USER_BLOCKS.path ||
+        pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USER_BLOCK.path
       );
     },
     roles: [ROLES.ADMIN],
   },
   {
-    name: 'administration',
-    label: 'Administration',
+    name: 'settings',
+    label: 'Settings',
     icon: <SettingsIcon />,
     items: [
       {
-        name: ROUTER_CONST_SCHOOL.ADMIN_MODULES.name,
-        label: ROUTER_CONST_SCHOOL.ADMIN_MODULES.label,
-        path: ROUTER_CONST_SCHOOL.ADMIN_MODULES.path,
+        name: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULES.name,
+        label: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULES.label,
+        path: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULES.path,
         active: (pathname: string) => {
           return (
-            pathname === ROUTER_CONST_SCHOOL.ADMIN_MODULES.path ||
-            pathname === ROUTER_CONST_SCHOOL.ADMIN_MODULE.path ||
-            pathname === ROUTER_CONST_SCHOOL.ADMIN_MODULE_BLOCKS.path ||
-            pathname === ROUTER_CONST_SCHOOL.ADMIN_MODULE_BLOCK.path
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULES.path ||
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULE.path ||
+            pathname ===
+              ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULE_BLOCKS.path ||
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULE_BLOCK.path
           );
         },
       },
       {
-        name: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.name,
-        label: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.label,
-        path: ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.path,
+        name: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_BLOCKS.name,
+        label: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_BLOCKS.label,
+        path: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_BLOCKS.path,
         active: (pathname: string) => {
           return (
-            pathname === ROUTER_CONST_SCHOOL.ADMIN_BLOCKS.path ||
-            pathname === ROUTER_CONST_SCHOOL.ADMIN_BLOCK.path
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_BLOCKS.path ||
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_BLOCK.path
           );
         },
       },
       {
-        name: ROUTER_CONST_SCHOOL.ADMIN_USERS.name,
-        label: ROUTER_CONST_SCHOOL.ADMIN_USERS.label,
-        path: ROUTER_CONST_SCHOOL.ADMIN_USERS.path,
+        name: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USERS.name,
+        label: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USERS.label,
+        path: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USERS.path,
         active: (pathname: string) => {
           return (
-            pathname === ROUTER_CONST_SCHOOL.ADMIN_USERS.path ||
-            pathname === ROUTER_CONST_SCHOOL.ADMIN_USER.path
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USERS.path ||
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USER.path
           );
         },
       },

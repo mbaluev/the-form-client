@@ -18,20 +18,17 @@ export class TaskAdminDocumentViewModel
     try {
       if (this.modalData && !this.hasModalErrors) {
         const token = await this.modelAuth.refreshToken();
-        const data = await this.serviceTask.sentTaskAdmin(
-          this.modalData,
-          token
-        );
+        await this.serviceTask.sentTaskAdmin(this.modalData, token);
         await this.clearModalChanges();
         if (this.userBlock.data) {
           const blockId = this.userBlock.data.id;
           await this.userBlock.getData(blockId);
         }
-        return data;
       }
     } catch (err) {
     } finally {
       this.setModalLoading(false);
     }
+    return undefined;
   };
 }

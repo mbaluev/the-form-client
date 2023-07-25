@@ -50,6 +50,8 @@ import { IModuleAdminViewModel } from '@viewModel/modules/entities/module/admin/
 import { ModuleAdminViewModel } from '@viewModel/modules/entities/module/admin';
 import { IMaterialAdminViewModel } from '@viewModel/modules/entities/material/admin/interface';
 import { MaterialAdminViewModel } from '@viewModel/modules/entities/material/admin';
+import { IUserAdminViewModel } from '@viewModel/modules/entities/user/admin/interface';
+import { UserAdminViewModel } from '@viewModel/modules/entities/user/admin';
 
 export const viewModelContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -148,3 +150,7 @@ viewModelContainer
 viewModelContainer
   .bind<ITaskAdminDocumentViewModel>(VIEW_MODEL.TaskAdminDocument)
   .to(TaskAdminDocumentViewModel);
+
+viewModelContainer
+  .bind<IUserAdminViewModel>(VIEW_MODEL.UserAdmin)
+  .to(UserAdminViewModel);

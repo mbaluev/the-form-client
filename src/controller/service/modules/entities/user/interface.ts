@@ -20,4 +20,9 @@ export interface IUserService {
     ids: string[],
     token?: string | null
   ) => Promise<boolean | undefined>;
+
+  getUsersAdmin: (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<IUserDTO[] | undefined>;
 }

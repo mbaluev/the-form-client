@@ -58,64 +58,72 @@ export const ROUTER_CONST_SCHOOL: Record<string, any> = {
     path: '/school/block/[id]',
     roles: [ROLES.STUDENT],
   },
-  ADMIN_MODULES: {
-    name: 'adminModules',
+  ADMIN_SETTINGS_MODULES: {
+    name: 'adminSettingsModules',
     label: 'Modules',
-    path: '/admin/module',
+    path: '/admin/settings/module',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_MODULE: {
-    name: 'adminModule',
+  ADMIN_SETTINGS_MODULE: {
+    name: 'adminSettingsModule',
     label: 'Module',
-    path: '/admin/module/[moduleId]',
+    path: '/admin/settings/module/[moduleId]',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_MODULE_BLOCKS: {
-    name: 'adminModuleBlocks',
+  ADMIN_SETTINGS_MODULE_BLOCKS: {
+    name: 'adminSettingsModuleBlocks',
     label: 'Blocks',
-    path: '/admin/module/[moduleId]/block',
+    path: '/admin/settings/module/[moduleId]/block',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_MODULE_BLOCK: {
-    name: 'adminModuleBlock',
+  ADMIN_SETTINGS_MODULE_BLOCK: {
+    name: 'adminSettingsModuleBlock',
     label: 'Block',
-    path: '/admin/module/[moduleId]/block/[blockId]',
+    path: '/admin/settings/module/[moduleId]/block/[blockId]',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_BLOCKS: {
-    name: 'adminBlocks',
+  ADMIN_SETTINGS_BLOCKS: {
+    name: 'adminSettingsBlocks',
     label: 'Blocks',
-    path: '/admin/block',
+    path: '/admin/settings/block',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_BLOCK: {
-    name: 'adminBlock',
+  ADMIN_SETTINGS_BLOCK: {
+    name: 'adminSettingsBlock',
     label: 'Block',
-    path: '/admin/block/[id]',
+    path: '/admin/settings/block/[id]',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_USERS: {
-    name: 'adminUsers',
+  ADMIN_SETTINGS_USERS: {
+    name: 'adminSettingsUsers',
     label: 'Users',
-    path: '/admin/user',
+    path: '/admin/settings/user',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_USER: {
-    name: 'adminUser',
+  ADMIN_SETTINGS_USER: {
+    name: 'adminSettingsUser',
     label: 'User',
-    path: '/admin/user/[id]',
+    path: '/admin/settings/user/[id]',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_USER_BLOCKS: {
-    name: 'adminUserTasks',
+
+  ADMIN_SETTINGS_USER_BLOCKS: {
+    name: 'adminSettingsUserTasks',
     label: 'Users progress',
-    path: '/admin/userBlock',
+    path: '/admin/settings/userBlock',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_USER_BLOCK: {
-    name: 'adminUserBlock',
+  ADMIN_SETTINGS_USER_BLOCK: {
+    name: 'adminSettingsUserBlock',
     label: 'User progress',
-    path: '/admin/userBlock/[id]',
+    path: '/admin/settings/userBlock/[id]',
+    roles: [ROLES.ADMIN],
+  },
+
+  ADMIN_PROGRESS_USERS: {
+    name: 'adminProgressUsers',
+    label: 'Users progress',
+    path: '/admin/progress/users',
     roles: [ROLES.ADMIN],
   },
 };

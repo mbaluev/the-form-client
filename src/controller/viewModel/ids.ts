@@ -27,4 +27,5 @@ export const VIEW_MODEL = {
   QuestionAdmin: Symbol.for('QuestionAdminViewModel'),
   TaskAdmin: Symbol.for('TaskAdminViewModel'),
   TaskAdminDocument: Symbol.for('TaskAdminDocumentViewModel'),
+  UserAdmin: Symbol.for('UserAdminViewModel'),
 };
