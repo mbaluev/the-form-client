@@ -47,18 +47,15 @@ export const BlockPage = observer(() => {
       url: { pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.path },
     },
     {
-      label: userModule
-        ? `${userModule.module?.title}. ${userModule.module?.name}`
-        : 'loading...',
+      label:
+        userModule && userModule.module ? userModule.module.name : 'loading...',
       url: {
         pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path,
         query: { id: userModule?.id },
       },
     },
     {
-      label: userBlock
-        ? `${userBlock.block?.title}. ${userBlock.block?.name}`
-        : 'loading...',
+      label: userBlock && userBlock.block ? userBlock.block.name : 'loading...',
       url: {
         pathname: ROUTER_CONST_SCHOOL.SCHOOL_BLOCK.path,
         query: { id: userBlock?.id },

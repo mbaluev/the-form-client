@@ -106,24 +106,28 @@ export const ROUTER_CONST_SCHOOL: Record<string, any> = {
     path: '/admin/settings/user/[id]',
     roles: [ROLES.ADMIN],
   },
-
-  ADMIN_SETTINGS_USER_BLOCKS: {
-    name: 'adminSettingsUserTasks',
-    label: 'Users progress',
-    path: '/admin/settings/userBlock',
-    roles: [ROLES.ADMIN],
-  },
-  ADMIN_SETTINGS_USER_BLOCK: {
-    name: 'adminSettingsUserBlock',
-    label: 'User progress',
-    path: '/admin/settings/userBlock/[id]',
-    roles: [ROLES.ADMIN],
-  },
-
   ADMIN_PROGRESS_USERS: {
-    name: 'adminProgressUsers',
+    name: 'Users',
     label: 'Users progress',
     path: '/admin/progress/users',
+    roles: [ROLES.ADMIN],
+  },
+  ADMIN_PROGRESS_MODULES: {
+    name: 'adminProgressModules',
+    label: 'User modules progress',
+    path: '/admin/progress/modules',
+    roles: [ROLES.ADMIN],
+  },
+  ADMIN_PROGRESS_BLOCKS: {
+    name: 'adminProgressBlocks',
+    label: 'User blocks progress',
+    path: '/admin/progress/blocks',
+    roles: [ROLES.ADMIN],
+  },
+  ADMIN_PROGRESS_BLOCK: {
+    name: 'adminProgressBlock',
+    label: 'User block progress',
+    path: '/admin/progress/blocks/[id]',
     roles: [ROLES.ADMIN],
   },
 };

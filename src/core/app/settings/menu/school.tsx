@@ -21,27 +21,17 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
     },
     roles: [ROLES.STUDENT],
   },
-
   {
     name: ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_USERS.name,
     label: ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_USERS.label,
     path: ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_USERS.path,
     icon: <BarChartRoundedIcon />,
     active: (pathname: string) => {
-      return pathname === ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_USERS.path;
-    },
-    roles: [ROLES.ADMIN],
-  },
-
-  {
-    name: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USER_BLOCKS.name,
-    label: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USER_BLOCKS.label,
-    path: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USER_BLOCKS.path,
-    icon: <BarChartRoundedIcon />,
-    active: (pathname: string) => {
       return (
-        pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USER_BLOCKS.path ||
-        pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USER_BLOCK.path
+        pathname === ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_USERS.path ||
+        pathname === ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_MODULES.path ||
+        pathname === ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_BLOCKS.path ||
+        pathname === ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_BLOCK.path
       );
     },
     roles: [ROLES.ADMIN],

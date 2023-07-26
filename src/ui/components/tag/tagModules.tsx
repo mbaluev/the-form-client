@@ -15,10 +15,14 @@ export const TagModules = (props: IProps) => {
   userModules?.forEach((userModule) => {
     if (userModule?.enable && !userModule.complete) tag.color = 'blue';
   });
-  const complete = userModules?.reduce(
-    (prev: boolean, userModule: IModuleUserDTO) => prev && userModule.complete,
-    true
-  );
+  let complete = false;
+  if (userModules && userModules.length > 0) {
+    complete = userModules?.reduce(
+      (prev: boolean, userModule: IModuleUserDTO) =>
+        prev && userModule.complete,
+      true
+    );
+  }
   if (complete) {
     tag.color = 'green';
   }

@@ -30,4 +30,15 @@ export interface IModuleService {
     query?: ParsedUrlQuery,
     token?: string | null
   ) => Promise<IModuleUserDTO | undefined>;
+
+  // --- admin
+  getModulesAdmin: (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<IModuleUserDTO[] | undefined>;
+  getModuleAdmin: (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ) => Promise<IModuleUserDTO | undefined>;
 }

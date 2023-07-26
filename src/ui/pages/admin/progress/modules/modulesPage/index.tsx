@@ -1,36 +1,31 @@
 import React from 'react';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
-import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { Page } from '@ui/layout/page';
-import { ModuleGrid } from '@ui/pages/school/module/index/moduleGrid';
 import { observer } from 'mobx-react';
+import { ModulesList } from '@ui/pages/admin/progress/modules/modulesList';
+import { useViewModel } from '@hooks/useViewModel';
+import { VIEW_MODEL } from '@viewModel/ids';
+import { IModuleAdminViewModel } from '@viewModel/modules/entities/module/admin/interface';
 import {
   getProgress,
   ModuleProgress,
 } from '@ui/pages/school/module/index/moduleProgress';
-import { useViewModel } from '@hooks/useViewModel';
-import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
-import { VIEW_MODEL } from '@viewModel/ids';
-import { classNames } from '@utils/classNames';
 import { TitleModules } from '@ui/components/title/titleModules';
 import { SubTitleModules } from '@ui/components/subTitle/subTitleModules';
-import './index.scss';
+import { IUserAdminViewModel } from '@viewModel/modules/entities/user/admin/interface';
 
-export const ModulesPage = observer(() => {
-  const { list: userModules } = useViewModel<IModuleUserViewModel>(
-    VIEW_MODEL.ModuleUser
+interface IProps {
+  breadCrumbs: TBreadCrumb[];
+}
+
+export const ModulesPage = observer((props: IProps) => {
+  const { list: userModules } = useViewModel<IModuleAdminViewModel>(
+    VIEW_MODEL.ModuleAdmin
   );
-  const breadCrumbs: TBreadCrumb[] = [
-    {
-      label: ROUTER_CONST_SCHOOL.HOME.label,
-      url: { pathname: ROUTER_CONST_SCHOOL.HOME.path },
-    },
-    {
-      label: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.label,
-      url: { pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.path },
-    },
-  ];
-  const cls = classNames('modules-page');
+  const { data: user } = useViewModel<IUserAdminViewModel>(
+    VIEW_MODEL.UserAdmin
+  );
+  const { breadCrumbs } = props;
   const progressValues = userModules?.reduce(
     (prevUserModules: boolean[], currUserModule) => {
       const currUserModuleData = currUserModule?.userBlocks?.reduce(
@@ -51,13 +46,13 @@ export const ModulesPage = observer(() => {
   const progress = getProgress(progressValues);
   return (
     <Page
-      title={<TitleModules userModules={userModules} />}
-      subTitle={<SubTitleModules userModules={userModules} />}
+      title={<TitleModules userModules={userModules} user={user} admin />}
+      subTitle={<SubTitleModules userModules={userModules} user={user} admin />}
       quickFilter={<ModuleProgress value={progress} width="150px" />}
       breadCrumbs={breadCrumbs}
-      className={cls}
+      padding={false}
     >
-      <ModuleGrid />
+      <ModulesList />
     </Page>
   );
 });

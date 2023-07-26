@@ -91,4 +91,31 @@ export class ModuleService implements IModuleService {
     );
     return ret ? ret.data : undefined;
   };
+
+  // --- admin
+
+  getModulesAdmin = async (
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<IModuleUserDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<IModuleUserDTO>>(
+      `${this.API_PREFIX}/admin/list`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
+
+  getModuleAdmin = async (
+    id?: string,
+    query?: ParsedUrlQuery,
+    token?: string | null
+  ): Promise<IModuleUserDTO | undefined> => {
+    const ret = await this.apiModule.post<IResponseItemDTO<IModuleUserDTO>>(
+      `${this.API_PREFIX}/admin/item/${id}`,
+      { ...query },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return ret ? ret.data : undefined;
+  };
 }

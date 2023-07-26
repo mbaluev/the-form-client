@@ -1,7 +1,7 @@
 import { IModuleUserDTO } from '@model/entities/module';
 
 export const statusModules = (userModules?: IModuleUserDTO[] | null) => {
-  let title = 'Disabled';
+  let title = 'Modules disabled';
   userModules?.forEach((userModule) => {
     if (userModule?.enable && !userModule.complete) title = 'In progress';
   });
