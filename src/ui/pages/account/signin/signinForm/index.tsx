@@ -22,7 +22,6 @@ export const SigninForm = observer(() => {
     hasErrors,
     message,
     clearMessage,
-    isDataLoading,
   } = useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
 
   const router = useRouter();
@@ -41,7 +40,6 @@ export const SigninForm = observer(() => {
 
   return (
     <div className="signin-form">
-      <Loader loading={isDataLoading} />
       {isAuth ? (
         <Loader loading relative />
       ) : (

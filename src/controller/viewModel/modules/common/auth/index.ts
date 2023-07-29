@@ -135,6 +135,7 @@ export class AuthViewModel
           return data.token;
         }
       } catch (err) {
+        await this.signout();
       } finally {
         this.setDataLoading(false);
       }

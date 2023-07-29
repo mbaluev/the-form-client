@@ -22,12 +22,6 @@ export const ROUTER_CONST_SCHOOL: Record<string, any> = {
     label: 'The Form',
     path: '/',
   },
-  ACCOUNT_PROFILE: {
-    name: 'accountProfile',
-    label: 'Profile',
-    path: '/account/profile',
-    roles: [ROLES.DISABLE],
-  },
   ACCOUNT_SIGN_IN: {
     name: 'accountSignin',
     label: 'signin',
