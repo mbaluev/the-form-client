@@ -25,7 +25,7 @@ export const TagQuestion = observer((props: IProps) => {
   if (userQuestion?.error) {
     tag.color = 'red';
   }
-  if (userQuestion?.comment) {
+  if (userQuestion?.commentText) {
     tag.color = 'red';
   }
   return <Tag {...tag} />;

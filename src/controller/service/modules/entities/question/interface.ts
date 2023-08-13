@@ -51,4 +51,10 @@ export interface IQuestionService {
     query?: ParsedUrlQuery,
     token?: string | null
   ) => Promise<IQuestionUserDTO | undefined>;
+  saveQuestionComment: (
+    userBlockId: string,
+    userQuestionId: string,
+    comment?: string,
+    token?: string | null
+  ) => Promise<void>;
 }

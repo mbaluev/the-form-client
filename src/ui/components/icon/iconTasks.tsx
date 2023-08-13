@@ -28,8 +28,7 @@ export const IconTasks = (props: IProps) => {
         userBlock?.sentTasksAdmin === false))
   ) {
     icon = <CallReceivedRoundedIcon className="color_red" />;
-  }
-  if (
+  } else if (
     (admin &&
       (userBlock?.sentTasksUser === false ||
         userBlock?.sentTasksAdmin === true)) ||

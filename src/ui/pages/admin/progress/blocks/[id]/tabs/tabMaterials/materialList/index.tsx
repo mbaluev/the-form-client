@@ -15,6 +15,7 @@ import { documentButtonValueGetter } from '@ui/components/documentButton/valueGe
 import { AlertMaterials } from '@ui/components/alert/alertMaterials';
 import { IMaterialAdminViewModel } from '@viewModel/modules/entities/material/admin/interface';
 import { IBlockAdminViewModel } from '@viewModel/modules/entities/block/admin/interface';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const MaterialList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockAdminViewModel>(
@@ -29,6 +30,7 @@ export const MaterialList = observer(() => {
     download,
     getData,
     data: materialData,
+    getList,
   } = useViewModel<IMaterialAdminViewModel>(VIEW_MODEL.MaterialAdmin);
 
   const [preventClick, setPreventClick] = useState(false);
@@ -94,6 +96,9 @@ export const MaterialList = observer(() => {
         ),
       }}
     />,
+    <IconButton onClick={() => getList()}>
+      <RefreshIcon />
+    </IconButton>,
   ];
 
   useEffect(() => {

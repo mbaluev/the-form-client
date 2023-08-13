@@ -3,7 +3,6 @@ import { Page } from '@ui/layout/page';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
-import { Loader } from '@components/loader';
 import { TitleQuestion } from '@ui/components/title/titleQuestion';
 import { QuestionCardContent } from '@ui/pages/admin/progress/blocks/[id]/tabs/tabQuestions/questionCardContent';
 import { ErrorPage } from '@ui/pages/errors/errorPage';
@@ -21,28 +20,18 @@ export const QuestionCard = observer(() => {
   const { data: block } = useViewModel<IBlockAdminViewModel>(
     VIEW_MODEL.BlockAdmin
   );
-  const { data, list, isDataLoading, isListLoading, start } =
+  const { data, list, isDataLoading, start } =
     useViewModel<IQuestionAdminViewModel>(VIEW_MODEL.QuestionAdmin);
 
   const handleStart = () => start();
 
-  if (isListLoading || isDataLoading) {
-    return (
-      <Page>
-        <Stack justifyContent="space-between" flex="1 1 auto">
-          <Loader loading relative />
-          {isDataLoading && <QuestionCardButtons />}
-        </Stack>
-      </Page>
-    );
-  }
-
   if (
     !list ||
     (list && list.length === 0) ||
-    (!data && block?.completeQuestions)
+    (!data && block?.completeQuestions) ||
+    isDataLoading
   ) {
-    return <Page204 />;
+    return <Page204 loading={isDataLoading} />;
   }
 
   if (!data && !block?.completeQuestions) {
@@ -70,7 +59,7 @@ export const QuestionCard = observer(() => {
       subTitle={<TagQuestion userQuestion={data} />}
       quickFilter={<QuestionCardActions />}
     >
-      <Stack justifyContent="space-between" flex="1 1 auto">
+      <Stack justifyContent="space-between" flex="1 1 auto" spacing={3}>
         <QuestionCardContent />
         <QuestionCardButtons />
       </Stack>

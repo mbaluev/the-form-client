@@ -13,6 +13,7 @@ import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interf
 import { CellClickedEvent, RowClassParams } from 'ag-grid-community';
 import { TaskRenderer } from '@ui/pages/school/block/[id]/tabs/tabTasks/taskList/taskRendrer';
 import { AlertTasks } from '@ui/components/alert/alertTasks';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const TaskList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockUserViewModel>(
@@ -27,6 +28,7 @@ export const TaskList = observer(() => {
     isModalOpen,
     getData,
     data: taskData,
+    getList,
   } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
 
   const [preventClick, setPreventClick] = useState(false);
@@ -80,6 +82,9 @@ export const TaskList = observer(() => {
         ),
       }}
     />,
+    <IconButton onClick={() => getList()}>
+      <RefreshIcon />
+    </IconButton>,
   ];
 
   useEffect(() => {

@@ -69,12 +69,11 @@ export const Attachment: FC<IProps> = (props) => {
     },
     [onUpload]
   );
-  const { getRootProps, getInputProps, acceptedFiles, isDragActive } =
-    useDropzone({
-      onDrop,
-      disabled: loading,
-      ...options,
-    });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    disabled: loading,
+    ...options,
+  });
 
   const cls = classNames('attachment', className, {
     attachment_error: Boolean(error),
@@ -86,15 +85,6 @@ export const Attachment: FC<IProps> = (props) => {
   const clsZoneText = classNames('attachment-zone__text');
   const clsFiles = classNames('attachment-files');
 
-  const AcceptedFiles = () => {
-    return (
-      <div className={clsFiles}>
-        {acceptedFiles?.map((file, index) => (
-          <AttachmentFile key={index} name={file.name} size={file.size} />
-        ))}
-      </div>
-    );
-  };
   const Files = () => {
     if (!files) return null;
     return (

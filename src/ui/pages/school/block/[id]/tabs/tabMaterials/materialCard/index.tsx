@@ -2,7 +2,6 @@ import React from 'react';
 import { Page } from '@ui/layout/page';
 import { observer } from 'mobx-react';
 import { Page204 } from '@ui/pages/errors/204';
-import { Loader } from '@components/loader';
 import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
 import { MaterialCardContent } from '@ui/pages/school/block/[id]/tabs/tabMaterials/materialCardContent';
 import { MaterialCardActions } from '@ui/pages/school/block/[id]/tabs/tabMaterials/materialCardActions';
@@ -12,19 +11,12 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 
 export const MaterialCard = observer(() => {
-  const { data, isDataLoading, isListLoading } =
-    useViewModel<IMaterialUserViewModel>(VIEW_MODEL.MaterialUser);
+  const { data, isDataLoading } = useViewModel<IMaterialUserViewModel>(
+    VIEW_MODEL.MaterialUser
+  );
 
-  if (isListLoading || isDataLoading) {
-    return (
-      <Page>
-        <Loader loading />
-      </Page>
-    );
-  }
-
-  if (!data) {
-    return <Page204 />;
+  if (!data || isDataLoading) {
+    return <Page204 loading={isDataLoading} />;
   }
 
   return (

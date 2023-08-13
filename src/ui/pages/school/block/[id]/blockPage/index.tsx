@@ -19,14 +19,19 @@ import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/in
 import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import { BlockContent } from '@ui/pages/school/block/[id]/blockContent';
 import { TitleBlock } from '@ui/components/title/titleBlock';
+import { Stack } from '@mui/material';
+import { IconButton } from '@components/iconButton';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const BlockPage = observer(() => {
   const { data: userModule } = useViewModel<IModuleUserViewModel>(
     VIEW_MODEL.ModuleUser
   );
-  const { data: userBlock, tab } = useViewModel<IBlockUserViewModel>(
-    VIEW_MODEL.BlockUser
-  );
+  const {
+    data: userBlock,
+    tab,
+    refresh,
+  } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
 
   const cls = classNames('block-page', {
     'block-page_complete': Boolean(userModule && userModule.complete),
@@ -75,7 +80,14 @@ export const BlockPage = observer(() => {
       title={<TitleBlock userBlock={userBlock} />}
       subTitle={<SubTitleBlock userBlock={userBlock} />}
       breadCrumbs={breadCrumbs}
-      quickFilter={<ModuleProgress value={progress} width="150px" />}
+      quickFilter={
+        <Stack direction="row" spacing={2}>
+          <ModuleProgress value={progress} width="150px" />
+          <IconButton onClick={() => refresh()}>
+            <RefreshIcon />
+          </IconButton>
+        </Stack>
+      }
       className={cls}
       pageRight={getPageRight()}
     >

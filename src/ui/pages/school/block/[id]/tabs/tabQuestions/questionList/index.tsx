@@ -13,6 +13,7 @@ import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { QuestionRenderer } from '@ui/pages/school/block/[id]/tabs/tabQuestions/questionList/questionRendrer';
 import { CellClickedEvent } from 'ag-grid-community';
 import { AlertQuestions } from '@ui/components/alert/alertQuestions';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const QuestionList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockUserViewModel>(
@@ -27,6 +28,7 @@ export const QuestionList = observer(() => {
     isModalOpen,
     getData,
     data: questionData,
+    getList,
   } = useViewModel<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser);
 
   const [preventClick, setPreventClick] = useState(false);
@@ -75,6 +77,9 @@ export const QuestionList = observer(() => {
         ),
       }}
     />,
+    <IconButton onClick={() => getList()}>
+      <RefreshIcon />
+    </IconButton>,
   ];
 
   useEffect(() => {

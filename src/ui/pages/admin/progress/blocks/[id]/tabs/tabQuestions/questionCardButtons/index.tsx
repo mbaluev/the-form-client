@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { Button } from '@components/button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -17,26 +17,28 @@ export const QuestionCardButtons = observer(() => {
   const handleNext = () => next();
 
   return (
-    <Grid container spacing="15px">
-      <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Button
-          variant="outlined"
-          startIcon={<ArrowBackIcon />}
-          disabled={!isPrev}
-          onClick={handlePrev}
-        >
-          Prev
-        </Button>
+    <Box>
+      <Grid container spacing={3}>
+        <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Button
+            variant="outlined"
+            startIcon={<ArrowBackIcon />}
+            disabled={!isPrev}
+            onClick={handlePrev}
+          >
+            Prev
+          </Button>
+        </Grid>
+        <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Button
+            endIcon={<ArrowForwardIcon />}
+            disabled={!isNext}
+            onClick={handleNext}
+          >
+            Next
+          </Button>
+        </Grid>
       </Grid>
-      <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Button
-          endIcon={<ArrowForwardIcon />}
-          disabled={!isNext}
-          onClick={handleNext}
-        >
-          Next
-        </Button>
-      </Grid>
-    </Grid>
+    </Box>
   );
 });

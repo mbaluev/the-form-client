@@ -145,4 +145,17 @@ export class QuestionService implements IQuestionService {
     );
     return ret ? ret.data : undefined;
   };
+
+  saveQuestionComment = async (
+    userBlockId: string,
+    userQuestionId: string,
+    commentText?: string,
+    token?: string | null
+  ): Promise<void> => {
+    return this.apiModule.post<void>(
+      `${this.API_PREFIX}/admin/save`,
+      { userBlockId, userQuestionId, commentText },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  };
 }

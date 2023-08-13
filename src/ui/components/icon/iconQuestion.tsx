@@ -26,7 +26,7 @@ export const IconQuestion = (props: IProps) => {
   if (userQuestion?.error) {
     icon = <CheckCircleIcon className="color_red" style={style} />;
   }
-  if (userQuestion?.comment) {
+  if (userQuestion?.commentText) {
     icon = <ChatIcon className="color_red" style={style} />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;

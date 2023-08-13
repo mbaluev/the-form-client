@@ -6,6 +6,7 @@ import { FormField, FormSection } from '@components/form';
 import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
 import { CheckboxFieldControl } from '@components/fields';
 import { RadioGroupFieldControl } from '@components/fields';
+import { Typography } from '@mui/material';
 
 export const QuestionCardContent = observer(() => {
   const { data, changeAnswer, saveQuestionAnswers, isStart } =
@@ -32,8 +33,6 @@ export const QuestionCardContent = observer(() => {
             );
             const checked = Boolean(questionAnswer);
             const error = Boolean(data?.error);
-            const commentText = questionAnswer?.commentText;
-
             return (
               <CheckboxFieldControl
                 key={i}
@@ -43,7 +42,6 @@ export const QuestionCardContent = observer(() => {
                 onChange={changeOptionCheckbox}
                 disabled={!isStart}
                 error={error}
-                helperText={commentText}
               />
             );
           })}
@@ -60,8 +58,14 @@ export const QuestionCardContent = observer(() => {
             onChange={changeOptionRadio}
             disabled={!isStart}
             error={data.error}
-            helperText={data.userQuestionAnswers?.[0]?.commentText}
           />
+        </FormField>
+      )}
+      {data.commentText && (
+        <FormField title="Comment">
+          <Typography sx={{ whiteSpace: 'pre-wrap' }}>
+            {data.commentText}
+          </Typography>
         </FormField>
       )}
     </FormSection>

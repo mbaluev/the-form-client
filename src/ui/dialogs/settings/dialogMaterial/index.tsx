@@ -70,7 +70,7 @@ export const DialogMaterial = observer((props: IProps) => {
     if (!modalData || (modalData && !modalData?.document?.name)) {
       return <React.Fragment>New material</React.Fragment>;
     }
-    return <React.Fragment>{modalData.document.name}</React.Fragment>;
+    return <React.Fragment>{modalData?.document?.name}</React.Fragment>;
   };
   const footerButtons: IButtonProps[] = [
     {

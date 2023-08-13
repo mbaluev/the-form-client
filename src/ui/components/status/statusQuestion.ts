@@ -10,6 +10,6 @@ export const statusQuestion = (userQuestion?: IQuestionUserDTO | null) => {
   }
   if (userQuestion?.complete) title = 'Complete';
   if (userQuestion?.error) title = 'Complete with errors';
-  if (userQuestion?.comment) title = 'Complete with comments';
+  if (userQuestion?.commentText) title = 'Complete with comments';
   return title;
 };

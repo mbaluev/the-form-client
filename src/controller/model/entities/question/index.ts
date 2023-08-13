@@ -41,7 +41,7 @@ export interface IQuestionUserDTO {
   id: string;
   complete?: boolean;
   error?: boolean;
-  comment?: boolean;
+  commentText?: string;
   createdAt: string;
   updatedAt: string;
 
@@ -57,13 +57,12 @@ export interface IQuestionUserDTO {
   userQuestionAnswers?: IQuestionAnswerUserDTO[];
 }
 export interface IQuestionAnswerUserDTO {
-  id?: string;
-  commentText?: string;
+  id: string;
   createdAt?: string;
   updatedAt?: string;
 
   // foreign keys
-  questionOptionId: string;
+  questionOptionId?: string;
   questionOption?: IQuestionOptionDTO;
   userId?: string;
   user?: IUserDTO;

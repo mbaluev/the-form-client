@@ -15,6 +15,7 @@ import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/inte
 import { CellClickedEvent } from 'ag-grid-community';
 import { documentButtonValueGetter } from '@ui/components/documentButton/valueGetter';
 import { AlertMaterials } from '@ui/components/alert/alertMaterials';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const MaterialList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockUserViewModel>(
@@ -30,6 +31,7 @@ export const MaterialList = observer(() => {
     getData,
     update,
     data: materialData,
+    getList,
   } = useViewModel<IMaterialUserViewModel>(VIEW_MODEL.MaterialUser);
 
   const [preventClick, setPreventClick] = useState(false);
@@ -100,6 +102,9 @@ export const MaterialList = observer(() => {
         ),
       }}
     />,
+    <IconButton onClick={() => getList()}>
+      <RefreshIcon />
+    </IconButton>,
   ];
 
   useEffect(() => {

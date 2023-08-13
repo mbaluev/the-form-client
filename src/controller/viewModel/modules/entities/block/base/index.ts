@@ -24,6 +24,7 @@ export class BlockBaseViewModel
       tab: observable,
       setTab: action,
       changeTab: action,
+      refresh: action,
     });
   }
 
@@ -33,5 +34,9 @@ export class BlockBaseViewModel
 
   changeTab = (value: BlockTabNames) => {
     this.setTab(value);
+  };
+
+  refresh = async () => {
+    if (this.data?.id) await this.getData(this.data.id);
   };
 }

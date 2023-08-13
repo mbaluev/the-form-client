@@ -1,4 +1,3 @@
-import React from 'react';
 import { observer } from 'mobx-react';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { Page } from '@ui/layout/page';
@@ -18,6 +17,9 @@ import { BlockContent } from '@ui/pages/admin/progress/blocks/[id]/blockContent'
 import { MaterialCard } from '@ui/pages/admin/progress/blocks/[id]/tabs/tabMaterials/materialCard';
 import { TaskCard } from '@ui/pages/admin/progress/blocks/[id]/tabs/tabTasks/taskCard';
 import { QuestionCard } from '@ui/pages/admin/progress/blocks/[id]/tabs/tabQuestions/questionCard';
+import { IconButton } from '@components/iconButton';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { Stack } from '@mui/material';
 
 interface IProps {
   breadCrumbs: TBreadCrumb[];
@@ -28,9 +30,11 @@ export const BlockPage = observer((props: IProps) => {
   const { data: userModule } = useViewModel<IModuleAdminViewModel>(
     VIEW_MODEL.ModuleAdmin
   );
-  const { data: userBlock, tab } = useViewModel<IBlockAdminViewModel>(
-    VIEW_MODEL.BlockAdmin
-  );
+  const {
+    data: userBlock,
+    tab,
+    refresh,
+  } = useViewModel<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin);
 
   const cls = classNames('block-page', {
     'block-page_complete': Boolean(userModule && userModule.complete),
@@ -53,7 +57,14 @@ export const BlockPage = observer((props: IProps) => {
       title={<TitleBlock userBlock={userBlock} />}
       subTitle={<SubTitleBlock userBlock={userBlock} />}
       breadCrumbs={breadCrumbs}
-      quickFilter={<ModuleProgress value={progress} width="150px" />}
+      quickFilter={
+        <Stack direction="row" spacing={2}>
+          <ModuleProgress value={progress} width="150px" />
+          <IconButton onClick={() => refresh()}>
+            <RefreshIcon />
+          </IconButton>
+        </Stack>
+      }
       className={cls}
       pageRight={getPageRight()}
     >

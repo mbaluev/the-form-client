@@ -4,7 +4,6 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { Page204 } from '@ui/pages/errors/204';
-import { Loader } from '@components/loader';
 import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { TaskCardActions } from '@ui/pages/school/block/[id]/tabs/tabTasks/taskCardActions';
 import { TitleTask } from '@ui/components/title/titleTask';
@@ -14,7 +13,7 @@ import { DialogTaskUserDocument } from '@ui/dialogs/user/dialogTaskUserDocument'
 import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
 
 export const TaskCard = observer(() => {
-  const { data, isDataLoading, isListLoading, getData, getList } =
+  const { data, isDataLoading, getData, getList } =
     useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
 
   const { isModalOpen, modalClose, modalSubmit } =
@@ -26,16 +25,8 @@ export const TaskCard = observer(() => {
     await getList();
   };
 
-  if (isListLoading || isDataLoading) {
-    return (
-      <Page>
-        <Loader loading />
-      </Page>
-    );
-  }
-
-  if (!data) {
-    return <Page204 />;
+  if (!data || isDataLoading) {
+    return <Page204 loading={isDataLoading} />;
   }
 
   return (

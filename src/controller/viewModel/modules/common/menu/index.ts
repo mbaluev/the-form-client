@@ -1,7 +1,7 @@
 import { injectable } from 'inversify';
 import { IMenuViewModel } from '@viewModel/modules/common/menu/interface';
 import { action, makeObservable, observable } from 'mobx';
-import { SStorage } from '@utils/storage/storage';
+import { LStorage } from '@utils/storage/storage';
 import { BaseViewModel } from 'controller/viewModel/modules/base/base';
 
 @injectable()
@@ -22,8 +22,8 @@ export class MenuViewModel extends BaseViewModel implements IMenuViewModel {
   };
 
   initiate = () => {
-    if (SStorage && SStorage.menuState !== undefined) {
-      this.setOpen(SStorage.menuState);
+    if (LStorage && LStorage.menuState !== undefined) {
+      this.setOpen(LStorage.menuState);
     }
     setTimeout(() => this.setInitiated(true));
   };
@@ -32,6 +32,6 @@ export class MenuViewModel extends BaseViewModel implements IMenuViewModel {
 
   setOpen = (value: boolean) => {
     super.setOpen(value);
-    SStorage.menuState = value;
+    LStorage.menuState = value;
   };
 }

@@ -5,13 +5,34 @@ import { FormField, FormSection } from '@components/form';
 import { CheckboxFieldControl } from '@components/fields';
 import { RadioGroupFieldControl } from '@components/fields';
 import { IQuestionAdminViewModel } from '@viewModel/modules/entities/question/admin/interface';
+import { Box, Stack, Typography } from '@mui/material';
+import { IconButton } from '@components/iconButton';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import { Tooltip } from '@components/tooltip';
+import { DialogQuestionAdminComment } from '@ui/dialogs/admin/dialogQuestionAdminComment';
+import { useState } from 'react';
 
 export const QuestionCardContent = observer(() => {
-  const { data } = useViewModel<IQuestionAdminViewModel>(
-    VIEW_MODEL.QuestionAdmin
-  );
+  const { data, setModalData, clearModalData, clearModalChanges, modalSubmit } =
+    useViewModel<IQuestionAdminViewModel>(VIEW_MODEL.QuestionAdmin);
 
   if (!data) return null;
+
+  const [open, setOpen] = useState<boolean>(false);
+  const handleOpen = async () => {
+    setModalData(data);
+    await clearModalChanges();
+    setOpen(true);
+  };
+  const handleClose = async () => {
+    await clearModalData();
+    await clearModalChanges();
+    setOpen(false);
+  };
+  const handleSubmit = async () => {
+    await modalSubmit();
+    setOpen(false);
+  };
 
   return (
     <FormSection>
@@ -24,8 +45,6 @@ export const QuestionCardContent = observer(() => {
             );
             const checked = Boolean(questionAnswer);
             const error = Boolean(data?.error);
-            const commentText = questionAnswer?.commentText;
-
             return (
               <CheckboxFieldControl
                 key={i}
@@ -33,7 +52,6 @@ export const QuestionCardContent = observer(() => {
                 name={item.id}
                 value={checked}
                 error={error}
-                helperText={commentText}
                 disabled
               />
             );
@@ -49,11 +67,32 @@ export const QuestionCardContent = observer(() => {
             }))}
             value={data.userQuestionAnswers?.[0]?.questionOptionId}
             error={data.error}
-            helperText={data.userQuestionAnswers?.[0]?.commentText}
             disabled
           />
         </FormField>
       )}
+      {data.error && (
+        <Stack direction="row" spacing={3}>
+          <Box sx={{ flex: '1 1 auto' }}>
+            <FormField title="Comment">
+              <Typography sx={{ whiteSpace: 'pre-wrap' }}>
+                {data.commentText || '-'}
+              </Typography>
+            </FormField>
+          </Box>
+          <Tooltip title="Edit comment">
+            <IconButton color="red" onClick={handleOpen}>
+              <EditNoteIcon />
+            </IconButton>
+          </Tooltip>
+        </Stack>
+      )}
+      <DialogQuestionAdminComment
+        isOpen={open}
+        onClose={handleClose}
+        onCancel={handleClose}
+        onSubmit={handleSubmit}
+      />
     </FormSection>
   );
 });

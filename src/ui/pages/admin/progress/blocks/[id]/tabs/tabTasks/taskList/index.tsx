@@ -13,6 +13,7 @@ import { TaskRenderer } from '@ui/pages/admin/progress/blocks/[id]/tabs/tabTasks
 import { AlertTasks } from '@ui/components/alert/alertTasks';
 import { IBlockAdminViewModel } from '@viewModel/modules/entities/block/admin/interface';
 import { ITaskAdminViewModel } from '@viewModel/modules/entities/task/admin/interface';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const TaskList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockAdminViewModel>(
@@ -27,6 +28,7 @@ export const TaskList = observer(() => {
     isModalOpen,
     getData,
     data: taskData,
+    getList,
   } = useViewModel<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin);
 
   const [preventClick, setPreventClick] = useState(false);
@@ -79,6 +81,9 @@ export const TaskList = observer(() => {
         ),
       }}
     />,
+    <IconButton onClick={() => getList()}>
+      <RefreshIcon />
+    </IconButton>,
   ];
 
   useEffect(() => {

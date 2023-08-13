@@ -120,8 +120,7 @@ export const GridWithData = observer((props: IProps) => {
     <div className={cls}>
       {toolbar && <Toolbar {...toolbar} className={clsToolbar} />}
       <div className={clsContent}>
-        {isLoading && <Loader loading={isLoading} relative />}
-        {!isLoading && hasRows && (
+        {hasRows && (
           <AgGridReact
             overlayNoRowsTemplate="No data found"
             ref={gridRef} // Ref for accessing Grid's API
@@ -139,19 +138,23 @@ export const GridWithData = observer((props: IProps) => {
             {...propsAG}
           />
         )}
-        {!isLoading && !hasRows && (
+        {!hasRows && !isLoading && (
           <NoData icon={<DoNotDisturbIcon />} message={noDataMessage} />
         )}
+        {!hasRows && isLoading && (
+          <NoData
+            icon={<Loader loading={isLoading} relative />}
+            message="Loading..."
+          />
+        )}
       </div>
-      {totalItems !== undefined && (
-        <div className={clsFooter}>
-          <div className="ag-grid-footer__label">Items:</div>
-          <div className="ag-grid-footer__filtered">
-            {propsAG.rowData?.length}
-          </div>
-          <div className="ag-grid-footer__total">{totalItems}</div>
+      <div className={clsFooter}>
+        <div className="ag-grid-footer__label">Items:</div>
+        <div className="ag-grid-footer__filtered">
+          {propsAG.rowData?.length || 0}
         </div>
-      )}
+        <div className="ag-grid-footer__total">{totalItems || 0}</div>
+      </div>
     </div>
   );
 });

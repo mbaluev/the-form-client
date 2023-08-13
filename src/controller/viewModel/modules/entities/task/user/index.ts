@@ -15,6 +15,7 @@ export class TaskUserViewModel
 
   getList = async () => {
     await this.clearList();
+    await this.clearData();
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {

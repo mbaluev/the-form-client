@@ -13,6 +13,7 @@ import { CellClickedEvent } from 'ag-grid-community';
 import { AlertQuestions } from '@ui/components/alert/alertQuestions';
 import { IBlockAdminViewModel } from '@viewModel/modules/entities/block/admin/interface';
 import { IQuestionAdminViewModel } from '@viewModel/modules/entities/question/admin/interface';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const QuestionList = observer(() => {
   const { data: userBlock } = useViewModel<IBlockAdminViewModel>(
@@ -27,6 +28,7 @@ export const QuestionList = observer(() => {
     isModalOpen,
     getData,
     data: questionData,
+    getList,
   } = useViewModel<IQuestionAdminViewModel>(VIEW_MODEL.QuestionAdmin);
 
   const [preventClick, setPreventClick] = useState(false);
@@ -75,6 +77,9 @@ export const QuestionList = observer(() => {
         ),
       }}
     />,
+    <IconButton onClick={() => getList()}>
+      <RefreshIcon />
+    </IconButton>,
   ];
 
   useEffect(() => {
