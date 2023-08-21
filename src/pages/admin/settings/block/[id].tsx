@@ -107,13 +107,6 @@ const Block = (
       pathname: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_BLOCKS.path,
     });
   };
-  const onNewCallback = (id: string) => {
-    const query: ParsedUrlQuery = { id: id };
-    router.push({
-      pathname: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_BLOCK.path,
-      query,
-    });
-  };
 
   useEffect(() => {
     setBlocks(blocks);
@@ -135,7 +128,6 @@ const Block = (
       onClick={onClick}
       onClose={onClose}
       onDelete={onDelete}
-      // onNewCallback={onNewCallback}
     />
   );
 };

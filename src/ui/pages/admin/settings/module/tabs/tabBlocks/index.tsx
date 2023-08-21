@@ -55,23 +55,10 @@ export const TabBlocks = observer(() => {
       query,
     });
   };
-  const onNewCallback = (id: string) => {
-    const query: ParsedUrlQuery = { moduleId: data?.id, blockId: id };
-    router.push({
-      pathname: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULE_BLOCK.path,
-      query,
-    });
-  };
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
   }, [filter]);
 
-  return (
-    <BlockList
-      onClick={onClick}
-      // onNewCallback={onNewCallback}
-      filtersLeft={itemsLeft}
-    />
-  );
+  return <BlockList onClick={onClick} filtersLeft={itemsLeft} />;
 });

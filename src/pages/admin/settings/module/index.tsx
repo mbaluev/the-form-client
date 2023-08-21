@@ -10,8 +10,6 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { ModulePage } from '@ui/pages/admin/settings/module/modulePage';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
-import { ParsedUrlQuery } from 'querystring';
-import { useRouter } from 'next/router';
 import { observer } from 'mobx-react';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
 
@@ -44,14 +42,6 @@ const Modules = (
       url: { pathname: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULES.path },
     },
   ];
-  const router = useRouter();
-  const onNewCallback = (id: string) => {
-    const query: ParsedUrlQuery = { moduleId: id };
-    router.push({
-      pathname: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULE.path,
-      query,
-    });
-  };
 
   useEffect(() => {
     setModules(modules);
@@ -60,12 +50,7 @@ const Modules = (
     };
   });
 
-  return (
-    <ModulePage
-      breadCrumbs={breadCrumbs}
-      // onNewCallback={onNewCallback}
-    />
-  );
+  return <ModulePage breadCrumbs={breadCrumbs} />;
 };
 
 Modules.Layout = MasterSchool;

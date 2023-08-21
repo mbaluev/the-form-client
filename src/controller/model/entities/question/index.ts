@@ -57,7 +57,7 @@ export interface IQuestionUserDTO {
   userQuestionAnswers?: IQuestionAnswerUserDTO[];
 }
 export interface IQuestionAnswerUserDTO {
-  id: string;
+  id?: string;
   createdAt?: string;
   updatedAt?: string;
 

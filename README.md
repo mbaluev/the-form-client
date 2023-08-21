@@ -21,8 +21,8 @@ The project uses :
 ## Using Docker
 
 1. [Install Docker](https://docs.docker.com/get-docker/) on your machine
-2. Build your container: `docker build -t the-form .`
-3. Run your container: `docker run -p 80:3000 the-form`
+2. Build your container: `docker build -t the-form-client .`
+3. Run your container: `docker run -p 80:3000 the-form-client`
 
 You can view your images created with `docker images`
 

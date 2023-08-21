@@ -4,15 +4,6 @@ import Link from 'next/link';
 
 export const CONFIG: IContentItemProps[] = [
   {
-    id: 'autocomplete',
-    label: 'Autocomplete',
-    content: (
-      <Link href={ROUTER_CONST_DEV.autocomplete.path}>
-        {ROUTER_CONST_DEV.autocomplete.label}
-      </Link>
-    ),
-  },
-  {
     id: 'checkbox',
     label: 'Checkbox',
     content: (

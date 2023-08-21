@@ -35,9 +35,11 @@ export const getDisplayValue = <T,>(
   valueField: keyof T,
   labelField: keyof T,
   options?: readonly T[],
-  value?: T[keyof T]
+  value?: NonNullable<T>
 ) => {
-  return options?.find((d) => d[valueField] === value)?.[labelField];
+  return value && options
+    ? options.find((d) => d[valueField] === value[valueField])?.[labelField]
+    : '-';
 };
 
 export const AutocompleteFieldControl = <T,>(

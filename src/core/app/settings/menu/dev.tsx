@@ -23,11 +23,6 @@ export const MENU_CONFIG_DEV: TMenuItemDTO[] = [
     icon: <TextFieldsIcon />,
     items: [
       {
-        name: ROUTER_CONST_DEV.autocomplete.name,
-        label: ROUTER_CONST_DEV.autocomplete.label,
-        path: ROUTER_CONST_DEV.autocomplete.path,
-      },
-      {
         name: ROUTER_CONST_DEV.checkbox.name,
         label: ROUTER_CONST_DEV.checkbox.label,
         path: ROUTER_CONST_DEV.checkbox.path,

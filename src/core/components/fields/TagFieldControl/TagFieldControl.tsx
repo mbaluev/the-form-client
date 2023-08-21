@@ -35,7 +35,7 @@ export const TagFieldControl = <ItemType,>(
   const renderOption = (item: ItemType) => {
     return (
       <div className="tag-field-control__option">
-        <Tag>{item[labelField]}</Tag>
+        <Tag tag={item[labelField]} />
         <div className="tag-field-control__option-count">
           {item[countField]}
         </div>
@@ -49,7 +49,7 @@ export const TagFieldControl = <ItemType,>(
         {selItems
           .filter((_, index) => (limit ? index < limit : true))
           .map((item, index) => {
-            return <Tag key={index}>{item[labelField]}</Tag>;
+            return <Tag key={index} tag={item[labelField]} />;
           })}
         {limit && selItems.length > limit && (
           <div className="tag-field-control__tags-more">

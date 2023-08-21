@@ -52,7 +52,7 @@ export const DialogTask = observer((props: IProps) => {
     if (!modalData || (modalData && !modalData?.document?.name)) {
       return <React.Fragment>New homework task</React.Fragment>;
     }
-    return <React.Fragment>{modalData.document.name}</React.Fragment>;
+    return <React.Fragment>{modalData.document?.name}</React.Fragment>;
   };
   const footerButtons: IButtonProps[] = [
     {

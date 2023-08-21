@@ -13,8 +13,6 @@ import { IBlockService } from '@service/modules/entities/block/interface';
 import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
-import { useRouter } from 'next/router';
-import { ParsedUrlQuery } from 'querystring';
 import { getCookieToken } from '@utils/cookie/getCookieToken';
 
 export const getServerSideProps = async (
@@ -67,14 +65,6 @@ const Module = (
       disabled: !Boolean(module),
     },
   ];
-  const router = useRouter();
-  const onNewCallback = (id: string) => {
-    const query: ParsedUrlQuery = { moduleId: id };
-    router.push({
-      pathname: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULE.path,
-      query,
-    });
-  };
 
   useEffect(() => {
     setModules(modules);
@@ -89,12 +79,7 @@ const Module = (
     };
   });
 
-  return (
-    <ModulePage
-      breadCrumbs={breadCrumbs}
-      // onNewCallback={onNewCallback}
-    />
-  );
+  return <ModulePage breadCrumbs={breadCrumbs} />;
 };
 
 Module.Layout = MasterSchool;

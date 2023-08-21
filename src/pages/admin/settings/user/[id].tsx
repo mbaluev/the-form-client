@@ -8,8 +8,6 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { observer } from 'mobx-react';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
-import { useRouter } from 'next/router';
-import { ParsedUrlQuery } from 'querystring';
 import { IUserService } from '@service/modules/entities/user/interface';
 import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 import { UserPage } from '@ui/pages/admin/settings/user/userPage';
@@ -59,14 +57,6 @@ const User = (
       disabled: !Boolean(user),
     },
   ];
-  const router = useRouter();
-  const onNewCallback = (id: string) => {
-    const query: ParsedUrlQuery = { id };
-    router.push({
-      pathname: ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_USER.path,
-      query,
-    });
-  };
 
   useEffect(() => {
     setUsers(users);
@@ -79,12 +69,7 @@ const User = (
     };
   });
 
-  return (
-    <UserPage
-      breadCrumbs={breadCrumbs}
-      // onNewCallback={onNewCallback}
-    />
-  );
+  return <UserPage breadCrumbs={breadCrumbs} />;
 };
 
 User.Layout = MasterSchool;

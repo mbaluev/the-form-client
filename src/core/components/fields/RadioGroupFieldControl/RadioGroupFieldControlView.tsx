@@ -12,7 +12,7 @@ export const RadioGroupFieldControlView = (
   });
 
   const displayValue =
-    props.items.find((item: IRadioItem) => {
+    props.items?.find((item: IRadioItem) => {
       return item.value === value;
     })?.label || 'unknown';
 

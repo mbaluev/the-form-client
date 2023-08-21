@@ -14,11 +14,6 @@ export const ROUTER_CONST_DEV: Record<string, any> = {
     label: 'attachment',
     path: '/dev/attachment',
   },
-  autocomplete: {
-    name: 'autocomplete',
-    label: 'autocomplete',
-    path: '/dev/autocomplete',
-  },
   button: {
     name: 'button',
     label: 'button',
