@@ -44,6 +44,7 @@ module.exports = {
   },
   env: {
     REACT_APP_CORE_URL: process.env.REACT_APP_CORE_URL,
+    REACT_HOST_DOCKER_INTERNAL: process.env.REACT_HOST_DOCKER_INTERNAL,
   },
   images: {
     domains: [
