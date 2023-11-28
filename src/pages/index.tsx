@@ -1,4 +1,3 @@
-import React from 'react';
 import { Page } from '@ui/layout/page';
 import { IndexContent } from '@ui/pages/index/indexContent';
 import { MasterSchool } from '@ui/masters/masterSchool';

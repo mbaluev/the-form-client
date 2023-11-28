@@ -24,6 +24,8 @@ import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
 import { getCookie } from 'cookies-next';
 import { theme } from '../core/mui/theme';
 import cookie from '@utils/cookie';
+import { SessionProvider } from 'next-auth/react';
+import { Session } from 'next-auth';
 import '../core/scss/index.scss';
 
 configure({ enforceActions: 'observed' });
@@ -33,7 +35,7 @@ enableStaticRendering(typeof window === 'undefined');
 const clientSideEmotionCache = createEmotionCache();
 const clientSideEmotionCacheRtl = createEmotionCacheRtl();
 
-interface MyAppProps extends AppProps {
+interface MyAppProps extends AppProps<{ session: Session }> {
   emotionCache?: EmotionCache;
 }
 
@@ -86,30 +88,32 @@ const MyApp = (props: MyAppProps) => {
   }, [getCookie(cookie.names.token)]);
 
   return (
-    <DiContainerProvider container={container}>
-      <CacheProvider value={emotionCache}>
-        <ThemeProvider theme={theme(router)}>
-          <Head>
-            <title>The Form</title>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
-            />
-          </Head>
-          <SnackbarProvider
-            maxSnack={10}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-          >
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </SnackbarProvider>
-        </ThemeProvider>
-      </CacheProvider>
-    </DiContainerProvider>
+    <SessionProvider session={pageProps.session}>
+      <DiContainerProvider container={container}>
+        <CacheProvider value={emotionCache}>
+          <ThemeProvider theme={theme(router)}>
+            <Head>
+              <title>The Form</title>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+              />
+            </Head>
+            <SnackbarProvider
+              maxSnack={10}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+            >
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </SnackbarProvider>
+          </ThemeProvider>
+        </CacheProvider>
+      </DiContainerProvider>
+    </SessionProvider>
   );
 };
 

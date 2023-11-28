@@ -7,4 +7,9 @@ export interface IAuthService {
   signout: (token?: string) => Promise<IAuthResponse>;
   getToken: (refreshToken?: string) => Promise<IAuthResponse>;
   refreshToken: () => Promise<IAuthResponse>;
+
+  login: (credentials?: {
+    username: string;
+    password: string;
+  }) => Promise<IUserDTO>;
 }

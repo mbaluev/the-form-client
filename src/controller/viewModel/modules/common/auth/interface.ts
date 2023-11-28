@@ -2,9 +2,15 @@ import { IBaseCardViewModel } from '@viewModel/modules/base/baseCard/interfaces'
 import { IUserDTO } from '@model/entities/user';
 
 export interface IAuthViewModel extends IBaseCardViewModel<IUserDTO> {
+  message?: string | null;
+  setMessage: (data?: string | null) => void;
+  clearMessage: () => Promise<void>;
+
+  // deprecated
+
   token?: string | null;
   setToken: (data?: string | null) => void;
-  message?: string;
+  clearToken: () => Promise<void>;
 
   signup: () => Promise<boolean>;
   signin: () => Promise<boolean>;
@@ -17,7 +23,4 @@ export interface IAuthViewModel extends IBaseCardViewModel<IUserDTO> {
   lastname?: string;
   username?: string;
   roles?: string[];
-
-  clearMessage: () => Promise<void>;
-  clearToken: () => Promise<void>;
 }

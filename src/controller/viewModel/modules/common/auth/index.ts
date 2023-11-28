@@ -60,9 +60,9 @@ export class AuthViewModel
     setCookies(cookie.names.token, data, cookie.options);
   };
 
-  message?: string = undefined;
+  message?: string | null = undefined;
 
-  setMessage = (data?: string) => {
+  setMessage = (data?: string | null) => {
     this.message = data;
   };
 

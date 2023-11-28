@@ -46,4 +46,11 @@ export class AuthService implements IAuthService {
       `${this.API_PREFIX}/refreshToken`
     );
   };
+
+  login = async (credentials?: { username: string; password: string }) => {
+    return this.apiModule.post<IUserDTO>(
+      `${this.API_PREFIX}/login`,
+      credentials
+    );
+  };
 }
