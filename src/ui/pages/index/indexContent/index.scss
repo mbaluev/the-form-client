@@ -6,7 +6,8 @@
   gap: $base * 6;
   flex: 1 1 auto;
   align-items: center;
-  justify-content: center;
+  margin-top: $base * 20;
+  margin-bottom: $base * 4;
 
   &__name {
     display: flex;

@@ -33,7 +33,7 @@ export class QuestionUserViewModel
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceQuestion.getQuestionsUser(
           { userBlockId: this.userBlock.data.id },
           token
@@ -50,7 +50,7 @@ export class QuestionUserViewModel
     this.setDataLoading(true);
     if (setIndex) this.setIndex(this.getIndexById(id));
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       const data = await this.serviceQuestion.getQuestionUser(
         id,
         undefined,
@@ -129,7 +129,7 @@ export class QuestionUserViewModel
   saveQuestionAnswers = async () => {
     try {
       if (this.data) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         await this.serviceQuestion.saveQuestionAnswers(
           this.data.id,
           this.data.userQuestionAnswers,
@@ -145,7 +145,7 @@ export class QuestionUserViewModel
     this.setListLoading(true);
     try {
       if (this.list && this.userBlock.data) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const blockId = this.userBlock.data.id;
         await this.serviceQuestion.checkQuestions(blockId, token);
         await this.userBlock.getData(blockId);

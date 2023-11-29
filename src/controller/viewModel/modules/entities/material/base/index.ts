@@ -82,7 +82,7 @@ export class MaterialBaseViewModel
 
   download = async (id: string, filename: string) => {
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       await this.serviceFile.downloadFile(id, filename, token);
     } catch (err) {
     } finally {

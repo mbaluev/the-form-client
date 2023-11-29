@@ -25,25 +25,7 @@ export class AuthService implements IAuthService {
     );
   };
 
-  signout = async (token?: string) => {
-    return this.apiModule.get<IAuthResponse>(
-      `${this.API_PREFIX}/signout`,
-      null,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-  };
-
-  getToken = async (refreshToken?: string) => {
-    return this.apiModule.post<IAuthResponse>(
-      `${this.API_PREFIX}/token`,
-      null,
-      { headers: { Cookie: `refreshToken=${refreshToken};` } }
-    );
-  };
-
-  refreshToken = async () => {
-    return this.apiModule.post<IAuthResponse>(
-      `${this.API_PREFIX}/refreshToken`
-    );
+  signout = async () => {
+    return this.apiModule.get<IAuthResponse>(`${this.API_PREFIX}/signout`);
   };
 }

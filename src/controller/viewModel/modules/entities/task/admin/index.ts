@@ -27,7 +27,7 @@ export class TaskAdminViewModel
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceTask.getTasksAdmin(
           { userBlockId: this.userBlock.data.id },
           token
@@ -43,7 +43,7 @@ export class TaskAdminViewModel
   getData = async (id: string) => {
     this.setDataLoading(true);
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       const data = await this.serviceTask.getTaskAdmin(id, undefined, token);
       this.setData(data);
     } catch (err) {
@@ -57,7 +57,7 @@ export class TaskAdminViewModel
   complete = async () => {
     try {
       if (this.data) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         await this.serviceTask.completeAdmin(this.data.id, token);
         if (this.userBlock.data) {
           const blockId = this.userBlock.data.id;

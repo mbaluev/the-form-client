@@ -57,7 +57,7 @@ export class UserViewModel
   getList = async () => {
     this.setListLoading(true);
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       const data = await this.serviceUser.getUsers(this.filters.filters, token);
       this.setList(data);
     } catch (err) {
@@ -69,7 +69,7 @@ export class UserViewModel
     this.setDataLoading(true);
     try {
       if (this.data && !this.hasErrors) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceUser.saveUser(this.data, token);
         await this.getList();
         await this.clearChanges();
@@ -85,7 +85,7 @@ export class UserViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceUser.saveUser(this.modalData, token);
         await this.getList();
         await this.clearModalChanges();
@@ -101,7 +101,7 @@ export class UserViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         await this.serviceUser.deleteUsers(this.deleteIds, token);
         await this.getList();
         await this.clearDelete();

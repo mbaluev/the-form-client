@@ -76,7 +76,7 @@ export class TaskViewModel
     this.setListLoading(true);
     try {
       if (this.block.data) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceTask.getTasks(
           { blockId: this.block.data.id },
           token
@@ -92,7 +92,7 @@ export class TaskViewModel
   getModalData = async (id: string) => {
     this.setModalLoading(true);
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       const data = await this.serviceTask.getTask(id, undefined, token);
       this.setModalData(data);
     } catch (err) {
@@ -106,7 +106,7 @@ export class TaskViewModel
     try {
       if (this.modalData && !this.hasModalErrors) {
         this.changeModalField('blockId', this.block.data?.id);
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceTask.saveTask(this.modalData, token);
         await this.getList();
         await this.clearModalChanges();
@@ -122,7 +122,7 @@ export class TaskViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         await this.serviceTask.deleteTasks(this.deleteIds, token);
         await this.getList();
         await this.clearDelete();

@@ -29,7 +29,7 @@ export class QuestionAdminViewModel
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceQuestion.getQuestionsAdmin(
           { userBlockId: this.userBlock.data.id },
           token
@@ -46,7 +46,7 @@ export class QuestionAdminViewModel
     this.setDataLoading(true);
     if (setIndex) this.setIndex(this.getIndexById(id));
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       const data = await this.serviceQuestion.getQuestionAdmin(
         id,
         undefined,
@@ -63,7 +63,7 @@ export class QuestionAdminViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const token = await this.modelAuth.refreshToken();
+        const token = await this.modelAuth.verify();
         await this.serviceQuestion.saveQuestionComment(
           this.modalData.userBlockId,
           this.modalData.id,

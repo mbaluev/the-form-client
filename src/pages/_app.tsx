@@ -20,10 +20,7 @@ import { ILocaleViewModel } from '@viewModel/modules/common/locale/interface';
 import { SnackbarProvider } from 'notistack';
 import { IMenuViewModel } from '@viewModel/modules/common/menu/interface';
 import { IFilterViewModel } from '@viewModel/modules/common/filter/interfaces';
-import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
-import { getCookie } from 'cookies-next';
 import { theme } from '../core/mui/theme';
-import cookie from '@utils/cookie';
 import '../core/scss/index.scss';
 
 configure({ enforceActions: 'observed' });
@@ -40,7 +37,6 @@ interface MyAppProps extends AppProps {
 // container init
 const container = initializeDiContainer();
 const app = container.get<IAppViewModel>(VIEW_MODEL.App);
-const auth = container.get<IAuthViewModel>(VIEW_MODEL.Auth);
 const locale = container.get<ILocaleViewModel>(VIEW_MODEL.Locale);
 const menu = container.get<IMenuViewModel>(VIEW_MODEL.Menu);
 const filter = container.get<IFilterViewModel>(VIEW_MODEL.Filter);
@@ -61,9 +57,6 @@ const MyApp = (props: MyAppProps) => {
     locale.changeLanguage(locale.language);
     menu.initiate();
 
-    const interval = 60 * 10 * 1000; // token expiry
-    setInterval(auth.refreshToken, interval);
-
     const handleStart = (url: string) => app.routeChangeStart(url);
     const handleStop = (url: string) => app.routeChangeComplete(url);
 
@@ -79,11 +72,6 @@ const MyApp = (props: MyAppProps) => {
   }, []);
 
   useEffect(() => filter.loadFilters(router), [router]);
-
-  useEffect(() => {
-    const token = (getCookie(cookie.names.token) as string) || undefined;
-    auth.setToken(token);
-  }, [getCookie(cookie.names.token)]);
 
   return (
     <DiContainerProvider container={container}>

@@ -7,8 +7,9 @@ import { AuthService } from 'controller/service/modules/common/auth';
 import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
 import { UserService } from 'controller/service/modules/entities/user';
 import { Jwt } from '@utils/jwt';
-import { setCookies } from 'cookies-next';
+import { getCookie, setCookies, removeCookies } from 'cookies-next';
 import cookie from '@utils/cookie';
+import moment from 'moment';
 
 @injectable()
 export class AuthViewModel
@@ -24,13 +25,14 @@ export class AuthViewModel
     makeObservable(this, {
       token: observable,
       setToken: action,
+      deleteToken: action,
       message: observable,
       setMessage: action,
 
       signup: action,
       signin: action,
       signout: action,
-      refreshToken: action,
+      verify: action,
 
       isAuth: computed,
       id: computed,
@@ -38,6 +40,7 @@ export class AuthViewModel
       lastname: computed,
       username: computed,
       roles: computed,
+      exp: computed,
 
       clearMessage: action,
       clearToken: action,
@@ -53,11 +56,16 @@ export class AuthViewModel
 
   // --- observable
 
-  token?: string | null = undefined;
+  token?: string | null = getCookie(cookie.names.token) as string;
 
   setToken = (data?: string | null) => {
     this.token = data;
     setCookies(cookie.names.token, data, cookie.options);
+  };
+
+  deleteToken = () => {
+    this.token = undefined;
+    removeCookies(cookie.names.token);
   };
 
   message?: string = undefined;
@@ -90,17 +98,20 @@ export class AuthViewModel
   signin = async () => {
     this.validate(['username', 'password']);
     if (this.data && !this.hasErrors) {
+      await this.clearChanges();
       this.setDataLoading(true);
       try {
         const data = await this.serviceAuth.signin(this.data);
-        if (data && data.token) {
+        if (data.token) {
           this.setToken(data.token);
-          await this.clearChanges();
           return true;
         } else {
+          this.deleteToken();
           this.setMessage('Incorrect username or password');
         }
       } catch (err) {
+        this.deleteToken();
+        this.setMessage('Incorrect username or password');
       } finally {
         this.setDataLoading(false);
       }
@@ -110,36 +121,24 @@ export class AuthViewModel
 
   signout = async () => {
     this.setDataLoading(true);
-    if (this.token) {
-      try {
-        const ret = await this.serviceAuth.signout(this.token);
-        if (ret && ret.success) {
-          this.setToken();
-          await this.clearData();
-          return true;
-        }
-      } catch (err) {
-      } finally {
-        this.setDataLoading(false);
+    try {
+      const ret = await this.serviceAuth.signout();
+      if (ret && ret.success) {
+        this.deleteToken();
+        await this.clearData();
+        return true;
       }
+    } catch (err) {
+    } finally {
+      this.setDataLoading(false);
     }
     return false;
   };
 
-  refreshToken = async () => {
-    if (this.isAuth) {
-      try {
-        const data = await this.serviceAuth.refreshToken();
-        if (data) {
-          this.setToken(data.token);
-          return data.token;
-        }
-      } catch (err) {
-        await this.signout();
-      } finally {
-        this.setDataLoading(false);
-      }
-    }
+  verify = async () => {
+    const valid = moment(this.exp).isAfter();
+    if (!valid) this.deleteToken();
+    return this.token;
   };
 
   // --- computed
@@ -183,6 +182,16 @@ export class AuthViewModel
     return undefined;
   }
 
+  get exp() {
+    if (this.token) {
+      const exp = new Jwt(this.token).decodedClaims?.exp;
+      if (exp) {
+        return new Date(Number(`${exp}000`));
+      }
+    }
+    return undefined;
+  }
+
   // --- clear
 
   clearMessage = async () => {
@@ -195,7 +204,7 @@ export class AuthViewModel
 
   clearToken = async () => {
     try {
-      this.setToken();
+      this.deleteToken();
     } catch (err) {
     } finally {
     }

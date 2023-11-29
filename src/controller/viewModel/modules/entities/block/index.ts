@@ -56,7 +56,7 @@ export class BlockViewModel
   getList = async () => {
     this.setListLoading(true);
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       const data = await this.serviceBlock.getBlocks(
         this.filters.filters,
         token
@@ -71,7 +71,7 @@ export class BlockViewModel
     this.setDataLoading(true);
     try {
       if (this.data && !this.hasErrors) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceBlock.saveBlock(this.data, token);
         await this.getList();
         await this.clearChanges();
@@ -87,7 +87,7 @@ export class BlockViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceBlock.saveBlock(this.modalData, token);
         await this.getList();
         await this.clearModalChanges();
@@ -103,7 +103,7 @@ export class BlockViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         await this.serviceBlock.deleteBlocks(this.deleteIds, token);
         await this.getList();
         await this.clearDelete();

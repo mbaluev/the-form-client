@@ -19,7 +19,7 @@ export class TaskUserViewModel
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceTask.getTasksUser(
           { userBlockId: this.userBlock.data.id },
           token
@@ -35,7 +35,7 @@ export class TaskUserViewModel
   getData = async (id: string) => {
     this.setDataLoading(true);
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       const data = await this.serviceTask.getTaskUser(id, undefined, token);
       this.setData(data);
     } catch (err) {

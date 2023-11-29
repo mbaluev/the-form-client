@@ -73,8 +73,8 @@ export class ModuleService implements IModuleService {
   ): Promise<IModuleUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IModuleUserDTO>>(
       `${this.API_PREFIX}/user/list`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
+      // token ? { headers: { Authorization: `Bearer ${token}` } } : undefined
     );
     return ret ? ret.data : undefined;
   };

@@ -51,10 +51,10 @@ export const ModulesPage = observer(() => {
   const progress = getProgress(progressValues);
   return (
     <Page
+      breadCrumbs={breadCrumbs}
       title={<TitleModules userModules={userModules} />}
       subTitle={<SubTitleModules userModules={userModules} />}
       quickFilter={<ModuleProgress value={progress} width="150px" />}
-      breadCrumbs={breadCrumbs}
       className={cls}
     >
       <ModuleGrid />

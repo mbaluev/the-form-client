@@ -1,7 +1,6 @@
-import React from 'react';
 import { Page } from '@ui/layout/page';
 import { IndexContent } from '@ui/pages/index/indexContent';
-import { MasterSchool } from '@ui/masters/masterSchool';
+import { MasterAnon } from '@ui/masters/masterAnon';
 
 const Index = () => {
   return (
@@ -11,5 +10,5 @@ const Index = () => {
   );
 };
 
-Index.Layout = MasterSchool;
+Index.Layout = MasterAnon;
 export default Index;

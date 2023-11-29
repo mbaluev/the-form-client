@@ -86,7 +86,7 @@ export class TaskBaseDocumentViewModel
   upload = async (file: File) => {
     this.setDataLoading(true);
     try {
-      const token = await this.modelAuth.refreshToken();
+      const token = await this.modelAuth.verify();
       return await this.serviceFile.uploadFile(file, token);
     } catch (err) {
     } finally {
@@ -96,7 +96,7 @@ export class TaskBaseDocumentViewModel
 
   download = async (id: string, filename: string) => {
     try {
-      const token = await this.modelAuth.refreshToken();
+      const token = await this.modelAuth.verify();
       await this.serviceFile.downloadFile(id, filename, token);
     } catch (err) {
     } finally {

@@ -17,7 +17,7 @@ export class TaskAdminDocumentViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const token = await this.modelAuth.refreshToken();
+        const token = await this.modelAuth.verify();
         await this.serviceTask.sentTaskAdmin(this.modalData, token);
         await this.clearModalChanges();
         if (this.userBlock.data) {
