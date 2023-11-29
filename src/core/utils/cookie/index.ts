@@ -11,7 +11,6 @@ const cookie = {
     firstWeekYear: 'THE_FORM_FIRST_WEEK_YEAR',
     timeZone: 'THE_FORM_TIME_ZONE',
     token: 'token',
-    refreshToken: 'refreshToken',
   },
   options: {
     maxAge: 60 * 60 * 24 * 30,

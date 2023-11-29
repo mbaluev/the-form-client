@@ -140,7 +140,7 @@ export class MaterialViewModel
     this.setListLoading(true);
     try {
       if (this.block.data) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceMaterial.getMaterials(
           { blockId: this.block.data.id },
           token
@@ -156,7 +156,7 @@ export class MaterialViewModel
   getModalData = async (id: string) => {
     this.setModalLoading(true);
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       const data = await this.serviceMaterial.getMaterial(id, undefined, token);
       this.setModalData(data);
     } catch (err) {
@@ -170,7 +170,7 @@ export class MaterialViewModel
     try {
       if (this.modalData && !this.hasModalErrors) {
         this.changeModalField('blockId', this.block.data?.id);
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceMaterial.saveMaterial(
           this.modalData,
           token
@@ -189,7 +189,7 @@ export class MaterialViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         await this.serviceMaterial.deleteMaterials(this.deleteIds, token);
         await this.getList();
         await this.clearDelete();
@@ -208,7 +208,7 @@ export class MaterialViewModel
   upload = async (file: File) => {
     this.setDataLoading(true);
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       return await this.serviceFile.uploadFile(file, token);
     } catch (err) {
     } finally {
@@ -218,7 +218,7 @@ export class MaterialViewModel
 
   download = async (id: string, filename: string) => {
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       await this.serviceFile.downloadFile(id, filename, token);
     } catch (err) {
     } finally {

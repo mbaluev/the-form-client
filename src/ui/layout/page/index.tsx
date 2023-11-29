@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC, Fragment } from 'react';
 import { classNames } from '@utils/classNames';
 import { BreadCrumbsSkeleton } from '@components/breadCrumbs/skeleton';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
@@ -90,20 +90,20 @@ export const Page: FC<IProps> = (props) => {
 
   if (pageRight) {
     return (
-      <React.Fragment>
+      <Fragment>
         <BreadCrumbsRenderer />
         <div className={clsWrapper} style={{ gridTemplateColumns }}>
           <PageRenderer />
           {pageRight}
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   }
 
   return (
-    <React.Fragment>
+    <Fragment>
       <BreadCrumbsRenderer />
       <PageRenderer />
-    </React.Fragment>
+    </Fragment>
   );
 };

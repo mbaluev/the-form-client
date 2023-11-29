@@ -27,7 +27,7 @@ export class MaterialUserViewModel
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceMaterial.getMaterialsUser(
           { userBlockId: this.userBlock.data.id },
           token
@@ -43,7 +43,7 @@ export class MaterialUserViewModel
   getData = async (id: string) => {
     this.setDataLoading(true);
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       const data = await this.serviceMaterial.getMaterialUser(
         id,
         undefined,
@@ -60,7 +60,7 @@ export class MaterialUserViewModel
     if (!complete) {
       this.setDataLoading(true);
       try {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         await this.serviceMaterial.updateMaterialUser(id, token);
         if (this.userBlock.data) {
           await this.userBlock.getData(this.userBlock.data.id);

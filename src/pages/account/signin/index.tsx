@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Page } from '@ui/layout/page';
 import { SigninForm } from '@ui/pages/account/signin/signinForm';
-import { MasterSchool } from '@ui/masters/masterSchool';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { observer } from 'mobx-react';
 import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
+import { MasterAnon } from '@ui/masters/masterAnon';
 
 const Signin = () => {
   const { clearData, clearChanges, clearMessage, clearToken } =
@@ -25,5 +25,5 @@ const Signin = () => {
   );
 };
 
-Signin.Layout = MasterSchool;
+Signin.Layout = MasterAnon;
 export default observer(Signin);

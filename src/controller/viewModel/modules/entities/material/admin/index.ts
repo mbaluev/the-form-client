@@ -19,7 +19,7 @@ export class MaterialAdminViewModel
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {
-        const token = await this.auth.refreshToken();
+        const token = await this.auth.verify();
         const data = await this.serviceMaterial.getMaterialsUser(
           { userBlockId: this.userBlock.data.id },
           token
@@ -35,7 +35,7 @@ export class MaterialAdminViewModel
   getData = async (id: string) => {
     this.setDataLoading(true);
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       const data = await this.serviceMaterial.getMaterialUser(
         id,
         undefined,

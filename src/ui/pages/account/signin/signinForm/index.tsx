@@ -45,14 +45,6 @@ export const SigninForm = observer(() => {
       ) : (
         <Form cols={1}>
           <FormSection>
-            {message && (
-              <Alert
-                message={message}
-                variant="outlined"
-                type="error"
-                shadow={false}
-              />
-            )}
             <FormField title="Email">
               <TextFieldControl
                 name="username"
@@ -76,6 +68,14 @@ export const SigninForm = observer(() => {
                 Sign in
               </Button>
             </FormField>
+            {message && (
+              <Alert
+                message={message}
+                variant="outlined"
+                type="error"
+                shadow={false}
+              />
+            )}
           </FormSection>
         </Form>
       )}

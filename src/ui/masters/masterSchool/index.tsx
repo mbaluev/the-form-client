@@ -1,19 +1,27 @@
-import { FC } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { MENU_CONFIG_SCHOOL } from '@app/settings/menu/school';
 import { Layout } from '@ui/layout/layout';
-import { observer } from 'mobx-react';
-import { useViewModel } from '@hooks/useViewModel';
-import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
-import { VIEW_MODEL } from '@viewModel/ids';
+import { useRouter } from 'next/router';
+import { getCookie } from 'cookies-next';
+import cookie from '@utils/cookie';
+import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 
-export const MasterSchool: FC<any> = observer((props) => {
+interface IProps {
+  children?: ReactNode;
+}
+
+export const MasterSchool = (props: IProps) => {
   const { children } = props;
-  const { isDataLoading } = useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
   const menuProps = { items: MENU_CONFIG_SCHOOL };
-  const loaderProps = { loading: isDataLoading };
-  return (
-    <Layout menuProps={menuProps} loaderProps={loaderProps}>
-      {children}
-    </Layout>
-  );
-});
+
+  const router = useRouter();
+  useEffect(() => {
+    const token = getCookie(cookie.names.token);
+    if (!token)
+      router.push({
+        pathname: ROUTER_CONST_SCHOOL.ACCOUNT_SIGN_IN.path,
+      });
+  }, [router.asPath]);
+
+  return <Layout menuProps={menuProps}>{children}</Layout>;
+};

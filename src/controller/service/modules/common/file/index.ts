@@ -30,7 +30,7 @@ export class FileService implements IFileService {
     filename: string,
     token?: string | null
   ) => {
-    await this.apiModule.getDownload(
+    await this.apiModule.download(
       `${this.API_PREFIX}/download/${id}`,
       filename,
       { headers: { Authorization: `Bearer ${token}` } }

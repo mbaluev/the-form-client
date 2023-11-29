@@ -18,7 +18,6 @@ export interface IUserDTO {
   active?: boolean;
   paid?: boolean;
   admin?: boolean;
-  refreshToken?: string;
   createdAt: string;
   updatedAt: string;
 

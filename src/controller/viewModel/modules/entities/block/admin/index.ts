@@ -88,7 +88,7 @@ export class BlockAdminViewModel
 
   getData = async (id: string) => {
     try {
-      const token = await this.auth.refreshToken();
+      const token = await this.auth.verify();
       const data = await this.serviceBlock.getBlockAdmin(id, undefined, token);
       this.setData(data);
     } catch (err) {
