@@ -3,6 +3,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { IMaterialAdminViewModel } from '@viewModel/modules/entities/material/admin/interface';
 import { BlockAdminViewModel } from '@viewModel/modules/entities/block/admin';
 import { MaterialBaseViewModel } from '@viewModel/modules/entities/material/base';
+import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
 export class MaterialAdminViewModel
@@ -19,11 +20,9 @@ export class MaterialAdminViewModel
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {
-        const token = await this.auth.verify();
-        const data = await this.serviceMaterial.getMaterialsUser(
-          { userBlockId: this.userBlock.data.id },
-          token
-        );
+        const data = await this.serviceMaterial.getMaterialsUser({
+          userBlockId: this.userBlock.data.id,
+        });
         this.setList(data);
       }
     } catch (err) {
@@ -32,15 +31,10 @@ export class MaterialAdminViewModel
     }
   };
 
-  getData = async (id: string) => {
+  getData = async (id?: string, query?: ParsedUrlQuery) => {
     this.setDataLoading(true);
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceMaterial.getMaterialUser(
-        id,
-        undefined,
-        token
-      );
+      const data = await this.serviceMaterial.getMaterialUser(id, query);
       this.setData(data);
     } catch (err) {
     } finally {

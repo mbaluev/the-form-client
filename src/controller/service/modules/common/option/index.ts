@@ -11,13 +11,9 @@ export class OptionService implements IOptionService {
 
   API_PREFIX = `api/documentType`;
 
-  getDocumentTypes = async (
-    token?: string | null
-  ): Promise<ISelectItem[] | undefined> => {
+  getDocumentTypes = async (): Promise<ISelectItem[] | undefined> => {
     const ret = await this.apiModule.get<IResponseListDTO<ISelectItem>>(
-      `${this.API_PREFIX}/list`,
-      undefined,
-      { headers: { Authorization: `Bearer ${token}` } }
+      `${this.API_PREFIX}/list`
     );
     return ret ? ret.data : undefined;
   };

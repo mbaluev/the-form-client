@@ -2,27 +2,14 @@ import { ParsedUrlQuery } from 'querystring';
 import { IUserDTO } from '@model/entities/user';
 
 export interface IUserService {
-  getCurrentUser: (token?: string | null) => Promise<IUserDTO | undefined>;
-  getUsers: (
-    query?: ParsedUrlQuery,
-    token?: string | null
-  ) => Promise<IUserDTO[] | undefined>;
+  getCurrentUser: () => Promise<IUserDTO | undefined>;
+  getUsers: (query?: ParsedUrlQuery) => Promise<IUserDTO[] | undefined>;
   getUser: (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IUserDTO | undefined>;
-  saveUser: (
-    data: IUserDTO,
-    token?: string | null
-  ) => Promise<IUserDTO | undefined>;
-  deleteUsers: (
-    ids: string[],
-    token?: string | null
-  ) => Promise<boolean | undefined>;
+  saveUser: (data: IUserDTO) => Promise<IUserDTO | undefined>;
+  deleteUsers: (ids: string[]) => Promise<boolean | undefined>;
 
-  getUsersAdmin: (
-    query?: ParsedUrlQuery,
-    token?: string | null
-  ) => Promise<IUserDTO[] | undefined>;
+  getUsersAdmin: (query?: ParsedUrlQuery) => Promise<IUserDTO[] | undefined>;
 }

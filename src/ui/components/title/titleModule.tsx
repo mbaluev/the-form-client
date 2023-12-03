@@ -14,7 +14,7 @@ export const TitleModule = observer((props: IProps) => {
   return (
     <Stack direction="row" spacing="10px">
       <IconModule userModule={userModule} style={{ marginTop: '5px' }} />
-      {name && <div>{name}</div>}
+      {name ? <div>{name}</div> : <div>loading...</div>}
     </Stack>
   );
 });

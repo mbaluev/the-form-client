@@ -6,7 +6,6 @@ import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 import { IUserDTO } from '@model/entities/user';
 import { UserService } from 'controller/service/modules/entities/user';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { AuthViewModel } from '@viewModel/modules/common/auth';
 import { FilterViewModel } from '@viewModel/modules/common/filter';
 
 @injectable()
@@ -15,8 +14,6 @@ export class UserViewModel
   implements IUserViewModel
 {
   @inject(SERVICE.User) protected serviceUser!: UserService;
-
-  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
 
   @inject(VIEW_MODEL.Filter) protected filters!: FilterViewModel;
 
@@ -57,8 +54,7 @@ export class UserViewModel
   getList = async () => {
     this.setListLoading(true);
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceUser.getUsers(this.filters.filters, token);
+      const data = await this.serviceUser.getUsers(this.filters.filters);
       this.setList(data);
     } catch (err) {
     } finally {
@@ -69,8 +65,7 @@ export class UserViewModel
     this.setDataLoading(true);
     try {
       if (this.data && !this.hasErrors) {
-        const token = await this.auth.verify();
-        const data = await this.serviceUser.saveUser(this.data, token);
+        const data = await this.serviceUser.saveUser(this.data);
         await this.getList();
         await this.clearChanges();
         return data;
@@ -85,8 +80,7 @@ export class UserViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const token = await this.auth.verify();
-        const data = await this.serviceUser.saveUser(this.modalData, token);
+        const data = await this.serviceUser.saveUser(this.modalData);
         await this.getList();
         await this.clearModalChanges();
         return data;
@@ -101,8 +95,7 @@ export class UserViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        const token = await this.auth.verify();
-        await this.serviceUser.deleteUsers(this.deleteIds, token);
+        await this.serviceUser.deleteUsers(this.deleteIds);
         await this.getList();
         await this.clearDelete();
         await this.clearData();

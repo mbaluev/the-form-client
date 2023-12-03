@@ -6,7 +6,6 @@ import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
 import { action, makeObservable, observable } from 'mobx';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { AuthViewModel } from '@viewModel/modules/common/auth';
 import { FilterViewModel } from '@viewModel/modules/common/filter';
 
 @injectable()
@@ -15,8 +14,6 @@ export class BlockViewModel
   implements IBlockViewModel
 {
   @inject(SERVICE.Block) protected serviceBlock!: BlockService;
-
-  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
 
   @inject(VIEW_MODEL.Filter) protected filters!: FilterViewModel;
 
@@ -56,11 +53,7 @@ export class BlockViewModel
   getList = async () => {
     this.setListLoading(true);
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceBlock.getBlocks(
-        this.filters.filters,
-        token
-      );
+      const data = await this.serviceBlock.getBlocks(this.filters.filters);
       this.setList(data);
     } catch (err) {
     } finally {
@@ -71,8 +64,7 @@ export class BlockViewModel
     this.setDataLoading(true);
     try {
       if (this.data && !this.hasErrors) {
-        const token = await this.auth.verify();
-        const data = await this.serviceBlock.saveBlock(this.data, token);
+        const data = await this.serviceBlock.saveBlock(this.data);
         await this.getList();
         await this.clearChanges();
         return data;
@@ -87,8 +79,7 @@ export class BlockViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const token = await this.auth.verify();
-        const data = await this.serviceBlock.saveBlock(this.modalData, token);
+        const data = await this.serviceBlock.saveBlock(this.modalData);
         await this.getList();
         await this.clearModalChanges();
         return data;
@@ -103,8 +94,7 @@ export class BlockViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        const token = await this.auth.verify();
-        await this.serviceBlock.deleteBlocks(this.deleteIds, token);
+        await this.serviceBlock.deleteBlocks(this.deleteIds);
         await this.getList();
         await this.clearDelete();
         await this.clearData();

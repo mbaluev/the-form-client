@@ -8,7 +8,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { BlockViewModel } from '@viewModel/modules/entities/block';
 import { action, computed, makeObservable, observable } from 'mobx';
 import { guid } from '@utils/guid/guid';
-import { AuthViewModel } from '@viewModel/modules/common/auth';
+import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
 export class QuestionViewModel
@@ -16,8 +16,6 @@ export class QuestionViewModel
   implements IQuestionViewModel
 {
   @inject(SERVICE.Question) protected serviceQuestion!: QuestionService;
-
-  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
 
   @inject(VIEW_MODEL.Block) protected block!: BlockViewModel;
 
@@ -112,11 +110,9 @@ export class QuestionViewModel
     this.setListLoading(true);
     try {
       if (this.block.data) {
-        const token = await this.auth.verify();
-        const data = await this.serviceQuestion.getQuestions(
-          { blockId: this.block.data.id },
-          token
-        );
+        const data = await this.serviceQuestion.getQuestions({
+          blockId: this.block.data.id,
+        });
         this.setList(data);
       }
     } catch (err) {
@@ -125,11 +121,10 @@ export class QuestionViewModel
     }
   };
 
-  getModalData = async (id: string) => {
+  getModalData = async (id?: string, query?: ParsedUrlQuery) => {
     this.setModalLoading(true);
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceQuestion.getQuestion(id, undefined, token);
+      const data = await this.serviceQuestion.getQuestion(id, query);
       this.setModalData(data);
     } catch (err) {
     } finally {
@@ -142,11 +137,7 @@ export class QuestionViewModel
     try {
       if (this.modalData && !this.hasModalErrors) {
         this.changeModalField('blockId', this.block.data?.id);
-        const token = await this.auth.verify();
-        const data = await this.serviceQuestion.saveQuestion(
-          this.modalData,
-          token
-        );
+        const data = await this.serviceQuestion.saveQuestion(this.modalData);
         await this.getList();
         await this.clearModalChanges();
         return data;
@@ -161,8 +152,7 @@ export class QuestionViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        const token = await this.auth.verify();
-        await this.serviceQuestion.deleteQuestions(this.deleteIds, token);
+        await this.serviceQuestion.deleteQuestions(this.deleteIds);
         await this.getList();
         await this.clearDelete();
         await this.clearData();

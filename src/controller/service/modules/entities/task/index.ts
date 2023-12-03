@@ -17,54 +17,47 @@ export class TaskService implements ITaskService {
   API_PREFIX = `/api/task`;
 
   getTasks = async (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<ITaskDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<ITaskDTO>>(
       `${this.API_PREFIX}/list`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
   getTask = async (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<ITaskDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<ITaskDTO>>(
       `${this.API_PREFIX}/item/${id}`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
-  saveTask = async (data: ITaskDTO, token?: string | null) => {
+  saveTask = async (data: ITaskDTO) => {
     if (data.id) {
       const { id, ...params } = data;
       const ret = await this.apiModule.patch<IResponseItemDTO<ITaskDTO>>(
         `${this.API_PREFIX}/update/${data.id}`,
-        { ...params },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { ...params }
       );
       return ret ? ret.data : undefined;
     } else {
       const ret = await this.apiModule.post<IResponseItemDTO<ITaskDTO>>(
         `${this.API_PREFIX}/create`,
-        { ...data },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { ...data }
       );
       return ret ? ret.data : undefined;
     }
   };
 
-  deleteTasks = async (ids: string[], token?: string | null) => {
+  deleteTasks = async (ids: string[]) => {
     const ret = await this.apiModule.delete<IResponseItemDTO<undefined>>(
       `${this.API_PREFIX}/delete`,
-      { ids },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ids }
     );
     return ret ? ret.success : undefined;
   };
@@ -72,84 +65,66 @@ export class TaskService implements ITaskService {
   // user
 
   getTasksUser = async (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<ITaskUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<ITaskUserDTO>>(
       `${this.API_PREFIX}/user/list`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
   getTaskUser = async (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<ITaskUserDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<ITaskUserDTO>>(
       `${this.API_PREFIX}/user/item/${id}`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
-  sentTaskUser = async (
-    data: ITaskUserDocumentDTO,
-    token?: string | null
-  ): Promise<void> => {
+  sentTaskUser = async (data: ITaskUserDocumentDTO): Promise<void> => {
     await this.apiModule.post<IResponseItemDTO<ITaskUserDocumentDTO>>(
       `${this.API_PREFIX}/user/sent`,
-      { ...data },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...data }
     );
   };
 
   // admin
 
   getTasksAdmin = async (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<ITaskUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<ITaskUserDTO>>(
       `${this.API_PREFIX}/admin/list`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
   getTaskAdmin = async (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<ITaskUserDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<ITaskUserDTO>>(
       `${this.API_PREFIX}/admin/item/${id}`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
-  sentTaskAdmin = async (
-    data: ITaskUserDocumentDTO,
-    token?: string | null
-  ): Promise<void> => {
+  sentTaskAdmin = async (data: ITaskUserDocumentDTO): Promise<void> => {
     await this.apiModule.post<IResponseItemDTO<ITaskUserDocumentDTO>>(
       `${this.API_PREFIX}/admin/sent`,
-      { ...data },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...data }
     );
   };
 
-  completeAdmin = async (id?: string, token?: string | null): Promise<void> => {
+  completeAdmin = async (id?: string): Promise<void> => {
     await this.apiModule.post<IResponseItemDTO<ITaskUserDTO>>(
-      `${this.API_PREFIX}/admin/complete/${id}`,
-      undefined,
-      { headers: { Authorization: `Bearer ${token}` } }
+      `${this.API_PREFIX}/admin/complete/${id}`
     );
   };
 }

@@ -2,36 +2,21 @@ import { ParsedUrlQuery } from 'querystring';
 import { IMaterialDTO, IMaterialUserDTO } from '@model/entities/material';
 
 export interface IMaterialService {
-  getMaterials: (
-    query?: ParsedUrlQuery,
-    token?: string | null
-  ) => Promise<IMaterialDTO[] | undefined>;
+  getMaterials: (query?: ParsedUrlQuery) => Promise<IMaterialDTO[] | undefined>;
   getMaterial: (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IMaterialDTO | undefined>;
-  saveMaterial: (
-    data: IMaterialDTO,
-    token?: string | null
-  ) => Promise<IMaterialDTO | undefined>;
-  deleteMaterials: (
-    ids: string[],
-    token?: string | null
-  ) => Promise<boolean | undefined>;
+  saveMaterial: (data: IMaterialDTO) => Promise<IMaterialDTO | undefined>;
+  deleteMaterials: (ids: string[]) => Promise<boolean | undefined>;
 
   // --- user
   getMaterialsUser: (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IMaterialUserDTO[] | undefined>;
   getMaterialUser: (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IMaterialUserDTO | undefined>;
-  updateMaterialUser: (
-    id: string,
-    token?: string | null
-  ) => Promise<boolean | undefined>;
+  updateMaterialUser: (id: string) => Promise<boolean | undefined>;
 }

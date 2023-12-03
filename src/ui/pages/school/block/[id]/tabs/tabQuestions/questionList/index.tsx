@@ -50,7 +50,7 @@ export const QuestionList = observer(() => {
   ];
 
   const onClick = async (params: CellClickedEvent) => {
-    if (!preventClick) await getData(params.data.id, true);
+    if (!preventClick) await getData(params.data.id, undefined, true);
     setPreventClick(false);
   };
   const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -7,7 +7,6 @@ import { IMaterialDTO } from '@model/entities/material';
 import { SERVICE } from '@service/ids';
 import { FileService } from 'controller/service/modules/common/file';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { AuthViewModel } from '@viewModel/modules/common/auth';
 import { action, makeObservable } from 'mobx';
 import { BlockViewModel } from '@viewModel/modules/entities/block';
 import { MaterialService } from 'controller/service/modules/entities/material';
@@ -23,8 +22,6 @@ export class MaterialViewModel
   @inject(SERVICE.Material) protected serviceMaterial!: MaterialService;
 
   @inject(SERVICE.File) protected serviceFile!: FileService;
-
-  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
 
   @inject(VIEW_MODEL.Block) protected block!: BlockViewModel;
 
@@ -140,11 +137,9 @@ export class MaterialViewModel
     this.setListLoading(true);
     try {
       if (this.block.data) {
-        const token = await this.auth.verify();
-        const data = await this.serviceMaterial.getMaterials(
-          { blockId: this.block.data.id },
-          token
-        );
+        const data = await this.serviceMaterial.getMaterials({
+          blockId: this.block.data.id,
+        });
         this.setList(data);
       }
     } catch (err) {
@@ -153,11 +148,10 @@ export class MaterialViewModel
     }
   };
 
-  getModalData = async (id: string) => {
+  getModalData = async (id?: string, query?: ParsedUrlQuery) => {
     this.setModalLoading(true);
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceMaterial.getMaterial(id, undefined, token);
+      const data = await this.serviceMaterial.getMaterial(id, query);
       this.setModalData(data);
     } catch (err) {
     } finally {
@@ -170,11 +164,7 @@ export class MaterialViewModel
     try {
       if (this.modalData && !this.hasModalErrors) {
         this.changeModalField('blockId', this.block.data?.id);
-        const token = await this.auth.verify();
-        const data = await this.serviceMaterial.saveMaterial(
-          this.modalData,
-          token
-        );
+        const data = await this.serviceMaterial.saveMaterial(this.modalData);
         await this.getList();
         await this.clearModalChanges();
         return data;
@@ -189,8 +179,7 @@ export class MaterialViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        const token = await this.auth.verify();
-        await this.serviceMaterial.deleteMaterials(this.deleteIds, token);
+        await this.serviceMaterial.deleteMaterials(this.deleteIds);
         await this.getList();
         await this.clearDelete();
         await this.clearData();
@@ -208,8 +197,7 @@ export class MaterialViewModel
   upload = async (file: File) => {
     this.setDataLoading(true);
     try {
-      const token = await this.auth.verify();
-      return await this.serviceFile.uploadFile(file, token);
+      return await this.serviceFile.uploadFile(file);
     } catch (err) {
     } finally {
       this.setDataLoading(false);
@@ -218,8 +206,7 @@ export class MaterialViewModel
 
   download = async (id: string, filename: string) => {
     try {
-      const token = await this.auth.verify();
-      await this.serviceFile.downloadFile(id, filename, token);
+      await this.serviceFile.downloadFile(id, filename);
     } catch (err) {
     } finally {
     }

@@ -2,39 +2,26 @@ import { IBlockDTO, IBlockUserDTO } from '@model/entities/block';
 import { ParsedUrlQuery } from 'querystring';
 
 export interface IBlockService {
-  getBlocks: (
-    query?: ParsedUrlQuery,
-    token?: string | null
-  ) => Promise<IBlockDTO[] | undefined>;
+  getBlocks: (query?: ParsedUrlQuery) => Promise<IBlockDTO[] | undefined>;
   getBlock: (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IBlockDTO | undefined>;
-  saveBlock: (
-    data: IBlockDTO,
-    token?: string | null
-  ) => Promise<IBlockDTO | undefined>;
-  deleteBlocks: (
-    ids: string[],
-    token?: string | null
-  ) => Promise<boolean | undefined>;
+  saveBlock: (data: IBlockDTO) => Promise<IBlockDTO | undefined>;
+  deleteBlocks: (ids: string[]) => Promise<boolean | undefined>;
 
   // --- user
   getBlockUser: (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IBlockUserDTO | undefined>;
 
   // --- admin
   getBlocksAdmin: (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IBlockUserDTO[] | undefined>;
   getBlockAdmin: (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IBlockUserDTO | undefined>;
 }

@@ -6,52 +6,30 @@ import {
 } from '@model/entities/task';
 
 export interface ITaskService {
-  getTasks: (
-    query?: ParsedUrlQuery,
-    token?: string | null
-  ) => Promise<ITaskDTO[] | undefined>;
+  getTasks: (query?: ParsedUrlQuery) => Promise<ITaskDTO[] | undefined>;
   getTask: (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<ITaskDTO | undefined>;
-  saveTask: (
-    data: ITaskDTO,
-    token?: string | null
-  ) => Promise<ITaskDTO | undefined>;
-  deleteTasks: (
-    ids: string[],
-    token?: string | null
-  ) => Promise<boolean | undefined>;
+  saveTask: (data: ITaskDTO) => Promise<ITaskDTO | undefined>;
+  deleteTasks: (ids: string[]) => Promise<boolean | undefined>;
 
   // --- user
-  getTasksUser: (
-    query?: ParsedUrlQuery,
-    token?: string | null
-  ) => Promise<ITaskUserDTO[] | undefined>;
+  getTasksUser: (query?: ParsedUrlQuery) => Promise<ITaskUserDTO[] | undefined>;
   getTaskUser: (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<ITaskUserDTO | undefined>;
-  sentTaskUser: (
-    data: ITaskUserDocumentDTO,
-    token?: string | null
-  ) => Promise<void>;
+  sentTaskUser: (data: ITaskUserDocumentDTO) => Promise<void>;
 
   // --- admin
   getTasksAdmin: (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<ITaskUserDTO[] | undefined>;
   getTaskAdmin: (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<ITaskUserDTO | undefined>;
-  sentTaskAdmin: (
-    data: ITaskUserDocumentDTO,
-    token?: string | null
-  ) => Promise<void>;
-  completeAdmin: (id?: string, token?: string | null) => Promise<void>;
+  sentTaskAdmin: (data: ITaskUserDocumentDTO) => Promise<void>;
+  completeAdmin: (id?: string) => Promise<void>;
 }

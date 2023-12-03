@@ -4,6 +4,7 @@ import { action, makeObservable } from 'mobx';
 import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
 import { BlockUserViewModel } from '@viewModel/modules/entities/block/user';
 import { MaterialBaseViewModel } from '@viewModel/modules/entities/material/base';
+import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
 export class MaterialUserViewModel
@@ -27,11 +28,9 @@ export class MaterialUserViewModel
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {
-        const token = await this.auth.verify();
-        const data = await this.serviceMaterial.getMaterialsUser(
-          { userBlockId: this.userBlock.data.id },
-          token
-        );
+        const data = await this.serviceMaterial.getMaterialsUser({
+          userBlockId: this.userBlock.data.id,
+        });
         this.setList(data);
       }
     } catch (err) {
@@ -40,15 +39,10 @@ export class MaterialUserViewModel
     }
   };
 
-  getData = async (id: string) => {
+  getData = async (id?: string, query?: ParsedUrlQuery) => {
     this.setDataLoading(true);
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceMaterial.getMaterialUser(
-        id,
-        undefined,
-        token
-      );
+      const data = await this.serviceMaterial.getMaterialUser(id, query);
       this.setData(data);
     } catch (err) {
     } finally {
@@ -60,8 +54,7 @@ export class MaterialUserViewModel
     if (!complete) {
       this.setDataLoading(true);
       try {
-        const token = await this.auth.verify();
-        await this.serviceMaterial.updateMaterialUser(id, token);
+        await this.serviceMaterial.updateMaterialUser(id);
         if (this.userBlock.data) {
           await this.userBlock.getData(this.userBlock.data.id);
         }

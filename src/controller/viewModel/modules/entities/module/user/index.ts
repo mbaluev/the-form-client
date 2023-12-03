@@ -1,6 +1,7 @@
 import { injectable } from 'inversify';
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 import { ModuleBaseViewModel } from '@viewModel/modules/entities/module/base';
+import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
 export class ModuleUserViewModel
@@ -9,13 +10,12 @@ export class ModuleUserViewModel
 {
   // --- override
 
-  getList = async () => {
+  getList = async (query?: ParsedUrlQuery) => {
     await this.clearList();
     await this.clearData();
     this.setListLoading(true);
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceModule.getModulesUser(undefined, token);
+      const data = await this.serviceModule.getModulesUser(query);
       this.setList(data);
     } catch (err) {
     } finally {
@@ -23,11 +23,21 @@ export class ModuleUserViewModel
     }
   };
 
-  getData = async (id: string) => {
+  getData = async (id?: string, query?: ParsedUrlQuery) => {
     this.setDataLoading(true);
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceModule.getModuleUser(id, undefined, token);
+      const data = await this.serviceModule.getModuleUser(id, query);
+      this.setData(data);
+    } catch (err) {
+    } finally {
+      this.setDataLoading(false);
+    }
+  };
+
+  getDataByBlockId = async (id?: string, query?: ParsedUrlQuery) => {
+    this.setDataLoading(true);
+    try {
+      const data = await this.serviceModule.getModuleUserByBlockId(id, query);
       this.setData(data);
     } catch (err) {
     } finally {

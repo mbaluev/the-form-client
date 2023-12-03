@@ -53,8 +53,8 @@ export interface IBaseCardViewModel<T extends IBaseCardType> {
   // --- override
 
   getList: (query?: ParsedUrlQuery) => Promise<void>;
-  getData: (id: string) => Promise<void>;
-  getModalData: (id: string) => Promise<void>;
+  getData: (id?: string, query?: ParsedUrlQuery) => Promise<void>;
+  getModalData: (id?: string, query?: ParsedUrlQuery) => Promise<void>;
   saveData: () => Promise<T | null | undefined>;
   saveModalData: () => Promise<T | null | undefined>;
   deleteData: () => Promise<boolean | undefined>;

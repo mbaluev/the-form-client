@@ -17,8 +17,7 @@ export class TaskUserDocumentViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const token = await this.modelAuth.verify();
-        await this.serviceTask.sentTaskUser(this.modalData, token);
+        await this.serviceTask.sentTaskUser(this.modalData);
         await this.clearModalChanges();
         if (this.userBlock.data) {
           const blockId = this.userBlock.data.id;

@@ -22,8 +22,6 @@ export class TaskViewModel
 
   @inject(SERVICE.File) protected serviceFile!: FileService;
 
-  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
-
   @inject(VIEW_MODEL.Block) protected block!: BlockViewModel;
 
   constructor() {
@@ -76,11 +74,9 @@ export class TaskViewModel
     this.setListLoading(true);
     try {
       if (this.block.data) {
-        const token = await this.auth.verify();
-        const data = await this.serviceTask.getTasks(
-          { blockId: this.block.data.id },
-          token
-        );
+        const data = await this.serviceTask.getTasks({
+          blockId: this.block.data.id,
+        });
         this.setList(data);
       }
     } catch (err) {
@@ -89,11 +85,10 @@ export class TaskViewModel
     }
   };
 
-  getModalData = async (id: string) => {
+  getModalData = async (id?: string, query?: ParsedUrlQuery) => {
     this.setModalLoading(true);
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceTask.getTask(id, undefined, token);
+      const data = await this.serviceTask.getTask(id, query);
       this.setModalData(data);
     } catch (err) {
     } finally {
@@ -106,8 +101,7 @@ export class TaskViewModel
     try {
       if (this.modalData && !this.hasModalErrors) {
         this.changeModalField('blockId', this.block.data?.id);
-        const token = await this.auth.verify();
-        const data = await this.serviceTask.saveTask(this.modalData, token);
+        const data = await this.serviceTask.saveTask(this.modalData);
         await this.getList();
         await this.clearModalChanges();
         return data;
@@ -122,8 +116,7 @@ export class TaskViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        const token = await this.auth.verify();
-        await this.serviceTask.deleteTasks(this.deleteIds, token);
+        await this.serviceTask.deleteTasks(this.deleteIds);
         await this.getList();
         await this.clearDelete();
         await this.clearData();

@@ -6,55 +6,39 @@ import {
 import { ParsedUrlQuery } from 'querystring';
 
 export interface IQuestionService {
-  getQuestions: (
-    query?: ParsedUrlQuery,
-    token?: string | null
-  ) => Promise<IQuestionDTO[] | undefined>;
+  getQuestions: (query?: ParsedUrlQuery) => Promise<IQuestionDTO[] | undefined>;
   getQuestion: (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IQuestionDTO | undefined>;
-  saveQuestion: (
-    data: IQuestionDTO,
-    token?: string | null
-  ) => Promise<IQuestionDTO | undefined>;
-  deleteQuestions: (
-    ids: string[],
-    token?: string | null
-  ) => Promise<boolean | undefined>;
+  saveQuestion: (data: IQuestionDTO) => Promise<IQuestionDTO | undefined>;
+  deleteQuestions: (ids: string[]) => Promise<boolean | undefined>;
 
   // --- user
   getQuestionsUser: (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IQuestionUserDTO[] | undefined>;
   getQuestionUser: (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IQuestionUserDTO | undefined>;
   saveQuestionAnswers: (
     userQuestionId: string,
-    userQuestionAnswers?: IQuestionAnswerUserDTO[],
-    token?: string | null
+    userQuestionAnswers?: IQuestionAnswerUserDTO[]
   ) => Promise<void>;
   checkQuestions: (userBlockId: string, token?: string | null) => Promise<void>;
 
   // --- admin
   getQuestionsAdmin: (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IQuestionUserDTO[] | undefined>;
   getQuestionAdmin: (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ) => Promise<IQuestionUserDTO | undefined>;
   saveQuestionComment: (
     userBlockId: string,
     userQuestionId: string,
-    comment?: string,
-    token?: string | null
+    comment?: string
   ) => Promise<void>;
 }

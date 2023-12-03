@@ -6,7 +6,6 @@ import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
 import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
 import { action, makeObservable, observable } from 'mobx';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { AuthViewModel } from '@viewModel/modules/common/auth';
 import { FilterViewModel } from '@viewModel/modules/common/filter';
 
 @injectable()
@@ -15,8 +14,6 @@ export class ModuleViewModel
   implements IModuleViewModel
 {
   @inject(SERVICE.Module) protected serviceModule!: ModuleService;
-
-  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
 
   @inject(VIEW_MODEL.Filter) protected filters!: FilterViewModel;
 
@@ -55,11 +52,7 @@ export class ModuleViewModel
   getList = async () => {
     this.setListLoading(true);
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceModule.getModules(
-        this.filters.filters,
-        token
-      );
+      const data = await this.serviceModule.getModules(this.filters.filters);
       this.setList(data);
     } catch (err) {
     } finally {
@@ -70,8 +63,7 @@ export class ModuleViewModel
     this.setDataLoading(true);
     try {
       if (this.data && !this.hasErrors) {
-        const token = await this.auth.verify();
-        const data = await this.serviceModule.saveModule(this.data, token);
+        const data = await this.serviceModule.saveModule(this.data);
         await this.getList();
         await this.clearChanges();
         return data;
@@ -86,8 +78,7 @@ export class ModuleViewModel
     this.setModalLoading(true);
     try {
       if (this.modalData && !this.hasModalErrors) {
-        const token = await this.auth.verify();
-        const data = await this.serviceModule.saveModule(this.modalData, token);
+        const data = await this.serviceModule.saveModule(this.modalData);
         await this.getList();
         await this.clearModalChanges();
         return data;
@@ -102,8 +93,7 @@ export class ModuleViewModel
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        const token = await this.auth.verify();
-        await this.serviceModule.deleteModules(this.deleteIds, token);
+        await this.serviceModule.deleteModules(this.deleteIds);
         await this.getList();
         await this.clearDelete();
         await this.clearData();

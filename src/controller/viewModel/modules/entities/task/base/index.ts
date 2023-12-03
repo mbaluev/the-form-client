@@ -6,8 +6,6 @@ import { inject, injectable } from 'inversify';
 import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
 import { SERVICE } from '@service/ids';
 import { FileService } from 'controller/service/modules/common/file';
-import { VIEW_MODEL } from '@viewModel/ids';
-import { AuthViewModel } from '@viewModel/modules/common/auth';
 import { ParsedUrlQuery } from 'querystring';
 import { ITaskUserDTO } from '@model/entities/task';
 import { TaskService } from '@service/modules/entities/task';
@@ -21,8 +19,6 @@ export class TaskBaseViewModel
   @inject(SERVICE.Task) protected serviceTask!: TaskService;
 
   @inject(SERVICE.File) protected serviceFile!: FileService;
-
-  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
 
   constructor() {
     super();
@@ -85,8 +81,7 @@ export class TaskBaseViewModel
 
   download = async (id: string, filename: string) => {
     try {
-      const token = await this.auth.verify();
-      await this.serviceFile.downloadFile(id, filename, token);
+      await this.serviceFile.downloadFile(id, filename);
     } catch (err) {
     } finally {
     }

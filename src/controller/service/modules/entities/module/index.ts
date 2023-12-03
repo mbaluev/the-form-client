@@ -13,54 +13,47 @@ export class ModuleService implements IModuleService {
   API_PREFIX = `/api/module`;
 
   getModules = async (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IModuleDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IModuleDTO>>(
       `${this.API_PREFIX}/list`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
   getModule = async (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IModuleDTO | undefined> => {
     const ret = await this.apiModule.post<IResponseItemDTO<IModuleDTO>>(
       `${this.API_PREFIX}/item/${id}`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
-  saveModule = async (data: IModuleDTO, token?: string | null) => {
+  saveModule = async (data: IModuleDTO) => {
     if (data.id) {
       const { id, ...params } = data;
       const ret = await this.apiModule.patch<IResponseItemDTO<IModuleDTO>>(
         `${this.API_PREFIX}/update/${data.id}`,
-        { ...params },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { ...params }
       );
       return ret ? ret.data : undefined;
     } else {
       const ret = await this.apiModule.post<IResponseItemDTO<IModuleDTO>>(
         `${this.API_PREFIX}/create`,
-        { ...data },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { ...data }
       );
       return ret ? ret.data : undefined;
     }
   };
 
-  deleteModules = async (ids: string[], token?: string | null) => {
+  deleteModules = async (ids: string[]) => {
     const ret = await this.apiModule.delete<IResponseItemDTO<undefined>>(
       `${this.API_PREFIX}/delete`,
-      { ids },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ids }
     );
     return ret ? ret.success : undefined;
   };
@@ -68,26 +61,33 @@ export class ModuleService implements IModuleService {
   // --- user
 
   getModulesUser = async (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IModuleUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IModuleUserDTO>>(
       `${this.API_PREFIX}/user/list`,
       { ...query }
-      // token ? { headers: { Authorization: `Bearer ${token}` } } : undefined
     );
     return ret ? ret.data : undefined;
   };
 
   getModuleUser = async (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IModuleUserDTO | undefined> => {
     const ret = await this.apiModule.post<IResponseItemDTO<IModuleUserDTO>>(
       `${this.API_PREFIX}/user/item/${id}`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
+    );
+    return ret ? ret.data : undefined;
+  };
+
+  getModuleUserByBlockId = async (
+    id?: string,
+    query?: ParsedUrlQuery
+  ): Promise<IModuleUserDTO | undefined> => {
+    const ret = await this.apiModule.post<IResponseItemDTO<IModuleUserDTO>>(
+      `${this.API_PREFIX}/user/blockId/${id}`,
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
@@ -95,26 +95,22 @@ export class ModuleService implements IModuleService {
   // --- admin
 
   getModulesAdmin = async (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IModuleUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IModuleUserDTO>>(
       `${this.API_PREFIX}/admin/list`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
   getModuleAdmin = async (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IModuleUserDTO | undefined> => {
     const ret = await this.apiModule.post<IResponseItemDTO<IModuleUserDTO>>(
       `${this.API_PREFIX}/admin/item/${id}`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };

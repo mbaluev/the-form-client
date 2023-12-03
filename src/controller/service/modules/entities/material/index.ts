@@ -13,54 +13,47 @@ export class MaterialService implements IMaterialService {
   API_PREFIX = `/api/material`;
 
   getMaterials = async (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IMaterialDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IMaterialDTO>>(
       `${this.API_PREFIX}/list`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
   getMaterial = async (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IMaterialDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<IMaterialDTO>>(
       `${this.API_PREFIX}/item/${id}`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
-  saveMaterial = async (data: IMaterialDTO, token?: string | null) => {
+  saveMaterial = async (data: IMaterialDTO) => {
     if (data.id) {
       const { id, ...params } = data;
       const ret = await this.apiModule.patch<IResponseItemDTO<IMaterialDTO>>(
         `${this.API_PREFIX}/update/${data.id}`,
-        { ...params },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { ...params }
       );
       return ret ? ret.data : undefined;
     } else {
       const ret = await this.apiModule.post<IResponseItemDTO<IMaterialDTO>>(
         `${this.API_PREFIX}/create`,
-        { ...data },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { ...data }
       );
       return ret ? ret.data : undefined;
     }
   };
 
-  deleteMaterials = async (ids: string[], token?: string | null) => {
+  deleteMaterials = async (ids: string[]) => {
     const ret = await this.apiModule.delete<IResponseItemDTO<undefined>>(
       `${this.API_PREFIX}/delete`,
-      { ids },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ids }
     );
     return ret ? ret.success : undefined;
   };
@@ -68,35 +61,29 @@ export class MaterialService implements IMaterialService {
   // --- user
 
   getMaterialsUser = async (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IMaterialUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IMaterialUserDTO>>(
       `${this.API_PREFIX}/user/list`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
   getMaterialUser = async (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IMaterialUserDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<IMaterialUserDTO>>(
       `${this.API_PREFIX}/user/item/${id}`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
-  updateMaterialUser = async (id: string, token?: string | null) => {
+  updateMaterialUser = async (id: string) => {
     const ret = await this.apiModule.post<IResponseItemDTO<undefined>>(
-      `${this.API_PREFIX}/user/update/${id}`,
-      undefined,
-      { headers: { Authorization: `Bearer ${token}` } }
+      `${this.API_PREFIX}/user/update/${id}`
     );
     return ret ? ret.success : undefined;
   };

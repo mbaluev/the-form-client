@@ -5,8 +5,6 @@ import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
 import { IMaterialUserDTO } from '@model/entities/material';
 import { SERVICE } from '@service/ids';
 import { FileService } from 'controller/service/modules/common/file';
-import { VIEW_MODEL } from '@viewModel/ids';
-import { AuthViewModel } from '@viewModel/modules/common/auth';
 import { action, makeObservable } from 'mobx';
 import { MaterialService } from 'controller/service/modules/entities/material';
 import { ParsedUrlQuery } from 'querystring';
@@ -20,8 +18,6 @@ export class MaterialBaseViewModel
   @inject(SERVICE.Material) protected serviceMaterial!: MaterialService;
 
   @inject(SERVICE.File) protected serviceFile!: FileService;
-
-  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
 
   constructor() {
     super();
@@ -82,8 +78,7 @@ export class MaterialBaseViewModel
 
   download = async (id: string, filename: string) => {
     try {
-      const token = await this.auth.verify();
-      await this.serviceFile.downloadFile(id, filename, token);
+      await this.serviceFile.downloadFile(id, filename);
     } catch (err) {
     } finally {
     }

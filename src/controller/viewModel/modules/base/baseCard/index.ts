@@ -264,8 +264,8 @@ export class BaseCardViewModel<T extends IBaseCardType>
     console.log('getList', query);
   }
 
-  async getData(id: string) {
-    console.log('getData', id);
+  async getData(id?: string, query?: ParsedUrlQuery) {
+    console.log('getData', id, query);
   }
 
   async saveData(): Promise<T | null | undefined> {
@@ -276,8 +276,8 @@ export class BaseCardViewModel<T extends IBaseCardType>
     return undefined;
   }
 
-  async getModalData(id: string) {
-    console.log('getModalData', id);
+  async getModalData(id?: string, query?: ParsedUrlQuery) {
+    console.log('getModalData', id, query);
   }
 
   async saveModalData(): Promise<T | null | undefined> {

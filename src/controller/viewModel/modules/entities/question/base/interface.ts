@@ -1,5 +1,6 @@
 import { IBaseCardViewModel } from '@viewModel/modules/base/baseCard/interfaces';
 import { IQuestionUserDTO } from '@model/entities/question';
+import { ParsedUrlQuery } from 'querystring';
 
 export type ITestStatusCode = 'new' | 'success' | 'fail';
 export interface ITestStatus {
@@ -11,7 +12,11 @@ export interface ITestStatus {
 
 export interface IQuestionBaseViewModel
   extends IBaseCardViewModel<IQuestionUserDTO> {
-  getData: (id: string, setIndex?: boolean) => Promise<void>;
+  getData: (
+    id?: string,
+    query?: ParsedUrlQuery,
+    setIndex?: boolean
+  ) => Promise<void>;
 
   status: ITestStatus;
   isNext: boolean;

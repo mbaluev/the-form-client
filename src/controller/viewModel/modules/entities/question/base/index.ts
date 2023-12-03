@@ -3,8 +3,6 @@ import { SERVICE } from '@service/ids';
 import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
 import { IQuestionUserDTO } from '@model/entities/question';
 import { QuestionService } from 'controller/service/modules/entities/question';
-import { VIEW_MODEL } from '@viewModel/ids';
-import { AuthViewModel } from '@viewModel/modules/common/auth';
 import { ITestStatus } from '@viewModel/modules/entities/question/user/interface';
 import { action, computed, makeObservable, observable } from 'mobx';
 import { IQuestionBaseViewModel } from '@viewModel/modules/entities/question/base/interface';
@@ -17,8 +15,6 @@ export class QuestionBaseViewModel
   implements IQuestionBaseViewModel
 {
   @inject(SERVICE.Question) protected serviceQuestion!: QuestionService;
-
-  @inject(VIEW_MODEL.Auth) protected auth!: AuthViewModel;
 
   constructor() {
     super();
@@ -60,8 +56,8 @@ export class QuestionBaseViewModel
       return result;
     };
 
-  async getData(id: string, setIndex?: boolean) {
-    console.log('getData', id, setIndex);
+  async getData(id?: string, query?: ParsedUrlQuery, setIndex?: boolean) {
+    console.log('getData', id, query, setIndex);
   }
 
   getDataByIndex = async (index: number) => {

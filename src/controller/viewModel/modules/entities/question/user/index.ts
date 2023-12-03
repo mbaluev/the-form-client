@@ -4,6 +4,7 @@ import { BlockUserViewModel } from '@viewModel/modules/entities/block/user';
 import { action, computed, makeObservable } from 'mobx';
 import { QuestionBaseViewModel } from '@viewModel/modules/entities/question/base';
 import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
+import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
 export class QuestionUserViewModel
@@ -33,11 +34,9 @@ export class QuestionUserViewModel
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {
-        const token = await this.auth.verify();
-        const data = await this.serviceQuestion.getQuestionsUser(
-          { userBlockId: this.userBlock.data.id },
-          token
-        );
+        const data = await this.serviceQuestion.getQuestionsUser({
+          userBlockId: this.userBlock.data.id,
+        });
         this.setList(data);
       }
     } catch (err) {
@@ -46,16 +45,11 @@ export class QuestionUserViewModel
     }
   };
 
-  getData = async (id: string, setIndex?: boolean) => {
+  getData = async (id?: string, query?: ParsedUrlQuery, setIndex?: boolean) => {
     this.setDataLoading(true);
-    if (setIndex) this.setIndex(this.getIndexById(id));
+    if (id && setIndex) this.setIndex(this.getIndexById(id));
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceQuestion.getQuestionUser(
-        id,
-        undefined,
-        token
-      );
+      const data = await this.serviceQuestion.getQuestionUser(id, query);
       this.setData(data);
     } catch (err) {
     } finally {
@@ -129,11 +123,9 @@ export class QuestionUserViewModel
   saveQuestionAnswers = async () => {
     try {
       if (this.data) {
-        const token = await this.auth.verify();
         await this.serviceQuestion.saveQuestionAnswers(
           this.data.id,
-          this.data.userQuestionAnswers,
-          token
+          this.data.userQuestionAnswers
         );
       }
     } catch (err) {
@@ -145,9 +137,8 @@ export class QuestionUserViewModel
     this.setListLoading(true);
     try {
       if (this.list && this.userBlock.data) {
-        const token = await this.auth.verify();
         const blockId = this.userBlock.data.id;
-        await this.serviceQuestion.checkQuestions(blockId, token);
+        await this.serviceQuestion.checkQuestions(blockId);
         await this.userBlock.getData(blockId);
       }
     } catch (err) {

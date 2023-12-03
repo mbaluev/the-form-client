@@ -86,10 +86,9 @@ export class BlockAdminViewModel
       return result;
     };
 
-  getData = async (id: string) => {
+  getData = async (id?: string, query?: ParsedUrlQuery) => {
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceBlock.getBlockAdmin(id, undefined, token);
+      const data = await this.serviceBlock.getBlockAdmin(id, query);
       this.setData(data);
     } catch (err) {
     } finally {

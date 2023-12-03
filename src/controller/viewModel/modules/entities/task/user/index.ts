@@ -3,6 +3,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { BlockUserViewModel } from '@viewModel/modules/entities/block/user';
 import { TaskBaseViewModel } from '@viewModel/modules/entities/task/base';
+import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
 export class TaskUserViewModel
@@ -19,11 +20,9 @@ export class TaskUserViewModel
     this.setListLoading(true);
     try {
       if (this.userBlock.data) {
-        const token = await this.auth.verify();
-        const data = await this.serviceTask.getTasksUser(
-          { userBlockId: this.userBlock.data.id },
-          token
-        );
+        const data = await this.serviceTask.getTasksUser({
+          userBlockId: this.userBlock.data.id,
+        });
         this.setList(data);
       }
     } catch (err) {
@@ -32,11 +31,10 @@ export class TaskUserViewModel
     }
   };
 
-  getData = async (id: string) => {
+  getData = async (id?: string, query?: ParsedUrlQuery) => {
     this.setDataLoading(true);
     try {
-      const token = await this.auth.verify();
-      const data = await this.serviceTask.getTaskUser(id, undefined, token);
+      const data = await this.serviceTask.getTaskUser(id, query);
       this.setData(data);
     } catch (err) {
     } finally {

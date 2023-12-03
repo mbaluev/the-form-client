@@ -1,50 +1,20 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { MasterSchool } from '@ui/masters/masterSchool';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import { useService } from '@hooks/useService';
-import { IModuleService } from '@service/modules/entities/module/interface';
-import { SERVICE } from '@service/ids';
-import { IBlockService } from '@service/modules/entities/block/interface';
 import { observer } from 'mobx-react';
-import { getCookieToken } from '@utils/cookie/getCookieToken';
 import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/interface';
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/user/interface';
 import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interface';
 import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
 import { BlockPage } from '@ui/pages/school/block/[id]/blockPage';
+import { useRouter } from 'next/router';
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext<{ id: string }>
-) => {
-  const { params } = context;
-  const token = getCookieToken(context);
-
-  const serviceModule = useService<IModuleService>(SERVICE.Module);
-  const serviceBlock = useService<IBlockService>(SERVICE.Block);
-
-  const query = { userBlockId: params?.id };
-  const userModule =
-    (await serviceModule.getModuleUser(undefined, query, token)) || null;
-  const userBlock =
-    (await serviceBlock.getBlockUser(query.userBlockId, undefined, token)) ||
-    null;
-
-  return {
-    props: { userModule, userBlock },
-    notFound: !Boolean(userModule) || !Boolean(userBlock),
-  };
-};
-
-const Block = (
-  props: InferGetServerSidePropsType<typeof getServerSideProps>
-) => {
-  const { userModule, userBlock } = props;
-  const { setData: setModule, clearData: clearModule } =
+const Block = () => {
+  const { getDataByBlockId: getModule, clearData: clearModule } =
     useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
-  const { setData: setBlock, clearData: clearBlock } =
+  const { getData: getBlock, clearData: clearBlock } =
     useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
 
   const { clearData: clearMaterial } = useViewModel<IMaterialUserViewModel>(
@@ -57,9 +27,14 @@ const Block = (
     VIEW_MODEL.QuestionUser
   );
 
+  const router = useRouter();
+  const id = router.query?.id as string;
+
   useEffect(() => {
-    setModule(userModule);
-    setBlock(userBlock);
+    if (id) {
+      getModule(id);
+      getBlock(id);
+    }
     return () => {
       clearModule();
       clearBlock();
@@ -67,7 +42,7 @@ const Block = (
       clearTask();
       clearQuestion();
     };
-  });
+  }, [id]);
 
   return <BlockPage />;
 };

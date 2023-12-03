@@ -17,54 +17,47 @@ export class QuestionService implements IQuestionService {
   API_PREFIX = `/api/question`;
 
   getQuestions = async (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IQuestionDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IQuestionDTO>>(
       `${this.API_PREFIX}/list`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
   getQuestion = async (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IQuestionDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<IQuestionDTO>>(
       `${this.API_PREFIX}/item/${id}`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
-  saveQuestion = async (data: IQuestionDTO, token?: string | null) => {
+  saveQuestion = async (data: IQuestionDTO) => {
     if (data.id) {
       const { id, ...params } = data;
       const ret = await this.apiModule.patch<IResponseItemDTO<IQuestionDTO>>(
         `${this.API_PREFIX}/update/${data.id}`,
-        { ...params },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { ...params }
       );
       return ret ? ret.data : undefined;
     } else {
       const ret = await this.apiModule.post<IResponseItemDTO<IQuestionDTO>>(
         `${this.API_PREFIX}/create`,
-        { ...data },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { ...data }
       );
       return ret ? ret.data : undefined;
     }
   };
 
-  deleteQuestions = async (ids: string[], token?: string | null) => {
+  deleteQuestions = async (ids: string[]) => {
     const ret = await this.apiModule.delete<IResponseItemDTO<undefined>>(
       `${this.API_PREFIX}/delete`,
-      { ids },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ids }
     );
     return ret ? ret.success : undefined;
   };
@@ -72,76 +65,61 @@ export class QuestionService implements IQuestionService {
   // --- user
 
   getQuestionsUser = async (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IQuestionUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IQuestionUserDTO>>(
       `${this.API_PREFIX}/user/list`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
   getQuestionUser = async (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IQuestionUserDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<IQuestionUserDTO>>(
       `${this.API_PREFIX}/user/item/${id}`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
   saveQuestionAnswers = async (
     userQuestionId: string,
-    userQuestionAnswers?: IQuestionAnswerUserDTO[],
-    token?: string | null
+    userQuestionAnswers?: IQuestionAnswerUserDTO[]
   ): Promise<void> => {
-    return this.apiModule.post<void>(
-      `${this.API_PREFIX}/user/save`,
-      { userQuestionId, userQuestionAnswers },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    return this.apiModule.post<void>(`${this.API_PREFIX}/user/save`, {
+      userQuestionId,
+      userQuestionAnswers,
+    });
   };
 
-  checkQuestions = async (
-    userBlockId: string,
-    token?: string | null
-  ): Promise<void> => {
-    return this.apiModule.post<void>(
-      `${this.API_PREFIX}/user/check`,
-      { userBlockId },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+  checkQuestions = async (userBlockId: string): Promise<void> => {
+    return this.apiModule.post<void>(`${this.API_PREFIX}/user/check`, {
+      userBlockId,
+    });
   };
 
   // --- admin
 
   getQuestionsAdmin = async (
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IQuestionUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IQuestionUserDTO>>(
       `${this.API_PREFIX}/admin/list`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
 
   getQuestionAdmin = async (
     id?: string,
-    query?: ParsedUrlQuery,
-    token?: string | null
+    query?: ParsedUrlQuery
   ): Promise<IQuestionUserDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<IQuestionUserDTO>>(
       `${this.API_PREFIX}/admin/item/${id}`,
-      { ...query },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { ...query }
     );
     return ret ? ret.data : undefined;
   };
@@ -149,13 +127,12 @@ export class QuestionService implements IQuestionService {
   saveQuestionComment = async (
     userBlockId: string,
     userQuestionId: string,
-    commentText?: string,
-    token?: string | null
+    commentText?: string
   ): Promise<void> => {
-    return this.apiModule.post<void>(
-      `${this.API_PREFIX}/admin/save`,
-      { userBlockId, userQuestionId, commentText },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    return this.apiModule.post<void>(`${this.API_PREFIX}/admin/save`, {
+      userBlockId,
+      userQuestionId,
+      commentText,
+    });
   };
 }

@@ -11,29 +11,20 @@ export class FileService implements IFileService {
 
   API_PREFIX = `api/file`;
 
-  uploadFile = async (
-    file: File,
-    token?: string | null
-  ): Promise<IFileDTO | undefined> => {
+  uploadFile = async (file: File): Promise<IFileDTO | undefined> => {
     const formData = new FormData();
     formData.append('file', file, file.name);
     const ret = await this.apiModule.post<IResponseItemDTO<IFileDTO>>(
       `${this.API_PREFIX}/upload`,
-      formData,
-      { headers: { Authorization: `Bearer ${token}` } }
+      formData
     );
     return ret ? ret.data : undefined;
   };
 
-  downloadFile = async (
-    id: string,
-    filename: string,
-    token?: string | null
-  ) => {
+  downloadFile = async (id: string, filename: string) => {
     await this.apiModule.download(
       `${this.API_PREFIX}/download/${id}`,
-      filename,
-      { headers: { Authorization: `Bearer ${token}` } }
+      filename
     );
   };
 }
