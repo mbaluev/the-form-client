@@ -109,7 +109,7 @@ export const ROUTER_CONST_SCHOOL: Record<string, any> = {
   ADMIN_PROGRESS_MODULES: {
     name: 'adminProgressModules',
     label: 'User modules progress',
-    path: '/admin/progress/modules',
+    path: '/admin/progress/modules/[userId]',
     roles: [ROLES.ADMIN],
   },
   ADMIN_PROGRESS_BLOCKS: {

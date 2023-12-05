@@ -1,50 +1,26 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { MasterSchool } from '@ui/masters/masterSchool';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { useService } from '@hooks/useService';
-import { SERVICE } from '@service/ids';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { observer } from 'mobx-react';
-import { getCookieToken } from '@utils/cookie/getCookieToken';
-import { IModuleService } from '@service/modules/entities/module/interface';
 import { IModuleAdminViewModel } from '@viewModel/modules/entities/module/admin/interface';
 import { ModulesPage } from '@ui/pages/admin/progress/modules/modulesPage';
 import { useRouter } from 'next/router';
-import { IUserService } from '@service/modules/entities/user/interface';
 import { IUserAdminViewModel } from '@viewModel/modules/entities/user/admin/interface';
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const { query } = context;
-  const userId = query.userId as string;
-  let user;
-
-  const token = getCookieToken(context);
-  const serviceModule = useService<IModuleService>(SERVICE.Module);
-  const serviceUser = useService<IUserService>(SERVICE.User);
-
-  const userModules =
-    (await serviceModule.getModulesAdmin(query, token)) || null;
-  if (userId)
-    user = (await serviceUser.getUser(userId, undefined, token)) || null;
-
-  return { props: { userModules, user } };
-};
-
-const Modules = (
-  props: InferGetServerSidePropsType<typeof getServerSideProps>
-) => {
-  const { userModules, user } = props;
-  const { setList: setModules, clearList: clearModules } =
+const Modules = () => {
+  const { getList: getModules, clearList: clearModules } =
     useViewModel<IModuleAdminViewModel>(VIEW_MODEL.ModuleAdmin);
-  const { setData: setUser, clearData: clearUser } =
-    useViewModel<IUserAdminViewModel>(VIEW_MODEL.UserAdmin);
+  const {
+    getData: getUser,
+    data: user,
+    clearData: clearUser,
+  } = useViewModel<IUserAdminViewModel>(VIEW_MODEL.UserAdmin);
 
   const router = useRouter();
+  const userId = router.query.userId as string;
   const breadCrumbs: TBreadCrumb[] = [
     {
       label: ROUTER_CONST_SCHOOL.HOME.label,
@@ -66,13 +42,15 @@ const Modules = (
   ];
 
   useEffect(() => {
-    setModules(userModules);
-    setUser(user);
+    if (userId) {
+      getModules(router.query);
+      getUser(userId);
+    }
     return () => {
       clearModules();
       clearUser();
     };
-  });
+  }, [userId]);
 
   return <ModulesPage breadCrumbs={breadCrumbs} />;
 };

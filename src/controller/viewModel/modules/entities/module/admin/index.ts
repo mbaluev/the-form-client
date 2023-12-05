@@ -41,4 +41,17 @@ export class ModuleAdminViewModel
       }
       return result;
     };
+
+  getList = async (query?: ParsedUrlQuery) => {
+    await this.clearList();
+    await this.clearData();
+    this.setListLoading(true);
+    try {
+      const data = await this.serviceModule.getModulesAdmin(query);
+      this.setList(data);
+    } catch (err) {
+    } finally {
+      this.setListLoading(false);
+    }
+  };
 }
