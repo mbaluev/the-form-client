@@ -5,12 +5,10 @@ import Stack from '@mui/material/Stack';
 
 export const Layout = observer((props: { children?: ReactNode }) => {
   const { children } = props;
-  // const { isAuth } = useAuthStore();
   return (
     <Stack height="100%" id="__layout">
       <Navigation />
       {children}
-      {/*<DialogSessionExpired open={!isAuth} />*/}
     </Stack>
   );
 });
