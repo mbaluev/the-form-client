@@ -12,13 +12,7 @@ export const AccountImage = (props: IMenuAccountImageProps) => {
   return loading ? (
     <Skeleton className="account-image" />
   ) : src ? (
-    <NextImage
-      src={src}
-      alt=""
-      layout="fill"
-      objectFit="contain"
-      priority={true}
-    />
+    <NextImage src={src} alt="" layout="fill" objectFit="contain" priority={true} />
   ) : (
     <div>{name?.substring(0, 1)}</div>
   );

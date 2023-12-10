@@ -45,8 +45,7 @@ const MyApp = (props: MyAppProps) => {
     pageProps,
   } = props;
 
-  const getLayout =
-    (Component as any).getLayout || ((page: ReactElement) => page);
+  const getLayout = (Component as any).getLayout || ((page: ReactElement) => page);
 
   useEffect(() => {
     authStore.init();
@@ -68,9 +67,7 @@ const MyApp = (props: MyAppProps) => {
     <ErrorBoundary>
       <CacheProvider value={emotionCache}>
         <ContainerProvider container={container}>
-          <ThemeProvider
-            theme={{ ...theme, direction: dirs.getDir(router.locale) }}
-          >
+          <ThemeProvider theme={{ ...theme, direction: dirs.getDir(router.locale) }}>
             <CssBaseline />
             {getLayout(<Component {...pageProps} />)}
           </ThemeProvider>

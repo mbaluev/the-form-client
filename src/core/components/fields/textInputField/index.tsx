@@ -25,9 +25,7 @@ export const TextInputField = (props: TextInputFieldProps) => {
 
   const [state, setState] = useState<string | number | undefined>(value);
 
-  const onChangeState = (
-    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
+  const onChangeState = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if (inputType === 'number') {
       let val = Number(e.target.value);
       if (max && val > max) val = max;

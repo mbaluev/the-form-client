@@ -18,8 +18,7 @@ export const Account = observer(() => {
   const open = Boolean(anchorEl);
   const handleOpen = (e: MouseEvent<any>) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
-  const { isAuth, firstname, lastname, username, signout, isDataLoading } =
-    useAuthStore();
+  const { isAuth, firstname, lastname, username, signout, isDataLoading } = useAuthStore();
 
   const router = useRouter();
   const signOutHandler = async () => {
@@ -55,18 +54,12 @@ export const Account = observer(() => {
           <div className={classes.account__top}>
             <div className={classes.account__avatar}>
               <Avatar sx={{ width: 50, height: 50, fontSize: '1.6rem' }}>
-                <AccountImage
-                  loading={isDataLoading}
-                  src={undefined}
-                  name={username}
-                />
+                <AccountImage loading={isDataLoading} src={undefined} name={username} />
               </Avatar>
             </div>
             <div className={classes.account__info}>
               <div className={classes.account__user}>
-                <div
-                  className={classes.account__name}
-                >{`${firstname} ${lastname}`}</div>
+                <div className={classes.account__name}>{`${firstname} ${lastname}`}</div>
                 <div className={classes.account__email}>{username}</div>
               </div>
             </div>
