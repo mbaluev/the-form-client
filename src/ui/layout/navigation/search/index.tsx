@@ -3,7 +3,6 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { InputAdornment, useTheme } from '@mui/material';
-import { useTranslation } from 'next-i18next';
 import { useFilterStore } from '@store/modules/common/filter/useFilterStore';
 import debounce from 'lodash/debounce';
 import { observer } from 'mobx-react';
@@ -12,7 +11,6 @@ import { ROUTES } from '@settings/routes';
 import { SearchInput } from '@ui/layout/navigation/search/styled';
 
 export const Search = observer(() => {
-  const { t } = useTranslation();
   const router = useRouter();
   const theme = useTheme();
 
@@ -27,7 +25,10 @@ export const Search = observer(() => {
   const request = (value?: string) => {
     setFiltersValue(value);
   };
-  const debounceRequestRedirect = useCallback(debounce(requestRedirect, 1000), []);
+  const debounceRequestRedirect = useCallback(
+    debounce(requestRedirect, 1000),
+    []
+  );
   const debounceRequest = useCallback(debounce(request, 1000), []);
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setState(e.target.value);
@@ -45,7 +46,7 @@ export const Search = observer(() => {
     <SearchInput
       value={state || ''}
       onChange={onChange}
-      placeholder={t('menu:nav-search')}
+      placeholder="Search"
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">

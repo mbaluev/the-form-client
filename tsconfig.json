@@ -40,9 +40,7 @@
     "**/*.ts",
     "**/*.tsx",
     "next.config.js",
-    "next-i18next.config.js",
-    "translate.js",
-    "openai.js"
+    "next-i18next.config.js"
   ],
   "exclude": ["node_modules"],
   "ts-node": {

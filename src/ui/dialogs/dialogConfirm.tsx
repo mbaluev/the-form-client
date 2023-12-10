@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import { Button } from '@theme/button';
 import {
   Dialog,
@@ -22,7 +21,6 @@ interface IProps {
 
 export const DialogConfirm = (props: IProps) => {
   const { open, onClose, onSubmit, isLoading, title, message, error } = props;
-  const { t } = useTranslation();
 
   const handleClose = async () => {
     if (onClose) await onClose();
@@ -36,7 +34,7 @@ export const DialogConfirm = (props: IProps) => {
       <DialogTitle>
         <Stack spacing={1}>
           <Typography fontWeight={600} fontSize="1.1rem">
-            {title || t('common:confirm-title')}
+            {title || 'Confirm'}
           </Typography>
           {error && (
             <Typography fontWeight={600} fontSize="0.9rem" color="error">
@@ -47,7 +45,7 @@ export const DialogConfirm = (props: IProps) => {
       </DialogTitle>
       {isLoading && <LinearProgress sx={{ borderRadius: 0 }} />}
       <DialogContent sx={{ pb: 0 }}>
-        <Typography textAlign="left">{message || t('common:confirm-message')}</Typography>
+        <Typography textAlign="left">{message || 'Are you sure?'}</Typography>
       </DialogContent>
       <DialogActions>
         <Button
@@ -57,7 +55,7 @@ export const DialogConfirm = (props: IProps) => {
           sx={{ flexBasis: '50%' }}
           fullWidth
         >
-          {t('common:confirm-no')}
+          No
         </Button>
         <Button
           onClick={handleSubmit}
@@ -66,7 +64,7 @@ export const DialogConfirm = (props: IProps) => {
           sx={{ flexBasis: '50%' }}
           fullWidth
         >
-          {t('common:confirm-yes')}
+          Yes
         </Button>
       </DialogActions>
     </Dialog>

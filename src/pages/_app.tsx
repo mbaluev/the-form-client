@@ -9,13 +9,14 @@ import { createEmotionCache, createEmotionCacheRtl } from '@theme/emotionCache';
 import { CssBaseline } from '@mui/material';
 import { ContainerProvider } from '@provider/context';
 import { theme } from '@theme/index';
-import { appWithTranslation, useTranslation } from 'next-i18next';
+import { appWithTranslation } from 'next-i18next';
 import { ErrorBoundary } from '@utils/ui/errorBoundary';
 import { EmotionCache } from '@emotion/react';
 import { AppProps } from 'next/app';
 import { AppProvider } from '@store/modules/common/app/provider';
 import { containerInitialize } from '@provider/initialize';
 import { STORE } from '@store/ids';
+import dirs from '@utils/locale/dir';
 import type IAppStore from '@store/modules/common/app/interface';
 import '../core/scss/index.scss';
 
@@ -37,15 +38,15 @@ interface MyAppProps extends AppProps {
 
 const MyApp = (props: MyAppProps) => {
   const router = useRouter();
-  const { i18n } = useTranslation();
-  const isRtl = i18n.dir() === 'rtl';
+  const isRtl = dirs.isRtl();
   const {
     Component,
     emotionCache = isRtl ? clientSideEmotionCacheRtl : clientSideEmotionCache,
     pageProps,
   } = props;
 
-  const getLayout = (Component as any).getLayout || ((page: ReactElement) => page);
+  const getLayout =
+    (Component as any).getLayout || ((page: ReactElement) => page);
 
   useEffect(() => {
     const handleStart = () => appStore.routeChangeStart();
@@ -67,7 +68,9 @@ const MyApp = (props: MyAppProps) => {
       <CacheProvider value={emotionCache}>
         <ContainerProvider container={container}>
           <AppProvider>
-            <ThemeProvider theme={{ ...theme, direction: i18n.dir(router.locale) }}>
+            <ThemeProvider
+              theme={{ ...theme, direction: dirs.getDir(router.locale) }}
+            >
               <CssBaseline />
               {getLayout(<Component {...pageProps} />)}
             </ThemeProvider>

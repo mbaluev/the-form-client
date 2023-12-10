@@ -17,14 +17,21 @@ import {
 import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
-import { useTranslation } from 'next-i18next';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { ISelectItem, SelectFieldProps } from '@components/fields/selectField/types';
+import {
+  ISelectItem,
+  SelectFieldProps,
+} from '@components/fields/selectField/types';
 import CheckIcon from '@mui/icons-material/Check';
 import { alpha } from '@mui/material/styles';
 
-const iconComponent = (hasState: boolean, required: boolean, disabled: boolean, open: boolean) => {
+const iconComponent = (
+  hasState: boolean,
+  required: boolean,
+  disabled: boolean,
+  open: boolean
+) => {
   if (hasState && !required && !disabled) return () => null;
   if (open) return ExpandLessIcon;
   return ExpandMoreIcon;
@@ -63,7 +70,6 @@ export const SelectSearchField = (props: SelectFieldProps) => {
   } = props;
 
   const selectRef = useRef<HTMLDivElement>();
-  const { t } = useTranslation();
   const theme = useTheme();
 
   const [open, setOpen] = useState<boolean>(false);
@@ -75,17 +81,23 @@ export const SelectSearchField = (props: SelectFieldProps) => {
   const [searchText, setSearchText] = useState<string>('');
   const search = (item: ISelectItem, searchString: string) => {
     return (
-      (item.value as string)?.toLowerCase().indexOf(searchString.toLowerCase()) >= 0 ||
-      (item.label as string)?.toLowerCase().indexOf(searchString.toLowerCase()) >= 0
+      (item.value as string)
+        ?.toLowerCase()
+        .indexOf(searchString.toLowerCase()) >= 0 ||
+      (item.label as string)
+        ?.toLowerCase()
+        .indexOf(searchString.toLowerCase()) >= 0
     );
   };
   const itemsFiltered = useMemo(() => {
     const selected =
-      items?.filter((item) => state === item.value).filter((item) => search(item, searchText)) ||
-      [];
+      items
+        ?.filter((item) => state === item.value)
+        .filter((item) => search(item, searchText)) || [];
     const notSelected =
-      items?.filter((item) => state !== item.value).filter((item) => search(item, searchText)) ||
-      [];
+      items
+        ?.filter((item) => state !== item.value)
+        .filter((item) => search(item, searchText)) || [];
     return [...selected, ...notSelected];
   }, [searchText, open]);
 
@@ -129,7 +141,12 @@ export const SelectSearchField = (props: SelectFieldProps) => {
   };
   const renderValue = (selected: any) => {
     const selItem = items?.find((item) => item.value === selected);
-    if (!selItem) return <Typography color={theme.palette.t1Grey['120']}>{placeholder}</Typography>;
+    if (!selItem)
+      return (
+        <Typography color={theme.palette.t1Grey['120']}>
+          {placeholder}
+        </Typography>
+      );
     return (
       <Typography
         sx={{
@@ -176,7 +193,9 @@ export const SelectSearchField = (props: SelectFieldProps) => {
           </MenuItem>
         ))}
       </Select>
-      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
+      {helperText && (
+        <FormHelperText error={!!error}>{helperText}</FormHelperText>
+      )}
       <Popover
         open={open}
         anchorEl={selectRef.current}
@@ -205,7 +224,7 @@ export const SelectSearchField = (props: SelectFieldProps) => {
               value={searchText}
               onChange={handleSearch}
               onKeyDown={(e) => e.stopPropagation()}
-              placeholder={t('common:filter-search')}
+              placeholder="Search"
               InputProps={{
                 endAdornment: searchText ? (
                   <InputAdornment position="end">
@@ -221,8 +240,11 @@ export const SelectSearchField = (props: SelectFieldProps) => {
           <Stack sx={{ flexGrow: 1, overflow: 'auto', pt: 2, pb: 2 }}>
             {(!itemsFiltered || itemsFiltered?.length === 0) && (
               <MenuItem>
-                <Typography color={theme.palette.t1Grey['130']} sx={{ width: '100%' }}>
-                  {t('common:filter-not-found')}
+                <Typography
+                  color={theme.palette.t1Grey['130']}
+                  sx={{ width: '100%' }}
+                >
+                  Not found
                 </Typography>
               </MenuItem>
             )}
@@ -246,12 +268,16 @@ export const SelectSearchField = (props: SelectFieldProps) => {
                   }}
                 >
                   <ListItemText>
-                    <Typography sx={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>
+                    <Typography
+                      sx={{ whiteSpace: 'normal', wordBreak: 'break-word' }}
+                    >
                       {item.label}
                     </Typography>
                   </ListItemText>
                   {highlightValue && checked && (
-                    <CheckIcon sx={{ fill: theme.palette.primary.main, ml: 2 }} />
+                    <CheckIcon
+                      sx={{ fill: theme.palette.primary.main, ml: 2 }}
+                    />
                   )}
                 </MenuItem>
               );

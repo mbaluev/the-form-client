@@ -1,7 +1,6 @@
 import { CSSProperties, ReactElement, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { useWindowVirtualizer } from '@tanstack/react-virtual';
-import { useTranslation } from 'next-i18next';
 import classes from './index.module.scss';
 
 interface IProps<T> {
@@ -17,7 +16,6 @@ interface IProps<T> {
 }
 
 export const VirtualizeWindow = observer(<T,>(props: IProps<T>) => {
-  const { t } = useTranslation();
   const {
     data,
     dataLength,
@@ -41,7 +39,13 @@ export const VirtualizeWindow = observer(<T,>(props: IProps<T>) => {
   useEffect(() => {
     const [last] = [...items].reverse();
     if (!last) return;
-    if (last.index >= dataLength - 1 && hasNextPage && fetchNextPage && !isLoading) fetchNextPage();
+    if (
+      last.index >= dataLength - 1 &&
+      hasNextPage &&
+      fetchNextPage &&
+      !isLoading
+    )
+      fetchNextPage();
   }, [hasNextPage, isLoading, items]);
 
   const styleParent: CSSProperties = {
@@ -63,7 +67,7 @@ export const VirtualizeWindow = observer(<T,>(props: IProps<T>) => {
                 data-index={virtualRow.index}
                 ref={virtualize.measureElement}
               >
-                {rowSkeleton || t('common:loading')}
+                {rowSkeleton || 'Loading'}
               </div>
             );
           }
@@ -74,7 +78,7 @@ export const VirtualizeWindow = observer(<T,>(props: IProps<T>) => {
                 data-index={virtualRow.index}
                 ref={virtualize.measureElement}
               >
-                {rowNoData || t('common:no-data')}
+                {rowNoData || 'Not found'}
               </div>
             );
           }
@@ -86,12 +90,16 @@ export const VirtualizeWindow = observer(<T,>(props: IProps<T>) => {
                 data-index={virtualRow.index}
                 ref={virtualize.measureElement}
               >
-                {rowNoData || t('common:no-data')}
+                {rowNoData || 'Not found'}
               </div>
             );
           }
           return (
-            <div key={virtualRow.key} data-index={virtualRow.index} ref={virtualize.measureElement}>
+            <div
+              key={virtualRow.key}
+              data-index={virtualRow.index}
+              ref={virtualize.measureElement}
+            >
               {rowRenderer(item)}
             </div>
           );

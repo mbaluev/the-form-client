@@ -10,7 +10,6 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
-import { useTranslation } from 'next-i18next';
 import { SelectFreeTextFieldProps } from '@components/fields/selectField/types';
 
 const AutocompleteInput = styled(InputBase)(({ theme }) => ({
@@ -34,7 +33,6 @@ const AutocompleteInput = styled(InputBase)(({ theme }) => ({
 
 const SelectFreeTextField = (props: SelectFreeTextFieldProps) => {
   const { value, onChange, items, helperText, error, sx } = props;
-  const { t } = useTranslation();
   const [state, setState] = useState<string | null>(null);
   const theme = useTheme();
 
@@ -49,14 +47,20 @@ const SelectFreeTextField = (props: SelectFreeTextFieldProps) => {
         value={state}
         onChange={(_, newValue) => {
           setState(newValue);
-          if (onChange) onChange({ target: { value: newValue } } as SelectChangeEvent<any>, null);
+          if (onChange)
+            onChange(
+              { target: { value: newValue } } as SelectChangeEvent<any>,
+              null
+            );
         }}
         isOptionEqualToValue={(option, val) => option === val}
-        noOptionsText={t('common:filter-not-found')}
+        noOptionsText="not-found"
         renderOption={(optionProps, option, { selected }) => (
           <MenuItem {...optionProps}>
             <ListItemText>{option}</ListItemText>
-            {selected && <CheckIcon sx={{ fill: theme.palette.primary.main, ml: 2 }} />}
+            {selected && (
+              <CheckIcon sx={{ fill: theme.palette.primary.main, ml: 2 }} />
+            )}
           </MenuItem>
         )}
         options={items || []}
@@ -65,16 +69,22 @@ const SelectFreeTextField = (props: SelectFreeTextFieldProps) => {
           <AutocompleteInput
             ref={params.InputProps.ref}
             inputProps={params.inputProps}
-            placeholder={t('common:filter-search')}
+            placeholder="search"
             onChange={(e) => {
               setState(e.target.value);
               if (onChange) onChange(e as SelectChangeEvent<any>, null);
             }}
-            sx={error ? { '& input': { borderColor: theme.palette.error.main } } : undefined}
+            sx={
+              error
+                ? { '& input': { borderColor: theme.palette.error.main } }
+                : undefined
+            }
           />
         )}
       />
-      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
+      {helperText && (
+        <FormHelperText error={!!error}>{helperText}</FormHelperText>
+      )}
     </FormControl>
   );
 };

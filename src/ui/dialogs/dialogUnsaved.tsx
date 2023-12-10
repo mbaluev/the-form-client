@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import { Button } from '@theme/button';
 import Loader from '@components/loader';
 import {
@@ -32,7 +31,6 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
     onDiscard,
     onSave,
   } = props;
-  const { t } = useTranslation();
 
   const handleCancel = () => {
     if (onCancel) onCancel();
@@ -54,13 +52,15 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
     <Dialog open={open} maxWidth="sm" fullWidth sx={{ zIndex: 1340 }}>
       <DialogTitle>
         <Typography fontWeight={600} fontSize="1.1rem">
-          {t('common:unsaved-title')}
+          Save changes?
         </Typography>
       </DialogTitle>
       <DialogContent sx={{ pb: 0 }}>
         <Stack>
-          <Typography>{t('common:unsaved-message')}</Typography>
-          <Typography>{t('common:unsaved-question')}</Typography>
+          <Typography>You have modified this page</Typography>
+          <Typography>
+            Do you want to save the changes before you go?
+          </Typography>
         </Stack>
       </DialogContent>
       <DialogActions>
@@ -70,10 +70,12 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
           color="primary"
           disabled={loading}
           sx={{ flexBasis: '50%' }}
-          startIcon={isLoadingCancel ? <Loader size={20} loading relative /> : undefined}
+          startIcon={
+            isLoadingCancel ? <Loader size={20} loading relative /> : undefined
+          }
           fullWidth
         >
-          {t('common:cancel')}
+          Cancel
         </Button>
         <Button
           onClick={handleDiscard}
@@ -81,10 +83,12 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
           color="primary"
           disabled={loading}
           sx={{ flexBasis: '50%' }}
-          startIcon={isLoadingDiscard ? <Loader size={20} loading relative /> : undefined}
+          startIcon={
+            isLoadingDiscard ? <Loader size={20} loading relative /> : undefined
+          }
           fullWidth
         >
-          {t('common:discard-changes')}
+          Discard changes
         </Button>
         <Button
           onClick={handleSave}
@@ -92,10 +96,12 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
           color="primary"
           disabled={loading}
           sx={{ flexBasis: '50%' }}
-          startIcon={isLoadingSave ? <Loader size={20} loading relative /> : undefined}
+          startIcon={
+            isLoadingSave ? <Loader size={20} loading relative /> : undefined
+          }
           fullWidth
         >
-          {t('common:save-changes')}
+          Save changes
         </Button>
       </DialogActions>
     </Dialog>

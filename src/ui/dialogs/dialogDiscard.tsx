@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import { Button } from '@theme/button';
 import {
   Dialog,
@@ -18,7 +17,6 @@ export interface IDialogDiscardProps {
 
 export const DialogDiscard = (props: IDialogDiscardProps) => {
   const { open, onClose, onCancel, onDiscard } = props;
-  const { t } = useTranslation();
 
   const handleCancel = () => {
     if (onCancel) onCancel();
@@ -33,13 +31,15 @@ export const DialogDiscard = (props: IDialogDiscardProps) => {
     <Dialog open={open} maxWidth="sm" fullWidth sx={{ zIndex: 1340 }}>
       <DialogTitle>
         <Typography fontWeight={600} fontSize="1.1rem">
-          {t('common:discard-title')}
+          Confirm discard
         </Typography>
       </DialogTitle>
       <DialogContent sx={{ pb: 0 }}>
         <Stack alignItems="flex-start">
-          <Typography textAlign="left">{t('common:discard-question')}</Typography>
-          <Typography textAlign="left">{t('common:discard-message')}</Typography>
+          <Typography textAlign="left">
+            Are you sure you want to discard all changes?
+          </Typography>
+          <Typography textAlign="left">They won't be saved</Typography>
         </Stack>
       </DialogContent>
       <DialogActions>
@@ -50,7 +50,7 @@ export const DialogDiscard = (props: IDialogDiscardProps) => {
           sx={{ flexBasis: '50%' }}
           fullWidth
         >
-          {t('common:cancel')}
+          Cancel
         </Button>
         <Button
           onClick={handleDiscard}
@@ -59,7 +59,7 @@ export const DialogDiscard = (props: IDialogDiscardProps) => {
           sx={{ flexBasis: '50%' }}
           fullWidth
         >
-          {t('common:discard-changes')}
+          Discard changes
         </Button>
       </DialogActions>
     </Dialog>

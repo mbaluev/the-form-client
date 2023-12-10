@@ -1,5 +1,4 @@
 import { Fragment, useEffect, useState } from 'react';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { DialogUnsaved } from '@ui/dialogs/dialogUnsaved';
 
@@ -11,7 +10,6 @@ interface IPromptProps {
 
 export const useUnsavedChanges = (isDirty: boolean) => {
   const router = useRouter();
-  const { t } = useTranslation();
   const [{ nextRoute, confirmed }, setNextRoute] = useState({
     nextRoute: null,
     confirmed: false,
@@ -27,7 +25,7 @@ export const useUnsavedChanges = (isDirty: boolean) => {
   const onWindowClose = (e: BeforeUnloadEvent) => {
     if (!isDirty) return;
     e.preventDefault();
-    e.returnValue = t('common:unsaved-message');
+    e.returnValue = 'You have modified this page';
     return e;
   };
   const onRouteChangeStart = (route: any) => {

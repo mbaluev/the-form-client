@@ -1,13 +1,20 @@
 import { useTheme, styled } from '@mui/material/styles';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import SettingsIcon from '@mui/icons-material/Settings';
-import Autocomplete, { AutocompleteCloseReason } from '@mui/material/Autocomplete';
+import Autocomplete, {
+  AutocompleteCloseReason,
+} from '@mui/material/Autocomplete';
 import InputBase from '@mui/material/InputBase';
-import { useState, MouseEvent, ChangeEvent, Fragment, KeyboardEvent } from 'react';
+import {
+  useState,
+  MouseEvent,
+  ChangeEvent,
+  Fragment,
+  KeyboardEvent,
+} from 'react';
 import { Button } from '@theme/button';
 import { ListItemText, MenuItem, Popover } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
-import { useTranslation } from 'next-i18next';
 
 interface PopperComponentProps {
   anchorEl?: any;
@@ -142,7 +149,6 @@ interface LabelType {
 }
 
 const SelectButtonField = () => {
-  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [value, setValue] = useState<LabelType[]>([labels[1], labels[11]]);
   const [pendingValue, setPendingValue] = useState<LabelType[]>([]);
@@ -180,7 +186,10 @@ const SelectButtonField = () => {
             <Autocomplete
               open
               multiple
-              onClose={(_: ChangeEvent<any>, reason: AutocompleteCloseReason) => {
+              onClose={(
+                _: ChangeEvent<any>,
+                reason: AutocompleteCloseReason
+              ) => {
                 if (reason === 'escape') {
                   handleClose();
                 }
@@ -199,11 +208,15 @@ const SelectButtonField = () => {
               disableCloseOnSelect
               PopperComponent={PopperComponent}
               renderTags={() => null}
-              noOptionsText={t('common:filter-not-found')}
+              noOptionsText="Not found"
               renderOption={(props, option, { selected }) => (
                 <MenuItem {...props}>
                   <ListItemText>{option.name}</ListItemText>
-                  {selected && <CheckIcon sx={{ fill: theme.palette.primary.main, ml: 2 }} />}
+                  {selected && (
+                    <CheckIcon
+                      sx={{ fill: theme.palette.primary.main, ml: 2 }}
+                    />
+                  )}
                 </MenuItem>
               )}
               options={[...labels].sort((a, b) => {
@@ -220,7 +233,7 @@ const SelectButtonField = () => {
                   ref={params.InputProps.ref}
                   inputProps={params.inputProps}
                   autoFocus
-                  placeholder={t('common:filter-search')}
+                  placeholder="Search"
                 />
               )}
             />

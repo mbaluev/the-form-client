@@ -2,7 +2,6 @@ import { IMenuItemDTO } from '@model/common/menu';
 import Link from 'next/link';
 import { useTheme, Button, lighten } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import { isActive } from '@ui/layout/navigation/menu/isActive';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -16,12 +15,15 @@ interface IProps {
 
 export const MenuItem = (props: IProps) => {
   const { item } = props;
-  const { t } = useTranslation();
   const router = useRouter();
   const theme = useTheme();
   const active = isActive(item, router.pathname);
-  const color = active ? theme.palette.accent.light : theme.palette.t1Grey['100'];
-  const colorHover = active ? lighten(theme.palette.accent.light, 0.2) : theme.palette.common.white;
+  const color = active
+    ? theme.palette.accent.light
+    : theme.palette.t1Grey['100'];
+  const colorHover = active
+    ? lighten(theme.palette.accent.light, 0.2)
+    : theme.palette.common.white;
 
   if (item.url) {
     return (
@@ -30,7 +32,7 @@ export const MenuItem = (props: IProps) => {
           sx={{ color, flex: '0 0 auto', '&:hover': { color: colorHover } }}
           startIcon={item.icon}
         >
-          {t(item.label)}
+          {item.label}
         </Button>
       </Link>
     );
@@ -39,7 +41,8 @@ export const MenuItem = (props: IProps) => {
   if (item.items && item.items.length > 0) {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event: MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
+    const handleClick = (event: MouseEvent<HTMLElement>) =>
+      setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
     return (
       <Fragment>
@@ -48,7 +51,7 @@ export const MenuItem = (props: IProps) => {
           endIcon={open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           onClick={handleClick}
         >
-          {t(item.label)}
+          {item.label}
         </Button>
         <Menu
           anchorEl={anchorEl}

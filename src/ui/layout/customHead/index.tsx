@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { useTranslation } from 'next-i18next';
 import { ReactNode } from 'react';
 
 interface IProps {
@@ -12,10 +11,9 @@ interface IProps {
 }
 
 export const CustomHead = (props: IProps) => {
-  const { t } = useTranslation();
   const {
-    title = t('common:ceo-title'),
-    description = t('common:ceo-description'),
+    title = 'The form school',
+    description = 'Online school of analytics',
     type = 'website',
     url = process.env.FRONTEND_URL,
     img = '/media/logo/totalOne.png',

@@ -18,7 +18,6 @@ import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
 import { MultiSelectFieldProps } from '@components/fields/multiSelectField/types';
 import { ChangeEvent, Fragment, useMemo, useRef, useState } from 'react';
-import { useTranslation } from 'next-i18next';
 import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -53,7 +52,8 @@ const renderValue = <ItemType,>(
   const sel = (selected as unknown[])?.filter((s) => s);
   const selLength = sel?.length;
   const selItems = items?.filter((item) => sel?.includes(item[valueField]));
-  const selLabel = (selItems?.[0]?.[labelField] as string) || (sel[0] as string);
+  const selLabel =
+    (selItems?.[0]?.[labelField] as string) || (sel[0] as string);
   if (!sel || !selLength) {
     return (
       <Typography
@@ -92,7 +92,9 @@ const renderValue = <ItemType,>(
   );
 };
 
-export const MultiSelectField = <ItemType,>(props: MultiSelectFieldProps<ItemType>) => {
+export const MultiSelectField = <ItemType,>(
+  props: MultiSelectFieldProps<ItemType>
+) => {
   const {
     valueField = 'value' as keyof ItemType,
     labelField = 'label' as keyof ItemType,
@@ -120,7 +122,6 @@ export const MultiSelectField = <ItemType,>(props: MultiSelectFieldProps<ItemTyp
   } = props;
 
   const selectRef = useRef<HTMLDivElement>();
-  const { t } = useTranslation();
   const theme = useTheme();
 
   const [open, setOpen] = useState<boolean>(false);
@@ -137,7 +138,9 @@ export const MultiSelectField = <ItemType,>(props: MultiSelectFieldProps<ItemTyp
       if (
         key !== valueField &&
         typeof item[key] === 'string' &&
-        (item[key] as unknown as string).toLowerCase().indexOf(searchString.toLowerCase()) >= 0
+        (item[key] as unknown as string)
+          .toLowerCase()
+          .indexOf(searchString.toLowerCase()) >= 0
       ) {
         ret = true;
       }
@@ -242,7 +245,9 @@ export const MultiSelectField = <ItemType,>(props: MultiSelectFieldProps<ItemTyp
         multiple
         {...other}
       />
-      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
+      {helperText && (
+        <FormHelperText error={!!error}>{helperText}</FormHelperText>
+      )}
       <Popover
         open={open}
         anchorEl={selectRef.current}
@@ -277,13 +282,17 @@ export const MultiSelectField = <ItemType,>(props: MultiSelectFieldProps<ItemTyp
                   onClick={handleSelectAll}
                   disabled={items && items.length > 10}
                 >
-                  {t('common:filter-select-all')}
+                  Select all
                 </Button>
                 <Divider orientation="vertical" sx={{ height: 'auto' }} />
               </Fragment>
             )}
-            <Button size="small" disabled={!hasState} onClick={handleClearSelected}>
-              {t('common:filter-clear')}
+            <Button
+              size="small"
+              disabled={!hasState}
+              onClick={handleClearSelected}
+            >
+              Clear
             </Button>
             <Divider orientation="vertical" sx={{ height: 'auto' }} />
             <IconButton size="small" onClick={handleIsSearch}>
@@ -323,13 +332,18 @@ export const MultiSelectField = <ItemType,>(props: MultiSelectFieldProps<ItemTyp
             ) : (
               <Fragment>
                 {(!itemsFiltered || itemsFiltered?.length === 0) && (
-                  <Typography color={theme.palette.t1Grey['130']} sx={{ width: '100%' }}>
-                    {t('common:filter-not-found')}
+                  <Typography
+                    color={theme.palette.t1Grey['130']}
+                    sx={{ width: '100%' }}
+                  >
+                    Not found
                   </Typography>
                 )}
                 {itemsFiltered?.map((item: ItemType, index: number) => {
                   const checked = state?.includes(item[valueField]);
-                  countTotal = checked ? countTotal + Number(item[countField]) : countTotal;
+                  countTotal = checked
+                    ? countTotal + Number(item[countField])
+                    : countTotal;
                   return (
                     <FormControl key={`${index}-${item[valueField]}`}>
                       <FormControlLabel
@@ -357,7 +371,9 @@ export const MultiSelectField = <ItemType,>(props: MultiSelectFieldProps<ItemTyp
                             >
                               {item[labelField] as string}
                             </Typography>
-                            <Typography>{item[countField] as string}</Typography>
+                            <Typography>
+                              {item[countField] as string}
+                            </Typography>
                           </Stack>
                         }
                       />
@@ -374,10 +390,14 @@ export const MultiSelectField = <ItemType,>(props: MultiSelectFieldProps<ItemTyp
                 variant="text"
                 onClick={handleApply}
                 fullWidth
-                startIcon={totalLoading ? <Loader relative loading size={20} /> : undefined}
+                startIcon={
+                  totalLoading ? (
+                    <Loader relative loading size={20} />
+                  ) : undefined
+                }
                 disabled={totalLoading}
               >
-                {`${t('common:filter-show')} ${total || countTotal} ${t('common:filter-results')}`}
+                {`Show ${total || countTotal} results`}
               </Button>
             </Stack>
           )}

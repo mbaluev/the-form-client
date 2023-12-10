@@ -1,7 +1,6 @@
 import { Fragment, ReactElement, ReactNode } from 'react';
 import Stack from '@mui/material/Stack';
 import { Button, IconButton, useTheme } from '@mui/material';
-import { useTranslation } from 'next-i18next';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from 'next/router';
 import Typography from '@mui/material/Typography';
@@ -21,7 +20,6 @@ interface IProps {
 
 export const BreadCrumbs = (props: IProps) => {
   const { breadCrumbs } = props;
-  const { t } = useTranslation();
   const router = useRouter();
   const theme = useTheme();
   const handleBack = async () => {
@@ -42,21 +40,11 @@ export const BreadCrumbs = (props: IProps) => {
           <Fragment key={index}>
             {item.url ? (
               <Link href={item.url} passHref>
-                <Button size="small">
-                  {typeof item.label === 'string'
-                    ? item.label && item.label.includes(':')
-                      ? t(item.label)
-                      : item.label
-                    : item.label}
-                </Button>
+                <Button size="small">{item.label}</Button>
               </Link>
             ) : (
               <Button size="small" disabled>
-                {typeof item.label === 'string'
-                  ? item.label && item.label.includes(':')
-                    ? t(item.label)
-                    : item.label
-                  : item.label}
+                {item.label}
               </Button>
             )}
             {index < arr.length - 1 && (

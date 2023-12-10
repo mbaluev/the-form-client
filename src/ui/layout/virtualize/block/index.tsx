@@ -1,7 +1,6 @@
 import { CSSProperties, ReactElement, useEffect, useRef } from 'react';
 import { observer } from 'mobx-react';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { useTranslation } from 'next-i18next';
 import classes from './index.module.scss';
 
 interface IProps<T> {
@@ -20,7 +19,6 @@ interface IProps<T> {
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 export const VirtualizeBlock = observer(<T,>(props: IProps<T>) => {
-  const { t } = useTranslation();
   const {
     data,
     dataLength,
@@ -48,7 +46,13 @@ export const VirtualizeBlock = observer(<T,>(props: IProps<T>) => {
   useEffect(() => {
     const [last] = [...items].reverse();
     if (!last) return;
-    if (last.index >= dataLength - 1 && hasNextPage && !isLoading && fetchNextPage) fetchNextPage();
+    if (
+      last.index >= dataLength - 1 &&
+      hasNextPage &&
+      !isLoading &&
+      fetchNextPage
+    )
+      fetchNextPage();
   }, [hasNextPage, isLoading, items]);
 
   const styleParent: CSSProperties = {
@@ -71,14 +75,22 @@ export const VirtualizeBlock = observer(<T,>(props: IProps<T>) => {
           if (isExtraRow) {
             if (isLoading) {
               return (
-                <div key={virtualRow.key} className={classes.list_row} style={styleRow}>
-                  {rowSkeleton || t('common:loading')}
+                <div
+                  key={virtualRow.key}
+                  className={classes.list_row}
+                  style={styleRow}
+                >
+                  {rowSkeleton || 'Loading'}
                 </div>
               );
             } else {
               return (
-                <div key={virtualRow.key} className={classes.list_row} style={styleRow}>
-                  {rowNoData || t('common:no-data')}
+                <div
+                  key={virtualRow.key}
+                  className={classes.list_row}
+                  style={styleRow}
+                >
+                  {rowNoData || 'Not found'}
                 </div>
               );
             }
@@ -86,13 +98,21 @@ export const VirtualizeBlock = observer(<T,>(props: IProps<T>) => {
           const item = data?.[virtualRow.index];
           if (!item) {
             return (
-              <div key={virtualRow.key} className={classes.list_row} style={styleRow}>
-                {rowNoData || t('common:no-data')}
+              <div
+                key={virtualRow.key}
+                className={classes.list_row}
+                style={styleRow}
+              >
+                {rowNoData || 'Not found'}
               </div>
             );
           }
           return (
-            <div key={virtualRow.key} className={classes.list_row} style={styleRow}>
+            <div
+              key={virtualRow.key}
+              className={classes.list_row}
+              style={styleRow}
+            >
               {rowRenderer(item)}
             </div>
           );

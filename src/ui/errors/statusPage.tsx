@@ -5,7 +5,6 @@ import IconError from '@components/svg/icons/components/error';
 import Stack, { StackProps } from '@mui/material/Stack';
 import { Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { useTranslation } from 'next-i18next';
 
 interface IProps {
   status?: 'success' | 'error';
@@ -15,9 +14,12 @@ interface IProps {
 }
 
 export const StatusPage = observer((props: IProps) => {
-  const { t } = useTranslation();
-
-  const { status = 'error', message, buttons, buttonsDirection = 'row' } = props;
+  const {
+    status = 'error',
+    message,
+    buttons,
+    buttonsDirection = 'row',
+  } = props;
 
   const Icon = () => {
     if (status === 'success') return <IconDone sx={{ fontSize: '6rem' }} />;
@@ -28,13 +30,13 @@ export const StatusPage = observer((props: IProps) => {
     if (status === 'success')
       return (
         <Typography fontSize="1.7rem" fontWeight={600} textAlign="center">
-          {t('common:error-thank-you')}
+          Thank you!
         </Typography>
       );
     if (status === 'error')
       return (
         <Typography fontSize="1.7rem" fontWeight={600} textAlign="center">
-          {t('common:error-oh-no')}
+          Oh no!
         </Typography>
       );
 

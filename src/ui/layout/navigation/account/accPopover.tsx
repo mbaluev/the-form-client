@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import { Avatar, ListItemText, useTheme } from '@mui/material';
@@ -15,7 +14,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 
 export const AccPopover = observer(() => {
-  const { t } = useTranslation();
   const theme = useTheme();
   const { isAuth } = useAuthStore();
 
@@ -34,8 +32,12 @@ export const AccPopover = observer(() => {
           <Stack spacing={3} sx={{ pt: 1, pr: 3, pb: 3, pl: 3 }}>
             <Stack direction="row" spacing={3} justifyContent="space-between">
               <Typography>name</Typography>
-              <Button size="small" endIcon={<IconSignOut />} onClick={() => onClickSignOut()}>
-                {t('menu:acc-sign-out')}
+              <Button
+                size="small"
+                endIcon={<IconSignOut />}
+                onClick={() => onClickSignOut()}
+              >
+                Sign out
               </Button>
             </Stack>
             <Stack direction="row" spacing={3}>
@@ -48,7 +50,11 @@ export const AccPopover = observer(() => {
                 }}
                 src="src"
               >
-                <Typography fontSize="1.1rem" fontWeight={600} color={theme.palette.t1Grey['130']}>
+                <Typography
+                  fontSize="1.1rem"
+                  fontWeight={600}
+                  color={theme.palette.t1Grey['130']}
+                >
                   <FirstLetters name="name" />
                 </Typography>
               </Avatar>
@@ -64,7 +70,7 @@ export const AccPopover = observer(() => {
             </ListItemIcon>
             <ListItemText>
               <Typography fontWeight={600} color={theme.palette.primary.main}>
-                {t('menu:acc-sign-in-with-another-account')}
+                Sign in with another account
               </Typography>
             </ListItemText>
           </MenuItem>
@@ -72,7 +78,11 @@ export const AccPopover = observer(() => {
       )}
       {!isAuth && (
         <Fragment>
-          <Stack direction="row" spacing={3} sx={{ pt: 1, pr: 3, pb: 3, pl: 3 }}>
+          <Stack
+            direction="row"
+            spacing={3}
+            sx={{ pt: 1, pr: 3, pb: 3, pl: 3 }}
+          >
             <Avatar
               variant="circular"
               sx={{
@@ -84,9 +94,9 @@ export const AccPopover = observer(() => {
               <IconProfile sx={{ color: theme.palette.t1Grey['130'] }} />
             </Avatar>
             <Stack justifyContent="space-between">
-              <Typography fontWeight={600}>{t('menu:acc-guest-user')}</Typography>
+              <Typography fontWeight={600}>Guest</Typography>
               <Typography fontSize="0.9rem" color={theme.palette.t1Grey['120']}>
-                {t('menu:acc-guest-hello')}
+                Hello
               </Typography>
             </Stack>
           </Stack>
@@ -96,7 +106,7 @@ export const AccPopover = observer(() => {
             </ListItemIcon>
             <ListItemText>
               <Typography fontWeight={600} color={theme.palette.primary.main}>
-                {t('menu:acc-sign-in')}
+                Sign in
               </Typography>
             </ListItemText>
           </MenuItem>

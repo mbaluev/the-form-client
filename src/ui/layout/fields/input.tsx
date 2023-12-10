@@ -1,10 +1,15 @@
-import { Controller, FieldValues, Path, RegisterOptions, useFormContext } from 'react-hook-form';
+import {
+  Controller,
+  FieldValues,
+  Path,
+  RegisterOptions,
+  useFormContext,
+} from 'react-hook-form';
 import { TextInputField } from 'core/components/fields/textInputField';
 import { TextInputFieldProps } from '@components/fields/textInputField/types';
 import { Warning } from '@ui/layout/fields/warning';
 import { useState } from 'react';
 import { Copy } from '@components/copy';
-import { useTranslation } from 'next-i18next';
 import { InputAdornment } from '@mui/material';
 import Loader from '@components/loader';
 
@@ -15,7 +20,6 @@ interface IProps extends TextInputFieldProps {
 
 export const Input = <T extends FieldValues>(props: IProps) => {
   const { name, rules, loading, ...otherProps } = props;
-  const { t } = useTranslation();
   const { control } = useFormContext<T>();
   const [hover, setHover] = useState<boolean>(false);
   const handleMouseEnter = () => setHover(true);
@@ -27,7 +31,7 @@ export const Input = <T extends FieldValues>(props: IProps) => {
       rules={{
         maxLength: {
           value: 256,
-          message: `${t('common:validation-max-length')} 256`,
+          message: 'Max length is 256',
         },
         ...rules,
       }}
