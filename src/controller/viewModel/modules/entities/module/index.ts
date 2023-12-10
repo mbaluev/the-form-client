@@ -5,8 +5,7 @@ import { ModuleService } from 'controller/service/modules/entities/module';
 import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
 import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
 import { action, makeObservable, observable } from 'mobx';
-import { VIEW_MODEL } from '@viewModel/ids';
-import { FilterViewModel } from '@viewModel/modules/common/filter';
+import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
 export class ModuleViewModel
@@ -14,8 +13,6 @@ export class ModuleViewModel
   implements IModuleViewModel
 {
   @inject(SERVICE.Module) protected serviceModule!: ModuleService;
-
-  @inject(VIEW_MODEL.Filter) protected filters!: FilterViewModel;
 
   constructor() {
     super();
@@ -49,13 +46,26 @@ export class ModuleViewModel
 
   // --- override
 
-  getList = async () => {
+  getList = async (query?: ParsedUrlQuery) => {
     this.setListLoading(true);
     try {
-      const data = await this.serviceModule.getModules(this.filters.filters);
+      const data = await this.serviceModule.getModules(query);
       this.setList(data);
     } catch (err) {
     } finally {
+      this.setListLoading(false);
+    }
+  };
+
+  getData = async (id?: string, query?: ParsedUrlQuery) => {
+    this.setDataLoading(true);
+    try {
+      const data = await this.serviceModule.getModule(id, query);
+      this.setData(data);
+      this.setModuleData(data);
+    } catch (err) {
+    } finally {
+      this.setDataLoading(false);
     }
   };
 

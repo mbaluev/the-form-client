@@ -5,8 +5,6 @@ import { action, makeObservable, observable } from 'mobx';
 import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 import { IUserDTO } from '@model/entities/user';
 import { UserService } from 'controller/service/modules/entities/user';
-import { VIEW_MODEL } from '@viewModel/ids';
-import { FilterViewModel } from '@viewModel/modules/common/filter';
 import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
@@ -15,8 +13,6 @@ export class UserViewModel
   implements IUserViewModel
 {
   @inject(SERVICE.User) protected serviceUser!: UserService;
-
-  @inject(VIEW_MODEL.Filter) protected filters!: FilterViewModel;
 
   constructor() {
     super();

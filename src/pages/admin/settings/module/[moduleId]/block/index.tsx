@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { MasterSchool } from '@ui/masters/masterSchool';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
-import { useService } from '@hooks/useService';
-import { SERVICE } from '@service/ids';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { observer } from 'mobx-react';
-import { IBlockService } from '@service/modules/entities/block/interface';
 import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { BlockPage } from '@ui/pages/admin/settings/block/blockPage';
-import { IModuleService } from '@service/modules/entities/module/interface';
 import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
@@ -17,39 +12,18 @@ import { FilterText } from '@ui/filter/filterText';
 import { useRouter } from 'next/router';
 import { CellClickedEvent } from 'ag-grid-community';
 import { ParsedUrlQuery } from 'querystring';
-import { getCookieToken } from '@utils/cookie/getCookieToken';
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext<{ moduleId: string }>
-) => {
-  const { params, query } = context;
-  const id = params?.moduleId;
-  const token = getCookieToken(context);
-  const serviceModule = useService<IModuleService>(SERVICE.Module);
-  const serviceBlock = useService<IBlockService>(SERVICE.Block);
-
-  const modules = (await serviceModule.getModules(undefined, token)) || null;
-  const module = (await serviceModule.getModule(id, undefined, token)) || null;
-  const blocks =
-    (await serviceBlock.getBlocks({ ...query, moduleId: id }, token)) || null;
-
-  return { props: { modules, module, blocks } };
-};
-
-const Blocks = (
-  props: InferGetServerSidePropsType<typeof getServerSideProps>
-) => {
-  const { modules, module, blocks } = props;
+const Blocks = () => {
   const {
-    setList: setModules,
-    setData: setModule,
-    setModuleData,
+    getList: getModules,
+    getData: getModule,
     clearList: clearModules,
     clearData: clearModule,
     clearModuleData,
+    data: module,
   } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
   const {
-    setList: setBlocks,
+    getList: getBlocks,
     clearList: clearBlocks,
     clearData: clearBlock,
     clearBlockData,
@@ -89,6 +63,7 @@ const Blocks = (
     />,
   ];
   const router = useRouter();
+  const moduleId = router.query.moduleId as string;
   const onClick = (params: CellClickedEvent) => {
     const query: ParsedUrlQuery = { ...router.query, blockId: params.data.id };
     router.push({
@@ -106,17 +81,18 @@ const Blocks = (
   };
 
   useEffect(() => {
-    setModules(modules);
-    setModule(module);
-    setModuleData(module);
-    setBlocks(blocks);
+    if (moduleId) {
+      getModules();
+      getModule(moduleId);
+      getBlocks({ moduleId });
+    }
     return () => {
       clearModules();
       clearModule();
       clearModuleData();
       clearBlocks();
     };
-  });
+  }, [moduleId]);
 
   return (
     <BlockPage

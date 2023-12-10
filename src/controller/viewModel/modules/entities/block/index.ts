@@ -5,8 +5,7 @@ import { BlockService } from 'controller/service/modules/entities/block';
 import { IBlockViewModel } from '@viewModel/modules/entities/block/interface';
 import { BaseCardViewModel } from 'controller/viewModel/modules/base/baseCard';
 import { action, makeObservable, observable } from 'mobx';
-import { VIEW_MODEL } from '@viewModel/ids';
-import { FilterViewModel } from '@viewModel/modules/common/filter';
+import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
 export class BlockViewModel
@@ -14,8 +13,6 @@ export class BlockViewModel
   implements IBlockViewModel
 {
   @inject(SERVICE.Block) protected serviceBlock!: BlockService;
-
-  @inject(VIEW_MODEL.Filter) protected filters!: FilterViewModel;
 
   constructor() {
     super();
@@ -50,13 +47,26 @@ export class BlockViewModel
 
   // --- override
 
-  getList = async () => {
+  getList = async (query?: ParsedUrlQuery) => {
     this.setListLoading(true);
     try {
-      const data = await this.serviceBlock.getBlocks(this.filters.filters);
+      const data = await this.serviceBlock.getBlocks(query);
       this.setList(data);
     } catch (err) {
     } finally {
+      this.setListLoading(false);
+    }
+  };
+
+  getData = async (id?: string, query?: ParsedUrlQuery) => {
+    this.setDataLoading(true);
+    try {
+      const data = await this.serviceBlock.getBlock(id, query);
+      this.setData(data);
+      this.setBlockData(data);
+    } catch (err) {
+    } finally {
+      this.setDataLoading(false);
     }
   };
 
