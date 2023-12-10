@@ -1,20 +1,18 @@
-import { useIsAuthenticated } from '@azure/msal-react';
 import Menu from '@mui/material/Menu';
 import IconButton from '@mui/material/IconButton';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Avatar, Skeleton, useTheme } from '@mui/material';
 import { observer } from 'mobx-react';
 import { AccPopover } from '@ui/layout/navigation/account/accPopover';
-import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 import { Fragment, useState, MouseEvent } from 'react';
 import Typography from '@mui/material/Typography';
 import { FirstLetters } from '@utils/ui/firstLetters';
 import { useAppStore } from '@store/modules/common/app/useAppStore';
+import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 
 export const Account = observer(() => {
+  const { isAuth } = useAuthStore();
   const { isLoading } = useAppStore();
-  const { currentAccount } = useAuthStore();
-  const isAuthenticated = useIsAuthenticated();
   const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -27,7 +25,7 @@ export const Account = observer(() => {
   return (
     <Fragment>
       <IconButton onClick={handleOpen} sx={{ p: '3px' }}>
-        {isAuthenticated &&
+        {isAuth &&
           (isLoading ? (
             <Skeleton
               variant="circular"
@@ -46,14 +44,14 @@ export const Account = observer(() => {
                   backgroundColor: theme.palette.t1Grey['210'],
                 },
               }}
-              src={currentAccount?.photo}
+              src="src"
             >
               <Typography fontSize="0.9rem" fontWeight={600}>
-                <FirstLetters name={currentAccount?.name} />
+                <FirstLetters name="name" />
               </Typography>
             </Avatar>
           ))}
-        {!isAuthenticated && (
+        {!isAuth && (
           <Avatar
             variant="circular"
             sx={{ width: 30, height: 30, backgroundColor: 'transparent' }}

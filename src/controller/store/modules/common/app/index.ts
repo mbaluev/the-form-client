@@ -10,9 +10,7 @@ import type IAppStore from '@store/modules/common/app/interface';
 import type IAuthStore from '@store/modules/common/auth/interface';
 import type IAxiosApi from '@api/modules/axios/interface';
 import type IClientService from '@service/modules/client/interface';
-import type ILanguageStore from '@store/modules/common/language/interface';
 import type INotifyStore from '@store/modules/common/notify/interface';
-import type ICompanyViewStore from '@store/modules/onboard/company/view/interface';
 
 @injectable()
 export class AppStore extends BaseStore implements IAppStore {
@@ -20,13 +18,9 @@ export class AppStore extends BaseStore implements IAppStore {
 
   @inject(SERVICE.Client) private clientService!: IClientService;
 
-  @inject(STORE.Language) private languageStore!: ILanguageStore;
-
   @inject(STORE.Notify) private notifyStore!: INotifyStore;
 
   @inject(STORE.Auth) private authStore!: IAuthStore;
-
-  @inject(STORE.CompanyView) private CompanyViewStore!: ICompanyViewStore;
 
   constructor() {
     super();
@@ -60,11 +54,9 @@ export class AppStore extends BaseStore implements IAppStore {
 
   init = async () => {
     try {
-      await this.languageStore.init();
       await this.authStore.init();
       this.axiosApi.init(this.authStore.token, process.env.REACT_APP_CORE_URL);
       this.clientService.init(process.env.REACT_APP_CORE_URL);
-      await this.CompanyViewStore.init();
     } catch (err) {
       this.notifyStore.add(err);
     } finally {

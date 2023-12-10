@@ -3,8 +3,3 @@ export interface IFilterDTO {
   label: string;
   count?: number;
 }
-
-export interface IFacet {
-  groupName: string;
-  values: { value: string; count: number }[];
-}

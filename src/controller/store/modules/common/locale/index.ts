@@ -43,7 +43,6 @@ export class LocaleStore extends BaseStore implements ILocaleStore {
       setFirstWeekYear: action,
       setTimeZone: action,
 
-      sample: computed,
       monthNames: computed,
       monthNamesShort: computed,
       languageName: computed,
@@ -316,21 +315,6 @@ export class LocaleStore extends BaseStore implements ILocaleStore {
     const currency = to || this.currency;
     return `${this.fCurrency(value, currency, opts)} ${currency}`;
   };
-
-  // --- sample ---
-
-  get sample() {
-    const today = new Date();
-    const num = 1234567890.12345;
-    return {
-      date: this.fDate(today),
-      dateFormat: this.fDateFormat,
-      time: this.fTime(today),
-      number: this.fNumber(num),
-      currency: this.fCurrencySymbol(num),
-      currencyExplicit: this.fCurrencyExplicit(num),
-    };
-  }
 
   // --- helpers ---
 

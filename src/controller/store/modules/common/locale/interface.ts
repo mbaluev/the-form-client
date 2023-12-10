@@ -1,4 +1,3 @@
-import type { ILocaleSample } from '@model/common/locale';
 import type { ICurrency } from '@utils/locale/currency/iso-4217';
 import type IBaseStore from '@store/modules/base/store/interface';
 
@@ -67,7 +66,6 @@ export default interface ILocaleStore extends IBaseStore {
     opts?: Intl.NumberFormatOptions
   ) => string;
 
-  sample: ILocaleSample;
   monthNames: string[];
   monthNamesShort: string[];
   languageName?: string;

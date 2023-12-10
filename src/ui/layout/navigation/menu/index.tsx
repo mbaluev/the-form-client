@@ -9,7 +9,6 @@ import { IMenuItemDTO } from '@model/common/menu';
 import { Search } from '@ui/layout/navigation/search';
 import { MenuItem } from '@ui/layout/navigation/menu/menuItem';
 import { Wrapper } from '@ui/layout/navigation/menu/wrapper';
-import { Language } from '@ui/layout/navigation/language';
 import IconTotalOne from '@components/svg/icons/components/totalOne';
 
 export const Menu = () => {
@@ -29,7 +28,6 @@ export const Menu = () => {
             </Wrapper>
           ))}
           <Search />
-          <Language />
           <Account />
         </Stack>
       </Toolbar>

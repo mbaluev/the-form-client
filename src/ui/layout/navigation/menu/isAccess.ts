@@ -1,9 +1,9 @@
 import { IMenuItemDTO } from '@model/common/menu';
-import { useIsAuthenticated } from '@azure/msal-react';
+import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 
 export const isAccess = (item: IMenuItemDTO) => {
-  const isAuthenticated = useIsAuthenticated();
-  if (item.display === 'authenticate') return isAuthenticated;
-  if (item.display === 'not-authenticate') return !isAuthenticated;
+  const { isAuth } = useAuthStore();
+  if (item.display === 'authenticate') return isAuth;
+  if (item.display === 'not-authenticate') return !isAuth;
   return true;
 };

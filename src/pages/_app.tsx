@@ -13,7 +13,6 @@ import { appWithTranslation, useTranslation } from 'next-i18next';
 import { ErrorBoundary } from '@utils/ui/errorBoundary';
 import { EmotionCache } from '@emotion/react';
 import { AppProps } from 'next/app';
-import { AuthProvider } from '@store/modules/common/auth/provider';
 import { AppProvider } from '@store/modules/common/app/provider';
 import { containerInitialize } from '@provider/initialize';
 import { STORE } from '@store/ids';
@@ -69,14 +68,12 @@ const MyApp = (props: MyAppProps) => {
       <CacheProvider value={emotionCache}>
         <ContainerProvider container={container}>
           <AppProvider>
-            <AuthProvider>
-              <ThemeProvider
-                theme={{ ...theme, direction: i18n.dir(router.locale) }}
-              >
-                <CssBaseline />
-                {getLayout(<Component {...pageProps} />)}
-              </ThemeProvider>
-            </AuthProvider>
+            <ThemeProvider
+              theme={{ ...theme, direction: i18n.dir(router.locale) }}
+            >
+              <CssBaseline />
+              {getLayout(<Component {...pageProps} />)}
+            </ThemeProvider>
           </AppProvider>
         </ContainerProvider>
       </CacheProvider>
