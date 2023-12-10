@@ -1,6 +1,4 @@
 import type { NextRouter } from 'next/router';
-import { DistinctValueResult, FilterItem } from '@service/modules/client/api';
-import { IFilterDTO } from '@model/common/filter';
 
 export default interface IFilterStore {
   // router
@@ -25,17 +23,4 @@ export default interface IFilterStore {
   hasFilters: boolean;
   clearFilters: () => void;
   setFilter: (key: string, value?: any, operator?: any) => void;
-
-  // operators
-  operators: Record<string, any>;
-  hasOperators: boolean;
-  clearOperators: () => void;
-  setOperator: (key: string, value?: any) => void;
-  getOperator: (key?: string) => any;
-
-  // ui
-  isMore?: boolean;
-  setIsMore: (value?: boolean) => void;
-  getFilterItems: (except?: string, property?: string, value?: any[]) => FilterItem[] | undefined;
-  getFilterDistinctValues: (name: string, data: DistinctValueResult) => IFilterDTO[] | undefined;
 }
