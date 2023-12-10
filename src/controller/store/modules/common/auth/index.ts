@@ -50,7 +50,7 @@ export class AuthStore extends BaseCardStore<IUserDTO> implements IAuthStore {
 
   // --- observable
 
-  token?: string | null = getCookie(cookie.names.token) as string;
+  token?: string | null = undefined;
 
   setToken = (data?: string | null) => {
     this.token = data;
@@ -69,6 +69,10 @@ export class AuthStore extends BaseCardStore<IUserDTO> implements IAuthStore {
   };
 
   // --- action
+
+  init = () => {
+    this.setToken(getCookie(cookie.names.token) as string);
+  };
 
   signup = async () => {
     this.validate();

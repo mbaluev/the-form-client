@@ -25,7 +25,10 @@ export const Search = observer(() => {
   const request = (value?: string) => {
     setFiltersValue(value);
   };
-  const debounceRequestRedirect = useCallback(debounce(requestRedirect, 1000), []);
+  const debounceRequestRedirect = useCallback(
+    debounce(requestRedirect, 1000),
+    []
+  );
   const debounceRequest = useCallback(debounce(request, 1000), []);
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setState(e.target.value);
@@ -44,6 +47,7 @@ export const Search = observer(() => {
       value={state || ''}
       onChange={onChange}
       placeholder="Search"
+      inputProps={{ autoComplete: 'off' }}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">

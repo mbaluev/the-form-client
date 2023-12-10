@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { ReactElement, useEffect } from 'react';
-import { autorun, configure } from 'mobx';
+import { configure } from 'mobx';
 import { enableStaticRendering } from 'mobx-react';
 import { useRouter } from 'next/router';
 import { CacheProvider } from '@emotion/react';
@@ -13,12 +13,12 @@ import { appWithTranslation } from 'next-i18next';
 import { ErrorBoundary } from '@utils/ui/errorBoundary';
 import { EmotionCache } from '@emotion/react';
 import { AppProps } from 'next/app';
-import { AppProvider } from '@store/modules/common/app/provider';
 import { containerInitialize } from '@provider/initialize';
 import { STORE } from '@store/ids';
 import dirs from '@utils/locale/dir';
 import type IAppStore from '@store/modules/common/app/interface';
 import '../core/scss/index.scss';
+import IAuthStore from '@store/modules/common/auth/interface';
 
 configure({ enforceActions: 'observed' });
 enableStaticRendering(typeof window === 'undefined');
@@ -30,7 +30,7 @@ const clientSideEmotionCacheRtl = createEmotionCacheRtl();
 // init app
 const container = containerInitialize();
 const appStore = container.get<IAppStore>(STORE.App);
-autorun(() => appStore.init());
+const authStore = container.get<IAuthStore>(STORE.Auth);
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -45,9 +45,11 @@ const MyApp = (props: MyAppProps) => {
     pageProps,
   } = props;
 
-  const getLayout = (Component as any).getLayout || ((page: ReactElement) => page);
+  const getLayout =
+    (Component as any).getLayout || ((page: ReactElement) => page);
 
   useEffect(() => {
+    authStore.init();
     const handleStart = () => appStore.routeChangeStart();
     const handleComplete = () => appStore.routeChangeComplete();
 
@@ -66,12 +68,12 @@ const MyApp = (props: MyAppProps) => {
     <ErrorBoundary>
       <CacheProvider value={emotionCache}>
         <ContainerProvider container={container}>
-          <AppProvider>
-            <ThemeProvider theme={{ ...theme, direction: dirs.getDir(router.locale) }}>
-              <CssBaseline />
-              {getLayout(<Component {...pageProps} />)}
-            </ThemeProvider>
-          </AppProvider>
+          <ThemeProvider
+            theme={{ ...theme, direction: dirs.getDir(router.locale) }}
+          >
+            <CssBaseline />
+            {getLayout(<Component {...pageProps} />)}
+          </ThemeProvider>
         </ContainerProvider>
       </CacheProvider>
     </ErrorBoundary>
