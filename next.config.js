@@ -44,14 +44,8 @@ module.exports = {
   },
   env: {
     REACT_APP_CORE_URL: process.env.REACT_APP_CORE_URL,
-    REACT_HOST_DOCKER_INTERNAL: process.env.REACT_HOST_DOCKER_INTERNAL,
   },
   images: {
-    domains: [
-      // 'lh3.googleusercontent.com',
-      // 'scontent.fdps8-1.fna.fbcdn.net',
-      // 'platform-lookaside.fbsbx.com',
-      // 'media-exp1.licdn.com',
-    ],
+    domains: [],
   },
 };
