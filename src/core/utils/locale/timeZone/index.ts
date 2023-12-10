@@ -8,8 +8,8 @@ const name = (timeZone?: string | null) => {
 
 const timeZones = {
   default:
-    parseTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone, labelStyle)
-      ?.value || Intl.DateTimeFormat().resolvedOptions().timeZone,
+    parseTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone, labelStyle)?.value ||
+    Intl.DateTimeFormat().resolvedOptions().timeZone,
   items: getOptions(labelStyle),
   name,
 };

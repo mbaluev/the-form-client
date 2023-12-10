@@ -318,10 +318,7 @@ if (Intl.getSupportedCurrencies == undefined) {
           currency,
         });
         const fmt = nf.format(123);
-        if (
-          fmt.substring(0, 3) != currency &&
-          fmt.substring(fmt.length - 3) != currency
-        ) {
+        if (fmt.substring(0, 3) != currency && fmt.substring(fmt.length - 3) != currency) {
           return true;
         }
       } catch (e) {}

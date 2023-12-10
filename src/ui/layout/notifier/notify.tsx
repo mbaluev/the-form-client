@@ -1,14 +1,6 @@
 import { observer } from 'mobx-react';
 import { useNotifyStore } from '@store/modules/common/notify/useNotifyStore';
-import {
-  Alert,
-  AlertProps,
-  Box,
-  Container,
-  IconButton,
-  Stack,
-  useTheme,
-} from '@mui/material';
+import { Alert, AlertProps, Box, Container, IconButton, Stack, useTheme } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { INotifyItem } from '@model/common/notify';
 import { Copy } from '@components/copy';

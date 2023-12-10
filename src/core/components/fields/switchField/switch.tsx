@@ -3,11 +3,7 @@ import { styled } from '@mui/material/styles';
 import type { SwitchProps } from '@mui/material';
 
 export const Switch = styled((props: SwitchProps) => (
-  <MuiSwitch
-    focusVisibleClassName=".Mui-focusVisible"
-    disableRipple
-    {...props}
-  />
+  <MuiSwitch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
   width: 40,
   height: 20,

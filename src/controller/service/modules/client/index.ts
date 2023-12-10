@@ -99,16 +99,10 @@ export class ClientService implements IClientService {
   init = (baseUrl?: string) => {
     this.AzureResources = new AzureResourcesClient(baseUrl, this.axiosApi.api);
     this.B2CSupport = new B2CSupportClient(baseUrl, this.axiosApi.api);
-    this.BusinessPartners = new BusinessPartnersClient(
-      baseUrl,
-      this.axiosApi.api
-    );
+    this.BusinessPartners = new BusinessPartnersClient(baseUrl, this.axiosApi.api);
     this.Cache = new CacheClient(baseUrl, this.axiosApi.api);
     this.Countries = new CountriesClient(baseUrl, this.axiosApi.api);
-    this.CustomAttributes = new CustomAttributesClient(
-      baseUrl,
-      this.axiosApi.api
-    );
+    this.CustomAttributes = new CustomAttributesClient(baseUrl, this.axiosApi.api);
     this.DbMigration = new DbMigrationClient(baseUrl, this.axiosApi.api);
     this.EntityTypes = new EntityTypesClient(baseUrl, this.axiosApi.api);
     this.Files = new FilesClient(baseUrl, this.axiosApi.api);
@@ -116,28 +110,13 @@ export class ClientService implements IClientService {
     this.Kubernetes = new KubernetesClient(baseUrl, this.axiosApi.api);
     this.PriceLists = new PriceListsClient(baseUrl, this.axiosApi.api);
     this.Products = new ProductsClient(baseUrl, this.axiosApi.api);
-    this.ProductVariants = new ProductVariantsClient(
-      baseUrl,
-      this.axiosApi.api
-    );
-    this.SupplierPriceListItems = new SupplierPriceListItemsClient(
-      baseUrl,
-      this.axiosApi.api
-    );
+    this.ProductVariants = new ProductVariantsClient(baseUrl, this.axiosApi.api);
+    this.SupplierPriceListItems = new SupplierPriceListItemsClient(baseUrl, this.axiosApi.api);
     this.TenantConfigs = new TenantConfigsClient(baseUrl, this.axiosApi.api);
     this.Media = new MediaClient(baseUrl, this.axiosApi.api);
-    this.TenantIntegrations = new TenantIntegrationsClient(
-      baseUrl,
-      this.axiosApi.api
-    );
-    this.TenantCspIntegrations = new TenantCspIntegrationsClient(
-      baseUrl,
-      this.axiosApi.api
-    );
-    this.TenantBusinessPartners = new TenantBusinessPartnersClient(
-      baseUrl,
-      this.axiosApi.api
-    );
+    this.TenantIntegrations = new TenantIntegrationsClient(baseUrl, this.axiosApi.api);
+    this.TenantCspIntegrations = new TenantCspIntegrationsClient(baseUrl, this.axiosApi.api);
+    this.TenantBusinessPartners = new TenantBusinessPartnersClient(baseUrl, this.axiosApi.api);
     this.T1Tenants = new T1TenantsClient(baseUrl, this.axiosApi.api);
   };
 }

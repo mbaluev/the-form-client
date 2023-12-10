@@ -5,22 +5,10 @@ import { SwitchFieldProps } from '@components/fields/switchField/types';
 import { Switch } from '@components/fields/switchField/switch';
 
 export const SwitchField = (props: SwitchFieldProps) => {
-  const {
-    className,
-    value = false,
-    onChange,
-    label,
-    error,
-    helperText,
-    sx,
-    ...other
-  } = props;
+  const { className, value = false, onChange, label, error, helperText, sx, ...other } = props;
 
   const [state, setState] = useState<boolean>(value);
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    checked: boolean
-  ) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     setState(checked);
     if (onChange) onChange(event, checked);
   };
@@ -40,9 +28,7 @@ export const SwitchField = (props: SwitchFieldProps) => {
         control={<Switch checked={state} onChange={handleChange} {...other} />}
         label={label}
       />
-      {helperText && (
-        <FormHelperText error={!!error}>{helperText}</FormHelperText>
-      )}
+      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
     </FormControl>
   );
 };

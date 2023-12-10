@@ -29,14 +29,7 @@ export interface MonthRangeFieldProps {
 }
 
 export const MonthRangeField: FC<MonthRangeFieldProps> = observer((props) => {
-  const {
-    value,
-    onChange,
-    type = 'button',
-    inputProps,
-    buttonProps,
-    placeholder,
-  } = props;
+  const { value, onChange, type = 'button', inputProps, buttonProps, placeholder } = props;
 
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const open = Boolean(anchorEl);

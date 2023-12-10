@@ -1,11 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import {
-  cloneElement,
-  Fragment,
-  ReactElement,
-  useEffect,
-  useState,
-} from 'react';
+import { cloneElement, Fragment, ReactElement, useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 import { Button } from '@theme/button';
 import { useFilterStore } from '@store/modules/common/filter/useFilterStore';
@@ -15,13 +9,7 @@ import TuneIcon from '@mui/icons-material/Tune';
 import { Tooltip } from '@theme/tooltip';
 import { Box, Skeleton } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import {
-  MEDIA_XL,
-  MEDIA_LG,
-  MEDIA_MD,
-  MEDIA_SM,
-  useWindowSize,
-} from '@hooks/useWindowSize';
+import { MEDIA_XL, MEDIA_LG, MEDIA_MD, MEDIA_SM, useWindowSize } from '@hooks/useWindowSize';
 
 type TFilters = ReactElement[] | undefined;
 const onGoTop = () => window.scrollTo(0, 0);
@@ -31,8 +19,7 @@ interface IButtonLimitProps {
 }
 const ButtonLimit = (props: IButtonLimitProps) => {
   const { filtersBarMore } = props;
-  if (!filtersBarMore || (filtersBarMore && filtersBarMore.length <= 0))
-    return null;
+  if (!filtersBarMore || (filtersBarMore && filtersBarMore.length <= 0)) return null;
 
   const TooltipHtml = (
     <Fragment>
@@ -76,9 +63,7 @@ const ButtonMore = observer((props: IButtonMoreProps) => {
 
   const TooltipHtml = (
     <Fragment>
-      {filtersMoreSel?.map((f, index) => (
-        <div key={index}>{f.props.placeholder}</div>
-      ))}
+      {filtersMoreSel?.map((f, index) => <div key={index}>{f.props.placeholder}</div>)}
     </Fragment>
   );
 
@@ -126,11 +111,7 @@ const ButtonReset = observer((props: IButtonResetProps) => {
   const { t } = useTranslation();
   if (!reset || !hasFilters) return null;
   return (
-    <Button
-      variant="text"
-      startIcon={<CloseIcon />}
-      onClick={() => clearFilters()}
-    >
+    <Button variant="text" startIcon={<CloseIcon />} onClick={() => clearFilters()}>
       {t('common:filter-clear')}
     </Button>
   );
@@ -260,9 +241,7 @@ export const Filter = observer((props: IProps) => {
         }}
       >
         {filtersBar?.map(mapFilters)}
-        {actions && (
-          <FilterActions goTop reset={false} filtersBarMore={filtersBarMore} />
-        )}
+        {actions && <FilterActions goTop reset={false} filtersBarMore={filtersBarMore} />}
       </Box>
     );
   }
@@ -286,13 +265,7 @@ export const Filter = observer((props: IProps) => {
       }}
     >
       {filtersAll.map(mapFilters)}
-      {actions && (
-        <FilterActions
-          hasMore={hasMore}
-          reset={reset}
-          filtersMoreSel={filtersMoreSel}
-        />
-      )}
+      {actions && <FilterActions hasMore={hasMore} reset={reset} filtersMoreSel={filtersMoreSel} />}
     </Box>
   );
 });

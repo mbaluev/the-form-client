@@ -31,8 +31,7 @@ export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
     handleClick,
     handleDelete,
   } = props;
-  const { dataFiltered, dataLength, isLoading, setData, getData, selectItem } =
-    dataModel;
+  const { dataFiltered, dataLength, isLoading, setData, getData, selectItem } = dataModel;
 
   useEffect(() => {
     getData();
@@ -61,9 +60,7 @@ export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
           }
           selected={Boolean(item.selected)}
           selectItem={selectItem}
-          onClick={
-            handleClick ? () => handleClick(item.id as string) : undefined
-          }
+          onClick={handleClick ? () => handleClick(item.id as string) : undefined}
           loading={item.loading}
         />
       )}

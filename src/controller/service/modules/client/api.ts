@@ -9,18 +9,12 @@
 // ReSharper disable InconsistentNaming
 
 import axios, { AxiosError } from 'axios';
-import type {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  CancelToken,
-} from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 
 export class AzureResourcesClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -37,8 +31,7 @@ export class AzureResourcesClient {
     body: AzureAuthorizedRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<AzureSubscription[]> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/azure-resources/list/subscriptions';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/azure-resources/list/subscriptions';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
@@ -110,8 +103,7 @@ export class AzureResourcesClient {
     body: StringAzureAuthorizedRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<AzureResourceGroup[]> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/azure-resources/list/resource-groups';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/azure-resources/list/resource-groups';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
@@ -183,8 +175,7 @@ export class AzureResourcesClient {
     body: B2CTenantCreationRequestAzureAuthorizedRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<string> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/azure-resources/create/b2c-tenant';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/azure-resources/create/b2c-tenant';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
@@ -256,16 +247,12 @@ export class AzureResourcesClient {
     body: AzureAuthorizedRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<string> {
-    let url_ =
-      this.baseUrl +
-      '/tenants/{tenantId}/azure-resources/create/b2c-tenant/check-status?';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/azure-resources/create/b2c-tenant/check-status?';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
-    if (location === null)
-      throw new Error("The parameter 'location' cannot be null.");
-    else if (location !== undefined)
-      url_ += 'location=' + encodeURIComponent('' + location) + '&';
+    if (location === null) throw new Error("The parameter 'location' cannot be null.");
+    else if (location !== undefined) url_ += 'location=' + encodeURIComponent('' + location) + '&';
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(body);
@@ -295,9 +282,7 @@ export class AzureResourcesClient {
       });
   }
 
-  protected processCheckB2CTenantCreationStatus(
-    response: AxiosResponse
-  ): Promise<string> {
+  protected processCheckB2CTenantCreationStatus(response: AxiosResponse): Promise<string> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -334,8 +319,7 @@ export class AzureResourcesClient {
     body: AzureAuthorizedRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<TenantResource[]> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/azure-resources/list/b2c-tenants';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/azure-resources/list/b2c-tenants';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
@@ -368,9 +352,7 @@ export class AzureResourcesClient {
       });
   }
 
-  protected processGetB2CTenants(
-    response: AxiosResponse
-  ): Promise<TenantResource[]> {
+  protected processGetB2CTenants(response: AxiosResponse): Promise<TenantResource[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -402,8 +384,7 @@ export class AzureResourcesClient {
 export class B2CSupportClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -448,9 +429,7 @@ export class B2CSupportClient {
       });
   }
 
-  protected processGetUserGroupsAndRoles(
-    response: AxiosResponse
-  ): Promise<void> {
+  protected processGetUserGroupsAndRoles(response: AxiosResponse): Promise<void> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -521,9 +500,7 @@ export class B2CSupportClient {
       });
   }
 
-  protected processValidateDomain(
-    response: AxiosResponse
-  ): Promise<ValidationResponse> {
+  protected processValidateDomain(response: AxiosResponse): Promise<ValidationResponse> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -589,9 +566,7 @@ export class B2CSupportClient {
       });
   }
 
-  protected processVerifyB2CApp(
-    response: AxiosResponse
-  ): Promise<OnboardingActionResult> {
+  protected processVerifyB2CApp(response: AxiosResponse): Promise<OnboardingActionResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -623,8 +598,7 @@ export class B2CSupportClient {
 export class BackgroundJobsClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -689,8 +663,7 @@ export class BackgroundJobsClient {
 export class BusinessPartnersClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -740,9 +713,7 @@ export class BusinessPartnersClient {
       });
   }
 
-  protected processGetAll(
-    response: AxiosResponse
-  ): Promise<BusinessPartnerDataResult> {
+  protected processGetAll(response: AxiosResponse): Promise<BusinessPartnerDataResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -914,8 +885,7 @@ export class BusinessPartnersClient {
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
-    if (id === undefined || id === null)
-      throw new Error("The parameter 'id' must be defined.");
+    if (id === undefined || id === null) throw new Error("The parameter 'id' must be defined.");
     url_ = url_.replace('{id}', encodeURIComponent('' + id));
     url_ = url_.replace(/[?&]$/, '');
 
@@ -942,9 +912,7 @@ export class BusinessPartnersClient {
       });
   }
 
-  protected processGetById(
-    response: AxiosResponse
-  ): Promise<BusinessPartner[]> {
+  protected processGetById(response: AxiosResponse): Promise<BusinessPartner[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -975,17 +943,12 @@ export class BusinessPartnersClient {
   /**
    * @return Success
    */
-  delete(
-    tenantId: string,
-    id: string,
-    cancelToken?: CancelToken | undefined
-  ): Promise<void> {
+  delete(tenantId: string, id: string, cancelToken?: CancelToken | undefined): Promise<void> {
     let url_ = this.baseUrl + '/tenants/{tenantId}/business-partners/{id}';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
-    if (id === undefined || id === null)
-      throw new Error("The parameter 'id' must be defined.");
+    if (id === undefined || id === null) throw new Error("The parameter 'id' must be defined.");
     url_ = url_.replace('{id}', encodeURIComponent('' + id));
     url_ = url_.replace(/[?&]$/, '');
 
@@ -1105,8 +1068,7 @@ export class BusinessPartnersClient {
 export class CacheClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -1184,8 +1146,7 @@ export class CacheClient {
 export class ClustersClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -1196,9 +1157,7 @@ export class ClustersClient {
   /**
    * @return Success
    */
-  listClusters(
-    cancelToken?: CancelToken | undefined
-  ): Promise<ClusterResponse[]> {
+  listClusters(cancelToken?: CancelToken | undefined): Promise<ClusterResponse[]> {
     let url_ = this.baseUrl + '/tenant-onboarding/clusters';
     url_ = url_.replace(/[?&]$/, '');
 
@@ -1225,9 +1184,7 @@ export class ClustersClient {
       });
   }
 
-  protected processListClusters(
-    response: AxiosResponse
-  ): Promise<ClusterResponse[]> {
+  protected processListClusters(response: AxiosResponse): Promise<ClusterResponse[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -1293,9 +1250,7 @@ export class ClustersClient {
       });
   }
 
-  protected processCreateCluster(
-    response: AxiosResponse
-  ): Promise<ClusterResponse> {
+  protected processCreateCluster(response: AxiosResponse): Promise<ClusterResponse> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -1326,13 +1281,9 @@ export class ClustersClient {
   /**
    * @return Success
    */
-  deleteCluster(
-    id: string,
-    cancelToken?: CancelToken | undefined
-  ): Promise<void> {
+  deleteCluster(id: string, cancelToken?: CancelToken | undefined): Promise<void> {
     let url_ = this.baseUrl + '/tenant-onboarding/clusters/{id}';
-    if (id === undefined || id === null)
-      throw new Error("The parameter 'id' must be defined.");
+    if (id === undefined || id === null) throw new Error("The parameter 'id' must be defined.");
     url_ = url_.replace('{id}', encodeURIComponent('' + id));
     url_ = url_.replace(/[?&]$/, '');
 
@@ -1386,8 +1337,7 @@ export class ClustersClient {
 export class ConfigurationPlansClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -1528,13 +1478,9 @@ export class ConfigurationPlansClient {
   /**
    * @return Success
    */
-  deleteConfigurationPlan(
-    id: string,
-    cancelToken?: CancelToken | undefined
-  ): Promise<void> {
+  deleteConfigurationPlan(id: string, cancelToken?: CancelToken | undefined): Promise<void> {
     let url_ = this.baseUrl + '/tenant-onboarding/configuration-plans/{id}';
-    if (id === undefined || id === null)
-      throw new Error("The parameter 'id' must be defined.");
+    if (id === undefined || id === null) throw new Error("The parameter 'id' must be defined.");
     url_ = url_.replace('{id}', encodeURIComponent('' + id));
     url_ = url_.replace(/[?&]$/, '');
 
@@ -1559,9 +1505,7 @@ export class ConfigurationPlansClient {
       });
   }
 
-  protected processDeleteConfigurationPlan(
-    response: AxiosResponse
-  ): Promise<void> {
+  protected processDeleteConfigurationPlan(response: AxiosResponse): Promise<void> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -1590,8 +1534,7 @@ export class ConfigurationPlansClient {
 export class CountriesClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -1661,8 +1604,7 @@ export class CountriesClient {
 export class CustomAttributesClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -1678,17 +1620,13 @@ export class CustomAttributesClient {
     entityTypeId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<CustomProperty[]> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/custom-attributes/{entityTypeId}';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/custom-attributes/{entityTypeId}';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
     if (entityTypeId === undefined || entityTypeId === null)
       throw new Error("The parameter 'entityTypeId' must be defined.");
-    url_ = url_.replace(
-      '{entityTypeId}',
-      encodeURIComponent('' + entityTypeId)
-    );
+    url_ = url_.replace('{entityTypeId}', encodeURIComponent('' + entityTypeId));
     url_ = url_.replace(/[?&]$/, '');
 
     let options_: AxiosRequestConfig = {
@@ -1714,9 +1652,7 @@ export class CustomAttributesClient {
       });
   }
 
-  protected processGetByEntityIdAll(
-    response: AxiosResponse
-  ): Promise<CustomProperty[]> {
+  protected processGetByEntityIdAll(response: AxiosResponse): Promise<CustomProperty[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -1753,18 +1689,13 @@ export class CustomAttributesClient {
     attributeId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<CustomProperty> {
-    let url_ =
-      this.baseUrl +
-      '/tenants/{tenantId}/custom-attributes/{entityTypeId}/{attributeId}';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/custom-attributes/{entityTypeId}/{attributeId}';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
     if (entityTypeId === undefined || entityTypeId === null)
       throw new Error("The parameter 'entityTypeId' must be defined.");
-    url_ = url_.replace(
-      '{entityTypeId}',
-      encodeURIComponent('' + entityTypeId)
-    );
+    url_ = url_.replace('{entityTypeId}', encodeURIComponent('' + entityTypeId));
     if (attributeId === undefined || attributeId === null)
       throw new Error("The parameter 'attributeId' must be defined.");
     url_ = url_.replace('{attributeId}', encodeURIComponent('' + attributeId));
@@ -1793,9 +1724,7 @@ export class CustomAttributesClient {
       });
   }
 
-  protected processGetByEntityId(
-    response: AxiosResponse
-  ): Promise<CustomProperty> {
+  protected processGetByEntityId(response: AxiosResponse): Promise<CustomProperty> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -1864,9 +1793,7 @@ export class CustomAttributesClient {
       });
   }
 
-  protected processCreateCustomProperty(
-    response: AxiosResponse
-  ): Promise<void> {
+  protected processCreateCustomProperty(response: AxiosResponse): Promise<void> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -1899,17 +1826,13 @@ export class CustomAttributesClient {
     customPropertyId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<void> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/custom-attributes/{customPropertyId}';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/custom-attributes/{customPropertyId}';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
     if (customPropertyId === undefined || customPropertyId === null)
       throw new Error("The parameter 'customPropertyId' must be defined.");
-    url_ = url_.replace(
-      '{customPropertyId}',
-      encodeURIComponent('' + customPropertyId)
-    );
+    url_ = url_.replace('{customPropertyId}', encodeURIComponent('' + customPropertyId));
     url_ = url_.replace(/[?&]$/, '');
 
     let options_: AxiosRequestConfig = {
@@ -1962,8 +1885,7 @@ export class CustomAttributesClient {
 export class DbMigrationClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -1974,12 +1896,8 @@ export class DbMigrationClient {
   /**
    * @return Success
    */
-  applyMigrations(
-    tenantId: string,
-    cancelToken?: CancelToken | undefined
-  ): Promise<void> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/db-migration/migrations/apply';
+  applyMigrations(tenantId: string, cancelToken?: CancelToken | undefined): Promise<void> {
+    let url_ = this.baseUrl + '/tenants/{tenantId}/db-migration/migrations/apply';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
@@ -2035,8 +1953,7 @@ export class DbMigrationClient {
 export class EntityTypesClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -2074,9 +1991,7 @@ export class EntityTypesClient {
       });
   }
 
-  protected processGetEntityTypes(
-    response: AxiosResponse
-  ): Promise<EntityType[]> {
+  protected processGetEntityTypes(response: AxiosResponse): Promise<EntityType[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -2107,17 +2022,11 @@ export class EntityTypesClient {
   /**
    * @return Success
    */
-  getById(
-    entityTypeId: string,
-    cancelToken?: CancelToken | undefined
-  ): Promise<EntityType> {
+  getById(entityTypeId: string, cancelToken?: CancelToken | undefined): Promise<EntityType> {
     let url_ = this.baseUrl + '/global/entity-types/{entityTypeId}';
     if (entityTypeId === undefined || entityTypeId === null)
       throw new Error("The parameter 'entityTypeId' must be defined.");
-    url_ = url_.replace(
-      '{entityTypeId}',
-      encodeURIComponent('' + entityTypeId)
-    );
+    url_ = url_.replace('{entityTypeId}', encodeURIComponent('' + entityTypeId));
     url_ = url_.replace(/[?&]$/, '');
 
     let options_: AxiosRequestConfig = {
@@ -2175,8 +2084,7 @@ export class EntityTypesClient {
 export class FilesClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -2187,10 +2095,7 @@ export class FilesClient {
   /**
    * @return Success
    */
-  getFileList(
-    tenantId: string,
-    cancelToken?: CancelToken | undefined
-  ): Promise<FileUploadInfo[]> {
+  getFileList(tenantId: string, cancelToken?: CancelToken | undefined): Promise<FileUploadInfo[]> {
     let url_ = this.baseUrl + '/tenants/{tenantId}/files';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
@@ -2220,9 +2125,7 @@ export class FilesClient {
       });
   }
 
-  protected processGetFileList(
-    response: AxiosResponse
-  ): Promise<FileUploadInfo[]> {
+  protected processGetFileList(response: AxiosResponse): Promise<FileUploadInfo[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -2560,9 +2463,7 @@ export class FilesClient {
       });
   }
 
-  protected processGetFileInformation(
-    response: AxiosResponse
-  ): Promise<IFileStructure> {
+  protected processGetFileInformation(response: AxiosResponse): Promise<IFileStructure> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -2594,8 +2495,7 @@ export class FilesClient {
 export class ImportsClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -2606,10 +2506,7 @@ export class ImportsClient {
   /**
    * @return Success
    */
-  readAll(
-    tenantId: string,
-    cancelToken?: CancelToken | undefined
-  ): Promise<Import[]> {
+  readAll(tenantId: string, cancelToken?: CancelToken | undefined): Promise<Import[]> {
     let url_ = this.baseUrl + '/tenants/{tenantId}/imports';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
@@ -2914,9 +2811,7 @@ export class ImportsClient {
       });
   }
 
-  protected processUpdateImport(
-    response: AxiosResponse
-  ): Promise<ImportItem[]> {
+  protected processUpdateImport(response: AxiosResponse): Promise<ImportItem[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -2980,9 +2875,7 @@ export class ImportsClient {
       });
   }
 
-  protected processGetAllTemplates(
-    response: AxiosResponse
-  ): Promise<ImportTemplate[]> {
+  protected processGetAllTemplates(response: AxiosResponse): Promise<ImportTemplate[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -3051,9 +2944,7 @@ export class ImportsClient {
       });
   }
 
-  protected processCreateImportTemplate(
-    response: AxiosResponse
-  ): Promise<void> {
+  protected processCreateImportTemplate(response: AxiosResponse): Promise<void> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -3086,8 +2977,7 @@ export class ImportsClient {
     tenantId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<ImportTemplate> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/imports/templates/{templateId}';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/imports/templates/{templateId}';
     if (templateId === undefined || templateId === null)
       throw new Error("The parameter 'templateId' must be defined.");
     url_ = url_.replace('{templateId}', encodeURIComponent('' + templateId));
@@ -3119,9 +3009,7 @@ export class ImportsClient {
       });
   }
 
-  protected processGetTemplateById(
-    response: AxiosResponse
-  ): Promise<ImportTemplate> {
+  protected processGetTemplateById(response: AxiosResponse): Promise<ImportTemplate> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -3157,8 +3045,7 @@ export class ImportsClient {
     tenantId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<void> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/imports/templates/{templateId}';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/imports/templates/{templateId}';
     if (templateId === undefined || templateId === null)
       throw new Error("The parameter 'templateId' must be defined.");
     url_ = url_.replace('{templateId}', encodeURIComponent('' + templateId));
@@ -3223,8 +3110,7 @@ export class ImportsClient {
     body: ImportTemplate | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<void> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/imports/templates/{templateId}';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/imports/templates/{templateId}';
     if (templateId === undefined || templateId === null)
       throw new Error("The parameter 'templateId' must be defined.");
     url_ = url_.replace('{templateId}', encodeURIComponent('' + templateId));
@@ -3324,9 +3210,7 @@ export class ImportsClient {
       });
   }
 
-  protected processReadAllImportItems(
-    response: AxiosResponse
-  ): Promise<ImportItem[]> {
+  protected processReadAllImportItems(response: AxiosResponse): Promise<ImportItem[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -3400,9 +3284,7 @@ export class ImportsClient {
       });
   }
 
-  protected processCreateImportItem(
-    response: AxiosResponse
-  ): Promise<ImportItem> {
+  protected processCreateImportItem(response: AxiosResponse): Promise<ImportItem> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -3439,8 +3321,7 @@ export class ImportsClient {
     itemId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<ImportItem> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/imports/{importId}/items/{itemId}';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/imports/{importId}/items/{itemId}';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
@@ -3475,9 +3356,7 @@ export class ImportsClient {
       });
   }
 
-  protected processGetImportItemById(
-    response: AxiosResponse
-  ): Promise<ImportItem> {
+  protected processGetImportItemById(response: AxiosResponse): Promise<ImportItem> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -3514,8 +3393,7 @@ export class ImportsClient {
     itemId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<void> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/imports/{importId}/items/{itemId}';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/imports/{importId}/items/{itemId}';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
@@ -3584,8 +3462,7 @@ export class ImportsClient {
     body: ImportItem | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<ImportItem> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/imports/{importId}/items/{itemId}';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/imports/{importId}/items/{itemId}';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
@@ -3624,9 +3501,7 @@ export class ImportsClient {
       });
   }
 
-  protected processUpdateImportItem(
-    response: AxiosResponse
-  ): Promise<ImportItem> {
+  protected processUpdateImportItem(response: AxiosResponse): Promise<ImportItem> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -3657,10 +3532,7 @@ export class ImportsClient {
   /**
    * @return Success
    */
-  autoImport(
-    tenantId: string,
-    cancelToken?: CancelToken | undefined
-  ): Promise<number> {
+  autoImport(tenantId: string, cancelToken?: CancelToken | undefined): Promise<number> {
     let url_ = this.baseUrl + '/tenants/{tenantId}/imports/re-import';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
@@ -3862,8 +3734,7 @@ export class ImportsClient {
 export class KubernetesClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -3878,8 +3749,7 @@ export class KubernetesClient {
     tenantId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<string[]> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/kubernetes/ingress-controllers/list';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/kubernetes/ingress-controllers/list';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
@@ -3908,9 +3778,7 @@ export class KubernetesClient {
       });
   }
 
-  protected processGetIngressControllers(
-    response: AxiosResponse
-  ): Promise<string[]> {
+  protected processGetIngressControllers(response: AxiosResponse): Promise<string[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -3949,18 +3817,14 @@ export class KubernetesClient {
     tenantId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<V1IngressStatus[]> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/kubernetes/ingress-controllers/add?';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/kubernetes/ingress-controllers/add?';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
     if (name === null) throw new Error("The parameter 'name' cannot be null.");
-    else if (name !== undefined)
-      url_ += 'name=' + encodeURIComponent('' + name) + '&';
-    if (hostname === null)
-      throw new Error("The parameter 'hostname' cannot be null.");
-    else if (hostname !== undefined)
-      url_ += 'hostname=' + encodeURIComponent('' + hostname) + '&';
+    else if (name !== undefined) url_ += 'name=' + encodeURIComponent('' + name) + '&';
+    if (hostname === null) throw new Error("The parameter 'hostname' cannot be null.");
+    else if (hostname !== undefined) url_ += 'hostname=' + encodeURIComponent('' + hostname) + '&';
     url_ = url_.replace(/[?&]$/, '');
 
     let options_: AxiosRequestConfig = {
@@ -3986,9 +3850,7 @@ export class KubernetesClient {
       });
   }
 
-  protected processAddIngressControllers(
-    response: AxiosResponse
-  ): Promise<V1IngressStatus[]> {
+  protected processAddIngressControllers(response: AxiosResponse): Promise<V1IngressStatus[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -4023,8 +3885,7 @@ export class KubernetesClient {
     tenantId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<void> {
-    let url_ =
-      this.baseUrl + '/tenants/{tenantId}/kubernetes/ingress-controllers/reset';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/kubernetes/ingress-controllers/reset';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
@@ -4051,9 +3912,7 @@ export class KubernetesClient {
       });
   }
 
-  protected processResetIngressControllersConfig(
-    response: AxiosResponse
-  ): Promise<void> {
+  protected processResetIngressControllersConfig(response: AxiosResponse): Promise<void> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -4087,15 +3946,12 @@ export class KubernetesClient {
     tenantId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<V1Status> {
-    let url_ =
-      this.baseUrl +
-      '/tenants/{tenantId}/kubernetes/ingress-controllers/remove?';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/kubernetes/ingress-controllers/remove?';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
     if (name === null) throw new Error("The parameter 'name' cannot be null.");
-    else if (name !== undefined)
-      url_ += 'name=' + encodeURIComponent('' + name) + '&';
+    else if (name !== undefined) url_ += 'name=' + encodeURIComponent('' + name) + '&';
     url_ = url_.replace(/[?&]$/, '');
 
     let options_: AxiosRequestConfig = {
@@ -4121,9 +3977,7 @@ export class KubernetesClient {
       });
   }
 
-  protected processRemoveIngressControllers(
-    response: AxiosResponse
-  ): Promise<V1Status> {
+  protected processRemoveIngressControllers(response: AxiosResponse): Promise<V1Status> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -4155,8 +4009,7 @@ export class KubernetesClient {
 export class MediaClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -4512,11 +4365,7 @@ export class MediaClient {
   /**
    * @return Success
    */
-  resize(
-    fileId: string,
-    tenantId: string,
-    cancelToken?: CancelToken | undefined
-  ): Promise<void> {
+  resize(fileId: string, tenantId: string, cancelToken?: CancelToken | undefined): Promise<void> {
     let url_ = this.baseUrl + '/tenants/{tenantId}/media/{fileId}/resize';
     if (fileId === undefined || fileId === null)
       throw new Error("The parameter 'fileId' must be defined.");
@@ -4576,8 +4425,7 @@ export class MediaClient {
 export class PriceListsClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -4627,9 +4475,7 @@ export class PriceListsClient {
       });
   }
 
-  protected processGetAll(
-    response: AxiosResponse
-  ): Promise<PriceListDataResult> {
+  protected processGetAll(response: AxiosResponse): Promise<PriceListDataResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -4731,8 +4577,7 @@ export class PriceListsClient {
 export class ProductsClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -4782,9 +4627,7 @@ export class ProductsClient {
       });
   }
 
-  protected processGetProducts(
-    response: AxiosResponse
-  ): Promise<ProductProductResponse> {
+  protected processGetProducts(response: AxiosResponse): Promise<ProductProductResponse> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -4923,9 +4766,7 @@ export class ProductsClient {
       });
   }
 
-  protected processGetAll(
-    response: AxiosResponse
-  ): Promise<ProductProductResponse> {
+  protected processGetAll(response: AxiosResponse): Promise<ProductProductResponse> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -4989,9 +4830,7 @@ export class ProductsClient {
       });
   }
 
-  protected processGetFilterList(
-    response: AxiosResponse
-  ): Promise<CustomAttribute[]> {
+  protected processGetFilterList(response: AxiosResponse): Promise<CustomAttribute[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -5061,9 +4900,7 @@ export class ProductsClient {
       });
   }
 
-  protected processGetProductsFromRepoTest(
-    response: AxiosResponse
-  ): Promise<ProductDataResult> {
+  protected processGetProductsFromRepoTest(response: AxiosResponse): Promise<ProductDataResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -5133,9 +4970,7 @@ export class ProductsClient {
       });
   }
 
-  protected processGetDistinctValues(
-    response: AxiosResponse
-  ): Promise<DistinctValueResult> {
+  protected processGetDistinctValues(response: AxiosResponse): Promise<DistinctValueResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -5236,10 +5071,7 @@ export class ProductsClient {
   /**
    * @return Success
    */
-  truncateData(
-    tenantId: string,
-    cancelToken?: CancelToken | undefined
-  ): Promise<number> {
+  truncateData(tenantId: string, cancelToken?: CancelToken | undefined): Promise<number> {
     let url_ = this.baseUrl + '/tenants/{tenantId}/products/test-truncate';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
@@ -5301,8 +5133,7 @@ export class ProductsClient {
 export class ProductVariantsClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -5454,8 +5285,7 @@ export class ProductVariantsClient {
 export class SupplierPriceListItemsClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -5505,9 +5335,7 @@ export class SupplierPriceListItemsClient {
       });
   }
 
-  protected processGetAll(
-    response: AxiosResponse
-  ): Promise<SupplierPriceListItemDataResult> {
+  protected processGetAll(response: AxiosResponse): Promise<SupplierPriceListItemDataResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -5543,18 +5371,13 @@ export class SupplierPriceListItemsClient {
     priceListItemId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<SupplierPriceListItem> {
-    let url_ =
-      this.baseUrl +
-      '/tenants/{tenantId}/supplier-price-list-items/{priceListItemId}';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/supplier-price-list-items/{priceListItemId}';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
     if (priceListItemId === undefined || priceListItemId === null)
       throw new Error("The parameter 'priceListItemId' must be defined.");
-    url_ = url_.replace(
-      '{priceListItemId}',
-      encodeURIComponent('' + priceListItemId)
-    );
+    url_ = url_.replace('{priceListItemId}', encodeURIComponent('' + priceListItemId));
     url_ = url_.replace(/[?&]$/, '');
 
     let options_: AxiosRequestConfig = {
@@ -5619,9 +5442,7 @@ export class SupplierPriceListItemsClient {
     body: DistinctValuesRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<DistinctValueResult> {
-    let url_ =
-      this.baseUrl +
-      '/tenants/{tenantId}/supplier-price-list-items/distinct-values';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/supplier-price-list-items/distinct-values';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
@@ -5654,9 +5475,7 @@ export class SupplierPriceListItemsClient {
       });
   }
 
-  protected processGetDistinctValues(
-    response: AxiosResponse
-  ): Promise<DistinctValueResult> {
+  protected processGetDistinctValues(response: AxiosResponse): Promise<DistinctValueResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -5691,9 +5510,7 @@ export class SupplierPriceListItemsClient {
     tenantId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<EntityTypeProperty[]> {
-    let url_ =
-      this.baseUrl +
-      '/tenants/{tenantId}/supplier-price-list-items/filter-list';
+    let url_ = this.baseUrl + '/tenants/{tenantId}/supplier-price-list-items/filter-list';
     if (tenantId === undefined || tenantId === null)
       throw new Error("The parameter 'tenantId' must be defined.");
     url_ = url_.replace('{tenantId}', encodeURIComponent('' + tenantId));
@@ -5722,9 +5539,7 @@ export class SupplierPriceListItemsClient {
       });
   }
 
-  protected processGetFilterList(
-    response: AxiosResponse
-  ): Promise<EntityTypeProperty[]> {
+  protected processGetFilterList(response: AxiosResponse): Promise<EntityTypeProperty[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -5756,8 +5571,7 @@ export class SupplierPriceListItemsClient {
 export class T1TenantsClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -5777,10 +5591,7 @@ export class T1TenantsClient {
       '/tenant-onboarding/t1-tenants/list-tenants-of-business-partner/{businessPartnerId}';
     if (businessPartnerId === undefined || businessPartnerId === null)
       throw new Error("The parameter 'businessPartnerId' must be defined.");
-    url_ = url_.replace(
-      '{businessPartnerId}',
-      encodeURIComponent('' + businessPartnerId)
-    );
+    url_ = url_.replace('{businessPartnerId}', encodeURIComponent('' + businessPartnerId));
     url_ = url_.replace(/[?&]$/, '');
 
     let options_: AxiosRequestConfig = {
@@ -5806,9 +5617,7 @@ export class T1TenantsClient {
       });
   }
 
-  protected processListTenants(
-    response: AxiosResponse
-  ): Promise<TenantResponse[]> {
+  protected processListTenants(response: AxiosResponse): Promise<TenantResponse[]> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -5874,9 +5683,7 @@ export class T1TenantsClient {
       });
   }
 
-  protected processCreateTenant(
-    response: AxiosResponse
-  ): Promise<TenantResponse> {
+  protected processCreateTenant(response: AxiosResponse): Promise<TenantResponse> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -5908,8 +5715,7 @@ export class T1TenantsClient {
 export class TenantBusinessPartnersClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -6055,8 +5861,7 @@ export class TenantBusinessPartnersClient {
     body: BusinessPartnerDomainVerificationRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<BusinessPartnerDomainVerificationResponse> {
-    let url_ =
-      this.baseUrl + '/tenant-onboarding/business-partners/verify-domain';
+    let url_ = this.baseUrl + '/tenant-onboarding/business-partners/verify-domain';
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(body);
@@ -6103,9 +5908,7 @@ export class TenantBusinessPartnersClient {
       let result200: any = null;
       let resultData200 = _responseText;
       result200 = JSON.parse(resultData200);
-      return Promise.resolve<BusinessPartnerDomainVerificationResponse>(
-        result200
-      );
+      return Promise.resolve<BusinessPartnerDomainVerificationResponse>(result200);
     } else if (status !== 200 && status !== 204) {
       const _responseText = response.data;
       return throwException(
@@ -6115,21 +5918,15 @@ export class TenantBusinessPartnersClient {
         _headers
       );
     }
-    return Promise.resolve<BusinessPartnerDomainVerificationResponse>(
-      null as any
-    );
+    return Promise.resolve<BusinessPartnerDomainVerificationResponse>(null as any);
   }
 
   /**
    * @return Success
    */
-  deleteTenantBusinessPartner(
-    id: string,
-    cancelToken?: CancelToken | undefined
-  ): Promise<void> {
+  deleteTenantBusinessPartner(id: string, cancelToken?: CancelToken | undefined): Promise<void> {
     let url_ = this.baseUrl + '/tenant-onboarding/business-partners/{id}';
-    if (id === undefined || id === null)
-      throw new Error("The parameter 'id' must be defined.");
+    if (id === undefined || id === null) throw new Error("The parameter 'id' must be defined.");
     url_ = url_.replace('{id}', encodeURIComponent('' + id));
     url_ = url_.replace(/[?&]$/, '');
 
@@ -6154,9 +5951,7 @@ export class TenantBusinessPartnersClient {
       });
   }
 
-  protected processDeleteTenantBusinessPartner(
-    response: AxiosResponse
-  ): Promise<void> {
+  protected processDeleteTenantBusinessPartner(response: AxiosResponse): Promise<void> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -6185,8 +5980,7 @@ export class TenantBusinessPartnersClient {
 export class TenantConfigsClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -6197,10 +5991,7 @@ export class TenantConfigsClient {
   /**
    * @return Success
    */
-  getById(
-    tenantName: string,
-    cancelToken?: CancelToken | undefined
-  ): Promise<FrontendConfig> {
+  getById(tenantName: string, cancelToken?: CancelToken | undefined): Promise<FrontendConfig> {
     let url_ = this.baseUrl + '/tenant-configs/{tenantName}';
     if (tenantName === undefined || tenantName === null)
       throw new Error("The parameter 'tenantName' must be defined.");
@@ -6261,11 +6052,8 @@ export class TenantConfigsClient {
   /**
    * @return Success
    */
-  getTenantClientIds(
-    cancelToken?: CancelToken | undefined
-  ): Promise<ClientApplicationIdResponse> {
-    let url_ =
-      this.baseUrl + '/tenant-configs/microsoft/identity-association-config';
+  getTenantClientIds(cancelToken?: CancelToken | undefined): Promise<ClientApplicationIdResponse> {
+    let url_ = this.baseUrl + '/tenant-configs/microsoft/identity-association-config';
     url_ = url_.replace(/[?&]$/, '');
 
     let options_: AxiosRequestConfig = {
@@ -6473,9 +6261,7 @@ export class TenantConfigsClient {
       });
   }
 
-  protected processGetPrivateTenantConfig(
-    response: AxiosResponse
-  ): Promise<TenantConfig> {
+  protected processGetPrivateTenantConfig(response: AxiosResponse): Promise<TenantConfig> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -6507,8 +6293,7 @@ export class TenantConfigsClient {
 export class TenantCspIntegrationsClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -6524,8 +6309,7 @@ export class TenantCspIntegrationsClient {
     body: TenantCspIntegrationRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<OnboardingActionResult> {
-    let url_ =
-      this.baseUrl + '/tenant-csp-integrations/register-csp-partner-tenant';
+    let url_ = this.baseUrl + '/tenant-csp-integrations/register-csp-partner-tenant';
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(body);
@@ -6555,9 +6339,7 @@ export class TenantCspIntegrationsClient {
       });
   }
 
-  protected processRegisterPartnerTenant(
-    response: AxiosResponse
-  ): Promise<OnboardingActionResult> {
+  protected processRegisterPartnerTenant(response: AxiosResponse): Promise<OnboardingActionResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -6593,8 +6375,7 @@ export class TenantCspIntegrationsClient {
     body: CspNativeAppRegistrationRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<OnboardingActionResult> {
-    let url_ =
-      this.baseUrl + '/tenant-csp-integrations/register-csp-partner-native-app';
+    let url_ = this.baseUrl + '/tenant-csp-integrations/register-csp-partner-native-app';
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(body);
@@ -6662,8 +6443,7 @@ export class TenantCspIntegrationsClient {
     body: CspWebAppRegistrationRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<OnboardingActionResult> {
-    let url_ =
-      this.baseUrl + '/tenant-csp-integrations/setup-csp-partner-web-app';
+    let url_ = this.baseUrl + '/tenant-csp-integrations/setup-csp-partner-web-app';
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(body);
@@ -6693,9 +6473,7 @@ export class TenantCspIntegrationsClient {
       });
   }
 
-  protected processSetupCspWebApp(
-    response: AxiosResponse
-  ): Promise<OnboardingActionResult> {
+  protected processSetupCspWebApp(response: AxiosResponse): Promise<OnboardingActionResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -6731,8 +6509,7 @@ export class TenantCspIntegrationsClient {
     body: BaseAuthorizedCspIntegrationRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<OnboardingActionResult> {
-    let url_ =
-      this.baseUrl + '/tenant-csp-integrations/create-gdap-security-group';
+    let url_ = this.baseUrl + '/tenant-csp-integrations/create-gdap-security-group';
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(body);
@@ -6830,9 +6607,7 @@ export class TenantCspIntegrationsClient {
       });
   }
 
-  protected processRegisterGdapApp(
-    response: AxiosResponse
-  ): Promise<OnboardingActionResult> {
+  protected processRegisterGdapApp(response: AxiosResponse): Promise<OnboardingActionResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -6868,9 +6643,7 @@ export class TenantCspIntegrationsClient {
     body: BaseAuthorizedCspIntegrationRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<OnboardingActionResult> {
-    let url_ =
-      this.baseUrl +
-      '/tenant-csp-integrations/assign-gdap-app-to-security-group';
+    let url_ = this.baseUrl + '/tenant-csp-integrations/assign-gdap-app-to-security-group';
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(body);
@@ -6900,9 +6673,7 @@ export class TenantCspIntegrationsClient {
       });
   }
 
-  protected processAssignAppToGroup(
-    response: AxiosResponse
-  ): Promise<OnboardingActionResult> {
+  protected processAssignAppToGroup(response: AxiosResponse): Promise<OnboardingActionResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -6938,8 +6709,7 @@ export class TenantCspIntegrationsClient {
     body: BaseCspIntegrationRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<MsIntegrationCredentialsResponse> {
-    let url_ =
-      this.baseUrl + '/tenant-csp-integrations/get-csp-integration-credentials';
+    let url_ = this.baseUrl + '/tenant-csp-integrations/get-csp-integration-credentials';
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(body);
@@ -7007,8 +6777,7 @@ export class TenantCspIntegrationsClient {
     body: CspAuthCodeRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<OnboardingActionResult> {
-    let url_ =
-      this.baseUrl + '/tenant-csp-integrations/generate-csp-refresh-token';
+    let url_ = this.baseUrl + '/tenant-csp-integrations/generate-csp-refresh-token';
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(body);
@@ -7106,9 +6875,7 @@ export class TenantCspIntegrationsClient {
       });
   }
 
-  protected processTestCspConnection(
-    response: AxiosResponse
-  ): Promise<OnboardingActionResult> {
+  protected processTestCspConnection(response: AxiosResponse): Promise<OnboardingActionResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -7146,10 +6913,7 @@ export class TenantCspIntegrationsClient {
     let url_ = this.baseUrl + '/tenant-csp-integrations/{integrationId}';
     if (integrationId === undefined || integrationId === null)
       throw new Error("The parameter 'integrationId' must be defined.");
-    url_ = url_.replace(
-      '{integrationId}',
-      encodeURIComponent('' + integrationId)
-    );
+    url_ = url_.replace('{integrationId}', encodeURIComponent('' + integrationId));
     url_ = url_.replace(/[?&]$/, '');
 
     let options_: AxiosRequestConfig = {
@@ -7217,10 +6981,7 @@ export class TenantCspIntegrationsClient {
     let url_ = this.baseUrl + '/tenant-csp-integrations/{integrationId}';
     if (integrationId === undefined || integrationId === null)
       throw new Error("The parameter 'integrationId' must be defined.");
-    url_ = url_.replace(
-      '{integrationId}',
-      encodeURIComponent('' + integrationId)
-    );
+    url_ = url_.replace('{integrationId}', encodeURIComponent('' + integrationId));
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(body);
@@ -7292,10 +7053,7 @@ export class TenantCspIntegrationsClient {
     let url_ = this.baseUrl + '/tenant-csp-integrations/{integrationId}';
     if (integrationId === undefined || integrationId === null)
       throw new Error("The parameter 'integrationId' must be defined.");
-    url_ = url_.replace(
-      '{integrationId}',
-      encodeURIComponent('' + integrationId)
-    );
+    url_ = url_.replace('{integrationId}', encodeURIComponent('' + integrationId));
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(body);
@@ -7363,9 +7121,7 @@ export class TenantCspIntegrationsClient {
     body: BaseAuthorizedCspIntegrationRequest | undefined,
     cancelToken?: CancelToken | undefined
   ): Promise<AzureResourceInfo[]> {
-    let url_ =
-      this.baseUrl +
-      '/tenant-csp-integrations/get-entra-resources-for-deletion';
+    let url_ = this.baseUrl + '/tenant-csp-integrations/get-entra-resources-for-deletion';
     url_ = url_.replace(/[?&]$/, '');
 
     const content_ = JSON.stringify(body);
@@ -7429,8 +7185,7 @@ export class TenantCspIntegrationsClient {
 export class TenantIntegrationsClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -7507,15 +7262,10 @@ export class TenantIntegrationsClient {
     integrationId: string,
     cancelToken?: CancelToken | undefined
   ): Promise<BusinessPartnerIntegrationDetailsResponse> {
-    let url_ =
-      this.baseUrl +
-      '/tenant-integrations/get-tenant-integration/{integrationId}';
+    let url_ = this.baseUrl + '/tenant-integrations/get-tenant-integration/{integrationId}';
     if (integrationId === undefined || integrationId === null)
       throw new Error("The parameter 'integrationId' must be defined.");
-    url_ = url_.replace(
-      '{integrationId}',
-      encodeURIComponent('' + integrationId)
-    );
+    url_ = url_.replace('{integrationId}', encodeURIComponent('' + integrationId));
     url_ = url_.replace(/[?&]$/, '');
 
     let options_: AxiosRequestConfig = {
@@ -7558,9 +7308,7 @@ export class TenantIntegrationsClient {
       let result200: any = null;
       let resultData200 = _responseText;
       result200 = JSON.parse(resultData200);
-      return Promise.resolve<BusinessPartnerIntegrationDetailsResponse>(
-        result200
-      );
+      return Promise.resolve<BusinessPartnerIntegrationDetailsResponse>(result200);
     } else if (status !== 200 && status !== 204) {
       const _responseText = response.data;
       return throwException(
@@ -7570,17 +7318,14 @@ export class TenantIntegrationsClient {
         _headers
       );
     }
-    return Promise.resolve<BusinessPartnerIntegrationDetailsResponse>(
-      null as any
-    );
+    return Promise.resolve<BusinessPartnerIntegrationDetailsResponse>(null as any);
   }
 }
 
 export class TenantOnboardingClient {
   private instance: AxiosInstance;
   private baseUrl: string;
-  protected jsonParseReviver: ((key: string, value: any) => any) | undefined =
-    undefined;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
   constructor(baseUrl?: string, instance?: AxiosInstance) {
     this.instance = instance ? instance : axios.create();
@@ -7690,9 +7435,7 @@ export class TenantOnboardingClient {
         }
       })
       .then((_response: AxiosResponse) => {
-        return this.processRegisterProxyIdentityExperienceFrameworkApp(
-          _response
-        );
+        return this.processRegisterProxyIdentityExperienceFrameworkApp(_response);
       });
   }
 
@@ -7832,9 +7575,7 @@ export class TenantOnboardingClient {
       });
   }
 
-  protected processRegisterPolicyKeys(
-    response: AxiosResponse
-  ): Promise<OnboardingActionResult> {
+  protected processRegisterPolicyKeys(response: AxiosResponse): Promise<OnboardingActionResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -7900,9 +7641,7 @@ export class TenantOnboardingClient {
       });
   }
 
-  protected processUploadPolicies(
-    response: AxiosResponse
-  ): Promise<OnboardingActionResult> {
+  protected processUploadPolicies(response: AxiosResponse): Promise<OnboardingActionResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -7968,9 +7707,7 @@ export class TenantOnboardingClient {
       });
   }
 
-  protected processCreateRoleGroups(
-    response: AxiosResponse
-  ): Promise<OnboardingActionResult> {
+  protected processCreateRoleGroups(response: AxiosResponse): Promise<OnboardingActionResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -8010,8 +7747,7 @@ export class TenantOnboardingClient {
     if (businessPartnerId === null)
       throw new Error("The parameter 'businessPartnerId' cannot be null.");
     else if (businessPartnerId !== undefined)
-      url_ +=
-        'businessPartnerId=' + encodeURIComponent('' + businessPartnerId) + '&';
+      url_ += 'businessPartnerId=' + encodeURIComponent('' + businessPartnerId) + '&';
     url_ = url_.replace(/[?&]$/, '');
 
     let options_: AxiosRequestConfig = {
@@ -8037,9 +7773,7 @@ export class TenantOnboardingClient {
       });
   }
 
-  protected processCreateTenantDbUser(
-    response: AxiosResponse
-  ): Promise<OnboardingActionResult> {
+  protected processCreateTenantDbUser(response: AxiosResponse): Promise<OnboardingActionResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -8132,9 +7866,7 @@ export class TenantOnboardingClient {
   /**
    * @return Success
    */
-  migrateDbSchema(
-    cancelToken?: CancelToken | undefined
-  ): Promise<OnboardingActionResult> {
+  migrateDbSchema(cancelToken?: CancelToken | undefined): Promise<OnboardingActionResult> {
     let url_ = this.baseUrl + '/tenant-onboarding/migrate-db-schema';
     url_ = url_.replace(/[?&]$/, '');
 
@@ -8161,9 +7893,7 @@ export class TenantOnboardingClient {
       });
   }
 
-  protected processMigrateDbSchema(
-    response: AxiosResponse
-  ): Promise<OnboardingActionResult> {
+  protected processMigrateDbSchema(response: AxiosResponse): Promise<OnboardingActionResult> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === 'object') {
@@ -8473,8 +8203,7 @@ export interface CspNativeAppDetails {
   appName?: string | undefined;
 }
 
-export interface CspNativeAppRegistrationRequest
-  extends BaseCspIntegrationRequest {
+export interface CspNativeAppRegistrationRequest extends BaseCspIntegrationRequest {
   nativeApp?: CspNativeApp;
 }
 
@@ -8496,8 +8225,7 @@ export interface CspWebAppDetails {
   secret?: CspSecret;
 }
 
-export interface CspWebAppRegistrationRequest
-  extends BaseAuthorizedCspIntegrationRequest {
+export interface CspWebAppRegistrationRequest extends BaseAuthorizedCspIntegrationRequest {
   webApp?: CspWebApp;
 }
 

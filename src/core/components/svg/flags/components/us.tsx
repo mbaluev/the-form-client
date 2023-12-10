@@ -4,12 +4,7 @@ import { SvgIconProps } from '@mui/material/SvgIcon';
 
 const FlagUs = forwardRef<SVGSVGElement, SvgIconProps>((props, ref) => {
   return (
-    <SvgIcon
-      viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
-      {...props}
-    >
+    <SvgIcon viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" ref={ref} {...props}>
       <g clipPath="url(#clip0_250_2)">
         <path d="M5 26.3158H95V73.6842H5V26.3158Z" fill="#B22234" />
         <path
@@ -226,12 +221,7 @@ const FlagUs = forwardRef<SVGSVGElement, SvgIconProps>((props, ref) => {
       </g>
       <defs>
         <clipPath id="clip0_250_2">
-          <rect
-            width="90"
-            height="47.3684"
-            fill="white"
-            transform="translate(5 26.3158)"
-          />
+          <rect width="90" height="47.3684" fill="white" transform="translate(5 26.3158)" />
         </clipPath>
       </defs>
     </SvgIcon>

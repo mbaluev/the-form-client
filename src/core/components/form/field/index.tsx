@@ -54,19 +54,13 @@ export const FormField = (props: IFormFieldProps) => {
           <Tooltip title={tooltip}>
             <div className={clsTitleText}>{title}</div>
           </Tooltip>
-          {titleExtra && (
-            <div className={classes.field_title_text_extra}>{titleExtra}</div>
-          )}
+          {titleExtra && <div className={classes.field_title_text_extra}>{titleExtra}</div>}
           {titleQuestion && (
             <Tooltip title={titleQuestion}>
-              <HelpOutlineOutlinedIcon
-                className={classes.field_title_text_extra}
-              />
+              <HelpOutlineOutlinedIcon className={classes.field_title_text_extra} />
             </Tooltip>
           )}
-          {required && (
-            <Typography color={theme.palette.error.main}>*</Typography>
-          )}
+          {required && <Typography color={theme.palette.error.main}>*</Typography>}
         </div>
       )}
       <div className={clsValue} style={styleValue}>

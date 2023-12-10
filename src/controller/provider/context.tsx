@@ -9,9 +9,5 @@ interface IProps {
 export const ContainerContext = createContext<Container | null>(null);
 
 export const ContainerProvider = ({ container, children }: IProps) => {
-  return (
-    <ContainerContext.Provider value={container}>
-      {children}
-    </ContainerContext.Provider>
-  );
+  return <ContainerContext.Provider value={container}>{children}</ContainerContext.Provider>;
 };

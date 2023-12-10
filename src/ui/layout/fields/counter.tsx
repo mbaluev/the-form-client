@@ -16,17 +16,11 @@ export const Count = <T extends FieldValues>(props: IProps) => {
       rules={rules}
       render={({ field: { onChange, value } }) => {
         const handleChange = (val: number) => {
-          if (
-            !(!Boolean(value) && !Boolean(val)) &&
-            !Number.isNaN(val) &&
-            val !== value
-          ) {
+          if (!(!Boolean(value) && !Boolean(val)) && !Number.isNaN(val) && val !== value) {
             onChange({ target: { value: val } });
           }
         };
-        return (
-          <Counter min={0} count={Number(value)} onChange={handleChange} />
-        );
+        return <Counter min={0} count={Number(value)} onChange={handleChange} />;
       }}
     />
   );

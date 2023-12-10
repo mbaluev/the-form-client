@@ -16,12 +16,8 @@ export interface IYearSelectProps {
 }
 
 export const YearSelect: FC<IYearSelectProps> = (props) => {
-  const { value, minYear, maxYear, onChange, hideControls, small, disabled } =
-    props;
-  const options: number[] = useMemo(
-    () => yearArrayFromRange(minYear, maxYear),
-    [minYear, maxYear]
-  );
+  const { value, minYear, maxYear, onChange, hideControls, small, disabled } = props;
+  const options: number[] = useMemo(() => yearArrayFromRange(minYear, maxYear), [minYear, maxYear]);
 
   const select = (
     <Select

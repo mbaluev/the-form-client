@@ -7,10 +7,7 @@ export const TODAY = {
   day: new Date().getDate(),
   yearShort: new Date().getFullYear().toString().substring(2),
   subtract: (y?: number, m?: number, d?: number) => {
-    return moment(new Date())
-      .subtract(y, 'years')
-      .subtract(m, 'months')
-      .subtract(d, 'days');
+    return moment(new Date()).subtract(y, 'years').subtract(m, 'months').subtract(d, 'days');
   },
   subtractMonthToYear: (monthCount: number) => {
     return moment(new Date())
@@ -22,12 +19,7 @@ export const TODAY = {
       .subtract(monthCount - 1, 'months')
       .month();
   },
-  monthsDiff: (
-    startYear: number,
-    startMonth: number,
-    endYear: number,
-    endMonth: number
-  ) => {
+  monthsDiff: (startYear: number, startMonth: number, endYear: number, endMonth: number) => {
     const start = moment({
       year: startYear,
       month: startMonth,

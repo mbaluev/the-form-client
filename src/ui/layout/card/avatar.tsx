@@ -21,11 +21,7 @@ export const CardAvatar = (props: IProps) => {
           backgroundColor: theme.palette.t1Grey['20'],
         }}
       >
-        <Typography
-          fontSize="1.2rem"
-          fontWeight={600}
-          color={theme.palette.t1Grey['130']}
-        >
+        <Typography fontSize="1.2rem" fontWeight={600} color={theme.palette.t1Grey['130']}>
           <FirstLetters name={name} />
         </Typography>
       </MuiAvatar>
@@ -33,10 +29,6 @@ export const CardAvatar = (props: IProps) => {
   }
 
   return (
-    <MuiAvatar
-      variant="rounded"
-      sx={{ backgroundColor: theme.palette.t1Grey['20'] }}
-      src={img}
-    />
+    <MuiAvatar variant="rounded" sx={{ backgroundColor: theme.palette.t1Grey['20'] }} src={img} />
   );
 };

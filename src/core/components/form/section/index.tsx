@@ -15,9 +15,7 @@ export const FormSection = (props: IFormSectionProps) => {
       {title && (
         <div className={classes.section_title}>
           <div className={classes.section_title_text}>{title}</div>
-          {titleExtra && (
-            <div className={classes.section_title_text_extra}>{titleExtra}</div>
-          )}
+          {titleExtra && <div className={classes.section_title_text_extra}>{titleExtra}</div>}
         </div>
       )}
       {children}

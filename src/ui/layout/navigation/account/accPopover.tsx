@@ -19,8 +19,11 @@ export const AccPopover = observer(() => {
   const theme = useTheme();
   const { isAuth } = useAuthStore();
 
-  const onClickSignIn = (id?: string) => {};
+  const onClickSignIn = (id?: string) => {
+    console.log('sign-in', id);
+  };
   const onClickSignOut = (e?: MouseEvent<HTMLDivElement>, id?: string) => {
+    console.log('sign-out', id);
     e?.stopPropagation();
   };
 

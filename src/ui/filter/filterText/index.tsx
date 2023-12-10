@@ -1,10 +1,4 @@
-import {
-  useState,
-  KeyboardEvent,
-  useEffect,
-  useCallback,
-  ChangeEvent,
-} from 'react';
+import { useState, KeyboardEvent, useEffect, useCallback, ChangeEvent } from 'react';
 import { observer } from 'mobx-react';
 import { InputAdornment, useTheme } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -65,10 +59,7 @@ export const FilterText = observer((props: TextInputFieldProps) => {
       onKeyDown={onKeyDown}
       InputProps={{
         endAdornment: state ? (
-          <InputAdornment
-            position="end"
-            sx={{ height: '100%', maxHeight: 'none' }}
-          >
+          <InputAdornment position="end" sx={{ height: '100%', maxHeight: 'none' }}>
             <Divider orientation="vertical" />
             <IconButton onClick={clearFilters} edge="end" color="primary">
               <CloseIcon />

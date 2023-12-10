@@ -1,10 +1,5 @@
 import { Controller, FieldValues, Path, useFormContext } from 'react-hook-form';
-import {
-  FormControl,
-  FormHelperText,
-  RadioGroup,
-  RadioGroupProps,
-} from '@mui/material';
+import { FormControl, FormHelperText, RadioGroup, RadioGroupProps } from '@mui/material';
 
 interface IProps extends RadioGroupProps {
   rules?: any;
@@ -21,17 +16,10 @@ export const RadioField = <T extends FieldValues>(props: IProps) => {
       defaultValue={false as any}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <FormControl>
-          <RadioGroup
-            name={name}
-            value={value}
-            onChange={onChange}
-            {...otherProps}
-          >
+          <RadioGroup name={name} value={value} onChange={onChange} {...otherProps}>
             {children}
           </RadioGroup>
-          {error && (
-            <FormHelperText error={!!error}>{error.message}</FormHelperText>
-          )}
+          {error && <FormHelperText error={!!error}>{error.message}</FormHelperText>}
         </FormControl>
       )}
     />

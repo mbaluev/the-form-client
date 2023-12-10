@@ -1,10 +1,4 @@
-import {
-  Controller,
-  FieldValues,
-  Path,
-  RegisterOptions,
-  useFormContext,
-} from 'react-hook-form';
+import { Controller, FieldValues, Path, RegisterOptions, useFormContext } from 'react-hook-form';
 import { TextInputField } from 'core/components/fields/textInputField';
 import { TextInputFieldProps } from '@components/fields/textInputField/types';
 import { Warning } from '@ui/layout/fields/warning';

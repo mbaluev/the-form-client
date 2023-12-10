@@ -51,11 +51,7 @@ export const Tabs = (props: IProps) => {
               />
             ))}
           </TabList>
-          {loading ? (
-            <Progress sx={{ mt: '-2px' }} />
-          ) : (
-            <TitleDivider sx={{ mt: '-2px' }} />
-          )}
+          {loading ? <Progress sx={{ mt: '-2px' }} /> : <TitleDivider sx={{ mt: '-2px' }} />}
         </Fragment>
       )}
       {tabs.map((tab) => (

@@ -2,10 +2,7 @@ import { isSameMonth, isSameYear, getMonth } from 'date-fns';
 import { useLocaleStore } from '@store/modules/common/locale/useLocaleStore';
 import { YearMonthRange } from '@components/fields/monthRangeField/index';
 
-export const valueFormatter = (
-  value?: YearMonthRange,
-  placeholder?: string
-) => {
+export const valueFormatter = (value?: YearMonthRange, placeholder?: string) => {
   const { fDate, language } = useLocaleStore();
 
   const format = (date?: Date, opts?: Intl.DateTimeFormatOptions) => {

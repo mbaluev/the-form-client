@@ -1,7 +1,4 @@
-import {
-  PatternFormat as PatternsFormat,
-  PatternFormatProps,
-} from 'react-number-format';
+import { PatternFormat as PatternsFormat, PatternFormatProps } from 'react-number-format';
 import { forwardRef } from 'react';
 
 interface IProps {

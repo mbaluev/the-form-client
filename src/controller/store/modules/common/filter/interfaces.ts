@@ -36,13 +36,6 @@ export default interface IFilterStore {
   // ui
   isMore?: boolean;
   setIsMore: (value?: boolean) => void;
-  getFilterItems: (
-    except?: string,
-    property?: string,
-    value?: any[]
-  ) => FilterItem[] | undefined;
-  getFilterDistinctValues: (
-    name: string,
-    data: DistinctValueResult
-  ) => IFilterDTO[] | undefined;
+  getFilterItems: (except?: string, property?: string, value?: any[]) => FilterItem[] | undefined;
+  getFilterDistinctValues: (name: string, data: DistinctValueResult) => IFilterDTO[] | undefined;
 }

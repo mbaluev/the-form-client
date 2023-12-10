@@ -12,8 +12,7 @@ export type TListITem = {
   error?: string | null;
 };
 
-export default interface IBaseListStore<T extends TListITem>
-  extends IBaseStore {
+export default interface IBaseListStore<T extends TListITem> extends IBaseStore {
   // page
   pageSize: number;
   pageNumber: number;

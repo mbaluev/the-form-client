@@ -25,10 +25,7 @@ export class ErrorBoundary extends Component {
           status="error"
           message="Oops, there is an error!"
           buttons={[
-            <Button
-              variant="outlined"
-              onClick={() => this.setState({ hasError: false })}
-            >
+            <Button variant="outlined" onClick={() => this.setState({ hasError: false })}>
               Try again
             </Button>,
           ]}

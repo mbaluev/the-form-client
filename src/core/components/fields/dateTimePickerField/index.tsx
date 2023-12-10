@@ -3,9 +3,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DateTimePickerFieldProps } from '@components/fields/dateTimePickerField/types';
 import 'moment/min/locales';
 
-export const DateTimePickerField = <TDate,>(
-  props: DateTimePickerFieldProps<TDate>
-) => {
+export const DateTimePickerField = <TDate,>(props: DateTimePickerFieldProps<TDate>) => {
   const { locale, ...otherProps } = props;
   return (
     <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={locale}>

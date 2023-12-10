@@ -70,9 +70,7 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
           color="primary"
           disabled={loading}
           sx={{ flexBasis: '50%' }}
-          startIcon={
-            isLoadingCancel ? <Loader size={20} loading relative /> : undefined
-          }
+          startIcon={isLoadingCancel ? <Loader size={20} loading relative /> : undefined}
           fullWidth
         >
           {t('common:cancel')}
@@ -83,9 +81,7 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
           color="primary"
           disabled={loading}
           sx={{ flexBasis: '50%' }}
-          startIcon={
-            isLoadingDiscard ? <Loader size={20} loading relative /> : undefined
-          }
+          startIcon={isLoadingDiscard ? <Loader size={20} loading relative /> : undefined}
           fullWidth
         >
           {t('common:discard-changes')}
@@ -96,9 +92,7 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
           color="primary"
           disabled={loading}
           sx={{ flexBasis: '50%' }}
-          startIcon={
-            isLoadingSave ? <Loader size={20} loading relative /> : undefined
-          }
+          startIcon={isLoadingSave ? <Loader size={20} loading relative /> : undefined}
           fullWidth
         >
           {t('common:save-changes')}

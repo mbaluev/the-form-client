@@ -52,8 +52,7 @@ export class AxiosApi implements IAxiosApi {
       return await this.handleError(response.data);
     } catch (error: any) {
       let ignore: boolean;
-      if (typeof options?.ignoreError === 'boolean')
-        ignore = options?.ignoreError;
+      if (typeof options?.ignoreError === 'boolean') ignore = options?.ignoreError;
       else ignore = options?.ignoreError?.code === error?.response?.status;
       ignore = ignore || error?.response?.status === 401;
       if (!ignore) this.notifyStore.add(error, 'error');
@@ -117,12 +116,7 @@ export class AxiosApi implements IAxiosApi {
     );
   }
 
-  async postDownload(
-    url: string,
-    filename: string,
-    data?: any,
-    options?: IApiOptions
-  ) {
+  async postDownload(url: string, filename: string, data?: any, options?: IApiOptions) {
     return this.postBlob(url, data, options).then((response) => {
       const a = document.createElement('a');
       a.href = URL.createObjectURL(response);

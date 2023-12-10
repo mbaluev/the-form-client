@@ -13,25 +13,19 @@ export const getInputProps = (
 ) => {
   if (inputType === 'text') {
     return {
-      endAdornment: adornment && (
-        <InputAdornment position="end">{adornment}</InputAdornment>
-      ),
+      endAdornment: adornment && <InputAdornment position="end">{adornment}</InputAdornment>,
     };
   }
   if (inputType === 'number') {
     return {
       inputComponent: NumberFormat as any,
-      endAdornment: adornment && (
-        <InputAdornment position="end">{adornment}</InputAdornment>
-      ),
+      endAdornment: adornment && <InputAdornment position="end">{adornment}</InputAdornment>,
     };
   }
   if (inputType === 'currency') {
     return {
       inputComponent: NumberFormat as any,
-      endAdornment: (
-        <InputAdornment position="end">{currencyInfo?.symbol}</InputAdornment>
-      ),
+      endAdornment: <InputAdornment position="end">{currencyInfo?.symbol}</InputAdornment>,
     };
   }
   if (inputType === 'pattern') {

@@ -20,12 +20,8 @@ export const MonthRangeContainer: FC<MonthRangeFieldProps> = (props) => {
     changeOnClick,
   } = props;
 
-  const [startValue, setStartValue] = useState<Date>(
-    () => value?.[0] ?? new Date()
-  );
-  const [endValue, setEndValue] = useState<Date>(
-    () => value?.[1] ?? new Date()
-  );
+  const [startValue, setStartValue] = useState<Date>(() => value?.[0] ?? new Date());
+  const [endValue, setEndValue] = useState<Date>(() => value?.[1] ?? new Date());
 
   useEffect(() => {
     if (value) {

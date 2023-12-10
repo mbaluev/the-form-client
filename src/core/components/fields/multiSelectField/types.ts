@@ -26,8 +26,7 @@ export type MultiSelectFieldProps<ItemType> = Omit<
   showPopoverTitle?: boolean;
 };
 
-export type MultiSelectAsyncFieldProps<ItemType> =
-  MultiSelectFieldProps<ItemType> & {
-    loadItems: (name?: string) => Promise<ItemType[] | undefined>;
-    loadTotal: (name?: string, value?: any[]) => Promise<number | undefined>;
-  };
+export type MultiSelectAsyncFieldProps<ItemType> = MultiSelectFieldProps<ItemType> & {
+  loadItems: (name?: string) => Promise<ItemType[] | undefined>;
+  loadTotal: (name?: string, value?: any[]) => Promise<number | undefined>;
+};

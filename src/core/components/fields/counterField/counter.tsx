@@ -59,22 +59,14 @@ export const Counter = (props: IProps) => {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <IconButton
-              edge="start"
-              onClick={onDecrease}
-              disabled={disabled || value === min}
-            >
+            <IconButton edge="start" onClick={onDecrease} disabled={disabled || value === min}>
               <RemoveIcon />
             </IconButton>
           </InputAdornment>
         ),
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton
-              edge="end"
-              onClick={onIncrease}
-              disabled={disabled || value === max}
-            >
+            <IconButton edge="end" onClick={onIncrease} disabled={disabled || value === max}>
               <AddIcon />
             </IconButton>
           </InputAdornment>

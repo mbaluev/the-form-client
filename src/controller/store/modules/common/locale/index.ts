@@ -166,11 +166,7 @@ export class LocaleStore extends BaseStore implements ILocaleStore {
 
   // --- formats ---
 
-  fDate = (
-    value?: Date,
-    opts?: Intl.DateTimeFormatOptions,
-    locale?: string
-  ) => {
+  fDate = (value?: Date, opts?: Intl.DateTimeFormatOptions, locale?: string) => {
     let displayValue = '';
     this.fDateParts(value, opts, locale)
       .map((d) => {
@@ -182,28 +178,17 @@ export class LocaleStore extends BaseStore implements ILocaleStore {
     return displayValue;
   };
 
-  fDateParts = (
-    value?: Date,
-    opts?: Intl.DateTimeFormatOptions,
-    locale?: string
-  ) => {
+  fDateParts = (value?: Date, opts?: Intl.DateTimeFormatOptions, locale?: string) => {
     const options = {
       dateStyle: 'short',
       numberingSystem: this.digit,
       timeZone: this.timeZone,
       ...opts,
     } as Intl.DateTimeFormatOptions;
-    return new Intl.DateTimeFormat(
-      locale || this.locale,
-      options
-    ).formatToParts(value);
+    return new Intl.DateTimeFormat(locale || this.locale, options).formatToParts(value);
   };
 
-  fTime = (
-    value?: Date,
-    opts?: Intl.DateTimeFormatOptions,
-    locale?: string
-  ) => {
+  fTime = (value?: Date, opts?: Intl.DateTimeFormatOptions, locale?: string) => {
     const options = {
       timeStyle: 'short',
       numberingSystem: this.digit,
@@ -211,21 +196,11 @@ export class LocaleStore extends BaseStore implements ILocaleStore {
       timeZone: this.timeZone,
       ...opts,
     } as Intl.DateTimeFormatOptions;
-    return new Intl.DateTimeFormat(locale || this.locale, options).format(
-      value
-    );
+    return new Intl.DateTimeFormat(locale || this.locale, options).format(value);
   };
 
-  fDateTime = (
-    value?: Date,
-    opts?: Intl.DateTimeFormatOptions,
-    locale?: string
-  ) => {
-    return `${this.fDate(value, opts, locale)} ${this.fTime(
-      value,
-      opts,
-      locale
-    )}`;
+  fDateTime = (value?: Date, opts?: Intl.DateTimeFormatOptions, locale?: string) => {
+    return `${this.fDate(value, opts, locale)} ${this.fTime(value, opts, locale)}`;
   };
 
   fNumber = (value?: any, opts?: Intl.NumberFormatOptions) => {
@@ -260,11 +235,7 @@ export class LocaleStore extends BaseStore implements ILocaleStore {
     return value && value !== currencies.unknown ? value : this.currency;
   };
 
-  fCurrency = (
-    value?: number,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => {
+  fCurrency = (value?: number, to?: string, opts?: Intl.NumberFormatOptions) => {
     const currency = this.fCurrencyGet(to);
     const options = {
       style: 'currency',
@@ -280,11 +251,7 @@ export class LocaleStore extends BaseStore implements ILocaleStore {
       .trim();
   };
 
-  fCurrencySymbol = (
-    value?: any,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => {
+  fCurrencySymbol = (value?: any, to?: string, opts?: Intl.NumberFormatOptions) => {
     const currency = this.fCurrencyGet(to || this.currency);
     if (to !== currencies.unknown) {
       const options = {
@@ -307,11 +274,7 @@ export class LocaleStore extends BaseStore implements ILocaleStore {
     }
   };
 
-  fCurrencyExplicit = (
-    value?: any,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => {
+  fCurrencyExplicit = (value?: any, to?: string, opts?: Intl.NumberFormatOptions) => {
     const currency = to || this.currency;
     return `${this.fCurrency(value, currency, opts)} ${currency}`;
   };

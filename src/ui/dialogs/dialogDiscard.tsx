@@ -38,12 +38,8 @@ export const DialogDiscard = (props: IDialogDiscardProps) => {
       </DialogTitle>
       <DialogContent sx={{ pb: 0 }}>
         <Stack alignItems="flex-start">
-          <Typography textAlign="left">
-            {t('common:discard-question')}
-          </Typography>
-          <Typography textAlign="left">
-            {t('common:discard-message')}
-          </Typography>
+          <Typography textAlign="left">{t('common:discard-question')}</Typography>
+          <Typography textAlign="left">{t('common:discard-message')}</Typography>
         </Stack>
       </DialogContent>
       <DialogActions>

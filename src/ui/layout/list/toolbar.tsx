@@ -13,14 +13,8 @@ interface IProps<T extends TListITem> extends IListBaseProps<T> {
 export const Toolbar = observer(<T extends TListITem>(props: IProps<T>) => {
   const { dataModel, padding, handleCreate } = props;
 
-  const {
-    isLoading,
-    dataLength,
-    dataTotal,
-    selectedItems,
-    selectAllItems,
-    allItemsSelected,
-  } = dataModel;
+  const { isLoading, dataLength, dataTotal, selectedItems, selectAllItems, allItemsSelected } =
+    dataModel;
 
   return (
     <VirtualizeToolbar
@@ -32,9 +26,7 @@ export const Toolbar = observer(<T extends TListITem>(props: IProps<T>) => {
       dataSelectAll={selectAllItems}
       dataAllSelected={allItemsSelected}
       refreshAction={<BtnReload dataModel={dataModel} />}
-      more={
-        handleCreate ? <BtnCreate handleCreate={handleCreate} /> : undefined
-      }
+      more={handleCreate ? <BtnCreate handleCreate={handleCreate} /> : undefined}
       checkbox
     />
   );

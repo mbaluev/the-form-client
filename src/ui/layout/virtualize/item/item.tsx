@@ -1,10 +1,4 @@
-import {
-  ReactElement,
-  useState,
-  ChangeEvent,
-  MouseEvent,
-  cloneElement,
-} from 'react';
+import { ReactElement, useState, ChangeEvent, MouseEvent, cloneElement } from 'react';
 import { observer } from 'mobx-react';
 import Divider from '@mui/material/Divider';
 import { CheckboxField } from 'core/components/fields/checkboxField';
@@ -25,8 +19,7 @@ interface IProps {
 }
 
 export const VirtualizeItem = observer((props: IProps) => {
-  const { id, selected, selectItem, onClick, avatar, content, more, loading } =
-    props;
+  const { id, selected, selectItem, onClick, avatar, content, more, loading } = props;
 
   // hover
   const [hover, setHover] = useState(false);
@@ -37,8 +30,7 @@ export const VirtualizeItem = observer((props: IProps) => {
   const handleClick = () => {
     if (onClick) onClick();
   };
-  const handleCheckClick = (e: MouseEvent<HTMLButtonElement>) =>
-    e.stopPropagation();
+  const handleCheckClick = (e: MouseEvent<HTMLButtonElement>) => e.stopPropagation();
   const handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
     if (selectItem) selectItem(e.target.name);
   };
@@ -65,9 +57,7 @@ export const VirtualizeItem = observer((props: IProps) => {
         )}
         <div className={classes.item_content}>
           {avatar && <div style={{ flexGrow: 0 }}>{avatar}</div>}
-          <div style={{ flexGrow: 1 }}>
-            {content && cloneElement(content, { hover })}
-          </div>
+          <div style={{ flexGrow: 1 }}>{content && cloneElement(content, { hover })}</div>
           {more && <div style={{ flexGrow: 0 }}>{more}</div>}
         </div>
       </div>

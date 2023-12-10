@@ -4,12 +4,7 @@ import { SvgIcon } from '@mui/material';
 
 const IconPuzzle = forwardRef<SVGSVGElement, SvgIconProps>((props, ref) => {
   return (
-    <SvgIcon
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
-      {...props}
-    >
+    <SvgIcon viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" ref={ref} {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

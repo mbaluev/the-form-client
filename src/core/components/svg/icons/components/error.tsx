@@ -4,12 +4,7 @@ import { SvgIconProps } from '@mui/material/SvgIcon';
 
 const IconError = forwardRef<SVGSVGElement, SvgIconProps>((props, ref) => {
   return (
-    <SvgIcon
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
-      {...props}
-    >
+    <SvgIcon viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" ref={ref} {...props}>
       <path
         d="M16.0765 2.15625H7.92345L2.15625 7.92345V16.0765L7.92345 21.8438H16.0765L21.8438 16.0765V7.92345L16.0765 2.15625Z"
         fill="#E2607F"

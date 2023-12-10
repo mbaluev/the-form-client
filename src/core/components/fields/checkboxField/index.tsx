@@ -1,30 +1,13 @@
 import { ChangeEvent, useState } from 'react';
-import {
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-} from '@mui/material';
+import { Checkbox, FormControl, FormControlLabel, FormHelperText } from '@mui/material';
 import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import { CheckboxFieldProps } from '@components/fields/checkboxField/types';
 
 export const CheckboxField = (props: CheckboxFieldProps) => {
-  const {
-    className,
-    value = false,
-    onChange,
-    label,
-    error,
-    helperText,
-    sx,
-    ...other
-  } = props;
+  const { className, value = false, onChange, label, error, helperText, sx, ...other } = props;
 
   const [state, setState] = useState<boolean>(value);
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    checked: boolean
-  ) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     setState(checked);
     if (onChange) onChange(event, checked);
   };
@@ -41,14 +24,10 @@ export const CheckboxField = (props: CheckboxFieldProps) => {
           display: 'flex',
           '& .MuiFormControlLabel-label': { flexGrow: 1, overflow: 'hidden' },
         }}
-        control={
-          <Checkbox checked={state} onChange={handleChange} {...other} />
-        }
+        control={<Checkbox checked={state} onChange={handleChange} {...other} />}
         label={label}
       />
-      {helperText && (
-        <FormHelperText error={!!error}>{helperText}</FormHelperText>
-      )}
+      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
     </FormControl>
   );
 };

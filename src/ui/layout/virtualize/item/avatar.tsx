@@ -13,15 +13,8 @@ export const VirtualizeAvatar = (props: IProps) => {
 
   if (!img) {
     return (
-      <MuiAvatar
-        variant="rounded"
-        sx={{ backgroundColor: theme.palette.t1Grey['20'] }}
-      >
-        <Typography
-          fontSize="0.9rem"
-          fontWeight={600}
-          color={theme.palette.t1Grey['130']}
-        >
+      <MuiAvatar variant="rounded" sx={{ backgroundColor: theme.palette.t1Grey['20'] }}>
+        <Typography fontSize="0.9rem" fontWeight={600} color={theme.palette.t1Grey['130']}>
           <FirstLetters name={name} />
         </Typography>
       </MuiAvatar>
@@ -29,10 +22,6 @@ export const VirtualizeAvatar = (props: IProps) => {
   }
 
   return (
-    <MuiAvatar
-      variant="rounded"
-      sx={{ backgroundColor: theme.palette.t1Grey['20'] }}
-      src={img}
-    />
+    <MuiAvatar variant="rounded" sx={{ backgroundColor: theme.palette.t1Grey['20'] }} src={img} />
   );
 };

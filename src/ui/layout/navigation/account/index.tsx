@@ -52,10 +52,7 @@ export const Account = observer(() => {
             </Avatar>
           ))}
         {!isAuth && (
-          <Avatar
-            variant="circular"
-            sx={{ width: 30, height: 30, backgroundColor: 'transparent' }}
-          >
+          <Avatar variant="circular" sx={{ width: 30, height: 30, backgroundColor: 'transparent' }}>
             <AccountCircleIcon
               sx={{
                 color: theme.palette.t1Grey['100'],

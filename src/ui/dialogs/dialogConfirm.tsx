@@ -47,9 +47,7 @@ export const DialogConfirm = (props: IProps) => {
       </DialogTitle>
       {isLoading && <LinearProgress sx={{ borderRadius: 0 }} />}
       <DialogContent sx={{ pb: 0 }}>
-        <Typography textAlign="left">
-          {message || t('common:confirm-message')}
-        </Typography>
+        <Typography textAlign="left">{message || t('common:confirm-message')}</Typography>
       </DialogContent>
       <DialogActions>
         <Button

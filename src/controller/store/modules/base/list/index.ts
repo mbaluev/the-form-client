@@ -7,10 +7,7 @@ import type IBaseListStore from '@store/modules/base/list/interface';
 import type { TListITem } from '@store/modules/base/list/interface';
 
 @injectable()
-export class BaseListStore<T extends TListITem>
-  extends BaseStore
-  implements IBaseListStore<T>
-{
+export class BaseListStore<T extends TListITem> extends BaseStore implements IBaseListStore<T> {
   @inject(STORE.Filter) readonly filterStore!: IFilterStore;
 
   constructor() {
@@ -79,9 +76,7 @@ export class BaseListStore<T extends TListITem>
         value: d.id,
         label: d.displayName || d.name,
       }))
-      ?.sort((a, b) =>
-        a.label && b.label ? a.label.localeCompare(b.label) : 0
-      );
+      ?.sort((a, b) => (a.label && b.label ? a.label.localeCompare(b.label) : 0));
   }
 
   // computed
@@ -98,8 +93,7 @@ export class BaseListStore<T extends TListITem>
       ?.slice()
       ?.sort(
         (a, b) =>
-          Number(a.order) - Number(b.order) ||
-          (a.name && b.name ? a.name.localeCompare(b.name) : 0)
+          Number(a.order) - Number(b.order) || (a.name && b.name ? a.name.localeCompare(b.name) : 0)
       );
   }
 
@@ -114,17 +108,13 @@ export class BaseListStore<T extends TListITem>
   // item
 
   setItemLoading = (id?: string | null, value?: boolean) => {
-    const items: T[] | undefined = this.data
-      ? JSON.parse(JSON.stringify(this.data))
-      : undefined;
+    const items: T[] | undefined = this.data ? JSON.parse(JSON.stringify(this.data)) : undefined;
     items?.forEach((d) => (d.loading = d.id === id ? value : d.loading));
     this.setData(items);
   };
 
   setItemError = (id?: string | null, value?: string) => {
-    const items: T[] | undefined = this.data
-      ? JSON.parse(JSON.stringify(this.data))
-      : undefined;
+    const items: T[] | undefined = this.data ? JSON.parse(JSON.stringify(this.data)) : undefined;
     items?.forEach((d) => {
       if (d.id === id) d.error = value;
     });
@@ -165,9 +155,7 @@ export class BaseListStore<T extends TListITem>
 
   get allItemsSelected() {
     return Boolean(
-      this.selectedItems &&
-        this.data &&
-        this.selectedItems.length === this.data.length
+      this.selectedItems && this.data && this.selectedItems.length === this.data.length
     );
   }
 

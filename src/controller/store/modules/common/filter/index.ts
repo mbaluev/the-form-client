@@ -389,12 +389,7 @@ export class FilterStore implements IFilterStore {
 
   getFilterItem = (property: string, value?: any[]) => {
     const operator = this.getOperator(property);
-    const val =
-      operator === FilterOperator.In
-        ? Array.isArray(value)
-          ? value
-          : [value]
-        : value;
+    const val = operator === FilterOperator.In ? (Array.isArray(value) ? value : [value]) : value;
     return {
       connector: FilterConnector.And,
       negateExpression: false,

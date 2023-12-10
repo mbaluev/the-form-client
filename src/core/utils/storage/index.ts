@@ -73,14 +73,8 @@ let SStorage: Record<string, any>;
 let LStorage: Record<string, any>;
 
 if (typeof window !== 'undefined') {
-  SStorage = new Proxy(
-    DefaultProps(window.sessionStorage),
-    CreateStoragePH(window.sessionStorage)
-  );
-  LStorage = new Proxy(
-    DefaultProps(window.localStorage),
-    CreateStoragePH(window.localStorage)
-  );
+  SStorage = new Proxy(DefaultProps(window.sessionStorage), CreateStoragePH(window.sessionStorage));
+  LStorage = new Proxy(DefaultProps(window.localStorage), CreateStoragePH(window.localStorage));
 }
 
 const LStorageSet = (name: string, value?: any) => {

@@ -45,8 +45,7 @@ const MyApp = (props: MyAppProps) => {
     pageProps,
   } = props;
 
-  const getLayout =
-    (Component as any).getLayout || ((page: ReactElement) => page);
+  const getLayout = (Component as any).getLayout || ((page: ReactElement) => page);
 
   useEffect(() => {
     const handleStart = () => appStore.routeChangeStart();
@@ -68,9 +67,7 @@ const MyApp = (props: MyAppProps) => {
       <CacheProvider value={emotionCache}>
         <ContainerProvider container={container}>
           <AppProvider>
-            <ThemeProvider
-              theme={{ ...theme, direction: i18n.dir(router.locale) }}
-            >
+            <ThemeProvider theme={{ ...theme, direction: i18n.dir(router.locale) }}>
               <CssBaseline />
               {getLayout(<Component {...pageProps} />)}
             </ThemeProvider>
