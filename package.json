@@ -15,7 +15,8 @@
     "test": "jest",
     "test:ci": "jest --ci",
     "test:watch": "jest --watch",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "docker": "docker build -t the-form-client . && docker run --env-file .env.production -dp 127.0.0.1:80:80 the-form-client"
   },
   "dependencies": {
     "@blossomfinance/iso-4217-currencies": "^0.2.5",

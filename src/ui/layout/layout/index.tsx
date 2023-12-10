@@ -27,7 +27,7 @@ import { useRouter } from 'next/router';
 import { MEDIA_SM, MEDIA_XS, useWindowSize } from '@hooks/useWindowSize';
 import { useAuth } from '@hooks/useAuth';
 import { isAccess } from '@ui/permission/permissionWrapper';
-import IconTheForm from '../../../core/icons/theForm';
+import IconTheFormCircle from '../../../core/icons/theFormCircle';
 import './index.scss';
 
 export interface ILayoutProps {
@@ -104,12 +104,16 @@ export const Layout = observer((props: TLayoutProps) => {
           )}
           <Link passHref href={ROUTER_CONST_SCHOOL.HOME.path}>
             {size.width > MEDIA_XS ? (
-              <Button startIcon={<IconTheForm />} size="medium" variant="text">
+              <Button
+                startIcon={<IconTheFormCircle />}
+                size="medium"
+                variant="text"
+              >
                 The Form
               </Button>
             ) : (
               <IconButton>
-                <IconTheForm />
+                <IconTheFormCircle />
               </IconButton>
             )}
           </Link>

@@ -35,28 +35,28 @@ export default class MyDocument extends Document {
             rel="icon"
             type="image/png"
             sizes="64x64"
-            href="/favicon/64x64.png"
+            href="/favicon/favicon.ico"
           />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="/favicon/180x180.png"
+            href="/favicon/favicon.ico"
           />
           <meta
             name="msapplication-square70x70logo"
-            content="/favicon/70x70.png"
+            content="/favicon/favicon.ico"
           />
           <meta
             name="msapplication-square150x150logo"
-            content="/favicon/150x150.png"
+            content="/favicon/favicon.ico"
           />
           <meta
             name="msapplication-square310x310logo"
-            content="/favicon/310x310.png"
+            content="/favicon/favicon.ico"
           />
           <meta
             name="msapplication-wide310x150logo"
-            content="/favicon/310x150.png"
+            content="/favicon/favicon.ico"
           />
           <meta name="msapplication-TileColor" content="#111" />
 
