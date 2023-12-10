@@ -1,7 +1,10 @@
 import cryptoJS from 'crypto';
 
 export const randomInt = (min: number, max: number) => {
-  if (typeof crypto !== 'undefined') {
+  if (
+    typeof crypto !== 'undefined' &&
+    typeof crypto.getRandomValues !== 'undefined'
+  ) {
     const randomBuffer = new Uint32Array(1);
     crypto.getRandomValues(randomBuffer);
     min = Math.ceil(min);

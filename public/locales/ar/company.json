@@ -1,0 +1,19 @@
+{
+  "btn-register": "تسجيل شركة جديدة",
+  "delete-company": "حذف الشركة",
+  "delete-company-question": "هل ترغب حقا في حذف هذه الشركة؟",
+  "field-address-line-1": "العنوان الأول",
+  "field-address-line-2": "العنوان الثاني",
+  "field-domain": "اسم النطاق",
+  "field-email": "البريد الإلكتروني",
+  "field-firstname": "الاسم الأول",
+  "field-lastname": "الاسم الأخير",
+  "field-name": "اسم الشركة",
+  "field-phone": "رقم الهاتف",
+  "new-company": "شركة جديدة",
+  "success-register": "تم تسجيل الشركة بنجاح",
+  "title-contact": "جهة الاتصال",
+  "title-general": "المعلومات العامة",
+  "title-sign-in": "تشغيل العدد الإجمالي كشركة جديدة",
+  "title-welcome": "مرحبا بك في عملية التوجيه لـ Total One"
+}

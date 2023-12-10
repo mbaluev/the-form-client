@@ -1,51 +1,19 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { i18n } = require('./next-i18next.config');
+const path = require('path');
+
 module.exports = {
-  reactStrictMode: true,
-  sassOptions: {},
-  webpack: (config) => {
-    let oneOfRules = config.module.rules.find((x) => x.oneOf).oneOf;
-
-    // remove the webpack rule to error on global css/scss
-    oneOfRules = oneOfRules.filter(
-      (x) => x.issuer || !x.use || x.use.loader !== 'error-loader'
-    );
-
-    // modify the webpack rule targeting only *.module.scss to target only *.scss
-    const newScssRule = oneOfRules.find(
-      (x) => x.test && x.test.toString() === /\.module\.(scss|sass)$/.toString()
-    );
-    newScssRule.test = /\.(scss|sass)$/;
-    newScssRule.sideEffects = true;
-
-    if (newScssRule.use[0].options.modules) {
-      newScssRule.use[0].options.modules = false;
-    }
-
-    if (newScssRule.use[1].options.modules) {
-      newScssRule.use[1].options.modules = false;
-    }
-
-    config.module.rules.splice(
-      config.module.rules.findIndex((x) => x.oneOf),
-      1,
-      {
-        oneOf: oneOfRules,
-      }
-    );
-
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
-
-    return config;
-  },
-  experimental: {
-    outputStandalone: true,
+  i18n,
+  output: 'standalone',
+  reactStrictMode: false,
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
   },
   env: {
     REACT_APP_CORE_URL: process.env.REACT_APP_CORE_URL,
   },
   images: {
+    minimumCacheTTL: 60,
     domains: [],
   },
 };

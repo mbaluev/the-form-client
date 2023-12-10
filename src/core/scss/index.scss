@@ -1,19 +1,12 @@
 @import "params.scss";
-@import "animations.scss";
-@import "colors.scss";
-@import "cols.scss";
-@import "card.scss";
 @import "nprogress.scss";
-@import "mui.scss";
 
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: $font-family;
   font-size: $font-size;
-  color: $color-black;
   -webkit-text-size-adjust: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -29,12 +22,12 @@ body {
 
 a,
 .link {
-  color: $color-blue;
+  color: $color-purple-dark;
   text-decoration: none;
   cursor: pointer;
 
   &:hover {
-    color: $color-red;
+    color: $color-purple-dark-70;
   }
 
   &_disabled,
@@ -42,6 +35,10 @@ a,
     color: $color-grey-100;
     cursor: not-allowed;
   }
+}
+
+.bold {
+  font-weight: 600 !important;
 }
 
 ul {
@@ -54,13 +51,12 @@ pre,
 code {
   margin: 0;
   white-space: pre-wrap;
-  font-family: $font-family-mono;
-  font-weight: 500;
 }
 
 input:-webkit-autofill {
   -webkit-background-clip: text;
-  -webkit-box-shadow: transparent !important;
+  -webkit-text-fill-color: $color-white !important;
+  -webkit-box-shadow: 0 0 0 30px $color-grey-300 inset !important;
 }
 
 @media print {

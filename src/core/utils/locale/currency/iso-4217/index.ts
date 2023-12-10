@@ -1,5 +1,6 @@
 import { ISO_3166_1_ALPHA_2_TO_ISO_4217 } from '@utils/locale/currency/iso-4217/iso-3166-1-alpha-2-to-iso-4217';
 import { ISO_4217_NAMES } from '@utils/locale/currency/iso-4217/iso-4127-names';
+import { ISO_4217 } from '@utils/locale/currency/iso-4217/iso-4217';
 
 export interface ICurrency {
   code: string;
@@ -43,6 +44,9 @@ const iso4217 = {
       }
     }
     return countries;
+  },
+  symbol: function (currency: string) {
+    return ISO_4217[currency]?.symbol;
   },
 };
 

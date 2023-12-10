@@ -1,0 +1,12 @@
+@import "../../../../core/scss/params";
+
+.list_parent {
+  width: 100%;
+  position: relative;
+}
+.list_grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}

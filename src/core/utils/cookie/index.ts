@@ -1,19 +1,21 @@
 const cookie = {
   names: {
     language: 'NEXT_LOCALE',
-    country: 'THE_FORM_COUNTRY',
-    format: 'THE_FORM_FORMAT',
-    currency: 'THE_FORM_CURRENCY',
-    digit: 'THE_FORM_DIGIT',
-    accountId: 'THE_FORM_ACCOUNT_ID',
-    hourCycle: 'THE_FORM_HOUR_CYCLE',
-    firstDayWeek: 'THE_FORM_FIRST_DAY_WEEK',
-    firstWeekYear: 'THE_FORM_FIRST_WEEK_YEAR',
-    timeZone: 'THE_FORM_TIME_ZONE',
-    token: 'token',
+    country: 'T1_COUNTRY',
+    format: 'T1_FORMAT',
+    currency: 'T1_CURRENCY',
+    digit: 'T1_DIGIT',
+    accountId: 'T1_ACCOUNT_ID',
+    accessToken: 'T1_ACCESS_TOKEN',
+    idpAccessToken: 'T1_IDP_ACCESS_TOKEN',
+    idpRefreshToken: 'T1_IDP_REFRESH_TOKEN',
+    hourCycle: 'T1_HOUR_CYCLE',
+    firstDayWeek: 'T1_FIRST_DAY_WEEK',
+    firstWeekYear: 'T1_FIRST_WEEK_YEAR',
+    timeZone: 'T1_TIME_ZONE',
   },
   options: {
-    maxAge: 60 * 60 * 24 * 30,
+    maxAge: 100 * 24 * 60 * 60,
   },
 };
 

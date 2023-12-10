@@ -14,7 +14,7 @@ export const getOptions = (labelStyle: ILabelStyle) => {
       const tz = now.timezone();
       const tzStrings = soft(zone[0]);
 
-      let label = '';
+      let label;
       const abbr = now.isDST()
         ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore

@@ -1,13 +1,11 @@
-import { LanguageCode } from 'iso-639-1';
-import languages from '@utils/locale/language';
+import { i18n } from 'next-i18next';
+
+const defaultDir = 'ltr';
 
 const dirs = {
-  getDir: (language?: string) => {
-    return languages.rtl.includes(language as LanguageCode) ? 'rtl' : 'ltr';
-  },
-  isRtl: (language?: string) => {
-    return languages.rtl.includes(language as LanguageCode);
-  },
+  default: defaultDir,
+  getDir: (language?: string) => i18n?.dir(language) || defaultDir,
+  isRtl: (language?: string) => i18n?.dir(language) === 'rtl',
 };
 
 export default dirs;

@@ -1,0 +1,19 @@
+{
+  "btn-register": "Registrera ett nytt företag",
+  "delete-company": "Radera företag",
+  "delete-company-question": "Vill du verkligen radera detta företag?",
+  "field-address-line-1": "Adresslinje 1",
+  "field-address-line-2": "Adresslinje 2",
+  "field-domain": "Domännamn",
+  "field-email": "E-post",
+  "field-firstname": "Förnamn",
+  "field-lastname": "Efternamn",
+  "field-name": "Företagsnamn",
+  "field-phone": "Telefonnummer",
+  "new-company": "Nytt företag",
+  "success-register": "Företaget har registrerats framgångsrikt",
+  "title-contact": "Kontakt",
+  "title-general": "Allmän information",
+  "title-sign-in": "Totalt onboarding av One",
+  "title-welcome": "Välkommen till Total One introduktion"
+}

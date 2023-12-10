@@ -1,36 +1,23 @@
-import * as React from 'react';
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentProps,
+} from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
-import {
-  createEmotionCache,
-  createEmotionCacheRtl,
-} from '@utils/cache/createEmotionCache';
-import dirs from '@utils/locale/dir';
+import { createEmotionCache, createEmotionCacheRtl } from '@theme/emotionCache';
+import { i18n } from 'next-i18next';
 
-export default class MyDocument extends Document {
+type Props = DocumentProps & {
+  // add custom document props
+};
+
+export default class MyDocument extends Document<Props> {
   render() {
     return (
-      <Html>
+      <Html dir={i18n?.dir()}>
         <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="true"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400;1,500&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,500;1,400;1,500&display=swap"
-            rel="stylesheet"
-          />
-
           <link
             rel="icon"
             type="image/png"
@@ -101,9 +88,10 @@ MyDocument.getInitialProps = async (ctx) => {
 
   // You can consider sharing the same emotion cache between all the SSR requests to speed up performance.
   // However, be aware that it can have global side effects.
-  const cache = dirs.isRtl(ctx.locale)
-    ? createEmotionCacheRtl()
-    : createEmotionCache();
+  const cache =
+    i18n?.dir(ctx.locale) === 'rtl'
+      ? createEmotionCacheRtl()
+      : createEmotionCache();
   const { extractCriticalToChunks } = createEmotionServer(cache);
 
   ctx.renderPage = () =>

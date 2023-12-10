@@ -16,19 +16,20 @@
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react",
     "incremental": true,
-    "types": ["node", "reflect-metadata", "@types/jest"],
+    "types": ["node", "reflect-metadata", "@types/jest", "./src/core/utils/ts"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "downlevelIteration": true,
     "paths": {
-      "@assets/*": ["assets/*"],
-      "@infrastructure/*": ["controller/infrastructure/*"],
+      "@api/*": ["controller/api/*"],
       "@model/*": ["controller/model/*"],
+      "@provider/*": ["controller/provider/*"],
       "@service/*": ["controller/service/*"],
-      "@viewModel/*": ["controller/viewModel/*"],
-      "@app/*": ["core/app/*"],
+      "@store/*": ["controller/store/*"],
       "@components/*": ["core/components/*"],
       "@hooks/*": ["core/hooks/*"],
+      "@settings/*": ["core/settings/*"],
+      "@theme/*": ["core/theme/*"],
       "@utils/*": ["core/utils/*"],
       "@pages/*": ["pages/*"],
       "@ui/*": ["ui/*"]
@@ -38,8 +39,10 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "jest.config.js",
-    "next.config.js"
+    "next.config.js",
+    "next-i18next.config.js",
+    "translate.js",
+    "openai.js"
   ],
   "exclude": ["node_modules"],
   "ts-node": {

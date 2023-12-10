@@ -1,0 +1,19 @@
+{
+  "btn-register": "Înregistrați o nouă companie",
+  "delete-company": "Ștergeți compania",
+  "delete-company-question": "Chiar doriți să ștergeți această companie?",
+  "field-address-line-1": "Linia adresei 1",
+  "field-address-line-2": "Linia adresei 2",
+  "field-domain": "Nume de domeniu",
+  "field-email": "Email",
+  "field-firstname": "Prenume",
+  "field-lastname": "Nume de familie",
+  "field-name": "Numele companiei",
+  "field-phone": "Număr de telefon",
+  "new-company": "Companie nouă",
+  "success-register": "Companie înregistrată cu succes",
+  "title-contact": "Contact",
+  "title-general": "Informații generale",
+  "title-sign-in": "Începerea lucrului cu Total One",
+  "title-welcome": "Bine ați venit la procesul de integrare în Total One"
+}

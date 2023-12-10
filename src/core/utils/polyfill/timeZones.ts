@@ -454,9 +454,9 @@ if (Intl.getSupportedTimeZones == undefined) {
         if (o == timeZone) {
           return true;
         }
-        // console.log(timeZone + " is accepted but changed to " + o);
+        console.log(timeZone + ' is accepted but changed to ' + o);
       } catch (e) {
-        // console.log(timeZone + " is not supported");
+        console.log(timeZone + ' is not supported');
       }
       return false;
     };

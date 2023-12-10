@@ -1,42 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import isEqual from 'lodash/isEqual';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
-import { SelectChangeEvent } from '@mui/material';
-import { useFilters } from '@hooks/useFilters';
-import { useRouter } from 'next/router';
-import {
-  MultiSelectFieldControl,
-  MultiSelectFieldControlProps,
-} from '@components/fields';
-import './index.less';
-import _ from 'lodash';
+import { useFilterStore } from '@store/modules/common/filter/useFilterStore';
+import { useTheme } from '@mui/material';
+import { MultiSelectField } from 'core/components/fields/multiSelectField';
+import { MultiSelectFieldProps } from '@components/fields/multiSelectField/types';
 
 export const FilterMultiSelect = observer(
-  (props: MultiSelectFieldControlProps) => {
+  <ItemType,>(props: MultiSelectFieldProps<ItemType>) => {
     const { name = '' } = props;
+    const { filters, setFilter } = useFilterStore();
+    const [state, setState] = useState<any[]>([]);
+    const setFilterValue = (value?: any[]) => setFilter(name, value);
+    const theme = useTheme();
 
-    const router = useRouter();
-    const { filters, setFilter } = useFilters();
-    const [state, setState] = useState<string[]>(filters[name]);
-    const setFilters = (setFiltersValue: unknown[]) =>
-      setFilter(name, setFiltersValue, router);
-
-    const onChange = (e: SelectChangeEvent<unknown>) => {
-      const value = e.target.value as string[];
-      const obj1 = value ? [...value] : [];
-      const obj2 = filters[name] ? [...filters[name]] : [];
-      if (!_.isEqual(obj1, obj2)) {
-        setFilters(value);
-      }
+    const onChange = (val?: unknown[]) => {
+      const obj1 = val?.filter((d) => d);
+      const obj2 = filters[name];
+      if (!isEqual(obj1, obj2)) setFilterValue(obj1);
     };
 
-    useEffect(() => setState(filters[name]), [filters[name]]);
+    useEffect(() => {
+      let value = filters[name];
+      if (!Array.isArray(value) && value !== undefined) value = [value];
+      setState(value);
+    }, [filters[name]]);
+
+    const sxSelected = {
+      '& .MuiOutlinedInput-notchedOutline, & .MuiDivider-root': {
+        borderColor: theme.palette.primary.main,
+      },
+    };
 
     return (
-      <MultiSelectFieldControl
-        className="filter-multi-select"
-        {...props}
-        value={state || []}
+      <MultiSelectField
+        value={state}
         onChange={onChange}
+        multiple
+        sx={state && state.length > 0 ? sxSelected : undefined}
+        {...props}
       />
     );
   }

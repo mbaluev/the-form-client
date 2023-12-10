@@ -6,11 +6,3 @@ export interface ILocaleSample {
   currency?: string;
   currencyExplicit?: string;
 }
-
-export interface IToday {
-  year: number;
-  yearShort: string;
-  month: number;
-  monthName: string;
-  monthNameShort: string;
-}

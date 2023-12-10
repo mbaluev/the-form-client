@@ -107,9 +107,9 @@ if (Intl.getSupportedNumberingSystems == undefined) {
         if (o == item && (item == 'latn' || nf.format(123) != '123')) {
           return true;
         }
-        // console.log(item + " is accepted but changed to " + o);
+        console.log(item + ' is accepted but changed to ' + o);
       } catch (e) {
-        // console.log(item + " is in CLDR but not supported in this implementation of ECMA402");
+        console.log(item + ' is not supported');
       }
       return false;
     };

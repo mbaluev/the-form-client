@@ -1,0 +1,19 @@
+{
+  "btn-register": "רישום חברה חדשה",
+  "delete-company": "מחק חברה",
+  "delete-company-question": "האם אתה באמת רוצה למחוק את החברה הזו?",
+  "field-address-line-1": "שורת כתובת 1",
+  "field-address-line-2": "שורת כתובת 2",
+  "field-domain": "שם דומיין",
+  "field-email": "אימייל",
+  "field-firstname": "שם פרטי",
+  "field-lastname": "שם משפחה",
+  "field-name": "שם החברה",
+  "field-phone": "מספר טלפון",
+  "new-company": "חברה חדשה",
+  "success-register": "החברה נרשמה בהצלחה",
+  "title-contact": "איש קשר",
+  "title-general": "מידע כללי",
+  "title-sign-in": "לוח זמנים מלא לאינטגרציה של One",
+  "title-welcome": "ברוכים הבאים לתהליך ההכנה של Total One"
+}

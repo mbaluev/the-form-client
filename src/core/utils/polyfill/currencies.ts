@@ -324,9 +324,7 @@ if (Intl.getSupportedCurrencies == undefined) {
         ) {
           return true;
         }
-      } catch (e) {
-        // cause exception
-      }
+      } catch (e) {}
       return false;
     };
 

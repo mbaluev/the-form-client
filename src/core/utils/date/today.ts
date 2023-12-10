@@ -1,23 +1,28 @@
 import moment from 'moment';
 
-const year = new Date().getFullYear();
-const month = new Date().getMonth();
-const monthPrevDate = moment(new Date()).subtract(1, 'months');
-
 export const TODAY = {
   date: new Date(),
-  year,
-  yearShort: year.toString().substring(2),
-  yearFull: monthPrevDate.year(),
-  month,
-  monthFull: monthPrevDate.month(),
-  yearSubtract: (monthCount: number) => {
-    return moment(new Date()).subtract(monthCount, 'months').year();
+  year: new Date().getFullYear(),
+  month: new Date().getMonth(),
+  day: new Date().getDate(),
+  yearShort: new Date().getFullYear().toString().substring(2),
+  subtract: (y?: number, m?: number, d?: number) => {
+    return moment(new Date())
+      .subtract(y, 'years')
+      .subtract(m, 'months')
+      .subtract(d, 'days');
   },
-  monthSubtract: (monthCount: number) => {
-    return moment(new Date()).subtract(monthCount, 'months').month();
+  subtractMonthToYear: (monthCount: number) => {
+    return moment(new Date())
+      .subtract(monthCount - 1, 'months')
+      .year();
   },
-  yearMonthDiff: (
+  subtractMonthToMonth: (monthCount: number) => {
+    return moment(new Date())
+      .subtract(monthCount - 1, 'months')
+      .month();
+  },
+  monthsDiff: (
     startYear: number,
     startMonth: number,
     endYear: number,

@@ -1,32 +1,64 @@
-$font-family: "Roboto Mono", "Roboto", "Montserrat", sans-serif;
-$font-family-mono: "Roboto Mono", monospace;
+$font-family: "Open Sans", sans-serif;
 
-$font-size: 12px;
+$font-size: 14px;
 $base: 5px;
-$border-radius-default: $base;
-$input-height: $base * 7;
-$input-height-big: $base * 10;
-$input-height-small: $base * 6;
-$input-height-x-small: $base * 5;
-$tab-height: $base * 8;
-$tab-height-vertical: $base * 6;
-$menu-width: $base * 40;
-$transition-duration: 300ms;
+$radius: 4px;
+$shadow-3: 0 3px 12px 0 rgba(0, 0, 0, 0.12);
 
-$color-pink: #ffa8a8;
-$color-red: #ec3d7d;
-$color-purple: #775bf7;
-$color-blue-dark: #2f41cd;
-$color-blue: #167dff;
-$color-blue-light: #4ca6ff;
-$color-green: #64d897;
-$color-green-dark: #00c075;
-$color-yellow: #fbf84a;
-$color-orange: #ffa300;
-$color-orange-dark: #f75229;
+// --- purple ---
 
-$color-black: #111;
+$color-purple: #5c5aff;
+$color-purple-70: #8d8dff;
+$color-purple-40: #bebdff;
+$color-purple-20: #dedeff;
+$color-purple-10: #efeeff;
+
+// --- purple-dark ---
+
+$color-purple-dark: #3a398c;
+$color-purple-dark-70: #7574af;
+$color-purple-dark-40: #b0b0d1;
+$color-purple-dark-20: #d8d7e8;
+$color-purple-dark-10: #ebebf3;
+
+// --- success ---
+
+$color-success: #30b675;
+$color-success-70: #6ecc9f;
+$color-success-40: #ace2c8;
+$color-success-20: #d6f0e3;
+$color-success-10: #eaf8f1;
+
+// --- warning ---
+
+$color-warning: #fd9b2c;
+$color-warning-70: #feb96b;
+$color-warning-40: #fed7ab;
+$color-warning-20: #ffebd5;
+$color-warning-10: #fff5ea;
+
+// --- error ---
+
+$color-error: #d71105;
+$color-error-70: #e35850;
+$color-error-40: #efa09b;
+$color-error-20: #f7cfcd;
+$color-error-10: #fbe7e6;
+
+// --- info ---
+
+$color-info: #3677dc;
+$color-info-70: #72a0e7;
+$color-info-40: #afc9f1;
+$color-info-20: #d7e4f8;
+$color-info-10: #ebf1fb;
+
+// --- black & white ---
+
 $color-white: #fff;
+$color-black: #111;
+
+// --- grey ---
 
 $color-grey-300: #111419;
 $color-grey-290: #191c21;
@@ -61,9 +93,8 @@ $color-grey-10: #f9faff;
 
 $color-tooltip: $color-grey-280;
 
-$media-hg: 1400px;
-$media-lg: 1280px;
-$media-md: 1024px;
-$media-sm: 768px;
-$media-xs: 550px;
-$media-xxs: 420px;
+$media-xs: 0;
+$media-sm: 600px;
+$media-md: 900px;
+$media-lg: 1200px;
+$media-xl: 1400px;

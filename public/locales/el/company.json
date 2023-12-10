@@ -1,0 +1,19 @@
+{
+  "btn-register": "Εγγραφή νέας εταιρείας",
+  "delete-company": "Διαγραφή εταιρείας",
+  "delete-company-question": "Θέλετε πραγματικά να διαγράψετε αυτή την εταιρεία;",
+  "field-address-line-1": "Διεύθυνση γραμμή 1",
+  "field-address-line-2": "Διεύθυνση γραμμή 2",
+  "field-domain": "Όνομα τομέα",
+  "field-email": "Email",
+  "field-firstname": "Όνομα",
+  "field-lastname": "Επίθετο",
+  "field-name": "Όνομα εταιρείας",
+  "field-phone": "Αριθμός τηλεφώνου",
+  "new-company": "Νέα εταιρεία",
+  "success-register": "Επιτυχημένη εγγραφή εταιρείας",
+  "title-contact": "Επικοινωνία",
+  "title-general": "Γενικές πληροφορίες",
+  "title-sign-in": "Total One εκκίνηση",
+  "title-welcome": "Καλώς ήρθατε στην ενσωμάτωση του Total One"
+}

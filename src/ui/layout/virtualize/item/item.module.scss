@@ -1,0 +1,21 @@
+@import "../../../../core/scss/params";
+
+.item {
+}
+.item_hover {
+  cursor: pointer;
+  background-color: $color-grey-10;
+}
+.item_container {
+  display: flex;
+  padding: $base * 3 $base * 4;
+  gap: $base;
+}
+.item_checkbox {
+  flex-grow: 0;
+}
+.item_content {
+  display: flex;
+  flex-grow: 1;
+  gap: $base * 3;
+}

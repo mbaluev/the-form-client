@@ -1,0 +1,48 @@
+@import "../../../scss/params";
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $base * 2;
+}
+
+.field_title {
+  font-weight: 600;
+  display: flex;
+  gap: $base * 2;
+}
+.field_title_left {
+  justify-content: flex-start;
+}
+.field_title_right {
+  justify-content: flex-end;
+}
+.field_title_text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.field_title_text_disabled {
+  color: $color-grey-150;
+}
+.field_title_text_extra {
+  color: $color-grey-100;
+}
+
+.field_value {
+  display: flex;
+  flex-direction: column;
+  gap: $base * 2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.field_value_block {
+  display: block;
+}
+.field_value_left {
+  align-items: flex-start;
+}
+.field_value_right {
+  align-items: flex-end;
+}

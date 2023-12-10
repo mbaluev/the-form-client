@@ -1,38 +1,66 @@
-import React from 'react';
-import { Button, IButtonProps } from '../button';
-import { classNames } from '@utils/classNames';
-import './index.scss';
+import { ReactElement } from 'react';
+import { useTranslation } from 'next-i18next';
+import { Button } from '@theme/button';
+import { Box, ButtonProps, useTheme } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 export type TNoDataOrientation = 'column' | 'row';
 
 interface IProps {
-  orientation?: TNoDataOrientation;
-  icon?: JSX.Element;
-  iconClassName?: string;
-  message?: string | JSX.Element;
-  messageClassName?: string;
-  button?: IButtonProps;
+  direction?: TNoDataOrientation;
+  icon?: ReactElement;
+  message?: string | ReactElement;
+  button?: ButtonProps;
+  marginTop?: number;
 }
 
 export const NoData = (props: IProps) => {
+  const { t } = useTranslation();
   const {
-    orientation = 'column',
+    direction = 'column',
     icon,
-    iconClassName,
-    message = 'No data found',
-    messageClassName,
+    message = t('common:no-data'),
     button,
+    marginTop,
   } = props;
-
-  const mainClassNames = classNames('no-data', `no-data_${orientation}`);
-  const iconClassNames = classNames('no-data__icon', iconClassName);
-  const messageClassNames = classNames('no-data__message', messageClassName);
-
+  const theme = useTheme();
   return (
-    <div className={mainClassNames}>
-      {icon && <div className={iconClassNames}>{icon}</div>}
-      {message && <div className={messageClassNames}>{message}</div>}
-      {button ? <Button {...button} /> : null}
-    </div>
+    <Stack
+      direction={direction}
+      flex="1 1 auto"
+      alignItems="center"
+      justifyContent="center"
+      gap={2}
+      sx={{ mt: marginTop }}
+    >
+      {icon && (
+        <Box
+          sx={{
+            '& .MuiSvgIcon-root': {
+              fontSize: '6rem',
+              fill: theme.palette.t1Grey['90'],
+            },
+          }}
+        >
+          {icon}
+        </Box>
+      )}
+      <Stack
+        direction={direction}
+        alignItems="center"
+        justifyContent="center"
+        gap={4}
+      >
+        {message && (
+          <Typography fontWeight={600} color={theme.palette.t1Grey['90']}>
+            {message}
+          </Typography>
+        )}
+        {button && <Button {...button} />}
+      </Stack>
+    </Stack>
   );
 };
+
+export default NoData;

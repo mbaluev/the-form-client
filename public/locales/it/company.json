@@ -1,0 +1,19 @@
+{
+  "btn-register": "Registra una nuova azienda",
+  "delete-company": "Elimina azienda",
+  "delete-company-question": "Vuoi davvero eliminare questa azienda?",
+  "field-address-line-1": "Indirizzo line 1",
+  "field-address-line-2": "Indirizzo line 2",
+  "field-domain": "Nome del dominio",
+  "field-email": "Email",
+  "field-firstname": "Nome",
+  "field-lastname": "Cognome",
+  "field-name": "Nome dell'azienda",
+  "field-phone": "Numero di telefono",
+  "new-company": "Nuova azienda",
+  "success-register": "Azienda registrata con successo",
+  "title-contact": "Contatto",
+  "title-general": "Informazioni generali",
+  "title-sign-in": "Totale Onboarding One",
+  "title-welcome": "Benvenuto all'integrazione di Total One"
+}

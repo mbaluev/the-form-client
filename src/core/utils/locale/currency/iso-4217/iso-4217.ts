@@ -1,4 +1,4 @@
-export const ISO_4217 = {
+export const ISO_4217: Record<string, any> = {
   AED: {
     symbol: 'AED',
     name: 'United Arab Emirates Dirham',

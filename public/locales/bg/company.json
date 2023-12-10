@@ -1,0 +1,19 @@
+{
+  "btn-register": "Регистриране на нова компания",
+  "delete-company": "Изтриване на компания",
+  "delete-company-question": "Наистина ли искате да изтриете тази компания?",
+  "field-address-line-1": "Адрес ред 1",
+  "field-address-line-2": "Адрес ред 2",
+  "field-domain": "Домейн име",
+  "field-email": "Електронна поща",
+  "field-firstname": "Име",
+  "field-lastname": "Фамилия",
+  "field-name": "Име на компания",
+  "field-phone": "Телефонен номер",
+  "new-company": "Нова компания",
+  "success-register": "Компанията е успешно регистрирана",
+  "title-contact": "Контакт",
+  "title-general": "Обща информация",
+  "title-sign-in": "Пълна интеграция на Total One",
+  "title-welcome": "Добре дошли в процеса на адаптация в Total One"
+}

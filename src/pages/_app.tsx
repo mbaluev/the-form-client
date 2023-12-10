@@ -1,26 +1,23 @@
 import 'reflect-metadata';
-import { useEffect } from 'react';
-import { configure } from 'mobx';
-import { enableStaticRendering, observer } from 'mobx-react';
-import Head from 'next/head';
-import { AppProps } from 'next/app';
+import { ReactElement, useEffect } from 'react';
+import { autorun, configure } from 'mobx';
+import { enableStaticRendering } from 'mobx-react';
 import { useRouter } from 'next/router';
-import { CacheProvider, EmotionCache } from '@emotion/react';
+import { CacheProvider } from '@emotion/react';
 import { ThemeProvider } from '@mui/material/styles';
-import {
-  createEmotionCache,
-  createEmotionCacheRtl,
-} from '@utils/cache/createEmotionCache';
-import { initializeDiContainer } from '@app/diContainer/diContainer';
-import { DiContainerProvider } from '@app/diContainer/diContainerProvider';
-import { VIEW_MODEL } from '@viewModel/ids';
-import { IAppViewModel } from '@viewModel/modules/common/app/interface';
-import { LayoutEmpty } from '@ui/layout/layout';
-import { ILocaleViewModel } from '@viewModel/modules/common/locale/interface';
-import { SnackbarProvider } from 'notistack';
-import { IMenuViewModel } from '@viewModel/modules/common/menu/interface';
-import { IFilterViewModel } from '@viewModel/modules/common/filter/interfaces';
-import { theme } from '../core/mui/theme';
+import { createEmotionCache, createEmotionCacheRtl } from '@theme/emotionCache';
+import { CssBaseline } from '@mui/material';
+import { ContainerProvider } from '@provider/context';
+import { theme } from '@theme/index';
+import { appWithTranslation, useTranslation } from 'next-i18next';
+import { ErrorBoundary } from '@utils/ui/errorBoundary';
+import { EmotionCache } from '@emotion/react';
+import { AppProps } from 'next/app';
+import { AuthProvider } from '@store/modules/common/auth/provider';
+import { AppProvider } from '@store/modules/common/app/provider';
+import { containerInitialize } from '@provider/initialize';
+import { STORE } from '@store/ids';
+import type IAppStore from '@store/modules/common/app/interface';
 import '../core/scss/index.scss';
 
 configure({ enforceActions: 'observed' });
@@ -30,75 +27,61 @@ enableStaticRendering(typeof window === 'undefined');
 const clientSideEmotionCache = createEmotionCache();
 const clientSideEmotionCacheRtl = createEmotionCacheRtl();
 
+// init app
+const container = containerInitialize();
+const appStore = container.get<IAppStore>(STORE.App);
+autorun(() => appStore.init());
+
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 
-// container init
-const container = initializeDiContainer();
-const app = container.get<IAppViewModel>(VIEW_MODEL.App);
-const locale = container.get<ILocaleViewModel>(VIEW_MODEL.Locale);
-const menu = container.get<IMenuViewModel>(VIEW_MODEL.Menu);
-const filter = container.get<IFilterViewModel>(VIEW_MODEL.Filter);
-
 const MyApp = (props: MyAppProps) => {
+  const router = useRouter();
+  const { i18n } = useTranslation();
+  const isRtl = i18n.dir() === 'rtl';
   const {
     Component,
-    emotionCache = locale.isRtl
-      ? clientSideEmotionCacheRtl
-      : clientSideEmotionCache,
+    emotionCache = isRtl ? clientSideEmotionCacheRtl : clientSideEmotionCache,
     pageProps,
   } = props;
 
-  const Layout = (Component as any).Layout || LayoutEmpty;
-  const router = useRouter();
+  const getLayout =
+    (Component as any).getLayout || ((page: ReactElement) => page);
 
   useEffect(() => {
-    locale.changeLanguage(locale.language);
-    menu.initiate();
-
-    const handleStart = (url: string) => app.routeChangeStart(url);
-    const handleStop = (url: string) => app.routeChangeComplete(url);
+    const handleStart = () => appStore.routeChangeStart();
+    const handleComplete = () => appStore.routeChangeComplete();
 
     router.events.on('routeChangeStart', handleStart);
-    router.events.on('routeChangeComplete', handleStop);
-    router.events.on('routeChangeError', handleStop);
+    router.events.on('routeChangeComplete', handleComplete);
+    router.events.on('routeChangeError', handleComplete);
 
     return () => {
       router.events.off('routeChangeStart', handleStart);
-      router.events.off('routeChangeComplete', handleStop);
-      router.events.off('routeChangeError', handleStop);
+      router.events.off('routeChangeComplete', handleComplete);
+      router.events.off('routeChangeError', handleComplete);
     };
   }, []);
 
-  useEffect(() => filter.loadFilters(router), [router]);
-
   return (
-    <DiContainerProvider container={container}>
+    <ErrorBoundary>
       <CacheProvider value={emotionCache}>
-        <ThemeProvider theme={theme(router)}>
-          <Head>
-            <title>The Form</title>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
-            />
-          </Head>
-          <SnackbarProvider
-            maxSnack={10}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-          >
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </SnackbarProvider>
-        </ThemeProvider>
+        <ContainerProvider container={container}>
+          <AppProvider>
+            <AuthProvider>
+              <ThemeProvider
+                theme={{ ...theme, direction: i18n.dir(router.locale) }}
+              >
+                <CssBaseline />
+                {getLayout(<Component {...pageProps} />)}
+              </ThemeProvider>
+            </AuthProvider>
+          </AppProvider>
+        </ContainerProvider>
       </CacheProvider>
-    </DiContainerProvider>
+    </ErrorBoundary>
   );
 };
 
-export default observer(MyApp);
+export default appWithTranslation(MyApp);
