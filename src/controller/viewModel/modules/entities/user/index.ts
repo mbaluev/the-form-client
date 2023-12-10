@@ -7,6 +7,7 @@ import { IUserDTO } from '@model/entities/user';
 import { UserService } from 'controller/service/modules/entities/user';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { FilterViewModel } from '@viewModel/modules/common/filter';
+import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
 export class UserViewModel
@@ -51,13 +52,26 @@ export class UserViewModel
 
   // --- override
 
-  getList = async () => {
+  getList = async (query?: ParsedUrlQuery) => {
     this.setListLoading(true);
     try {
-      const data = await this.serviceUser.getUsers(this.filters.filters);
+      const data = await this.serviceUser.getUsers(query);
       this.setList(data);
     } catch (err) {
     } finally {
+      this.setListLoading(false);
+    }
+  };
+
+  getData = async (id?: string, query?: ParsedUrlQuery) => {
+    this.setDataLoading(true);
+    try {
+      const data = await this.serviceUser.getUser(id, query);
+      this.setData(data);
+      this.setUserData(data);
+    } catch (err) {
+    } finally {
+      this.setDataLoading(false);
     }
   };
 

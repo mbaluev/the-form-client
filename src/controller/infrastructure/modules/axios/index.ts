@@ -121,12 +121,12 @@ export class AxiosApiModule implements IAxiosApiModule {
     );
   }
 
-  async download(url: string, filename: string, options?: IApiOptions) {
+  async download(url: string, name: string, options?: IApiOptions) {
     return this.getBlob(url, options).then((response) => {
       if (response) {
         const a = document.createElement('a');
         a.href = URL.createObjectURL(response);
-        a.setAttribute('download', filename);
+        a.setAttribute('download', name);
         a.click();
       }
     });

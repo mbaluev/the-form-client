@@ -9,11 +9,7 @@ export interface IAxiosApiModule {
   delete: <T>(url: string, data?: any, options?: IApiOptions) => Promise<T>;
   patch: <T>(url: string, data?: any, options?: IApiOptions) => Promise<T>;
 
-  download: (
-    url: string,
-    filename: string,
-    options?: IApiOptions
-  ) => Promise<void>;
+  download: (url: string, name: string, options?: IApiOptions) => Promise<void>;
 }
 
 export interface IApiOptions {

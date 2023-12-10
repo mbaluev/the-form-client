@@ -42,9 +42,20 @@ export class ModuleAdminViewModel
       return result;
     };
 
+  getData = async (id?: string, query?: ParsedUrlQuery) => {
+    await this.clearData();
+    this.setDataLoading(true);
+    try {
+      const data = await this.serviceModule.getModuleAdmin(id, query);
+      this.setData(data);
+    } catch (err) {
+    } finally {
+      this.setDataLoading(false);
+    }
+  };
+
   getList = async (query?: ParsedUrlQuery) => {
     await this.clearList();
-    await this.clearData();
     this.setListLoading(true);
     try {
       const data = await this.serviceModule.getModulesAdmin(query);

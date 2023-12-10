@@ -1,37 +1,19 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { MasterSchool } from '@ui/masters/masterSchool';
-import { useService } from '@hooks/useService';
-import { SERVICE } from '@service/ids';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
-import { IUserService } from '@service/modules/entities/user/interface';
 import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 import { UserPage } from '@ui/pages/admin/settings/user/userPage';
 import { observer } from 'mobx-react';
-import { getCookieToken } from '@utils/cookie/getCookieToken';
+import { useRouter } from 'next/router';
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext<{ id: string }>
-) => {
-  const { query } = context;
-  const token = getCookieToken(context);
-  const serviceUser = useService<IUserService>(SERVICE.User);
-
-  const users = (await serviceUser.getUsers(query, token)) || null;
-
-  return { props: { users } };
-};
-
-const Users = (
-  props: InferGetServerSidePropsType<typeof getServerSideProps>
-) => {
-  const { users } = props;
-  const { setList: setUsers, clearList: clearUsers } =
+const Users = () => {
+  const { getList: getUsers, clearList: clearUsers } =
     useViewModel<IUserViewModel>(VIEW_MODEL.User);
 
+  const router = useRouter();
   const breadCrumbs: TBreadCrumb[] = [
     {
       label: ROUTER_CONST_SCHOOL.HOME.label,
@@ -44,7 +26,7 @@ const Users = (
   ];
 
   useEffect(() => {
-    setUsers(users);
+    getUsers(router.query);
     return () => {
       clearUsers();
     };

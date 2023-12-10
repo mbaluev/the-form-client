@@ -87,11 +87,26 @@ export class BlockAdminViewModel
     };
 
   getData = async (id?: string, query?: ParsedUrlQuery) => {
+    await this.clearData();
+    this.setDataLoading(true);
     try {
       const data = await this.serviceBlock.getBlockAdmin(id, query);
       this.setData(data);
     } catch (err) {
     } finally {
+      this.setDataLoading(false);
+    }
+  };
+
+  getList = async (query?: ParsedUrlQuery) => {
+    await this.clearList();
+    this.setListLoading(true);
+    try {
+      const data = await this.serviceBlock.getBlocksAdmin(query);
+      this.setList(data);
+    } catch (err) {
+    } finally {
+      this.setListLoading(false);
     }
   };
 }
