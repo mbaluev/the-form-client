@@ -36,9 +36,7 @@ export const DialogDiscard = (props: IDialogDiscardProps) => {
       </DialogTitle>
       <DialogContent sx={{ pb: 0 }}>
         <Stack alignItems="flex-start">
-          <Typography textAlign="left">
-            Are you sure you want to discard all changes?
-          </Typography>
+          <Typography textAlign="left">Are you sure you want to discard all changes?</Typography>
           <Typography textAlign="left">They won't be saved</Typography>
         </Stack>
       </DialogContent>

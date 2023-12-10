@@ -15,13 +15,7 @@ interface IProps {
 }
 
 export const NoData = (props: IProps) => {
-  const {
-    direction = 'column',
-    icon,
-    message = 'Not found',
-    button,
-    marginTop,
-  } = props;
+  const { direction = 'column', icon, message = 'Not found', button, marginTop } = props;
   const theme = useTheme();
   return (
     <Stack
@@ -44,12 +38,7 @@ export const NoData = (props: IProps) => {
           {icon}
         </Box>
       )}
-      <Stack
-        direction={direction}
-        alignItems="center"
-        justifyContent="center"
-        gap={4}
-      >
+      <Stack direction={direction} alignItems="center" justifyContent="center" gap={4}>
         {message && (
           <Typography fontWeight={600} color={theme.palette.t1Grey['90']}>
             {message}

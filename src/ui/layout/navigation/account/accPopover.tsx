@@ -32,11 +32,7 @@ export const AccPopover = observer(() => {
           <Stack spacing={3} sx={{ pt: 1, pr: 3, pb: 3, pl: 3 }}>
             <Stack direction="row" spacing={3} justifyContent="space-between">
               <Typography>name</Typography>
-              <Button
-                size="small"
-                endIcon={<IconSignOut />}
-                onClick={() => onClickSignOut()}
-              >
+              <Button size="small" endIcon={<IconSignOut />} onClick={() => onClickSignOut()}>
                 Sign out
               </Button>
             </Stack>
@@ -50,11 +46,7 @@ export const AccPopover = observer(() => {
                 }}
                 src="src"
               >
-                <Typography
-                  fontSize="1.1rem"
-                  fontWeight={600}
-                  color={theme.palette.t1Grey['130']}
-                >
+                <Typography fontSize="1.1rem" fontWeight={600} color={theme.palette.t1Grey['130']}>
                   <FirstLetters name="name" />
                 </Typography>
               </Avatar>
@@ -78,11 +70,7 @@ export const AccPopover = observer(() => {
       )}
       {!isAuth && (
         <Fragment>
-          <Stack
-            direction="row"
-            spacing={3}
-            sx={{ pt: 1, pr: 3, pb: 3, pl: 3 }}
-          >
+          <Stack direction="row" spacing={3} sx={{ pt: 1, pr: 3, pb: 3, pl: 3 }}>
             <Avatar
               variant="circular"
               sx={{

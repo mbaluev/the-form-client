@@ -39,13 +39,7 @@ export const VirtualizeWindow = observer(<T,>(props: IProps<T>) => {
   useEffect(() => {
     const [last] = [...items].reverse();
     if (!last) return;
-    if (
-      last.index >= dataLength - 1 &&
-      hasNextPage &&
-      fetchNextPage &&
-      !isLoading
-    )
-      fetchNextPage();
+    if (last.index >= dataLength - 1 && hasNextPage && fetchNextPage && !isLoading) fetchNextPage();
   }, [hasNextPage, isLoading, items]);
 
   const styleParent: CSSProperties = {
@@ -95,11 +89,7 @@ export const VirtualizeWindow = observer(<T,>(props: IProps<T>) => {
             );
           }
           return (
-            <div
-              key={virtualRow.key}
-              data-index={virtualRow.index}
-              ref={virtualize.measureElement}
-            >
+            <div key={virtualRow.key} data-index={virtualRow.index} ref={virtualize.measureElement}>
               {rowRenderer(item)}
             </div>
           );

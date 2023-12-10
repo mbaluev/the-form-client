@@ -1,17 +1,9 @@
 import { useTheme, styled } from '@mui/material/styles';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import SettingsIcon from '@mui/icons-material/Settings';
-import Autocomplete, {
-  AutocompleteCloseReason,
-} from '@mui/material/Autocomplete';
+import Autocomplete, { AutocompleteCloseReason } from '@mui/material/Autocomplete';
 import InputBase from '@mui/material/InputBase';
-import {
-  useState,
-  MouseEvent,
-  ChangeEvent,
-  Fragment,
-  KeyboardEvent,
-} from 'react';
+import { useState, MouseEvent, ChangeEvent, Fragment, KeyboardEvent } from 'react';
 import { Button } from '@theme/button';
 import { ListItemText, MenuItem, Popover } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
@@ -186,10 +178,7 @@ const SelectButtonField = () => {
             <Autocomplete
               open
               multiple
-              onClose={(
-                _: ChangeEvent<any>,
-                reason: AutocompleteCloseReason
-              ) => {
+              onClose={(_: ChangeEvent<any>, reason: AutocompleteCloseReason) => {
                 if (reason === 'escape') {
                   handleClose();
                 }
@@ -212,11 +201,7 @@ const SelectButtonField = () => {
               renderOption={(props, option, { selected }) => (
                 <MenuItem {...props}>
                   <ListItemText>{option.name}</ListItemText>
-                  {selected && (
-                    <CheckIcon
-                      sx={{ fill: theme.palette.primary.main, ml: 2 }}
-                    />
-                  )}
+                  {selected && <CheckIcon sx={{ fill: theme.palette.primary.main, ml: 2 }} />}
                 </MenuItem>
               )}
               options={[...labels].sort((a, b) => {

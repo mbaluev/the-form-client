@@ -45,20 +45,13 @@ export const VirtualizeToolbar = observer((props: IProps) => {
   const selectedAll = dataAllSelected;
   const selectedCount = dataSelected?.length || 0;
   const selectedTotal = dataTotal || 0;
-  const selectedLabel = `${fNumber(selectedCount)} / ${fNumber(
-    selectedTotal
-  )} selected`;
+  const selectedLabel = `${fNumber(selectedCount)} / ${fNumber(selectedTotal)} selected`;
   const itemsWord = 'items';
 
   return (
     <Box sx={padding ? { pl: 4, pr: 4 } : undefined}>
       <Stack direction="row" spacing={2} alignItems="center">
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{ flexGrow: 1 }}
-          alignItems="center"
-        >
+        <Stack direction="row" spacing={2} sx={{ flexGrow: 1 }} alignItems="center">
           {checkbox ? (
             <CheckboxField
               size="small"
@@ -77,12 +70,7 @@ export const VirtualizeToolbar = observer((props: IProps) => {
             </Box>
           )}
         </Stack>
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{ flexGrow: 0 }}
-          alignItems="center"
-        >
+        <Stack direction="row" spacing={2} sx={{ flexGrow: 0 }} alignItems="center">
           {refreshAction}
           {orderByAction}
           {more}

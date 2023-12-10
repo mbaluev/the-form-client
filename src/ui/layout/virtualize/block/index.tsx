@@ -46,13 +46,7 @@ export const VirtualizeBlock = observer(<T,>(props: IProps<T>) => {
   useEffect(() => {
     const [last] = [...items].reverse();
     if (!last) return;
-    if (
-      last.index >= dataLength - 1 &&
-      hasNextPage &&
-      !isLoading &&
-      fetchNextPage
-    )
-      fetchNextPage();
+    if (last.index >= dataLength - 1 && hasNextPage && !isLoading && fetchNextPage) fetchNextPage();
   }, [hasNextPage, isLoading, items]);
 
   const styleParent: CSSProperties = {
@@ -75,21 +69,13 @@ export const VirtualizeBlock = observer(<T,>(props: IProps<T>) => {
           if (isExtraRow) {
             if (isLoading) {
               return (
-                <div
-                  key={virtualRow.key}
-                  className={classes.list_row}
-                  style={styleRow}
-                >
+                <div key={virtualRow.key} className={classes.list_row} style={styleRow}>
                   {rowSkeleton || 'Loading'}
                 </div>
               );
             } else {
               return (
-                <div
-                  key={virtualRow.key}
-                  className={classes.list_row}
-                  style={styleRow}
-                >
+                <div key={virtualRow.key} className={classes.list_row} style={styleRow}>
                   {rowNoData || 'Not found'}
                 </div>
               );
@@ -98,21 +84,13 @@ export const VirtualizeBlock = observer(<T,>(props: IProps<T>) => {
           const item = data?.[virtualRow.index];
           if (!item) {
             return (
-              <div
-                key={virtualRow.key}
-                className={classes.list_row}
-                style={styleRow}
-              >
+              <div key={virtualRow.key} className={classes.list_row} style={styleRow}>
                 {rowNoData || 'Not found'}
               </div>
             );
           }
           return (
-            <div
-              key={virtualRow.key}
-              className={classes.list_row}
-              style={styleRow}
-            >
+            <div key={virtualRow.key} className={classes.list_row} style={styleRow}>
               {rowRenderer(item)}
             </div>
           );

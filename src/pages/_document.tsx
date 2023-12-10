@@ -1,10 +1,4 @@
-import Document, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-  DocumentProps,
-} from 'next/document';
+import Document, { Html, Head, Main, NextScript, DocumentProps } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
 import { createEmotionCache, createEmotionCacheRtl } from '@theme/emotionCache';
 import { i18n } from 'next-i18next';
@@ -19,33 +13,12 @@ export default class MyDocument extends Document<Props> {
     return (
       <Html dir={dirs.getDir()}>
         <Head>
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="64x64"
-            href="/favicon/favicon.ico"
-          />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/favicon/favicon.ico"
-          />
-          <meta
-            name="msapplication-square70x70logo"
-            content="/favicon/favicon.ico"
-          />
-          <meta
-            name="msapplication-square150x150logo"
-            content="/favicon/favicon.ico"
-          />
-          <meta
-            name="msapplication-square310x310logo"
-            content="/favicon/favicon.ico"
-          />
-          <meta
-            name="msapplication-wide310x150logo"
-            content="/favicon/favicon.ico"
-          />
+          <link rel="icon" type="image/png" sizes="64x64" href="/favicon/favicon.ico" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon.ico" />
+          <meta name="msapplication-square70x70logo" content="/favicon/favicon.ico" />
+          <meta name="msapplication-square150x150logo" content="/favicon/favicon.ico" />
+          <meta name="msapplication-square310x310logo" content="/favicon/favicon.ico" />
+          <meta name="msapplication-wide310x150logo" content="/favicon/favicon.ico" />
           <meta name="msapplication-TileColor" content="#111" />
 
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
@@ -89,10 +62,7 @@ MyDocument.getInitialProps = async (ctx) => {
 
   // You can consider sharing the same emotion cache between all the SSR requests to speed up performance.
   // However, be aware that it can have global side effects.
-  const cache =
-    i18n?.dir(ctx.locale) === 'rtl'
-      ? createEmotionCacheRtl()
-      : createEmotionCache();
+  const cache = i18n?.dir(ctx.locale) === 'rtl' ? createEmotionCacheRtl() : createEmotionCache();
   const { extractCriticalToChunks } = createEmotionServer(cache);
 
   ctx.renderPage = () =>

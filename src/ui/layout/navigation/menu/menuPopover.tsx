@@ -31,10 +31,7 @@ export const MenuPopover = (props: IProps) => {
                   </ListItemIcon>
                 )}
                 <ListItemText>
-                  <Typography
-                    fontWeight={600}
-                    color={theme.palette.primary.main}
-                  >
+                  <Typography fontWeight={600} color={theme.palette.primary.main}>
                     {one.label}
                   </Typography>
                 </ListItemText>

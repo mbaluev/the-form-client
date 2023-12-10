@@ -58,9 +58,7 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
       <DialogContent sx={{ pb: 0 }}>
         <Stack>
           <Typography>You have modified this page</Typography>
-          <Typography>
-            Do you want to save the changes before you go?
-          </Typography>
+          <Typography>Do you want to save the changes before you go?</Typography>
         </Stack>
       </DialogContent>
       <DialogActions>
@@ -70,9 +68,7 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
           color="primary"
           disabled={loading}
           sx={{ flexBasis: '50%' }}
-          startIcon={
-            isLoadingCancel ? <Loader size={20} loading relative /> : undefined
-          }
+          startIcon={isLoadingCancel ? <Loader size={20} loading relative /> : undefined}
           fullWidth
         >
           Cancel
@@ -83,9 +79,7 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
           color="primary"
           disabled={loading}
           sx={{ flexBasis: '50%' }}
-          startIcon={
-            isLoadingDiscard ? <Loader size={20} loading relative /> : undefined
-          }
+          startIcon={isLoadingDiscard ? <Loader size={20} loading relative /> : undefined}
           fullWidth
         >
           Discard changes
@@ -96,9 +90,7 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
           color="primary"
           disabled={loading}
           sx={{ flexBasis: '50%' }}
-          startIcon={
-            isLoadingSave ? <Loader size={20} loading relative /> : undefined
-          }
+          startIcon={isLoadingSave ? <Loader size={20} loading relative /> : undefined}
           fullWidth
         >
           Save changes

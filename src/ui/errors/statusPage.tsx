@@ -14,12 +14,7 @@ interface IProps {
 }
 
 export const StatusPage = observer((props: IProps) => {
-  const {
-    status = 'error',
-    message,
-    buttons,
-    buttonsDirection = 'row',
-  } = props;
+  const { status = 'error', message, buttons, buttonsDirection = 'row' } = props;
 
   const Icon = () => {
     if (status === 'success') return <IconDone sx={{ fontSize: '6rem' }} />;
