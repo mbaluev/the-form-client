@@ -52,8 +52,7 @@ const renderValue = <ItemType,>(
   const sel = (selected as unknown[])?.filter((s) => s);
   const selLength = sel?.length;
   const selItems = items?.filter((item) => sel?.includes(item[valueField]));
-  const selLabel =
-    (selItems?.[0]?.[labelField] as string) || (sel[0] as string);
+  const selLabel = (selItems?.[0]?.[labelField] as string) || (sel[0] as string);
   if (!sel || !selLength) {
     return (
       <Typography
@@ -92,9 +91,7 @@ const renderValue = <ItemType,>(
   );
 };
 
-export const MultiSelectField = <ItemType,>(
-  props: MultiSelectFieldProps<ItemType>
-) => {
+export const MultiSelectField = <ItemType,>(props: MultiSelectFieldProps<ItemType>) => {
   const {
     valueField = 'value' as keyof ItemType,
     labelField = 'label' as keyof ItemType,
@@ -138,9 +135,7 @@ export const MultiSelectField = <ItemType,>(
       if (
         key !== valueField &&
         typeof item[key] === 'string' &&
-        (item[key] as unknown as string)
-          .toLowerCase()
-          .indexOf(searchString.toLowerCase()) >= 0
+        (item[key] as unknown as string).toLowerCase().indexOf(searchString.toLowerCase()) >= 0
       ) {
         ret = true;
       }
@@ -245,9 +240,7 @@ export const MultiSelectField = <ItemType,>(
         multiple
         {...other}
       />
-      {helperText && (
-        <FormHelperText error={!!error}>{helperText}</FormHelperText>
-      )}
+      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
       <Popover
         open={open}
         anchorEl={selectRef.current}
@@ -287,11 +280,7 @@ export const MultiSelectField = <ItemType,>(
                 <Divider orientation="vertical" sx={{ height: 'auto' }} />
               </Fragment>
             )}
-            <Button
-              size="small"
-              disabled={!hasState}
-              onClick={handleClearSelected}
-            >
+            <Button size="small" disabled={!hasState} onClick={handleClearSelected}>
               Clear
             </Button>
             <Divider orientation="vertical" sx={{ height: 'auto' }} />
@@ -332,18 +321,13 @@ export const MultiSelectField = <ItemType,>(
             ) : (
               <Fragment>
                 {(!itemsFiltered || itemsFiltered?.length === 0) && (
-                  <Typography
-                    color={theme.palette.fGrey['130']}
-                    sx={{ width: '100%' }}
-                  >
+                  <Typography color={theme.palette.fGrey['130']} sx={{ width: '100%' }}>
                     Not found
                   </Typography>
                 )}
                 {itemsFiltered?.map((item: ItemType, index: number) => {
                   const checked = state?.includes(item[valueField]);
-                  countTotal = checked
-                    ? countTotal + Number(item[countField])
-                    : countTotal;
+                  countTotal = checked ? countTotal + Number(item[countField]) : countTotal;
                   return (
                     <FormControl key={`${index}-${item[valueField]}`}>
                       <FormControlLabel
@@ -371,9 +355,7 @@ export const MultiSelectField = <ItemType,>(
                             >
                               {item[labelField] as string}
                             </Typography>
-                            <Typography>
-                              {item[countField] as string}
-                            </Typography>
+                            <Typography>{item[countField] as string}</Typography>
                           </Stack>
                         }
                       />
@@ -390,11 +372,7 @@ export const MultiSelectField = <ItemType,>(
                 variant="text"
                 onClick={handleApply}
                 fullWidth
-                startIcon={
-                  totalLoading ? (
-                    <Loader relative loading size={20} />
-                  ) : undefined
-                }
+                startIcon={totalLoading ? <Loader relative loading size={20} /> : undefined}
                 disabled={totalLoading}
               >
                 {`Show ${total || countTotal} results`}

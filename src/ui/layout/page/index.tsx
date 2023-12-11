@@ -20,13 +20,7 @@ export const Page = observer((props: IProps) => {
   const theme = useTheme();
   return (
     <Fragment>
-      <Stack
-        id="__page"
-        spacing={3}
-        alignItems="center"
-        sx={{ pb: 20 }}
-        flexGrow={1}
-      >
+      <Stack id="__page" spacing={3} alignItems="center" sx={{ pb: 20 }} flexGrow={1}>
         {breadCrumbs && (
           <Box
             id="__breadcrumbs"
@@ -71,9 +65,7 @@ export const Page = observer((props: IProps) => {
         <Box id="__content" width="100%" flexGrow={1}>
           <Container maxWidth="xl">
             {shadow ? (
-              <Box sx={{ borderRadius: 2, boxShadow: 3, overflow: 'hidden' }}>
-                {children}
-              </Box>
+              <Box sx={{ borderRadius: 2, boxShadow: 3, overflow: 'hidden' }}>{children}</Box>
             ) : (
               children
             )}

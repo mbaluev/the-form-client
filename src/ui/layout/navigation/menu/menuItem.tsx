@@ -18,9 +18,7 @@ export const MenuItem = (props: IProps) => {
   const router = useRouter();
   const theme = useTheme();
   const active = isActive(item, router.pathname);
-  const color = active
-    ? theme.palette.primary.light
-    : theme.palette.fGrey['100'];
+  const color = active ? theme.palette.primary.light : theme.palette.fGrey['100'];
   const colorHover = active
     ? lighten(theme.palette.primary.light, 0.2)
     : theme.palette.common.white;
@@ -41,8 +39,7 @@ export const MenuItem = (props: IProps) => {
   if (item.items && item.items.length > 0) {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event: MouseEvent<HTMLElement>) =>
-      setAnchorEl(event.currentTarget);
+    const handleClick = (event: MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
     return (
       <Fragment>
