@@ -9,7 +9,7 @@ import { IMenuItemDTO } from '@model/common/menu';
 import { Search } from '@ui/layout/navigation/search';
 import { MenuItem } from '@ui/layout/navigation/menu/menuItem';
 import { Wrapper } from '@ui/layout/navigation/menu/wrapper';
-import IconTotalOne from '@components/svg/icons/components/totalOne';
+import LogoTheForm from '@components/svg/logo/components/theForm';
 
 export const Menu = () => {
   const theme = useTheme();
@@ -18,8 +18,8 @@ export const Menu = () => {
       <Toolbar sx={{ padding: '0 !important' }}>
         <Stack direction="row" spacing={2} width="100%">
           <Link href={ROUTES.HOME.path} passHref>
-            <IconButton sx={{ color: theme.palette.accent.light }}>
-              <IconTotalOne />
+            <IconButton sx={{ fill: theme.palette.primary.main }}>
+              <LogoTheForm />
             </IconButton>
           </Link>
           {MENU_CONFIG.map((item: IMenuItemDTO) => (

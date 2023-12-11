@@ -20,7 +20,7 @@ const AutocompleteInput = styled(InputBase)(({ theme }) => ({
     paddingLeft: 13,
     paddingRight: 13,
     transition: theme.transitions.create(['border-color', 'box-shadow']),
-    border: `1px solid ${theme.palette.t1Grey['80']}`,
+    border: `1px solid ${theme.palette.fGrey['80']}`,
     '&:focus': {
       borderWidth: 2,
       padding: 6.5,
@@ -47,14 +47,20 @@ const SelectFreeTextField = (props: SelectFreeTextFieldProps) => {
         value={state}
         onChange={(_, newValue) => {
           setState(newValue);
-          if (onChange) onChange({ target: { value: newValue } } as SelectChangeEvent<any>, null);
+          if (onChange)
+            onChange(
+              { target: { value: newValue } } as SelectChangeEvent<any>,
+              null
+            );
         }}
         isOptionEqualToValue={(option, val) => option === val}
         noOptionsText="not-found"
         renderOption={(optionProps, option, { selected }) => (
           <MenuItem {...optionProps}>
             <ListItemText>{option}</ListItemText>
-            {selected && <CheckIcon sx={{ fill: theme.palette.primary.main, ml: 2 }} />}
+            {selected && (
+              <CheckIcon sx={{ fill: theme.palette.primary.main, ml: 2 }} />
+            )}
           </MenuItem>
         )}
         options={items || []}
@@ -68,11 +74,17 @@ const SelectFreeTextField = (props: SelectFreeTextFieldProps) => {
               setState(e.target.value);
               if (onChange) onChange(e as SelectChangeEvent<any>, null);
             }}
-            sx={error ? { '& input': { borderColor: theme.palette.error.main } } : undefined}
+            sx={
+              error
+                ? { '& input': { borderColor: theme.palette.error.main } }
+                : undefined
+            }
           />
         )}
       />
-      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
+      {helperText && (
+        <FormHelperText error={!!error}>{helperText}</FormHelperText>
+      )}
     </FormControl>
   );
 };

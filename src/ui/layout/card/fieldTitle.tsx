@@ -10,7 +10,7 @@ export const FieldTitle = (props: IFormFieldProps) => {
       styleTitle={{
         fontSize: '1rem',
         fontWeight: 'normal',
-        color: theme.palette.t1Grey['150'],
+        color: theme.palette.fGrey['150'],
       }}
       styleValue={{ fontSize: '1rem' }}
       {...other}

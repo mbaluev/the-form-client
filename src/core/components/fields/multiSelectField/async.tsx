@@ -15,28 +15,44 @@ import {
 import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
 import { MultiSelectAsyncFieldProps } from '@components/fields/multiSelectField/types';
-import { ChangeEvent, Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  ChangeEvent,
+  Fragment,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { Button } from '@theme/button';
 import SearchIcon from '@mui/icons-material/Search';
 import Loader from '@components/loader';
-import { endAdornment, iconComponent } from '@components/fields/multiSelectField/index';
+import {
+  endAdornment,
+  iconComponent,
+} from '@components/fields/multiSelectField/index';
 import { useLocaleStore } from '@store/modules/common/locale/useLocaleStore';
 import { VirtualizeBlock } from '@ui/layout/virtualize/block';
 import NoData from '@components/noData';
 import { ISelectItem } from '@components/fields/selectField/types';
 import { Tooltip } from '@theme/tooltip';
 
-const renderValue = (selected: unknown, dictionary?: ISelectItem[], placeholder?: string) => {
+const renderValue = (
+  selected: unknown,
+  dictionary?: ISelectItem[],
+  placeholder?: string
+) => {
   const theme = useTheme();
   const sel = (selected as unknown[])?.filter((s) => s);
   const selValue = sel[0] as string;
   const selItem = dictionary?.find((d) => d.value === selValue);
   const selLabel = selItem?.label || selValue;
   if (!sel || !sel.length) {
-    return <Typography color={theme.palette.t1Grey['120']}>{placeholder}</Typography>;
+    return (
+      <Typography color={theme.palette.fGrey['120']}>{placeholder}</Typography>
+    );
   }
   if (sel.length === 1) {
     return (
@@ -64,7 +80,9 @@ const renderValue = (selected: unknown, dictionary?: ISelectItem[], placeholder?
   );
 };
 
-export const MultiSelectAsyncField = <ItemType,>(props: MultiSelectAsyncFieldProps<ItemType>) => {
+export const MultiSelectAsyncField = <ItemType,>(
+  props: MultiSelectAsyncFieldProps<ItemType>
+) => {
   const {
     valueField = 'value' as keyof ItemType,
     labelField = 'label' as keyof ItemType,
@@ -107,7 +125,9 @@ export const MultiSelectAsyncField = <ItemType,>(props: MultiSelectAsyncFieldPro
       if (
         key !== valueField &&
         typeof item[key] === 'string' &&
-        (item[key] as unknown as string).toLowerCase().indexOf(searchString.toLowerCase()) >= 0
+        (item[key] as unknown as string)
+          .toLowerCase()
+          .indexOf(searchString.toLowerCase()) >= 0
       ) {
         ret = true;
       }
@@ -240,7 +260,9 @@ export const MultiSelectAsyncField = <ItemType,>(props: MultiSelectAsyncFieldPro
       <Select
         ref={selectRef}
         value={state as ItemType[]}
-        renderValue={(selected: unknown) => renderValue(selected, dictionary, placeholder)}
+        renderValue={(selected: unknown) =>
+          renderValue(selected, dictionary, placeholder)
+        }
         open={false}
         onOpen={handleOpen}
         onClose={handleClose}
@@ -254,12 +276,15 @@ export const MultiSelectAsyncField = <ItemType,>(props: MultiSelectAsyncFieldPro
         {...other}
         sx={{
           ...other.sx,
-          '& .MuiOutlinedInput-input.MuiOutlinedInput-input.MuiOutlinedInput-input': {
-            paddingRight: hasState ? 0 : undefined,
-          },
+          '& .MuiOutlinedInput-input.MuiOutlinedInput-input.MuiOutlinedInput-input':
+            {
+              paddingRight: hasState ? 0 : undefined,
+            },
         }}
       />
-      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
+      {helperText && (
+        <FormHelperText error={!!error}>{helperText}</FormHelperText>
+      )}
       <Popover
         open={open}
         anchorEl={selectRef.current}
@@ -293,7 +318,9 @@ export const MultiSelectAsyncField = <ItemType,>(props: MultiSelectAsyncFieldPro
                   size="small"
                   onClick={handleSelectAll}
                   disabled={
-                    loading || (items && items.length > 10) || state.length === items.length
+                    loading ||
+                    (items && items.length > 10) ||
+                    state.length === items.length
                   }
                 >
                   Select all
@@ -301,7 +328,11 @@ export const MultiSelectAsyncField = <ItemType,>(props: MultiSelectAsyncFieldPro
                 <Divider orientation="vertical" sx={{ height: 'auto' }} />
               </Fragment>
             )}
-            <Button size="small" disabled={loading || !hasState} onClick={handleClearSelected}>
+            <Button
+              size="small"
+              disabled={loading || !hasState}
+              onClick={handleClearSelected}
+            >
               Clear
             </Button>
             <Divider orientation="vertical" sx={{ height: 'auto' }} />
@@ -342,7 +373,9 @@ export const MultiSelectAsyncField = <ItemType,>(props: MultiSelectAsyncFieldPro
               {!loading &&
                 (!itemsFiltered || itemsFiltered?.length === 0 ? (
                   <Box sx={{ pl: 2.5, pr: 2.5 }}>
-                    <Typography color={theme.palette.t1Grey['130']}>Not found</Typography>
+                    <Typography color={theme.palette.fGrey['130']}>
+                      Not found
+                    </Typography>
                   </Box>
                 ) : (
                   <VirtualizeBlock
@@ -406,7 +439,11 @@ export const MultiSelectAsyncField = <ItemType,>(props: MultiSelectAsyncFieldPro
                 variant="text"
                 onClick={handleApply}
                 fullWidth
-                startIcon={totalLoading ? <Loader relative loading size={20} /> : undefined}
+                startIcon={
+                  totalLoading ? (
+                    <Loader relative loading size={20} />
+                  ) : undefined
+                }
                 disabled={!hasState || totalLoading}
               >
                 {total ? `Show ${fNumber(total)} results` : 'Show results'}

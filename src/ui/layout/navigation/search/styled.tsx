@@ -5,7 +5,7 @@ export const SearchInput = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-root': {
     height: '100%',
     paddingLeft: '10px',
-    backgroundColor: theme.palette.t1Grey[230],
+    backgroundColor: theme.palette.fGrey[230],
     '&.Mui-focused .MuiSvgIcon-root, &:hover .MuiSvgIcon-root': {
       color: theme.palette.common.white,
     },

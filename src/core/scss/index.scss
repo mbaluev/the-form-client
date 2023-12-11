@@ -22,12 +22,12 @@ body {
 
 a,
 .link {
-  color: $color-purple-dark;
+  color: $color-blue;
   text-decoration: none;
   cursor: pointer;
 
   &:hover {
-    color: $color-purple-dark-70;
+    color: $color-blue-dark;
   }
 
   &_disabled,

@@ -17,7 +17,7 @@ export const TypographyTitleName = styled(Typography)(() => ({
 }));
 export const TypographyTitleId = styled(Typography)(({ theme }) => ({
   fontSize: '0.85rem',
-  color: theme.palette.t1Grey[200],
+  color: theme.palette.fGrey[200],
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',

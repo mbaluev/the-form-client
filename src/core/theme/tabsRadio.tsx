@@ -14,7 +14,7 @@ const FormControlLabelGrey = styled(FormControlLabel)(({ theme }) => ({
   '&.MuiFormControlLabel-root': {
     paddingRight: theme.spacing(3),
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: theme.palette.t1Grey['20'],
+    backgroundColor: theme.palette.fGrey['20'],
     marginLeft: 0,
     marginRight: 0,
     '& .MuiTypography-root': {

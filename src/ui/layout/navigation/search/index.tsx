@@ -25,7 +25,10 @@ export const Search = observer(() => {
   const request = (value?: string) => {
     setFiltersValue(value);
   };
-  const debounceRequestRedirect = useCallback(debounce(requestRedirect, 1000), []);
+  const debounceRequestRedirect = useCallback(
+    debounce(requestRedirect, 1000),
+    []
+  );
   const debounceRequest = useCallback(debounce(request, 1000), []);
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setState(e.target.value);
@@ -48,13 +51,13 @@ export const Search = observer(() => {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <SearchIcon sx={{ color: theme.palette.t1Grey[130] }} />
+            <SearchIcon sx={{ color: theme.palette.fGrey[130] }} />
           </InputAdornment>
         ),
         endAdornment: state ? (
           <InputAdornment position="end">
             <IconButton onClick={clearFilters} edge="end">
-              <CloseIcon sx={{ color: theme.palette.t1Grey[130] }} />
+              <CloseIcon sx={{ color: theme.palette.fGrey[130] }} />
             </IconButton>
           </InputAdornment>
         ) : null,

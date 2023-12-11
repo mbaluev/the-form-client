@@ -48,7 +48,7 @@ export const BreadCrumbs = (props: IProps) => {
               </Button>
             )}
             {index < arr.length - 1 && (
-              <Typography fontWeight={600} color={theme.palette.t1Grey['100']}>
+              <Typography fontWeight={600} color={theme.palette.fGrey['100']}>
                 /
               </Typography>
             )}

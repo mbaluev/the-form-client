@@ -75,7 +75,11 @@ export const SelectField = (props: SelectFieldProps) => {
   const renderValue = (selected: any) => {
     const selItem = items?.find((item) => item.value === selected);
     if (!selItem) {
-      return <Typography color={theme.palette.t1Grey['120']}>{placeholder}</Typography>;
+      return (
+        <Typography color={theme.palette.fGrey['120']}>
+          {placeholder}
+        </Typography>
+      );
     }
     const color = highlightInput ? theme.palette.primary.main : undefined;
     const fontWeight = highlightInput ? 600 : undefined;
@@ -135,7 +139,11 @@ export const SelectField = (props: SelectFieldProps) => {
       >
         {stateItems?.map((item, index) => {
           return (
-            <MenuItem key={index} value={item.value ? item.value : ''} disabled={item.disabled}>
+            <MenuItem
+              key={index}
+              value={item.value ? item.value : ''}
+              disabled={item.disabled}
+            >
               <ListItemText>{item.label}</ListItemText>
               {highlightValue && item.value === state && (
                 <CheckIcon sx={{ fill: theme.palette.primary.main, ml: 2 }} />
@@ -144,7 +152,9 @@ export const SelectField = (props: SelectFieldProps) => {
           );
         })}
       </Select>
-      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
+      {helperText && (
+        <FormHelperText error={!!error}>{helperText}</FormHelperText>
+      )}
     </FormControl>
   );
 };

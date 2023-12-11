@@ -1,16 +1,8 @@
 import { createTheme, Shadows } from '@mui/material/styles';
-import { darken, lighten } from '@mui/material';
 import { JetBrains_Mono } from 'next/font/google';
 import {} from '@mui/lab/themeAugmentation';
 
 declare module '@mui/material/styles' {
-  interface PaletteColorCustom {
-    100: string;
-    70: string;
-    40: string;
-    20: string;
-    10: string;
-  }
   interface PaletteColorGrey {
     300: string;
     290: string;
@@ -44,44 +36,10 @@ declare module '@mui/material/styles' {
     10: string;
   }
   interface Palette {
-    greyDark: Palette['primary'];
-    greyLight: Palette['primary'];
-    accent: Palette['primary'];
-    t1Primary: PaletteColorCustom;
-    t1Secondary: PaletteColorCustom;
-    t1Accent: PaletteColorCustom;
-    t1Success: PaletteColorCustom;
-    t1Warning: PaletteColorCustom;
-    t1Error: PaletteColorCustom;
-    t1Info: PaletteColorCustom;
-    t1Grey: PaletteColorGrey;
+    fGrey: PaletteColorGrey;
   }
   interface PaletteOptions {
-    greyDark: Palette['primary'];
-    greyLight: Palette['primary'];
-    accent: Palette['primary'];
-    t1Primary: PaletteColorCustom;
-    t1Secondary: PaletteColorCustom;
-    t1Accent: PaletteColorCustom;
-    t1Success: PaletteColorCustom;
-    t1Warning: PaletteColorCustom;
-    t1Error: PaletteColorCustom;
-    t1Info: PaletteColorCustom;
-    t1Grey: PaletteColorGrey;
-  }
-}
-declare module '@mui/material/Button' {
-  interface ButtonPropsColorOverrides {
-    accent: true;
-    greyDark: true;
-    greyLight: true;
-  }
-}
-declare module '@mui/material/IconButton' {
-  interface IconButtonPropsColorOverrides {
-    accent: true;
-    greyDark: true;
-    greyLight: true;
+    fGrey: PaletteColorGrey;
   }
 }
 
@@ -93,80 +51,43 @@ const font = JetBrains_Mono({
 
 const colors = {
   common: { white: '#ffffff', black: '#111419' },
-  primary: { main: '#3A398C', contrastText: '#FFFFFF' },
-  secondary: { main: '#308280', contrastText: '#FFFFFF' },
-  accent: {
-    main: '#5C5AFF',
-    light: lighten('#5C5AFF', 0.2),
-    dark: darken('#5C5AFF', 0.2),
+  secondary: {
+    main: '#2F41CD',
+    light: '6D7ADC',
+    dark: '1E2A83',
     contrastText: '#FFFFFF',
   },
-  greyDark: {
-    main: '#616469',
-    light: lighten('#616469', 0.2),
-    dark: darken('#616469', 0.2),
+  primary: {
+    main: '#167DFF',
+    light: '5CA4FF',
+    dark: '0E50A3',
     contrastText: '#FFFFFF',
   },
-  greyLight: {
-    main: '#a1a4a9',
-    light: lighten('#a1a4a9', 0.2),
-    dark: darken('#a1a4a9', 0.2),
+  info: {
+    main: '#167DFF',
+    light: '5CA4FF',
+    dark: '0E50A3',
     contrastText: '#FFFFFF',
   },
-  success: { main: '#0B8148', contrastText: '#FFFFFF' },
-  warning: { main: '#C86A00', contrastText: '#FFFFFF' },
-  error: { main: '#D71105', contrastText: '#FFFFFF' },
-  info: { main: '#2970DF', contrastText: '#FFFFFF' },
-  t1Primary: {
-    '100': '#3A398C',
-    '70': '#7574AF',
-    '40': '#B0B0D1',
-    '20': '#D8D7E8',
-    '10': '#EBEBF3',
+  success: {
+    main: '#00C075',
+    light: '4DD39E',
+    dark: '007B4B',
+    contrastText: '#FFFFFF',
   },
-  t1Secondary: {
-    '100': '#308280',
-    '70': '#6EA7A6',
-    '40': '#ACCDCC',
-    '20': '#D6E6E6',
-    '10': '#EAF3F2',
+  warning: {
+    main: '#FD9B2C',
+    light: 'FEB96B',
+    dark: 'A2631C',
+    contrastText: '#FFFFFF',
   },
-  t1Accent: {
-    '100': '#5C5AFF',
-    '70': '#8D8BFF',
-    '40': '#BEBDFF',
-    '20': '#DEDEFF',
-    '10': '#EFEFFF',
+  error: {
+    main: '#EC3D7D',
+    light: 'F277A4',
+    dark: '972750',
+    contrastText: '#FFFFFF',
   },
-  t1Success: {
-    '100': '#0B8148',
-    '70': '#54A77F',
-    '40': '#ACE2C8',
-    '20': '#D6F0E3',
-    '10': '#EAF8F1',
-  },
-  t1Warning: {
-    '100': '#C86A00',
-    '70': '#9B84E8',
-    '40': '#E9C399',
-    '20': '#FFEBD5',
-    '10': '#FFF5EA',
-  },
-  t1Error: {
-    '100': '#D71105',
-    '70': '#FF695F',
-    '40': '#FFA9A4',
-    '20': '#FFD4D1',
-    '10': '#FFE9E8',
-  },
-  t1Info: {
-    '100': '#2970DF',
-    '70': '#72A0E7',
-    '40': '#AFC9F1',
-    '20': '#D7E4F8',
-    '10': '#EBF1FB',
-  },
-  t1Grey: {
+  fGrey: {
     '300': '#111419',
     '290': '#191c21',
     '280': '#212429',
@@ -207,25 +128,15 @@ export const theme = createTheme({
     fontFamily: font.style.fontFamily,
   },
   palette: {
-    divider: colors.t1Grey['30'],
+    divider: colors.fGrey['30'],
     common: colors.common,
     primary: colors.primary,
     secondary: colors.secondary,
-    accent: colors.accent,
-    greyDark: colors.greyDark,
-    greyLight: colors.greyLight,
     success: colors.success,
     warning: colors.warning,
     error: colors.error,
     info: colors.info,
-    t1Primary: colors.t1Primary,
-    t1Secondary: colors.t1Secondary,
-    t1Accent: colors.t1Accent,
-    t1Success: colors.t1Success,
-    t1Warning: colors.t1Warning,
-    t1Error: colors.t1Error,
-    t1Info: colors.t1Info,
-    t1Grey: colors.t1Grey,
+    fGrey: colors.fGrey,
   },
   breakpoints: {
     values: {
@@ -280,23 +191,23 @@ export const theme = createTheme({
           whiteSpace: 'nowrap',
           textOverflow: 'ellipsis',
         },
-        standardSuccess: { backgroundColor: colors.t1Success['10'] },
-        standardError: { backgroundColor: colors.t1Error['10'] },
-        standardWarning: { backgroundColor: colors.t1Warning['10'] },
-        standardInfo: { backgroundColor: colors.t1Info['10'] },
+        standardSuccess: { backgroundColor: colors.success.light },
+        standardError: { backgroundColor: colors.error.light },
+        standardWarning: { backgroundColor: colors.warning.light },
+        standardInfo: { backgroundColor: colors.info.light },
       },
     },
     MuiSkeleton: {
       styleOverrides: {
         root: {
-          backgroundColor: colors.t1Grey['40'],
+          backgroundColor: colors.fGrey['40'],
         },
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: colors.t1Grey['270'],
+          backgroundColor: colors.fGrey['270'],
         },
       },
     },
@@ -309,7 +220,7 @@ export const theme = createTheme({
           borderRadius: 2,
         },
         colorPrimary: {
-          backgroundColor: colors.t1Grey['50'],
+          backgroundColor: colors.fGrey['50'],
         },
       },
     },
@@ -373,9 +284,9 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           '&.Mui-disabled': {
-            backgroundColor: colors.t1Grey[20],
+            backgroundColor: colors.fGrey[20],
             '& fieldset.MuiOutlinedInput-notchedOutline': {
-              borderColor: colors.t1Grey[50],
+              borderColor: colors.fGrey[50],
             },
           },
           '&.Mui-error': {

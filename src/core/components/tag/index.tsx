@@ -1,7 +1,14 @@
 import { MouseEvent } from 'react';
 import { Box, darken, Stack, useTheme } from '@mui/material';
 
-export type TTagColor = 'default' | 'primary' | 'grey' | 'blue' | 'green' | 'orange' | 'red';
+export type TTagColor =
+  | 'default'
+  | 'primary'
+  | 'grey'
+  | 'blue'
+  | 'green'
+  | 'orange'
+  | 'red';
 
 const getColor = (color?: TTagColor) => {
   const theme = useTheme();
@@ -9,7 +16,7 @@ const getColor = (color?: TTagColor) => {
     case 'primary':
       return theme.palette.primary.main;
     case 'grey':
-      return theme.palette.t1Grey['100'];
+      return theme.palette.fGrey['100'];
     case 'blue':
       return theme.palette.info.main;
     case 'green':
@@ -34,7 +41,7 @@ const getColorBorder = (color?: TTagColor) => {
     case 'red':
       return getColor(color);
     default:
-      return theme.palette.t1Grey['40'];
+      return theme.palette.fGrey['40'];
   }
 };
 
@@ -49,7 +56,7 @@ const getColorBackground = (color?: TTagColor) => {
     case 'red':
       return theme.palette.common.white;
     default:
-      return theme.palette.t1Grey['10'];
+      return theme.palette.fGrey['10'];
   }
 };
 
