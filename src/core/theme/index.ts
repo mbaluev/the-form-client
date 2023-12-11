@@ -1,6 +1,6 @@
 import { createTheme, Shadows } from '@mui/material/styles';
 import { darken, lighten } from '@mui/material';
-import { Open_Sans } from 'next/font/google';
+import { JetBrains_Mono } from 'next/font/google';
 import {} from '@mui/lab/themeAugmentation';
 
 declare module '@mui/material/styles' {
@@ -85,7 +85,7 @@ declare module '@mui/material/IconButton' {
   }
 }
 
-const font = Open_Sans({
+const font = JetBrains_Mono({
   weight: ['400', '600'],
   subsets: ['latin'],
   display: 'swap',
