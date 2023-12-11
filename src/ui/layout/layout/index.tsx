@@ -1,7 +1,7 @@
 import { Fragment, ReactNode, useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 import Stack from '@mui/material/Stack';
-import { Container, IconButton, InputAdornment, useTheme } from '@mui/material';
+import { IconButton, InputAdornment, useTheme } from '@mui/material';
 import { useMenuStore } from '@store/modules/common/menu/useMenuStore';
 import { useNotifyStore } from '@store/modules/common/notify/useNotifyStore';
 import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
@@ -46,102 +46,97 @@ export const Layout = observer((props: IProps) => {
     }, 310);
   }, [isOpenMenu]);
 
+  // <Container
+  //   id="__container"
+  //   maxWidth="xl"
+  //   sx={{ height: '100%', pt: 3, pb: 3 }}
+  // ></Container>;
+
   return (
-    <Container
-      id="__lcontainer"
-      maxWidth="xl"
-      sx={{
-        backgroundColor: theme.palette.fGrey['20'],
-        height: '100%',
-        pt: 3,
-        pb: 3,
-      }}
-    >
-      <Stack id="__layout" spacing={3}>
-        <Stack id="__layout_top" direction="row" spacing={3}>
-          <Stack direction="row" spacing={2}>
-            {isMenu && (
-              <IconButton onClick={menuClick}>
-                <MenuIcon />
+    <Stack id="__layout" spacing={3} sx={{ p: 3 }}>
+      <Stack id="__layout_top" direction="row" spacing={3}>
+        <Stack direction="row" spacing={2}>
+          {isMenu && (
+            <IconButton onClick={menuClick}>
+              <MenuIcon />
+            </IconButton>
+          )}
+          <Link passHref href={ROUTES.HOME.path}>
+            {size.width && size.width <= MEDIA_XS ? (
+              <IconButton>
+                <LogoTheForm />
               </IconButton>
-            )}
-            <Link passHref href={ROUTES.HOME.path}>
-              {size.width && size.width <= MEDIA_XS ? (
-                <IconButton>
-                  <LogoTheForm />
-                </IconButton>
-              ) : (
-                <Button
-                  startIcon={<LogoTheForm fill={theme.palette.primary.main} />}
-                  variant="text"
-                >
-                  The Form
-                </Button>
-              )}
-            </Link>
-          </Stack>
-          <Stack direction="row" flex="1 1 auto">
-            {globalSearch && (
-              <TextInputField
-                placeholder="Search"
-                sx={{
-                  backgroundColor: theme.palette.common.white,
-                  borderRadius: 1,
-                  '& .MuiOutlinedInput-notchedOutline': {
-                    border: 'none',
-                  },
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton edge="end">
-                        <TuneIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                fullWidth
-              />
-            )}
-          </Stack>
-          <Stack direction="row" spacing={2}>
-            {isAuth ? (
-              <Fragment>
-                {support && (
-                  <IconButton>
-                    <HeadsetMicIcon />
-                  </IconButton>
-                )}
-                {notifications && (
-                  <IconButton onClick={notifyClick}>
-                    <NotificationsIcon />
-                  </IconButton>
-                )}
-                <Account />
-              </Fragment>
             ) : (
-              <Fragment>
-                <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path}>
-                  <Button variant="contained">Sign in</Button>
-                </Link>
-                <Link passHref href={ROUTES.ACCOUNT_SIGN_UP.path}>
-                  <Button variant="contained" color="success">
-                    Sign up
-                  </Button>
-                </Link>
-              </Fragment>
+              <Button
+                startIcon={<LogoTheForm fill={theme.palette.primary.main} />}
+                variant="text"
+              >
+                The Form
+              </Button>
             )}
-          </Stack>
+          </Link>
         </Stack>
-        <Stack id="__layout_bottom" direction="row" spacing={3}>
-          {children}
+        <Stack direction="row" flex="1 1 auto">
+          {globalSearch && (
+            <TextInputField
+              placeholder="Search"
+              sx={{
+                backgroundColor: theme.palette.common.white,
+                borderRadius: 1,
+                '& .MuiOutlinedInput-notchedOutline': {
+                  border: 'none',
+                },
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton edge="end">
+                      <TuneIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              fullWidth
+            />
+          )}
+        </Stack>
+        <Stack direction="row" spacing={2}>
+          {isAuth ? (
+            <Fragment>
+              {support && (
+                <IconButton>
+                  <HeadsetMicIcon />
+                </IconButton>
+              )}
+              {notifications && (
+                <IconButton onClick={notifyClick}>
+                  <NotificationsIcon />
+                </IconButton>
+              )}
+              <Account />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path}>
+                <Button variant="contained">Sign in</Button>
+              </Link>
+              <Link passHref href={ROUTES.ACCOUNT_SIGN_UP.path}>
+                <Button variant="contained" color="success">
+                  Sign up
+                </Button>
+              </Link>
+            </Fragment>
+          )}
         </Stack>
       </Stack>
-    </Container>
+      <Stack id="__layout_bottom" direction="row" spacing={3}>
+        {children}
+      </Stack>
+    </Stack>
   );
 });
