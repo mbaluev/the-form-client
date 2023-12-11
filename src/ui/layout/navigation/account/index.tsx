@@ -57,9 +57,7 @@ export const Account = observer(() => {
             </div>
             <div className={classes.account__info}>
               <div className={classes.account__user}>
-                <div
-                  className={classes.account__name}
-                >{`${firstname} ${lastname}`}</div>
+                <div className={classes.account__name}>{`${firstname} ${lastname}`}</div>
                 <div className={classes.account__email}>{username}</div>
               </div>
             </div>
