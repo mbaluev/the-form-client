@@ -67,10 +67,7 @@ export const Layout = observer((props: IProps) => {
                 <LogoTheForm />
               </IconButton>
             ) : (
-              <Button
-                startIcon={<LogoTheForm fill={theme.palette.primary.main} />}
-                variant="text"
-              >
+              <Button startIcon={<LogoTheForm fill={theme.palette.primary.main} />} variant="text">
                 The Form
               </Button>
             )}
