@@ -54,17 +54,12 @@ export const Account = observer(() => {
                 fontSize="1.2rem"
                 fontWeight={600}
               >{`${firstname} ${lastname}`}</Typography>
-              <Typography sx={{ color: theme.palette.fGrey['150'] }}>
-                {username}
-              </Typography>
+              <Typography sx={{ color: theme.palette.fGrey['150'] }}>{username}</Typography>
             </Stack>
           </Stack>
           <AccountRoles />
           <Divider />
-          <Button
-            onClick={signOutHandler}
-            startIcon={<Logout fontSize="small" />}
-          >
+          <Button onClick={signOutHandler} startIcon={<Logout fontSize="small" />}>
             Sign out
           </Button>
         </Stack>
