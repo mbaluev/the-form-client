@@ -21,7 +21,7 @@ export const CardAvatar = (props: IProps) => {
           backgroundColor: theme.palette.fGrey['20'],
         }}
       >
-        <Typography fontSize="1.2rem" fontWeight={600} color={theme.palette.fGrey['130']}>
+        <Typography fontSize="1.5rem" fontWeight={600} color={theme.palette.fGrey['130']}>
           <FirstLetters name={name} />
         </Typography>
       </MuiAvatar>

@@ -1,17 +1,16 @@
 import { Fragment, MouseEvent, useState } from 'react';
 import FaceIcon from '@mui/icons-material/Face';
-import MenuItem from '@mui/material/MenuItem';
 import Logout from '@mui/icons-material/Logout';
-import { Divider, IconButton } from '@mui/material';
+import { Button, Divider, IconButton, useTheme } from '@mui/material';
 import { observer } from 'mobx-react';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
 import { useRouter } from 'next/router';
 import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 import { ROUTES } from '@settings/routes';
-import { AccountRoles } from '@ui/layout/navigation/account/accountRoles';
-import classes from './index.module.scss';
+import { AccountRoles } from '@ui/layout/navigation/account/roles';
 import { CardAvatar } from '@ui/layout/card/avatar';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 export const Account = observer(() => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -19,6 +18,7 @@ export const Account = observer(() => {
   const handleOpen = (e: MouseEvent<any>) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
   const { isAuth, firstname, lastname, username, signout } = useAuthStore();
+  const theme = useTheme();
 
   const router = useRouter();
   const signOutHandler = async () => {
@@ -38,39 +38,36 @@ export const Account = observer(() => {
       </IconButton>
       <Menu
         anchorEl={anchorEl}
-        id="menu-account"
-        className={classes.account}
         open={open}
         onClose={handleClose}
         onClick={handleClose}
-        PaperProps={{
-          elevation: 2,
-          sx: { mt: 2 },
-        }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        slotProps={{ paper: { elevation: 2, sx: { mt: 2 } } }}
+        sx={{ '& .MuiList-root': { p: 3 } }}
       >
-        <div className={classes.account__container}>
-          <div className={classes.account__top}>
-            <div className={classes.account__avatar}>
-              <CardAvatar name={`${firstname} ${lastname}`} />
-            </div>
-            <div className={classes.account__info}>
-              <div className={classes.account__user}>
-                <div className={classes.account__name}>{`${firstname} ${lastname}`}</div>
-                <div className={classes.account__email}>{username}</div>
-              </div>
-            </div>
-          </div>
+        <Stack spacing={3} sx={{ minWidth: 300 }}>
+          <Stack spacing={3} direction="row">
+            <CardAvatar name={`${firstname} ${lastname}`} />
+            <Stack>
+              <Typography
+                fontSize="1.2rem"
+                fontWeight={600}
+              >{`${firstname} ${lastname}`}</Typography>
+              <Typography sx={{ color: theme.palette.fGrey['150'] }}>
+                {username}
+              </Typography>
+            </Stack>
+          </Stack>
           <AccountRoles />
-        </div>
-        <Divider sx={{ mt: 2, mb: 2 }} />
-        <MenuItem onClick={signOutHandler}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Sign out
-        </MenuItem>
+          <Divider />
+          <Button
+            onClick={signOutHandler}
+            startIcon={<Logout fontSize="small" />}
+          >
+            Sign out
+          </Button>
+        </Stack>
       </Menu>
     </Fragment>
   );
