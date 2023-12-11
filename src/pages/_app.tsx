@@ -17,8 +17,8 @@ import { containerInitialize } from '@provider/initialize';
 import { STORE } from '@store/ids';
 import dirs from '@utils/locale/dir';
 import type IAppStore from '@store/modules/common/app/interface';
-import '../core/scss/index.scss';
 import IAuthStore from '@store/modules/common/auth/interface';
+import '../core/scss/index.scss';
 
 configure({ enforceActions: 'observed' });
 enableStaticRendering(typeof window === 'undefined');
@@ -34,9 +34,13 @@ const authStore = container.get<IAuthStore>(STORE.Auth);
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
+  token?: string;
 }
 
 const MyApp = (props: MyAppProps) => {
+  const { token } = props;
+  authStore.setToken(token);
+
   const router = useRouter();
   const isRtl = dirs.isRtl();
   const {
@@ -45,10 +49,10 @@ const MyApp = (props: MyAppProps) => {
     pageProps,
   } = props;
 
-  const getLayout = (Component as any).getLayout || ((page: ReactElement) => page);
+  const getLayout =
+    (Component as any).getLayout || ((page: ReactElement) => page);
 
   useEffect(() => {
-    authStore.init();
     const handleStart = () => appStore.routeChangeStart();
     const handleComplete = () => appStore.routeChangeComplete();
 
@@ -67,7 +71,9 @@ const MyApp = (props: MyAppProps) => {
     <ErrorBoundary>
       <CacheProvider value={emotionCache}>
         <ContainerProvider container={container}>
-          <ThemeProvider theme={{ ...theme, direction: dirs.getDir(router.locale) }}>
+          <ThemeProvider
+            theme={{ ...theme, direction: dirs.getDir(router.locale) }}
+          >
             <CssBaseline />
             {getLayout(<Component {...pageProps} />)}
           </ThemeProvider>
@@ -75,6 +81,11 @@ const MyApp = (props: MyAppProps) => {
       </CacheProvider>
     </ErrorBoundary>
   );
+};
+
+MyApp.getInitialProps = ({ ctx }: { ctx: any }) => {
+  const token = ctx.res.req.cookies.token;
+  return { token };
 };
 
 export default appWithTranslation(MyApp);

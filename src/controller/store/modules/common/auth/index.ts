@@ -4,7 +4,7 @@ import { IUserDTO } from '@model/entities/user';
 import IAuthStore from '@store/modules/common/auth/interface';
 import { SERVICE } from '@service/ids';
 import { action, computed, makeObservable, observable } from 'mobx';
-import { getCookie, setCookie, deleteCookie } from 'cookies-next';
+import { setCookie, deleteCookie } from 'cookies-next';
 import cookie from '@utils/cookie';
 import moment from 'moment';
 import { Jwt } from '@utils/jwt';
@@ -69,10 +69,6 @@ export class AuthStore extends BaseCardStore<IUserDTO> implements IAuthStore {
   };
 
   // --- action
-
-  init = () => {
-    this.setToken(getCookie(cookie.names.token) as string);
-  };
 
   signup = async () => {
     this.validate();

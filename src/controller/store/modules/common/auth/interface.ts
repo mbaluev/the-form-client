@@ -6,7 +6,6 @@ export default interface IAuthStore extends IBaseCardStore<IUserDTO> {
   setToken: (data?: string | null) => void;
   message?: string;
 
-  init: () => void;
   signup: () => Promise<boolean>;
   signin: () => Promise<boolean>;
   signout: () => Promise<boolean>;
