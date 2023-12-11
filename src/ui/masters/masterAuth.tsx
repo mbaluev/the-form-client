@@ -13,7 +13,7 @@ export const MasterAuth = observer((props: { children?: ReactNode }) => {
   const { isAuth } = useAuthStore();
   const { isLoading } = useAppStore();
   return (
-    <Layout>
+    <Layout globalSearch support notifications>
       {isAuth && (isLoading ? <Loader relative loading /> : children)}
       {!isAuth &&
         (isLoading ? (

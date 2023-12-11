@@ -9,4 +9,5 @@ export interface IMenuItemDTO {
   active?: (pathname: string) => boolean;
   items?: IMenuItemDTO[];
   icon?: ReactElement;
+  roles?: string[];
 }

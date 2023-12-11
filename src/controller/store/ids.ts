@@ -4,5 +4,6 @@ export const STORE = {
   Auth: Symbol.for('AuthStore'),
   Filter: Symbol.for('FilterStore'),
   Locale: Symbol.for('LocaleStore'),
+  Menu: Symbol.for('MenuStore'),
   Notify: Symbol.for('NotifyStore'),
 };

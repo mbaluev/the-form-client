@@ -1,7 +1,14 @@
 import { MouseEvent } from 'react';
-import { Box, darken, Stack, useTheme } from '@mui/material';
+import { Box, darken, lighten, Stack, useTheme } from '@mui/material';
 
-export type TTagColor = 'default' | 'primary' | 'grey' | 'blue' | 'green' | 'orange' | 'red';
+export type TTagColor =
+  | 'default'
+  | 'primary'
+  | 'grey'
+  | 'blue'
+  | 'green'
+  | 'orange'
+  | 'red';
 
 const getColor = (color?: TTagColor) => {
   const theme = useTheme();
@@ -9,7 +16,7 @@ const getColor = (color?: TTagColor) => {
     case 'primary':
       return theme.palette.primary.main;
     case 'grey':
-      return theme.palette.fGrey['100'];
+      return theme.palette.fGrey['150'];
     case 'blue':
       return theme.palette.info.main;
     case 'green':
@@ -23,33 +30,23 @@ const getColor = (color?: TTagColor) => {
   }
 };
 
-const getColorBorder = (color?: TTagColor) => {
-  const theme = useTheme();
-  switch (color) {
-    case 'primary':
-    case 'grey':
-    case 'blue':
-    case 'green':
-    case 'orange':
-    case 'red':
-      return getColor(color);
-    default:
-      return theme.palette.fGrey['40'];
-  }
-};
-
 const getColorBackground = (color?: TTagColor) => {
   const theme = useTheme();
   switch (color) {
     case 'primary':
+      return lighten(theme.palette.primary.main, 0.9);
     case 'grey':
+      return theme.palette.fGrey['20'];
     case 'blue':
+      return lighten(theme.palette.primary.main, 0.9);
     case 'green':
+      return lighten(theme.palette.success.main, 0.9);
     case 'orange':
+      return lighten(theme.palette.warning.main, 0.9);
     case 'red':
-      return theme.palette.common.white;
+      return lighten(theme.palette.error.main, 0.9);
     default:
-      return theme.palette.fGrey['10'];
+      return theme.palette.fGrey['20'];
   }
 };
 
@@ -68,8 +65,7 @@ export const Tag = (props: ITagProps) => {
       direction="row"
       spacing="5px"
       sx={{
-        p: '2px 8px',
-        border: `solid 1px ${getColorBorder(color)}`,
+        p: '5px 10px',
         color: getColor(color),
         fill: getColor(color),
         backgroundColor: getColorBackground(color),

@@ -25,11 +25,19 @@ export class BaseStore implements IBaseStore {
 
   error?: string = undefined;
 
-  setLoading = (isLoading: boolean) => (this.isLoading = isLoading);
+  setLoading = (isLoading: boolean) => {
+    this.isLoading = isLoading;
+  };
 
-  setEdit = (isEdit: boolean) => (this.isEdit = isEdit);
+  setEdit = (isEdit: boolean) => {
+    this.isEdit = isEdit;
+  };
 
-  setOpen = (isOpen: boolean) => (this.isOpen = isOpen);
+  setOpen = (isOpen: boolean) => {
+    this.isOpen = isOpen;
+  };
 
-  setError = (value?: string) => (this.error = value);
+  setError = (value?: string) => {
+    this.error = value;
+  };
 }

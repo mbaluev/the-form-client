@@ -4,10 +4,12 @@ import { guid } from '@utils/guid';
 import type { AlertProps } from '@mui/material';
 import type INotifyStore from '@store/modules/common/notify/interface';
 import type { INotifyItem } from '@model/common/notify';
+import { BaseStore } from '@store/modules/base/store';
 
 @injectable()
-export class NotifyStore implements INotifyStore {
+export class NotifyStore extends BaseStore implements INotifyStore {
   constructor() {
+    super();
     makeObservable(this, {
       items: observable,
       setItems: action,
@@ -36,7 +38,8 @@ export class NotifyStore implements INotifyStore {
     };
     items.push(item);
     this.setItems(items);
-    if (this.autoHide) setTimeout(() => this.remove(item.guid), this.autoHideDuration);
+    if (this.autoHide)
+      setTimeout(() => this.remove(item.guid), this.autoHideDuration);
   };
 
   remove = (id: string) => {

@@ -1,7 +1,8 @@
 import type { INotifyItem } from '@model/common/notify';
 import type { AlertProps } from '@mui/material';
+import type IBaseStore from '@store/modules/base/store/interface';
 
-export default interface INotifyStore {
+export default interface INotifyStore extends IBaseStore {
   items?: INotifyItem[];
   add: (error: any, severity?: AlertProps['severity']) => void;
   remove: (guid: string) => void;

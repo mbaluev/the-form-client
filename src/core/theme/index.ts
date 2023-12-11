@@ -1,4 +1,4 @@
-import { createTheme, Shadows } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import { JetBrains_Mono } from 'next/font/google';
 import {} from '@mui/lab/themeAugmentation';
 
@@ -298,10 +298,4 @@ export const theme = createTheme({
       },
     },
   },
-  shadows: [
-    ...createTheme({}).shadows.map((shadow, i) => {
-      if (i === 3) return '0px 3px 12px 0px rgba(0,0,0,0.12)';
-      return shadow;
-    }),
-  ] as Shadows,
 });

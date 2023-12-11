@@ -18,7 +18,8 @@ export const Account = observer(() => {
   const open = Boolean(anchorEl);
   const handleOpen = (e: MouseEvent<any>) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
-  const { isAuth, firstname, lastname, username, signout, isDataLoading } = useAuthStore();
+  const { isAuth, firstname, lastname, username, signout, isDataLoading } =
+    useAuthStore();
 
   const router = useRouter();
   const signOutHandler = async () => {
@@ -45,7 +46,7 @@ export const Account = observer(() => {
         onClick={handleClose}
         PaperProps={{
           elevation: 2,
-          sx: { mt: 1 },
+          sx: { mt: 2 },
         }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
@@ -54,19 +55,25 @@ export const Account = observer(() => {
           <div className={classes.account__top}>
             <div className={classes.account__avatar}>
               <Avatar sx={{ width: 50, height: 50, fontSize: '1.6rem' }}>
-                <AccountImage loading={isDataLoading} src={undefined} name={username} />
+                <AccountImage
+                  loading={isDataLoading}
+                  src={undefined}
+                  name={username}
+                />
               </Avatar>
             </div>
             <div className={classes.account__info}>
               <div className={classes.account__user}>
-                <div className={classes.account__name}>{`${firstname} ${lastname}`}</div>
+                <div
+                  className={classes.account__name}
+                >{`${firstname} ${lastname}`}</div>
                 <div className={classes.account__email}>{username}</div>
               </div>
             </div>
           </div>
           <AccountRoles />
         </div>
-        <Divider />
+        <Divider sx={{ mt: 2, mb: 2 }} />
         <MenuItem onClick={signOutHandler}>
           <ListItemIcon>
             <Logout fontSize="small" />
