@@ -61,10 +61,7 @@ export const Layout = observer((props: IProps) => {
         <Stack id="__layout_top" direction="row" spacing={3}>
           <Stack direction="row" spacing={2}>
             {isMenu && (
-              <IconButton
-                onClick={menuClick}
-                sx={{ fill: theme.palette.fGrey['150'] }}
-              >
+              <IconButton onClick={menuClick}>
                 <MenuIcon />
               </IconButton>
             )}
@@ -75,9 +72,7 @@ export const Layout = observer((props: IProps) => {
                 </IconButton>
               ) : (
                 <Button
-                  startIcon={
-                    <LogoTheForm sx={{ fill: theme.palette.primary.main }} />
-                  }
+                  startIcon={<LogoTheForm fill={theme.palette.primary.main} />}
                   variant="text"
                 >
                   The Form
@@ -99,13 +94,13 @@ export const Layout = observer((props: IProps) => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <SearchIcon sx={{ fill: theme.palette.fGrey['100'] }} />
+                      <SearchIcon />
                     </InputAdornment>
                   ),
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton edge="end">
-                        <TuneIcon sx={{ fill: theme.palette.fGrey['100'] }} />
+                        <TuneIcon />
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -132,10 +127,12 @@ export const Layout = observer((props: IProps) => {
             ) : (
               <Fragment>
                 <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path}>
-                  <Button>Sign in</Button>
+                  <Button variant="contained">Sign in</Button>
                 </Link>
                 <Link passHref href={ROUTES.ACCOUNT_SIGN_UP.path}>
-                  <Button color="success">Sign up</Button>
+                  <Button variant="contained" color="success">
+                    Sign up
+                  </Button>
                 </Link>
               </Fragment>
             )}

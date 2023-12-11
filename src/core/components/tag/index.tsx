@@ -1,14 +1,7 @@
 import { MouseEvent } from 'react';
 import { Box, darken, lighten, Stack, useTheme } from '@mui/material';
 
-export type TTagColor =
-  | 'default'
-  | 'primary'
-  | 'grey'
-  | 'blue'
-  | 'green'
-  | 'orange'
-  | 'red';
+export type TTagColor = 'default' | 'primary' | 'grey' | 'blue' | 'green' | 'orange' | 'red';
 
 const getColor = (color?: TTagColor) => {
   const theme = useTheme();

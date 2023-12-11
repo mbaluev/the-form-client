@@ -38,8 +38,7 @@ export class NotifyStore extends BaseStore implements INotifyStore {
     };
     items.push(item);
     this.setItems(items);
-    if (this.autoHide)
-      setTimeout(() => this.remove(item.guid), this.autoHideDuration);
+    if (this.autoHide) setTimeout(() => this.remove(item.guid), this.autoHideDuration);
   };
 
   remove = (id: string) => {
