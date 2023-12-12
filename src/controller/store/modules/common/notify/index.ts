@@ -55,7 +55,7 @@ export class NotifyStore extends BaseStore implements INotifyStore {
 
   clear = () => this.setItems();
 
-  init = () => {
+  test = () => {
     const message =
       "Material UI is an open-source React component library that implements Google's Material Design.\n" +
       'Material UI is beautiful by design and features a suite of customization options that make it easy to implement your own custom design system on top of our components.';

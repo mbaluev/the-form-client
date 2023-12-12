@@ -9,6 +9,5 @@ export default interface INotifyStore extends IBaseStore {
   remove: (guid: string) => void;
   parseError: (error: any) => string;
   clear: () => void;
-
-  init: () => void;
+  test: () => void;
 }
