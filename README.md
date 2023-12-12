@@ -5,8 +5,8 @@
 Install it and run:
 
 ```sh
-npm ci
-npm run dev
+yarn
+yarn dev
 ```
 
 ## The idea behind
