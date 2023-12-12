@@ -38,9 +38,6 @@ interface MyAppProps extends AppProps {
 }
 
 const MyApp = (props: MyAppProps) => {
-  const { token } = props;
-  if (token) authStore.setToken(token);
-
   const router = useRouter();
   const isRtl = dirs.isRtl();
   const {
@@ -52,6 +49,7 @@ const MyApp = (props: MyAppProps) => {
   const getLayout = (Component as any).getLayout || ((page: ReactElement) => page);
 
   useEffect(() => {
+    authStore.init();
     const handleStart = () => appStore.routeChangeStart();
     const handleComplete = () => appStore.routeChangeComplete();
 
@@ -78,11 +76,6 @@ const MyApp = (props: MyAppProps) => {
       </CacheProvider>
     </ErrorBoundary>
   );
-};
-
-MyApp.getInitialProps = ({ ctx }: { ctx: any }) => {
-  const token = ctx?.res?.req?.cookies?.token;
-  return { token };
 };
 
 export default appWithTranslation(MyApp);

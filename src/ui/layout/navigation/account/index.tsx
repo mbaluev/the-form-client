@@ -1,7 +1,7 @@
 import { Fragment, MouseEvent, useState } from 'react';
 import FaceIcon from '@mui/icons-material/Face';
 import Logout from '@mui/icons-material/Logout';
-import { Button, Divider, IconButton, useTheme } from '@mui/material';
+import { Box, Button, Divider, IconButton, useTheme } from '@mui/material';
 import { observer } from 'mobx-react';
 import Menu from '@mui/material/Menu';
 import { useRouter } from 'next/router';
@@ -44,9 +44,9 @@ export const Account = observer(() => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         slotProps={{ paper: { elevation: 2, sx: { mt: 2 } } }}
-        sx={{ '& .MuiList-root': { p: 3 } }}
+        sx={{ '& .MuiList-root': { p: 0 } }}
       >
-        <Stack spacing={3} sx={{ minWidth: 300 }}>
+        <Stack spacing={3} sx={{ minWidth: 300, p: 3 }}>
           <Stack spacing={3} direction="row">
             <CardAvatar name={`${firstname} ${lastname}`} />
             <Stack>
@@ -58,11 +58,13 @@ export const Account = observer(() => {
             </Stack>
           </Stack>
           <AccountRoles />
-          <Divider />
-          <Button onClick={signOutHandler} startIcon={<Logout fontSize="small" />}>
+        </Stack>
+        <Divider />
+        <Box sx={{ p: 3 }}>
+          <Button startIcon={<Logout fontSize="small" />} onClick={signOutHandler} fullWidth>
             Sign out
           </Button>
-        </Stack>
+        </Box>
       </Menu>
     </Fragment>
   );

@@ -1,11 +1,12 @@
 import { IBaseCardStore } from '@store/modules/base/card/interfaces';
-import { IUserDTO } from '@model/entities/user';
+import { IAccountDTO } from '@model/common/auth';
 
-export default interface IAuthStore extends IBaseCardStore<IUserDTO> {
+export default interface IAuthStore extends IBaseCardStore<IAccountDTO> {
   token?: string | null;
   setToken: (data?: string | null) => void;
   message?: string;
 
+  init: () => void;
   signup: () => Promise<boolean>;
   signin: () => Promise<boolean>;
   signout: () => Promise<boolean>;

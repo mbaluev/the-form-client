@@ -1,6 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { IUserDTO } from '@model/entities/user';
-import { IAuthResponse } from 'controller/model/common/auth';
+import { IAccountDTO, IAuthResponse } from 'controller/model/common/auth';
 import { API } from '@api/ids';
 import type IAxiosApi from '@api/modules/axios/interface';
 import type IAuthService from '@service/modules/common/auth/interface';
@@ -11,11 +10,11 @@ export class AuthService implements IAuthService {
 
   API_PREFIX = `${process.env.REACT_APP_CORE_URL}/api/auth`;
 
-  signup = async (data: IUserDTO) => {
+  signup = async (data: IAccountDTO) => {
     return this.axiosApi.post<IAuthResponse>(`${this.API_PREFIX}/signup`, data);
   };
 
-  signin = async (data: IUserDTO) => {
+  signin = async (data: IAccountDTO) => {
     return this.axiosApi.post<IAuthResponse>(`${this.API_PREFIX}/signin`, data);
   };
 

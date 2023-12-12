@@ -22,5 +22,5 @@ export default interface IFilterStore {
   filters: Record<string, any>;
   hasFilters: boolean;
   clearFilters: () => void;
-  setFilter: (key: string, value?: any, operator?: any) => void;
+  setFilter: (key: string, value?: any) => void;
 }

@@ -8,7 +8,6 @@ import Divider from '@mui/material/Divider';
 import { IconButton } from '@mui/material';
 import { TextInputField } from 'core/components/fields/textInputField';
 import { TextInputFieldProps } from '@components/fields/textInputField/types';
-import { FilterOperator } from '@service/modules/client/api';
 
 export const FilterText = observer((props: TextInputFieldProps) => {
   const theme = useTheme();
@@ -16,8 +15,7 @@ export const FilterText = observer((props: TextInputFieldProps) => {
   const { filters, setFilter } = useFilterStore();
   const [state, setState] = useState<string | undefined>(filters[name]);
   const setFilterValue = (value?: string) => {
-    if (value) setFilter(name, value, FilterOperator.Like);
-    else setFilter(name, value, undefined);
+    setFilter(name, value);
   };
 
   const request = debounce((value) => {

@@ -11,13 +11,7 @@ export const BtnReload = observer(<T extends TListITem>(props: IProps<T>) => {
   const { getData } = dataModel;
   const handleRefresh = async () => getData();
   return (
-    <Button
-      variant="text"
-      size="small"
-      color="greyDark"
-      startIcon={<RefreshIcon />}
-      onClick={handleRefresh}
-    >
+    <Button variant="text" size="small" startIcon={<RefreshIcon />} onClick={handleRefresh}>
       Reload
     </Button>
   );

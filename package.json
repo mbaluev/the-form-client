@@ -12,13 +12,11 @@
     "prettier": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier -- --list-different \"src/**/*.{ts,tsx}\"",
     "prettier:write": "npm run prettier -- --write \"src/**/*.{ts,tsx}\"",
+    "test": "jest",
+    "test:ci": "jest --ci",
+    "test:watch": "jest --watch",
     "prepare": "husky install",
-    "translate": "node translate.js",
-    "nswag:prettier": "npm run prettier -- --write \"src/controller/service/modules/client/api.ts\"",
-    "nswag:generate": "nswag run api.nswag /variables:url=https://api-dev.staging.ontotal.one/swagger/v1/swagger.json /runtime:Net60",
-    "nswag:generate:local": "nswag run api.nswag /variables:url=https://localhost:5001/swagger/v1/swagger.json /runtime:Net60",
-    "nswag": "npm run nswag:generate && npm run nswag:prettier",
-    "nswag:local": "npm run nswag:generate:local && npm run nswag:prettier"
+    "docker": "docker build -t the-form-client . && docker run --env-file .env.production -dp 127.0.0.1:80:80 the-form-client"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",

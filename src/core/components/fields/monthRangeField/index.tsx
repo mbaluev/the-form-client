@@ -49,7 +49,6 @@ export const MonthRangeField: FC<MonthRangeFieldProps> = observer((props) => {
           children={valueFormatter(value, placeholder)}
           onClick={handleClick}
           endIcon={<DateRangeIcon />}
-          color={value ? 'greyDark' : 'greyLight'}
         />
       )}
       {type === 'input' && (

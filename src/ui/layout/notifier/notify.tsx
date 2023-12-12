@@ -9,13 +9,13 @@ const getColor = (severity?: AlertProps['severity']) => {
   const theme = useTheme();
   switch (severity) {
     case 'success':
-      return theme.palette.t1Success['10'];
+      return theme.palette.success.main;
     case 'info':
-      return theme.palette.t1Info['10'];
+      return theme.palette.info.main;
     case 'warning':
-      return theme.palette.t1Warning['10'];
+      return theme.palette.warning.main;
     case 'error':
-      return theme.palette.t1Error['10'];
+      return theme.palette.error.main;
   }
 };
 
