@@ -17,6 +17,7 @@ import TuneIcon from '@mui/icons-material/Tune';
 import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Account } from '@ui/layout/navigation/account';
+import { Notifier } from '@ui/notifier';
 
 interface IProps {
   children?: ReactNode;
@@ -54,6 +55,7 @@ export const Layout = observer((props: IProps) => {
 
   return (
     <Stack id="__layout" spacing={3} sx={{ p: 3 }}>
+      <Notifier />
       <Stack id="__layout_top" direction="row" spacing={3}>
         <Stack direction="row" spacing={2}>
           {isMenu && (

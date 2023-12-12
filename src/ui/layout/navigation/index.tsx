@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import AppBar from '@mui/material/AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Menu } from '@ui/layout/navigation/menu';
-import { Notifier } from '@ui/layout/notifier';
+import { Notifier } from 'ui/notifier';
 import Stack from '@mui/material/Stack';
 import Toolbar from '@mui/material/Toolbar';
 

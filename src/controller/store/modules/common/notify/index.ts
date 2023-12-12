@@ -19,9 +19,7 @@ export class NotifyStore extends BaseStore implements INotifyStore {
     });
   }
 
-  autoHide = false;
-
-  autoHideDuration = 3000;
+  duration = 3000000;
 
   items: INotifyItem[] | undefined = undefined;
 
@@ -38,7 +36,6 @@ export class NotifyStore extends BaseStore implements INotifyStore {
     };
     items.push(item);
     this.setItems(items);
-    if (this.autoHide) setTimeout(() => this.remove(item.guid), this.autoHideDuration);
   };
 
   remove = (id: string) => {
@@ -57,4 +54,14 @@ export class NotifyStore extends BaseStore implements INotifyStore {
   };
 
   clear = () => this.setItems();
+
+  init = () => {
+    const message =
+      "Material UI is an open-source React component library that implements Google's Material Design.\n" +
+      'Material UI is beautiful by design and features a suite of customization options that make it easy to implement your own custom design system on top of our components.';
+    this.add(message, 'info');
+    this.add(message, 'success');
+    this.add(message, 'warning');
+    this.add(message, 'error');
+  };
 }

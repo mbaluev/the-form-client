@@ -15,9 +15,9 @@ import { EmotionCache } from '@emotion/react';
 import { AppProps } from 'next/app';
 import { containerInitialize } from '@provider/initialize';
 import { STORE } from '@store/ids';
+import { SnackbarProvider } from 'notistack';
 import dirs from '@utils/locale/dir';
 import type IAppStore from '@store/modules/common/app/interface';
-import IAuthStore from '@store/modules/common/auth/interface';
 import '../core/scss/index.scss';
 
 configure({ enforceActions: 'observed' });
@@ -30,11 +30,9 @@ const clientSideEmotionCacheRtl = createEmotionCacheRtl();
 // init app
 const container = containerInitialize();
 const appStore = container.get<IAppStore>(STORE.App);
-const authStore = container.get<IAuthStore>(STORE.Auth);
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
-  token?: string;
 }
 
 const MyApp = (props: MyAppProps) => {
@@ -49,7 +47,7 @@ const MyApp = (props: MyAppProps) => {
   const getLayout = (Component as any).getLayout || ((page: ReactElement) => page);
 
   useEffect(() => {
-    authStore.init();
+    appStore.init();
     const handleStart = () => appStore.routeChangeStart();
     const handleComplete = () => appStore.routeChangeComplete();
 
@@ -69,8 +67,16 @@ const MyApp = (props: MyAppProps) => {
       <CacheProvider value={emotionCache}>
         <ContainerProvider container={container}>
           <ThemeProvider theme={{ ...theme, direction: dirs.getDir(router.locale) }}>
-            <CssBaseline />
-            {getLayout(<Component {...pageProps} />)}
+            <SnackbarProvider
+              maxSnack={10}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+            >
+              <CssBaseline />
+              {getLayout(<Component {...pageProps} />)}
+            </SnackbarProvider>
           </ThemeProvider>
         </ContainerProvider>
       </CacheProvider>
