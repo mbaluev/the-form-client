@@ -39,7 +39,7 @@ interface MyAppProps extends AppProps {
 
 const MyApp = (props: MyAppProps) => {
   const { token } = props;
-  authStore.setToken(token);
+  if (token) authStore.setToken(token);
 
   const router = useRouter();
   const isRtl = dirs.isRtl();
@@ -49,7 +49,8 @@ const MyApp = (props: MyAppProps) => {
     pageProps,
   } = props;
 
-  const getLayout = (Component as any).getLayout || ((page: ReactElement) => page);
+  const getLayout =
+    (Component as any).getLayout || ((page: ReactElement) => page);
 
   useEffect(() => {
     const handleStart = () => appStore.routeChangeStart();
@@ -70,7 +71,9 @@ const MyApp = (props: MyAppProps) => {
     <ErrorBoundary>
       <CacheProvider value={emotionCache}>
         <ContainerProvider container={container}>
-          <ThemeProvider theme={{ ...theme, direction: dirs.getDir(router.locale) }}>
+          <ThemeProvider
+            theme={{ ...theme, direction: dirs.getDir(router.locale) }}
+          >
             <CssBaseline />
             {getLayout(<Component {...pageProps} />)}
           </ThemeProvider>
@@ -81,7 +84,7 @@ const MyApp = (props: MyAppProps) => {
 };
 
 MyApp.getInitialProps = ({ ctx }: { ctx: any }) => {
-  const token = ctx.res.req.cookies.token;
+  const token = ctx?.res?.req?.cookies?.token;
   return { token };
 };
 
