@@ -123,7 +123,7 @@ const colors = {
 
 export const theme = createTheme({
   spacing: 5,
-  shape: { borderRadius: 4 },
+  shape: { borderRadius: 5 },
   typography: {
     fontFamily: font.style.fontFamily,
   },

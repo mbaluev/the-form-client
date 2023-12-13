@@ -1,7 +1,7 @@
-import { Fragment, ReactNode, useEffect, useState } from 'react';
+import { Fragment, ReactNode, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import Stack from '@mui/material/Stack';
-import { IconButton, InputAdornment, useTheme } from '@mui/material';
+import { Box, IconButton, InputAdornment, useTheme } from '@mui/material';
 import { useMenuStore } from '@store/modules/common/menu/useMenuStore';
 import { useNotifyStore } from '@store/modules/common/notify/useNotifyStore';
 import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
@@ -37,8 +37,6 @@ export const Layout = observer((props: IProps) => {
   const menuClick = () => setOpenMenu(!isOpenMenu);
   const notifyClick = () => setOpenNotify(!isOpenNotify);
 
-  const [isMenu] = useState(true);
-
   useEffect(() => {
     const resize = () => window.dispatchEvent(new Event('resize'));
     const interval = setInterval(resize, 10);
@@ -54,11 +52,10 @@ export const Layout = observer((props: IProps) => {
   // ></Container>;
 
   return (
-    <Stack id="__layout" spacing={3} sx={{ p: 3 }}>
-      <Notifier />
+    <Stack id="__layout" spacing={3} sx={{ p: 3, height: '100%' }}>
       <Stack id="__layout_top" direction="row" spacing={3}>
         <Stack direction="row" spacing={2}>
-          {isMenu && (
+          {isAuth && (
             <IconButton onClick={menuClick}>
               <MenuIcon />
             </IconButton>
@@ -133,9 +130,12 @@ export const Layout = observer((props: IProps) => {
           )}
         </Stack>
       </Stack>
-      <Stack id="__layout_bottom" direction="row" spacing={3}>
-        {children}
+      <Stack id="__layout_bottom" direction="row" spacing={3} flex="1 1 auto">
+        <Box sx={{ width: '100%', borderRadius: 2, backgroundColor: theme.palette.common.white }}>
+          {children}
+        </Box>
       </Stack>
+      <Notifier />
     </Stack>
   );
 });
