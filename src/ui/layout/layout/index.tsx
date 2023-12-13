@@ -18,6 +18,7 @@ import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Account } from '@ui/layout/navigation/account';
 import { Notifier } from '@ui/notifier';
+import { useAppStore } from '@store/modules/common/app/useAppStore';
 
 interface IProps {
   children?: ReactNode;
@@ -34,6 +35,7 @@ export const Layout = observer((props: IProps) => {
   const { isOpen: isOpenMenu, open: setOpenMenu } = useMenuStore();
   const { isOpen: isOpenNotify, setOpen: setOpenNotify } = useNotifyStore();
   const { isAuth } = useAuthStore();
+  const { isLoading } = useAppStore();
   const menuClick = () => setOpenMenu(!isOpenMenu);
   const notifyClick = () => setOpenNotify(!isOpenNotify);
 
@@ -53,83 +55,88 @@ export const Layout = observer((props: IProps) => {
 
   return (
     <Stack id="__layout" spacing={3} sx={{ p: 3, height: '100%' }}>
-      <Stack id="__layout_top" direction="row" spacing={3}>
-        <Stack direction="row" spacing={2}>
-          {isAuth && (
-            <IconButton onClick={menuClick}>
-              <MenuIcon />
-            </IconButton>
-          )}
-          <Link passHref href={ROUTES.HOME.path}>
-            {size.width && size.width <= MEDIA_XS ? (
-              <IconButton>
-                <LogoTheForm />
+      {!isLoading && (
+        <Stack id="__layout_top" direction="row" spacing={3}>
+          <Stack direction="row" spacing={2}>
+            {isAuth && (
+              <IconButton onClick={menuClick}>
+                <MenuIcon />
               </IconButton>
-            ) : (
-              <Button startIcon={<LogoTheForm fill={theme.palette.primary.main} />} variant="text">
-                The Form
-              </Button>
             )}
-          </Link>
-        </Stack>
-        <Stack direction="row" flex="1 1 auto">
-          {globalSearch && (
-            <TextInputField
-              placeholder="Search"
-              sx={{
-                backgroundColor: theme.palette.common.white,
-                borderRadius: 1,
-                '& .MuiOutlinedInput-notchedOutline': {
-                  border: 'none',
-                },
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton edge="end">
-                      <TuneIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              fullWidth
-            />
-          )}
-        </Stack>
-        <Stack direction="row" spacing={2}>
-          {isAuth ? (
-            <Fragment>
-              {support && (
+            <Link passHref href={ROUTES.HOME.path}>
+              {size.width && size.width <= MEDIA_XS ? (
                 <IconButton>
-                  <HeadsetMicIcon />
+                  <LogoTheForm />
                 </IconButton>
-              )}
-              {notifications && (
-                <IconButton onClick={notifyClick}>
-                  <NotificationsIcon />
-                </IconButton>
-              )}
-              <Account />
-            </Fragment>
-          ) : (
-            <Fragment>
-              <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path}>
-                <Button variant="contained">Sign in</Button>
-              </Link>
-              <Link passHref href={ROUTES.ACCOUNT_SIGN_UP.path}>
-                <Button variant="contained" color="success">
-                  Sign up
+              ) : (
+                <Button
+                  startIcon={<LogoTheForm fill={theme.palette.primary.main} />}
+                  variant="text"
+                >
+                  The Form
                 </Button>
-              </Link>
-            </Fragment>
-          )}
+              )}
+            </Link>
+          </Stack>
+          <Stack direction="row" flex="1 1 auto">
+            {globalSearch && (
+              <TextInputField
+                placeholder="Search"
+                sx={{
+                  backgroundColor: theme.palette.common.white,
+                  borderRadius: 1,
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    border: 'none',
+                  },
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton edge="end">
+                        <TuneIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                fullWidth
+              />
+            )}
+          </Stack>
+          <Stack direction="row" spacing={2}>
+            {isAuth ? (
+              <Fragment>
+                {support && (
+                  <IconButton>
+                    <HeadsetMicIcon />
+                  </IconButton>
+                )}
+                {notifications && (
+                  <IconButton onClick={notifyClick}>
+                    <NotificationsIcon />
+                  </IconButton>
+                )}
+                <Account />
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path}>
+                  <Button variant="contained">Sign in</Button>
+                </Link>
+                <Link passHref href={ROUTES.ACCOUNT_SIGN_UP.path}>
+                  <Button variant="contained" color="success">
+                    Sign up
+                  </Button>
+                </Link>
+              </Fragment>
+            )}
+          </Stack>
         </Stack>
-      </Stack>
+      )}
       <Stack id="__layout_bottom" direction="row" spacing={3} flex="1 1 auto">
         <Box sx={{ width: '100%', borderRadius: 2, backgroundColor: theme.palette.common.white }}>
           {children}

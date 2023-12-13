@@ -9,8 +9,12 @@ import type IAuthStore from '@store/modules/common/auth/interface';
 export class AppStore extends BaseStore implements IAppStore {
   @inject(STORE.Auth) protected authStore!: IAuthStore;
 
-  init = async () => {
+  constructor() {
+    super();
     this.setLoading(true);
+  }
+
+  init = async () => {
     try {
       this.authStore.init();
     } catch (err) {
