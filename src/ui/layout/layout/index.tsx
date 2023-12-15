@@ -47,37 +47,28 @@ export const Layout = observer((props: IProps) => {
     }, 310);
   }, [isOpenMenu]);
 
-  // <Container
-  //   id="__container"
-  //   maxWidth="xl"
-  //   sx={{ height: '100%', pt: 3, pb: 3 }}
-  // ></Container>;
-
   return (
     <Stack id="__layout" spacing={3} sx={{ p: 3, height: '100%' }}>
-      {!isLoading && (
-        <Stack id="__layout_top" direction="row" spacing={3}>
-          <Stack direction="row" spacing={2}>
-            {isAuth && (
-              <IconButton onClick={menuClick}>
-                <MenuIcon />
+      <Stack id="__layout_top" direction="row" spacing={3}>
+        <Stack direction="row" spacing={2}>
+          {isAuth && !isLoading && (
+            <IconButton onClick={menuClick}>
+              <MenuIcon />
+            </IconButton>
+          )}
+          <Link passHref href={ROUTES.HOME.path}>
+            {size.width && size.width <= MEDIA_XS ? (
+              <IconButton>
+                <LogoTheForm />
               </IconButton>
+            ) : (
+              <Button startIcon={<LogoTheForm fill={theme.palette.primary.main} />} variant="text">
+                The Form
+              </Button>
             )}
-            <Link passHref href={ROUTES.HOME.path}>
-              {size.width && size.width <= MEDIA_XS ? (
-                <IconButton>
-                  <LogoTheForm />
-                </IconButton>
-              ) : (
-                <Button
-                  startIcon={<LogoTheForm fill={theme.palette.primary.main} />}
-                  variant="text"
-                >
-                  The Form
-                </Button>
-              )}
-            </Link>
-          </Stack>
+          </Link>
+        </Stack>
+        {!isLoading && (
           <Stack direction="row" flex="1 1 auto">
             {globalSearch && (
               <TextInputField
@@ -107,6 +98,8 @@ export const Layout = observer((props: IProps) => {
               />
             )}
           </Stack>
+        )}
+        {!isLoading && (
           <Stack direction="row" spacing={2}>
             {isAuth ? (
               <Fragment>
@@ -135,8 +128,8 @@ export const Layout = observer((props: IProps) => {
               </Fragment>
             )}
           </Stack>
-        </Stack>
-      )}
+        )}
+      </Stack>
       <Stack id="__layout_bottom" direction="row" spacing={3} flex="1 1 auto">
         <Box sx={{ width: '100%', borderRadius: 2, backgroundColor: theme.palette.common.white }}>
           {children}

@@ -18,30 +18,23 @@ interface IProps {
 export const NoData = (props: IProps) => {
   const { direction = 'column', icon, iconColor, message = 'Not found', button, marginTop } = props;
   const theme = useTheme();
+  const colorGrey = theme.palette.fGrey['100'];
+  const iconSx = { fontSize: '6rem', fill: iconColor || colorGrey };
   return (
     <Stack
       direction={direction}
-      flex="1 1 auto"
+      spacing={4}
       alignItems="center"
       justifyContent="center"
-      gap={2}
       sx={{ mt: marginTop }}
     >
-      {icon &&
-        cloneElement(icon, {
-          sx: {
-            fontSize: '6rem',
-            fill: iconColor || theme.palette.fGrey['90'],
-          },
-        })}
-      <Stack direction={direction} alignItems="center" justifyContent="center" gap={4}>
-        {message && (
-          <Typography fontWeight={600} color={theme.palette.fGrey['90']}>
-            {message}
-          </Typography>
-        )}
-        {button && <Button {...button} />}
-      </Stack>
+      {icon && cloneElement(icon, { sx: iconSx })}
+      {message && (
+        <Typography fontWeight={600} color={colorGrey}>
+          {message}
+        </Typography>
+      )}
+      {button && <Button {...button} />}
     </Stack>
   );
 };
