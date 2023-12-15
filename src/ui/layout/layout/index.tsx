@@ -1,4 +1,4 @@
-import { Fragment, ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import Stack from '@mui/material/Stack';
 import { Box, IconButton, InputAdornment, useTheme } from '@mui/material';
@@ -16,7 +16,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
 import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { Account } from '@ui/layout/navigation/account';
+import { Account } from 'ui/layout/account';
 import { Notifier } from '@ui/notifier';
 import { useAppStore } from '@store/modules/common/app/useAppStore';
 
@@ -50,7 +50,7 @@ export const Layout = observer((props: IProps) => {
   return (
     <Stack id="__layout" spacing={3} sx={{ p: 3, height: '100%' }}>
       <Stack id="__layout_top" direction="row" spacing={3}>
-        <Stack direction="row" spacing={2}>
+        <Stack id="__layout_top_logo" direction="row" spacing={2}>
           {isAuth && !isLoading && (
             <IconButton onClick={menuClick}>
               <MenuIcon />
@@ -68,67 +68,60 @@ export const Layout = observer((props: IProps) => {
             )}
           </Link>
         </Stack>
-        {!isLoading && (
-          <Stack direction="row" flex="1 1 auto">
-            {globalSearch && (
-              <TextInputField
-                placeholder="Search"
-                sx={{
-                  backgroundColor: theme.palette.common.white,
-                  borderRadius: 1,
-                  '& .MuiOutlinedInput-notchedOutline': {
-                    border: 'none',
-                  },
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton edge="end">
-                        <TuneIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                fullWidth
-              />
-            )}
-          </Stack>
-        )}
-        {!isLoading && (
-          <Stack direction="row" spacing={2}>
-            {isAuth ? (
-              <Fragment>
-                {support && (
-                  <IconButton>
-                    <HeadsetMicIcon />
-                  </IconButton>
-                )}
-                {notifications && (
-                  <IconButton onClick={notifyClick}>
-                    <NotificationsIcon />
-                  </IconButton>
-                )}
-                <Account />
-              </Fragment>
-            ) : (
-              <Fragment>
-                <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path}>
-                  <Button variant="contained">Sign in</Button>
-                </Link>
-                <Link passHref href={ROUTES.ACCOUNT_SIGN_UP.path}>
-                  <Button variant="contained" color="success">
-                    Sign up
-                  </Button>
-                </Link>
-              </Fragment>
-            )}
-          </Stack>
-        )}
+        <Stack id="__layout_top_search" direction="row" flex="1 1 auto">
+          {globalSearch && !isLoading && (
+            <TextInputField
+              placeholder="Search"
+              sx={{
+                backgroundColor: theme.palette.common.white,
+                borderRadius: 1,
+                '& .MuiOutlinedInput-notchedOutline': {
+                  border: 'none',
+                },
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton edge="end">
+                      <TuneIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              fullWidth
+            />
+          )}
+        </Stack>
+        <Stack id="__layout_top_account" direction="row" spacing={2}>
+          {isAuth && !isLoading && support && (
+            <IconButton>
+              <HeadsetMicIcon />
+            </IconButton>
+          )}
+          {isAuth && !isLoading && notifications && (
+            <IconButton onClick={notifyClick}>
+              <NotificationsIcon />
+            </IconButton>
+          )}
+          {!isAuth && !isLoading && (
+            <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path}>
+              <Button variant="contained">Sign in</Button>
+            </Link>
+          )}
+          {!isAuth && !isLoading && (
+            <Link passHref href={ROUTES.ACCOUNT_SIGN_UP.path}>
+              <Button variant="contained" color="success">
+                Sign up
+              </Button>
+            </Link>
+          )}
+          <Account />
+        </Stack>
       </Stack>
       <Stack id="__layout_bottom" direction="row" spacing={3} flex="1 1 auto">
         <Box sx={{ width: '100%', borderRadius: 2, backgroundColor: theme.palette.common.white }}>

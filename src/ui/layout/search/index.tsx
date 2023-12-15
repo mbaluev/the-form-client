@@ -8,7 +8,7 @@ import debounce from 'lodash/debounce';
 import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@settings/routes';
-import { SearchInput } from '@ui/layout/navigation/search/styled';
+import { SearchInput } from '@ui/layout/search/styled';
 
 export const Search = observer(() => {
   const router = useRouter();

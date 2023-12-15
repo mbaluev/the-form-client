@@ -35,7 +35,7 @@ export class AxiosApi implements IAxiosApi {
       const response = await this.api(config);
       return response.data;
     } catch (error: any) {
-      this.notifyStore.add(error);
+      this.notifyStore.add(error, 'error');
       return Promise.reject(error);
     }
   }

@@ -1,7 +1,7 @@
 import { Fragment, ReactElement } from 'react';
 import { observer } from 'mobx-react';
 import { IMenuItemDTO } from '@model/common/menu';
-import { isAccess } from '@ui/layout/navigation/menu/isAccess';
+import { isAccess } from '@ui/layout/menu/isAccess';
 
 interface IProps {
   item: IMenuItemDTO;

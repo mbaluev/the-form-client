@@ -2,12 +2,12 @@ import { IMenuItemDTO } from '@model/common/menu';
 import Link from 'next/link';
 import { useTheme, Button, lighten } from '@mui/material';
 import { useRouter } from 'next/router';
-import { isActive } from '@ui/layout/navigation/menu/isActive';
+import { isActive } from '@ui/layout/menu/isActive';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Fragment, MouseEvent, useState } from 'react';
 import Menu from '@mui/material/Menu';
-import { MenuPopover } from '@ui/layout/navigation/menu/menuPopover';
+import { MenuPopover } from '@ui/layout/menu/menuPopover';
 
 interface IProps {
   item: IMenuItemDTO;

@@ -2,13 +2,13 @@ import Toolbar from '@mui/material/Toolbar';
 import { Container, IconButton, useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import { MENU_CONFIG } from '@settings/menu';
-import { Account } from '@ui/layout/navigation/account';
+import { Account } from '@ui/layout/account';
 import { ROUTES } from '@settings/routes';
 import Link from 'next/link';
 import { IMenuItemDTO } from '@model/common/menu';
-import { Search } from '@ui/layout/navigation/search';
-import { MenuItem } from '@ui/layout/navigation/menu/menuItem';
-import { Wrapper } from '@ui/layout/navigation/menu/wrapper';
+import { Search } from '@ui/layout/search';
+import { MenuItem } from '@ui/layout/menu/menuItem';
+import { Wrapper } from '@ui/layout/menu/wrapper';
 import LogoTheForm from '@components/svg/logo/components/theForm';
 
 export const Menu = () => {

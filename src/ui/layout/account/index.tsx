@@ -7,7 +7,7 @@ import Menu from '@mui/material/Menu';
 import { useRouter } from 'next/router';
 import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 import { ROUTES } from '@settings/routes';
-import { AccountRoles } from '@ui/layout/navigation/account/roles';
+import { AccountRoles } from '@ui/layout/account/roles';
 import { CardAvatar } from '@ui/layout/card/avatar';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -44,7 +44,7 @@ export const Account = observer(() => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         slotProps={{ paper: { elevation: 2, sx: { mt: 2 } } }}
-        sx={{ '& .MuiList-root': { p: 0 } }}
+        sx={{ '& .MuiList-root': { p: 0, minWidth: 250 } }}
       >
         <Stack spacing={3} sx={{ minWidth: 300, p: 3 }}>
           <Stack spacing={3} direction="row">
@@ -61,7 +61,7 @@ export const Account = observer(() => {
         </Stack>
         <Divider />
         <Box sx={{ p: 3 }}>
-          <Button startIcon={<Logout fontSize="small" />} onClick={signOutHandler} fullWidth>
+          <Button startIcon={<Logout />} onClick={signOutHandler} fullWidth>
             Sign out
           </Button>
         </Box>

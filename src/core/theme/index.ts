@@ -158,6 +158,7 @@ export const theme = createTheme({
           overflow: 'hidden',
           whiteSpace: 'nowrap',
           minWidth: 'unset',
+          lineHeight: '22px',
         },
       },
     },
