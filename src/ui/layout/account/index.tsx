@@ -15,15 +15,15 @@ import Typography from '@mui/material/Typography';
 export const Account = observer(() => {
   const { isAuth, firstname, lastname, username, signout } = useAuthStore();
   const theme = useTheme();
+  const router = useRouter();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const handleOpen = (e: MouseEvent<any>) => {
+  const handleOpen = async (e: MouseEvent<any>) => {
     if (isAuth) setAnchorEl(e.currentTarget);
+    else await router.push({ pathname: ROUTES.ACCOUNT_SIGN_IN.path });
   };
   const handleClose = () => setAnchorEl(null);
-
-  const router = useRouter();
   const handleSignOut = async () => {
     if (await signout()) {
       await router.push({
