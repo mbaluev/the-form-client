@@ -16,7 +16,7 @@ export class AppStore extends BaseStore implements IAppStore {
 
   init = async () => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // await new Promise((resolve) => setTimeout(resolve, 1000));
       this.authStore.init();
     } catch (err) {
     } finally {

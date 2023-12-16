@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { Page } from '@ui/layout/page';
 import { observer } from 'mobx-react';
 import { MasterAnon } from '@ui/masters/masterAnon';
 import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
+import { SignInForm } from '@ui/pages/account/signIn';
 
-const SignIn = (props: any) => {
+const SignIn = () => {
   const { clearData, clearChanges, clearMessage, clearToken } = useAuthStore();
 
   useEffect(() => {
@@ -16,10 +16,9 @@ const SignIn = (props: any) => {
 
   return (
     <MasterAnon>
-      <Page {...props}>SignInForm</Page>
+      <SignInForm sx={{ mt: 20 }} />
     </MasterAnon>
   );
 };
 
-SignIn.Layout = MasterAnon;
 export default observer(SignIn);

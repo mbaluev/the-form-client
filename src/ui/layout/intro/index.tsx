@@ -1,4 +1,4 @@
-import { LinearProgress, Stack, useTheme } from '@mui/material';
+import { Stack, useTheme } from '@mui/material';
 import LogoTheForm from '@components/svg/logo/components/theForm';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { ROUTES } from '@settings/routes';
 import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 import { useAppStore } from '@store/modules/common/app/useAppStore';
+import { ProgressShort } from '@ui/layout/card/progress';
 
 const StyledStack = styled(Stack)(({ theme }) => ({
   transition: theme.transitions.create(['opacity', 'transform'], {
@@ -30,7 +31,7 @@ export const Intro = observer((props: IProps) => {
   useEffect(() => setOpacity(1), []);
 
   return (
-    <StyledStack spacing={4} alignItems="center" justifyContent="center" sx={{ opacity, mt: 30 }}>
+    <StyledStack spacing={4} alignItems="center" justifyContent="center" sx={{ opacity, mt: 20 }}>
       <LogoTheForm sx={{ fontSize: '6rem', fill: theme.palette.primary.main }} />
       <Stack spacing={1} alignItems="center">
         <Typography fontWeight={600} color={theme.palette.primary.main} fontSize="1.5rem">
@@ -40,14 +41,16 @@ export const Intro = observer((props: IProps) => {
           School of analytics
         </Typography>
       </Stack>
-      {loading && <LinearProgress sx={{ width: 200 }} />}
+      {loading && <ProgressShort sx={{ width: 200 }} />}
       {!isAuth && !isLoading && (
-        <Stack direction="row" spacing={2}>
-          <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path}>
-            <Button variant="contained">Sign in</Button>
+        <Stack direction="row" spacing={4} sx={{ maxWidth: 300, minWidth: 300 }}>
+          <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path} style={{ flex: '1 1 auto' }}>
+            <Button variant="contained" fullWidth>
+              Sign in
+            </Button>
           </Link>
-          <Link passHref href={ROUTES.ACCOUNT_SIGN_UP.path}>
-            <Button variant="contained" color="success">
+          <Link passHref href={ROUTES.ACCOUNT_SIGN_UP.path} style={{ flex: '1 1 auto' }}>
+            <Button variant="contained" color="success" fullWidth>
               Sign up
             </Button>
           </Link>

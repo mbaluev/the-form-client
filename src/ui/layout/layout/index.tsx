@@ -112,7 +112,10 @@ export const Layout = observer((props: IProps) => {
         </Stack>
       </Stack>
       <Stack id="__layout_bottom" direction="row" spacing={3} flex="1 1 auto">
-        <Box sx={{ width: '100%', borderRadius: 2, backgroundColor: theme.palette.common.white }}>
+        <Box
+          id="__layout_bottom_main"
+          sx={{ width: '100%', borderRadius: 2, backgroundColor: theme.palette.common.white }}
+        >
           {children}
         </Box>
       </Stack>
