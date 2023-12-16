@@ -79,11 +79,18 @@ export const SignUpForm = observer((props: IProps) => {
             Sign up
           </Button>
           {isDataLoading ? <ProgressShort /> : <TitleDividerShort />}
-          <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path}>
-            <Button variant="text" fullWidth>
-              Sign in
-            </Button>
-          </Link>
+          <Stack direction="row" spacing={4}>
+            <Link passHref href={ROUTES.HOME.path} style={{ flex: '1 1 auto' }}>
+              <Button variant="outlined" fullWidth>
+                The Form
+              </Button>
+            </Link>
+            <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path} style={{ flex: '1 1 auto' }}>
+              <Button variant="outlined" fullWidth>
+                Sign in
+              </Button>
+            </Link>
+          </Stack>
         </FormSection>
       </Box>
     </Stack>

@@ -7,5 +7,5 @@ import { Intro } from '@ui/layout/intro';
 export const MasterAnon = observer((props: { children?: ReactNode }) => {
   const { children } = props;
   const { isLoading } = useAppStore();
-  return <Layout>{isLoading ? <Intro loading /> : children}</Layout>;
+  return <Layout>{isLoading ? <Intro /> : children}</Layout>;
 });

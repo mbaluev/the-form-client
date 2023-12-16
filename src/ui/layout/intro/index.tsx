@@ -10,6 +10,7 @@ import { ROUTES } from '@settings/routes';
 import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 import { useAppStore } from '@store/modules/common/app/useAppStore';
 import { ProgressShort } from '@ui/layout/card/progress';
+import { TitleDividerShort } from '@ui/layout/card/divider';
 
 const StyledStack = styled(Stack)(({ theme }) => ({
   transition: theme.transitions.create(['opacity', 'transform'], {
@@ -17,17 +18,12 @@ const StyledStack = styled(Stack)(({ theme }) => ({
   }),
 }));
 
-interface IProps {
-  loading?: boolean;
-}
-
-export const Intro = observer((props: IProps) => {
-  const { loading } = props;
+export const Intro = observer(() => {
   const { isAuth } = useAuthStore();
   const { isLoading } = useAppStore();
   const theme = useTheme();
 
-  const [opacity, setOpacity] = useState<number>(loading ? 0 : 1);
+  const [opacity, setOpacity] = useState<number>(isLoading ? 0 : 1);
   useEffect(() => setOpacity(1), []);
 
   return (
@@ -41,7 +37,11 @@ export const Intro = observer((props: IProps) => {
           School of analytics
         </Typography>
       </Stack>
-      {loading && <ProgressShort sx={{ width: 200 }} />}
+      {isLoading ? (
+        <ProgressShort sx={{ width: 300 }} />
+      ) : (
+        <TitleDividerShort sx={{ width: 300 }} />
+      )}
       {!isAuth && !isLoading && (
         <Stack direction="row" spacing={4} sx={{ maxWidth: 300, minWidth: 300 }}>
           <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path} style={{ flex: '1 1 auto' }}>
