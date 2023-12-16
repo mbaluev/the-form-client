@@ -108,18 +108,6 @@ export const Layout = observer((props: IProps) => {
               <NotificationsIcon />
             </IconButton>
           )}
-          {!isAuth && !isLoading && (
-            <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path}>
-              <Button variant="contained">Sign in</Button>
-            </Link>
-          )}
-          {!isAuth && !isLoading && (
-            <Link passHref href={ROUTES.ACCOUNT_SIGN_UP.path}>
-              <Button variant="contained" color="success">
-                Sign up
-              </Button>
-            </Link>
-          )}
           <Account />
         </Stack>
       </Stack>

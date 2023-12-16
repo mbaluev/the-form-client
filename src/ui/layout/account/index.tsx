@@ -13,23 +13,24 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 export const Account = observer(() => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleOpen = (e: MouseEvent<any>) => setAnchorEl(e.currentTarget);
-  const handleClose = () => setAnchorEl(null);
   const { isAuth, firstname, lastname, username, signout } = useAuthStore();
   const theme = useTheme();
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleOpen = (e: MouseEvent<any>) => {
+    if (isAuth) setAnchorEl(e.currentTarget);
+  };
+  const handleClose = () => setAnchorEl(null);
+
   const router = useRouter();
-  const signOutHandler = async () => {
+  const handleSignOut = async () => {
     if (await signout()) {
       await router.push({
         pathname: ROUTES.HOME.path,
       });
     }
   };
-
-  if (!isAuth) return null;
 
   return (
     <Fragment>
@@ -61,7 +62,7 @@ export const Account = observer(() => {
         </Stack>
         <Divider />
         <Box sx={{ p: 3 }}>
-          <Button startIcon={<Logout />} onClick={signOutHandler} fullWidth>
+          <Button startIcon={<Logout />} onClick={handleSignOut} fullWidth>
             Sign out
           </Button>
         </Box>
