@@ -10,15 +10,15 @@ export class AuthService implements IAuthService {
 
   API_PREFIX = `${process.env.REACT_APP_CORE_URL}/api/auth`;
 
-  signup = async (data: IAccountDTO) => {
+  signUp = async (data: IAccountDTO) => {
     return this.axiosApi.post<IAuthResponse>(`${this.API_PREFIX}/signup`, data);
   };
 
-  signin = async (data: IAccountDTO) => {
+  signIn = async (data: IAccountDTO) => {
     return this.axiosApi.post<IAuthResponse>(`${this.API_PREFIX}/signin`, data);
   };
 
-  signout = async () => {
+  signOut = async () => {
     return this.axiosApi.get<IAuthResponse>(`${this.API_PREFIX}/signout`);
   };
 }

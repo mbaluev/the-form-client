@@ -1,7 +1,7 @@
 import { IAccountDTO, IAuthResponse } from 'controller/model/common/auth';
 
 export default interface IAuthService {
-  signup: (data: IAccountDTO) => Promise<IAuthResponse>;
-  signin: (data: IAccountDTO) => Promise<IAuthResponse>;
-  signout: () => Promise<IAuthResponse>;
+  signUp: (data: IAccountDTO) => Promise<IAuthResponse>;
+  signIn: (data: IAccountDTO) => Promise<IAuthResponse>;
+  signOut: () => Promise<IAuthResponse>;
 }

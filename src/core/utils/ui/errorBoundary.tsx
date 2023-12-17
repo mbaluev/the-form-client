@@ -23,12 +23,13 @@ export class ErrorBoundary extends Component {
       return (
         <StatusPage
           status="error"
+          title="Error"
           message="Oops, there is an error!"
-          buttons={[
-            <Button variant="outlined" onClick={() => this.setState({ hasError: false })}>
+          buttons={
+            <Button variant="contained" onClick={() => this.setState({ hasError: false })}>
               Try again
-            </Button>,
-          ]}
+            </Button>
+          }
         />
       );
     }

@@ -1,59 +1,51 @@
-import { cloneElement, ReactElement } from 'react';
-import { observer } from 'mobx-react';
-import IconDone from '@components/svg/icons/components/done';
-import IconError from '@components/svg/icons/components/error';
-import Stack, { StackProps } from '@mui/material/Stack';
-import { Container } from '@mui/material';
+import { Fragment, ReactElement } from 'react';
+import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import CheckIcon from '@mui/icons-material/Check';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { ProgressShort } from '@ui/layout/card/progress';
+import { TitleDividerShort } from '@ui/layout/card/divider';
 
 interface IProps {
   status?: 'success' | 'error';
+  title?: ReactElement | string;
   message?: ReactElement | string;
-  buttons?: ReactElement[];
-  buttonsDirection?: StackProps['direction'];
+  loading?: boolean;
+  buttons?: ReactElement;
 }
 
-export const StatusPage = observer((props: IProps) => {
-  const { status = 'error', message, buttons, buttonsDirection = 'row' } = props;
-
+export const StatusPage = (props: IProps) => {
+  const { status = 'success', title, message, loading, buttons } = props;
+  const theme = useTheme();
   const Icon = () => {
-    if (status === 'success') return <IconDone sx={{ fontSize: '6rem' }} />;
-    if (status === 'error') return <IconError sx={{ fontSize: '6rem' }} />;
-    return null;
-  };
-  const Title = () => {
     if (status === 'success')
-      return (
-        <Typography fontSize="1.7rem" fontWeight={600} textAlign="center">
-          Thank you!
-        </Typography>
-      );
+      return <CheckIcon sx={{ fontSize: '6rem', fill: theme.palette[status].main }} />;
     if (status === 'error')
-      return (
-        <Typography fontSize="1.7rem" fontWeight={600} textAlign="center">
-          Oh no!
-        </Typography>
-      );
-
+      return <ErrorOutlineIcon sx={{ fontSize: '6rem', fill: theme.palette[status].main }} />;
     return null;
   };
-
   return (
-    <Stack alignItems="center" paddingTop={20}>
-      <Container maxWidth="sm">
-        <Stack alignItems="center" spacing={2}>
-          <Icon />
-          <Title />
-          {message && <Typography textAlign="center">{message}</Typography>}
-          {buttons && (
-            <Stack direction={buttonsDirection} spacing={3} paddingTop={2}>
-              {buttons.map((button: ReactElement, index: number) =>
-                cloneElement(button, { key: index })
-              )}
-            </Stack>
+    <Stack spacing={4} alignItems="center" justifyContent="center" sx={{ mt: 20 }}>
+      <Icon />
+      <Stack spacing={1} alignItems="center">
+        <Typography fontWeight={600} color={theme.palette[status].main} fontSize="1.5rem">
+          {title}
+        </Typography>
+        <Typography fontWeight={600} color={theme.palette[status].main}>
+          {message}
+        </Typography>
+      </Stack>
+      {buttons && (
+        <Fragment>
+          {loading ? (
+            <ProgressShort sx={{ width: 300 }} />
+          ) : (
+            <TitleDividerShort sx={{ width: 300 }} />
           )}
-        </Stack>
-      </Container>
+          {buttons}
+        </Fragment>
+      )}
     </Stack>
   );
-});
+};

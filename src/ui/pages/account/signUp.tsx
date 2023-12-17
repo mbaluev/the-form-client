@@ -18,7 +18,7 @@ interface IProps {
 
 export const SignUpForm = observer((props: IProps) => {
   const { sx } = props;
-  const { data, changeField, getError, signup, hasErrors, clearMessage, isDataLoading } =
+  const { data, changeField, getError, signUp, hasErrors, clearMessage, isDataLoading } =
     useAuthStore();
 
   const router = useRouter();
@@ -28,7 +28,7 @@ export const SignUpForm = observer((props: IProps) => {
   };
   const submitHandler = async () => {
     clearMessage();
-    if (await signup()) {
+    if (await signUp()) {
       await router.replace({
         pathname: ROUTES.ERROR402.path,
       });

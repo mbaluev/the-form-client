@@ -18,7 +18,7 @@ interface IProps {
 
 export const SignInForm = observer((props: IProps) => {
   const { sx } = props;
-  const { data, changeField, getError, signin, hasErrors, clearMessage, isDataLoading } =
+  const { data, changeField, getError, signIn, hasErrors, clearMessage, isDataLoading } =
     useAuthStore();
 
   const router = useRouter();
@@ -28,7 +28,7 @@ export const SignInForm = observer((props: IProps) => {
   };
   const submitHandler = async () => {
     clearMessage();
-    if (await signin()) {
+    if (await signIn()) {
       await router.push({
         pathname: ROUTES.HOME.path,
       });

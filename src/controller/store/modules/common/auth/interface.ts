@@ -7,9 +7,9 @@ export default interface IAuthStore extends IBaseCardStore<IAccountDTO> {
   message?: string;
 
   init: () => void;
-  signup: () => Promise<boolean>;
-  signin: () => Promise<boolean>;
-  signout: () => Promise<boolean>;
+  signUp: () => Promise<boolean>;
+  signIn: () => Promise<boolean>;
+  signOut: () => Promise<boolean>;
   verify: () => Promise<string | null | undefined>;
 
   isAuth: boolean;

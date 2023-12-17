@@ -23,9 +23,9 @@ export class AuthStore extends BaseCardStore<IAccountDTO> implements IAuthStore 
       message: observable,
       setMessage: action,
 
-      signup: action,
-      signin: action,
-      signout: action,
+      signUp: action,
+      signIn: action,
+      signOut: action,
       verify: action,
 
       isAuth: computed,
@@ -74,12 +74,12 @@ export class AuthStore extends BaseCardStore<IAccountDTO> implements IAuthStore 
     this.setToken(getCookie(cookie.names.token) as string);
   };
 
-  signup = async () => {
+  signUp = async () => {
     this.validate();
     if (this.data && !this.hasErrors) {
       this.setDataLoading(true);
       try {
-        const data = await this.authService.signup(this.data);
+        const data = await this.authService.signUp(this.data);
         if (data) {
           await this.clearChanges();
           await this.clearData();
@@ -93,13 +93,13 @@ export class AuthStore extends BaseCardStore<IAccountDTO> implements IAuthStore 
     return false;
   };
 
-  signin = async () => {
+  signIn = async () => {
     this.validate(['username', 'password']);
     if (this.data && !this.hasErrors) {
       await this.clearChanges();
       this.setDataLoading(true);
       try {
-        const data = await this.authService.signin(this.data);
+        const data = await this.authService.signIn(this.data);
         if (data.token) {
           this.setToken(data.token);
           return true;
@@ -117,10 +117,10 @@ export class AuthStore extends BaseCardStore<IAccountDTO> implements IAuthStore 
     return false;
   };
 
-  signout = async () => {
+  signOut = async () => {
     this.setDataLoading(true);
     try {
-      const ret = await this.authService.signout();
+      const ret = await this.authService.signOut();
       if (ret && ret.success) {
         this.deleteToken();
         await this.clearData();

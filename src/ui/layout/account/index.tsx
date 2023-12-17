@@ -13,7 +13,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 export const Account = observer(() => {
-  const { isAuth, firstname, lastname, username, signout } = useAuthStore();
+  const { isAuth, firstname, lastname, username, signOut } = useAuthStore();
   const theme = useTheme();
   const router = useRouter();
 
@@ -25,7 +25,7 @@ export const Account = observer(() => {
   };
   const handleClose = () => setAnchorEl(null);
   const handleSignOut = async () => {
-    if (await signout()) {
+    if (await signOut()) {
       await router.push({
         pathname: ROUTES.HOME.path,
       });

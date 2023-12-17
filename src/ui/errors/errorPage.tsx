@@ -11,7 +11,7 @@ export const ErrorPage = (props: IProps) => {
   const { code, description } = props;
   const theme = useTheme();
   return (
-    <Stack alignItems="center" marginTop={30}>
+    <Stack alignItems="center" marginTop={20}>
       <Container maxWidth="sm">
         <Stack flex="1 1 auto" alignItems="center" spacing={3}>
           <Typography fontSize="5rem" lineHeight="5rem" color={theme.palette.error.main}>
