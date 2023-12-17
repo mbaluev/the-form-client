@@ -56,8 +56,7 @@ code {
 
 input:-webkit-autofill {
   -webkit-background-clip: text;
-  -webkit-text-fill-color: $color-white !important;
-  -webkit-box-shadow: 0 0 0 30px $color-grey-300 inset !important;
+  -webkit-box-shadow: transparent !important;
 }
 
 @media print {

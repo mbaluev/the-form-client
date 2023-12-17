@@ -11,6 +11,7 @@ import { SxProps } from '@mui/system';
 import Link from 'next/link';
 import { ProgressShort } from '@ui/layout/card/progress';
 import { TitleDividerShort } from '@ui/layout/card/divider';
+import { PasswordField } from '@components/fields/passwordField';
 
 interface IProps {
   sx?: SxProps;
@@ -67,7 +68,7 @@ export const SignUpForm = observer((props: IProps) => {
             />
           </FormField>
           <FormField title="Password">
-            <TextInputField
+            <PasswordField
               name="password"
               value={data?.password}
               onChange={changeHandler}
