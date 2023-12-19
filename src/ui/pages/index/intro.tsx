@@ -41,20 +41,32 @@ export const Intro = observer(() => {
       ) : (
         <TitleDividerShort sx={{ width: 300 }} />
       )}
-      {!isAuth && !isLoading && (
-        <Stack direction="row" spacing={4} sx={{ maxWidth: 300, minWidth: 300 }}>
+      <Stack
+        direction="row"
+        spacing={4}
+        sx={{ maxWidth: 300, minWidth: 300 }}
+        justifyContent="center"
+      >
+        {isAuth && (
+          <Link passHref href={ROUTES.SCHOOL_MODULES.path}>
+            <Button variant="contained">Go to modules</Button>
+          </Link>
+        )}
+        {!isAuth && (
           <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path} style={{ flex: '1 1 auto' }}>
             <Button variant="contained" fullWidth>
               Sign in
             </Button>
           </Link>
+        )}
+        {!isAuth && (
           <Link passHref href={ROUTES.ACCOUNT_SIGN_UP.path} style={{ flex: '1 1 auto' }}>
             <Button variant="contained" color="success" fullWidth>
               Sign up
             </Button>
           </Link>
-        </Stack>
-      )}
+        )}
+      </Stack>
     </StyledStack>
   );
 });
