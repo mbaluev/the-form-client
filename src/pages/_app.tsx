@@ -66,10 +66,10 @@ const MyApp = (props: MyAppProps) => {
   }, []);
 
   return (
-    <ErrorBoundary>
+    <ThemeProvider theme={{ ...theme, direction: dirs.getDir(router.locale) }}>
       <CacheProvider value={emotionCache}>
-        <ContainerProvider container={container}>
-          <ThemeProvider theme={{ ...theme, direction: dirs.getDir(router.locale) }}>
+        <ErrorBoundary>
+          <ContainerProvider container={container}>
             <SnackbarProvider
               maxSnack={10}
               anchorOrigin={{
@@ -80,10 +80,10 @@ const MyApp = (props: MyAppProps) => {
               <CssBaseline />
               {getLayout(<Component {...pageProps} />)}
             </SnackbarProvider>
-          </ThemeProvider>
-        </ContainerProvider>
+          </ContainerProvider>
+        </ErrorBoundary>
       </CacheProvider>
-    </ErrorBoundary>
+    </ThemeProvider>
   );
 };
 

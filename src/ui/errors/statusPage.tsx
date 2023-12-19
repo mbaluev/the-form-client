@@ -26,7 +26,7 @@ export const StatusPage = (props: IProps) => {
     return null;
   };
   return (
-    <Stack spacing={4} alignItems="center" justifyContent="center" sx={{ mt: 20 }}>
+    <Stack spacing={4} alignItems="center" justifyContent="center" sx={{ pt: 20 }}>
       <Icon />
       <Stack spacing={1} alignItems="center">
         <Typography fontWeight={600} color={theme.palette[status].main} fontSize="1.5rem">
