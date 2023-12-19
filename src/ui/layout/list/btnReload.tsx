@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { Button } from '@theme/button';
 import { TListITem } from '@store/modules/base/list/interface';
 import { IListBaseProps } from '@ui/layout/list/list';
+import { Button } from '@mui/material';
 
 type IProps<T extends TListITem> = IListBaseProps<T>;
 

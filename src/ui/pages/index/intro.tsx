@@ -1,9 +1,8 @@
-import { Stack, useTheme } from '@mui/material';
+import { Button, Stack, useTheme } from '@mui/material';
 import LogoTheForm from '@components/svg/logo/components/theForm';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
-import { Button } from '@theme/button';
 import { observer } from 'mobx-react';
 import Link from 'next/link';
 import { ROUTES } from '@settings/routes';

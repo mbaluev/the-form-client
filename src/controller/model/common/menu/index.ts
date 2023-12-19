@@ -1,13 +1,21 @@
-import type { ReactElement } from 'react';
-import type { Url } from 'next/dist/shared/lib/router/router';
+import { ReactElement } from 'react';
+import { Url } from 'next/dist/shared/lib/router/router';
 
-export interface IMenuItemDTO {
+export type IMenuItemDTO = IMenuItem & (IMenuItemParentDTO | IMenuItemChildrenDTO);
+
+interface IMenuItem {
   name: string;
   label: string;
-  url?: Url;
-  display?: 'authenticate' | 'not-authenticate';
-  active?: (pathname: string) => boolean;
-  items?: IMenuItemDTO[];
   icon?: ReactElement;
+  position?: 'top' | 'bottom';
+  active?: (pathname: string) => boolean;
   roles?: string[];
+}
+
+export interface IMenuItemParentDTO {
+  items?: IMenuItemDTO[];
+}
+
+export interface IMenuItemChildrenDTO {
+  url?: Url;
 }

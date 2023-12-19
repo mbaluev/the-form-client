@@ -1,6 +1,6 @@
 import { StatusPage } from '@ui/errors/statusPage';
 import { Component } from 'react';
-import { Button } from '@theme/button';
+import { Button } from '@mui/material';
 
 export class ErrorBoundary extends Component {
   constructor(props: any) {

@@ -1,5 +1,6 @@
 import { FC, useState, MouseEvent } from 'react';
 import {
+  Button,
   ButtonProps,
   FormControl,
   InputAdornment,
@@ -9,7 +10,6 @@ import {
 } from '@mui/material';
 import { MonthRangeContainer } from '@components/fields/monthRangeField/monthRangeContainer';
 import { valueFormatter } from '@components/fields/monthRangeField/valueFormatter';
-import { Button } from '@theme/button';
 import { observer } from 'mobx-react';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 

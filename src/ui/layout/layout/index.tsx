@@ -1,14 +1,13 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 import Stack from '@mui/material/Stack';
-import { Box, IconButton, InputAdornment, useTheme } from '@mui/material';
+import { Box, Button, IconButton, InputAdornment, useTheme } from '@mui/material';
 import { useMenuStore } from '@store/modules/common/menu/useMenuStore';
 import { useNotifyStore } from '@store/modules/common/notify/useNotifyStore';
 import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 import Link from 'next/link';
 import { ROUTES } from '@settings/routes';
 import { MEDIA_XS, useWindowSize } from '@hooks/useWindowSize';
-import { Button } from '@theme/button';
 import LogoTheForm from '@components/svg/logo/components/theForm';
 import MenuIcon from '@mui/icons-material/Menu';
 import { TextInputField } from '@components/fields/textInputField';
@@ -19,25 +18,38 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Account } from 'ui/layout/account';
 import { Notifier } from '@ui/notifier';
 import { useAppStore } from '@store/modules/common/app/useAppStore';
+import { IMenuProps, Menu } from '@ui/layout/menu';
+import { isAccess } from '@ui/layout/menu/isAccess';
 
 interface IProps {
   children?: ReactNode;
   globalSearch?: boolean;
   support?: boolean;
   notifications?: boolean;
+  menuProps?: IMenuProps;
 }
 
 export const Layout = observer((props: IProps) => {
-  const { children, globalSearch, support, notifications } = props;
+  const { children, globalSearch, support, notifications, menuProps } = props;
   const theme = useTheme();
   const size = useWindowSize();
 
   const { isOpen: isOpenMenu, open: setOpenMenu } = useMenuStore();
   const { isOpen: isOpenNotify, setOpen: setOpenNotify } = useNotifyStore();
-  const { isAuth } = useAuthStore();
+  const { isAuth, roles: claimRoles } = useAuthStore();
   const { isLoading } = useAppStore();
   const menuClick = () => setOpenMenu(!isOpenMenu);
   const notifyClick = () => setOpenNotify(!isOpenNotify);
+
+  const [isMenu, setIsMenu] = useState(false);
+  useEffect(() => {
+    setIsMenu(false);
+    menuProps?.items?.forEach((item) => {
+      if (isAccess(claimRoles, item.roles)) {
+        setIsMenu(true);
+      }
+    });
+  }, [menuProps, claimRoles, isAuth]);
 
   useEffect(() => {
     const resize = () => window.dispatchEvent(new Event('resize'));
@@ -50,9 +62,9 @@ export const Layout = observer((props: IProps) => {
   return (
     <Stack id="__layout" spacing={3} sx={{ p: 3, height: '100%' }}>
       <Stack id="__layout_top" direction="row" spacing={3}>
-        <Stack id="__layout_top_logo" direction="row" spacing={2}>
-          {isAuth && !isLoading && (
-            <IconButton onClick={menuClick}>
+        <Stack id="__layout_top_logo" direction="row" spacing={3}>
+          {menuProps && isMenu && (
+            <IconButton color="secondary" onClick={menuClick}>
               <MenuIcon />
             </IconButton>
           )}
@@ -99,12 +111,12 @@ export const Layout = observer((props: IProps) => {
         </Stack>
         <Stack id="__layout_top_account" direction="row" spacing={2}>
           {isAuth && !isLoading && support && (
-            <IconButton>
+            <IconButton color="secondary">
               <HeadsetMicIcon />
             </IconButton>
           )}
           {isAuth && !isLoading && notifications && (
-            <IconButton onClick={notifyClick}>
+            <IconButton color="secondary" onClick={notifyClick}>
               <NotificationsIcon />
             </IconButton>
           )}
@@ -112,6 +124,7 @@ export const Layout = observer((props: IProps) => {
         </Stack>
       </Stack>
       <Stack id="__layout_bottom" direction="row" spacing={3} flex="1 1 auto">
+        {menuProps && isMenu && <Menu {...menuProps} />}
         <Box
           id="__layout_bottom_main"
           sx={{ width: '100%', borderRadius: 2, backgroundColor: theme.palette.common.white }}

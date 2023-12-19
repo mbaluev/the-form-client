@@ -11,6 +11,7 @@ import {
   TextField,
   useTheme,
   Select,
+  Button,
 } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
@@ -19,7 +20,6 @@ import { ChangeEvent, Fragment, useEffect, useMemo, useRef, useState } from 'rea
 import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { Button } from '@theme/button';
 import SearchIcon from '@mui/icons-material/Search';
 import Loader from '@components/loader';
 import { endAdornment, iconComponent } from '@components/fields/multiSelectField/index';

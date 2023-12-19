@@ -1,69 +1,31 @@
-import { IMenuItemDTO } from '@model/common/menu';
-import Link from 'next/link';
-import { useTheme, Button, lighten } from '@mui/material';
+import { useState } from 'react';
+import { MenuItemBase } from '@ui/layout/menu/menuItemBase';
+import { MenuItemChild } from '@ui/layout/menu/menuItemChild';
 import { useRouter } from 'next/router';
+import { IMenuItemDTO } from '@model/common/menu';
 import { isActive } from '@ui/layout/menu/isActive';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Fragment, MouseEvent, useState } from 'react';
-import Menu from '@mui/material/Menu';
-import { MenuPopover } from '@ui/layout/menu/menuPopover';
+import { Box, Stack } from '@mui/material';
 
-interface IProps {
-  item: IMenuItemDTO;
-}
+type TMenuItem = IMenuItemDTO & {
+  isChild?: boolean;
+};
 
-export const MenuItem = (props: IProps) => {
-  const { item } = props;
+export const MenuItem = (props: TMenuItem) => {
   const router = useRouter();
-  const theme = useTheme();
-  const active = isActive(item, router.pathname);
-  const color = active ? theme.palette.primary.light : theme.palette.fGrey['100'];
-  const colorHover = active
-    ? lighten(theme.palette.primary.light, 0.2)
-    : theme.palette.common.white;
-
-  if (item.url) {
+  const active = isActive(props, router.pathname);
+  if ('items' in props) {
+    const [open, setOpen] = useState<boolean>(active);
     return (
-      <Link href={item.url} passHref>
-        <Button
-          sx={{ color, flex: '0 0 auto', '&:hover': { color: colorHover } }}
-          startIcon={item.icon}
-        >
-          {item.label}
-        </Button>
-      </Link>
+      <Stack spacing={1}>
+        <MenuItemBase {...props} open={open} setOpen={setOpen} />
+        <MenuItemChild {...props} open={open} />
+      </Stack>
+    );
+  } else {
+    return (
+      <Box>
+        <MenuItemBase {...props} />
+      </Box>
     );
   }
-
-  if (item.items && item.items.length > 0) {
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event: MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
-    const handleClose = () => setAnchorEl(null);
-    return (
-      <Fragment>
-        <Button
-          sx={{ color, flex: '0 0 auto', '&:hover': { color: colorHover } }}
-          endIcon={open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-          onClick={handleClick}
-        >
-          {item.label}
-        </Button>
-        <Menu
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          onClick={handleClose}
-          slotProps={{ paper: { elevation: 2, sx: { mt: 2 } } }}
-          transformOrigin={{ horizontal: 'left', vertical: 'top' }}
-          anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-        >
-          <MenuPopover item={item} />
-        </Menu>
-      </Fragment>
-    );
-  }
-
-  return null;
 };

@@ -1,14 +1,15 @@
-import { Fragment, ReactElement } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { observer } from 'mobx-react';
-import { IMenuItemDTO } from '@model/common/menu';
+import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 import { isAccess } from '@ui/layout/menu/isAccess';
 
 interface IProps {
-  item: IMenuItemDTO;
-  children?: ReactElement;
+  roles?: string[];
+  children?: ReactNode;
 }
 
 export const Wrapper = observer((props: IProps) => {
-  const { item, children } = props;
-  return <Fragment>{isAccess(item) ? children : null}</Fragment>;
+  const { roles, children } = props;
+  const { roles: claimRoles } = useAuthStore();
+  return <Fragment>{isAccess(claimRoles, roles) ? children : null}</Fragment>;
 });

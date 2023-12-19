@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button } from '@theme/button';
+import { Button } from '@mui/material';
 
 interface IMonthProps {
   month: string;

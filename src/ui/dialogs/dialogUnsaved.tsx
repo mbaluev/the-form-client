@@ -1,6 +1,6 @@
-import { Button } from '@theme/button';
 import Loader from '@components/loader';
 import {
+  Button,
   Stack,
   Dialog,
   DialogActions,

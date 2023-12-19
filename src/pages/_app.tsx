@@ -18,6 +18,7 @@ import { STORE } from '@store/ids';
 import { SnackbarProvider } from 'notistack';
 import dirs from '@utils/locale/dir';
 import type IAppStore from '@store/modules/common/app/interface';
+import type IMenuStore from '@store/modules/common/menu/interface';
 import '../core/scss/index.scss';
 
 configure({ enforceActions: 'observed' });
@@ -30,6 +31,7 @@ const clientSideEmotionCacheRtl = createEmotionCacheRtl();
 // init app
 const container = containerInitialize();
 const appStore = container.get<IAppStore>(STORE.App);
+const menuStore = container.get<IMenuStore>(STORE.Menu);
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -48,6 +50,7 @@ const MyApp = (props: MyAppProps) => {
 
   useEffect(() => {
     appStore.init();
+    menuStore.init();
     const handleStart = () => appStore.routeChangeStart();
     const handleComplete = () => appStore.routeChangeComplete();
 

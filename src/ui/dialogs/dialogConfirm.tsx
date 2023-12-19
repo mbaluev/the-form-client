@@ -1,5 +1,5 @@
-import { Button } from '@theme/button';
 import {
+  Button,
   Dialog,
   DialogActions,
   DialogContent,

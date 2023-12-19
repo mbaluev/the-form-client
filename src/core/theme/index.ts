@@ -42,6 +42,16 @@ declare module '@mui/material/styles' {
     fGrey: PaletteColorGrey;
   }
 }
+declare module '@mui/material/Button' {
+  interface ButtonPropsColorOverrides {
+    grey: true;
+  }
+}
+declare module '@mui/material/IconButton' {
+  interface IconButtonPropsColorOverrides {
+    grey: true;
+  }
+}
 
 const font = JetBrains_Mono({
   weight: ['400', '600'],
@@ -52,9 +62,9 @@ const font = JetBrains_Mono({
 const colors = {
   common: { white: '#ffffff', black: '#111419' },
   secondary: {
-    main: '#2F41CD',
-    light: '#6D7ADC',
-    dark: '#1E2A83',
+    main: '#797c81',
+    light: '#a1a4a9',
+    dark: '#515459',
     contrastText: '#FFFFFF',
   },
   primary: {
@@ -160,6 +170,8 @@ export const theme = createTheme({
           minWidth: 'unset',
           lineHeight: '22px',
         },
+        startIcon: { marginLeft: 0 },
+        endIcon: { marginRight: 0 },
       },
     },
     MuiDialogTitle: {

@@ -1,13 +1,13 @@
-import React, { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, Fragment } from 'react';
 import Divider from '@mui/material/Divider';
 import { setYear, isAfter, getYear, isSameYear } from 'date-fns';
 import { valueFormatter } from '@components/fields/monthRangeField/valueFormatter';
 import { YearSelect } from '@components/fields/monthRangeField/yearSelect';
 import { MonthRangePicker } from '@components/fields/monthRangeField/monthRangePicker';
-import { Button } from '@theme/button';
 import { TODAY } from '@utils/date/today';
 import { MonthRangeFieldProps } from '@components/fields/monthRangeField/index';
 import moment from 'moment';
+import { Button } from '@mui/material';
 
 export const MonthRangeContainer: FC<MonthRangeFieldProps> = (props) => {
   const {
@@ -41,7 +41,7 @@ export const MonthRangeContainer: FC<MonthRangeFieldProps> = (props) => {
         {valueFormatter([startValue, endValue])}
       </div>
       {!isSameYear(minDate, maxDate) && (
-        <React.Fragment>
+        <Fragment>
           <Divider />
           <div className="month-range-field-control__years">
             <YearSelect
@@ -79,7 +79,7 @@ export const MonthRangeContainer: FC<MonthRangeFieldProps> = (props) => {
               }}
             />
           </div>
-        </React.Fragment>
+        </Fragment>
       )}
       <Divider />
       <MonthRangePicker

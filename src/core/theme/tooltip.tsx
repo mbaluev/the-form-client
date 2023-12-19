@@ -14,14 +14,15 @@ export const Tooltip = styled(({ className, children, ...props }: TooltipProps) 
   }
 })(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
-    fontSize: 13,
+    fontSize: '0.9rem',
+    fontWeight: 600,
     padding: '7px 12px',
-    lineHeight: 1.4,
+    lineHeight: 'normal',
     marginRight: '10px',
     marginLeft: '10px',
-    backgroundColor: theme.palette.fGrey[250],
+    backgroundColor: theme.palette.secondary.dark,
   },
   [`& .${tooltipClasses.arrow}`]: {
-    color: theme.palette.fGrey[250],
+    color: theme.palette.secondary.dark,
   },
 }));

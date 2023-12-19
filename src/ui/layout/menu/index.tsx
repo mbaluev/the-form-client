@@ -1,36 +1,39 @@
-import Toolbar from '@mui/material/Toolbar';
-import { Container, IconButton, useTheme } from '@mui/material';
-import Stack from '@mui/material/Stack';
-import { MENU_CONFIG } from '@settings/menu';
-import { Account } from '@ui/layout/account';
-import { ROUTES } from '@settings/routes';
-import Link from 'next/link';
+import { observer } from 'mobx-react';
 import { IMenuItemDTO } from '@model/common/menu';
-import { Search } from '@ui/layout/search';
 import { MenuItem } from '@ui/layout/menu/menuItem';
 import { Wrapper } from '@ui/layout/menu/wrapper';
-import LogoTheForm from '@components/svg/logo/components/theForm';
+import { Stack } from '@mui/material';
+import { useMenuStore } from '@store/modules/common/menu/useMenuStore';
 
-export const Menu = () => {
-  const theme = useTheme();
+export interface IMenuProps {
+  items?: IMenuItemDTO[];
+}
+
+export const Menu = observer((props: IMenuProps) => {
+  const { items } = props;
+  const { isOpen } = useMenuStore();
+
+  const itemsTop = items?.filter((item) => item.position !== 'bottom');
+  const itemsBottom = items?.filter((item) => item.position === 'bottom');
+
   return (
-    <Container id="__menu" maxWidth="xl">
-      <Toolbar sx={{ padding: '0 !important' }}>
-        <Stack direction="row" spacing={2} width="100%">
-          <Link href={ROUTES.HOME.path} passHref>
-            <IconButton sx={{ fill: theme.palette.primary.main }}>
-              <LogoTheForm />
-            </IconButton>
-          </Link>
-          {MENU_CONFIG.map((item: IMenuItemDTO) => (
-            <Wrapper key={item.name} item={item}>
-              <MenuItem item={item} />
+    <Stack spacing={2} justifyContent="space-between" minWidth={isOpen ? 200 : undefined}>
+      <Stack spacing={2}>
+        {itemsTop?.map((item, index) => (
+          <Wrapper key={index} roles={item.roles}>
+            <MenuItem {...item} />
+          </Wrapper>
+        ))}
+      </Stack>
+      {itemsBottom && (
+        <Stack spacing={2}>
+          {itemsBottom?.map((item, index) => (
+            <Wrapper key={index} roles={item.roles}>
+              <MenuItem {...item} />
             </Wrapper>
           ))}
-          <Search />
-          <Account />
         </Stack>
-      </Toolbar>
-    </Container>
+      )}
+    </Stack>
   );
-};
+});

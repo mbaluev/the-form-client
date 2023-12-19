@@ -4,8 +4,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Autocomplete, { AutocompleteCloseReason } from '@mui/material/Autocomplete';
 import InputBase from '@mui/material/InputBase';
 import { useState, MouseEvent, ChangeEvent, Fragment, KeyboardEvent } from 'react';
-import { Button } from '@theme/button';
-import { ListItemText, MenuItem, Popover } from '@mui/material';
+import { Button, ListItemText, MenuItem, Popover } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 
 interface PopperComponentProps {
