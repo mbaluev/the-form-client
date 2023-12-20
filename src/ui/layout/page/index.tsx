@@ -1,6 +1,5 @@
 import { ReactNode, ReactElement, Fragment } from 'react';
 import { observer } from 'mobx-react';
-import { Box, Grid } from '@mui/material';
 import { BreadCrumbs, TBreadCrumb } from '@ui/layout/page/breadCrumbs';
 import Stack from '@mui/material/Stack';
 import { Panel } from '@ui/layout/page/panel';
@@ -46,16 +45,10 @@ export const Page = observer((props: IProps) => {
             </Container>
           </Box>
         )}*/}
-        <Box id="__content" flexGrow={1}>
-          <Grid container spacing={3} height="100%">
-            <Grid item xs={6}>
-              <Panel sx={{ height: '100%' }}>{children}</Panel>
-            </Grid>
-            <Grid item xs={6}>
-              <Panel sx={{ height: '100%' }}>right</Panel>
-            </Grid>
-          </Grid>
-        </Box>
+        <Stack id="__content" direction="row" spacing={3} flexGrow={1} width="100%">
+          <Panel flexGrow={1}>{children}</Panel>
+          <Panel flexGrow={1}>right</Panel>
+        </Stack>
       </Stack>
     </Fragment>
   );
