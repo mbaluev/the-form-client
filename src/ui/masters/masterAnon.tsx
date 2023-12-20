@@ -1,9 +1,12 @@
 import { ReactNode } from 'react';
 import { Layout } from '@ui/layout/layout';
-import { MENU_CONFIG } from '@settings/menu';
+import { observer } from 'mobx-react';
 
-export const MasterAnon = (props: { children?: ReactNode }) => {
+interface IProps {
+  children?: ReactNode;
+}
+
+export const MasterAnon = observer((props: IProps) => {
   const { children } = props;
-  const menuProps = { items: MENU_CONFIG };
-  return <Layout menuProps={menuProps}>{children}</Layout>;
-};
+  return <Layout>{children}</Layout>;
+});

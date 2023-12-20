@@ -1,20 +1,26 @@
 import { observer } from 'mobx-react';
-import { IMenuItemDTO } from '@model/common/menu';
 import { MenuItem } from '@ui/layout/menu/menuItem';
 import { Wrapper } from '@ui/layout/menu/wrapper';
 import { Stack } from '@mui/material';
 import { useMenuStore } from '@store/modules/common/menu/useMenuStore';
+import { MENU_CONFIG } from '@settings/menu';
+import { useEffect } from 'react';
 
-export interface IMenuProps {
-  items?: IMenuItemDTO[];
-}
+export const Menu = observer(() => {
+  const { isOpen, hasAccess } = useMenuStore();
 
-export const Menu = observer((props: IMenuProps) => {
-  const { items } = props;
-  const { isOpen } = useMenuStore();
+  const itemsTop = MENU_CONFIG.filter((item) => item.position !== 'bottom');
+  const itemsBottom = MENU_CONFIG.filter((item) => item.position === 'bottom');
 
-  const itemsTop = items?.filter((item) => item.position !== 'bottom');
-  const itemsBottom = items?.filter((item) => item.position === 'bottom');
+  useEffect(() => {
+    const resize = () => window.dispatchEvent(new Event('resize'));
+    const interval = setInterval(resize, 10);
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 310);
+  }, [isOpen]);
+
+  if (!hasAccess) return null;
 
   return (
     <Stack spacing={2} justifyContent="space-between" minWidth={isOpen ? 200 : undefined}>
