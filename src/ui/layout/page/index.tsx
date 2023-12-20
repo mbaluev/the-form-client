@@ -1,9 +1,9 @@
 import { ReactNode, ReactElement, Fragment } from 'react';
 import { observer } from 'mobx-react';
-import { Box, Container, useTheme } from '@mui/material';
-import { BreadCrumbs, TBreadCrumb } from '@ui/layout/breadCrumbs';
+import { Box, Grid } from '@mui/material';
+import { BreadCrumbs, TBreadCrumb } from '@ui/layout/page/breadCrumbs';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import { Panel } from '@ui/layout/page/panel';
 
 interface IProps {
   className?: string;
@@ -12,27 +12,16 @@ interface IProps {
   quickFilter?: ReactElement;
   breadCrumbs?: TBreadCrumb[];
   children?: ReactNode;
-  shadow?: boolean;
 }
 
 export const Page = observer((props: IProps) => {
-  const { children, title, filter, quickFilter, breadCrumbs, shadow } = props;
-  const theme = useTheme();
+  const { children, title, filter, quickFilter, breadCrumbs } = props;
+  console.log(title, filter, quickFilter);
   return (
     <Fragment>
-      <Stack id="__page" spacing={3} alignItems="center" sx={{ pb: 20 }} flexGrow={1}>
-        {breadCrumbs && (
-          <Box
-            id="__breadcrumbs"
-            width="100%"
-            sx={{ backgroundColor: theme.palette.fGrey['20'], pt: 2, pb: 2 }}
-          >
-            <Container maxWidth="xl">
-              <BreadCrumbs breadCrumbs={breadCrumbs} />
-            </Container>
-          </Box>
-        )}
-        {(title || quickFilter) && (
+      <Stack id="__page" spacing={3} height="100%" flexGrow={1}>
+        {breadCrumbs && <BreadCrumbs breadCrumbs={breadCrumbs} />}
+        {/*{(title || quickFilter) && (
           <Box id="__title" width="100%">
             <Container maxWidth="xl">
               <Stack direction="row" spacing={3} justifyContent="space-between">
@@ -56,20 +45,16 @@ export const Page = observer((props: IProps) => {
               </Stack>
             </Container>
           </Box>
-        )}
-        {filter && (
-          <Box id="__filter" width="100%">
-            <Container maxWidth="xl">{filter}</Container>
-          </Box>
-        )}
-        <Box id="__content" width="100%" flexGrow={1}>
-          <Container maxWidth="xl">
-            {shadow ? (
-              <Box sx={{ borderRadius: 2, boxShadow: 3, overflow: 'hidden' }}>{children}</Box>
-            ) : (
-              children
-            )}
-          </Container>
+        )}*/}
+        <Box id="__content" flexGrow={1}>
+          <Grid container spacing={3} height="100%">
+            <Grid item xs={6}>
+              <Panel sx={{ height: '100%' }}>{children}</Panel>
+            </Grid>
+            <Grid item xs={6}>
+              <Panel sx={{ height: '100%' }}>right</Panel>
+            </Grid>
+          </Grid>
         </Box>
       </Stack>
     </Fragment>

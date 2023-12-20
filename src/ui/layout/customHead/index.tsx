@@ -12,11 +12,11 @@ interface IProps {
 
 export const CustomHead = (props: IProps) => {
   const {
-    title = 'The form school',
+    title = 'The Form school',
     description = 'Online school of analytics',
     type = 'website',
     url = process.env.FRONTEND_URL,
-    img = '/media/logo/totalOne.png',
+    img = '/favicon/favicon.svg',
   } = props;
   return (
     <Head>

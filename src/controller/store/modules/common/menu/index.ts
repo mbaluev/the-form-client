@@ -39,7 +39,6 @@ export class MenuStore extends BaseStore implements IMenuStore {
         res = true;
       }
     });
-    debugger;
     return res;
   }
 }
