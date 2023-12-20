@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { TitleDividerShort } from '@ui/layout/card/divider';
-import { ProgressShort } from '@ui/layout/card/progress';
+import { ProgressBase } from '@ui/layout/card/progress';
 
 interface IProps {
   icon?: ReactElement;
@@ -30,7 +30,7 @@ export const NoData = (props: IProps) => {
       {button && (
         <Fragment>
           {loading ? (
-            <ProgressShort sx={{ width: 300 }} />
+            <ProgressBase sx={{ width: 300 }} />
           ) : (
             <TitleDividerShort sx={{ width: 300 }} />
           )}

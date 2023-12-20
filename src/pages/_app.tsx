@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { ReactElement, useEffect } from 'react';
+import { ReactElement } from 'react';
 import { configure } from 'mobx';
 import { enableStaticRendering } from 'mobx-react';
 import { useRouter } from 'next/router';
@@ -14,11 +14,8 @@ import { ErrorBoundary } from '@utils/ui/errorBoundary';
 import { EmotionCache } from '@emotion/react';
 import { AppProps } from 'next/app';
 import { containerInitialize } from '@provider/initialize';
-import { STORE } from '@store/ids';
 import { SnackbarProvider } from 'notistack';
 import dirs from '@utils/locale/dir';
-import type IAppStore from '@store/modules/common/app/interface';
-import type IMenuStore from '@store/modules/common/menu/interface';
 import '../core/scss/index.scss';
 
 configure({ enforceActions: 'observed' });
@@ -30,8 +27,6 @@ const clientSideEmotionCacheRtl = createEmotionCacheRtl();
 
 // init app
 const container = containerInitialize();
-const appStore = container.get<IAppStore>(STORE.App);
-const menuStore = container.get<IMenuStore>(STORE.Menu);
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -47,23 +42,6 @@ const MyApp = (props: MyAppProps) => {
   } = props;
 
   const getLayout = (Component as any).getLayout || ((page: ReactElement) => page);
-
-  useEffect(() => {
-    appStore.init();
-    menuStore.init();
-    const handleStart = () => appStore.routeChangeStart();
-    const handleComplete = () => appStore.routeChangeComplete();
-
-    router.events.on('routeChangeStart', handleStart);
-    router.events.on('routeChangeComplete', handleComplete);
-    router.events.on('routeChangeError', handleComplete);
-
-    return () => {
-      router.events.off('routeChangeStart', handleStart);
-      router.events.off('routeChangeComplete', handleComplete);
-      router.events.off('routeChangeError', handleComplete);
-    };
-  }, []);
 
   return (
     <ThemeProvider theme={{ ...theme, direction: dirs.getDir(router.locale) }}>

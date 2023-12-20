@@ -4,10 +4,13 @@ import { BaseStore } from '@store/modules/base/store';
 import { STORE } from '@store/ids';
 import type IAppStore from '@store/modules/common/app/interface';
 import type IAuthStore from '@store/modules/common/auth/interface';
+import type IMenuStore from '@store/modules/common/menu/interface';
 
 @injectable()
 export class AppStore extends BaseStore implements IAppStore {
   @inject(STORE.Auth) protected authStore!: IAuthStore;
+
+  @inject(STORE.Menu) protected menuStore!: IMenuStore;
 
   constructor() {
     super();
@@ -16,8 +19,8 @@ export class AppStore extends BaseStore implements IAppStore {
 
   init = async () => {
     try {
-      // await new Promise((resolve) => setTimeout(resolve, 1000));
       this.authStore.init();
+      this.menuStore.init();
     } catch (err) {
     } finally {
       this.setLoading(false);
@@ -25,12 +28,10 @@ export class AppStore extends BaseStore implements IAppStore {
   };
 
   routeChangeStart = async () => {
-    this.setLoading(true);
     NProgress.start();
   };
 
   routeChangeComplete = async () => {
-    this.setLoading(false);
     NProgress.done();
   };
 }

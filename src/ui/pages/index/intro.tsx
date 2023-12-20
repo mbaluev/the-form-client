@@ -1,32 +1,20 @@
 import { Button, Stack, useTheme } from '@mui/material';
 import LogoTheForm from '@components/svg/logo/components/theForm';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
-import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 import Link from 'next/link';
 import { ROUTES } from '@settings/routes';
 import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 import { useAppStore } from '@store/modules/common/app/useAppStore';
-import { ProgressShort } from '@ui/layout/card/progress';
+import { ProgressBase } from '@ui/layout/card/progress';
 import { TitleDividerShort } from '@ui/layout/card/divider';
-
-const StyledStack = styled(Stack)(({ theme }) => ({
-  transition: theme.transitions.create(['opacity', 'transform'], {
-    duration: theme.transitions.duration.standard,
-  }),
-}));
 
 export const Intro = observer(() => {
   const { isAuth } = useAuthStore();
   const { isLoading } = useAppStore();
   const theme = useTheme();
-
-  const [opacity, setOpacity] = useState<number>(isLoading ? 0 : 1);
-  useEffect(() => setOpacity(1), []);
-
   return (
-    <StyledStack spacing={4} alignItems="center" justifyContent="center" sx={{ opacity, mt: 20 }}>
+    <Stack spacing={4} alignItems="center" justifyContent="center" sx={{ mt: 20 }}>
       <LogoTheForm sx={{ fontSize: '6rem', fill: theme.palette.primary.main }} />
       <Stack spacing={1} alignItems="center">
         <Typography fontWeight={600} color={theme.palette.primary.main} fontSize="1.5rem">
@@ -36,11 +24,7 @@ export const Intro = observer(() => {
           School of analytics
         </Typography>
       </Stack>
-      {isLoading ? (
-        <ProgressShort sx={{ width: 300 }} />
-      ) : (
-        <TitleDividerShort sx={{ width: 300 }} />
-      )}
+      {isLoading ? <ProgressBase sx={{ width: 300 }} /> : <TitleDividerShort sx={{ width: 300 }} />}
       <Stack
         direction="row"
         spacing={4}
@@ -67,6 +51,6 @@ export const Intro = observer(() => {
           </Link>
         )}
       </Stack>
-    </StyledStack>
+    </Stack>
   );
 });

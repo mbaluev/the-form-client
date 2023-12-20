@@ -4,7 +4,7 @@ import Divider from '@mui/material/Divider';
 import { CheckboxField } from 'core/components/fields/checkboxField';
 import { classNames } from '@utils/classNames';
 import classes from './item.module.scss';
-import { ProgressShort } from '@ui/layout/card/progress';
+import { ProgressBase } from '@ui/layout/card/progress';
 
 interface IProps {
   id?: string;
@@ -61,11 +61,7 @@ export const VirtualizeItem = observer((props: IProps) => {
           {more && <div style={{ flexGrow: 0 }}>{more}</div>}
         </div>
       </div>
-      {loading ? (
-        <ProgressShort />
-      ) : (
-        <Divider sx={{ borderWidth: 1, borderColor: 'transparent' }} />
-      )}
+      {loading ? <ProgressBase /> : <Divider sx={{ borderWidth: 1, borderColor: 'transparent' }} />}
     </div>
   );
 });

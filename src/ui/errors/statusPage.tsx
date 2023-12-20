@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import CheckIcon from '@mui/icons-material/Check';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { ProgressShort } from '@ui/layout/card/progress';
+import { ProgressBase } from '@ui/layout/card/progress';
 import { TitleDividerShort } from '@ui/layout/card/divider';
 
 interface IProps {
@@ -39,7 +39,7 @@ export const StatusPage = (props: IProps) => {
       {buttons && (
         <Fragment>
           {loading ? (
-            <ProgressShort sx={{ width: 300 }} />
+            <ProgressBase sx={{ width: 300 }} />
           ) : (
             <TitleDividerShort sx={{ width: 300 }} />
           )}
