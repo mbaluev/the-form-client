@@ -5,16 +5,16 @@ import Stack from '@mui/material/Stack';
 import { Panel } from '@ui/layout/page/panel';
 
 interface IProps {
-  className?: string;
+  children?: ReactNode;
   title?: string | ReactElement;
   filter?: ReactElement;
   quickFilter?: ReactElement;
   breadCrumbs?: TBreadCrumb[];
-  children?: ReactNode;
+  right?: ReactNode;
 }
 
 export const Page = observer((props: IProps) => {
-  const { children, title, filter, quickFilter, breadCrumbs } = props;
+  const { children, title, filter, quickFilter, breadCrumbs, right } = props;
   console.log(title, filter, quickFilter);
   return (
     <Fragment>
@@ -47,7 +47,7 @@ export const Page = observer((props: IProps) => {
         )}*/}
         <Stack id="__content" direction="row" spacing={3} flexGrow={1} width="100%">
           <Panel flexGrow={1}>{children}</Panel>
-          <Panel flexGrow={1}>right</Panel>
+          {right && <Panel flexGrow={1}>{right}</Panel>}
         </Stack>
       </Stack>
     </Fragment>

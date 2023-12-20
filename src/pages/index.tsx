@@ -1,4 +1,4 @@
-import { CustomHead } from '@ui/layout/customHead';
+import { CustomHead } from 'ui/layout/head';
 import { Page } from '@ui/layout/page';
 import { observer } from 'mobx-react';
 import { MasterAuth } from '@ui/masters/masterAuth';

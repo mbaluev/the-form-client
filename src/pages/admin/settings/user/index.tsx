@@ -3,7 +3,7 @@ import { TBreadCrumb } from '@ui/layout/page/breadCrumbs';
 import { ROUTES } from '@settings/routes';
 import { MasterAuth } from '@ui/masters/masterAuth';
 import { Page } from '@ui/layout/page';
-import { CustomHead } from '@ui/layout/customHead';
+import { CustomHead } from 'ui/layout/head';
 
 const Users = observer((props: any) => {
   // const router = useRouter();
@@ -30,9 +30,9 @@ const Users = observer((props: any) => {
 
   return (
     <MasterAuth>
-      <Page {...props} breadCrumbs={breadCrumbs}>
+      <Page {...props} breadCrumbs={breadCrumbs} right={<>right</>}>
         <CustomHead />
-        ...
+        left
       </Page>
     </MasterAuth>
   );

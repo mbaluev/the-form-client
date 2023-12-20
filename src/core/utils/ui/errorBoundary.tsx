@@ -1,4 +1,4 @@
-import { StatusPage } from '@ui/errors/statusPage';
+import { ErrorIcon } from '@ui/layout/page/errorIcon';
 import { Component } from 'react';
 import { Button } from '@mui/material';
 
@@ -21,7 +21,7 @@ export class ErrorBoundary extends Component {
     // @ts-ignore
     if (this.state.hasError) {
       return (
-        <StatusPage
+        <ErrorIcon
           status="error"
           title="Error"
           message="Oops, there is an error!"

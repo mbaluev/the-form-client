@@ -1,19 +1,20 @@
-import { Container, Divider, useTheme } from '@mui/material';
+import { Divider, useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { Panel } from '@ui/layout/page/panel';
 
 interface IProps {
   code: string;
   description: string;
 }
 
-export const ErrorPage = (props: IProps) => {
+export const ErrorCode = (props: IProps) => {
   const { code, description } = props;
   const theme = useTheme();
   return (
-    <Stack alignItems="center" marginTop={20}>
-      <Container maxWidth="sm">
-        <Stack flex="1 1 auto" alignItems="center" spacing={4}>
+    <Panel height="100%">
+      <Stack alignItems="center">
+        <Stack flex="1 1 auto" alignItems="center" spacing={4} paddingTop={20}>
           <Typography fontSize="5rem" lineHeight="5rem" color={theme.palette.error.main}>
             {code}
           </Typography>
@@ -22,7 +23,7 @@ export const ErrorPage = (props: IProps) => {
             {description}
           </Typography>
         </Stack>
-      </Container>
-    </Stack>
+      </Stack>
+    </Panel>
   );
 };

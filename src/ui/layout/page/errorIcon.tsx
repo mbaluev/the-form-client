@@ -6,6 +6,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { ProgressBase } from '@ui/layout/card/progress';
 import { TitleDividerShort } from '@ui/layout/card/divider';
+import { Panel } from '@ui/layout/page/panel';
 
 interface IProps {
   status?: 'success' | 'error';
@@ -15,7 +16,7 @@ interface IProps {
   buttons?: ReactElement;
 }
 
-export const StatusPage = (props: IProps) => {
+export const ErrorIcon = (props: IProps) => {
   const { status = 'success', title, message, loading, buttons } = props;
   const theme = useTheme();
   const Icon = () => {
@@ -26,26 +27,28 @@ export const StatusPage = (props: IProps) => {
     return null;
   };
   return (
-    <Stack spacing={4} alignItems="center" justifyContent="center" sx={{ pt: 20 }}>
-      <Icon />
-      <Stack spacing={1} alignItems="center">
-        <Typography fontWeight={600} color={theme.palette[status].main} fontSize="1.5rem">
-          {title}
-        </Typography>
-        <Typography fontWeight={600} color={theme.palette[status].main}>
-          {message}
-        </Typography>
+    <Panel height="100%">
+      <Stack spacing={4} alignItems="center" justifyContent="center" paddingTop={20}>
+        <Icon />
+        <Stack spacing={1} alignItems="center">
+          <Typography fontWeight={600} color={theme.palette[status].main} fontSize="1.5rem">
+            {title}
+          </Typography>
+          <Typography fontWeight={600} color={theme.palette[status].main}>
+            {message}
+          </Typography>
+        </Stack>
+        {buttons && (
+          <Fragment>
+            {loading ? (
+              <ProgressBase sx={{ width: 300 }} />
+            ) : (
+              <TitleDividerShort sx={{ width: 300 }} />
+            )}
+            {buttons}
+          </Fragment>
+        )}
       </Stack>
-      {buttons && (
-        <Fragment>
-          {loading ? (
-            <ProgressBase sx={{ width: 300 }} />
-          ) : (
-            <TitleDividerShort sx={{ width: 300 }} />
-          )}
-          {buttons}
-        </Fragment>
-      )}
-    </Stack>
+    </Panel>
   );
 };

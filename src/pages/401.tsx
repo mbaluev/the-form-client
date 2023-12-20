@@ -1,9 +1,9 @@
 import { MasterAnon } from '@ui/masters/masterAnon';
-import { ErrorPage } from '@ui/errors/errorPage';
+import { PageStatus } from '@ui/layout/page/pageStatus';
 import { ReactElement } from 'react';
 
 const Custom401 = () => {
-  return <ErrorPage code="401" description="Unauthorized" />;
+  return <PageStatus code="401" description="Unauthorized" />;
 };
 
 Custom401.getLayout = function getLayout(page: ReactElement) {
