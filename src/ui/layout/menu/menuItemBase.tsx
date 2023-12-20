@@ -27,9 +27,7 @@ export const MenuItemBase = observer((props: TMenuItemContainer) => {
   let endIcon;
   if ('items' in props) endIcon = props.open ? <ExpandLessIcon /> : <ExpandMoreIcon />;
   let url = undefined;
-  if ('url' in props) {
-    url = props.url;
-  }
+  if ('url' in props) url = props.url;
   if (isOpen) {
     let onClick = undefined;
     if ('items' in props) {
