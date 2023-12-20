@@ -50,7 +50,7 @@ export const Account = observer(() => {
         <Stack spacing={3} sx={{ minWidth: 300, p: 3 }}>
           <Stack spacing={3} direction="row">
             <CardAvatar name={`${firstname} ${lastname}`} />
-            <Stack>
+            <Stack spacing={1}>
               <Typography
                 fontSize="1.2rem"
                 fontWeight={600}
