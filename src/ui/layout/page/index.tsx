@@ -6,15 +6,15 @@ import { Panel } from '@ui/layout/page/panel';
 
 interface IProps {
   children?: ReactNode;
-  title?: string | ReactElement;
+  breadCrumbs?: TBreadCrumb[];
+  title?: ReactElement;
   filter?: ReactElement;
   quickFilter?: ReactElement;
-  breadCrumbs?: TBreadCrumb[];
   right?: ReactNode;
 }
 
 export const Page = observer((props: IProps) => {
-  const { children, title, filter, quickFilter, breadCrumbs, right } = props;
+  const { children, breadCrumbs, title, filter, quickFilter, right } = props;
   console.log(title, filter, quickFilter);
   return (
     <Fragment>
