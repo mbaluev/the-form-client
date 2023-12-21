@@ -13,19 +13,20 @@ type TMenuItem = IMenuItemDTO & {
 export const MenuItem = (props: TMenuItem) => {
   const router = useRouter();
   const active = isActive(props, router.pathname);
+  const [open, setOpen] = useState<boolean>(active);
+
   if ('items' in props) {
-    const [open, setOpen] = useState<boolean>(active);
     return (
       <Stack spacing={1}>
         <MenuItemBase {...props} open={open} setOpen={setOpen} />
         <MenuItemChild {...props} open={open} />
       </Stack>
     );
-  } else {
-    return (
-      <Box>
-        <MenuItemBase {...props} />
-      </Box>
-    );
   }
+
+  return (
+    <Box>
+      <MenuItemBase {...props} />
+    </Box>
+  );
 };
