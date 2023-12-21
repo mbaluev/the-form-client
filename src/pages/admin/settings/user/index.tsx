@@ -1,15 +1,10 @@
-import { observer } from 'mobx-react';
 import { TBreadCrumb } from '@ui/layout/page/breadCrumbs';
 import { ROUTES } from '@settings/routes';
 import { MasterAuth } from '@ui/masters/masterAuth';
 import { Page } from '@ui/layout/page';
 import { CustomHead } from 'ui/layout/head';
 
-const Users = observer((props: any) => {
-  // const router = useRouter();
-  // const { getList: getUsers, clearList: clearUsers } =
-  //   useViewModel<IUserViewModel>(VIEW_MODEL.User);
-
+const Users = (props: any) => {
   const breadCrumbs: TBreadCrumb[] = [
     {
       label: ROUTES.HOME.label,
@@ -20,14 +15,6 @@ const Users = observer((props: any) => {
       url: { pathname: ROUTES.ADMIN_SETTINGS_USERS.path },
     },
   ];
-
-  // useEffect(() => {
-  //   getUsers(router.query);
-  //   return () => {
-  //     clearUsers();
-  //   };
-  // });
-
   return (
     <MasterAuth>
       <Page {...props} breadCrumbs={breadCrumbs} right={<>right</>}>
@@ -36,6 +23,6 @@ const Users = observer((props: any) => {
       </Page>
     </MasterAuth>
   );
-});
+};
 
 export default Users;
