@@ -1,6 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 import { JetBrains_Mono } from 'next/font/google';
 import {} from '@mui/lab/themeAugmentation';
+import { lighten } from '@mui/material';
 
 declare module '@mui/material/styles' {
   interface PaletteColorGrey {
@@ -298,6 +299,36 @@ export const theme = createTheme({
               borderColor: colors.error.main,
             },
           },
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: { borderRadius: 5 },
+        label: { fontSize: '0.9rem', fontWeight: 600 },
+        colorPrimary: {
+          backgroundColor: lighten(colors.primary.main, 0.9),
+          color: colors.primary.main,
+        },
+        colorSecondary: {
+          backgroundColor: lighten(colors.secondary.main, 0.9),
+          color: colors.secondary.main,
+        },
+        colorSuccess: {
+          backgroundColor: lighten(colors.success.main, 0.9),
+          color: colors.success.main,
+        },
+        colorWarning: {
+          backgroundColor: lighten(colors.warning.main, 0.9),
+          color: colors.warning.main,
+        },
+        colorError: {
+          backgroundColor: lighten(colors.error.main, 0.9),
+          color: colors.error.main,
+        },
+        colorInfo: {
+          backgroundColor: lighten(colors.info.main, 0.9),
+          color: colors.info.main,
         },
       },
     },
