@@ -20,6 +20,7 @@ export class MenuStore extends BaseStore implements IMenuStore {
       open: action,
       items: observable,
       setItems: action,
+      setItemOpen: action,
       hasAccess: computed,
     });
   }
@@ -46,6 +47,7 @@ export class MenuStore extends BaseStore implements IMenuStore {
         d.open = value;
       }
     });
+    this.setItems(items);
   };
 
   get hasAccess() {

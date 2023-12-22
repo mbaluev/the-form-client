@@ -4,6 +4,7 @@ import { Wrapper } from '@ui/layout/menu/wrapper';
 import { Stack } from '@mui/material';
 import { useMenuStore } from '@store/modules/common/menu/useMenuStore';
 import { useEffect } from 'react';
+import { toJS } from 'mobx';
 
 export const Menu = observer(() => {
   const { isOpen, hasAccess, items } = useMenuStore();
@@ -26,7 +27,7 @@ export const Menu = observer(() => {
       <Stack spacing={2}>
         {itemsTop?.map((item, index) => (
           <Wrapper key={index} roles={item.roles}>
-            <MenuItem {...item} />
+            <MenuItem {...toJS(item)} />
           </Wrapper>
         ))}
       </Stack>
@@ -34,7 +35,7 @@ export const Menu = observer(() => {
         <Stack spacing={2}>
           {itemsBottom?.map((item, index) => (
             <Wrapper key={index} roles={item.roles}>
-              <MenuItem {...item} />
+              <MenuItem {...toJS(item)} />
             </Wrapper>
           ))}
         </Stack>

@@ -31,7 +31,7 @@ export const MenuItemBase = observer((props: TMenuItemContainer) => {
     let onClick = undefined;
     if ('items' in props) {
       onClick = () => {
-        if (props && props.setOpen) props.setOpen(!props.open);
+        if (setOpen) setOpen(!props.open);
       };
     }
     return url ? (
@@ -65,8 +65,7 @@ export const MenuItemBase = observer((props: TMenuItemContainer) => {
     if ('items' in props) {
       tooltip += ' ...';
       onClick = () => {
-        if (props && props.setOpen) props.setOpen(true);
-        setOpen(true);
+        if (setOpen) setOpen(true);
       };
     }
     return url ? (
