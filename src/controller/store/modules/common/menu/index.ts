@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { action, computed, makeObservable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 import { BaseStore } from '@store/modules/base/store';
 import { LStorage } from '@utils/storage';
 import type IMenuStore from '@store/modules/common/menu/interface';
@@ -7,6 +7,7 @@ import { isAccess } from '@ui/layout/menu/isAccess';
 import { STORE } from '@store/ids';
 import type IAuthStore from '@store/modules/common/auth/interface';
 import { MENU_CONFIG } from '@settings/menu';
+import { IMenuItemDTO } from '@model/common/menu';
 
 @injectable()
 export class MenuStore extends BaseStore implements IMenuStore {
@@ -17,6 +18,8 @@ export class MenuStore extends BaseStore implements IMenuStore {
     makeObservable(this, {
       init: action,
       open: action,
+      items: observable,
+      setItems: action,
       hasAccess: computed,
     });
   }
@@ -32,9 +35,22 @@ export class MenuStore extends BaseStore implements IMenuStore {
     LStorage.menuState = value;
   };
 
+  items: IMenuItemDTO[] = MENU_CONFIG;
+
+  setItems = (value: IMenuItemDTO[]) => (this.items = value);
+
+  setItemOpen = (name: string, value: boolean) => {
+    const items = [...this.items];
+    items.forEach((d) => {
+      if (d.name === name && 'items' in d) {
+        d.open = value;
+      }
+    });
+  };
+
   get hasAccess() {
     let res = false;
-    MENU_CONFIG.forEach((item) => {
+    this.items.forEach((item) => {
       if (isAccess(this.authStore.roles, item.roles)) {
         res = true;
       }

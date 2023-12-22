@@ -14,6 +14,7 @@ interface IMenuItem {
 
 export interface IMenuItemParentDTO {
   items?: IMenuItemDTO[];
+  open?: boolean;
 }
 
 export interface IMenuItemChildrenDTO {

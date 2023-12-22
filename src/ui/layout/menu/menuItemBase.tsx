@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import Link from 'next/link';
 import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
@@ -13,7 +12,7 @@ import { MenuItemButton } from '@ui/layout/menu/menuItemButton';
 
 type TMenuItemContainer = IMenuItemDTO & {
   open?: boolean;
-  setOpen?: Dispatch<SetStateAction<boolean>>;
+  setOpen?: (value: boolean) => void;
   isChild?: boolean;
 };
 

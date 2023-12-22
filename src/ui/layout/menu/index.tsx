@@ -3,14 +3,13 @@ import { MenuItem } from '@ui/layout/menu/menuItem';
 import { Wrapper } from '@ui/layout/menu/wrapper';
 import { Stack } from '@mui/material';
 import { useMenuStore } from '@store/modules/common/menu/useMenuStore';
-import { MENU_CONFIG } from '@settings/menu';
 import { useEffect } from 'react';
 
 export const Menu = observer(() => {
-  const { isOpen, hasAccess } = useMenuStore();
+  const { isOpen, hasAccess, items } = useMenuStore();
 
-  const itemsTop = MENU_CONFIG.filter((item) => item.position !== 'bottom');
-  const itemsBottom = MENU_CONFIG.filter((item) => item.position === 'bottom');
+  const itemsTop = items.filter((item) => item.position !== 'bottom');
+  const itemsBottom = items.filter((item) => item.position === 'bottom');
 
   useEffect(() => {
     const resize = () => window.dispatchEvent(new Event('resize'));
