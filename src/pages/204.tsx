@@ -3,7 +3,7 @@ import { ReactElement } from 'react';
 import { ErrorIcon } from '@ui/layout/page/errorIcon';
 
 const Custom204 = () => {
-  return <ErrorIcon status="secondary" message="No content. Please select item." />;
+  return <ErrorIcon status="secondary" message="No content. Please select item" />;
 };
 
 Custom204.getLayout = function getLayout(page: ReactElement) {
