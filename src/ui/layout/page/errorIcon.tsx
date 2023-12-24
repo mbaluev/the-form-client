@@ -7,9 +7,10 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { ProgressBase } from '@ui/layout/card/progress';
 import { TitleDividerShort } from '@ui/layout/card/divider';
 import { Panel } from '@ui/layout/page/panel';
+import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 
 interface IProps {
-  status?: 'success' | 'error';
+  status?: 'success' | 'error' | 'secondary';
   title?: ReactElement | string;
   message?: ReactElement | string;
   loading?: boolean;
@@ -21,9 +22,11 @@ export const ErrorIcon = (props: IProps) => {
   const theme = useTheme();
   const Icon = () => {
     if (status === 'success')
-      return <CheckIcon sx={{ fontSize: '6rem', fill: theme.palette[status].main }} />;
+      return <CheckIcon sx={{ fontSize: '5rem', fill: theme.palette[status].main }} />;
     if (status === 'error')
-      return <ErrorOutlineIcon sx={{ fontSize: '6rem', fill: theme.palette[status].main }} />;
+      return <ErrorOutlineIcon sx={{ fontSize: '5rem', fill: theme.palette[status].main }} />;
+    if (status === 'secondary')
+      return <DoDisturbIcon sx={{ fontSize: '5rem', fill: theme.palette.fGrey[80] }} />;
     return null;
   };
   return (

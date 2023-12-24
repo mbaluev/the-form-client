@@ -4,23 +4,24 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { TitleDividerShort } from '@ui/layout/card/divider';
 import { ProgressBase } from '@ui/layout/card/progress';
+import { SxProps } from '@mui/system';
 
 interface IProps {
   icon?: ReactElement;
   iconColor?: string;
   message?: string | ReactElement;
   button?: ReactElement;
-  marginTop?: number;
   loading?: boolean;
+  sx?: SxProps;
 }
 
 export const NoData = (props: IProps) => {
-  const { icon, iconColor, message = 'Not found', button, marginTop, loading } = props;
+  const { icon, iconColor, message = 'Not found', button, sx, loading } = props;
   const theme = useTheme();
-  const colorGrey = theme.palette.fGrey['100'];
-  const iconSx = { fontSize: '6rem', fill: iconColor || colorGrey };
+  const colorGrey = theme.palette.fGrey['80'];
+  const iconSx = { fontSize: '5rem', fill: iconColor || colorGrey };
   return (
-    <Stack spacing={4} alignItems="center" justifyContent="center" sx={{ mt: marginTop }}>
+    <Stack spacing={4} alignItems="center" justifyContent="center" sx={{ ...sx, pl: 10, pr: 10 }}>
       {icon && cloneElement(icon, { sx: iconSx })}
       {message && (
         <Typography fontWeight={600} color={colorGrey}>

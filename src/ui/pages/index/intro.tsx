@@ -15,7 +15,7 @@ export const Intro = observer(() => {
   const theme = useTheme();
   return (
     <Stack spacing={4} alignItems="center" justifyContent="center" sx={{ mt: 20 }}>
-      <LogoTheForm sx={{ fontSize: '6rem', fill: theme.palette.primary.main }} />
+      <LogoTheForm sx={{ fontSize: '5rem', fill: theme.palette.primary.main }} />
       <Stack spacing={1} alignItems="center">
         <Typography fontWeight={600} color={theme.palette.primary.main} fontSize="1.5rem">
           The Form
