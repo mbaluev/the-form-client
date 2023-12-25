@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { ProgressBase } from '@ui/layout/card/progress';
 import { TitleDividerShort } from '@ui/layout/card/divider';
 import { PasswordField } from '@components/fields/passwordField';
+import { PageContent } from '@ui/layout/page/pageContent';
 
 interface IProps {
   sx?: SxProps;
@@ -37,63 +38,70 @@ export const SignUpForm = observer((props: IProps) => {
   };
 
   return (
-    <Stack sx={sx} alignItems="center">
-      <Box sx={{ maxWidth: 300, minWidth: 300 }}>
-        <FormSection>
-          <FormField title="First name">
-            <TextInputField
-              name="firstname"
-              value={data?.firstname}
-              onChange={changeHandler}
-              error={Boolean(getError('firstname'))}
-              helperText={getError('firstname')?.message}
-            />
-          </FormField>
-          <FormField title="Last name">
-            <TextInputField
-              name="lastname"
-              value={data?.lastname}
-              onChange={changeHandler}
-              error={Boolean(getError('lastname'))}
-              helperText={getError('lastname')?.message}
-            />
-          </FormField>
-          <FormField title="Email">
-            <TextInputField
-              name="username"
-              value={data?.username}
-              onChange={changeHandler}
-              error={Boolean(getError('username'))}
-              helperText={getError('username')?.message}
-            />
-          </FormField>
-          <FormField title="Password">
-            <PasswordField
-              name="password"
-              value={data?.password}
-              onChange={changeHandler}
-              error={Boolean(getError('password'))}
-              helperText={getError('password')?.message}
-            />
-          </FormField>
-          <Button variant="contained" onClick={submitHandler} color="success" disabled={hasErrors}>
-            Sign up
-          </Button>
-          {isDataLoading ? <ProgressBase /> : <TitleDividerShort />}
-          <Stack direction="row" spacing={4}>
-            <Link passHref href={ROUTES.HOME.path} style={{ flex: '1 1 auto' }}>
-              <Button variant="outlined" fullWidth>
-                The Form
-              </Button>
-            </Link>
-            <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path} style={{ flex: '1 1 auto' }}>
-              <Button variant="outlined" fullWidth>
-                Sign in
-              </Button>
-            </Link>
-          </Stack>
-        </FormSection>
-      </Box>
-    </Stack>
+    <PageContent>
+      <Stack sx={sx} alignItems="center">
+        <Box sx={{ maxWidth: 300, minWidth: 300 }}>
+          <FormSection>
+            <FormField title="First name">
+              <TextInputField
+                name="firstname"
+                value={data?.firstname}
+                onChange={changeHandler}
+                error={Boolean(getError('firstname'))}
+                helperText={getError('firstname')?.message}
+              />
+            </FormField>
+            <FormField title="Last name">
+              <TextInputField
+                name="lastname"
+                value={data?.lastname}
+                onChange={changeHandler}
+                error={Boolean(getError('lastname'))}
+                helperText={getError('lastname')?.message}
+              />
+            </FormField>
+            <FormField title="Email">
+              <TextInputField
+                name="username"
+                value={data?.username}
+                onChange={changeHandler}
+                error={Boolean(getError('username'))}
+                helperText={getError('username')?.message}
+              />
+            </FormField>
+            <FormField title="Password">
+              <PasswordField
+                name="password"
+                value={data?.password}
+                onChange={changeHandler}
+                error={Boolean(getError('password'))}
+                helperText={getError('password')?.message}
+              />
+            </FormField>
+            <Button
+              variant="contained"
+              onClick={submitHandler}
+              color="success"
+              disabled={hasErrors}
+            >
+              Sign up
+            </Button>
+            {isDataLoading ? <ProgressBase /> : <TitleDividerShort />}
+            <Stack direction="row" spacing={4}>
+              <Link passHref href={ROUTES.HOME.path} style={{ flex: '1 1 auto' }}>
+                <Button variant="outlined" fullWidth>
+                  The Form
+                </Button>
+              </Link>
+              <Link passHref href={ROUTES.ACCOUNT_SIGN_IN.path} style={{ flex: '1 1 auto' }}>
+                <Button variant="outlined" fullWidth>
+                  Sign in
+                </Button>
+              </Link>
+            </Stack>
+          </FormSection>
+        </Box>
+      </Stack>
+    </PageContent>
   );
 });

@@ -17,6 +17,7 @@ import { containerInitialize } from '@provider/initialize';
 import { SnackbarProvider } from 'notistack';
 import dirs from '@utils/locale/dir';
 import '../core/scss/index.scss';
+import { CustomHead } from '@ui/layout/head';
 
 configure({ enforceActions: 'observed' });
 enableStaticRendering(typeof window === 'undefined');
@@ -56,6 +57,7 @@ const MyApp = (props: MyAppProps) => {
               }}
             >
               <CssBaseline />
+              <CustomHead />
               {getLayout(<Component {...pageProps} />)}
             </SnackbarProvider>
           </ContainerProvider>

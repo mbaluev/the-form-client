@@ -19,7 +19,7 @@ interface IProps {
 export const BreadCrumbs = (props: IProps) => {
   const { breadCrumbs } = props;
   return (
-    <Panel sx={{ p: 1 }}>
+    <Panel id="__bread_crumbs" sx={{ p: 1 }}>
       <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
         {breadCrumbs && breadCrumbs.length > 1 && (
           <Link href={breadCrumbs[breadCrumbs.length - 2].url} passHref>
