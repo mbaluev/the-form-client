@@ -1,4 +1,4 @@
-import { Fragment, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import Stack from '@mui/material/Stack';
 import { useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -7,10 +7,10 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { ProgressBase } from '@ui/layout/card/progress';
 import { TitleDividerShort } from '@ui/layout/card/divider';
 import { Panel } from '@ui/layout/page/panel';
-import DoDisturbIcon from '@mui/icons-material/DoDisturb';
+import SearchIcon from '@mui/icons-material/Search';
 
 interface IProps {
-  status?: 'success' | 'error' | 'secondary';
+  status?: 'success' | 'error' | 'secondary' | 'primary';
   title?: ReactElement | string;
   message?: ReactElement | string;
   loading?: boolean;
@@ -18,16 +18,17 @@ interface IProps {
 }
 
 export const ErrorIcon = (props: IProps) => {
-  const { status = 'success', title, message, loading, buttons } = props;
+  const { status = 'secondary', title, message, loading, buttons } = props;
   const theme = useTheme();
   const Icon = () => {
-    if (status === 'success')
-      return <CheckIcon sx={{ fontSize: '5rem', fill: theme.palette[status].main }} />;
-    if (status === 'error')
-      return <ErrorOutlineIcon sx={{ fontSize: '5rem', fill: theme.palette[status].main }} />;
-    if (status === 'secondary')
-      return <DoDisturbIcon sx={{ fontSize: '5rem', fill: theme.palette.fGrey[80] }} />;
-    return null;
+    switch (status) {
+      case 'success':
+        return <CheckIcon sx={{ fontSize: '5rem', fill: theme.palette[status].main }} />;
+      case 'error':
+        return <ErrorOutlineIcon sx={{ fontSize: '5rem', fill: theme.palette[status].main }} />;
+      default:
+        return <SearchIcon sx={{ fontSize: '5rem', fill: theme.palette[status].main }} />;
+    }
   };
   return (
     <Panel height="100%">
@@ -41,16 +42,9 @@ export const ErrorIcon = (props: IProps) => {
             {message}
           </Typography>
         </Stack>
-        {buttons && (
-          <Fragment>
-            {loading ? (
-              <ProgressBase sx={{ width: 300 }} />
-            ) : (
-              <TitleDividerShort sx={{ width: 300 }} />
-            )}
-            {buttons}
-          </Fragment>
-        )}
+        {buttons && loading && <ProgressBase sx={{ width: 300 }} />}
+        {buttons && !loading && <TitleDividerShort sx={{ width: 300 }} />}
+        {buttons}
       </Stack>
     </Panel>
   );
