@@ -97,8 +97,18 @@ export const ROUTES: Record<string, any> = {
   ADMIN_SETTINGS_USER: {
     name: 'adminSettingsUser',
     label: 'User',
-    path: '/admin/settings/user/[id]',
+    path: '/admin/settings/user/[...slug]',
     roles: [ROLES.ADMIN],
+    tabs: {
+      keys: {
+        general: 'general',
+        more: 'more',
+      },
+      labels: {
+        general: 'General',
+        more: 'More',
+      },
+    },
   },
   ADMIN_PROGRESS_USERS: {
     name: 'Users',

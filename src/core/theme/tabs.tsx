@@ -5,8 +5,8 @@ import TabPanel from '@mui/lab/TabPanel';
 import { Fragment, ReactElement } from 'react';
 import { SxProps } from '@mui/system';
 import { Theme } from '@mui/material/styles';
-import { Progress } from '@ui/layout/card/progress';
-import { Separator } from '@ui/layout/card/separator';
+import { ProgressBase } from '@ui/layout/card/progress';
+import { SeparatorBase } from '@ui/layout/card/separator';
 
 export interface ITabDTO {
   key: string;
@@ -37,9 +37,8 @@ export const Tabs = (props: IProps) => {
           <TabList
             onChange={handleChange}
             sx={{
-              pl: padding ? 4 : undefined,
-              pr: padding ? 4 : undefined,
-              pt: padding ? 2 : undefined,
+              pl: padding ? 3 : undefined,
+              pr: padding ? 3 : undefined,
             }}
           >
             {tabs.map((tab) => (
@@ -51,7 +50,7 @@ export const Tabs = (props: IProps) => {
               />
             ))}
           </TabList>
-          {loading ? <Progress sx={{ mt: '-2px' }} /> : <Separator sx={{ mt: '-2px' }} />}
+          {loading ? <ProgressBase sx={{ mt: '-2px' }} /> : <SeparatorBase sx={{ mt: '-2px' }} />}
         </Fragment>
       )}
       {tabs.map((tab) => (

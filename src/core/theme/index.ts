@@ -139,7 +139,7 @@ export const theme = createTheme({
     fontFamily: font.style.fontFamily,
   },
   palette: {
-    divider: colors.fGrey['30'],
+    divider: colors.fGrey['20'],
     common: colors.common,
     primary: colors.primary,
     secondary: colors.secondary,
@@ -225,7 +225,7 @@ export const theme = createTheme({
           borderRadius: 2,
         },
         colorPrimary: {
-          backgroundColor: colors.fGrey['30'],
+          backgroundColor: colors.fGrey['20'],
         },
       },
     },

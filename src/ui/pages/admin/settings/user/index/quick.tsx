@@ -3,7 +3,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const Quick = () => {
   return (
-    <IconButton color="primary">
+    <IconButton color="secondary">
       <RefreshIcon />
     </IconButton>
   );

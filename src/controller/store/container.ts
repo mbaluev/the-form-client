@@ -10,7 +10,7 @@ import type INotifyStore from '@store/modules/common/notify/interface';
 import { NotifyStore } from '@store/modules/common/notify';
 import type IAuthStore from '@store/modules/common/auth/interface';
 import { AuthStore } from '@store/modules/common/auth';
-import type { IMenuStore } from '@store/modules/common/menu/interface';
+import type IMenuStore from '@store/modules/common/menu/interface';
 import { MenuStore } from '@store/modules/common/menu';
 
 export const storeContainer = new Container({ defaultScope: 'Singleton' });
