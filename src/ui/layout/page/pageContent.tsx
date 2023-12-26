@@ -1,45 +1,30 @@
-import { ReactElement, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Panel } from '@ui/layout/page/panel';
+import { Box, Stack } from '@mui/material';
 
 interface IProps {
   children?: ReactNode;
-  title?: ReactElement;
-  filter?: ReactElement;
-  quickFilter?: ReactElement;
+  title?: ReactNode;
+  subtitle?: ReactNode;
+  quick?: ReactNode;
 }
 
 export const PageContent = (props: IProps) => {
-  const { children } = props;
-  /*
-  {(title || quickFilter) && (
-    <Box id="__title" width="100%">
-      <Container maxWidth="xl">
-        <Stack direction="row" spacing={3} justifyContent="space-between">
-          {title &&
-            (typeof title === 'string' ? (
-              <Typography
-                fontSize="1.3rem"
-                lineHeight="37px"
-                fontWeight={600}
-                flexGrow={1}
-                overflow="hidden"
-                whiteSpace="nowrap"
-                textOverflow="ellipsis"
-              >
-                {title}
-              </Typography>
-            ) : (
-              title
-            ))}
-          {quickFilter && <Stack flexGrow={0}>{quickFilter}</Stack>}
-        </Stack>
-      </Container>
-    </Box>
-  )}
-  */
+  const { children, title, subtitle, quick } = props;
   return (
     <Panel className="__page_content" height="100%">
-      {children}
+      <Stack spacing={2} height="100%">
+        <Stack direction="row" spacing={2}>
+          <Stack spacing={2} height="100%" padding={3} paddingBottom={0} flexGrow={1}>
+            <Box>{title}</Box>
+            <Box>{subtitle}</Box>
+          </Stack>
+          <Box padding={2} paddingBottom={0}>
+            {quick}
+          </Box>
+        </Stack>
+        <Box flexGrow={1}>{children}</Box>
+      </Stack>
     </Panel>
   );
 };
