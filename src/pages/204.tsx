@@ -1,9 +1,19 @@
 import { MasterAnon } from '@ui/masters/masterAnon';
 import { ReactElement } from 'react';
-import { ErrorIcon } from '@ui/layout/page/errorIcon';
+import NoData from '@components/noData';
+import { PageContent } from '@ui/layout/page/pageContent';
+import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 
 const Custom204 = () => {
-  return <ErrorIcon status="secondary" message="No content. Please select item" />;
+  return (
+    <PageContent>
+      <NoData
+        sx={{ pt: 20 }}
+        icon={<DoNotDisturbIcon />}
+        message="No content. Please select item"
+      />
+    </PageContent>
+  );
 };
 
 Custom204.getLayout = function getLayout(page: ReactElement) {

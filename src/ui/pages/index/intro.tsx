@@ -7,7 +7,7 @@ import { ROUTES } from '@settings/routes';
 import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 import { useAppStore } from '@store/modules/common/app/useAppStore';
 import { ProgressBase } from '@ui/layout/card/progress';
-import { TitleDividerShort } from '@ui/layout/card/divider';
+import { SeparatorBase } from '@ui/layout/card/separator';
 import { PageContent } from '@ui/layout/page/pageContent';
 
 export const Intro = observer(() => {
@@ -26,11 +26,7 @@ export const Intro = observer(() => {
             School of analytics
           </Typography>
         </Stack>
-        {isLoading ? (
-          <ProgressBase sx={{ width: 300 }} />
-        ) : (
-          <TitleDividerShort sx={{ width: 300 }} />
-        )}
+        {isLoading ? <ProgressBase sx={{ width: 300 }} /> : <SeparatorBase sx={{ width: 300 }} />}
         <Stack
           direction="row"
           spacing={4}

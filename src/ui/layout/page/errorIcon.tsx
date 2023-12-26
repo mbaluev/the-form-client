@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import CheckIcon from '@mui/icons-material/Check';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { ProgressBase } from '@ui/layout/card/progress';
-import { TitleDividerShort } from '@ui/layout/card/divider';
+import { SeparatorBase } from '@ui/layout/card/separator';
 import { Panel } from '@ui/layout/page/panel';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -43,7 +43,7 @@ export const ErrorIcon = (props: IProps) => {
           </Typography>
         </Stack>
         {buttons && loading && <ProgressBase sx={{ width: 300 }} />}
-        {buttons && !loading && <TitleDividerShort sx={{ width: 300 }} />}
+        {buttons && !loading && <SeparatorBase sx={{ width: 300 }} />}
         {buttons}
       </Stack>
     </Panel>

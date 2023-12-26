@@ -7,13 +7,14 @@ interface IProps {
   title?: ReactNode;
   subtitle?: ReactNode;
   quick?: ReactNode;
+  separator?: ReactNode;
 }
 
 export const PageContent = (props: IProps) => {
-  const { children, title, subtitle, quick } = props;
+  const { children, title, subtitle, quick, separator } = props;
   return (
     <Panel className="__page_content" height="100%">
-      <Stack spacing={2} height="100%">
+      <Stack spacing={3} height="100%">
         <Stack direction="row" spacing={2}>
           <Stack spacing={2} height="100%" padding={3} paddingBottom={0} flexGrow={1}>
             <Box>{title}</Box>
@@ -23,6 +24,7 @@ export const PageContent = (props: IProps) => {
             {quick}
           </Box>
         </Stack>
+        {separator}
         <Box flexGrow={1}>{children}</Box>
       </Stack>
     </Panel>

@@ -2,7 +2,7 @@ import { cloneElement, Fragment, ReactElement } from 'react';
 import { useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { TitleDividerShort } from '@ui/layout/card/divider';
+import { SeparatorBase } from '@ui/layout/card/separator';
 import { ProgressBase } from '@ui/layout/card/progress';
 import { SxProps } from '@mui/system';
 
@@ -30,11 +30,7 @@ export const NoData = (props: IProps) => {
       )}
       {button && (
         <Fragment>
-          {loading ? (
-            <ProgressBase sx={{ width: 300 }} />
-          ) : (
-            <TitleDividerShort sx={{ width: 300 }} />
-          )}
+          {loading ? <ProgressBase sx={{ width: 300 }} /> : <SeparatorBase sx={{ width: 300 }} />}
           {button}
         </Fragment>
       )}

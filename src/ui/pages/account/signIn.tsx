@@ -10,7 +10,7 @@ import { TextInputField } from '@components/fields/textInputField';
 import { SxProps } from '@mui/system';
 import Link from 'next/link';
 import { ProgressBase } from '@ui/layout/card/progress';
-import { TitleDividerShort } from '@ui/layout/card/divider';
+import { SeparatorBase } from '@ui/layout/card/separator';
 import { PasswordField } from '@components/fields/passwordField';
 import { PageContent } from '@ui/layout/page/pageContent';
 
@@ -63,7 +63,7 @@ export const SignInForm = observer((props: IProps) => {
             <Button variant="contained" onClick={submitHandler} disabled={hasErrors} fullWidth>
               Sign in
             </Button>
-            {isDataLoading ? <ProgressBase /> : <TitleDividerShort />}
+            {isDataLoading ? <ProgressBase /> : <SeparatorBase />}
             <Stack direction="row" spacing={4}>
               <Link passHref href={ROUTES.HOME.path} style={{ flex: '1 1 auto' }}>
                 <Button variant="outlined" fullWidth>
