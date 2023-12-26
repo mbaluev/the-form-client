@@ -2,10 +2,10 @@ import { PageContent } from '@ui/layout/page/pageContent';
 import { Quick } from '@ui/pages/user/quick';
 import { Title } from '@ui/pages/user/title';
 import { SubTitle } from '@ui/pages/user/subtitle';
-import { Content } from '@ui/pages/user/content';
+import { Tabs } from '@ui/pages/user/tabs';
 import { SeparatorBase } from '@ui/layout/card/separator';
 
-export const User = () => {
+export const UserList = () => {
   return (
     <PageContent
       title={<Title />}
@@ -13,7 +13,7 @@ export const User = () => {
       quick={<Quick />}
       separator={<SeparatorBase />}
     >
-      <Content />
+      <Tabs />
     </PageContent>
   );
 };

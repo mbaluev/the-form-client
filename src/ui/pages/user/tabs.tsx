@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
 
-export const Content = () => {
+export const Tabs = () => {
   return <Box>content</Box>;
 };

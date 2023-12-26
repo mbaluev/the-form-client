@@ -225,7 +225,7 @@ export const theme = createTheme({
           borderRadius: 2,
         },
         colorPrimary: {
-          backgroundColor: colors.fGrey['50'],
+          backgroundColor: colors.fGrey['30'],
         },
       },
     },

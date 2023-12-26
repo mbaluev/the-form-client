@@ -2,8 +2,8 @@ import { TBreadCrumb } from '@ui/layout/page/breadCrumbs';
 import { ROUTES } from '@settings/routes';
 import { MasterAuth } from '@ui/masters/masterAuth';
 import { Page } from '@ui/layout/page/page';
-import Custom204 from '@pages/204';
-import { User } from '@ui/pages/user';
+import { UserList } from '@ui/pages/user/list';
+import { UserItem } from '@ui/pages/user/item';
 
 const Users = (props: any) => {
   const breadCrumbs: TBreadCrumb[] = [
@@ -18,8 +18,8 @@ const Users = (props: any) => {
   ];
   return (
     <MasterAuth>
-      <Page {...props} breadCrumbs={breadCrumbs} right={<Custom204 />}>
-        <User />
+      <Page {...props} breadCrumbs={breadCrumbs} right={<UserItem />}>
+        <UserList />
       </Page>
     </MasterAuth>
   );
