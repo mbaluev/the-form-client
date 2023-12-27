@@ -29,6 +29,7 @@ export const UsersList = observer(() => {
           dataModel={dataModel}
           itemRenderer={(item: IUserDTO) => <Item item={item} />}
           handleClick={handleClick}
+          estimateSize={38}
         />
       </Stack>
     </Stack>

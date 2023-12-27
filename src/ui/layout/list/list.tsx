@@ -19,6 +19,7 @@ interface IListProps<T extends TListITem> extends IListBaseProps<T> {
   handleClick?: (id: string) => void;
   handleDelete?: (item: T) => void;
   checkbox?: boolean;
+  estimateSize: number;
 }
 
 export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
@@ -31,6 +32,7 @@ export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
     handleClick,
     handleDelete,
     checkbox,
+    estimateSize,
   } = props;
   const { dataFiltered, dataLength, isLoading, setData, getData, selectItem } = dataModel;
 
@@ -43,7 +45,7 @@ export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
     <VirtualizeBlock
       data={dataFiltered}
       dataLength={dataLength}
-      estimateSize={38}
+      estimateSize={estimateSize}
       isLoading={isLoading}
       rowRenderer={(item: T) => (
         <VirtualizeItem
