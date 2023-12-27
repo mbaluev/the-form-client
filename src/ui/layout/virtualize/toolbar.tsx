@@ -49,7 +49,7 @@ export const VirtualizeToolbar = observer((props: IProps) => {
   const itemsWord = 'items';
 
   return (
-    <Box sx={padding ? { pl: 4, pr: 4 } : undefined}>
+    <Box sx={padding ? { pl: 3, pr: 3 } : undefined}>
       <Stack direction="row" spacing={2} alignItems="center">
         <Stack direction="row" spacing={2} sx={{ flexGrow: 1 }} alignItems="center">
           {checkbox ? (

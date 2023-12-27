@@ -22,6 +22,7 @@ export const Page = observer((props: IProps) => {
         display="grid"
         gridTemplateColumns={right ? '1fr 1fr' : '1fr'}
         gap={3}
+        overflow="hidden"
       >
         {children}
         {right}

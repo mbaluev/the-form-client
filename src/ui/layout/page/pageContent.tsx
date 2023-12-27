@@ -13,23 +13,27 @@ interface IProps {
 export const PageContent = (props: IProps) => {
   const { children, title, subtitle, quick, separator } = props;
   return (
-    <Panel className="__page_content" height="100%">
+    <Panel className="__page_content" height="100%" overflow="hidden">
       <Stack spacing={3} height="100%">
         {(title || subtitle || quick) && (
           <Fragment>
             <Stack direction="row" spacing={2}>
               <Stack spacing={2} height="100%" padding={3} paddingBottom={0} flexGrow={1}>
-                <Box>{title}</Box>
-                <Box>{subtitle}</Box>
+                {title && <Box>{title}</Box>}
+                {subtitle && <Box>{subtitle}</Box>}
               </Stack>
-              <Box padding={2} paddingBottom={0}>
-                {quick}
-              </Box>
+              {quick && (
+                <Box padding={2} paddingBottom={0}>
+                  {quick}
+                </Box>
+              )}
             </Stack>
             {separator}
           </Fragment>
         )}
-        <Box flexGrow={1}>{children}</Box>
+        <Box flexGrow={1} overflow="hidden">
+          {children}
+        </Box>
       </Stack>
     </Panel>
   );

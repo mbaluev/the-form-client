@@ -46,7 +46,7 @@ export const VirtualizeWindow = observer(<T,>(props: IProps<T>) => {
     height: virtualize.getTotalSize(),
   };
   const styleGrid: CSSProperties = {
-    transform: `translateY(${items[0].start}px)`,
+    transform: `translateY(${items[0]?.start}px)`,
   };
 
   return (

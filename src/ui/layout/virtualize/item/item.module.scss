@@ -1,6 +1,7 @@
 @import "../../../../core/scss/params";
 
 .item {
+  width: 100%;
 }
 .item_hover {
   cursor: pointer;
@@ -8,14 +9,17 @@
 }
 .item_container {
   display: flex;
-  padding: $base * 3 $base * 4;
+  padding: $base * 2 $base * 3;
   gap: $base;
+  overflow: hidden;
 }
 .item_checkbox {
   flex-grow: 0;
+  margin: -7px 0 (-$base * 2) 0;
 }
 .item_content {
   display: flex;
   flex-grow: 1;
   gap: $base * 3;
+  overflow: hidden;
 }

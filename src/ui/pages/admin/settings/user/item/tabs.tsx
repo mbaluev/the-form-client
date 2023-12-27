@@ -25,7 +25,9 @@ export const Tabs = observer(() => {
     const id = router.query.slug?.[0] as string;
     const slug = [id];
     if (value !== ROUTES.ADMIN_SETTINGS_USER.tabs.keys.general) slug.push(value);
-    await router.push({ pathname: ROUTES.ADMIN_SETTINGS_USER.path, query: { slug } });
+    const query = router.query || {};
+    query.slug = slug;
+    await router.push({ pathname: ROUTES.ADMIN_SETTINGS_USER.path, query });
   };
 
   return <MuiTabs active={active} tabs={tabs} onChange={handleChange} padding />;

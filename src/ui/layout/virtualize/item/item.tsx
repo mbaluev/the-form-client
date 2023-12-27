@@ -57,11 +57,17 @@ export const VirtualizeItem = observer((props: IProps) => {
         )}
         <div className={classes.item_content}>
           {avatar && <div style={{ flexGrow: 0 }}>{avatar}</div>}
-          <div style={{ flexGrow: 1 }}>{content && cloneElement(content, { hover })}</div>
+          <div style={{ flexGrow: 1, overflow: 'hidden' }}>
+            {content && cloneElement(content, { hover })}
+          </div>
           {more && <div style={{ flexGrow: 0 }}>{more}</div>}
         </div>
       </div>
-      {loading ? <ProgressBase /> : <Divider sx={{ borderWidth: 1, borderColor: 'transparent' }} />}
+      {loading ? (
+        <ProgressBase sx={{ mt: '-2px' }} />
+      ) : (
+        <Divider sx={{ borderWidth: 1, borderColor: 'transparent', mt: '-2px' }} />
+      )}
     </div>
   );
 });

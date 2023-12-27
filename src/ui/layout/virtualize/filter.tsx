@@ -19,7 +19,7 @@ export const VirtualizeFilter = observer((props: IProps) => {
   const size = useWindowSize();
 
   return (
-    <Stack direction="row" spacing={2} sx={padding ? { pl: 4, pr: 4 } : undefined}>
+    <Stack direction="row" spacing={2} sx={padding ? { pl: 3, pr: 3 } : undefined}>
       {filter && size.width > MEDIA_SM && <Box sx={{ flexGrow: 1 }}>{filter}</Box>}
       {filterSearchName && (
         <Box sx={{ flexGrow: filter && size.width > MEDIA_SM ? 0 : 1 }}>

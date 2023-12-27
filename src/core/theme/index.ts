@@ -304,7 +304,7 @@ export const theme = createTheme({
     },
     MuiChip: {
       styleOverrides: {
-        root: { borderRadius: 5 },
+        root: { borderRadius: 5, height: 18 },
         label: { fontSize: '0.9rem', fontWeight: 600 },
         colorPrimary: {
           backgroundColor: lighten(colors.primary.main, 0.9),

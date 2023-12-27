@@ -96,7 +96,7 @@ export const Layout = observer((props: IProps) => {
           <Account />
         </Stack>
       </Stack>
-      <Stack id="__layout_bottom" direction="row" spacing={3} flex="1 1 auto">
+      <Stack id="__layout_bottom" direction="row" spacing={3} flex="1 1 auto" overflow="hidden">
         <Menu />
         <Box id="__layout_bottom_main" sx={{ flex: '1 1 auto' }}>
           {children}

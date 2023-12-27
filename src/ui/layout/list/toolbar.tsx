@@ -8,10 +8,11 @@ import { BtnCreate } from '@ui/layout/list/btnCreate';
 interface IProps<T extends TListITem> extends IListBaseProps<T> {
   padding?: boolean;
   handleCreate?: () => Promise<void>;
+  checkbox?: boolean;
 }
 
 export const Toolbar = observer(<T extends TListITem>(props: IProps<T>) => {
-  const { dataModel, padding, handleCreate } = props;
+  const { dataModel, padding, handleCreate, checkbox } = props;
 
   const { isLoading, dataLength, dataTotal, selectedItems, selectAllItems, allItemsSelected } =
     dataModel;
@@ -27,7 +28,7 @@ export const Toolbar = observer(<T extends TListITem>(props: IProps<T>) => {
       dataAllSelected={allItemsSelected}
       refreshAction={<BtnReload dataModel={dataModel} />}
       more={handleCreate ? <BtnCreate handleCreate={handleCreate} /> : undefined}
-      checkbox
+      checkbox={checkbox}
     />
   );
 });

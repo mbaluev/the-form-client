@@ -8,7 +8,7 @@ export const VirtualizeNoData = observer(() => {
     <div className={classes.item}>
       <Divider />
       <div className={classes.item_container}>
-        <NoData />
+        <NoData sx={{ width: '100%' }} />
       </div>
     </div>
   );

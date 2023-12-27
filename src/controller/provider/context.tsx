@@ -3,6 +3,7 @@ import { createContext, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { STORE } from '@store/ids';
 import type IAppStore from '@store/modules/common/app/interface';
+import type IFilterStore from '@store/modules/common/filter/interfaces';
 
 interface IProps {
   container: Container;
@@ -14,6 +15,7 @@ export const ContainerContext = createContext<Container | null>(null);
 export const ContainerProvider = ({ container, children }: IProps) => {
   const router = useRouter();
   const appStore = container.get<IAppStore>(STORE.App);
+  const filterStore = container.get<IFilterStore>(STORE.Filter);
 
   useEffect(() => {
     appStore.init();
@@ -31,6 +33,10 @@ export const ContainerProvider = ({ container, children }: IProps) => {
       router.events.off('routeChangeError', handleComplete);
     };
   }, []);
+
+  useEffect(() => {
+    filterStore.changeRoute(router);
+  }, [router]);
 
   return <ContainerContext.Provider value={container}>{children}</ContainerContext.Provider>;
 };
