@@ -205,7 +205,7 @@ export const theme = createTheme({
     MuiSkeleton: {
       styleOverrides: {
         root: {
-          backgroundColor: colors.fGrey['40'],
+          backgroundColor: colors.fGrey['30'],
         },
       },
     },
