@@ -18,7 +18,7 @@ export const UsersList = observer(() => {
       slug.push(router.query.slug?.[1] as string);
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_USER.path,
-      query: { slug },
+      query: { ...router.query, slug },
     });
   };
   return (
