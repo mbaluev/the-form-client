@@ -8,13 +8,6 @@ type TMenuItem = IMenuItemDTO & {
 };
 
 export const MenuItem = (props: TMenuItem) => {
-  // const router = useRouter();
-  // const active = isActive(props, router.pathname);
-  // const { setItemOpen } = useMenuStore();
-  // const setOpen = (value: boolean) => {
-  //   setItemOpen(props.name, value);
-  // };
-
   if ('items' in props) {
     return (
       <Stack spacing={1}>

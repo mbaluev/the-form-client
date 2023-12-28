@@ -18,7 +18,7 @@ type TMenuItemContainer = IMenuItemDTO & {
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 export const MenuItemBase = observer((props: TMenuItemContainer) => {
-  const { isOpen, setOpen, setItemOpen } = useMenuStore();
+  const { isOpen, open, setItemOpen } = useMenuStore();
   const router = useRouter();
   const active = isActive(props, router.pathname);
   const color = active ? 'primary' : 'secondary';
@@ -65,7 +65,7 @@ export const MenuItemBase = observer((props: TMenuItemContainer) => {
     if ('items' in props) {
       tooltip += ' ...';
       onClick = () => {
-        setOpen(true);
+        open(true);
         setItemOpen(props.name, true);
       };
     }
