@@ -102,11 +102,11 @@ export const ROUTES: Record<string, any> = {
     tabs: {
       keys: {
         general: 'general',
-        more: 'more',
+        users: 'users',
       },
       labels: {
         general: 'General',
-        more: 'More',
+        users: 'All users',
       },
     },
   },

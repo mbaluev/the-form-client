@@ -17,8 +17,8 @@ export const Tabs = observer(() => {
       component: isLoading ? <TabSkeleton /> : <>general</>,
     },
     {
-      key: ROUTES.ADMIN_SETTINGS_USER.tabs.keys.more,
-      label: ROUTES.ADMIN_SETTINGS_USER.tabs.labels.more,
+      key: ROUTES.ADMIN_SETTINGS_USER.tabs.keys.users,
+      label: ROUTES.ADMIN_SETTINGS_USER.tabs.labels.users,
       component: isLoading ? <TabSkeleton /> : <UsersList />,
       sxPanel: { overflow: 'hidden', pb: 0 },
     },
