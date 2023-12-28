@@ -6,7 +6,7 @@ import PersonIcon from '@mui/icons-material/Person';
 export const Title = () => {
   return (
     <Stack direction="row" spacing={2}>
-      <Tooltip title="user">
+      <Tooltip title="tooltip">
         <PersonIcon color="error" sx={{ marginTop: '3px !important' }} />
       </Tooltip>
       <Typography sx={{ fontSize: '1.3rem', fontWeight: 600 }}>User</Typography>
