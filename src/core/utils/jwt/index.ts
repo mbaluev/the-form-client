@@ -22,7 +22,7 @@ export class Jwt implements IJwt {
 
   encodedToken?: string;
 
-  private decodedHeader?: Record<string, any>;
+  decodedHeader?: Record<string, any>;
 
   decodedClaims?: Record<string, any>;
 
