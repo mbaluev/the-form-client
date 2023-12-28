@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 import { List } from '@ui/layout/list/list';
 import { Filter } from '@ui/layout/list/filter';
 import { Toolbar } from '@ui/layout/list/toolbar';
-import { Stack } from '@mui/material';
+import { Stack, useTheme } from '@mui/material';
 import { useUserListStore } from '@store/modules/entities/user/list/useUserListStore';
 import { IUserDTO } from '@model/entities/user';
 import { Item } from '@ui/pages/admin/settings/user/index/item';
@@ -12,6 +12,7 @@ import { ROUTES } from '@settings/routes';
 export const UsersList = observer(() => {
   const dataModel = useUserListStore();
   const router = useRouter();
+  const theme = useTheme();
   const handleClick = async (id: string) => {
     const slug = [id];
     if (router.pathname === ROUTES.ADMIN_SETTINGS_USER.path)
@@ -31,6 +32,12 @@ export const UsersList = observer(() => {
         <List
           dataModel={dataModel}
           itemRenderer={(item: IUserDTO) => <Item item={item} />}
+          rowStyleGetter={(item: IUserDTO) => {
+            if (router.pathname === ROUTES.ADMIN_SETTINGS_USER.path) {
+              const id = router.query.slug?.[0] as string;
+              if (item.id === id) return { backgroundColor: theme.palette.fGrey[10] };
+            }
+          }}
           handleClick={handleClick}
           estimateSize={38}
         />

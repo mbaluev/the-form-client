@@ -39,6 +39,7 @@ export default interface IBaseListStore<T extends TListITem> extends IBaseStore 
   selectAllItems: () => void;
   selectedItems?: (string | null | undefined)[];
   allItemsSelected: boolean;
+  deselectAllItems: () => void;
 
   // filter
   filterName: string;

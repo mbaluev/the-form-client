@@ -1,9 +1,8 @@
-import { DependencyList, ReactElement, useEffect } from 'react';
+import { CSSProperties, DependencyList, ReactElement, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import IBaseListStore, { TListITem } from '@store/modules/base/list/interface';
 import { VirtualizeItem } from '@ui/layout/virtualize/item/item';
 import { VirtualizeSkeleton } from '@ui/layout/virtualize/item/skeleton';
-import { BtnDelete } from '@ui/layout/list/btnDelete';
 import { VirtualizeBlock } from '@ui/layout/virtualize/block';
 import { VirtualizeNoData } from '@ui/layout/virtualize/item/nodata';
 
@@ -16,8 +15,8 @@ interface IListProps<T extends TListITem> extends IListBaseProps<T> {
   itemRenderer: (item: T) => ReactElement;
   avatarRenderer?: (item: T) => ReactElement;
   moreRenderer?: (item: T) => ReactElement;
+  rowStyleGetter?: (item: T) => CSSProperties | undefined;
   handleClick?: (id: string) => void;
-  handleDelete?: (item: T) => void;
   checkbox?: boolean;
   estimateSize: number;
 }
@@ -29,8 +28,8 @@ export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
     itemRenderer,
     avatarRenderer,
     moreRenderer,
+    rowStyleGetter,
     handleClick,
-    handleDelete,
     checkbox,
     estimateSize,
   } = props;
@@ -51,17 +50,12 @@ export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
           id={item.id as string}
           avatar={avatarRenderer ? avatarRenderer(item) : undefined}
           content={itemRenderer(item)}
-          more={
-            handleDelete ? (
-              <BtnDelete handleDelete={() => handleDelete(item)} />
-            ) : moreRenderer ? (
-              moreRenderer(item)
-            ) : undefined
-          }
+          more={moreRenderer ? moreRenderer(item) : undefined}
           selected={Boolean(item.selected)}
           selectItem={checkbox ? selectItem : undefined}
           onClick={handleClick ? () => handleClick(item.id as string) : undefined}
           loading={item.loading}
+          rowStyle={rowStyleGetter ? rowStyleGetter(item) : undefined}
         />
       )}
       rowSkeleton={<VirtualizeSkeleton />}

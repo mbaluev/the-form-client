@@ -1,4 +1,11 @@
-import { ReactElement, useState, ChangeEvent, MouseEvent, cloneElement } from 'react';
+import {
+  ReactElement,
+  useState,
+  ChangeEvent,
+  MouseEvent,
+  cloneElement,
+  CSSProperties,
+} from 'react';
 import { observer } from 'mobx-react';
 import Divider from '@mui/material/Divider';
 import { CheckboxField } from 'core/components/fields/checkboxField';
@@ -16,10 +23,11 @@ interface IProps {
   more?: ReactElement;
   action?: ReactElement;
   loading?: boolean | null;
+  rowStyle?: CSSProperties;
 }
 
 export const VirtualizeItem = observer((props: IProps) => {
-  const { id, selected, selectItem, onClick, avatar, content, more, loading } = props;
+  const { id, selected, selectItem, onClick, avatar, content, more, loading, rowStyle } = props;
 
   // hover
   const [hover, setHover] = useState(false);
@@ -41,6 +49,7 @@ export const VirtualizeItem = observer((props: IProps) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
+      style={rowStyle}
     >
       <Divider />
       <div className={classes.item_container}>
