@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { observer } from 'mobx-react';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
 import { UsersList } from '@ui/pages/admin/settings/user/index/list';
+import { Form } from '@ui/pages/admin/settings/user/item/form';
 
 export const Tabs = observer(() => {
   const router = useRouter();
@@ -14,7 +15,7 @@ export const Tabs = observer(() => {
     {
       key: ROUTES.ADMIN_SETTINGS_USER.tabs.keys.general,
       label: ROUTES.ADMIN_SETTINGS_USER.tabs.labels.general,
-      component: isLoading ? <TabSkeleton /> : <>general</>,
+      component: isLoading ? <TabSkeleton /> : <Form />,
     },
     {
       key: ROUTES.ADMIN_SETTINGS_USER.tabs.keys.users,
