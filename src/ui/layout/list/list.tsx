@@ -34,11 +34,10 @@ export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
     checkbox,
     estimateSize,
   } = props;
-  const { dataFiltered, dataLength, isLoading, setData, getData, selectItem } = dataModel;
+  const { dataFiltered, dataLength, isLoading, getData, selectItem } = dataModel;
 
   useEffect(() => {
     getData();
-    return () => setData();
   }, dependencies || []);
 
   return (

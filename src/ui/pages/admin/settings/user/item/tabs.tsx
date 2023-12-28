@@ -3,6 +3,7 @@ import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
+import { UsersList } from '@ui/pages/admin/settings/user/index/list';
 
 export const Tabs = observer(() => {
   const router = useRouter();
@@ -18,7 +19,8 @@ export const Tabs = observer(() => {
     {
       key: ROUTES.ADMIN_SETTINGS_USER.tabs.keys.more,
       label: ROUTES.ADMIN_SETTINGS_USER.tabs.labels.more,
-      component: isLoading ? <TabSkeleton /> : <>more</>,
+      component: isLoading ? <TabSkeleton /> : <UsersList />,
+      sxPanel: { overflow: 'hidden', pb: 0 },
     },
   ];
   const handleChange = async (value: string) => {

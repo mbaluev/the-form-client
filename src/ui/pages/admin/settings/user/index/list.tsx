@@ -13,9 +13,12 @@ export const UsersList = observer(() => {
   const dataModel = useUserListStore();
   const router = useRouter();
   const handleClick = async (id: string) => {
+    const slug = [id];
+    if (router.pathname === ROUTES.ADMIN_SETTINGS_USER.path)
+      slug.push(router.query.slug?.[1] as string);
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_USER.path,
-      query: { slug: [id] },
+      query: { slug },
     });
   };
   return (

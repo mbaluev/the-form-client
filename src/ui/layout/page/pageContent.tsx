@@ -31,9 +31,9 @@ export const PageContent = (props: IProps) => {
             {separator}
           </Fragment>
         )}
-        <Box flexGrow={1} overflow="hidden">
+        <Stack flexGrow={1} overflow="hidden">
           {children}
-        </Box>
+        </Stack>
       </Stack>
     </Panel>
   );
