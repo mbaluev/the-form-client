@@ -44,6 +44,7 @@ export const VirtualizeToolbar = observer((props: IProps) => {
   // data
   const selectedAll = dataAllSelected;
   const selectedCount = dataSelected?.length || 0;
+  const selectedLength = dataLength || 0;
   const selectedTotal = dataTotal || 0;
   const selectedLabel = `${fNumber(selectedCount)} / ${fNumber(selectedTotal)} selected`;
   const itemsWord = 'items';
@@ -62,7 +63,7 @@ export const VirtualizeToolbar = observer((props: IProps) => {
               sx={{ '& .MuiFormControlLabel-root': { gap: 1 } }}
             />
           ) : (
-            <Box>{`${fNumber(selectedTotal)} ${itemsWord}`}</Box>
+            <Box>{`${fNumber(selectedLength)} / ${fNumber(selectedTotal)} ${itemsWord}`}</Box>
           )}
           {isLoading && (
             <Box>
