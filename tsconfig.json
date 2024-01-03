@@ -16,7 +16,7 @@
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react",
     "incremental": true,
-    "types": ["node", "reflect-metadata", "@types/jest", "./src/core/utils/ts"],
+    "types": ["node", "reflect-metadata", "@types/jest"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "downlevelIteration": true,
