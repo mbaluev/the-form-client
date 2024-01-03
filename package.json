@@ -16,7 +16,9 @@
     "test:ci": "jest --ci",
     "test:watch": "jest --watch",
     "prepare": "husky install",
-    "docker": "docker build -t the-form-client . && docker run --env-file .env.production -dp 127.0.0.1:80:80 the-form-client"
+    "docker:build": "docker build -t the-form-client .",
+    "docker:run": "docker run --env-file .env.production -dp 127.0.0.1:3000:3000 the-form-client",
+    "docker": "npm run docker:build && npm run docker:run"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
