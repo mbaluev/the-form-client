@@ -73,7 +73,6 @@
     "react-hook-form": "^7.47.0",
     "react-i18next": "^13.2.1",
     "react-number-format": "^5.3.0",
-    "recharts": "^2.8.0",
     "reflect-metadata": "^0.1.13",
     "sonarqube-scanner": "^3.0.1",
     "spacetime": "^7.4.7",
