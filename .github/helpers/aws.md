@@ -43,3 +43,36 @@ sudo apt install nginx -y
 sudo apt update
 sudo apt-get update -y
 ```
+
+### ftp
+```
+sudo apt update
+sudo apt install vsftpd -y
+
+sudo vi /etc/vsftpd.conf
+# anonymous_enable=NO
+# pasv_enable=YES
+# pasv_min_port=1024
+# pasv_max_port=1048
+# pasv_address=<Public IP of your instance>
+sudo /etc/init.d/vsftpd restart
+
+adduser awsftpuser
+ passwd awsftpuser
+
+sudo vi /etc/vsftpd.conf
+# chroot_local_user=YES
+sudo /etc/init.d/vsftpd restart
+
+sudo usermod -d /files/ awsftpuser
+usermod -a -G root awsftpuser
+sudo /etc/init.d/vsftpd restart
+
+sudo vi /etc/vsftpd.conf
+# chroot_local_user=YES
+# write_enable=YES
+# allow_writeable_chroot=YES
+sudo /etc/init.d/vsftpd restart
+
+chown -R ftpusername /files
+```
