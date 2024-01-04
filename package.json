@@ -16,7 +16,14 @@
     "test:ci": "jest --ci",
     "test:watch": "jest --watch",
     "prepare": "husky install",
-    "docker": "docker build -t the-form-client . && docker run --env-file .env.production -dp 127.0.0.1:80:80 the-form-client"
+    "docker": "npm run docker:stop && npm run docker:rm && npm run docker:build && npm run docker:run",
+    "docker:stop": "docker stop the-form-client || true",
+    "docker:rm": "docker rm the-form-client || true",
+    "docker:build": "docker build -t the-form-client .",
+    "docker:run": "docker run --name the-form-client --env-file .env.production.local -dp 127.0.0.1:8081:8081 the-form-client",
+    "docker:mbaluev": "npm run docker:mbaluev-pull && npm run docker:mbaluev-run",
+    "docker:mbaluev-pull": "docker pull mbaluev/the-form-client:localhost",
+    "docker:mbaluev-run": "docker run --name the-form-client --env-file .env.production.local -dp 127.0.0.1:8081:8081 mbaluev/the-form-client:localhost"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
