@@ -25,7 +25,7 @@
     "docker:mbaluev-stop": "docker stop the-form-client-mbaluev || true",
     "docker:mbaluev-rm": "docker rm the-form-client-mbaluev || true && docker image rm mbaluev/the-form-client:localhost || true",
     "docker:mbaluev-pull": "docker pull --platform linux/x86_64 mbaluev/the-form-client:localhost",
-    "docker:mbaluev-run": "docker run --name the-form-client-client --env-file .env.production.local -dp 127.0.0.1:3000:3000 mbaluev/the-form-client:localhost"
+    "docker:mbaluev-run": "docker run --name the-form-client-mbaluev --env-file .env.development.local -dp 127.0.0.1:3000:3000 mbaluev/the-form-client:localhost"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
