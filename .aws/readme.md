@@ -3,6 +3,7 @@
 ### docker
 ```
 sudo apt update
+sudo apt upgrade
 sudo apt install ca-certificates curl gnupg lsb-release
 
 sudo mkdir -p /etc/apt/keyrings
@@ -75,4 +76,14 @@ sudo vi /etc/vsftpd.conf
 sudo /etc/init.d/vsftpd restart
 
 chown -R ftpusername /files
+```
+
+
+### ?https
+```
+sudo openssl req -newkey rsa:2048 -keyout cert.key -out cert.csr
+sudo openssl x509 -signkey cert.key -in cert.csr -req -days 365 -out cert.crt
+
+sudo openssl req -x509 -sha256 -days 1825 -newkey rsa:2048 -keyout rootCA.key -out rootCA.crt
+sudo openssl x509 -req -CA rootCA.crt -CAkey rootCA.key -in cert.csr -out cert.crt -days 365 -CAcreateserial -extfile domain.ext
 ```
