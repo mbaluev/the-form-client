@@ -16,7 +16,16 @@
     "test:ci": "jest --ci",
     "test:watch": "jest --watch",
     "prepare": "husky install",
-    "docker": "docker build -t the-form-client . && docker run --env-file .env.production -dp 127.0.0.1:80:80 the-form-client"
+    "docker": "npm run docker:stop && npm run docker:rm && npm run docker:build && npm run docker:run",
+    "docker:stop": "docker stop the-form-client || true",
+    "docker:rm": "docker rm the-form-client || true",
+    "docker:build": "docker build -t the-form-client .",
+    "docker:run": "docker run --name the-form-client --env-file .env.production.local -dp 127.0.0.1:3000:3000 the-form-client",
+    "docker:mbaluev": "npm run docker:mbaluev-stop && npm run docker:mbaluev-rm && npm run docker:mbaluev-pull && npm run docker:mbaluev-run",
+    "docker:mbaluev-stop": "docker stop the-form-client-mbaluev || true",
+    "docker:mbaluev-rm": "docker rm the-form-client-mbaluev || true && docker image rm mbaluev/the-form-client:localhost || true",
+    "docker:mbaluev-pull": "docker pull --platform linux/x86_64 mbaluev/the-form-client:localhost",
+    "docker:mbaluev-run": "docker run --name the-form-client-mbaluev -dp 127.0.0.1:3000:3000 mbaluev/the-form-client:localhost"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
@@ -46,7 +55,6 @@
     "countries-list": "^2.6.1",
     "country-state-city": "^3.2.0",
     "crypto-js": "^4.1.1",
-    "d3": "^7.8.5",
     "date-fns": "^2.30.0",
     "filesize": "^10.0.12",
     "i18next": "^23.4.6",
@@ -91,7 +99,6 @@
     "@babel/plugin-transform-modules-commonjs": "^7.22.11",
     "@next/eslint-plugin-next": "^13.4.19",
     "@types/autosuggest-highlight": "^3.2.0",
-    "@types/d3": "^7.4.0",
     "@types/node": "^20.5.7",
     "@types/object-path": "^0.11.1",
     "@types/spark-md5": "^3.0.2",

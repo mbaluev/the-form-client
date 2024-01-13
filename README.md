@@ -22,7 +22,7 @@ The project uses :
 
 1. [Install Docker](https://docs.docker.com/get-docker/) on your machine
 2. Build your container: `docker build -t the-form-client .`
-3. Run your container: `docker run --env-file .env.production -dp 127.0.0.1:80:80 the-form-client`
+3. Run your container: `docker run --env-file .env.production -dp 127.0.0.1:3000:3000 the-form-client`
 
 You can view your images created with `docker images`
 
