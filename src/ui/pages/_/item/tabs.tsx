@@ -3,8 +3,8 @@ import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
-import { UsersList } from '@ui/pages/admin/settings/user/index/list';
 import { Form } from '@ui/pages/admin/settings/user/item/form';
+import { Card } from '@ui/pages/_/item/card';
 
 export const Tabs = observer(() => {
   const router = useRouter();
@@ -20,7 +20,7 @@ export const Tabs = observer(() => {
     {
       key: ROUTES.ADMIN_SETTINGS_USER.tabs.keys.users,
       label: ROUTES.ADMIN_SETTINGS_USER.tabs.labels.users,
-      component: isLoading ? <TabSkeleton /> : <UsersList />,
+      component: isLoading ? <TabSkeleton /> : <Card />,
       sxPanel: { overflow: 'hidden', pb: 0 },
     },
   ];
