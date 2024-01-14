@@ -139,6 +139,7 @@ export const theme = createTheme({
     fontFamily: font.style.fontFamily,
   },
   palette: {
+    background: { default: colors.fGrey['20'] },
     divider: colors.fGrey['20'],
     common: colors.common,
     primary: colors.primary,

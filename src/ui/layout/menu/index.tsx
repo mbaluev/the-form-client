@@ -1,13 +1,16 @@
 import { observer } from 'mobx-react';
 import { MenuItem } from '@ui/layout/menu/menuItem';
 import { Wrapper } from '@ui/layout/menu/wrapper';
-import { Stack } from '@mui/material';
+import { Stack, StackProps, useMediaQuery, useTheme } from '@mui/material';
 import { useMenuStore } from '@store/modules/common/menu/useMenuStore';
 import { useEffect } from 'react';
 import { toJS } from 'mobx';
+import { MEDIA_SM } from '@hooks/useWindowSize';
 
-export const Menu = observer(() => {
+export const Menu = observer((props: StackProps) => {
   const { isOpen, hasAccess, items } = useMenuStore();
+  const isDesktop = useMediaQuery(`(min-width:${MEDIA_SM}px)`);
+  const theme = useTheme();
 
   const itemsTop = items.filter((item) => item.position !== 'bottom');
   const itemsBottom = items.filter((item) => item.position === 'bottom');
@@ -21,9 +24,19 @@ export const Menu = observer(() => {
   }, [isOpen]);
 
   if (!hasAccess) return null;
+  if (!isDesktop && !isOpen) return null;
 
   return (
-    <Stack spacing={2} justifyContent="space-between" minWidth={isOpen ? 200 : undefined}>
+    <Stack
+      id="__menu"
+      spacing={2}
+      justifyContent="space-between"
+      minWidth={isOpen ? 200 : undefined}
+      position="sticky"
+      top={theme.spacing(11)}
+      height="fit-content"
+      {...props}
+    >
       <Stack spacing={2}>
         {itemsTop?.map((item, index) => (
           <Wrapper key={index} roles={item.roles}>

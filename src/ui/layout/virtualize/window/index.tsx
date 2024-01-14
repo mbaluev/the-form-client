@@ -32,7 +32,7 @@ export const VirtualizeWindow = observer(<T,>(props: IProps<T>) => {
   const virtualize = useWindowVirtualizer({
     count: isExtraItem ? dataLength + 1 : dataLength,
     estimateSize: () => estimateSize,
-    overscan: 5,
+    overscan: 10,
   });
   const items = virtualize.getVirtualItems();
 

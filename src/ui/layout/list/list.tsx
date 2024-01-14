@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import IBaseListStore, { TListITem } from '@store/modules/base/list/interface';
 import { VirtualizeItem } from '@ui/layout/virtualize/item/item';
 import { VirtualizeSkeleton } from '@ui/layout/virtualize/item/skeleton';
-import { VirtualizeBlock } from '@ui/layout/virtualize/block';
+import { VirtualizeWindow } from '@ui/layout/virtualize/window';
 import { VirtualizeNoData } from '@ui/layout/virtualize/item/nodata';
 
 export interface IListBaseProps<T extends TListITem> {
@@ -40,7 +40,7 @@ export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
   }, dependencies || []);
 
   return (
-    <VirtualizeBlock
+    <VirtualizeWindow
       data={dataFiltered}
       dataLength={dataLength}
       estimateSize={estimateSize}

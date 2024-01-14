@@ -8,7 +8,7 @@ const Custom204 = () => {
   return (
     <PageContent>
       <NoData
-        sx={{ pt: 20 }}
+        sx={{ pt: 20, pb: 20 }}
         icon={<NewspaperOutlinedIcon />}
         message="No content. Please select item"
       />

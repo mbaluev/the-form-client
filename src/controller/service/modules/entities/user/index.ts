@@ -21,7 +21,19 @@ export class UserService implements IUserService {
       `${this.API_PREFIX}/list`,
       query
     );
-    return ret ? ret.data : undefined;
+    return ret
+      ? ret.data
+          ?.concat(ret.data)
+          .concat(ret.data)
+          .concat(ret.data)
+          .concat(ret.data)
+          .concat(ret.data)
+          .concat(ret.data)
+          .concat(ret.data)
+          .concat(ret.data)
+          .concat(ret.data)
+          .concat(ret.data)
+      : undefined;
   };
 
   getUser = async (id?: string, query?: ParsedUrlQuery): Promise<IUserDTO | undefined> => {

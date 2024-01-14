@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 import Stack from '@mui/material/Stack';
 import { Box, Button, IconButton, InputAdornment, useTheme } from '@mui/material';
@@ -18,6 +18,8 @@ import { Notifier } from '@ui/notifier';
 import { useAppStore } from '@store/modules/common/app/useAppStore';
 import { Menu } from '@ui/layout/menu';
 import { MenuBtn } from '@ui/layout/menu/btn';
+import { Separator } from '@ui/layout/card/separator';
+import MenuIcon from '@mui/icons-material/Menu';
 
 interface IProps {
   children?: ReactNode;
@@ -36,69 +38,108 @@ export const Layout = observer((props: IProps) => {
   const { isLoading } = useAppStore();
   const notifyClick = () => setOpenNotify(!isOpenNotify);
 
+  const [shadow, setShadow] = useState<boolean>(false);
+  useEffect(() => {
+    if (window) {
+      window?.addEventListener('scroll', () => {
+        if (window.scrollY > 0) setShadow(true);
+        else setShadow(false);
+      });
+    }
+  }, []);
+
   return (
-    <Stack id="__layout" spacing={3} sx={{ p: 3, height: '100%' }}>
-      <Stack id="__layout_top" direction="row" spacing={3}>
-        <Stack id="__layout_top_logo" direction="row" spacing={3}>
-          <MenuBtn />
-          <Link passHref href={ROUTES.HOME.path}>
-            {size.width && size.width <= MEDIA_XS ? (
-              <IconButton>
-                <LogoTheForm />
-              </IconButton>
-            ) : (
-              <Button startIcon={<LogoTheForm fill={theme.palette.primary.main} />} variant="text">
-                The Form
-              </Button>
+    <Stack id="__layout" padding={2} paddingBottom={0} height="100%">
+      <Stack
+        id="__layout_top"
+        position="fixed"
+        top={0}
+        left={0}
+        width="100%"
+        padding={2}
+        paddingBottom={0}
+        sx={{ backgroundColor: theme.palette.fGrey[20] }}
+        zIndex={2}
+        spacing={2}
+      >
+        <Stack direction="row" spacing={2}>
+          <Stack id="__layout_top_logo" direction="row" spacing={2}>
+            <MenuBtn />
+            <Link passHref href={ROUTES.HOME.path}>
+              {size.width && size.width <= MEDIA_XS ? (
+                <IconButton>
+                  <LogoTheForm />
+                </IconButton>
+              ) : (
+                <Button
+                  startIcon={<LogoTheForm fill={theme.palette.primary.main} />}
+                  variant="text"
+                >
+                  The Form
+                </Button>
+              )}
+            </Link>
+          </Stack>
+          <Stack id="__layout_top_search" direction="row" flex="1 1 auto">
+            {globalSearch && !isLoading && (
+              <TextInputField
+                placeholder="Search"
+                sx={{
+                  backgroundColor: theme.palette.common.white,
+                  borderRadius: 1,
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    border: 'none',
+                  },
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton edge="end">
+                        <TuneIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                fullWidth
+              />
             )}
-          </Link>
+          </Stack>
+          <Stack id="__layout_top_account" direction="row" spacing={2}>
+            {isAuth && !isLoading && support && (
+              <IconButton color="secondary">
+                <HeadsetMicIcon />
+              </IconButton>
+            )}
+            {isAuth && !isLoading && notifications && (
+              <IconButton color="secondary" onClick={notifyClick}>
+                <NotificationsIcon />
+              </IconButton>
+            )}
+            <Account />
+          </Stack>
         </Stack>
-        <Stack id="__layout_top_search" direction="row" flex="1 1 auto">
-          {globalSearch && !isLoading && (
-            <TextInputField
-              placeholder="Search"
-              sx={{
-                backgroundColor: theme.palette.common.white,
-                borderRadius: 1,
-                '& .MuiOutlinedInput-notchedOutline': {
-                  border: 'none',
-                },
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton edge="end">
-                      <TuneIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              fullWidth
-            />
-          )}
-        </Stack>
-        <Stack id="__layout_top_account" direction="row" spacing={2}>
-          {isAuth && !isLoading && support && (
-            <IconButton color="secondary">
-              <HeadsetMicIcon />
-            </IconButton>
-          )}
-          {isAuth && !isLoading && notifications && (
-            <IconButton color="secondary" onClick={notifyClick}>
-              <NotificationsIcon />
-            </IconButton>
-          )}
-          <Account />
-        </Stack>
+        {shadow && <Separator sx={{ borderColor: theme.palette.fGrey[30] }} />}
       </Stack>
-      <Stack id="__layout_bottom" direction="row" spacing={3} flex="1 1 auto" overflow="hidden">
-        <Menu />
-        <Box id="__layout_bottom_main" sx={{ flex: '1 1 auto' }}>
+      <Stack id="__layout_top_holder" spacing={2}>
+        <IconButton sx={{ visibility: 'hidden' }}>
+          <MenuIcon />
+        </IconButton>
+      </Stack>
+      <Stack
+        id="__layout_bottom"
+        direction="row"
+        spacing={2}
+        paddingBottom={2}
+        marginTop={2}
+        flexGrow={1}
+      >
+        <Menu sx={{ pt: shadow ? 3 : undefined }} />
+        <Box id="__layout_bottom_main" flex="1 1 auto">
           {children}
         </Box>
       </Stack>
