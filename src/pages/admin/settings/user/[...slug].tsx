@@ -5,6 +5,9 @@ import { Page } from '@ui/layout/page/page';
 import { PageUsers } from '@ui/pages/admin/settings/user/index/page';
 import { PageUser } from '@ui/pages/admin/settings/user/item/page';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { observer } from 'mobx-react';
+import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
 
 const User = (props: any) => {
   const router = useRouter();
@@ -22,6 +25,15 @@ const User = (props: any) => {
       url: { pathname: ROUTES.ADMIN_SETTINGS_USER.path, query: router.query },
     },
   ];
+
+  const { getData } = useUserItemStore();
+  useEffect(() => {
+    if (router.query.slug) {
+      const id = router.query.slug[0];
+      getData(id);
+    }
+  }, [router.query.slug]);
+
   return (
     <MasterAuth>
       <Page {...props} breadCrumbs={breadCrumbs} right={<PageUser />}>
@@ -31,4 +43,4 @@ const User = (props: any) => {
   );
 };
 
-export default User;
+export default observer(User);
