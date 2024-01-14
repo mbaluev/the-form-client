@@ -8,10 +8,7 @@ import { action, makeObservable, observable } from 'mobx';
 import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
-export class ModuleViewModel
-  extends BaseCardViewModel<IModuleDTO>
-  implements IModuleViewModel
-{
+export class ModuleViewModel extends BaseCardViewModel<IModuleDTO> implements IModuleViewModel {
   @inject(SERVICE.Module) protected serviceModule!: ModuleService;
 
   constructor() {

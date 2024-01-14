@@ -4,11 +4,7 @@ import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { ParsedUrlQuery } from 'querystring';
 import { IResponseItemDTO, IResponseListDTO } from '@model/common/response';
 import { ITaskService } from '@service/modules/entities/task/interface';
-import {
-  ITaskDTO,
-  ITaskUserDocumentDTO,
-  ITaskUserDTO,
-} from '@model/entities/task';
+import { ITaskDTO, ITaskUserDocumentDTO, ITaskUserDTO } from '@model/entities/task';
 
 @injectable()
 export class TaskService implements ITaskService {
@@ -16,20 +12,14 @@ export class TaskService implements ITaskService {
 
   API_PREFIX = `/api/task`;
 
-  getTasks = async (
-    query?: ParsedUrlQuery
-  ): Promise<ITaskDTO[] | undefined> => {
-    const ret = await this.apiModule.post<IResponseListDTO<ITaskDTO>>(
-      `${this.API_PREFIX}/list`,
-      { ...query }
-    );
+  getTasks = async (query?: ParsedUrlQuery): Promise<ITaskDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<ITaskDTO>>(`${this.API_PREFIX}/list`, {
+      ...query,
+    });
     return ret ? ret.data : undefined;
   };
 
-  getTask = async (
-    id?: string,
-    query?: ParsedUrlQuery
-  ): Promise<ITaskDTO | undefined> => {
+  getTask = async (id?: string, query?: ParsedUrlQuery): Promise<ITaskDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<ITaskDTO>>(
       `${this.API_PREFIX}/item/${id}`,
       { ...query }
@@ -64,9 +54,7 @@ export class TaskService implements ITaskService {
 
   // user
 
-  getTasksUser = async (
-    query?: ParsedUrlQuery
-  ): Promise<ITaskUserDTO[] | undefined> => {
+  getTasksUser = async (query?: ParsedUrlQuery): Promise<ITaskUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<ITaskUserDTO>>(
       `${this.API_PREFIX}/user/list`,
       { ...query }
@@ -74,10 +62,7 @@ export class TaskService implements ITaskService {
     return ret ? ret.data : undefined;
   };
 
-  getTaskUser = async (
-    id?: string,
-    query?: ParsedUrlQuery
-  ): Promise<ITaskUserDTO | undefined> => {
+  getTaskUser = async (id?: string, query?: ParsedUrlQuery): Promise<ITaskUserDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<ITaskUserDTO>>(
       `${this.API_PREFIX}/user/item/${id}`,
       { ...query }
@@ -94,9 +79,7 @@ export class TaskService implements ITaskService {
 
   // admin
 
-  getTasksAdmin = async (
-    query?: ParsedUrlQuery
-  ): Promise<ITaskUserDTO[] | undefined> => {
+  getTasksAdmin = async (query?: ParsedUrlQuery): Promise<ITaskUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<ITaskUserDTO>>(
       `${this.API_PREFIX}/admin/list`,
       { ...query }
@@ -104,10 +87,7 @@ export class TaskService implements ITaskService {
     return ret ? ret.data : undefined;
   };
 
-  getTaskAdmin = async (
-    id?: string,
-    query?: ParsedUrlQuery
-  ): Promise<ITaskUserDTO | undefined> => {
+  getTaskAdmin = async (id?: string, query?: ParsedUrlQuery): Promise<ITaskUserDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<ITaskUserDTO>>(
       `${this.API_PREFIX}/admin/item/${id}`,
       { ...query }

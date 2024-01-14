@@ -67,10 +67,8 @@ $dialog-min-width: $base * 100;
     max-height: calc(100% - #{$dialog-margin-top + $dialog-margin-bottom});
     max-width: calc(100% - #{$dialog-margin-right + $dialog-margin-left});
     min-width: $dialog-min-width;
-    margin: $dialog-margin-top $dialog-margin-right $dialog-margin-bottom
-      $dialog-margin-left;
-    box-shadow: 0 11px 15px -7px rgba($color-black, 0.2),
-      0px 24px 38px 3px rgba($color-black, 0.14),
+    margin: $dialog-margin-top $dialog-margin-right $dialog-margin-bottom $dialog-margin-left;
+    box-shadow: 0 11px 15px -7px rgba($color-black, 0.2), 0px 24px 38px 3px rgba($color-black, 0.14),
       0px 9px 46px 8px rgba($color-black, 0.12);
 
     &_shake {

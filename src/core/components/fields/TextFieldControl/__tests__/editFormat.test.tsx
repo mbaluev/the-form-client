@@ -22,11 +22,7 @@ test('text-field-control edit-format', () => {
   // render useLocale hook
   const diContainer = initializeDiContainer();
   const wrapper: FC<IDIContainerProviderProps> = ({ container, children }) => {
-    return (
-      <DiContainerProvider container={container}>
-        {children}
-      </DiContainerProvider>
-    );
+    return <DiContainerProvider container={container}>{children}</DiContainerProvider>;
   };
   const { result } = renderHook(() => useLocale(), {
     wrapper,

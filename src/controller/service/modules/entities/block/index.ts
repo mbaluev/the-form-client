@@ -12,20 +12,14 @@ export class BlockService implements IBlockService {
 
   API_PREFIX = `/api/block`;
 
-  getBlocks = async (
-    query?: ParsedUrlQuery
-  ): Promise<IBlockDTO[] | undefined> => {
-    const ret = await this.apiModule.post<IResponseListDTO<IBlockDTO>>(
-      `${this.API_PREFIX}/list`,
-      { ...query }
-    );
+  getBlocks = async (query?: ParsedUrlQuery): Promise<IBlockDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<IBlockDTO>>(`${this.API_PREFIX}/list`, {
+      ...query,
+    });
     return ret ? ret.data : undefined;
   };
 
-  getBlock = async (
-    id?: string,
-    query?: ParsedUrlQuery
-  ): Promise<IBlockDTO | undefined> => {
+  getBlock = async (id?: string, query?: ParsedUrlQuery): Promise<IBlockDTO | undefined> => {
     const ret = await this.apiModule.post<IResponseItemDTO<IBlockDTO>>(
       `${this.API_PREFIX}/item/${id}`,
       { ...query }
@@ -73,9 +67,7 @@ export class BlockService implements IBlockService {
 
   // --- admin
 
-  getBlocksAdmin = async (
-    query?: ParsedUrlQuery
-  ): Promise<IBlockUserDTO[] | undefined> => {
+  getBlocksAdmin = async (query?: ParsedUrlQuery): Promise<IBlockUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IBlockUserDTO>>(
       `${this.API_PREFIX}/admin/list`,
       { ...query }

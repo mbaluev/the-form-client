@@ -8,12 +8,9 @@ export const getToggleItemsFromObject = <ItemType>(
   return getToggleItemsFromDictionary(dictionary).filter((item) => {
     if (data) {
       if (Array.isArray(data[fieldName])) {
-        return (data[fieldName] as unknown as string[]).reduce(
-          (prev: boolean, curr: string) => {
-            return prev || item.value === curr;
-          },
-          false
-        );
+        return (data[fieldName] as unknown as string[]).reduce((prev: boolean, curr: string) => {
+          return prev || item.value === curr;
+        }, false);
       } else {
         return String(item.value) === String(data[fieldName]);
       }

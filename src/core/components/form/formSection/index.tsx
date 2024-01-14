@@ -88,9 +88,7 @@ export const FormSection: FC<IFormSectionProps> = (props) => {
             <FormSectionTitleText />
             <FormSectionTitleCollapse />
           </div>
-          {rightBlock && (
-            <div className="form-section__title-right">{rightBlock}</div>
-          )}
+          {rightBlock && <div className="form-section__title-right">{rightBlock}</div>}
         </div>
       ) : null}
       {subtitle && <div className="form-section__subtitle">{subtitle}</div>}

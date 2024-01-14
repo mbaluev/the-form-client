@@ -15,9 +15,5 @@ export const isAccess = (claimRoles?: string[], roles?: string[]) => {
 export const PermissionWrapper: FC<IProps> = observer((props) => {
   const { roles, children } = props;
   const { roles: claimRoles } = useAuth();
-  return (
-    <React.Fragment>
-      {isAccess(claimRoles, roles) ? children : null}
-    </React.Fragment>
-  );
+  return <React.Fragment>{isAccess(claimRoles, roles) ? children : null}</React.Fragment>;
 });

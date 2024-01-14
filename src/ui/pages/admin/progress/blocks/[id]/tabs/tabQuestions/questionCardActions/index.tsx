@@ -8,9 +8,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { IQuestionAdminViewModel } from '@viewModel/modules/entities/question/admin/interface';
 
 export const QuestionCardActions = observer(() => {
-  const { stop } = useViewModel<IQuestionAdminViewModel>(
-    VIEW_MODEL.QuestionAdmin
-  );
+  const { stop } = useViewModel<IQuestionAdminViewModel>(VIEW_MODEL.QuestionAdmin);
 
   const handleClose = () => stop();
 

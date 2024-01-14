@@ -1,5 +1,4 @@
-export type TMenuItemDTO = IMenuItem &
-  (IMenuItemParentDTO | IMenuItemChildrenDTO);
+export type TMenuItemDTO = IMenuItem & (IMenuItemParentDTO | IMenuItemChildrenDTO);
 
 interface IMenuItem {
   name: string;

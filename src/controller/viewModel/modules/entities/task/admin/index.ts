@@ -7,10 +7,7 @@ import { TaskBaseViewModel } from '@viewModel/modules/entities/task/base';
 import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
-export class TaskAdminViewModel
-  extends TaskBaseViewModel
-  implements ITaskAdminViewModel
-{
+export class TaskAdminViewModel extends TaskBaseViewModel implements ITaskAdminViewModel {
   @inject(VIEW_MODEL.BlockAdmin) protected userBlock!: BlockAdminViewModel;
 
   constructor() {

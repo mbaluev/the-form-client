@@ -56,11 +56,7 @@ export const RangeFieldControlEdit = (props: RangeFieldControlProps) => {
     }
   };
 
-  const handleChange = (
-    event: any,
-    newValue: number[],
-    activeThumb: number
-  ) => {
+  const handleChange = (event: any, newValue: number[], activeThumb: number) => {
     setState(newValue);
     if (onChange) {
       onChange(event, newValue, activeThumb);
@@ -112,9 +108,7 @@ export const RangeFieldControlEdit = (props: RangeFieldControlProps) => {
         disabled={disabled}
         error={error}
       />
-      {error && helperText && (
-        <FormHelperText error={error}>{helperText}</FormHelperText>
-      )}
+      {error && helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
       <RangePopover
         anchorEl={inputRef.current}
         onClose={setClosed}

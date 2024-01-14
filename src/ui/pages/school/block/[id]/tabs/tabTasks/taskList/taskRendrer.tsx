@@ -10,18 +10,10 @@ export const TaskRenderer = (params: ICellRendererParams) => {
   const type = params.data?.task?.document?.documentType?.name;
   return (
     <Stack direction="row" spacing={2} alignItems="center" height="100%">
-      <Stack
-        direction="row"
-        spacing={2}
-        alignItems="center"
-        height="100%"
-        flex="1 1 auto"
-      >
+      <Stack direction="row" spacing={2} alignItems="center" height="100%" flex="1 1 auto">
         <Typography>{index}.</Typography>
         <IconTask userTask={params.data} />
-        <Typography style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {name}
-        </Typography>
+        <Typography style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{name}</Typography>
       </Stack>
       <Tag tag={type} color="blue" />
     </Stack>

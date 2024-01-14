@@ -8,8 +8,9 @@ import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/in
 import { useRouter } from 'next/router';
 
 const Module = () => {
-  const { getData: getModule, clearData: clearModule } =
-    useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
+  const { getData: getModule, clearData: clearModule } = useViewModel<IModuleUserViewModel>(
+    VIEW_MODEL.ModuleUser
+  );
 
   const router = useRouter();
   const id = router.query?.id as string;

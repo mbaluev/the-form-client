@@ -86,11 +86,7 @@ export const Modal: FC<IModalProps> = (props) => {
   return isOpen ? (
     <div className="modal">
       <div className="modal-backdrop" />
-      <div
-        className="modal-container"
-        onMouseDown={shake}
-        onAnimationEnd={shakeEnd}
-      >
+      <div className="modal-container" onMouseDown={shake} onAnimationEnd={shakeEnd}>
         <div className={draggableCls}>
           <div className={dialogCls}>
             <div className="modal-title">

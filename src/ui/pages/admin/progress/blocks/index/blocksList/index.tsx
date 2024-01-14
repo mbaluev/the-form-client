@@ -4,11 +4,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { DefaultRenderer } from '@ui/layout/grid/renderers/defaultRenderer';
-import {
-  CellClickedEvent,
-  ICellRendererParams,
-  RowClassParams,
-} from 'ag-grid-community';
+import { CellClickedEvent, ICellRendererParams, RowClassParams } from 'ag-grid-community';
 import { useRouter } from 'next/router';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { IBlockAdminViewModel } from '@viewModel/modules/entities/block/admin/interface';
@@ -17,14 +13,12 @@ import { InputAdornment, Stack } from '@mui/material';
 import { IconButton } from '@components/iconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { IconRenderer } from '@ui/pages/admin/progress/blocks/index/blocksList/iconRendrer';
-import {
-  getProgress,
-  ModuleProgress,
-} from '@ui/pages/school/module/index/moduleProgress';
+import { getProgress, ModuleProgress } from '@ui/pages/school/module/index/moduleProgress';
 
 export const BlocksList = observer(() => {
-  const { list, listFiltered, hasList, filter, setFilter } =
-    useViewModel<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin);
+  const { list, listFiltered, hasList, filter, setFilter } = useViewModel<IBlockAdminViewModel>(
+    VIEW_MODEL.BlockAdmin
+  );
 
   const defaultColDef = useMemo(
     () => ({

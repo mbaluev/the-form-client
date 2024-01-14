@@ -74,15 +74,9 @@ export const BreadCrumb: FC<TBreadCrumb> = (props) => {
                     {item.complete !== undefined && (
                       <ListItemIcon>
                         {item.complete ? (
-                          <CheckCircleIcon
-                            fontSize="small"
-                            className={clsIcon}
-                          />
+                          <CheckCircleIcon fontSize="small" className={clsIcon} />
                         ) : (
-                          <RadioButtonUncheckedIcon
-                            fontSize="small"
-                            className={clsIcon}
-                          />
+                          <RadioButtonUncheckedIcon fontSize="small" className={clsIcon} />
                         )}
                       </ListItemIcon>
                     )}

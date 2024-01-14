@@ -49,11 +49,7 @@ export const Page: FC<IProps> = (props) => {
     if (!breadCrumbs) return null;
     return (
       <div className={clsBreadCrumbs}>
-        {breadCrumbsLoading ? (
-          <BreadCrumbsSkeleton />
-        ) : (
-          <BreadCrumbs breadCrumbs={breadCrumbs} />
-        )}
+        {breadCrumbsLoading ? <BreadCrumbsSkeleton /> : <BreadCrumbs breadCrumbs={breadCrumbs} />}
       </div>
     );
   };
@@ -63,9 +59,7 @@ export const Page: FC<IProps> = (props) => {
         {(subTitle || title || quickFilter) && (
           <div className={clsTop}>
             <div className={clsTopRow}>
-              <div className={clsTopColumn}>
-                {title && <div className={clsTitle}>{title}</div>}
-              </div>
+              <div className={clsTopColumn}>{title && <div className={clsTitle}>{title}</div>}</div>
               {quickFilter && (
                 <div className={clsTopColumn}>
                   <div className={clsQuickFilter}>{quickFilter}</div>

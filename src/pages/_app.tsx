@@ -7,10 +7,7 @@ import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { ThemeProvider } from '@mui/material/styles';
-import {
-  createEmotionCache,
-  createEmotionCacheRtl,
-} from '@utils/cache/createEmotionCache';
+import { createEmotionCache, createEmotionCacheRtl } from '@utils/cache/createEmotionCache';
 import { initializeDiContainer } from '@app/diContainer/diContainer';
 import { DiContainerProvider } from '@app/diContainer/diContainerProvider';
 import { VIEW_MODEL } from '@viewModel/ids';
@@ -44,9 +41,7 @@ const filter = container.get<IFilterViewModel>(VIEW_MODEL.Filter);
 const MyApp = (props: MyAppProps) => {
   const {
     Component,
-    emotionCache = locale.isRtl
-      ? clientSideEmotionCacheRtl
-      : clientSideEmotionCache,
+    emotionCache = locale.isRtl ? clientSideEmotionCacheRtl : clientSideEmotionCache,
     pageProps,
   } = props;
 

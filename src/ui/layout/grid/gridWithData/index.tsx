@@ -67,12 +67,7 @@ export const GridWithData = observer((props: IProps) => {
     []
   );
   const sizeToFitFn = useCallback(() => {
-    if (
-      sizeToFit &&
-      gridRef.current &&
-      gridRef.current.columnApi &&
-      gridRef.current.api
-    ) {
+    if (sizeToFit && gridRef.current && gridRef.current.columnApi && gridRef.current.api) {
       gridRef.current.columnApi.autoSizeColumns(autoSizeColumns);
       gridRef.current.api.sizeColumnsToFit();
     }
@@ -138,21 +133,14 @@ export const GridWithData = observer((props: IProps) => {
             {...propsAG}
           />
         )}
-        {!hasRows && !isLoading && (
-          <NoData icon={<DoNotDisturbIcon />} message={noDataMessage} />
-        )}
+        {!hasRows && !isLoading && <NoData icon={<DoNotDisturbIcon />} message={noDataMessage} />}
         {!hasRows && isLoading && (
-          <NoData
-            icon={<Loader loading={isLoading} relative />}
-            message="Loading..."
-          />
+          <NoData icon={<Loader loading={isLoading} relative />} message="Loading..." />
         )}
       </div>
       <div className={clsFooter}>
         <div className="ag-grid-footer__label">Items:</div>
-        <div className="ag-grid-footer__filtered">
-          {propsAG.rowData?.length || 0}
-        </div>
+        <div className="ag-grid-footer__filtered">{propsAG.rowData?.length || 0}</div>
         <div className="ag-grid-footer__total">{totalItems || 0}</div>
       </div>
     </div>

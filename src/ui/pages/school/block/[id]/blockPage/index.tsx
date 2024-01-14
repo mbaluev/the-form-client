@@ -3,10 +3,7 @@ import { observer } from 'mobx-react';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { Page } from '@ui/layout/page';
 import { classNames } from '@utils/classNames';
-import {
-  getProgress,
-  ModuleProgress,
-} from '@ui/pages/school/module/index/moduleProgress';
+import { getProgress, ModuleProgress } from '@ui/pages/school/module/index/moduleProgress';
 import { SubTitleBlock } from '@ui/components/subTitle/subTitleBlock';
 import { BlockTabNames } from '@ui/components/blockTab/blockTabNames';
 import { MaterialCard } from '@ui/pages/school/block/[id]/tabs/tabMaterials/materialCard';
@@ -24,14 +21,8 @@ import { IconButton } from '@components/iconButton';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const BlockPage = observer(() => {
-  const { data: userModule } = useViewModel<IModuleUserViewModel>(
-    VIEW_MODEL.ModuleUser
-  );
-  const {
-    data: userBlock,
-    tab,
-    refresh,
-  } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
+  const { data: userModule } = useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
+  const { data: userBlock, tab, refresh } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
 
   const cls = classNames('block-page', {
     'block-page_complete': Boolean(userModule && userModule.complete),
@@ -52,8 +43,7 @@ export const BlockPage = observer(() => {
       url: { pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.path },
     },
     {
-      label:
-        userModule && userModule.module ? userModule.module.name : 'loading...',
+      label: userModule && userModule.module ? userModule.module.name : 'loading...',
       url: {
         pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path,
         query: { id: userModule?.id },

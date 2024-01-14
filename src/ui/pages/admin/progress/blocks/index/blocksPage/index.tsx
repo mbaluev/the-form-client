@@ -5,10 +5,7 @@ import { observer } from 'mobx-react';
 import { BlocksList } from '@ui/pages/admin/progress/blocks/index/blocksList';
 import { TitleModule } from '@ui/components/title/titleModule';
 import { SubTitleModule } from '@ui/components/subTitle/subTitleModule';
-import {
-  getProgress,
-  ModuleProgress,
-} from '@ui/pages/school/module/index/moduleProgress';
+import { getProgress, ModuleProgress } from '@ui/pages/school/module/index/moduleProgress';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { IModuleAdminViewModel } from '@viewModel/modules/entities/module/admin/interface';
@@ -18,9 +15,7 @@ interface IProps {
 }
 
 export const BlocksPage = observer((props: IProps) => {
-  const { data: userModule } = useViewModel<IModuleAdminViewModel>(
-    VIEW_MODEL.ModuleAdmin
-  );
+  const { data: userModule } = useViewModel<IModuleAdminViewModel>(VIEW_MODEL.ModuleAdmin);
   const { breadCrumbs } = props;
   const progressValues = userModule?.userBlocks?.reduce(
     (prev: boolean[], curr) =>

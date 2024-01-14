@@ -11,9 +11,7 @@ import { VIEW_MODEL } from '@viewModel/ids';
 import { IMaterialAdminViewModel } from '@viewModel/modules/entities/material/admin/interface';
 
 export const MaterialCard = observer(() => {
-  const { data, isDataLoading } = useViewModel<IMaterialAdminViewModel>(
-    VIEW_MODEL.MaterialAdmin
-  );
+  const { data, isDataLoading } = useViewModel<IMaterialAdminViewModel>(VIEW_MODEL.MaterialAdmin);
 
   if (!data || isDataLoading) {
     return <Page204 loading={isDataLoading} />;

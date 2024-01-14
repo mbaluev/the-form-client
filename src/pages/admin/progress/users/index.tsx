@@ -9,8 +9,9 @@ import { IUserAdminViewModel } from '@viewModel/modules/entities/user/admin/inte
 import { UsersPage } from '@ui/pages/admin/progress/users/usersPage';
 
 const Users = () => {
-  const { getList: getUsers, clearList: clearUsers } =
-    useViewModel<IUserAdminViewModel>(VIEW_MODEL.UserAdmin);
+  const { getList: getUsers, clearList: clearUsers } = useViewModel<IUserAdminViewModel>(
+    VIEW_MODEL.UserAdmin
+  );
 
   const breadCrumbs: TBreadCrumb[] = [
     {

@@ -7,9 +7,7 @@ import { CheckboxFieldControl, TextFieldControl } from '@components/fields';
 import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 
 export const TabDetails = observer(() => {
-  const { data, changeField, getError } = useViewModel<IUserViewModel>(
-    VIEW_MODEL.User
-  );
+  const { data, changeField, getError } = useViewModel<IUserViewModel>(VIEW_MODEL.User);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();

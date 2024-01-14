@@ -11,9 +11,7 @@ import { DocumentButton } from '@ui/components/documentButton';
 import { useLocale } from '@hooks/useLocale';
 
 export const TaskCardContent = observer(() => {
-  const { data, download } = useViewModel<ITaskUserViewModel>(
-    VIEW_MODEL.TaskUser
-  );
+  const { data, download } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
   const { fDateTime } = useLocale();
 
   if (!data?.userTaskDocuments || data?.userTaskDocuments.length === 0) {
@@ -28,10 +26,7 @@ export const TaskCardContent = observer(() => {
   return (
     <Stack height="100%" spacing="20px">
       <FormSection>
-        <DocumentButton
-          doc={data.userTaskDocuments[0].document}
-          download={download}
-        />
+        <DocumentButton doc={data.userTaskDocuments[0].document} download={download} />
         <FormField title="Document name">
           <Box>{data.userTaskDocuments[0].document?.name}</Box>
         </FormField>

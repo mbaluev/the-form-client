@@ -45,9 +45,7 @@ export const SwitchFieldControlEdit = (props: SwitchFieldControlProps) => {
         label={label}
         labelPlacement={labelPlacement}
       />
-      {helperText && (
-        <FormHelperText error={!!error}>{helperText}</FormHelperText>
-      )}
+      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
     </FormControl>
   );
 };

@@ -10,8 +10,9 @@ import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
 
 const Modules = () => {
-  const { getList: getModules, clearList: clearModules } =
-    useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
+  const { getList: getModules, clearList: clearModules } = useViewModel<IModuleViewModel>(
+    VIEW_MODEL.Module
+  );
 
   const router = useRouter();
   const breadCrumbs: TBreadCrumb[] = [

@@ -1,10 +1,7 @@
 import React from 'react';
 import { FormField, FormSection } from '@components/form';
 import { observer } from 'mobx-react';
-import {
-  MonthRangeFieldControl,
-  YearMonthRange,
-} from '@components/fields/MonthRangeFieldControl';
+import { MonthRangeFieldControl, YearMonthRange } from '@components/fields/MonthRangeFieldControl';
 import { TODAY } from '@utils/date/today';
 
 export const MonthRangeFieldControls = observer((props: { id?: string }) => {

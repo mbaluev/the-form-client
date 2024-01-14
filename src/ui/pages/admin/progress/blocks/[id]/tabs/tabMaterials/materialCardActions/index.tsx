@@ -8,9 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { IMaterialAdminViewModel } from '@viewModel/modules/entities/material/admin/interface';
 
 export const MaterialCardActions = observer(() => {
-  const { clearData } = useViewModel<IMaterialAdminViewModel>(
-    VIEW_MODEL.MaterialAdmin
-  );
+  const { clearData } = useViewModel<IMaterialAdminViewModel>(VIEW_MODEL.MaterialAdmin);
 
   const handleClose = async () => {
     clearData();

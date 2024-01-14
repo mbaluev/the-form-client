@@ -14,12 +14,7 @@ export const UserPage = observer((props: IProps) => {
   const { breadCrumbs, ...other } = props;
 
   return (
-    <Page
-      title="Users"
-      breadCrumbs={breadCrumbs}
-      padding={false}
-      pageRight={<UserCard />}
-    >
+    <Page title="Users" breadCrumbs={breadCrumbs} padding={false} pageRight={<UserCard />}>
       <UserList {...other} />
     </Page>
   );

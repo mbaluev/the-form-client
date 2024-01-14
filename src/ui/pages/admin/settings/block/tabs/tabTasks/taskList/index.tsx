@@ -105,25 +105,14 @@ export const TaskList = observer(() => {
     <IconButton tooltip="Add new task" onClick={modalNew}>
       <AddIcon />
     </IconButton>,
-    <IconButton
-      tooltip="Delete tasks"
-      onClick={handleDelete}
-      disabled={!hasDelete}
-    >
+    <IconButton tooltip="Delete tasks" onClick={handleDelete} disabled={!hasDelete}>
       <DeleteIcon />
     </IconButton>,
   ];
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
-  }, [
-    filter,
-    deleteIds,
-    isDeleteOpen,
-    isDeleteLoading,
-    isModalOpen,
-    preventClick,
-  ]);
+  }, [filter, deleteIds, isDeleteOpen, isDeleteLoading, isModalOpen, preventClick]);
 
   return (
     <React.Fragment>

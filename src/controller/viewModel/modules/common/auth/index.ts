@@ -12,10 +12,7 @@ import cookie from '@utils/cookie';
 import moment from 'moment';
 
 @injectable()
-export class AuthViewModel
-  extends BaseCardViewModel<IUserDTO>
-  implements IAuthViewModel
-{
+export class AuthViewModel extends BaseCardViewModel<IUserDTO> implements IAuthViewModel {
   @inject(SERVICE.Auth) protected serviceAuth!: AuthService;
 
   @inject(SERVICE.User) protected serviceUser!: UserService;

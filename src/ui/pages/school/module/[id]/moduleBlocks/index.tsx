@@ -6,9 +6,7 @@ import { observer } from 'mobx-react';
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 
 export const ModuleBlocks = observer(() => {
-  const { data: userModule } = useViewModel<IModuleUserViewModel>(
-    VIEW_MODEL.ModuleUser
-  );
+  const { data: userModule } = useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
   return (
     <div className="cols_4">
       {userModule?.userBlocks?.map((userBlock, index) => {

@@ -14,10 +14,7 @@ export const IconQuestion = (props: IProps) => {
   const { userQuestion, style } = props;
   const title = statusQuestion(userQuestion);
   let icon = <CircleOutlinedIcon className="color_grey-50" style={style} />;
-  if (
-    userQuestion?.userQuestionAnswers &&
-    userQuestion?.userQuestionAnswers.length > 0
-  ) {
+  if (userQuestion?.userQuestionAnswers && userQuestion?.userQuestionAnswers.length > 0) {
     icon = <CheckCircleIcon className="color_grey-50" style={style} />;
   }
   if (userQuestion?.complete) {

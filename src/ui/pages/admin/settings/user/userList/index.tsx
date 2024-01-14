@@ -22,15 +22,8 @@ interface IProps {
 export const UserList = observer((props: IProps) => {
   const { onNewCallback } = props;
 
-  const {
-    userData,
-    list,
-    hasList,
-    isModalOpen,
-    modalNew,
-    modalClose,
-    modalSubmit,
-  } = useViewModel<IUserViewModel>(VIEW_MODEL.User);
+  const { userData, list, hasList, isModalOpen, modalNew, modalClose, modalSubmit } =
+    useViewModel<IUserViewModel>(VIEW_MODEL.User);
 
   const defaultColDef = useMemo(
     () => ({
@@ -50,11 +43,7 @@ export const UserList = observer((props: IProps) => {
   ];
 
   const itemsLeft: JSX.Element[] = [
-    <FilterText
-      name="search"
-      placeholder="Search"
-      style={{ flex: '1 1 auto' }}
-    />,
+    <FilterText name="search" placeholder="Search" style={{ flex: '1 1 auto' }} />,
   ];
   const itemsRight: JSX.Element[] = [
     <IconButton tooltip="New" onClick={modalNew}>

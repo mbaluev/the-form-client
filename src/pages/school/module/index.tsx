@@ -7,8 +7,9 @@ import { observer } from 'mobx-react';
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 
 const Module = () => {
-  const { getList: getModules, clearList: clearModules } =
-    useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
+  const { getList: getModules, clearList: clearModules } = useViewModel<IModuleUserViewModel>(
+    VIEW_MODEL.ModuleUser
+  );
 
   useEffect(() => {
     getModules();

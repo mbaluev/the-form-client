@@ -9,14 +9,8 @@ import { FetchApiModule } from '@infrastructure/modules/fetch';
 
 export const infrastructureContainer = new Container();
 
-infrastructureContainer
-  .bind<IAxiosApiModule>(INFRASTRUCTURE_MODULE.Axios)
-  .to(AxiosApiModule);
+infrastructureContainer.bind<IAxiosApiModule>(INFRASTRUCTURE_MODULE.Axios).to(AxiosApiModule);
 
-infrastructureContainer
-  .bind<IFileApiModule>(INFRASTRUCTURE_MODULE.File)
-  .to(FileApiModule);
+infrastructureContainer.bind<IFileApiModule>(INFRASTRUCTURE_MODULE.File).to(FileApiModule);
 
-infrastructureContainer
-  .bind<IFetchApiModule>(INFRASTRUCTURE_MODULE.Fetch)
-  .to(FetchApiModule);
+infrastructureContainer.bind<IFetchApiModule>(INFRASTRUCTURE_MODULE.Fetch).to(FetchApiModule);

@@ -44,11 +44,6 @@ export const TabVerticalControls = () => {
   };
 
   return (
-    <Tabs
-      tabs={TAB_CONFIG}
-      activeTab={active}
-      onChangeTab={onChangeTab}
-      orientation="vertical"
-    />
+    <Tabs tabs={TAB_CONFIG} activeTab={active} onChangeTab={onChangeTab} orientation="vertical" />
   );
 };

@@ -17,12 +17,7 @@ export const TODAY = {
   monthSubtract: (monthCount: number) => {
     return moment(new Date()).subtract(monthCount, 'months').month();
   },
-  yearMonthDiff: (
-    startYear: number,
-    startMonth: number,
-    endYear: number,
-    endMonth: number
-  ) => {
+  yearMonthDiff: (startYear: number, startMonth: number, endYear: number, endMonth: number) => {
     const start = moment({
       year: startYear,
       month: startMonth,

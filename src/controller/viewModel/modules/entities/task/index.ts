@@ -14,10 +14,7 @@ import { ITaskDTO } from '@model/entities/task';
 import { TaskService } from '@service/modules/entities/task';
 
 @injectable()
-export class TaskViewModel
-  extends BaseCardViewModel<ITaskDTO>
-  implements ITaskViewModel
-{
+export class TaskViewModel extends BaseCardViewModel<ITaskDTO> implements ITaskViewModel {
   @inject(SERVICE.Task) protected serviceTask!: TaskService;
 
   @inject(SERVICE.File) protected serviceFile!: FileService;
@@ -49,9 +46,7 @@ export class TaskViewModel
             result ||
             (item.document?.name !== undefined &&
               item.document?.name !== null &&
-              item.document?.name
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.document?.name.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'document.description')) {
           result =

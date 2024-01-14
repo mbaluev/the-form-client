@@ -7,9 +7,7 @@ import { Form, FormField, FormSection } from '@components/form';
 import { TextFieldControl } from '@components/fields';
 
 export const TabDetails = observer(() => {
-  const { data, changeField, getError } = useViewModel<IModuleViewModel>(
-    VIEW_MODEL.Module
-  );
+  const { data, changeField, getError } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();

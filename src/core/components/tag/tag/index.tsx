@@ -4,14 +4,7 @@ import './index.scss';
 
 export type ITagProps = {
   tag: any;
-  color?:
-    | 'primary'
-    | 'grey'
-    | 'grey-dark'
-    | 'blue'
-    | 'green'
-    | 'orange'
-    | 'red';
+  color?: 'primary' | 'grey' | 'grey-dark' | 'blue' | 'green' | 'orange' | 'red';
   className?: string;
   checked?: boolean;
   active?: boolean;

@@ -5,13 +5,7 @@ import './index.scss';
 import { classNames } from '@utils/classNames';
 
 export const TabsHeader = (props: ITabsProps) => {
-  const {
-    onChangeTab,
-    tabs,
-    activeTab,
-    scrollable,
-    orientation = 'horizontal',
-  } = props;
+  const { onChangeTab, tabs, activeTab, scrollable, orientation = 'horizontal' } = props;
 
   const cls = classNames('tabs__header', {
     [`tabs__header_${orientation}`]: Boolean(orientation),

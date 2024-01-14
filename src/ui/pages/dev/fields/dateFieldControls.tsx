@@ -17,11 +17,7 @@ export const DateFieldControls = observer((props: { id?: string }) => {
       <FormField title="1. DateFieldControl">
         <DateFieldControl disabled inputFormat={fDateFormat} />
         <DateFieldControl inputFormat={fDateFormat} />
-        <DateFieldControl
-          helperText="Error message"
-          error={true}
-          inputFormat={fDateFormat}
-        />
+        <DateFieldControl helperText="Error message" error={true} inputFormat={fDateFormat} />
         <DateFieldControl views={['year', 'month']} />
       </FormField>
       <FormField title="2. DateFieldControl view">

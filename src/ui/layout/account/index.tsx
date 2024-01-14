@@ -53,11 +53,7 @@ export const Account = observer(() => {
           <div className="account__top">
             <div className="account__avatar">
               <Avatar sx={{ width: 50, height: 50, fontSize: '1.6rem' }}>
-                <AccountImage
-                  loading={isDataLoading}
-                  src={undefined}
-                  name={username}
-                />
+                <AccountImage loading={isDataLoading} src={undefined} name={username} />
               </Avatar>
             </div>
             <div className="account__info">

@@ -6,11 +6,6 @@ interface IDIContainerProviderProps {
   container: Container;
 }
 
-export const DiContainerProvider: FC<IDIContainerProviderProps> = ({
-  container,
-  children,
-}) => (
-  <DIContainerContext.Provider value={container}>
-    {children}
-  </DIContainerContext.Provider>
+export const DiContainerProvider: FC<IDIContainerProviderProps> = ({ container, children }) => (
+  <DIContainerContext.Provider value={container}>{children}</DIContainerContext.Provider>
 );

@@ -49,8 +49,7 @@ export const MENU_CONFIG_SCHOOL: TMenuItemDTO[] = [
           return (
             pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULES.path ||
             pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULE.path ||
-            pathname ===
-              ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULE_BLOCKS.path ||
+            pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULE_BLOCKS.path ||
             pathname === ROUTER_CONST_SCHOOL.ADMIN_SETTINGS_MODULE_BLOCK.path
           );
         },

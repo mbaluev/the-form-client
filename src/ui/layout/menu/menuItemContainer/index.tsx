@@ -77,22 +77,12 @@ export const MenuItemContainer = observer((props: TMenuItemContainer) => {
     }
     return path ? (
       <Link passHref href={path}>
-        <IconButton
-          onClick={onClick}
-          color={color}
-          tooltip={tooltip}
-          tooltipPlacement="right"
-        >
+        <IconButton onClick={onClick} color={color} tooltip={tooltip} tooltipPlacement="right">
           {icon}
         </IconButton>
       </Link>
     ) : (
-      <IconButton
-        onClick={onClick}
-        color={color}
-        tooltip={tooltip}
-        tooltipPlacement="right"
-      >
+      <IconButton onClick={onClick} color={color} tooltip={tooltip} tooltipPlacement="right">
         {icon}
       </IconButton>
     );

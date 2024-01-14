@@ -8,16 +8,10 @@ import { YearSelect } from '@components/fields/MonthRangeFieldControl/yearSelect
 import { MonthRangePicker } from '@components/fields/MonthRangeFieldControl/monthRangePicker';
 import { Button } from '@components/button';
 
-export const MonthRangeContainer: FC<IMonthRangeFieldControlProps> = (
-  props
-) => {
+export const MonthRangeContainer: FC<IMonthRangeFieldControlProps> = (props) => {
   const { value, maxDate, minDate, confirmText, curYearText, onChange } = props;
-  const [startValue, setStartValue] = useState<Date>(
-    () => value?.[0] ?? new Date()
-  );
-  const [endValue, setEndValue] = useState<Date>(
-    () => value?.[1] ?? new Date()
-  );
+  const [startValue, setStartValue] = useState<Date>(() => value?.[0] ?? new Date());
+  const [endValue, setEndValue] = useState<Date>(() => value?.[1] ?? new Date());
 
   useEffect(() => {
     if (value) {

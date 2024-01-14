@@ -1,9 +1,7 @@
 import { ISelectItem } from '@components/fields';
 import { IDictionaryDTO } from 'controller/model/common/dictionary';
 
-export const getSelectItemsFromDictionary = (
-  dictionary?: IDictionaryDTO
-): ISelectItem[] => {
+export const getSelectItemsFromDictionary = (dictionary?: IDictionaryDTO): ISelectItem[] => {
   const items: ISelectItem[] = [];
   if (dictionary) {
     Object.keys(dictionary).forEach((key) => {

@@ -3,10 +3,7 @@ import Link from 'next/link';
 import { classNames } from '@utils/classNames';
 import { IBlockUserDTO } from 'controller/model/entities/block';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
-import {
-  getProgress,
-  ModuleProgress,
-} from '@ui/pages/school/module/index/moduleProgress';
+import { getProgress, ModuleProgress } from '@ui/pages/school/module/index/moduleProgress';
 import './index.scss';
 import { IconMaterials } from '@ui/components/icon/iconMaterials';
 import { IconTasks } from '@ui/components/icon/iconTasks';
@@ -44,21 +41,15 @@ const ModuleBlockContent = (props: IModuleBlockProps) => {
         <ul className="module-block__ul">
           <li className={clsLiMaterials}>
             <IconMaterials userBlock={userBlock} />
-            <div className="module-block__li-label">
-              {statusMaterials(userBlock)}
-            </div>
+            <div className="module-block__li-label">{statusMaterials(userBlock)}</div>
           </li>
           <li className={clsLiTasks}>
             <IconTasks userBlock={userBlock} />
-            <div className="module-block__li-label">
-              {statusTasks(userBlock)}
-            </div>
+            <div className="module-block__li-label">{statusTasks(userBlock)}</div>
           </li>
           <li className={clsLiQuestions}>
             <IconQuestions userBlock={userBlock} />
-            <div className="module-block__li-label">
-              {statusQuestions(userBlock)}
-            </div>
+            <div className="module-block__li-label">{statusQuestions(userBlock)}</div>
           </li>
         </ul>
         <ModuleProgress value={progress} width="100%" />

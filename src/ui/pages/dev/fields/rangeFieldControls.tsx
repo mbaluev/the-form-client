@@ -18,13 +18,7 @@ export const RangeFieldControls = (props: { id?: string }) => {
   return (
     <FormSection title="RangeField" cols={4} id={props.id}>
       <FormField title="1. RangeFieldControl">
-        <RangeFieldControl
-          disabled
-          placeholder="disabled"
-          min={0}
-          max={2000}
-          value={[0, 1000]}
-        />
+        <RangeFieldControl disabled placeholder="disabled" min={0} max={2000} value={[0, 1000]} />
         <RangeFieldControl
           placeholder="simple"
           min={0}

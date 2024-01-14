@@ -30,60 +30,24 @@ export interface ILocaleViewModel {
   changeFirstWeekYear: (value: string) => void;
   changeTimeZone: (value?: string) => void;
 
-  fDate: (
-    value?: Date,
-    opts?: Intl.DateTimeFormatOptions,
-    locale?: string
-  ) => string;
+  fDate: (value?: Date, opts?: Intl.DateTimeFormatOptions, locale?: string) => string;
   fDateFormat: string;
-  fTime: (
-    value?: Date,
-    opts?: Intl.DateTimeFormatOptions,
-    locale?: string
-  ) => string;
-  fDateTime: (
-    value?: Date,
-    opts?: Intl.DateTimeFormatOptions,
-    locale?: string
-  ) => string;
+  fTime: (value?: Date, opts?: Intl.DateTimeFormatOptions, locale?: string) => string;
+  fDateTime: (value?: Date, opts?: Intl.DateTimeFormatOptions, locale?: string) => string;
 
   fNumber: (value?: any, opts?: Intl.NumberFormatOptions) => string;
   fDecimalSeparator: string;
   fThousandSeparator: string;
 
   fPercent: (value?: any, opts?: Intl.NumberFormatOptions) => string;
-  fCurrency: (
-    value?: any,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => string;
-  fCurrencySymbol: (
-    value?: any,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => string;
-  fCurrencyExplicit: (
-    value?: any,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => string;
+  fCurrency: (value?: any, to?: string, opts?: Intl.NumberFormatOptions) => string;
+  fCurrencySymbol: (value?: any, to?: string, opts?: Intl.NumberFormatOptions) => string;
+  fCurrencyExplicit: (value?: any, to?: string, opts?: Intl.NumberFormatOptions) => string;
 
   c: (value?: any, to?: string) => any;
-  cCurrency: (
-    value?: any,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => string;
-  cCurrencySymbol: (
-    value?: any,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => string;
-  cCurrencyExplicit: (
-    value?: any,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => string;
+  cCurrency: (value?: any, to?: string, opts?: Intl.NumberFormatOptions) => string;
+  cCurrencySymbol: (value?: any, to?: string, opts?: Intl.NumberFormatOptions) => string;
+  cCurrencyExplicit: (value?: any, to?: string, opts?: Intl.NumberFormatOptions) => string;
   cPercent: (value?: any, opts?: Intl.NumberFormatOptions) => string;
 
   sample: ILocaleSample;

@@ -22,9 +22,6 @@ export class FileService implements IFileService {
   };
 
   downloadFile = async (id: string, filename: string) => {
-    await this.apiModule.download(
-      `${this.API_PREFIX}/download/${id}`,
-      filename
-    );
+    await this.apiModule.download(`${this.API_PREFIX}/download/${id}`, filename);
   };
 }

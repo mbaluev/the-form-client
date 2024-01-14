@@ -12,9 +12,7 @@ export class OptionService implements IOptionService {
   API_PREFIX = `api/documentType`;
 
   getDocumentTypes = async (): Promise<ISelectItem[] | undefined> => {
-    const ret = await this.apiModule.get<IResponseListDTO<ISelectItem>>(
-      `${this.API_PREFIX}/list`
-    );
+    const ret = await this.apiModule.get<IResponseListDTO<ISelectItem>>(`${this.API_PREFIX}/list`);
     return ret ? ret.data : undefined;
   };
 }

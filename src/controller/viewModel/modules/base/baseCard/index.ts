@@ -13,9 +13,7 @@ import {
 } from '@viewModel/modules/base/baseCard/interfaces';
 
 @injectable()
-export class BaseCardViewModel<T extends IBaseCardType>
-  implements IBaseCardViewModel<T>
-{
+export class BaseCardViewModel<T extends IBaseCardType> implements IBaseCardViewModel<T> {
   constructor() {
     makeObservable(this, {
       // --- list
@@ -221,27 +219,21 @@ export class BaseCardViewModel<T extends IBaseCardType>
             result ||
             (item.title !== undefined &&
               item.title !== null &&
-              item.title
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.title.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'name')) {
           result =
             result ||
             (item.name !== undefined &&
               item.name !== null &&
-              item.name
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.name.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'description')) {
           result =
             result ||
             (item.description !== undefined &&
               item.description !== null &&
-              item.description
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.description.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
       } else {
         result = true;
@@ -376,8 +368,7 @@ export class BaseCardViewModel<T extends IBaseCardType>
 
   removeDeleteId = (id?: string) => {
     const deleteIds = this.deleteIds?.filter((d) => d !== id);
-    const newDeleteIds =
-      deleteIds && deleteIds.length > 0 ? deleteIds : undefined;
+    const newDeleteIds = deleteIds && deleteIds.length > 0 ? deleteIds : undefined;
     this.setDeleteIds(newDeleteIds);
   };
 
@@ -654,10 +645,7 @@ export class BaseCardViewModel<T extends IBaseCardType>
 
   validate = (nameSpaces?: string[]) => {
     this.validations?.forEach((validation) => {
-      if (
-        !nameSpaces ||
-        (nameSpaces && nameSpaces.includes(validation.nameSpace))
-      ) {
+      if (!nameSpaces || (nameSpaces && nameSpaces.includes(validation.nameSpace))) {
         const data = this.data ? { ...this.data } : {};
         const value = objectPath.get(data, validation.nameSpace);
         this.validateField(validation.nameSpace, value);
@@ -676,10 +664,7 @@ export class BaseCardViewModel<T extends IBaseCardType>
 
   validateModal = (nameSpaces?: string[]) => {
     this.validations?.forEach((validation) => {
-      if (
-        !nameSpaces ||
-        (nameSpaces && nameSpaces.includes(validation.nameSpace))
-      ) {
+      if (!nameSpaces || (nameSpaces && nameSpaces.includes(validation.nameSpace))) {
         const data = this.modalData ? { ...this.modalData } : {};
         const value = objectPath.get(data, validation.nameSpace);
         this.validateModalField(validation.nameSpace, value);

@@ -6,10 +6,7 @@ import { IModuleUserDTO } from '@model/entities/module';
 import _ from 'lodash';
 
 @injectable()
-export class ModuleAdminViewModel
-  extends ModuleBaseViewModel
-  implements IModuleAdminViewModel
-{
+export class ModuleAdminViewModel extends ModuleBaseViewModel implements IModuleAdminViewModel {
   // --- override
 
   filterByQuery =
@@ -23,18 +20,14 @@ export class ModuleAdminViewModel
             result ||
             (item.module?.title !== undefined &&
               item.module.title !== null &&
-              item.module.title
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.module.title.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'module.name')) {
           result =
             result ||
             (item.module?.name !== undefined &&
               item.module.name !== null &&
-              item.module.name
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.module.name.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
       } else {
         result = true;

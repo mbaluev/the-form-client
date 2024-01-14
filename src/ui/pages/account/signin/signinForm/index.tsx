@@ -13,16 +13,8 @@ import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import './index.scss';
 
 export const SigninForm = observer(() => {
-  const {
-    isAuth,
-    data,
-    changeField,
-    getError,
-    signin,
-    hasErrors,
-    message,
-    clearMessage,
-  } = useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
+  const { isAuth, data, changeField, getError, signin, hasErrors, message, clearMessage } =
+    useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
 
   const router = useRouter();
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,14 +60,7 @@ export const SigninForm = observer(() => {
                 Sign in
               </Button>
             </FormField>
-            {message && (
-              <Alert
-                message={message}
-                variant="outlined"
-                type="error"
-                shadow={false}
-              />
-            )}
+            {message && <Alert message={message} variant="outlined" type="error" shadow={false} />}
           </FormSection>
         </Form>
       )}

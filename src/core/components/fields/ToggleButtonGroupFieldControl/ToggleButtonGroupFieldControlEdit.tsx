@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  FormControl,
-  FormHelperText,
-  ToggleButton,
-  ToggleButtonGroup,
-} from '@mui/material';
+import { FormControl, FormHelperText, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import { classNames } from '@utils/classNames';
 import {
@@ -12,9 +7,7 @@ import {
   ToggleButtonGroupFieldControlProps,
 } from '@components/fields';
 
-export const ToggleButtonGroupFieldControlEdit = (
-  props: ToggleButtonGroupFieldControlProps
-) => {
+export const ToggleButtonGroupFieldControlEdit = (props: ToggleButtonGroupFieldControlProps) => {
   const {
     className,
     value,
@@ -42,10 +35,7 @@ export const ToggleButtonGroupFieldControlEdit = (
     <FormControl className={cls}>
       <ToggleButtonGroup
         value={state}
-        onChange={(
-          e: React.MouseEvent<HTMLElement>,
-          onChangeValue: string | null
-        ) => {
+        onChange={(e: React.MouseEvent<HTMLElement>, onChangeValue: string | null) => {
           setState(onChangeValue);
           if (onChange) {
             onChange(e, onChangeValue);
@@ -55,23 +45,16 @@ export const ToggleButtonGroupFieldControlEdit = (
       >
         {items?.map((item, index) => {
           const selected =
-            item.value === state ||
-            (Array.isArray(state) && state.indexOf(item.value) >= 0);
+            item.value === state || (Array.isArray(state) && state.indexOf(item.value) >= 0);
           return (
-            <ToggleButton
-              key={index}
-              value={item.value}
-              disabled={item.disabled || disabled}
-            >
+            <ToggleButton key={index} value={item.value} disabled={item.disabled || disabled}>
               {checkIcon && selected && <CheckIcon />}
               {item.label}
             </ToggleButton>
           );
         })}
       </ToggleButtonGroup>
-      {helperText && (
-        <FormHelperText error={!!error}>{helperText}</FormHelperText>
-      )}
+      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
     </FormControl>
   );
 };

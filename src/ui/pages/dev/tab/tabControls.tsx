@@ -43,7 +43,5 @@ export const TabControls = () => {
     setActive(value);
   };
 
-  return (
-    <Tabs tabs={TAB_CONFIG} activeTab={active} onChangeTab={onChangeTab} />
-  );
+  return <Tabs tabs={TAB_CONFIG} activeTab={active} onChangeTab={onChangeTab} />;
 };

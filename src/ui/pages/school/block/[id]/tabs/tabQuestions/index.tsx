@@ -6,9 +6,7 @@ import { QuestionList } from '@ui/pages/school/block/[id]/tabs/tabQuestions/ques
 import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/user/interface';
 
 export const TabQuestions = observer(() => {
-  const { getList } = useViewModel<IQuestionUserViewModel>(
-    VIEW_MODEL.QuestionUser
-  );
+  const { getList } = useViewModel<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser);
 
   useEffect(() => {
     getList();

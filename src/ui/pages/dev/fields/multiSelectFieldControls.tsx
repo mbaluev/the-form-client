@@ -25,11 +25,7 @@ export const MultiSelectFieldControls = (props: { id?: string }) => {
   return (
     <FormSection title="MultiSelectField" cols={4} id={props.id}>
       <FormField title="1. MultiSelectFieldControl">
-        <MultiSelectFieldControl
-          placeholder="disabled"
-          items={SelectList}
-          disabled
-        />
+        <MultiSelectFieldControl placeholder="disabled" items={SelectList} disabled />
         <MultiSelectFieldControl placeholder="simple" items={SelectList} />
         <MultiSelectFieldControl
           placeholder="error"

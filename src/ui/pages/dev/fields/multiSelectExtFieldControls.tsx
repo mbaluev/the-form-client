@@ -44,10 +44,9 @@ export const MultiSelectExtFieldControls = (props: { id?: string }) => {
     return item.name;
   };
   const renderValue = (selItems: ItemType[]) => {
-    return `${selItems.length} ${declinationOfNumber(
-      selItems.length,
-      ITEM_FORMS
-    )} (${selItems.map((item) => item.name).join(', ')})`;
+    return `${selItems.length} ${declinationOfNumber(selItems.length, ITEM_FORMS)} (${selItems
+      .map((item) => item.name)
+      .join(', ')})`;
   };
 
   const [value, setValue] = useState<unknown[] | undefined>();

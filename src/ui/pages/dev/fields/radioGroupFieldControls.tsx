@@ -17,12 +17,7 @@ export const RadioGroupFieldControls = (props: { id?: string }) => {
       <FormField title="1. RadioGroupFieldControl">
         <RadioGroupFieldControl disabled items={items} value="1" />
         <RadioGroupFieldControl items={items} value="1" layout="horizontal" />
-        <RadioGroupFieldControl
-          error={true}
-          helperText="Error message"
-          items={items}
-          value="1"
-        />
+        <RadioGroupFieldControl error={true} helperText="Error message" items={items} value="1" />
       </FormField>
       <FormField title="2. RadioGroupFieldControl view">
         <Button

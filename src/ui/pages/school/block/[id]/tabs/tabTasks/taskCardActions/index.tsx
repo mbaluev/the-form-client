@@ -10,23 +10,16 @@ import { ITaskUserViewModel } from '@viewModel/modules/entities/task/user/interf
 import { ITaskUserDocumentViewModel } from '@viewModel/modules/entities/task/userDocument/interface';
 
 export const TaskCardActions = observer(() => {
-  const { data, clearData } = useViewModel<ITaskUserViewModel>(
-    VIEW_MODEL.TaskUser
+  const { data, clearData } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
+  const { modalNew, changeModalField } = useViewModel<ITaskUserDocumentViewModel>(
+    VIEW_MODEL.TaskUserDocument
   );
-  const { modalNew, changeModalField } =
-    useViewModel<ITaskUserDocumentViewModel>(VIEW_MODEL.TaskUserDocument);
 
   const handleNew = async () => {
     modalNew();
     changeModalField('userTaskId', data?.id);
-    changeModalField(
-      'document.documentTypeId',
-      data?.task?.document?.documentTypeId
-    );
-    changeModalField(
-      'document.documentType',
-      data?.task?.document?.documentType
-    );
+    changeModalField('document.documentTypeId', data?.task?.document?.documentTypeId);
+    changeModalField('document.documentType', data?.task?.document?.documentType);
   };
   const handleClose = async () => clearData();
 

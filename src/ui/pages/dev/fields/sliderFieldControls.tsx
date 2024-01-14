@@ -18,13 +18,7 @@ export const SliderFieldControls = (props: { id?: string }) => {
   return (
     <FormSection title="SliderField" cols={4} id={props.id}>
       <FormField title="1. SliderFieldControl">
-        <SliderFieldControl
-          placeholder="disabled"
-          disabled
-          min={0}
-          max={2000}
-          value={300}
-        />
+        <SliderFieldControl placeholder="disabled" disabled min={0} max={2000} value={300} />
         <SliderFieldControl
           placeholder="range"
           min={0}

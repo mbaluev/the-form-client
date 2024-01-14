@@ -23,34 +23,10 @@ export const Notifications = () => {
         </IconButton>
       </div>
       <div className={clsContent}>
-        <Alert
-          title="info"
-          variant="outlined"
-          type="info"
-          shadow={false}
-          border={false}
-        />
-        <Alert
-          title="success"
-          variant="outlined"
-          type="success"
-          shadow={false}
-          border={false}
-        />
-        <Alert
-          title="warning"
-          variant="outlined"
-          type="warning"
-          shadow={false}
-          border={false}
-        />
-        <Alert
-          title="error"
-          variant="outlined"
-          type="error"
-          shadow={false}
-          border={false}
-        />
+        <Alert title="info" variant="outlined" type="info" shadow={false} border={false} />
+        <Alert title="success" variant="outlined" type="success" shadow={false} border={false} />
+        <Alert title="warning" variant="outlined" type="warning" shadow={false} border={false} />
+        <Alert title="error" variant="outlined" type="error" shadow={false} border={false} />
       </div>
     </div>
   );

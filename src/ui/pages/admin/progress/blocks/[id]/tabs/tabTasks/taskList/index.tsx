@@ -16,9 +16,7 @@ import { ITaskAdminViewModel } from '@viewModel/modules/entities/task/admin/inte
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const TaskList = observer(() => {
-  const { data: userBlock } = useViewModel<IBlockAdminViewModel>(
-    VIEW_MODEL.BlockAdmin
-  );
+  const { data: userBlock } = useViewModel<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin);
   const {
     isListLoading,
     listFiltered: tasks,

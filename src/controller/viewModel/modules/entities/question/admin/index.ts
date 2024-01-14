@@ -14,9 +14,7 @@ export class QuestionAdminViewModel
 
   constructor() {
     super();
-    this.setValidations([
-      { nameSpace: 'commentText', type: 'required', message: 'Required' },
-    ]);
+    this.setValidations([{ nameSpace: 'commentText', type: 'required', message: 'Required' }]);
   }
 
   // --- override

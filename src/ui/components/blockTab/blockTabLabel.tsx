@@ -15,15 +15,9 @@ export const BlockTabLabel = (props: IProps) => {
   const { label, userBlock, admin } = props;
   return (
     <Stack direction="row" spacing={2}>
-      {label === 'Materials' && (
-        <IconMaterials userBlock={userBlock} admin={admin} />
-      )}
-      {label === 'Homework' && (
-        <IconTasks userBlock={userBlock} admin={admin} />
-      )}
-      {label === 'Test' && (
-        <IconQuestions userBlock={userBlock} admin={admin} />
-      )}
+      {label === 'Materials' && <IconMaterials userBlock={userBlock} admin={admin} />}
+      {label === 'Homework' && <IconTasks userBlock={userBlock} admin={admin} />}
+      {label === 'Test' && <IconQuestions userBlock={userBlock} admin={admin} />}
       <Typography fontWeight={500}>{label}</Typography>
     </Stack>
   );

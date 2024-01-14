@@ -6,10 +6,7 @@ import { TaskBaseViewModel } from '@viewModel/modules/entities/task/base';
 import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
-export class TaskUserViewModel
-  extends TaskBaseViewModel
-  implements ITaskUserViewModel
-{
+export class TaskUserViewModel extends TaskBaseViewModel implements ITaskUserViewModel {
   @inject(VIEW_MODEL.BlockUser) protected userBlock!: BlockUserViewModel;
 
   // --- override

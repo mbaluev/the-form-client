@@ -9,9 +9,7 @@ import { IModuleViewModel } from '@viewModel/modules/entities/module/interface';
 import { SelectChangeEvent } from '@mui/material';
 
 export const TabDetails = observer(() => {
-  const { data, changeField, getError } = useViewModel<IBlockViewModel>(
-    VIEW_MODEL.Block
-  );
+  const { data, changeField, getError } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
   const { list: modules } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {

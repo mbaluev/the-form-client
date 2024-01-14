@@ -19,13 +19,13 @@ export const BlockTabs = observer(() => {
     changeTab,
   } = useViewModel<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin);
 
-  const { clearData: clearDataMaterial } =
-    useViewModel<IMaterialAdminViewModel>(VIEW_MODEL.MaterialAdmin);
-  const { clearData: clearDataQuestion } =
-    useViewModel<IQuestionAdminViewModel>(VIEW_MODEL.QuestionAdmin);
-  const { clearData: clearDataTask } = useViewModel<ITaskAdminViewModel>(
-    VIEW_MODEL.TaskAdmin
+  const { clearData: clearDataMaterial } = useViewModel<IMaterialAdminViewModel>(
+    VIEW_MODEL.MaterialAdmin
   );
+  const { clearData: clearDataQuestion } = useViewModel<IQuestionAdminViewModel>(
+    VIEW_MODEL.QuestionAdmin
+  );
+  const { clearData: clearDataTask } = useViewModel<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin);
 
   const onChangeTab = (_: React.ChangeEvent<unknown>, value: string) => {
     changeTab(value as BlockTabNames);
@@ -55,12 +55,5 @@ export const BlockTabs = observer(() => {
     },
   ];
 
-  return (
-    <Tabs
-      tabs={tabs}
-      activeTab={tab}
-      onChangeTab={onChangeTab}
-      orientation="horizontal"
-    />
-  );
+  return <Tabs tabs={tabs} activeTab={tab} onChangeTab={onChangeTab} orientation="horizontal" />;
 });

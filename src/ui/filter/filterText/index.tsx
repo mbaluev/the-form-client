@@ -14,9 +14,7 @@ export const FilterText = observer((props: TextFieldControlProps) => {
   const [state, setState] = useState<string | undefined>(filters[name]);
   const setFilters = (value?: string) => setFilter(name, value, router);
 
-  const onChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setState(e.target.value);
   };
 

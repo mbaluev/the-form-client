@@ -14,9 +14,7 @@ import { classNames } from '@utils/classNames';
 import { MultiSelectFieldControlProps } from '@components/fields';
 import { IconButton } from '@components/iconButton';
 
-export const MultiSelectFieldControlEdit = (
-  props: MultiSelectFieldControlProps
-) => {
+export const MultiSelectFieldControlEdit = (props: MultiSelectFieldControlProps) => {
   const {
     className,
     variant,
@@ -91,8 +89,7 @@ export const MultiSelectFieldControlEdit = (
         MenuProps={{
           anchorOrigin: { vertical: 'bottom', horizontal: 0 },
           transformOrigin: { vertical: -8, horizontal: 0 },
-          className:
-            'multi-select-field-control__menu select-field-control__menu',
+          className: 'multi-select-field-control__menu select-field-control__menu',
         }}
         {...other}
       >
@@ -109,9 +106,7 @@ export const MultiSelectFieldControlEdit = (
           );
         })}
       </Select>
-      {helperText && (
-        <FormHelperText error={!!error}>{helperText}</FormHelperText>
-      )}
+      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
     </FormControl>
   );
 };

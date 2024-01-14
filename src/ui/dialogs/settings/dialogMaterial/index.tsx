@@ -43,9 +43,7 @@ export const DialogMaterial = observer((props: IProps) => {
     validateModal,
   } = useViewModel<IMaterialViewModel>(VIEW_MODEL.Material);
 
-  const { list: blocks, data: block } = useViewModel<IBlockViewModel>(
-    VIEW_MODEL.Block
-  );
+  const { list: blocks, data: block } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -179,11 +177,7 @@ export const DialogMaterial = observer((props: IProps) => {
                 onDownload={downloadHandler}
                 error={Boolean(getModalError('document.fileId'))}
                 helperText={getModalError('document.fileId')?.message}
-                files={
-                  modalData?.document?.file
-                    ? [modalData.document.file]
-                    : undefined
-                }
+                files={modalData?.document?.file ? [modalData.document.file] : undefined}
               />
             </FormField>
           )}

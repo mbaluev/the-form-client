@@ -6,9 +6,7 @@ import {
   isControlHasData,
 } from '@components/fields/AutocompleteFieldControl/AutocompleteFieldControl';
 
-export const AutocompleteFieldControlView = <T,>(
-  props: AutocompleteFieldControlProps<T>
-) => {
+export const AutocompleteFieldControlView = <T,>(props: AutocompleteFieldControlProps<T>) => {
   const {
     className,
     value,
@@ -23,11 +21,7 @@ export const AutocompleteFieldControlView = <T,>(
   });
 
   if (isControlHasData(value)) {
-    return (
-      <div className={cls}>
-        {getDisplayValue(valueField, labelField, options, value)}
-      </div>
-    );
+    return <div className={cls}>{getDisplayValue(valueField, labelField, options, value)}</div>;
   } else {
     return <div className={cls}>{emptyLabel}</div>;
   }

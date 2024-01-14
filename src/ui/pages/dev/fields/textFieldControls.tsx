@@ -15,12 +15,7 @@ export const TextFieldControls = observer((props: { id?: string }) => {
       <FormField title="1. TextFieldControl">
         <TextFieldControl disabled placeholder="disabled" value={value} />
         <TextFieldControl placeholder="simple" value={value} />
-        <TextFieldControl
-          placeholder="multiline"
-          multiline
-          minRows={5}
-          value={value}
-        />
+        <TextFieldControl placeholder="multiline" multiline minRows={5} value={value} />
         <TextFieldControl
           placeholder="error"
           helperText="Error message"

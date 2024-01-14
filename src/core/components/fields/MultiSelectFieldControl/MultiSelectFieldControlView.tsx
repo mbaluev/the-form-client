@@ -2,9 +2,7 @@ import React from 'react';
 import { classNames } from '@utils/classNames';
 import { MultiSelectFieldControlProps } from '@components/fields';
 
-export const MultiSelectFieldControlView = (
-  props: MultiSelectFieldControlProps
-) => {
+export const MultiSelectFieldControlView = (props: MultiSelectFieldControlProps) => {
   const { className, value, items, emptyLabel = '-' } = props;
 
   const cls = classNames(className, {

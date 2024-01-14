@@ -63,63 +63,39 @@ viewModelContainer.bind<IAuthViewModel>(VIEW_MODEL.Auth).to(AuthViewModel);
 
 viewModelContainer.bind<IMenuViewModel>(VIEW_MODEL.Menu).to(MenuViewModel);
 
-viewModelContainer
-  .bind<INotifyViewModel>(VIEW_MODEL.Notify)
-  .to(NotifyViewModel);
+viewModelContainer.bind<INotifyViewModel>(VIEW_MODEL.Notify).to(NotifyViewModel);
 
-viewModelContainer
-  .bind<ILocaleViewModel>(VIEW_MODEL.Locale)
-  .to(LocaleViewModel);
+viewModelContainer.bind<ILocaleViewModel>(VIEW_MODEL.Locale).to(LocaleViewModel);
 
-viewModelContainer
-  .bind<IFilterViewModel>(VIEW_MODEL.Filter)
-  .to(FilterViewModel);
+viewModelContainer.bind<IFilterViewModel>(VIEW_MODEL.Filter).to(FilterViewModel);
 
-viewModelContainer
-  .bind<IOptionViewModel>(VIEW_MODEL.Option)
-  .to(OptionViewModel);
+viewModelContainer.bind<IOptionViewModel>(VIEW_MODEL.Option).to(OptionViewModel);
 
 // settings
 
 viewModelContainer.bind<IUserViewModel>(VIEW_MODEL.User).to(UserViewModel);
 
-viewModelContainer
-  .bind<IModuleViewModel>(VIEW_MODEL.Module)
-  .to(ModuleViewModel);
+viewModelContainer.bind<IModuleViewModel>(VIEW_MODEL.Module).to(ModuleViewModel);
 
 viewModelContainer.bind<IBlockViewModel>(VIEW_MODEL.Block).to(BlockViewModel);
 
-viewModelContainer
-  .bind<IMaterialViewModel>(VIEW_MODEL.Material)
-  .to(MaterialViewModel);
+viewModelContainer.bind<IMaterialViewModel>(VIEW_MODEL.Material).to(MaterialViewModel);
 
 viewModelContainer.bind<ITaskViewModel>(VIEW_MODEL.Task).to(TaskViewModel);
 
-viewModelContainer
-  .bind<IQuestionViewModel>(VIEW_MODEL.Question)
-  .to(QuestionViewModel);
+viewModelContainer.bind<IQuestionViewModel>(VIEW_MODEL.Question).to(QuestionViewModel);
 
 // user
 
-viewModelContainer
-  .bind<IModuleUserViewModel>(VIEW_MODEL.ModuleUser)
-  .to(ModuleUserViewModel);
+viewModelContainer.bind<IModuleUserViewModel>(VIEW_MODEL.ModuleUser).to(ModuleUserViewModel);
 
-viewModelContainer
-  .bind<IBlockUserViewModel>(VIEW_MODEL.BlockUser)
-  .to(BlockUserViewModel);
+viewModelContainer.bind<IBlockUserViewModel>(VIEW_MODEL.BlockUser).to(BlockUserViewModel);
 
-viewModelContainer
-  .bind<IMaterialUserViewModel>(VIEW_MODEL.MaterialUser)
-  .to(MaterialUserViewModel);
+viewModelContainer.bind<IMaterialUserViewModel>(VIEW_MODEL.MaterialUser).to(MaterialUserViewModel);
 
-viewModelContainer
-  .bind<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser)
-  .to(QuestionUserViewModel);
+viewModelContainer.bind<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser).to(QuestionUserViewModel);
 
-viewModelContainer
-  .bind<ITaskUserViewModel>(VIEW_MODEL.TaskUser)
-  .to(TaskUserViewModel);
+viewModelContainer.bind<ITaskUserViewModel>(VIEW_MODEL.TaskUser).to(TaskUserViewModel);
 
 viewModelContainer
   .bind<ITaskUserDocumentViewModel>(VIEW_MODEL.TaskUserDocument)
@@ -127,13 +103,9 @@ viewModelContainer
 
 // admin
 
-viewModelContainer
-  .bind<IModuleAdminViewModel>(VIEW_MODEL.ModuleAdmin)
-  .to(ModuleAdminViewModel);
+viewModelContainer.bind<IModuleAdminViewModel>(VIEW_MODEL.ModuleAdmin).to(ModuleAdminViewModel);
 
-viewModelContainer
-  .bind<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin)
-  .to(BlockAdminViewModel);
+viewModelContainer.bind<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin).to(BlockAdminViewModel);
 
 viewModelContainer
   .bind<IMaterialAdminViewModel>(VIEW_MODEL.MaterialAdmin)
@@ -143,14 +115,10 @@ viewModelContainer
   .bind<IQuestionAdminViewModel>(VIEW_MODEL.QuestionAdmin)
   .to(QuestionAdminViewModel);
 
-viewModelContainer
-  .bind<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin)
-  .to(TaskAdminViewModel);
+viewModelContainer.bind<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin).to(TaskAdminViewModel);
 
 viewModelContainer
   .bind<ITaskAdminDocumentViewModel>(VIEW_MODEL.TaskAdminDocument)
   .to(TaskAdminDocumentViewModel);
 
-viewModelContainer
-  .bind<IUserAdminViewModel>(VIEW_MODEL.UserAdmin)
-  .to(UserAdminViewModel);
+viewModelContainer.bind<IUserAdminViewModel>(VIEW_MODEL.UserAdmin).to(UserAdminViewModel);

@@ -51,15 +51,11 @@ const parseDigit = (curLocale: string, locale?: ILocale) => {
 };
 
 const parseHourCycle = (curLocale: string, locale?: ILocale) => {
-  return locale?.hourCycle || curLocale
-    ? timeSettings.hourCycle.getByLocale(curLocale)
-    : '';
+  return locale?.hourCycle || curLocale ? timeSettings.hourCycle.getByLocale(curLocale) : '';
 };
 
 const parseFirstDayWeek = (curLocale: string, locale?: ILocale) => {
-  return locale?.firstDayWeek || curLocale
-    ? timeSettings.firstDayWeek.getByLocale(curLocale)
-    : '';
+  return locale?.firstDayWeek || curLocale ? timeSettings.firstDayWeek.getByLocale(curLocale) : '';
 };
 
 const parseFirstWeekYear = (curLocale: string, locale?: ILocale) => {
@@ -125,10 +121,8 @@ const detectLocale = () => {
   const currency = browserLocale.currency || currencies.default;
   const digit = browserLocale.digit || digits.default;
   const hourCycle = browserLocale.hourCycle || timeSettings.hourCycle.default;
-  const firstDayWeek =
-    browserLocale.firstDayWeek || timeSettings.firstDayWeek.default;
-  const firstWeekYear =
-    browserLocale.firstWeekYear || timeSettings.firstWeekYear.default;
+  const firstDayWeek = browserLocale.firstDayWeek || timeSettings.firstDayWeek.default;
+  const firstWeekYear = browserLocale.firstWeekYear || timeSettings.firstWeekYear.default;
   const timeZone = browserLocale.timeZone || timeZones.default;
 
   return {

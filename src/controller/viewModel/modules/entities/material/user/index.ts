@@ -7,10 +7,7 @@ import { MaterialBaseViewModel } from '@viewModel/modules/entities/material/base
 import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
-export class MaterialUserViewModel
-  extends MaterialBaseViewModel
-  implements IMaterialUserViewModel
-{
+export class MaterialUserViewModel extends MaterialBaseViewModel implements IMaterialUserViewModel {
   @inject(VIEW_MODEL.BlockUser) protected userBlock!: BlockUserViewModel;
 
   constructor() {

@@ -130,11 +130,7 @@ export const DialogTaskUserDocument = observer((props: IProps) => {
                 onDownload={downloadHandler}
                 error={Boolean(getModalError('document.fileId'))}
                 helperText={getModalError('document.fileId')?.message}
-                files={
-                  modalData?.document?.file
-                    ? [modalData.document.file]
-                    : undefined
-                }
+                files={modalData?.document?.file ? [modalData.document.file] : undefined}
               />
             </FormField>
           )}

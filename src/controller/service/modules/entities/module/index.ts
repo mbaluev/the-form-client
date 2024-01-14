@@ -12,20 +12,14 @@ export class ModuleService implements IModuleService {
 
   API_PREFIX = `/api/module`;
 
-  getModules = async (
-    query?: ParsedUrlQuery
-  ): Promise<IModuleDTO[] | undefined> => {
-    const ret = await this.apiModule.post<IResponseListDTO<IModuleDTO>>(
-      `${this.API_PREFIX}/list`,
-      { ...query }
-    );
+  getModules = async (query?: ParsedUrlQuery): Promise<IModuleDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<IModuleDTO>>(`${this.API_PREFIX}/list`, {
+      ...query,
+    });
     return ret ? ret.data : undefined;
   };
 
-  getModule = async (
-    id?: string,
-    query?: ParsedUrlQuery
-  ): Promise<IModuleDTO | undefined> => {
+  getModule = async (id?: string, query?: ParsedUrlQuery): Promise<IModuleDTO | undefined> => {
     const ret = await this.apiModule.post<IResponseItemDTO<IModuleDTO>>(
       `${this.API_PREFIX}/item/${id}`,
       { ...query }
@@ -60,9 +54,7 @@ export class ModuleService implements IModuleService {
 
   // --- user
 
-  getModulesUser = async (
-    query?: ParsedUrlQuery
-  ): Promise<IModuleUserDTO[] | undefined> => {
+  getModulesUser = async (query?: ParsedUrlQuery): Promise<IModuleUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IModuleUserDTO>>(
       `${this.API_PREFIX}/user/list`,
       { ...query }
@@ -94,9 +86,7 @@ export class ModuleService implements IModuleService {
 
   // --- admin
 
-  getModulesAdmin = async (
-    query?: ParsedUrlQuery
-  ): Promise<IModuleUserDTO[] | undefined> => {
+  getModulesAdmin = async (query?: ParsedUrlQuery): Promise<IModuleUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IModuleUserDTO>>(
       `${this.API_PREFIX}/admin/list`,
       { ...query }

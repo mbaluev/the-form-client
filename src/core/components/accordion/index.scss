@@ -85,7 +85,7 @@
     }
     & .MuiAccordionSummary-root .MuiSvgIcon-root,
     & .MuiAccordionSummary-content {
-      color: $color-red
+      color: $color-red;
     }
   }
   &_orange {
@@ -98,7 +98,7 @@
     }
     & .MuiAccordionSummary-root .MuiSvgIcon-root,
     & .MuiAccordionSummary-content {
-      color: $color-orange
+      color: $color-orange;
     }
   }
   &_green {
@@ -111,7 +111,7 @@
     }
     & .MuiAccordionSummary-root .MuiSvgIcon-root,
     & .MuiAccordionSummary-content {
-      color: $color-green-dark
+      color: $color-green-dark;
     }
   }
   &_blue {
@@ -124,7 +124,7 @@
     }
     & .MuiAccordionSummary-root .MuiSvgIcon-root,
     & .MuiAccordionSummary-content {
-      color: $color-blue
+      color: $color-blue;
     }
   }
 }

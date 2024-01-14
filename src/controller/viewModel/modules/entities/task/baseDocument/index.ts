@@ -45,10 +45,7 @@ export class TaskBaseDocumentViewModel
         message: 'Required',
         condition: () => {
           if (this.modalData) {
-            const docType = objectPath.get(
-              this.modalData,
-              'document.documentType.name'
-            );
+            const docType = objectPath.get(this.modalData, 'document.documentType.name');
             return docType === 'file';
           }
           return false;
@@ -60,10 +57,7 @@ export class TaskBaseDocumentViewModel
         message: 'Required',
         condition: () => {
           if (this.modalData) {
-            const docType = objectPath.get(
-              this.modalData,
-              'document.documentType.name'
-            );
+            const docType = objectPath.get(this.modalData, 'document.documentType.name');
             return docType === 'link' || docType === 'video';
           }
           return false;

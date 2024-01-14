@@ -43,19 +43,14 @@ type TLayoutProps = React.PropsWithChildren<ILayoutProps>;
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 export const Layout = observer((props: TLayoutProps) => {
-  const {
-    className,
-    menuProps,
-    loaderProps,
-    notifications,
-    globalSearch,
-    support,
-    children,
-  } = props;
-  const { isOpen: isOpenMenu, setOpen: setOpenMenu } =
-    useViewModel<IMenuViewModel>(VIEW_MODEL.Menu);
-  const { isOpen: isOpenNotify, setOpen: setOpenNotify } =
-    useViewModel<INotifyViewModel>(VIEW_MODEL.Notify);
+  const { className, menuProps, loaderProps, notifications, globalSearch, support, children } =
+    props;
+  const { isOpen: isOpenMenu, setOpen: setOpenMenu } = useViewModel<IMenuViewModel>(
+    VIEW_MODEL.Menu
+  );
+  const { isOpen: isOpenNotify, setOpen: setOpenNotify } = useViewModel<INotifyViewModel>(
+    VIEW_MODEL.Notify
+  );
   const { isAuth, roles: claimRoles } = useAuth();
   const menuClick = () => setOpenMenu(!isOpenMenu);
   const notifyClick = () => setOpenNotify(!isOpenNotify);
@@ -68,12 +63,9 @@ export const Layout = observer((props: TLayoutProps) => {
   const clsCenter = classNames('layout__center', {
     layout__center_shift: isOpenMenu && size.width <= MEDIA_XS,
   });
-  const colorDev = router.pathname.includes(ROUTER_CONST_DEV.home.path)
-    ? 'blue'
-    : 'grey';
+  const colorDev = router.pathname.includes(ROUTER_CONST_DEV.home.path) ? 'blue' : 'grey';
 
-  const isNotifications =
-    notifications && isOpenNotify && size.width > MEDIA_SM;
+  const isNotifications = notifications && isOpenNotify && size.width > MEDIA_SM;
 
   const [isMenu, setIsMenu] = useState(false);
   useEffect(() => {
@@ -104,11 +96,7 @@ export const Layout = observer((props: TLayoutProps) => {
           )}
           <Link passHref href={ROUTER_CONST_SCHOOL.HOME.path}>
             {size.width > MEDIA_XS ? (
-              <Button
-                startIcon={<IconTheFormCircle />}
-                size="medium"
-                variant="text"
-              >
+              <Button startIcon={<IconTheFormCircle />} size="medium" variant="text">
                 The Form
               </Button>
             ) : (
@@ -150,11 +138,7 @@ export const Layout = observer((props: TLayoutProps) => {
           {isAuth ? (
             <React.Fragment>
               {support && (
-                <IconButton
-                  color="grey"
-                  tooltip="Support"
-                  tooltipPlacement="bottom"
-                >
+                <IconButton color="grey" tooltip="Support" tooltipPlacement="bottom">
                   <HeadsetMicIcon />
                 </IconButton>
               )}

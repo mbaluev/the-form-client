@@ -9,9 +9,7 @@ import { BlockTabs } from '@ui/pages/school/block/[id]/blockTabs';
 import { Box } from '@mui/material';
 
 export const BlockContent = observer(() => {
-  const { data: userBlock } = useViewModel<IBlockUserViewModel>(
-    VIEW_MODEL.BlockUser
-  );
+  const { data: userBlock } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
   if (!userBlock) return <Loader loading relative />;
   return userBlock.enable ? (
     <Box flex="1 1 auto">

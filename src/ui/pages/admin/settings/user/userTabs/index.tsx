@@ -8,9 +8,7 @@ import { observer } from 'mobx-react';
 import { IUserViewModel } from '@viewModel/modules/entities/user/interface';
 
 export const UserTabs = observer(() => {
-  const { hasChanges, saveData, clearChanges } = useViewModel<IUserViewModel>(
-    VIEW_MODEL.User
-  );
+  const { hasChanges, saveData, clearChanges } = useViewModel<IUserViewModel>(VIEW_MODEL.User);
   const { add: addNotify } = useViewModel<INotifyViewModel>(VIEW_MODEL.Notify);
   const { Prompt } = useUnsavedChanges(hasChanges);
   const saveHandler = async () => {

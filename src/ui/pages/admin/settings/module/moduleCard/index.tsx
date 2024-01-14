@@ -11,9 +11,7 @@ import { ModuleLabel } from '@ui/pages/admin/settings/module/moduleLabel';
 import { Loader } from '@components/loader';
 
 export const ModuleCard = observer(() => {
-  const { moduleData, isDataLoading } = useViewModel<IModuleViewModel>(
-    VIEW_MODEL.Module
-  );
+  const { moduleData, isDataLoading } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
   if (!moduleData) return <Page204 />;
   return (
     <Page title={<ModuleLabel />} quickFilter={<ModuleCardActions />}>

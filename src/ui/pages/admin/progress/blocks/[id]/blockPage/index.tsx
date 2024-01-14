@@ -2,10 +2,7 @@ import { observer } from 'mobx-react';
 import { TBreadCrumb } from '@components/breadCrumbs/breadCrumb';
 import { Page } from '@ui/layout/page';
 import { classNames } from '@utils/classNames';
-import {
-  getProgress,
-  ModuleProgress,
-} from '@ui/pages/school/module/index/moduleProgress';
+import { getProgress, ModuleProgress } from '@ui/pages/school/module/index/moduleProgress';
 import { SubTitleBlock } from '@ui/components/subTitle/subTitleBlock';
 import { BlockTabNames } from '@ui/components/blockTab/blockTabNames';
 import { useViewModel } from '@hooks/useViewModel';
@@ -27,9 +24,7 @@ interface IProps {
 
 export const BlockPage = observer((props: IProps) => {
   const { breadCrumbs } = props;
-  const { data: userModule } = useViewModel<IModuleAdminViewModel>(
-    VIEW_MODEL.ModuleAdmin
-  );
+  const { data: userModule } = useViewModel<IModuleAdminViewModel>(VIEW_MODEL.ModuleAdmin);
   const {
     data: userBlock,
     tab,

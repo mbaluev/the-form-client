@@ -8,10 +8,7 @@ import { SERVICE } from '@service/ids';
 import { UserService } from '@service/modules/entities/user';
 
 @injectable()
-export class UserAdminViewModel
-  extends BaseCardViewModel<IUserDTO>
-  implements IUserAdminViewModel
-{
+export class UserAdminViewModel extends BaseCardViewModel<IUserDTO> implements IUserAdminViewModel {
   @inject(SERVICE.User) protected serviceUser!: UserService;
 
   // --- override
@@ -27,27 +24,21 @@ export class UserAdminViewModel
             result ||
             (item.firstname !== undefined &&
               item.firstname !== null &&
-              item.firstname
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.firstname.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'lastname')) {
           result =
             result ||
             (item.lastname !== undefined &&
               item.lastname !== null &&
-              item.lastname
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.lastname.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'username')) {
           result =
             result ||
             (item.username !== undefined &&
               item.username !== null &&
-              item.username
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.username.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
       } else {
         result = true;

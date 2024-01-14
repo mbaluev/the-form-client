@@ -63,12 +63,10 @@ export class Jwt implements IJwt {
     const acrValue = decodedClaims[acr];
 
     return (
-      ((issValue.indexOf(MS_LOGIN) === 0 ||
-        issValue.match(/https:\/\/[^./]*\.b2clogin.com\//gi)) &&
+      ((issValue.indexOf(MS_LOGIN) === 0 || issValue.match(/https:\/\/[^./]*\.b2clogin.com\//gi)) &&
         issValue.indexOf('2.0') > -1 &&
         ((tfpValue && tfpValue.toLowerCase().indexOf(b2cPolicyPrefix) === 0) ||
-          (acrValue &&
-            acrValue.toLowerCase().indexOf(b2cPolicyPrefix) === 0))) ||
+          (acrValue && acrValue.toLowerCase().indexOf(b2cPolicyPrefix) === 0))) ||
       ((issValue.indexOf(CHINA_LOGIN) === 0 ||
         issValue.match(/https:\/\/[^./]*\.b2clogin.cn\//gi)) &&
         issValue.indexOf('2.0') > -1 &&
@@ -91,12 +89,10 @@ export class Jwt implements IJwt {
     const acrValue = decodedClaims[acr];
 
     return (
-      ((issValue.indexOf(MS_LOGIN) === 0 ||
-        issValue.match(/https:\/\/[^./]*\.b2clogin.com\//gi)) &&
+      ((issValue.indexOf(MS_LOGIN) === 0 || issValue.match(/https:\/\/[^./]*\.b2clogin.com\//gi)) &&
         issValue.indexOf('2.0') > -1 &&
         ((tfpValue && tfpValue.toLowerCase().indexOf(iefPolicyPrefix) === 0) ||
-          (acrValue &&
-            acrValue.toLowerCase().indexOf(iefPolicyPrefix) === 0))) ||
+          (acrValue && acrValue.toLowerCase().indexOf(iefPolicyPrefix) === 0))) ||
       ((issValue.indexOf(CHINA_LOGIN) === 0 ||
         issValue.match(/https:\/\/[^./]*\.b2clogin.cn\//gi)) &&
         issValue.indexOf('2.0') > -1 &&

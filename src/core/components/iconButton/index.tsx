@@ -1,8 +1,5 @@
 import React, { Ref } from 'react';
-import {
-  IconButton as MuiIconButton,
-  IconButtonProps as MuiIconButtonProps,
-} from '@mui/material';
+import { IconButton as MuiIconButton, IconButtonProps as MuiIconButtonProps } from '@mui/material';
 import { classNames } from '@utils/classNames';
 import { TButtonColorTypes, TButtonSizeTypes } from '@components/button';
 import { TooltipProps } from '@mui/material';

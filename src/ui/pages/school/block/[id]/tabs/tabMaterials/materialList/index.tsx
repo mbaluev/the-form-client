@@ -18,9 +18,7 @@ import { AlertMaterials } from '@ui/components/alert/alertMaterials';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const MaterialList = observer(() => {
-  const { data: userBlock } = useViewModel<IBlockUserViewModel>(
-    VIEW_MODEL.BlockUser
-  );
+  const { data: userBlock } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
   const {
     isListLoading,
     listFiltered: materials,

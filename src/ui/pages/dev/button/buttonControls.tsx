@@ -41,11 +41,7 @@ export const ButtonControls = () => {
         <Button variant="contained" color="grey" className="field-control">
           contained grey
         </Button>
-        <Button
-          variant="contained"
-          color="grey-light"
-          className="field-control"
-        >
+        <Button variant="contained" color="grey-light" className="field-control">
           contained grey-light
         </Button>
         <Button variant="contained" color="blue" className="field-control">

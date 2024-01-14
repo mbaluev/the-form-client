@@ -36,9 +36,7 @@ export const DialogTask = observer((props: IProps) => {
     validateModal,
   } = useViewModel<ITaskViewModel>(VIEW_MODEL.Task);
 
-  const { list: blocks, data: block } = useViewModel<IBlockViewModel>(
-    VIEW_MODEL.Block
-  );
+  const { list: blocks, data: block } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();

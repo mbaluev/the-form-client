@@ -6,9 +6,7 @@ import { IMaterialUserViewModel } from '@viewModel/modules/entities/material/use
 import { MaterialList } from '@ui/pages/school/block/[id]/tabs/tabMaterials/materialList';
 
 export const TabMaterials = observer(() => {
-  const { getList } = useViewModel<IMaterialUserViewModel>(
-    VIEW_MODEL.MaterialUser
-  );
+  const { getList } = useViewModel<IMaterialUserViewModel>(VIEW_MODEL.MaterialUser);
 
   useEffect(() => {
     getList();

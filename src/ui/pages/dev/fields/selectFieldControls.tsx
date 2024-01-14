@@ -25,11 +25,7 @@ export const SelectFieldControls = (props: { id?: string }) => {
   return (
     <FormSection title="SelectField" cols={4} id={props.id}>
       <FormField title="1. SelectFieldControl">
-        <SelectFieldControl
-          placeholder="disabled"
-          items={SelectList}
-          disabled
-        />
+        <SelectFieldControl placeholder="disabled" items={SelectList} disabled />
         <SelectFieldControl placeholder="simple" items={SelectList} />
         <SelectFieldControl
           placeholder="error"
@@ -73,26 +69,10 @@ export const SelectFieldControls = (props: { id?: string }) => {
         />
       </FormField>
       <FormField title="4. SelectFieldControl sizes">
-        <SelectFieldControl
-          placeholder="default"
-          items={SelectList}
-          size="default"
-        />
-        <SelectFieldControl
-          placeholder="medium"
-          items={SelectList}
-          size="medium"
-        />
-        <SelectFieldControl
-          placeholder="small"
-          items={SelectList}
-          size="small"
-        />
-        <SelectFieldControl
-          placeholder="x-small"
-          items={SelectList}
-          size="x-small"
-        />
+        <SelectFieldControl placeholder="default" items={SelectList} size="default" />
+        <SelectFieldControl placeholder="medium" items={SelectList} size="medium" />
+        <SelectFieldControl placeholder="small" items={SelectList} size="small" />
+        <SelectFieldControl placeholder="x-small" items={SelectList} size="x-small" />
       </FormField>
     </FormSection>
   );

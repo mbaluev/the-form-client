@@ -7,10 +7,7 @@ import { IQuestionUserViewModel } from '@viewModel/modules/entities/question/use
 import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
-export class QuestionUserViewModel
-  extends QuestionBaseViewModel
-  implements IQuestionUserViewModel
-{
+export class QuestionUserViewModel extends QuestionBaseViewModel implements IQuestionUserViewModel {
   @inject(VIEW_MODEL.BlockUser) protected userBlock!: BlockUserViewModel;
 
   constructor() {
@@ -102,10 +99,9 @@ export class QuestionUserViewModel
                 q.userQuestionAnswers = q.userQuestionAnswers?.filter(
                   (a) => a.questionOptionId !== optionId
                 );
-                newData.userQuestionAnswers =
-                  newData.userQuestionAnswers?.filter(
-                    (a) => a.questionOptionId !== optionId
-                  );
+                newData.userQuestionAnswers = newData.userQuestionAnswers?.filter(
+                  (a) => a.questionOptionId !== optionId
+                );
               }
               break;
             case 'radio':
@@ -123,10 +119,7 @@ export class QuestionUserViewModel
   saveQuestionAnswers = async () => {
     try {
       if (this.data) {
-        await this.serviceQuestion.saveQuestionAnswers(
-          this.data.id,
-          this.data.userQuestionAnswers
-        );
+        await this.serviceQuestion.saveQuestionAnswers(this.data.id, this.data.userQuestionAnswers);
       }
     } catch (err) {
     } finally {

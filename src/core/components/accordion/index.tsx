@@ -1,9 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import {
-  Accordion as AccordionMui,
-  AccordionDetails,
-  AccordionSummary,
-} from '@mui/material';
+import { Accordion as AccordionMui, AccordionDetails, AccordionSummary } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import { classNames } from '@utils/classNames';
 import './index.scss';

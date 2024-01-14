@@ -5,10 +5,7 @@ import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { Page } from '@ui/layout/page';
 import { classNames } from '@utils/classNames';
 import { ModuleContent } from '@ui/pages/school/module/[id]/moduleContent';
-import {
-  getProgress,
-  ModuleProgress,
-} from '@ui/pages/school/module/index/moduleProgress';
+import { getProgress, ModuleProgress } from '@ui/pages/school/module/index/moduleProgress';
 import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { SubTitleModule } from '@ui/components/subTitle/subTitleModule';
@@ -17,9 +14,7 @@ import './index.scss';
 import { TitleModule } from '@ui/components/title/titleModule';
 
 export const ModulePage = observer(() => {
-  const { data: userModule } = useViewModel<IModuleUserViewModel>(
-    VIEW_MODEL.ModuleUser
-  );
+  const { data: userModule } = useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
   const breadCrumbs: TBreadCrumb[] = [
     {
       label: ROUTER_CONST_SCHOOL.HOME.label,
@@ -30,8 +25,7 @@ export const ModulePage = observer(() => {
       url: { pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULES.path },
     },
     {
-      label:
-        userModule && userModule.module ? userModule.module.name : 'loading...',
+      label: userModule && userModule.module ? userModule.module.name : 'loading...',
       url: {
         pathname: ROUTER_CONST_SCHOOL.SCHOOL_MODULE.path,
         query: { id: userModule?.id },

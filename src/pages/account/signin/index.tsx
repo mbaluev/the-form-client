@@ -8,8 +8,9 @@ import { IAuthViewModel } from '@viewModel/modules/common/auth/interface';
 import { MasterAnon } from '@ui/masters/masterAnon';
 
 const Signin = () => {
-  const { clearData, clearChanges, clearMessage, clearToken } =
-    useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
+  const { clearData, clearChanges, clearMessage, clearToken } = useViewModel<IAuthViewModel>(
+    VIEW_MODEL.Auth
+  );
 
   useEffect(() => {
     clearToken();

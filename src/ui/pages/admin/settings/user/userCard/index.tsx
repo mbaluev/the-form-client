@@ -11,9 +11,7 @@ import { UserCardActions } from '@ui/pages/admin/settings/user/userCardActions';
 import { UserTabs } from '@ui/pages/admin/settings/user/userTabs';
 
 export const UserCard = observer(() => {
-  const { userData, isDataLoading } = useViewModel<IUserViewModel>(
-    VIEW_MODEL.User
-  );
+  const { userData, isDataLoading } = useViewModel<IUserViewModel>(VIEW_MODEL.User);
 
   if (!userData) return <Page204 />;
 

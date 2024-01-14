@@ -6,8 +6,8 @@ const labelStyle = 'altName';
 const timeZones = {
   labelStyle,
   default:
-    parseTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone, labelStyle)
-      ?.value || Intl.DateTimeFormat().resolvedOptions().timeZone,
+    parseTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone, labelStyle)?.value ||
+    Intl.DateTimeFormat().resolvedOptions().timeZone,
   selectItems: getOptions(labelStyle),
 };
 

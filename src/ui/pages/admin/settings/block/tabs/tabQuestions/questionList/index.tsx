@@ -100,11 +100,7 @@ export const QuestionList = observer(() => {
     <IconButton tooltip="Add new question" onClick={modalNew}>
       <AddIcon />
     </IconButton>,
-    <IconButton
-      tooltip="Delete questions"
-      onClick={handleDelete}
-      disabled={!hasDelete}
-    >
+    <IconButton tooltip="Delete questions" onClick={handleDelete} disabled={!hasDelete}>
       <DeleteIcon />
     </IconButton>,
   ];

@@ -8,10 +8,7 @@ import { action, makeObservable, observable } from 'mobx';
 import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
-export class BlockViewModel
-  extends BaseCardViewModel<IBlockDTO>
-  implements IBlockViewModel
-{
+export class BlockViewModel extends BaseCardViewModel<IBlockDTO> implements IBlockViewModel {
   @inject(SERVICE.Block) protected serviceBlock!: BlockService;
 
   constructor() {

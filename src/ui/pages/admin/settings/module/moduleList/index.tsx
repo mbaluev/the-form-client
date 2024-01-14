@@ -44,20 +44,14 @@ export const ModuleList = observer((props: IProps) => {
     {
       headerName: 'Modules',
       valueGetter: (params: any) => {
-        return `${params.node.rowIndex + 1}. ${params.data?.title}. ${
-          params.data?.name
-        }`;
+        return `${params.node.rowIndex + 1}. ${params.data?.title}. ${params.data?.name}`;
       },
       cellClass: 'ag-first-cell ag-last-cell',
     },
   ];
 
   const itemsLeft: JSX.Element[] = [
-    <FilterText
-      name="search"
-      placeholder="Search"
-      style={{ flex: '1 1 auto' }}
-    />,
+    <FilterText name="search" placeholder="Search" style={{ flex: '1 1 auto' }} />,
   ];
   const itemsRight: JSX.Element[] = [
     <IconButton tooltip="New" onClick={modalNew}>

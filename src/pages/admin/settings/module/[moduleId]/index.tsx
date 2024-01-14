@@ -19,8 +19,9 @@ const Module = () => {
     clearModuleData,
     data: module,
   } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
-  const { getList: getBlocks, clearList: clearBlocks } =
-    useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
+  const { getList: getBlocks, clearList: clearBlocks } = useViewModel<IBlockViewModel>(
+    VIEW_MODEL.Block
+  );
 
   const router = useRouter();
   const moduleId = router.query.moduleId as string;

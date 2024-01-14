@@ -9,9 +9,7 @@ export const AccountRoles = observer(() => {
   return (
     <Tags>
       {roles?.includes(ROLES.USER) && <Tag tag={ROLES.USER} color="blue" />}
-      {roles?.includes(ROLES.STUDENT) && (
-        <Tag tag={ROLES.STUDENT} color="green" />
-      )}
+      {roles?.includes(ROLES.STUDENT) && <Tag tag={ROLES.STUDENT} color="green" />}
       {roles?.includes(ROLES.ADMIN) && <Tag tag={ROLES.ADMIN} color="red" />}
     </Tags>
   );

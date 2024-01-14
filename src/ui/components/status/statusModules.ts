@@ -8,8 +8,7 @@ export const statusModules = (userModules?: IModuleUserDTO[] | null) => {
   let complete = false;
   if (userModules && userModules.length > 0) {
     complete = userModules?.reduce(
-      (prev: boolean, userModule: IModuleUserDTO) =>
-        prev && userModule.complete,
+      (prev: boolean, userModule: IModuleUserDTO) => prev && userModule.complete,
       true
     );
   }

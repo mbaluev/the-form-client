@@ -11,8 +11,9 @@ import { BlocksPage } from 'ui/pages/admin/progress/blocks/index/blocksPage';
 import { IModuleAdminViewModel } from '@viewModel/modules/entities/module/admin/interface';
 
 const UserBlocks = () => {
-  const { getList: getBlocks, clearList: clearBlocks } =
-    useViewModel<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin);
+  const { getList: getBlocks, clearList: clearBlocks } = useViewModel<IBlockAdminViewModel>(
+    VIEW_MODEL.BlockAdmin
+  );
   const {
     getData: getModule,
     clearData: clearModule,

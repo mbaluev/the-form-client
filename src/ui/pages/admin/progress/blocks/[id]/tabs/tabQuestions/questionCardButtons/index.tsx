@@ -30,11 +30,7 @@ export const QuestionCardButtons = observer(() => {
           </Button>
         </Grid>
         <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Button
-            endIcon={<ArrowForwardIcon />}
-            disabled={!isNext}
-            onClick={handleNext}
-          >
+          <Button endIcon={<ArrowForwardIcon />} disabled={!isNext} onClick={handleNext}>
             Next
           </Button>
         </Grid>

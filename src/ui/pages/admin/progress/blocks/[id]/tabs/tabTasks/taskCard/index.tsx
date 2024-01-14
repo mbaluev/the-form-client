@@ -13,11 +13,13 @@ import { ITaskAdminDocumentViewModel } from '@viewModel/modules/entities/task/ad
 import { DialogTaskAdminDocument } from '@ui/dialogs/admin/dialogTaskAdminDocument';
 
 export const TaskCard = observer(() => {
-  const { data, isDataLoading, getData, getList } =
-    useViewModel<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin);
+  const { data, isDataLoading, getData, getList } = useViewModel<ITaskAdminViewModel>(
+    VIEW_MODEL.TaskAdmin
+  );
 
-  const { isModalOpen, modalClose, modalSubmit } =
-    useViewModel<ITaskAdminDocumentViewModel>(VIEW_MODEL.TaskAdminDocument);
+  const { isModalOpen, modalClose, modalSubmit } = useViewModel<ITaskAdminDocumentViewModel>(
+    VIEW_MODEL.TaskAdminDocument
+  );
 
   const handleSubmit = async () => {
     await modalSubmit();

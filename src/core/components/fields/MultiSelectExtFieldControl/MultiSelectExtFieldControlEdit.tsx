@@ -102,9 +102,7 @@ export const MultiSelectExtFieldControlEdit = <ItemType,>(
       if (
         key !== valueField &&
         typeof item[key] === 'string' &&
-        (item[key] as unknown as string)
-          .toLowerCase()
-          .indexOf(searchString.toLowerCase()) >= 0
+        (item[key] as unknown as string).toLowerCase().indexOf(searchString.toLowerCase()) >= 0
       ) {
         ret = true;
       }
@@ -119,12 +117,8 @@ export const MultiSelectExtFieldControlEdit = <ItemType,>(
     return displaySelectedFirst
       ? fItems
           ?.filter((_item) => state?.includes(_item[valueField]))
-          .sort((a, b) =>
-            stringCompare(String(a[valueField]), String(b[valueField]))
-          )
-          .concat(
-            fItems?.filter((_item) => !state?.includes(_item[valueField]))
-          )
+          .sort((a, b) => stringCompare(String(a[valueField]), String(b[valueField])))
+          .concat(fItems?.filter((_item) => !state?.includes(_item[valueField])))
       : fItems;
     // eslint-disable-next-line
   }, [searchText, state, items, valueField]);
@@ -212,9 +206,7 @@ export const MultiSelectExtFieldControlEdit = <ItemType,>(
         multiple
         {...other}
       />
-      {helperText && (
-        <FormHelperText error={!!error}>{helperText}</FormHelperText>
-      )}
+      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
       <Popover
         open={open}
         anchorEl={selectRef.current}
@@ -258,34 +250,23 @@ export const MultiSelectExtFieldControlEdit = <ItemType,>(
         )}
         <div className="multi-select-ext-field-control__content">
           {(!itemsFiltered || itemsFiltered?.length === 0) && (
-            <div className="multi-select-ext-field-control__menu-item_no-data">
-              not found
-            </div>
+            <div className="multi-select-ext-field-control__menu-item_no-data">not found</div>
           )}
           {itemsFiltered?.map((item, index) => {
             const checked = state?.includes(item[valueField]);
-            const clsItem = classNames(
-              'multi-select-ext-field-control__menu-item',
-              {
-                'multi-select-ext-field-control__menu-item_checked': Boolean(
-                  checked && !displayCheckboxes
-                ),
-              }
-            );
+            const clsItem = classNames('multi-select-ext-field-control__menu-item', {
+              'multi-select-ext-field-control__menu-item_checked': Boolean(
+                checked && !displayCheckboxes
+              ),
+            });
             return (
               <div
                 key={index}
-                data-value={
-                  item[valueField]
-                    ? (item[valueField] as unknown as string)
-                    : ''
-                }
+                data-value={item[valueField] ? (item[valueField] as unknown as string) : ''}
                 className={clsItem}
                 onClick={() => onChangeHandler(item[valueField] as unknown)}
               >
-                {displayCheckboxes && (
-                  <CheckboxFieldControl checked={checked} />
-                )}
+                {displayCheckboxes && <CheckboxFieldControl checked={checked} />}
                 {renderOption ? (
                   renderOption(item)
                 ) : (
@@ -300,41 +281,21 @@ export const MultiSelectExtFieldControlEdit = <ItemType,>(
         {displayButtons && (
           <div className="multi-select-ext-field-control__buttons">
             {onCancel ? (
-              <Button
-                size="small"
-                variant="text"
-                color="red"
-                onClick={onCancelHandler}
-              >
+              <Button size="small" variant="text" color="red" onClick={onCancelHandler}>
                 {cancelLabel}
               </Button>
             ) : (
-              <Button
-                size="small"
-                variant="text"
-                color="red"
-                onClick={clearAll}
-              >
+              <Button size="small" variant="text" color="red" onClick={clearAll}>
                 {clearLabel}
               </Button>
             )}
             {onSave ? (
-              <Button
-                size="small"
-                variant="contained"
-                color="blue"
-                onClick={onSaveHandler}
-              >
+              <Button size="small" variant="contained" color="blue" onClick={onSaveHandler}>
                 {selectLabel}
               </Button>
             ) : (
               multiple && (
-                <Button
-                  size="small"
-                  variant="contained"
-                  color="blue"
-                  onClick={selectAll}
-                >
+                <Button size="small" variant="contained" color="blue" onClick={selectAll}>
                   {selectAllLabel}
                 </Button>
               )

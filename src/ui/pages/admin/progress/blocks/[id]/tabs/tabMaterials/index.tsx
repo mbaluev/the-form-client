@@ -6,9 +6,7 @@ import { MaterialList } from '@ui/pages/admin/progress/blocks/[id]/tabs/tabMater
 import { IMaterialAdminViewModel } from '@viewModel/modules/entities/material/admin/interface';
 
 export const TabMaterials = observer(() => {
-  const { getList } = useViewModel<IMaterialAdminViewModel>(
-    VIEW_MODEL.MaterialAdmin
-  );
+  const { getList } = useViewModel<IMaterialAdminViewModel>(VIEW_MODEL.MaterialAdmin);
 
   useEffect(() => {
     getList();

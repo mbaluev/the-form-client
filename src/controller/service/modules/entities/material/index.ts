@@ -12,9 +12,7 @@ export class MaterialService implements IMaterialService {
 
   API_PREFIX = `/api/material`;
 
-  getMaterials = async (
-    query?: ParsedUrlQuery
-  ): Promise<IMaterialDTO[] | undefined> => {
+  getMaterials = async (query?: ParsedUrlQuery): Promise<IMaterialDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IMaterialDTO>>(
       `${this.API_PREFIX}/list`,
       { ...query }
@@ -22,10 +20,7 @@ export class MaterialService implements IMaterialService {
     return ret ? ret.data : undefined;
   };
 
-  getMaterial = async (
-    id?: string,
-    query?: ParsedUrlQuery
-  ): Promise<IMaterialDTO | undefined> => {
+  getMaterial = async (id?: string, query?: ParsedUrlQuery): Promise<IMaterialDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<IMaterialDTO>>(
       `${this.API_PREFIX}/item/${id}`,
       { ...query }
@@ -60,9 +55,7 @@ export class MaterialService implements IMaterialService {
 
   // --- user
 
-  getMaterialsUser = async (
-    query?: ParsedUrlQuery
-  ): Promise<IMaterialUserDTO[] | undefined> => {
+  getMaterialsUser = async (query?: ParsedUrlQuery): Promise<IMaterialUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IMaterialUserDTO>>(
       `${this.API_PREFIX}/user/list`,
       { ...query }

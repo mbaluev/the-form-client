@@ -6,9 +6,7 @@ import { QuestionList } from '@ui/pages/admin/progress/blocks/[id]/tabs/tabQuest
 import { IQuestionAdminViewModel } from '@viewModel/modules/entities/question/admin/interface';
 
 export const TabQuestions = observer(() => {
-  const { getList } = useViewModel<IQuestionAdminViewModel>(
-    VIEW_MODEL.QuestionAdmin
-  );
+  const { getList } = useViewModel<IQuestionAdminViewModel>(VIEW_MODEL.QuestionAdmin);
 
   useEffect(() => {
     getList();

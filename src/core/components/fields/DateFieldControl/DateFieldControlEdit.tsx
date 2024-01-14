@@ -5,16 +5,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DateFieldControlProps, TextFieldControl } from '@components/fields';
 
 export const DateFieldControlEdit = (props: DateFieldControlProps) => {
-  const {
-    value,
-    onChange,
-    className,
-    renderInput,
-    helperText,
-    error,
-    size,
-    ...other
-  } = props;
+  const { value, onChange, className, renderInput, helperText, error, size, ...other } = props;
 
   const [state, setState] = useState<Date | string | null>();
 

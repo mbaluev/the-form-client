@@ -8,14 +8,7 @@ import {
 } from '@components/fields';
 
 export const RangeFieldControlView = (props: RangeFieldControlProps) => {
-  const {
-    className,
-    value,
-    emptyLabel = '-',
-    format,
-    min = RANGE_MIN,
-    max = RANGE_MAX,
-  } = props;
+  const { className, value, emptyLabel = '-', format, min = RANGE_MIN, max = RANGE_MAX } = props;
 
   const cls = classNames(className, {
     'field-control_no-data': !Boolean(value),

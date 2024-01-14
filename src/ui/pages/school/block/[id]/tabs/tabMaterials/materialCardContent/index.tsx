@@ -10,9 +10,7 @@ import { NoData } from '@components/noData';
 import { DocumentButton } from '@ui/components/documentButton';
 
 export const MaterialCardContent = observer(() => {
-  const { data, download } = useViewModel<IMaterialUserViewModel>(
-    VIEW_MODEL.MaterialUser
-  );
+  const { data, download } = useViewModel<IMaterialUserViewModel>(VIEW_MODEL.MaterialUser);
 
   if (!data) return <NoData />;
 
@@ -21,9 +19,7 @@ export const MaterialCardContent = observer(() => {
       <FormSection>
         <DocumentButton doc={data.material?.document} download={download} />
         <FormField title="Document description">
-          <Box style={{ lineHeight: 1.9 }}>
-            {data.material?.document?.description}
-          </Box>
+          <Box style={{ lineHeight: 1.9 }}>{data.material?.document?.description}</Box>
         </FormField>
       </FormSection>
       <Stack flex="1 1 auto" borderRadius="5px" overflow="hidden">

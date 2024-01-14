@@ -16,16 +16,10 @@ export const IconTask = (props: IProps) => {
   const { userTask, admin, style } = props;
   const title = statusTask(userTask);
   let icon = <CircleOutlinedIcon className="color_grey-50" style={style} />;
-  if (
-    (admin && userTask?.sent === true) ||
-    (!admin && userTask?.sent === false)
-  ) {
+  if ((admin && userTask?.sent === true) || (!admin && userTask?.sent === false)) {
     icon = <CallReceivedRoundedIcon className="color_red" style={style} />;
   }
-  if (
-    (admin && userTask?.sent === false) ||
-    (!admin && userTask?.sent === true)
-  ) {
+  if ((admin && userTask?.sent === false) || (!admin && userTask?.sent === true)) {
     icon = <CallMadeRoundedIcon className="color_blue" style={style} />;
   }
   if (userTask?.complete) {

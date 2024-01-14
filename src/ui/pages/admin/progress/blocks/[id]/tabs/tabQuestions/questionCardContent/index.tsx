@@ -75,9 +75,7 @@ export const QuestionCardContent = observer(() => {
         <Stack direction="row" spacing={3}>
           <Box sx={{ flex: '1 1 auto' }}>
             <FormField title="Comment">
-              <Typography sx={{ whiteSpace: 'pre-wrap' }}>
-                {data.commentText || '-'}
-              </Typography>
+              <Typography sx={{ whiteSpace: 'pre-wrap' }}>{data.commentText || '-'}</Typography>
             </FormField>
           </Box>
           <Tooltip title="Edit comment">

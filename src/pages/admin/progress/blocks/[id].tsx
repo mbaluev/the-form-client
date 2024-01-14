@@ -28,9 +28,7 @@ const Block = () => {
   const { clearData: clearMaterial } = useViewModel<IMaterialAdminViewModel>(
     VIEW_MODEL.MaterialAdmin
   );
-  const { clearData: clearTask } = useViewModel<ITaskAdminViewModel>(
-    VIEW_MODEL.TaskAdmin
-  );
+  const { clearData: clearTask } = useViewModel<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin);
   const { clearData: clearQuestion } = useViewModel<IQuestionAdminViewModel>(
     VIEW_MODEL.QuestionAdmin
   );

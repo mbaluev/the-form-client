@@ -12,17 +12,11 @@ export class AuthService implements IAuthService {
   API_PREFIX = `${process.env.REACT_APP_CORE_URL}/api/auth`;
 
   signup = async (data: IUserDTO) => {
-    return this.apiModule.post<IAuthResponse>(
-      `${this.API_PREFIX}/signup`,
-      data
-    );
+    return this.apiModule.post<IAuthResponse>(`${this.API_PREFIX}/signup`, data);
   };
 
   signin = async (data: IUserDTO) => {
-    return this.apiModule.post<IAuthResponse>(
-      `${this.API_PREFIX}/signin`,
-      data
-    );
+    return this.apiModule.post<IAuthResponse>(`${this.API_PREFIX}/signin`, data);
   };
 
   signout = async () => {

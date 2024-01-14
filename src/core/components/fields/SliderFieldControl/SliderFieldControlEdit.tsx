@@ -4,11 +4,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import { classNames } from '@utils/classNames';
-import {
-  Slider,
-  SliderFieldControlProps,
-  getSliderDisplayValue,
-} from '@components/fields';
+import { Slider, SliderFieldControlProps, getSliderDisplayValue } from '@components/fields';
 
 export const SliderFieldControlEdit = (props: SliderFieldControlProps) => {
   const {
@@ -31,11 +27,7 @@ export const SliderFieldControlEdit = (props: SliderFieldControlProps) => {
     setState(value);
   }, [value]);
 
-  const handleChange = (
-    _event: any,
-    newValue: number | number[],
-    activeThumb: number
-  ) => {
+  const handleChange = (_event: any, newValue: number | number[], activeThumb: number) => {
     setState(newValue);
     if (onChange) {
       onChange(_event, newValue, activeThumb);
@@ -89,9 +81,7 @@ export const SliderFieldControlEdit = (props: SliderFieldControlProps) => {
       {displayControls && (
         <div className="slider-field-control__controls">
           {typeof state === 'number' && !disabled && <DecreaseButton />}
-          <div className="slider-field-control__label">
-            {getSliderDisplayValue(state, format)}
-          </div>
+          <div className="slider-field-control__label">{getSliderDisplayValue(state, format)}</div>
           {typeof state === 'number' && !disabled && <IncreaseButton />}
         </div>
       )}
@@ -104,9 +94,7 @@ export const SliderFieldControlEdit = (props: SliderFieldControlProps) => {
           {...other}
         />
       </div>
-      {error && helperText && (
-        <FormHelperText error={error}>{helperText}</FormHelperText>
-      )}
+      {error && helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
     </FormControl>
   );
 };

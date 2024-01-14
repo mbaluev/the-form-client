@@ -16,9 +16,7 @@ import { AlertTasks } from '@ui/components/alert/alertTasks';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const TaskList = observer(() => {
-  const { data: userBlock } = useViewModel<IBlockUserViewModel>(
-    VIEW_MODEL.BlockUser
-  );
+  const { data: userBlock } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
   const {
     isListLoading,
     listFiltered: tasks,
@@ -50,8 +48,7 @@ export const TaskList = observer(() => {
   ];
 
   const getRowClass = (params: RowClassParams) => {
-    if (!params.data.complete && params.data.sent === false)
-      return 'ag-row-red';
+    if (!params.data.complete && params.data.sent === false) return 'ag-row-red';
   };
 
   const onClick = async (params: CellClickedEvent) => {

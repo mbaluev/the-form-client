@@ -10,13 +10,8 @@ export interface ITestStatus {
   fail: number;
 }
 
-export interface IQuestionBaseViewModel
-  extends IBaseCardViewModel<IQuestionUserDTO> {
-  getData: (
-    id?: string,
-    query?: ParsedUrlQuery,
-    setIndex?: boolean
-  ) => Promise<void>;
+export interface IQuestionBaseViewModel extends IBaseCardViewModel<IQuestionUserDTO> {
+  getData: (id?: string, query?: ParsedUrlQuery, setIndex?: boolean) => Promise<void>;
 
   status: ITestStatus;
   isNext: boolean;

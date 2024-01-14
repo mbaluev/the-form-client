@@ -4,10 +4,7 @@ import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { Page } from '@ui/layout/page';
 import { ModuleGrid } from '@ui/pages/school/module/index/moduleGrid';
 import { observer } from 'mobx-react';
-import {
-  getProgress,
-  ModuleProgress,
-} from '@ui/pages/school/module/index/moduleProgress';
+import { getProgress, ModuleProgress } from '@ui/pages/school/module/index/moduleProgress';
 import { useViewModel } from '@hooks/useViewModel';
 import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/interface';
 import { VIEW_MODEL } from '@viewModel/ids';
@@ -17,9 +14,7 @@ import { SubTitleModules } from '@ui/components/subTitle/subTitleModules';
 import './index.scss';
 
 export const ModulesPage = observer(() => {
-  const { list: userModules } = useViewModel<IModuleUserViewModel>(
-    VIEW_MODEL.ModuleUser
-  );
+  const { list: userModules } = useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
   const breadCrumbs: TBreadCrumb[] = [
     {
       label: ROUTER_CONST_SCHOOL.HOME.label,
@@ -31,23 +26,18 @@ export const ModulesPage = observer(() => {
     },
   ];
   const cls = classNames('modules-page');
-  const progressValues = userModules?.reduce(
-    (prevUserModules: boolean[], currUserModule) => {
-      const currUserModuleData = currUserModule?.userBlocks?.reduce(
-        (prev: boolean[], curr) =>
-          prev.concat([
-            Boolean(curr.completeMaterials),
-            Boolean(curr.completeQuestions),
-            Boolean(curr.completeTasks),
-          ]),
-        []
-      );
-      return currUserModuleData
-        ? prevUserModules.concat(currUserModuleData)
-        : prevUserModules;
-    },
-    []
-  );
+  const progressValues = userModules?.reduce((prevUserModules: boolean[], currUserModule) => {
+    const currUserModuleData = currUserModule?.userBlocks?.reduce(
+      (prev: boolean[], curr) =>
+        prev.concat([
+          Boolean(curr.completeMaterials),
+          Boolean(curr.completeQuestions),
+          Boolean(curr.completeTasks),
+        ]),
+      []
+    );
+    return currUserModuleData ? prevUserModules.concat(currUserModuleData) : prevUserModules;
+  }, []);
   const progress = getProgress(progressValues);
   return (
     <Page

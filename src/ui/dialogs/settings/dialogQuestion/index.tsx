@@ -1,11 +1,7 @@
 import React, { ChangeEvent, useEffect } from 'react';
 import { Modal } from '@components/modal';
 import { Form, FormField, FormSection } from '@components/form';
-import {
-  CheckboxFieldControl,
-  SelectFieldControl,
-  TextFieldControl,
-} from '@components/fields';
+import { CheckboxFieldControl, SelectFieldControl, TextFieldControl } from '@components/fields';
 import { IButtonProps } from '@components/button';
 import { observer } from 'mobx-react';
 import { useViewModel } from '@hooks/useViewModel';
@@ -42,9 +38,7 @@ export const DialogQuestion = observer((props: IProps) => {
     hasOption,
   } = useViewModel<IQuestionViewModel>(VIEW_MODEL.Question);
 
-  const { list: blocks, data: block } = useViewModel<IBlockViewModel>(
-    VIEW_MODEL.Block
-  );
+  const { list: blocks, data: block } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     changeModalField(e.target.name, e.target.value);
@@ -136,11 +130,7 @@ export const DialogQuestion = observer((props: IProps) => {
           <FormField
             title="Question options"
             actions={[
-              <IconButton
-                onClick={addOption}
-                disabled={!hasOption}
-                tooltip="Add option"
-              >
+              <IconButton onClick={addOption} disabled={!hasOption} tooltip="Add option">
                 <Add />
               </IconButton>,
             ]}
@@ -162,10 +152,7 @@ export const DialogQuestion = observer((props: IProps) => {
               <FormField
                 key={index}
                 actions={[
-                  <IconButton
-                    onClick={deleteOptionHandler}
-                    tooltip="Remove option"
-                  >
+                  <IconButton onClick={deleteOptionHandler} tooltip="Remove option">
                     <Delete />
                   </IconButton>,
                 ]}

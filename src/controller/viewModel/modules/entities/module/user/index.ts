@@ -4,10 +4,7 @@ import { ModuleBaseViewModel } from '@viewModel/modules/entities/module/base';
 import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
-export class ModuleUserViewModel
-  extends ModuleBaseViewModel
-  implements IModuleUserViewModel
-{
+export class ModuleUserViewModel extends ModuleBaseViewModel implements IModuleUserViewModel {
   // --- override
 
   getList = async (query?: ParsedUrlQuery) => {

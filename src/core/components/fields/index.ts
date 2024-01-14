@@ -14,10 +14,7 @@ export type BaseFieldControlProps<T> = Omit<T, 'size'> & {
   size?: 'default' | 'medium' | 'small' | 'x-small';
 };
 
-export const fieldControlClassNames = <T>(
-  props: BaseFieldControlProps<T>,
-  className?: string
-) => {
+export const fieldControlClassNames = <T>(props: BaseFieldControlProps<T>, className?: string) => {
   const {
     className: classNameProps,
     isEdit = true,

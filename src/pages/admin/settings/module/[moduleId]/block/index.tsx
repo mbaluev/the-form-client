@@ -56,11 +56,7 @@ const Blocks = () => {
     },
   ];
   const filtersLeft: JSX.Element[] = [
-    <FilterText
-      name="search"
-      placeholder="Search"
-      style={{ flexBasis: '100%' }}
-    />,
+    <FilterText name="search" placeholder="Search" style={{ flexBasis: '100%' }} />,
   ];
   const router = useRouter();
   const moduleId = router.query.moduleId as string;

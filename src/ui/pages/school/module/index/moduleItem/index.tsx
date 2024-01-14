@@ -5,10 +5,7 @@ import { IModuleUserDTO } from 'controller/model/entities/module';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { IconBlock } from '@ui/components/icon/iconBlock';
 import { TagModule } from '@ui/components/tag/tagModule';
-import {
-  getProgress,
-  ModuleProgress,
-} from '@ui/pages/school/module/index/moduleProgress';
+import { getProgress, ModuleProgress } from '@ui/pages/school/module/index/moduleProgress';
 import './index.scss';
 
 interface IModuleItemProps {
@@ -17,16 +14,13 @@ interface IModuleItemProps {
 
 const ModuleItemContent = (props: IModuleItemProps) => {
   const { userModule } = props;
-  const progressValues = userModule.userBlocks?.reduce(
-    (prev: boolean[], curr) => {
-      return prev.concat([
-        Boolean(curr.completeMaterials),
-        Boolean(curr.completeQuestions),
-        Boolean(curr.completeTasks),
-      ]);
-    },
-    []
-  );
+  const progressValues = userModule.userBlocks?.reduce((prev: boolean[], curr) => {
+    return prev.concat([
+      Boolean(curr.completeMaterials),
+      Boolean(curr.completeQuestions),
+      Boolean(curr.completeTasks),
+    ]);
+  }, []);
   const progress = getProgress(progressValues);
   return (
     <React.Fragment>
@@ -46,9 +40,7 @@ const ModuleItemContent = (props: IModuleItemProps) => {
                 <div className="module-item__li-icon">
                   <IconBlock userBlock={userBlock} />
                 </div>
-                <div className="module-item__li-label">
-                  {userBlock.block?.name}
-                </div>
+                <div className="module-item__li-label">{userBlock.block?.name}</div>
               </li>
             );
           })}

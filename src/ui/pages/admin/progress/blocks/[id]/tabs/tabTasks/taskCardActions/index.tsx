@@ -11,11 +11,13 @@ import CheckIcon from '@mui/icons-material/Check';
 import HistoryIcon from '@mui/icons-material/History';
 
 export const TaskCardActions = observer(() => {
-  const { data, complete, getData, getList, clearData } =
-    useViewModel<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin);
+  const { data, complete, getData, getList, clearData } = useViewModel<ITaskAdminViewModel>(
+    VIEW_MODEL.TaskAdmin
+  );
 
-  const { modalNew, changeModalField } =
-    useViewModel<ITaskAdminDocumentViewModel>(VIEW_MODEL.TaskAdminDocument);
+  const { modalNew, changeModalField } = useViewModel<ITaskAdminDocumentViewModel>(
+    VIEW_MODEL.TaskAdminDocument
+  );
 
   const handleComplete = async () => {
     await complete();
@@ -25,14 +27,8 @@ export const TaskCardActions = observer(() => {
   const handleNew = async () => {
     modalNew();
     changeModalField('userTaskId', data?.id);
-    changeModalField(
-      'document.documentTypeId',
-      data?.task?.document?.documentTypeId
-    );
-    changeModalField(
-      'document.documentType',
-      data?.task?.document?.documentType
-    );
+    changeModalField('document.documentTypeId', data?.task?.document?.documentTypeId);
+    changeModalField('document.documentType', data?.task?.document?.documentType);
   };
   const handleHistory = async () => {};
   const handleClose = async () => clearData();
@@ -44,21 +40,13 @@ export const TaskCardActions = observer(() => {
   return (
     <Toolbar
       itemsLeft={[
-        <IconButton
-          onClick={handleComplete}
-          tooltip="Complete"
-          disabled={disabledComplete}
-        >
+        <IconButton onClick={handleComplete} tooltip="Complete" disabled={disabledComplete}>
           <CheckIcon />
         </IconButton>,
         <IconButton onClick={handleNew} tooltip="Send" disabled={disabledNew}>
           <AddIcon />
         </IconButton>,
-        <IconButton
-          onClick={handleHistory}
-          tooltip="History"
-          disabled={disabledHistory}
-        >
+        <IconButton onClick={handleHistory} tooltip="History" disabled={disabledHistory}>
           <HistoryIcon />
         </IconButton>,
         <IconButton onClick={handleClose} tooltip="Close">

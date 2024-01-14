@@ -13,9 +13,7 @@ export const inputProps = (
   if (inputType === 'number') {
     return {
       inputComponent: FormatNumber as any,
-      endAdornment: adornment && (
-        <InputAdornment position="end">{adornment}</InputAdornment>
-      ),
+      endAdornment: adornment && <InputAdornment position="end">{adornment}</InputAdornment>,
     };
   }
   if (inputType === 'currency') {

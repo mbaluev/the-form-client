@@ -16,20 +16,14 @@ export class UserService implements IUserService {
     return this.apiModule.get<IUserDTO | undefined>(`${this.API_PREFIX}/me`);
   };
 
-  getUsers = async (
-    query?: ParsedUrlQuery
-  ): Promise<IUserDTO[] | undefined> => {
-    const ret = await this.apiModule.post<IResponseListDTO<IUserDTO>>(
-      `${this.API_PREFIX}/list`,
-      { ...query }
-    );
+  getUsers = async (query?: ParsedUrlQuery): Promise<IUserDTO[] | undefined> => {
+    const ret = await this.apiModule.post<IResponseListDTO<IUserDTO>>(`${this.API_PREFIX}/list`, {
+      ...query,
+    });
     return ret ? ret.data : undefined;
   };
 
-  getUser = async (
-    id?: string,
-    query?: ParsedUrlQuery
-  ): Promise<IUserDTO | undefined> => {
+  getUser = async (id?: string, query?: ParsedUrlQuery): Promise<IUserDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<IUserDTO>>(
       `${this.API_PREFIX}/item/${id}`,
       { ...query }
@@ -64,9 +58,7 @@ export class UserService implements IUserService {
 
   // admin
 
-  getUsersAdmin = async (
-    query?: ParsedUrlQuery
-  ): Promise<IUserDTO[] | undefined> => {
+  getUsersAdmin = async (query?: ParsedUrlQuery): Promise<IUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IUserDTO>>(
       `${this.API_PREFIX}/admin/list`,
       { ...query }

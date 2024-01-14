@@ -1,10 +1,7 @@
 import * as React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
-import {
-  createEmotionCache,
-  createEmotionCacheRtl,
-} from '@utils/cache/createEmotionCache';
+import { createEmotionCache, createEmotionCacheRtl } from '@utils/cache/createEmotionCache';
 import dirs from '@utils/locale/dir';
 
 export default class MyDocument extends Document {
@@ -13,11 +10,7 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="true"
-          />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
           <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap"
             rel="stylesheet"
@@ -31,33 +24,12 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
 
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="64x64"
-            href="/favicon/favicon.ico"
-          />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/favicon/favicon.ico"
-          />
-          <meta
-            name="msapplication-square70x70logo"
-            content="/favicon/favicon.ico"
-          />
-          <meta
-            name="msapplication-square150x150logo"
-            content="/favicon/favicon.ico"
-          />
-          <meta
-            name="msapplication-square310x310logo"
-            content="/favicon/favicon.ico"
-          />
-          <meta
-            name="msapplication-wide310x150logo"
-            content="/favicon/favicon.ico"
-          />
+          <link rel="icon" type="image/png" sizes="64x64" href="/favicon/favicon.ico" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon.ico" />
+          <meta name="msapplication-square70x70logo" content="/favicon/favicon.ico" />
+          <meta name="msapplication-square150x150logo" content="/favicon/favicon.ico" />
+          <meta name="msapplication-square310x310logo" content="/favicon/favicon.ico" />
+          <meta name="msapplication-wide310x150logo" content="/favicon/favicon.ico" />
           <meta name="msapplication-TileColor" content="#111" />
 
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
@@ -101,9 +73,7 @@ MyDocument.getInitialProps = async (ctx) => {
 
   // You can consider sharing the same emotion cache between all the SSR requests to speed up performance.
   // However, be aware that it can have global side effects.
-  const cache = dirs.isRtl(ctx.locale)
-    ? createEmotionCacheRtl()
-    : createEmotionCache();
+  const cache = dirs.isRtl(ctx.locale) ? createEmotionCacheRtl() : createEmotionCache();
   const { extractCriticalToChunks } = createEmotionServer(cache);
 
   ctx.renderPage = () =>

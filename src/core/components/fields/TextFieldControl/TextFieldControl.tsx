@@ -21,26 +21,15 @@ export const isTextFieldControlHasData = (value?: string | number) => {
 };
 
 export const TextFieldControl = (props: TextFieldControlProps) => {
-  const {
-    isEdit = true,
-    loading,
-    multiline,
-    className,
-    heightAuto,
-    ...other
-  } = props;
+  const { isEdit = true, loading, multiline, className, heightAuto, ...other } = props;
 
   const cls = fieldControlClassNames(props, 'text-field-control');
 
   if (loading) {
     return <SkeletonFieldControl className={cls} />;
   } else if (isEdit) {
-    return (
-      <TextFieldControlEdit className={cls} multiline={multiline} {...other} />
-    );
+    return <TextFieldControlEdit className={cls} multiline={multiline} {...other} />;
   } else {
-    return (
-      <TextFieldControlView className={cls} loading={loading} {...other} />
-    );
+    return <TextFieldControlView className={cls} loading={loading} {...other} />;
   }
 };

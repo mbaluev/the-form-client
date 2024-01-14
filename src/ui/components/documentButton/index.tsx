@@ -55,11 +55,7 @@ export const DocumentButton = observer((props: IProps) => {
     if (doc.file) {
       return (
         <FormField title={titleDownload}>
-          <Button
-            {...buttonProps}
-            onClick={handleDownload}
-            startIcon={iconFile}
-          >
+          <Button {...buttonProps} onClick={handleDownload} startIcon={iconFile}>
             {doc.file.name}
           </Button>
         </FormField>
@@ -67,11 +63,7 @@ export const DocumentButton = observer((props: IProps) => {
     } else {
       return (
         <FormField title={titleOpenLink}>
-          <Button
-            {...buttonProps}
-            onClick={handleOpenLink}
-            startIcon={iconVideo}
-          >
+          <Button {...buttonProps} onClick={handleOpenLink} startIcon={iconVideo}>
             {doc.url}
           </Button>
         </FormField>

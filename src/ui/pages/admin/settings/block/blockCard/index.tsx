@@ -16,9 +16,7 @@ interface IProps {
 }
 export const BlockCard = observer((props: IProps) => {
   const { onClose, onDelete } = props;
-  const { blockData, isDataLoading } = useViewModel<IBlockViewModel>(
-    VIEW_MODEL.Block
-  );
+  const { blockData, isDataLoading } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
   if (!blockData) return <Page204 />;
   return (
     <Page

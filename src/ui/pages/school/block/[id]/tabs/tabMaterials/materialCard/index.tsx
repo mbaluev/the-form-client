@@ -11,9 +11,7 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 
 export const MaterialCard = observer(() => {
-  const { data, isDataLoading } = useViewModel<IMaterialUserViewModel>(
-    VIEW_MODEL.MaterialUser
-  );
+  const { data, isDataLoading } = useViewModel<IMaterialUserViewModel>(VIEW_MODEL.MaterialUser);
 
   if (!data || isDataLoading) {
     return <Page204 loading={isDataLoading} />;

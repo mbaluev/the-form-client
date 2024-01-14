@@ -18,9 +18,7 @@ import { IBlockUserViewModel } from '@viewModel/modules/entities/block/user/inte
 import { TagQuestion } from '@ui/components/tag/tagQuestion';
 
 export const QuestionCard = observer(() => {
-  const { data: block } = useViewModel<IBlockUserViewModel>(
-    VIEW_MODEL.BlockUser
-  );
+  const { data: block } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
   const { data, list, isDataLoading, start, finish, isFinish } =
     useViewModel<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser);
 

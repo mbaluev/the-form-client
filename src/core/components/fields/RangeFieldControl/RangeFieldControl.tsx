@@ -17,10 +17,7 @@ export type RangeFieldControlButtons = {
   submitLabel?: string;
 };
 
-export type RangeSliderProps = Omit<
-  SliderFieldControlProps,
-  'value' | 'onChange'
-> & {
+export type RangeSliderProps = Omit<SliderFieldControlProps, 'value' | 'onChange'> & {
   value?: number[];
   onChange?: (event: Event, value: number[], activeThumb: number) => void;
 };
@@ -55,11 +52,7 @@ export const getRangeDisplayValue = (
   }
 };
 
-export const rangeFieldHasData = (
-  min: number,
-  max: number,
-  value?: number[]
-) => {
+export const rangeFieldHasData = (min: number, max: number, value?: number[]) => {
   if (!Boolean(value)) return false;
   else if (Array.isArray(value) && value.length === 0) return false;
   else return !(Array.isArray(value) && value[0] === min && value[1] === max);

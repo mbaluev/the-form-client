@@ -23,12 +23,7 @@ export const MasterDev = (props: IProps) => {
   }, [router.asPath]);
 
   return (
-    <Layout
-      menuProps={{ items: MENU_CONFIG_DEV }}
-      notifications
-      globalSearch
-      support
-    >
+    <Layout menuProps={{ items: MENU_CONFIG_DEV }} notifications globalSearch support>
       {children}
     </Layout>
   );

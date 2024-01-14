@@ -49,10 +49,7 @@ export class MaterialViewModel
         message: 'Required',
         condition: () => {
           if (this.modalData) {
-            const docType = objectPath.get(
-              this.modalData,
-              'document.documentType.name'
-            );
+            const docType = objectPath.get(this.modalData, 'document.documentType.name');
             return docType === 'file';
           }
           return false;
@@ -64,10 +61,7 @@ export class MaterialViewModel
         message: 'Required',
         condition: () => {
           if (this.modalData) {
-            const docType = objectPath.get(
-              this.modalData,
-              'document.documentType.name'
-            );
+            const docType = objectPath.get(this.modalData, 'document.documentType.name');
             return docType === 'link' || docType === 'video';
           }
           return false;
@@ -94,9 +88,7 @@ export class MaterialViewModel
             result ||
             (item.document?.name !== undefined &&
               item.document?.name !== null &&
-              item.document?.name
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.document?.name.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'document.description')) {
           result =
@@ -121,9 +113,7 @@ export class MaterialViewModel
             result ||
             (item.document?.url !== undefined &&
               item.document?.url !== null &&
-              item.document?.url
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.document?.url.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
       } else {
         result = true;

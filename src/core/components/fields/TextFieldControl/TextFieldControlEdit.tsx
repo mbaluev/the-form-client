@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { TextField } from '@mui/material';
 import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import { classNames } from '@utils/classNames';
-import {
-  isTextFieldControlHasData,
-  TextFieldControlProps,
-  inputProps,
-} from '@components/fields';
+import { isTextFieldControlHasData, TextFieldControlProps, inputProps } from '@components/fields';
 
 export const TextFieldControlEdit = (props: TextFieldControlProps) => {
   const {

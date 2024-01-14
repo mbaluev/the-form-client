@@ -20,21 +20,13 @@ export const IconTasks = (props: IProps) => {
     icon = <CircleOutlinedIcon className="color_grey-50" />;
   }
   if (
-    (!admin &&
-      (userBlock?.sentTasksAdmin === true ||
-        userBlock?.sentTasksUser === false)) ||
-    (admin &&
-      (userBlock?.sentTasksUser === true ||
-        userBlock?.sentTasksAdmin === false))
+    (!admin && (userBlock?.sentTasksAdmin === true || userBlock?.sentTasksUser === false)) ||
+    (admin && (userBlock?.sentTasksUser === true || userBlock?.sentTasksAdmin === false))
   ) {
     icon = <CallReceivedRoundedIcon className="color_red" />;
   } else if (
-    (admin &&
-      (userBlock?.sentTasksUser === false ||
-        userBlock?.sentTasksAdmin === true)) ||
-    (!admin &&
-      (userBlock?.sentTasksAdmin === false ||
-        userBlock?.sentTasksUser === true))
+    (admin && (userBlock?.sentTasksUser === false || userBlock?.sentTasksAdmin === true)) ||
+    (!admin && (userBlock?.sentTasksAdmin === false || userBlock?.sentTasksUser === true))
   ) {
     icon = <CallMadeRoundedIcon className="color_blue" />;
   }

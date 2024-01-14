@@ -13,24 +13,13 @@ export const SampleForm = observer((props: ISimpleModalFormProps) => {
     <Form className="sample-form">
       <FormSection title="Enter some data" collapsible>
         <FormField isRow={isRow} title="Days" tooltip="tooltip">
-          <TextFieldControl
-            placeholder="days format"
-            inputType="number"
-            adornment="days"
-          />
+          <TextFieldControl placeholder="days format" inputType="number" adornment="days" />
         </FormField>
         <FormField isRow={isRow} title="Percent">
-          <TextFieldControl
-            placeholder="percent format"
-            inputType="number"
-            adornment="%"
-          />
+          <TextFieldControl placeholder="percent format" inputType="number" adornment="%" />
         </FormField>
         <FormField isRow={isRow} title="Currency">
-          <TextFieldControl
-            placeholder="currency format"
-            inputType="currency"
-          />
+          <TextFieldControl placeholder="currency format" inputType="currency" />
         </FormField>
       </FormSection>
     </Form>

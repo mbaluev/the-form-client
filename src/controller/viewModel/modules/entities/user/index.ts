@@ -8,10 +8,7 @@ import { UserService } from 'controller/service/modules/entities/user';
 import { ParsedUrlQuery } from 'querystring';
 
 @injectable()
-export class UserViewModel
-  extends BaseCardViewModel<IUserDTO>
-  implements IUserViewModel
-{
+export class UserViewModel extends BaseCardViewModel<IUserDTO> implements IUserViewModel {
   @inject(SERVICE.User) protected serviceUser!: UserService;
 
   constructor() {

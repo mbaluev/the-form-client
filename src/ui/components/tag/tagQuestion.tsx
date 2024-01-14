@@ -13,10 +13,7 @@ export const TagQuestion = observer((props: IProps) => {
     tag: statusQuestion(userQuestion),
     color: 'grey',
   };
-  if (
-    userQuestion?.userQuestionAnswers &&
-    userQuestion?.userQuestionAnswers.length > 0
-  ) {
+  if (userQuestion?.userQuestionAnswers && userQuestion?.userQuestionAnswers.length > 0) {
     tag.color = 'grey';
   }
   if (userQuestion?.complete) {

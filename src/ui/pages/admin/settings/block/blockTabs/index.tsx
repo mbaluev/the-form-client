@@ -50,8 +50,9 @@ export const BlockTabs = observer(() => {
     setActive(value);
   };
 
-  const { hasChanges, saveData, clearChanges, hasErrors } =
-    useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
+  const { hasChanges, saveData, clearChanges, hasErrors } = useViewModel<IBlockViewModel>(
+    VIEW_MODEL.Block
+  );
 
   const { add: addNotify } = useViewModel<INotifyViewModel>(VIEW_MODEL.Notify);
   const { Prompt } = useUnsavedChanges(hasChanges);
@@ -66,16 +67,8 @@ export const BlockTabs = observer(() => {
 
   return (
     <React.Fragment>
-      <Tabs
-        tabs={BLOCK_TAB_CONFIG}
-        activeTab={active}
-        onChangeTab={onChangeTab}
-      />
-      <Prompt
-        onSave={saveHandler}
-        onDiscard={discardHandler}
-        disabled={hasErrors}
-      />
+      <Tabs tabs={BLOCK_TAB_CONFIG} activeTab={active} onChangeTab={onChangeTab} />
+      <Prompt onSave={saveHandler} onDiscard={discardHandler} disabled={hasErrors} />
     </React.Fragment>
   );
 });

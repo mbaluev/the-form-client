@@ -46,9 +46,7 @@ export class QuestionBaseViewModel
             result ||
             (item.question?.title !== undefined &&
               item.question?.title !== null &&
-              item.question?.title
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.question?.title.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
       } else {
         result = true;
@@ -127,12 +125,7 @@ export class QuestionBaseViewModel
   };
 
   prev = async () => {
-    if (
-      this.isPrev &&
-      this.index !== undefined &&
-      !this.isListLoading &&
-      !this.isDataLoading
-    ) {
+    if (this.isPrev && this.index !== undefined && !this.isListLoading && !this.isDataLoading) {
       const index = this.index - 1;
       this.setIndex(index);
       await this.getDataByIndex(index);

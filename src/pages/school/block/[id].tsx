@@ -14,15 +14,14 @@ import { useRouter } from 'next/router';
 const Block = () => {
   const { getDataByBlockId: getModule, clearData: clearModule } =
     useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
-  const { getData: getBlock, clearData: clearBlock } =
-    useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
+  const { getData: getBlock, clearData: clearBlock } = useViewModel<IBlockUserViewModel>(
+    VIEW_MODEL.BlockUser
+  );
 
   const { clearData: clearMaterial } = useViewModel<IMaterialUserViewModel>(
     VIEW_MODEL.MaterialUser
   );
-  const { clearData: clearTask } = useViewModel<ITaskUserViewModel>(
-    VIEW_MODEL.TaskUser
-  );
+  const { clearData: clearTask } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
   const { clearData: clearQuestion } = useViewModel<IQuestionUserViewModel>(
     VIEW_MODEL.QuestionUser
   );

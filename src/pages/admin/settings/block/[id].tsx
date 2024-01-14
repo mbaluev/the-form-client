@@ -61,11 +61,7 @@ const Block = () => {
         };
       })}
     />,
-    <FilterText
-      name="search"
-      placeholder="Search"
-      style={{ flexBasis: '50%' }}
-    />,
+    <FilterText name="search" placeholder="Search" style={{ flexBasis: '50%' }} />,
   ];
   const onClick = (params: CellClickedEvent) => {
     const query: ParsedUrlQuery = { ...router.query, id: params.data.id };

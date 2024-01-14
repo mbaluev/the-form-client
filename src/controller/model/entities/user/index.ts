@@ -3,10 +3,7 @@ import { IModuleUserDTO } from '@model/entities/module';
 import { IBlockUserDTO } from '@model/entities/block';
 import { IMaterialUserDTO } from '@model/entities/material';
 import { ITaskUserDocumentDTO, ITaskUserDTO } from '@model/entities/task';
-import {
-  IQuestionAnswerUserDTO,
-  IQuestionUserDTO,
-} from '@model/entities/question';
+import { IQuestionAnswerUserDTO, IQuestionUserDTO } from '@model/entities/question';
 
 export interface IUserDTO {
   id: string;

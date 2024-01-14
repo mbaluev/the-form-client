@@ -26,9 +26,7 @@ export const BlockTabs = observer(() => {
   const { clearData: clearDataQuestion } = useViewModel<IQuestionUserViewModel>(
     VIEW_MODEL.QuestionUser
   );
-  const { clearData: clearDataTask } = useViewModel<ITaskUserViewModel>(
-    VIEW_MODEL.TaskUser
-  );
+  const { clearData: clearDataTask } = useViewModel<ITaskUserViewModel>(VIEW_MODEL.TaskUser);
 
   const onChangeTab = (_: React.ChangeEvent<unknown>, value: string) => {
     changeTab(value as BlockTabNames);
@@ -58,12 +56,5 @@ export const BlockTabs = observer(() => {
     },
   ];
 
-  return (
-    <Tabs
-      tabs={tabs}
-      activeTab={tab}
-      onChangeTab={onChangeTab}
-      orientation="horizontal"
-    />
-  );
+  return <Tabs tabs={tabs} activeTab={tab} onChangeTab={onChangeTab} orientation="horizontal" />;
 });

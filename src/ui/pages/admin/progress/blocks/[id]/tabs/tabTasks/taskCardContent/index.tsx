@@ -11,27 +11,17 @@ import { useLocale } from '@hooks/useLocale';
 import { ITaskAdminViewModel } from '@viewModel/modules/entities/task/admin/interface';
 
 export const TaskCardContent = observer(() => {
-  const { data, download } = useViewModel<ITaskAdminViewModel>(
-    VIEW_MODEL.TaskAdmin
-  );
+  const { data, download } = useViewModel<ITaskAdminViewModel>(VIEW_MODEL.TaskAdmin);
   const { fDateTime } = useLocale();
 
   if (!data?.userTaskDocuments || data?.userTaskDocuments.length === 0) {
-    return (
-      <NoData
-        icon={<DoNotDisturbIcon />}
-        message={`Homework has not been sent yet`}
-      />
-    );
+    return <NoData icon={<DoNotDisturbIcon />} message={`Homework has not been sent yet`} />;
   }
 
   return (
     <Stack height="100%" spacing="20px">
       <FormSection>
-        <DocumentButton
-          doc={data.userTaskDocuments[0].document}
-          download={download}
-        />
+        <DocumentButton doc={data.userTaskDocuments[0].document} download={download} />
         <FormField title="Document name">
           <Box>{data.userTaskDocuments[0].document?.name}</Box>
         </FormField>

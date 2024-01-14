@@ -8,18 +8,10 @@ export const QuestionRenderer = (params: ICellRendererParams) => {
   const title = params.data.question?.title;
   return (
     <Stack direction="row" spacing={2} alignItems="center" height="100%">
-      <Stack
-        direction="row"
-        spacing={2}
-        alignItems="center"
-        height="100%"
-        flex="1 1 auto"
-      >
+      <Stack direction="row" spacing={2} alignItems="center" height="100%" flex="1 1 auto">
         <Typography>{position}.</Typography>
         <IconQuestion userQuestion={params.data} />
-        <Typography style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {title}
-        </Typography>
+        <Typography style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{title}</Typography>
       </Stack>
     </Stack>
   );

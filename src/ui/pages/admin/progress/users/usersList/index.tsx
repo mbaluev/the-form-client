@@ -4,29 +4,23 @@ import { useViewModel } from '@hooks/useViewModel';
 import { VIEW_MODEL } from '@viewModel/ids';
 import { GridWithData } from '@ui/layout/grid/gridWithData';
 import { DefaultRenderer } from '@ui/layout/grid/renderers/defaultRenderer';
-import {
-  CellClickedEvent,
-  ICellRendererParams,
-  RowClassParams,
-} from 'ag-grid-community';
+import { CellClickedEvent, ICellRendererParams, RowClassParams } from 'ag-grid-community';
 import { useRouter } from 'next/router';
 import { ROUTER_CONST_SCHOOL } from '@app/settings/routerConst/school';
 import { TextFieldControl } from '@components/fields';
 import { InputAdornment, Stack } from '@mui/material';
 import { IconButton } from '@components/iconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import {
-  getProgress,
-  ModuleProgress,
-} from '@ui/pages/school/module/index/moduleProgress';
+import { getProgress, ModuleProgress } from '@ui/pages/school/module/index/moduleProgress';
 import { IUserAdminViewModel } from '@viewModel/modules/entities/user/admin/interface';
 import { IconRenderer } from '@ui/pages/admin/progress/users/usersList/iconRendrer';
 import { IModuleUserDTO } from '@model/entities/module';
 import { statusModules } from '@ui/components/status/statusModules';
 
 export const UsersList = observer(() => {
-  const { list, listFiltered, hasList, filter, setFilter } =
-    useViewModel<IUserAdminViewModel>(VIEW_MODEL.UserAdmin);
+  const { list, listFiltered, hasList, filter, setFilter } = useViewModel<IUserAdminViewModel>(
+    VIEW_MODEL.UserAdmin
+  );
 
   const defaultColDef = useMemo(
     () => ({

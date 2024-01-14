@@ -13,16 +13,8 @@ import { Alert } from '@components/alert';
 import './index.scss';
 
 export const SignupForm = observer(() => {
-  const {
-    data,
-    changeField,
-    getError,
-    signup,
-    hasErrors,
-    message,
-    clearMessage,
-    isDataLoading,
-  } = useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
+  const { data, changeField, getError, signup, hasErrors, message, clearMessage, isDataLoading } =
+    useViewModel<IAuthViewModel>(VIEW_MODEL.Auth);
 
   const router = useRouter();
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -43,14 +35,7 @@ export const SignupForm = observer(() => {
       <Loader loading={isDataLoading} />
       <Form cols={1}>
         <FormSection>
-          {message && (
-            <Alert
-              title={message}
-              variant="outlined"
-              type="error"
-              shadow={false}
-            />
-          )}
+          {message && <Alert title={message} variant="outlined" type="error" shadow={false} />}
           <FormField title="First name">
             <TextFieldControl
               name="firstname"

@@ -16,9 +16,7 @@ import { IQuestionAdminViewModel } from '@viewModel/modules/entities/question/ad
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const QuestionList = observer(() => {
-  const { data: userBlock } = useViewModel<IBlockAdminViewModel>(
-    VIEW_MODEL.BlockAdmin
-  );
+  const { data: userBlock } = useViewModel<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin);
   const {
     isListLoading,
     listFiltered: questions,

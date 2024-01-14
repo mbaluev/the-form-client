@@ -26,11 +26,7 @@ test('text-field-control view', () => {
 
   rerender(
     <DiContainerProvider container={diContainer}>
-      <TextFieldControl
-        {...textFieldControlProps}
-        value={undefined}
-        emptyLabel={testEmptyValue}
-      />
+      <TextFieldControl {...textFieldControlProps} value={undefined} emptyLabel={testEmptyValue} />
     </DiContainerProvider>
   );
   expect(input.textContent).toEqual(testEmptyValue);

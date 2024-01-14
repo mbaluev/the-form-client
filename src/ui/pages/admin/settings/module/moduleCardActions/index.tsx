@@ -49,11 +49,7 @@ export const ModuleCardActions = observer(() => {
     <React.Fragment>
       <Toolbar
         itemsLeft={[
-          <IconButton
-            onClick={saveData}
-            tooltip="Save changes"
-            disabled={!hasChanges || hasErrors}
-          >
+          <IconButton onClick={saveData} tooltip="Save changes" disabled={!hasChanges || hasErrors}>
             <SaveIcon />
           </IconButton>,
           <IconButton onClick={handleDelete} tooltip="Delete">

@@ -15,9 +15,7 @@ type RangePopoverOptions = {
   onClose: () => void;
 };
 
-export type RangePopoverProps = RangeSliderProps &
-  RangePopoverOptions &
-  RangeFieldControlButtons;
+export type RangePopoverProps = RangeSliderProps & RangePopoverOptions & RangeFieldControlButtons;
 
 export const RangePopover = (props: RangePopoverProps) => {
   const {
@@ -81,12 +79,7 @@ export const RangePopover = (props: RangePopoverProps) => {
           <Button size="small" variant="text" color="red" onClick={handleClear}>
             {clearLabel}
           </Button>
-          <Button
-            size="small"
-            variant="contained"
-            color="blue"
-            onClick={handleSubmit}
-          >
+          <Button size="small" variant="contained" color="blue" onClick={handleSubmit}>
             {submitLabel}
           </Button>
         </div>

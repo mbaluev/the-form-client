@@ -126,9 +126,7 @@ export const Attachment: FC<IProps> = (props) => {
         )}
         <Files />
       </div>
-      {helperText && (
-        <FormHelperText error={!!error}>{helperText}</FormHelperText>
-      )}
+      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
     </FormControl>
   );
 };

@@ -11,8 +11,9 @@ import { Tooltip } from '@components/tooltip';
 import SportsScoreIcon from '@mui/icons-material/SportsScore';
 
 export const QuestionCardButtons = observer(() => {
-  const { isPrev, isNext, isFinish, prev, next, finish } =
-    useViewModel<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser);
+  const { isPrev, isNext, isFinish, prev, next, finish } = useViewModel<IQuestionUserViewModel>(
+    VIEW_MODEL.QuestionUser
+  );
 
   const handlePrev = () => prev();
   const handleNext = () => next();
@@ -32,11 +33,7 @@ export const QuestionCardButtons = observer(() => {
           </Button>
         </Grid>
         <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Button
-            endIcon={<ArrowForwardIcon />}
-            disabled={!isNext}
-            onClick={handleNext}
-          >
+          <Button endIcon={<ArrowForwardIcon />} disabled={!isNext} onClick={handleNext}>
             Next
           </Button>
         </Grid>

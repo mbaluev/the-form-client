@@ -13,11 +13,7 @@ export const CheckboxFieldControls = (props: { id?: string }) => {
         <CheckboxFieldControl label="disabled" disabled />
         <CheckboxFieldControl label="disabled checked" value={true} disabled />
         <CheckboxFieldControl label="simple" />
-        <CheckboxFieldControl
-          label="error"
-          error={true}
-          helperText="Error message"
-        />
+        <CheckboxFieldControl label="error" error={true} helperText="Error message" />
       </FormField>
       <FormField title="2. CheckboxFieldControl view">
         <Button

@@ -10,8 +10,9 @@ import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
 
 const Users = () => {
-  const { getList: getUsers, clearList: clearUsers } =
-    useViewModel<IUserViewModel>(VIEW_MODEL.User);
+  const { getList: getUsers, clearList: clearUsers } = useViewModel<IUserViewModel>(
+    VIEW_MODEL.User
+  );
 
   const router = useRouter();
   const breadCrumbs: TBreadCrumb[] = [

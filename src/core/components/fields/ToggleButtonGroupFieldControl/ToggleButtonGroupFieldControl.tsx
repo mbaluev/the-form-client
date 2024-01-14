@@ -23,32 +23,18 @@ export interface IToggleButtonItem {
   disabled?: boolean;
 }
 
-export type ToggleButtonGroupFieldControlProps =
-  BaseFieldControlProps<ToggleButtonGroupProps> & {
-    items?: IToggleButtonItemJSX[];
-    variant?: TToggleVariant;
-    checkIcon?: boolean;
-  };
-
-export const isToggleButtonGroupFieldControlHasData = (value?: any) => {
-  return (
-    typeof value !== 'undefined' &&
-    Array.isArray(value) &&
-    (value as []).length > 0
-  );
+export type ToggleButtonGroupFieldControlProps = BaseFieldControlProps<ToggleButtonGroupProps> & {
+  items?: IToggleButtonItemJSX[];
+  variant?: TToggleVariant;
+  checkIcon?: boolean;
 };
 
-export const ToggleButtonGroupFieldControl = (
-  props: ToggleButtonGroupFieldControlProps
-) => {
-  const {
-    isEdit = true,
-    loading,
-    className,
-    heightAuto,
-    variant = 'default',
-    ...other
-  } = props;
+export const isToggleButtonGroupFieldControlHasData = (value?: any) => {
+  return typeof value !== 'undefined' && Array.isArray(value) && (value as []).length > 0;
+};
+
+export const ToggleButtonGroupFieldControl = (props: ToggleButtonGroupFieldControlProps) => {
+  const { isEdit = true, loading, className, heightAuto, variant = 'default', ...other } = props;
 
   const clsBase = classNames(
     'toggle-button-group-field-control',

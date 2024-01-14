@@ -20,53 +20,44 @@ export interface IMonthRangeFieldControlProps {
   curYearText?: string;
 }
 
-export const MonthRangeFieldControl: FC<IMonthRangeFieldControlProps> =
-  observer((props) => {
-    const { value, onChange, type = 'button', inputProps, buttonProps } = props;
+export const MonthRangeFieldControl: FC<IMonthRangeFieldControlProps> = observer((props) => {
+  const { value, onChange, type = 'button', inputProps, buttonProps } = props;
 
-    const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event: MouseEvent<any>) => {
-      setAnchorEl(event.currentTarget);
-    };
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: MouseEvent<any>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-    return (
-      <FormControl className="month-range-field-control">
-        {type === 'button' && (
-          <Button
-            {...buttonProps}
-            children={valueFormatter(value)}
-            onClick={handleClick}
-          />
-        )}
-        {type === 'input' && (
-          <TextFieldControl
-            {...inputProps}
-            value={valueFormatter(value)}
-            onClick={handleClick}
-          />
-        )}
-        <Popover
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-          transformOrigin={{ vertical: -10, horizontal: 'left' }}
-          className="month-range-field-control__popover"
-          marginThreshold={10}
-        >
-          <MonthRangeContainer
-            {...props}
-            onChange={(v) => {
-              onChange(v);
-              handleClose();
-            }}
-          />
-        </Popover>
-      </FormControl>
-    );
-  });
+  return (
+    <FormControl className="month-range-field-control">
+      {type === 'button' && (
+        <Button {...buttonProps} children={valueFormatter(value)} onClick={handleClick} />
+      )}
+      {type === 'input' && (
+        <TextFieldControl {...inputProps} value={valueFormatter(value)} onClick={handleClick} />
+      )}
+      <Popover
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        transformOrigin={{ vertical: -10, horizontal: 'left' }}
+        className="month-range-field-control__popover"
+        marginThreshold={10}
+      >
+        <MonthRangeContainer
+          {...props}
+          onChange={(v) => {
+            onChange(v);
+            handleClose();
+          }}
+        />
+      </Popover>
+    </FormControl>
+  );
+});

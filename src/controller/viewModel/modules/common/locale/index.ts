@@ -223,11 +223,7 @@ export class LocaleViewModel extends BaseViewModel implements ILocaleViewModel {
 
   // --- formats ---
 
-  fDate = (
-    value?: Date,
-    opts?: Intl.DateTimeFormatOptions,
-    locale?: string
-  ) => {
+  fDate = (value?: Date, opts?: Intl.DateTimeFormatOptions, locale?: string) => {
     let displayValue = '';
     this.fDateParts(value, opts, locale)
       .map((d) => {
@@ -239,21 +235,14 @@ export class LocaleViewModel extends BaseViewModel implements ILocaleViewModel {
     return displayValue;
   };
 
-  fDateParts = (
-    value?: Date,
-    opts?: Intl.DateTimeFormatOptions,
-    locale?: string
-  ) => {
+  fDateParts = (value?: Date, opts?: Intl.DateTimeFormatOptions, locale?: string) => {
     const options = {
       dateStyle: 'short',
       numberingSystem: this.digit,
       timeZone: this.timeZone,
       ...opts,
     } as Intl.DateTimeFormatOptions;
-    return new Intl.DateTimeFormat(
-      locale || this.locale,
-      options
-    ).formatToParts(value);
+    return new Intl.DateTimeFormat(locale || this.locale, options).formatToParts(value);
   };
 
   fTime = (value?: Date, opts?: Intl.DateTimeFormatOptions) => {
@@ -267,11 +256,7 @@ export class LocaleViewModel extends BaseViewModel implements ILocaleViewModel {
     return new Intl.DateTimeFormat(this.locale, options).format(value);
   };
 
-  fDateTime = (
-    value?: Date,
-    opts?: Intl.DateTimeFormatOptions,
-    locale?: string
-  ) => {
+  fDateTime = (value?: Date, opts?: Intl.DateTimeFormatOptions, locale?: string) => {
     return `${this.fDate(value, opts, locale)} ${this.fTime(value, opts)}`;
   };
 
@@ -325,11 +310,7 @@ export class LocaleViewModel extends BaseViewModel implements ILocaleViewModel {
       .trim();
   };
 
-  fCurrencySymbol = (
-    value?: any,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => {
+  fCurrencySymbol = (value?: any, to?: string, opts?: Intl.NumberFormatOptions) => {
     const currency = this.fCurrencyGet(to);
     if (to !== NACurrency) {
       const options = {
@@ -345,11 +326,7 @@ export class LocaleViewModel extends BaseViewModel implements ILocaleViewModel {
     }
   };
 
-  fCurrencyExplicit = (
-    value?: any,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => {
+  fCurrencyExplicit = (value?: any, to?: string, opts?: Intl.NumberFormatOptions) => {
     const currency = to || this.currency;
     return `${this.fCurrency(value, currency, opts)} ${currency}`;
   };
@@ -370,20 +347,12 @@ export class LocaleViewModel extends BaseViewModel implements ILocaleViewModel {
     return this.fCurrency(cValue, to, opts);
   };
 
-  cCurrencySymbol = (
-    value?: any,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => {
+  cCurrencySymbol = (value?: any, to?: string, opts?: Intl.NumberFormatOptions) => {
     const cValue = this.c(value, to);
     return this.fCurrencySymbol(cValue, to, opts);
   };
 
-  cCurrencyExplicit = (
-    value?: any,
-    to?: string,
-    opts?: Intl.NumberFormatOptions
-  ) => {
+  cCurrencyExplicit = (value?: any, to?: string, opts?: Intl.NumberFormatOptions) => {
     const cValue = this.c(value, to);
     return this.fCurrencyExplicit(cValue, to, opts);
   };

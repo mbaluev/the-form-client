@@ -1,25 +1,11 @@
 import React, { useState } from 'react';
-import {
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-} from '@mui/material';
+import { Checkbox, FormControl, FormControlLabel, FormHelperText } from '@mui/material';
 import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import { classNames } from '@utils/classNames';
 import { CheckboxFieldControlProps } from '@components/fields';
 
 export const CheckboxFieldControlEdit = (props: CheckboxFieldControlProps) => {
-  const {
-    className,
-    value = false,
-    onChange,
-    label,
-    error,
-    helperText,
-    size,
-    ...other
-  } = props;
+  const { className, value = false, onChange, label, error, helperText, size, ...other } = props;
 
   const [state, setState] = useState<boolean>(value);
 
@@ -48,9 +34,7 @@ export const CheckboxFieldControlEdit = (props: CheckboxFieldControlProps) => {
         }
         label={label}
       />
-      {helperText && (
-        <FormHelperText error={!!error}>{helperText}</FormHelperText>
-      )}
+      {helperText && <FormHelperText error={!!error}>{helperText}</FormHelperText>}
     </FormControl>
   );
 };

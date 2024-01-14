@@ -2,11 +2,7 @@ import { inject, injectable } from 'inversify';
 import { INFRASTRUCTURE_MODULE } from '@infrastructure/ids';
 import { IAxiosApiModule } from '@infrastructure/modules/axios/interface';
 import { IQuestionService } from '@service/modules/entities/question/interface';
-import {
-  IQuestionAnswerUserDTO,
-  IQuestionDTO,
-  IQuestionUserDTO,
-} from '@model/entities/question';
+import { IQuestionAnswerUserDTO, IQuestionDTO, IQuestionUserDTO } from '@model/entities/question';
 import { ParsedUrlQuery } from 'querystring';
 import { IResponseItemDTO, IResponseListDTO } from '@model/common/response';
 
@@ -16,9 +12,7 @@ export class QuestionService implements IQuestionService {
 
   API_PREFIX = `/api/question`;
 
-  getQuestions = async (
-    query?: ParsedUrlQuery
-  ): Promise<IQuestionDTO[] | undefined> => {
+  getQuestions = async (query?: ParsedUrlQuery): Promise<IQuestionDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IQuestionDTO>>(
       `${this.API_PREFIX}/list`,
       { ...query }
@@ -26,10 +20,7 @@ export class QuestionService implements IQuestionService {
     return ret ? ret.data : undefined;
   };
 
-  getQuestion = async (
-    id?: string,
-    query?: ParsedUrlQuery
-  ): Promise<IQuestionDTO | undefined> => {
+  getQuestion = async (id?: string, query?: ParsedUrlQuery): Promise<IQuestionDTO | undefined> => {
     const ret = await this.apiModule.get<IResponseItemDTO<IQuestionDTO>>(
       `${this.API_PREFIX}/item/${id}`,
       { ...query }
@@ -64,9 +55,7 @@ export class QuestionService implements IQuestionService {
 
   // --- user
 
-  getQuestionsUser = async (
-    query?: ParsedUrlQuery
-  ): Promise<IQuestionUserDTO[] | undefined> => {
+  getQuestionsUser = async (query?: ParsedUrlQuery): Promise<IQuestionUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IQuestionUserDTO>>(
       `${this.API_PREFIX}/user/list`,
       { ...query }
@@ -103,9 +92,7 @@ export class QuestionService implements IQuestionService {
 
   // --- admin
 
-  getQuestionsAdmin = async (
-    query?: ParsedUrlQuery
-  ): Promise<IQuestionUserDTO[] | undefined> => {
+  getQuestionsAdmin = async (query?: ParsedUrlQuery): Promise<IQuestionUserDTO[] | undefined> => {
     const ret = await this.apiModule.post<IResponseListDTO<IQuestionUserDTO>>(
       `${this.API_PREFIX}/admin/list`,
       { ...query }

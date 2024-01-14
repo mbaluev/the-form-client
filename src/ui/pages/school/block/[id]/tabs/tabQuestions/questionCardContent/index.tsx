@@ -9,8 +9,9 @@ import { RadioGroupFieldControl } from '@components/fields';
 import { Typography } from '@mui/material';
 
 export const QuestionCardContent = observer(() => {
-  const { data, changeAnswer, saveQuestionAnswers, isStart } =
-    useViewModel<IQuestionUserViewModel>(VIEW_MODEL.QuestionUser);
+  const { data, changeAnswer, saveQuestionAnswers, isStart } = useViewModel<IQuestionUserViewModel>(
+    VIEW_MODEL.QuestionUser
+  );
 
   const changeOptionCheckbox = async (e: ChangeEvent<HTMLInputElement>) => {
     changeAnswer(e.target.name, e.target.checked);
@@ -63,9 +64,7 @@ export const QuestionCardContent = observer(() => {
       )}
       {data.commentText && (
         <FormField title="Comment">
-          <Typography sx={{ whiteSpace: 'pre-wrap' }}>
-            {data.commentText}
-          </Typography>
+          <Typography sx={{ whiteSpace: 'pre-wrap' }}>{data.commentText}</Typography>
         </FormField>
       )}
     </FormSection>

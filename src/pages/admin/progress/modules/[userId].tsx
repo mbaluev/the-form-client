@@ -11,8 +11,9 @@ import { useRouter } from 'next/router';
 import { IUserAdminViewModel } from '@viewModel/modules/entities/user/admin/interface';
 
 const Modules = () => {
-  const { getList: getModules, clearList: clearModules } =
-    useViewModel<IModuleAdminViewModel>(VIEW_MODEL.ModuleAdmin);
+  const { getList: getModules, clearList: clearModules } = useViewModel<IModuleAdminViewModel>(
+    VIEW_MODEL.ModuleAdmin
+  );
   const {
     getData: getUser,
     data: user,
@@ -31,9 +32,7 @@ const Modules = () => {
       url: { pathname: ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_USERS.path },
     },
     {
-      label: user
-        ? user.username
-        : ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_MODULES.label,
+      label: user ? user.username : ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_MODULES.label,
       url: {
         pathname: ROUTER_CONST_SCHOOL.ADMIN_PROGRESS_MODULES.path,
         query: router.query,

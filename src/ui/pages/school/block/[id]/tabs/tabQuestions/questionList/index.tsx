@@ -16,9 +16,7 @@ import { AlertQuestions } from '@ui/components/alert/alertQuestions';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const QuestionList = observer(() => {
-  const { data: userBlock } = useViewModel<IBlockUserViewModel>(
-    VIEW_MODEL.BlockUser
-  );
+  const { data: userBlock } = useViewModel<IBlockUserViewModel>(VIEW_MODEL.BlockUser);
   const {
     isListLoading,
     listFiltered: questions,

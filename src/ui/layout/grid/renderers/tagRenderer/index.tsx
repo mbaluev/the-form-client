@@ -7,7 +7,5 @@ export const TagRenderer = (props: ICellRendererParams) => {
   const cls = classNames('tag-renderer');
 
   if (!props.value) return null;
-  return (
-    <Tag className={cls} tag={props.value.status} color={props.value.color} />
-  );
+  return <Tag className={cls} tag={props.value.status} color={props.value.color} />;
 };

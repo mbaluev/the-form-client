@@ -17,11 +17,10 @@ import { IBlockAdminViewModel } from '@viewModel/modules/entities/block/admin/in
 import { IQuestionAdminViewModel } from '@viewModel/modules/entities/question/admin/interface';
 
 export const QuestionCard = observer(() => {
-  const { data: block } = useViewModel<IBlockAdminViewModel>(
-    VIEW_MODEL.BlockAdmin
+  const { data: block } = useViewModel<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin);
+  const { data, list, isDataLoading, start } = useViewModel<IQuestionAdminViewModel>(
+    VIEW_MODEL.QuestionAdmin
   );
-  const { data, list, isDataLoading, start } =
-    useViewModel<IQuestionAdminViewModel>(VIEW_MODEL.QuestionAdmin);
 
   const handleStart = () => start();
 

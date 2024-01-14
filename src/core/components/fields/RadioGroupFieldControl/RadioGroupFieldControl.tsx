@@ -13,13 +13,12 @@ export interface IRadioItem {
   label: string;
 }
 
-export type RadioGroupFieldControlProps =
-  BaseFieldControlProps<RadioGroupProps> & {
-    items?: IRadioItem[];
-    value?: string;
-    disabled?: boolean;
-    layout?: 'vertical' | 'horizontal';
-  };
+export type RadioGroupFieldControlProps = BaseFieldControlProps<RadioGroupProps> & {
+  items?: IRadioItem[];
+  value?: string;
+  disabled?: boolean;
+  layout?: 'vertical' | 'horizontal';
+};
 
 export const RadioGroupFieldControl = (props: RadioGroupFieldControlProps) => {
   const { isEdit = true, loading, className, heightAuto, ...other } = props;

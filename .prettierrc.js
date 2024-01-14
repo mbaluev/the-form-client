@@ -1,8 +1,7 @@
 module.exports = {
-  // ...require('some config'),
   tabWidth: 2,
   useTabs: false,
-  printWidth: 80,
+  printWidth: 100,
   semi: true,
   singleQuote: true,
   quoteProps: 'as-needed',

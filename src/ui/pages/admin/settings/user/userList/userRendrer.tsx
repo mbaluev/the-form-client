@@ -23,14 +23,9 @@ export const UserRenderer = (params: ICellRendererParams) => {
         {params.value.title}
       </div>
       {params.value.active && (
-        <Tag
-          tag={params.value.active.status}
-          color={params.value.active.color}
-        />
+        <Tag tag={params.value.active.status} color={params.value.active.color} />
       )}
-      {params.value.paid && (
-        <Tag tag={params.value.paid.status} color={params.value.paid.color} />
-      )}
+      {params.value.paid && <Tag tag={params.value.paid.status} color={params.value.paid.color} />}
       {params.value.admin && (
         <Tag tag={params.value.admin.status} color={params.value.admin.color} />
       )}

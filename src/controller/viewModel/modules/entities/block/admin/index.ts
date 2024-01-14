@@ -7,10 +7,7 @@ import _ from 'lodash';
 import { BlockBaseViewModel } from '@viewModel/modules/entities/block/base';
 
 @injectable()
-export class BlockAdminViewModel
-  extends BlockBaseViewModel
-  implements IBlockAdminViewModel
-{
+export class BlockAdminViewModel extends BlockBaseViewModel implements IBlockAdminViewModel {
   filterByQuery =
     (query?: ParsedUrlQuery) =>
     (item: IBlockUserDTO): boolean => {
@@ -22,45 +19,35 @@ export class BlockAdminViewModel
             result ||
             (item.user?.firstname !== undefined &&
               item.user?.firstname !== null &&
-              item.user?.firstname
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.user?.firstname.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'user.lastname')) {
           result =
             result ||
             (item.user?.lastname !== undefined &&
               item.user?.lastname !== null &&
-              item.user?.lastname
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.user?.lastname.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'user.username')) {
           result =
             result ||
             (item.user?.username !== undefined &&
               item.user?.username !== null &&
-              item.user?.username
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.user?.username.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'block.title')) {
           result =
             result ||
             (item.block?.title !== undefined &&
               item.block?.title !== null &&
-              item.block?.title
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.block?.title.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'block.name')) {
           result =
             result ||
             (item.block?.name !== undefined &&
               item.block?.name !== null &&
-              item.block?.name
-                .toLowerCase()
-                .includes((query.filter as string).toLowerCase()));
+              item.block?.name.toLowerCase().includes((query.filter as string).toLowerCase()));
         }
         if (_.has(item, 'block.module.title')) {
           result =

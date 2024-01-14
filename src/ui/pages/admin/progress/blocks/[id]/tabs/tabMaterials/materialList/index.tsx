@@ -18,9 +18,7 @@ import { IBlockAdminViewModel } from '@viewModel/modules/entities/block/admin/in
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const MaterialList = observer(() => {
-  const { data: userBlock } = useViewModel<IBlockAdminViewModel>(
-    VIEW_MODEL.BlockAdmin
-  );
+  const { data: userBlock } = useViewModel<IBlockAdminViewModel>(VIEW_MODEL.BlockAdmin);
   const {
     isListLoading,
     listFiltered: materials,
@@ -55,11 +53,7 @@ export const MaterialList = observer(() => {
       headerName: 'Download',
       suppressSizeToFit: true,
       valueGetter: (params: any) => {
-        return documentButtonValueGetter(
-          params.data.material?.document,
-          setPreventClick,
-          download
-        );
+        return documentButtonValueGetter(params.data.material?.document, setPreventClick, download);
       },
       cellRenderer: ButtonRenderer,
       cellClass: 'ag-last-cell',

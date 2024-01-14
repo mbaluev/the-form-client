@@ -67,11 +67,7 @@ export const MaterialList = observer(() => {
       headerName: 'Download',
       suppressSizeToFit: true,
       valueGetter: (params: any) =>
-        documentButtonValueGetter(
-          params.data.document,
-          setPreventClick,
-          download
-        ),
+        documentButtonValueGetter(params.data.document, setPreventClick, download),
       cellRenderer: ButtonRenderer,
       maxWidth: 300,
       cellClass: 'ag-last-cell',
@@ -122,25 +118,14 @@ export const MaterialList = observer(() => {
     <IconButton tooltip="Add new material" onClick={modalNew}>
       <AddIcon />
     </IconButton>,
-    <IconButton
-      tooltip="Delete materials"
-      onClick={handleDelete}
-      disabled={!hasDelete}
-    >
+    <IconButton tooltip="Delete materials" onClick={handleDelete} disabled={!hasDelete}>
       <DeleteIcon />
     </IconButton>,
   ];
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
-  }, [
-    filter,
-    deleteIds,
-    isDeleteOpen,
-    isDeleteLoading,
-    isModalOpen,
-    preventClick,
-  ]);
+  }, [filter, deleteIds, isDeleteOpen, isDeleteLoading, isModalOpen, preventClick]);
 
   return (
     <React.Fragment>

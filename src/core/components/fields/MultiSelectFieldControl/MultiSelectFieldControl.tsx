@@ -10,22 +10,16 @@ import {
   fieldControlClassNames,
 } from '@components/fields';
 
-export type MultiSelectFieldControlProps =
-  BaseFieldControlProps<SelectProps> & {
-    items?: ISelectItem[];
-    onChange?: SelectInputProps['onChange'];
-    value?: Array<unknown>;
-  };
+export type MultiSelectFieldControlProps = BaseFieldControlProps<SelectProps> & {
+  items?: ISelectItem[];
+  onChange?: SelectInputProps['onChange'];
+  value?: Array<unknown>;
+};
 
-export const MultiSelectFieldControl = (
-  props: MultiSelectFieldControlProps
-) => {
+export const MultiSelectFieldControl = (props: MultiSelectFieldControlProps) => {
   const { isEdit = true, loading, className, heightAuto, ...other } = props;
 
-  const cls = fieldControlClassNames(
-    props,
-    'multi-select-field-control select-field-control'
-  );
+  const cls = fieldControlClassNames(props, 'multi-select-field-control select-field-control');
 
   if (loading) {
     return <SkeletonFieldControl className={cls} />;

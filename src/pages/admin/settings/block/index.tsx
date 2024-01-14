@@ -49,11 +49,7 @@ const Block = () => {
         };
       })}
     />,
-    <FilterText
-      name="search"
-      placeholder="Search"
-      style={{ flexBasis: '50%' }}
-    />,
+    <FilterText name="search" placeholder="Search" style={{ flexBasis: '50%' }} />,
   ];
   const router = useRouter();
   const onClick = (params: CellClickedEvent) => {

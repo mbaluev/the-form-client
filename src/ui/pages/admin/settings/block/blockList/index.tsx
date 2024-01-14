@@ -41,9 +41,7 @@ export const BlockList = observer((props: IProps) => {
     {
       headerName: 'Blocks',
       valueGetter: (params: any) => {
-        return `${params.node.rowIndex + 1}. ${params.data?.title}. ${
-          params.data?.name
-        }`;
+        return `${params.node.rowIndex + 1}. ${params.data?.title}. ${params.data?.name}`;
       },
       cellClass: 'ag-first-cell ag-last-cell',
     },

@@ -31,9 +31,7 @@ export const DialogBlock = observer((props: IProps) => {
     hasModalChanges,
   } = useViewModel<IBlockViewModel>(VIEW_MODEL.Block);
 
-  const { list: modules, data: module } = useViewModel<IModuleViewModel>(
-    VIEW_MODEL.Module
-  );
+  const { list: modules, data: module } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     changeModalField(e.target.name, e.target.value);

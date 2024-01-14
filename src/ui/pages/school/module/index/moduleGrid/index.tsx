@@ -7,8 +7,9 @@ import { IModuleUserViewModel } from '@viewModel/modules/entities/module/user/in
 import { Loader } from '@components/loader';
 
 export const ModuleGrid = observer(() => {
-  const { list: userModules, isListLoading } =
-    useViewModel<IModuleUserViewModel>(VIEW_MODEL.ModuleUser);
+  const { list: userModules, isListLoading } = useViewModel<IModuleUserViewModel>(
+    VIEW_MODEL.ModuleUser
+  );
 
   if (isListLoading) return <Loader relative loading />;
 
@@ -16,9 +17,7 @@ export const ModuleGrid = observer(() => {
     <div className="cols_4">
       <Loader relative />
       {!isListLoading &&
-        userModules?.map((userModule, index) => (
-          <ModuleItem key={index} userModule={userModule} />
-        ))}
+        userModules?.map((userModule, index) => <ModuleItem key={index} userModule={userModule} />)}
     </div>
   );
 });

@@ -14,12 +14,7 @@ export const ModulePage = observer((props: IProps) => {
   const { breadCrumbs, ...other } = props;
 
   return (
-    <Page
-      title="Modules"
-      breadCrumbs={breadCrumbs}
-      padding={false}
-      pageRight={<ModuleCard />}
-    >
+    <Page title="Modules" breadCrumbs={breadCrumbs} padding={false} pageRight={<ModuleCard />}>
       <ModuleList {...other} />
     </Page>
   );

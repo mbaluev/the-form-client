@@ -35,9 +35,7 @@ export const ModuleTabs = observer(() => {
     setActive(value);
   };
 
-  const { hasChanges, saveData, clearChanges } = useViewModel<IModuleViewModel>(
-    VIEW_MODEL.Module
-  );
+  const { hasChanges, saveData, clearChanges } = useViewModel<IModuleViewModel>(VIEW_MODEL.Module);
   const { add: addNotify } = useViewModel<INotifyViewModel>(VIEW_MODEL.Notify);
   const { Prompt } = useUnsavedChanges(hasChanges);
   const saveHandler = async () => {
@@ -51,11 +49,7 @@ export const ModuleTabs = observer(() => {
 
   return (
     <React.Fragment>
-      <Tabs
-        tabs={MODULE_TAB_CONFIG}
-        activeTab={active}
-        onChangeTab={onChangeTab}
-      />
+      <Tabs tabs={MODULE_TAB_CONFIG} activeTab={active} onChangeTab={onChangeTab} />
       <Prompt onSave={saveHandler} onDiscard={discardHandler} />
     </React.Fragment>
   );
