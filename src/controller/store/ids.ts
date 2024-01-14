@@ -9,4 +9,5 @@ export const STORE = {
 
   // entities
   UserList: Symbol.for('UserListStore'),
+  UserItem: Symbol.for('UserItemStore'),
 };

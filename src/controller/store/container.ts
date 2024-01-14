@@ -14,6 +14,8 @@ import type IMenuStore from '@store/modules/common/menu/interface';
 import { MenuStore } from '@store/modules/common/menu';
 import type IUserListStore from '@store/modules/entities/user/list/interface';
 import { UserListStore } from '@store/modules/entities/user/list';
+import type IUserItemStore from '@store/modules/entities/user/item/interface';
+import { UserItemStore } from '@store/modules/entities/user/item';
 
 export const storeContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -34,3 +36,5 @@ storeContainer.bind<INotifyStore>(STORE.Notify).to(NotifyStore);
 // entities
 
 storeContainer.bind<IUserListStore>(STORE.UserList).to(UserListStore);
+
+storeContainer.bind<IUserItemStore>(STORE.UserItem).to(UserItemStore);
