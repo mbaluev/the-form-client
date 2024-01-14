@@ -11,6 +11,7 @@ import { observer } from 'mobx-react';
 export const Quick = observer(() => {
   const {
     data,
+    isDataLoading,
     hasChanges,
     saveData,
     isDeleteOpen,
@@ -43,10 +44,14 @@ export const Quick = observer(() => {
 
   return (
     <Stack direction="row" spacing={2}>
-      <IconButton color="primary" onClick={saveData} disabled={!hasChanges || hasErrors}>
+      <IconButton
+        color="primary"
+        onClick={saveData}
+        disabled={!hasChanges || hasErrors || isDataLoading}
+      >
         <SaveIcon />
       </IconButton>
-      <IconButton color="primary" onClick={handleDelete}>
+      <IconButton color="primary" onClick={handleDelete} disabled={isDataLoading}>
         <DeleteIcon />
       </IconButton>
       <IconButton color="primary" onClick={handleClose}>

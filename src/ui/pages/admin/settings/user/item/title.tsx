@@ -1,6 +1,5 @@
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import { Tooltip } from '@theme/tooltip';
 import PersonIcon from '@mui/icons-material/Person';
 import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
 import { observer } from 'mobx-react';
@@ -10,9 +9,7 @@ export const Title = observer(() => {
   const { data, isDataLoading } = useUserItemStore();
   return (
     <Stack direction="row" spacing={2}>
-      <Tooltip title="tooltip">
-        <PersonIcon color="error" sx={{ marginTop: '3px !important' }} />
-      </Tooltip>
+      <PersonIcon color="error" sx={{ marginTop: '3px !important' }} />
       {isDataLoading ? (
         <Skeleton width={100} />
       ) : (
