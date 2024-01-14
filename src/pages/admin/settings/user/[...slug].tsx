@@ -26,12 +26,13 @@ const User = (props: any) => {
     },
   ];
 
-  const { getData } = useUserItemStore();
+  const { getData, setData } = useUserItemStore();
   useEffect(() => {
     if (router.query.slug) {
       const id = router.query.slug[0];
       getData(id);
     }
+    return () => setData();
   }, [router.query.slug]);
 
   return (
