@@ -33,4 +33,4 @@ jobs:
           context: ./
           push: true
           dockerfile: ./Dockerfile
-          tags: mbaluev/the-form-client:localhost
+          tags: mbaluev/the-form-client:feature-v2
