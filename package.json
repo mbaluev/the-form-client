@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev -p 3002",
     "build": "next build",
-    "start": "next start -p 3000",
+    "start": "next start -p 3002",
     "eslint": "npx eslint src --ext .tsx --ext .ts",
     "eslint:json": "eslint --config .eslintrc.json --output-file ./eslint-report.json --format json src",
     "eslint:html": "eslint --config .eslintrc.json --output-file ./eslint-report.html --format html src",
@@ -16,7 +16,16 @@
     "test:ci": "jest --ci",
     "test:watch": "jest --watch",
     "prepare": "husky install",
-    "docker": "docker build -t the-form-client . && docker run --env-file .env.production -dp 127.0.0.1:80:80 the-form-client"
+    "docker": "npm run docker:stop && npm run docker:rm && npm run docker:build && npm run docker:run",
+    "docker:stop": "docker stop the-form-client || true",
+    "docker:rm": "docker rm the-form-client || true",
+    "docker:build": "docker build -t the-form-client .",
+    "docker:run": "docker run --name the-form-client --env-file .env.production.local -dp 127.0.0.1:3000:3000 the-form-client",
+    "docker:mbaluev": "npm run docker:mbaluev-stop && npm run docker:mbaluev-rm && npm run docker:mbaluev-pull && npm run docker:mbaluev-run",
+    "docker:mbaluev-stop": "docker stop the-form-client-mbaluev || true",
+    "docker:mbaluev-rm": "docker rm the-form-client-mbaluev || true && docker image rm mbaluev/the-form-client:v1 || true",
+    "docker:mbaluev-pull": "docker pull --platform linux/x86_64 mbaluev/the-form-client:v1",
+    "docker:mbaluev-run": "docker run --name the-form-client-mbaluev -dp 127.0.0.1:3000:3000 mbaluev/the-form-client:v1"
   },
   "dependencies": {
     "@blossomfinance/iso-4217-currencies": "^0.2.5",
