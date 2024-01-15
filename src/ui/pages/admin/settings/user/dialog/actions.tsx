@@ -6,7 +6,8 @@ import { useRouter } from 'next/router';
 import { ROUTES } from '@settings/routes';
 
 export const Actions = observer(() => {
-  const { isModalLoading, hasModalErrors, hasModalChanges, saveModalData } = useUserItemStore();
+  const { isModalLoading, hasModalErrors, hasModalChanges, saveModalData, validateModal } =
+    useUserItemStore();
 
   const router = useRouter();
   const handleClose = async () => {
@@ -14,7 +15,7 @@ export const Actions = observer(() => {
       pathname: ROUTES.ADMIN_SETTINGS_USERS.path,
     });
   };
-  const handleSave = async () => {
+  const handleDoSave = async () => {
     const user = await saveModalData();
     if (user?.id) {
       await router.push({
@@ -22,6 +23,10 @@ export const Actions = observer(() => {
         query: { slug: [user.id] },
       });
     }
+  };
+  const handleSave = async () => {
+    const isValid = validateModal();
+    if (isValid) await handleDoSave();
   };
 
   return (

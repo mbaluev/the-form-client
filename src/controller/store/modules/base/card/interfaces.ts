@@ -105,8 +105,8 @@ export interface IBaseCardStore<T extends IBaseCardType> {
 
   // --- validations
 
-  validate: (nameSpaces?: string[]) => void;
-  validateModal: (nameSpaces?: string[]) => void;
+  validate: (nameSpaces?: string[]) => boolean;
+  validateModal: (nameSpaces?: string[]) => boolean;
 
   // --- clear
 

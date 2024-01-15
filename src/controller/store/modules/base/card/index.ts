@@ -651,6 +651,7 @@ export class BaseCardStore<T extends IBaseCardType> implements IBaseCardStore<T>
         this.validateField(validation.nameSpace, value);
       }
     });
+    return this.hasErrors;
   };
 
   validateModalField = (nameSpace: string, value?: any) => {
@@ -670,6 +671,7 @@ export class BaseCardStore<T extends IBaseCardType> implements IBaseCardStore<T>
         this.validateModalField(validation.nameSpace, value);
       }
     });
+    return this.hasModalErrors;
   };
 
   // -- clear
