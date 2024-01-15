@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
 import { FormField } from '@components/form/field';
@@ -8,7 +8,7 @@ import { Grid } from '@mui/material';
 import { PasswordField } from '@components/fields/passwordField';
 
 export const Form = observer(() => {
-  const { modalData, changeModalField, getModalError } = useUserItemStore();
+  const { modalData, changeModalField, getModalError, hasModalErrors } = useUserItemStore();
   const spacing = 3;
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +18,9 @@ export const Form = observer(() => {
   const changeCheckboxHandler = (e: ChangeEvent<HTMLInputElement>) => {
     changeModalField(e.target.name, e.target.checked);
   };
+
+  useEffect(() => {}, [hasModalErrors]);
+
   return (
     <Grid container spacing={spacing} alignItems="flex-start">
       <Grid item xs={12} sm={6}>

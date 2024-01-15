@@ -641,16 +641,20 @@ export class BaseCardStore<T extends IBaseCardType> implements IBaseCardStore<T>
     } else {
       this.setError(nameSpace, validated.message, value);
     }
+    return validated;
   };
 
   validate = (nameSpaces?: string[]) => {
+    let isValidData = true;
     this.validations?.forEach((validation) => {
       if (!nameSpaces || (nameSpaces && nameSpaces.includes(validation.nameSpace))) {
         const data = this.data ? { ...this.data } : {};
         const value = objectPath.get(data, validation.nameSpace);
-        this.validateField(validation.nameSpace, value);
+        const isValid = this.validateField(validation.nameSpace, value);
+        isValidData = isValidData && isValid.valid;
       }
     });
+    return isValidData;
   };
 
   validateModalField = (nameSpace: string, value?: any) => {
@@ -660,16 +664,20 @@ export class BaseCardStore<T extends IBaseCardType> implements IBaseCardStore<T>
     } else {
       this.setModalError(nameSpace, validated.message, value);
     }
+    return validated;
   };
 
   validateModal = (nameSpaces?: string[]) => {
+    let isValidModal = true;
     this.validations?.forEach((validation) => {
       if (!nameSpaces || (nameSpaces && nameSpaces.includes(validation.nameSpace))) {
         const data = this.modalData ? { ...this.modalData } : {};
         const value = objectPath.get(data, validation.nameSpace);
-        this.validateModalField(validation.nameSpace, value);
+        const isValid = this.validateModalField(validation.nameSpace, value);
+        isValidModal = isValidModal && isValid.valid;
       }
     });
+    return isValidModal;
   };
 
   // -- clear
