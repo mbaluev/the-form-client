@@ -1,6 +1,5 @@
 import { inject, injectable } from 'inversify';
 import { SERVICE } from '@service/ids';
-import { action, makeObservable, observable } from 'mobx';
 import { IUserDTO } from '@model/entities/user';
 import { ParsedUrlQuery } from 'querystring';
 import { BaseCardStore } from '@store/modules/base/card';
@@ -17,11 +16,6 @@ export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemS
 
   constructor() {
     super();
-    makeObservable(this, {
-      userData: observable,
-      setUserData: action,
-      clearUserData: action,
-    });
     this.setValidations([
       { nameSpace: 'firstname', type: 'required', message: 'Required' },
       { nameSpace: 'lastname', type: 'required', message: 'Required' },
@@ -30,22 +24,6 @@ export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemS
       { nameSpace: 'password', type: 'required', message: 'Required' },
     ]);
   }
-
-  // --- observable
-
-  userData?: IUserDTO | null = undefined;
-
-  setUserData = (data?: IUserDTO | null) => {
-    this.userData = data;
-  };
-
-  clearUserData = async () => {
-    try {
-      this.setUserData();
-    } catch (err) {
-    } finally {
-    }
-  };
 
   // --- override
 
@@ -65,10 +43,20 @@ export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemS
     try {
       const data = await this.serviceUser.getUser(id, query);
       this.setData(data);
-      this.setUserData(data);
     } catch (err) {
     } finally {
       this.setDataLoading(false);
+    }
+  };
+
+  getModalData = async (id?: string, query?: ParsedUrlQuery) => {
+    this.setModalLoading(true);
+    try {
+      const data = await this.serviceUser.getUser(id, query);
+      this.setModalData(data);
+    } catch (err) {
+    } finally {
+      this.setModalLoading(false);
     }
   };
 
@@ -110,7 +98,6 @@ export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemS
         await this.userListStore.getData();
         await this.clearDelete();
         await this.clearData();
-        await this.clearUserData();
         return true;
       }
     } catch (err) {
