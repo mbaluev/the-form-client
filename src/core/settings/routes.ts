@@ -97,24 +97,9 @@ export const ROUTES: Record<string, any> = {
   ADMIN_SETTINGS_USER: {
     name: 'adminSettingsUser',
     label: 'User',
-    path: '/admin/settings/user/[...slug]',
+    path: '/admin/settings/user/[id]',
     roles: [ROLES.ADMIN],
-    tabs: {
-      keys: {
-        general: 'general',
-        users: 'users',
-      },
-      labels: {
-        general: 'General',
-        users: 'All users',
-      },
-    },
-  },
-  ADMIN_SETTINGS_USER_CREATE: {
-    name: 'adminSettingsUserCreate',
-    label: 'Create user',
-    path: '/admin/settings/user/create',
-    roles: [ROLES.ADMIN],
+    slug: { create: 'create' },
   },
   ADMIN_PROGRESS_USERS: {
     name: 'Users',

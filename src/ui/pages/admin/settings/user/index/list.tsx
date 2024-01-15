@@ -14,17 +14,15 @@ export const UsersList = observer(() => {
   const router = useRouter();
   const theme = useTheme();
   const handleClick = async (id: string) => {
-    const slug = [id];
-    if (router.pathname === ROUTES.ADMIN_SETTINGS_USER.path)
-      slug.push(router.query.slug?.[1] as string);
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_USER.path,
-      query: { ...router.query, slug },
+      query: { id },
     });
   };
   const handleCreate = async () => {
     await router.push({
-      pathname: ROUTES.ADMIN_SETTINGS_USER_CREATE.path,
+      pathname: ROUTES.ADMIN_SETTINGS_USER.path,
+      query: { id: ROUTES.ADMIN_SETTINGS_USER.slug.create },
     });
   };
   return (
@@ -39,7 +37,7 @@ export const UsersList = observer(() => {
           itemRenderer={(item: IUserDTO) => <Item item={item} />}
           rowStyleGetter={(item: IUserDTO) => {
             if (router.pathname === ROUTES.ADMIN_SETTINGS_USER.path) {
-              const id = router.query.slug?.[0] as string;
+              const id = router.query.id as string;
               if (item.id === id) return { backgroundColor: theme.palette.fGrey[10] };
             }
           }}

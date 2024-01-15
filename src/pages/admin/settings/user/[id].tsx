@@ -28,12 +28,9 @@ const User = (props: any) => {
 
   const { getData, setData } = useUserItemStore();
   useEffect(() => {
-    if (router.query.slug) {
-      const id = router.query.slug[0];
-      getData(id);
-    }
+    if (router.query.id) getData(router.query.id as string);
     return () => setData();
-  }, [router.query.slug]);
+  }, [router.query.id]);
 
   return (
     <MasterAuth>

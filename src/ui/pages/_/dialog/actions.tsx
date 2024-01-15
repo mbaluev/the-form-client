@@ -20,7 +20,7 @@ export const Actions = observer(() => {
     if (user?.id) {
       await router.push({
         pathname: ROUTES.ADMIN_SETTINGS_USER.path,
-        query: { slug: [user.id] },
+        query: { id: user.id },
       });
     }
   };
