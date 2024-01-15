@@ -110,6 +110,12 @@ export const ROUTES: Record<string, any> = {
       },
     },
   },
+  ADMIN_SETTINGS_USER_CREATE: {
+    name: 'adminSettingsUserCreate',
+    label: 'Create user',
+    path: '/admin/settings/user/create',
+    roles: [ROLES.ADMIN],
+  },
   ADMIN_PROGRESS_USERS: {
     name: 'Users',
     label: 'Users progress',

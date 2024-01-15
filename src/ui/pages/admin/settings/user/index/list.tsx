@@ -22,11 +22,16 @@ export const UsersList = observer(() => {
       query: { ...router.query, slug },
     });
   };
+  const handleCreate = async () => {
+    await router.push({
+      pathname: ROUTES.ADMIN_SETTINGS_USER_CREATE.path,
+    });
+  };
   return (
     <Stack spacing={2} height="100%">
       <Stack spacing={2}>
         <Filter dataModel={dataModel} padding />
-        <Toolbar dataModel={dataModel} padding />
+        <Toolbar dataModel={dataModel} padding handleCreate={handleCreate} />
       </Stack>
       <Stack flexGrow={1} overflow="hidden">
         <List
