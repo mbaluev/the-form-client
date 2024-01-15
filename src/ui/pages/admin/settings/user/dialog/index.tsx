@@ -3,7 +3,6 @@ import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
 import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
 import { Title } from '@ui/pages/admin/settings/user/dialog/title';
-import { ROUTES } from '@settings/routes';
 import { Content } from '@ui/pages/admin/settings/user/dialog/content';
 import { Actions } from '@ui/pages/admin/settings/user/dialog/actions';
 import { SeparatorBase } from '@ui/layout/card/separator';
@@ -19,10 +18,8 @@ export const UserDialog = observer((props: IProps) => {
   const { isModalLoading, setModalData } = useUserItemStore();
 
   const router = useRouter();
-  const handleClose = async () => {
-    await router.push({
-      pathname: ROUTES.ADMIN_SETTINGS_USERS.path,
-    });
+  const handleClose = () => {
+    router.back();
   };
   useEffect(() => {
     setModalData();

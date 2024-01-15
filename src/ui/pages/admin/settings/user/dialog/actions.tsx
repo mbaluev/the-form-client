@@ -10,10 +10,8 @@ export const Actions = observer(() => {
     useUserItemStore();
 
   const router = useRouter();
-  const handleClose = async () => {
-    await router.push({
-      pathname: ROUTES.ADMIN_SETTINGS_USERS.path,
-    });
+  const handleClose = () => {
+    router.back();
   };
   const handleDoSave = async () => {
     const user = await saveModalData();

@@ -1,6 +1,6 @@
 import { Fragment, ReactNode } from 'react';
 import { Panel } from '@ui/layout/page/panel';
-import { Box, Stack } from '@mui/material';
+import { Box, BoxProps, Stack } from '@mui/material';
 
 interface IProps {
   children?: ReactNode;
@@ -8,12 +8,13 @@ interface IProps {
   subtitle?: ReactNode;
   quick?: ReactNode;
   separator?: ReactNode;
+  boxProps?: BoxProps;
 }
 
 export const PageContent = (props: IProps) => {
-  const { children, title, subtitle, quick, separator } = props;
+  const { children, title, subtitle, quick, separator, boxProps } = props;
   return (
-    <Panel className="__page_content" height="100%" overflow="hidden">
+    <Panel className="__page_content" height="100%" overflow="hidden" {...boxProps}>
       <Stack spacing={3} height="100%">
         {(title || subtitle || quick) && (
           <Fragment>
