@@ -8,16 +8,20 @@ import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
 import NoData from '@components/noData';
 import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
 import { Panel } from '@ui/layout/page/panel';
+import { useRouter } from 'next/router';
 
 export const PageUser = observer(() => {
   const { data, isDataLoading } = useUserItemStore();
+  const router = useRouter();
+  const id = router.query.id;
+  const isCreate = id === 'create';
   if (isDataLoading)
     return (
       <Panel sx={{ p: 3 }}>
         <TabSkeleton />
       </Panel>
     );
-  if (!data)
+  if (!data && !isCreate)
     return (
       <Panel sx={{ pt: 20 }}>
         <NoData icon={<NewspaperOutlinedIcon />} message="No content. Please select item" />

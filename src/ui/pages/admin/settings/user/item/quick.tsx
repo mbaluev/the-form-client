@@ -7,12 +7,15 @@ import { ROUTES } from '@settings/routes';
 import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { observer } from 'mobx-react';
+import { Fragment } from 'react';
+import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 
 export const Quick = observer(() => {
   const {
     data,
     isDataLoading,
     hasChanges,
+    validate,
     saveData,
     isDeleteOpen,
     isDeleteLoading,
@@ -21,6 +24,7 @@ export const Quick = observer(() => {
     deleteClose,
     deleteSubmit,
     hasErrors,
+    clearChanges,
   } = useUserItemStore();
 
   const router = useRouter();
@@ -41,30 +45,51 @@ export const Quick = observer(() => {
       });
     }
   };
+  const handleDoSave = async () => {
+    const user = await saveData();
+    if (user?.id) {
+      await router.push({
+        pathname: ROUTES.ADMIN_SETTINGS_USER.path,
+        query: { id: user.id },
+      });
+    }
+  };
+  const handleSave = async () => {
+    const isValid = validate();
+    if (isValid) await handleDoSave();
+  };
+  const handleDiscard = async () => {
+    await clearChanges();
+  };
+
+  const { Prompt } = useUnsavedChanges(hasChanges);
 
   return (
-    <Stack direction="row" spacing={2}>
-      <IconButton
-        color="primary"
-        onClick={saveData}
-        disabled={!hasChanges || hasErrors || isDataLoading}
-      >
-        <SaveIcon />
-      </IconButton>
-      <IconButton color="primary" onClick={handleDelete} disabled={isDataLoading}>
-        <DeleteIcon />
-      </IconButton>
-      <IconButton color="primary" onClick={handleClose}>
-        <CloseIcon />
-      </IconButton>
-      <DialogConfirm
-        open={isDeleteOpen}
-        isLoading={isDeleteLoading}
-        onClose={deleteClose}
-        onSubmit={handleDeleteSubmit}
-        title="Delete user"
-        message="Are you sure you want to delete user?"
-      />
-    </Stack>
+    <Fragment>
+      <Stack direction="row" spacing={2}>
+        <IconButton
+          color="primary"
+          onClick={handleSave}
+          disabled={!hasChanges || hasErrors || isDataLoading}
+        >
+          <SaveIcon />
+        </IconButton>
+        <IconButton color="primary" onClick={handleDelete} disabled={isDataLoading}>
+          <DeleteIcon />
+        </IconButton>
+        <IconButton color="primary" onClick={handleClose}>
+          <CloseIcon />
+        </IconButton>
+        <DialogConfirm
+          open={isDeleteOpen}
+          isLoading={isDeleteLoading}
+          onClose={deleteClose}
+          onSubmit={handleDeleteSubmit}
+          title="Delete user"
+          message="Are you sure you want to delete user?"
+        />
+      </Stack>
+      <Prompt onSave={handleSave} onDiscard={handleDiscard} />
+    </Fragment>
   );
 });

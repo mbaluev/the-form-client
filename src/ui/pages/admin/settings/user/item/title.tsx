@@ -7,13 +7,14 @@ import { Skeleton } from '@mui/material';
 
 export const Title = observer(() => {
   const { data, isDataLoading } = useUserItemStore();
+  const username = data?.username || 'New user';
   return (
     <Stack direction="row" spacing={2}>
       <PersonIcon color="error" sx={{ marginTop: '3px !important' }} />
       {isDataLoading ? (
         <Skeleton width={100} />
       ) : (
-        <Typography sx={{ fontSize: '1.3rem', fontWeight: 600 }}>{data?.username}</Typography>
+        <Typography sx={{ fontSize: '1.3rem', fontWeight: 600 }}>{username}</Typography>
       )}
     </Stack>
   );
