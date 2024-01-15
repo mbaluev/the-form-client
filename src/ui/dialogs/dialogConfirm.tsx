@@ -4,10 +4,10 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  LinearProgress,
   Stack,
   Typography,
 } from '@mui/material';
+import { ProgressBase } from '@ui/layout/card/progress';
 
 interface IProps {
   open: boolean;
@@ -43,7 +43,7 @@ export const DialogConfirm = (props: IProps) => {
           )}
         </Stack>
       </DialogTitle>
-      {isLoading && <LinearProgress sx={{ borderRadius: 0 }} />}
+      {isLoading && <ProgressBase />}
       <DialogContent sx={{ pb: 0 }}>
         <Typography textAlign="left">{message || 'Are you sure?'}</Typography>
       </DialogContent>
