@@ -11,7 +11,7 @@ export const Item = observer((props: IProps) => {
   const { item } = props;
   return (
     <Stack direction="row" spacing={2} justifyContent="space-between">
-      <Stack direction="row" spacing={2}>
+      <Stack direction="row" spacing={2} overflow="hidden">
         <Typography textOverflow="ellipsis" whiteSpace="nowrap" overflow="hidden">
           {item.username}
         </Typography>
