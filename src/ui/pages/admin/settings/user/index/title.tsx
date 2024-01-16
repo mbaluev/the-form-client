@@ -6,7 +6,9 @@ export const Title = () => {
   return (
     <Stack direction="row" spacing={2}>
       <GroupIcon color="error" sx={{ marginTop: '3px !important' }} />
-      <Typography sx={{ fontSize: '1.3rem', fontWeight: 600 }}>Users</Typography>
+      <Typography sx={{ fontSize: '1.3rem', fontWeight: 600, lineHeight: '24px' }}>
+        Users
+      </Typography>
     </Stack>
   );
 };

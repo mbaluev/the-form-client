@@ -14,7 +14,9 @@ export const Title = observer(() => {
       {isDataLoading ? (
         <Skeleton width={100} />
       ) : (
-        <Typography sx={{ fontSize: '1.3rem', fontWeight: 600 }}>{username}</Typography>
+        <Typography sx={{ fontSize: '1.3rem', fontWeight: 600, lineHeight: '24px' }}>
+          {username}
+        </Typography>
       )}
     </Stack>
   );
