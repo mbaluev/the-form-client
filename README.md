@@ -46,3 +46,4 @@ module.exports = {
 
 1. `cd ~/.ssh && ssh-keygen`
 2. `cat id_rsa.pub | pbcopy`
+
