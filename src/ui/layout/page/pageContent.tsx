@@ -24,8 +24,8 @@ export const PageContent = (props: IProps) => {
                 {subtitle && <Box>{subtitle}</Box>}
               </Stack>
               {quick && (
-                <Box padding={2} paddingBottom={0}>
-                  {quick}
+                <Box padding={3} paddingBottom={0}>
+                  <Box margin={-1}>{quick}</Box>
                 </Box>
               )}
             </Stack>

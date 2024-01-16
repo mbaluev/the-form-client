@@ -9,6 +9,8 @@ import NoData from '@components/noData';
 import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
 import { Panel } from '@ui/layout/page/panel';
 import { useRouter } from 'next/router';
+import { SeparatorBase } from '@ui/layout/card/separator';
+import { SubTitle } from '@ui/pages/admin/settings/user/item/subtitle';
 
 export const PageUser = observer(() => {
   const { data, isDataLoading } = useUserItemStore();
@@ -28,7 +30,12 @@ export const PageUser = observer(() => {
       </Panel>
     );
   return (
-    <PageContent title={<Title />} quick={<Quick />}>
+    <PageContent
+      title={<Title />}
+      subtitle={data && (data.active || data.paid || data.admin) && <SubTitle />}
+      quick={<Quick />}
+      separator={<SeparatorBase />}
+    >
       <Content />
     </PageContent>
   );
