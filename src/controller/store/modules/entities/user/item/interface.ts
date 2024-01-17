@@ -1,6 +1,4 @@
 import { IUserDTO } from '@model/entities/user';
-import { IBaseCardStore } from '@store/modules/base/card/interfaces';
+import type IBaseCardStore from '@store/modules/base/card/interfaces';
 
-type IUserItemStore = IBaseCardStore<IUserDTO>;
-
-export default IUserItemStore;
+export default interface IUserItemStore extends IBaseCardStore<IUserDTO> {}

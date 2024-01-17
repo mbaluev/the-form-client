@@ -1,13 +1,13 @@
 /* eslint-disable sonarjs/cognitive-complexity */
+import _ from 'lodash';
+import objectPath from 'object-path';
 import { injectable } from 'inversify';
 import { action, computed, makeObservable, observable } from 'mobx';
 import { ParsedUrlQuery } from 'querystring';
-import objectPath from 'object-path';
-import _ from 'lodash';
+import type IBaseCardStore from '@store/modules/base/card/interfaces';
 import {
   IBaseCardError,
   IBaseCardField,
-  IBaseCardStore,
   IBaseCardType,
   IBaseCardValidation,
 } from '@store/modules/base/card/interfaces';

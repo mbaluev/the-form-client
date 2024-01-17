@@ -1,5 +1,4 @@
-import type IBaseListStore from '@store/modules/base/list/interface';
 import { IUserDTO } from '@model/entities/user';
+import type IBaseListStore from '@store/modules/base/list/interface';
 
-type IUserListStore = IBaseListStore<IUserDTO>;
-export default IUserListStore;
+export default interface IUserListStore extends IBaseListStore<IUserDTO> {}

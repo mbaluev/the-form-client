@@ -26,7 +26,7 @@ export type IBaseCardType = {
   description?: string;
 };
 
-export interface IBaseCardStore<T extends IBaseCardType> {
+export default interface IBaseCardStore<T extends IBaseCardType> {
   // --- list
 
   list?: T[] | null;
