@@ -1,4 +1,4 @@
-import { Chip, Stack } from '@mui/material';
+import { Chip, Stack, useTheme } from '@mui/material';
 import { observer } from 'mobx-react';
 import { IUserDTO } from '@model/entities/user';
 import Typography from '@mui/material/Typography';
@@ -9,6 +9,8 @@ interface IProps {
 
 export const Item = observer((props: IProps) => {
   const { item } = props;
+  const theme = useTheme();
+  const grey = theme.palette.fGrey[150];
   return (
     <Stack direction="row" spacing={2} justifyContent="space-between">
       <Stack direction="row" spacing={2} overflow="hidden">
@@ -16,11 +18,10 @@ export const Item = observer((props: IProps) => {
           {item.username}
         </Typography>
         <Typography>-</Typography>
-        <Typography textOverflow="ellipsis" whiteSpace="nowrap" overflow="hidden">
+        <Typography textOverflow="ellipsis" whiteSpace="nowrap" overflow="hidden" color={grey}>
           {item.firstname}
         </Typography>
-        <Typography>-</Typography>
-        <Typography textOverflow="ellipsis" whiteSpace="nowrap" overflow="hidden">
+        <Typography textOverflow="ellipsis" whiteSpace="nowrap" overflow="hidden" color={grey}>
           {item.lastname}
         </Typography>
       </Stack>
