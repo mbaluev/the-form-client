@@ -1,7 +1,7 @@
 import { injectable } from 'inversify';
 import { ParsedUrlQuery } from 'querystring';
-import { ModuleBaseStore } from '@store/modules/entities/module/base';
-import type IModuleUserStore from '@store/modules/entities/module/user/interface';
+import { ModuleBaseStore } from '@store/modules/entities/module/_/base';
+import type IModuleUserStore from '@store/modules/entities/module/_/user/interface';
 
 @injectable()
 export class ModuleUserStore extends ModuleBaseStore implements IModuleUserStore {

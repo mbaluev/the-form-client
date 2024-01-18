@@ -2,7 +2,8 @@ import { TBreadCrumb } from '@ui/layout/page/breadCrumbs';
 import { ROUTES } from '@settings/routes';
 import { MasterAuth } from '@ui/masters/masterAuth';
 import { Page } from '@ui/layout/page/page';
-import { Panel } from '@ui/layout/page/panel';
+import { PageModules } from '@ui/pages/admin/settings/module/index/page';
+import { PageModule } from '@ui/pages/admin/settings/module/item/page';
 
 const Modules = (props: any) => {
   const breadCrumbs: TBreadCrumb[] = [
@@ -17,8 +18,8 @@ const Modules = (props: any) => {
   ];
   return (
     <MasterAuth>
-      <Page {...props} breadCrumbs={breadCrumbs} right={<Panel />}>
-        <Panel>modules</Panel>
+      <Page {...props} breadCrumbs={breadCrumbs} right={<PageModule />}>
+        <PageModules />
       </Page>
     </MasterAuth>
   );

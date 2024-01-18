@@ -57,7 +57,7 @@ export const TextInputField = (props: TextInputFieldProps) => {
         ...InputProps,
       }}
       sx={{
-        '& input': { textAlign: inputType === 'number' ? 'right' : undefined },
+        // '& input': { textAlign: inputType === 'number' ? 'right' : undefined },
         ...sx,
       }}
       {...other}

@@ -2,8 +2,8 @@ import _ from 'lodash';
 import { injectable } from 'inversify';
 import { ParsedUrlQuery } from 'querystring';
 import { IModuleUserDTO } from '@model/entities/module';
-import { ModuleBaseStore } from '@store/modules/entities/module/base';
-import type IModuleAdminStore from '@store/modules/entities/module/admin/interface';
+import { ModuleBaseStore } from '@store/modules/entities/module/_/base';
+import type IModuleAdminStore from '@store/modules/entities/module/_/admin/interface';
 
 @injectable()
 export class ModuleAdminStore extends ModuleBaseStore implements IModuleAdminStore {

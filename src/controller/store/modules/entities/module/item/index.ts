@@ -1,27 +1,25 @@
 import { inject, injectable } from 'inversify';
 import { SERVICE } from '@service/ids';
-import { IUserDTO } from '@model/entities/user';
 import { ParsedUrlQuery } from 'querystring';
 import { BaseCardStore } from '@store/modules/base/card';
 import { STORE } from '@store/ids';
-import type IUserItemStore from '@store/modules/entities/user/item/interface';
-import type IUserListStore from '@store/modules/entities/user/list/interface';
-import type IUserService from '@service/modules/entities/user/interface';
+import { IModuleDTO } from '@model/entities/module';
+import type IModuleItemStore from '@store/modules/entities/module/item/interface';
+import type IModuleService from '@service/modules/entities/module/interface';
+import type IModuleListStore from '@store/modules/entities/module/list/interface';
 
 @injectable()
-export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemStore {
-  @inject(SERVICE.User) protected userService!: IUserService;
+export class ModuleItemStore extends BaseCardStore<IModuleDTO> implements IModuleItemStore {
+  @inject(SERVICE.Module) private moduleService!: IModuleService;
 
-  @inject(STORE.UserList) protected userListStore!: IUserListStore;
+  @inject(STORE.ModuleList) protected moduleListStore!: IModuleListStore;
 
   constructor() {
     super();
     this.setValidations([
-      { nameSpace: 'firstname', type: 'required', message: 'Required' },
-      { nameSpace: 'lastname', type: 'required', message: 'Required' },
-      { nameSpace: 'username', type: 'required', message: 'Required' },
-      { nameSpace: 'username', type: 'email', message: 'Not correct email' },
-      { nameSpace: 'password', type: 'required', message: 'Required' },
+      { nameSpace: 'title', type: 'required', message: 'Required' },
+      { nameSpace: 'name', type: 'required', message: 'Required' },
+      { nameSpace: 'position', type: 'required', message: 'Required' },
     ]);
   }
 
@@ -30,7 +28,7 @@ export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemS
   getList = async (query?: ParsedUrlQuery) => {
     this.setListLoading(true);
     try {
-      const data = await this.userService.getUsers(query);
+      const data = await this.moduleService.getModules(query);
       this.setList(data);
     } catch (err) {
     } finally {
@@ -41,7 +39,7 @@ export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemS
   getData = async (id?: string, query?: ParsedUrlQuery) => {
     this.setDataLoading(true);
     try {
-      const data = await this.userService.getUser(id, query);
+      const data = await this.moduleService.getModule(id, query);
       this.setData(data);
     } catch (err) {
     } finally {
@@ -53,8 +51,8 @@ export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemS
     this.setDataLoading(true);
     try {
       if (this.data && !this.hasErrors) {
-        const data = await this.userService.saveUser(this.data);
-        await this.userListStore.getData();
+        const data = await this.moduleService.saveModule(this.data);
+        await this.moduleListStore.getData();
         await this.clearChanges();
         return data;
       }
@@ -68,8 +66,8 @@ export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemS
     this.setDeleteLoading(true);
     try {
       if (this.deleteIds) {
-        await this.userService.deleteUsers(this.deleteIds);
-        await this.userListStore.getData();
+        await this.moduleService.deleteModules(this.deleteIds);
+        await this.moduleListStore.getData();
         await this.clearDelete();
         await this.clearData();
         return true;

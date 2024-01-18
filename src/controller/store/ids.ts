@@ -11,6 +11,8 @@ export const STORE = {
   // entities
   UserList: Symbol.for('UserListStore'),
   UserItem: Symbol.for('UserItemStore'),
+  ModuleList: Symbol.for('ModuleListStore'),
+  ModuleItem: Symbol.for('ModuleItemStore'),
 
   // old
   Block: Symbol.for('BlockViewModel'),

@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import { IModuleUserDTO } from '@model/entities/module';
 import { SERVICE } from '@service/ids';
 import { BaseCardStore } from '@store/modules/base/card';
-import type IModuleBaseStore from '@store/modules/entities/module/base/interface';
+import type IModuleBaseStore from '@store/modules/entities/module/_/base/interface';
 import type IModuleService from '@service/modules/entities/module/interface';
 
 @injectable()

@@ -17,6 +17,7 @@ export const ROUTES: Record<string, any> = {
     name: '500',
     path: '/500',
   },
+
   HOME: {
     name: 'home',
     label: 'The Form',
@@ -34,6 +35,7 @@ export const ROUTES: Record<string, any> = {
     path: '/account/signup',
     roles: [ROLES.NONE],
   },
+
   SCHOOL_MODULES: {
     name: 'userModules',
     label: 'Modules',
@@ -52,6 +54,20 @@ export const ROUTES: Record<string, any> = {
     path: '/school/block/[id]',
     roles: [ROLES.STUDENT],
   },
+
+  ADMIN_SETTINGS_USERS: {
+    name: 'adminSettingsUsers',
+    label: 'Users',
+    path: '/admin/settings/user',
+    roles: [ROLES.ADMIN],
+  },
+  ADMIN_SETTINGS_USER: {
+    name: 'adminSettingsUser',
+    label: 'User',
+    path: '/admin/settings/user/[id]',
+    roles: [ROLES.ADMIN],
+    slug: { create: 'create' },
+  },
   ADMIN_SETTINGS_MODULES: {
     name: 'adminSettingsModules',
     label: 'Modules',
@@ -61,8 +77,9 @@ export const ROUTES: Record<string, any> = {
   ADMIN_SETTINGS_MODULE: {
     name: 'adminSettingsModule',
     label: 'Module',
-    path: '/admin/settings/module/[moduleId]',
+    path: '/admin/settings/module/[id]',
     roles: [ROLES.ADMIN],
+    slug: { create: 'create' },
   },
   ADMIN_SETTINGS_MODULE_BLOCKS: {
     name: 'adminSettingsModuleBlocks',
@@ -88,19 +105,7 @@ export const ROUTES: Record<string, any> = {
     path: '/admin/settings/block/[id]',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_SETTINGS_USERS: {
-    name: 'adminSettingsUsers',
-    label: 'Users',
-    path: '/admin/settings/user',
-    roles: [ROLES.ADMIN],
-  },
-  ADMIN_SETTINGS_USER: {
-    name: 'adminSettingsUser',
-    label: 'User',
-    path: '/admin/settings/user/[id]',
-    roles: [ROLES.ADMIN],
-    slug: { create: 'create' },
-  },
+
   ADMIN_PROGRESS_USERS: {
     name: 'Users',
     label: 'Users progress',

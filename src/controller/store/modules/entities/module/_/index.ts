@@ -4,7 +4,7 @@ import { IModuleDTO } from '@model/entities/module';
 import { action, makeObservable, observable } from 'mobx';
 import { ParsedUrlQuery } from 'querystring';
 import { BaseCardStore } from '@store/modules/base/card';
-import type IModuleStore from '@store/modules/entities/module/interface';
+import type IModuleStore from '@store/modules/entities/module/_/interface';
 import type IModuleService from '@service/modules/entities/module/interface';
 
 @injectable()
