@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { SeparatorBase } from '@ui/layout/card/separator';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
 import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
+import { SubTitle } from '@ui/pages/admin/settings/module/item/subtitle';
 
 export const PageModule = observer(() => {
   const { data, isDataLoading } = useModuleItemStore();
@@ -29,7 +30,12 @@ export const PageModule = observer(() => {
       </Panel>
     );
   return (
-    <PageContent title={<Title />} quick={<Quick />} separator={<SeparatorBase />}>
+    <PageContent
+      title={<Title />}
+      quick={<Quick />}
+      subtitle={data && data.name && <SubTitle />}
+      separator={<SeparatorBase />}
+    >
       <Content />
     </PageContent>
   );

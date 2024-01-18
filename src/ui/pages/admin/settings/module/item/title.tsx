@@ -7,7 +7,7 @@ import { useModuleItemStore } from '@store/modules/entities/module/item/useModul
 
 export const Title = observer(() => {
   const { data, isDataLoading } = useModuleItemStore();
-  const displayName = data?.name || 'New module';
+  const displayName = data?.title || 'New module';
   return (
     <Stack direction="row" spacing={2}>
       <SchoolIcon color="error" sx={{ marginTop: '3px !important' }} />
