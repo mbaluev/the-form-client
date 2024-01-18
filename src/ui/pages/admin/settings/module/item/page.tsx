@@ -33,7 +33,7 @@ export const PageModule = observer(() => {
     <PageContent
       title={<Title />}
       quick={<Quick />}
-      subtitle={data && data.name && <SubTitle />}
+      subtitle={<SubTitle />}
       separator={<SeparatorBase />}
     >
       <Content />

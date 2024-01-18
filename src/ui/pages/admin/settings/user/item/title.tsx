@@ -4,13 +4,16 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
 import { observer } from 'mobx-react';
 import { Skeleton } from '@mui/material';
+import { PageIcon } from '@ui/layout/page/pageIcon';
 
 export const Title = observer(() => {
-  const { data, isDataLoading } = useUserItemStore();
+  const { data, isDataLoading, hasChanges, hasData } = useUserItemStore();
   const displayName = data?.username || 'New user';
   return (
     <Stack direction="row" spacing={2}>
-      <PersonIcon color="error" sx={{ marginTop: '3px !important' }} />
+      <PageIcon>
+        <PersonIcon color={hasChanges || !hasData ? 'error' : 'primary'} />
+      </PageIcon>
       {isDataLoading ? (
         <Skeleton width={100} />
       ) : (

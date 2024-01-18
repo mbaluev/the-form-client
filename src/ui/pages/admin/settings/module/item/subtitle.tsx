@@ -5,9 +5,9 @@ import { useModuleItemStore } from '@store/modules/entities/module/item/useModul
 
 export const SubTitle = observer(() => {
   const { data } = useModuleItemStore();
+  const displayName = data?.name || '...';
   const theme = useTheme();
   const grey = theme.palette.fGrey[100];
-  if (!data) return null;
   return (
     <Stack direction="row" spacing={2}>
       <Typography
@@ -17,7 +17,7 @@ export const SubTitle = observer(() => {
         fontWeight={600}
         color={grey}
       >
-        {data.name}
+        {displayName}
       </Typography>
     </Stack>
   );
