@@ -16,13 +16,13 @@ export const ModulesList = observer(() => {
   const handleClick = async (id: string) => {
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_MODULE.path,
-      query: { id },
+      query: { slug: [id] },
     });
   };
   const handleCreate = async () => {
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_MODULE.path,
-      query: { id: ROUTES.ADMIN_SETTINGS_MODULE.slug.create },
+      query: { slug: [ROUTES.ADMIN_SETTINGS_MODULE.tabs.keys.create] },
     });
   };
   return (

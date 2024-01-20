@@ -262,8 +262,6 @@ export const theme = createTheme({
     MuiTabPanel: {
       styleOverrides: {
         root: {
-          paddingTop: 20,
-          paddingBottom: 20,
           paddingLeft: 0,
           paddingRight: 0,
         },

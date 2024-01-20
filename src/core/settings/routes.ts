@@ -77,9 +77,19 @@ export const ROUTES: Record<string, any> = {
   ADMIN_SETTINGS_MODULE: {
     name: 'adminSettingsModule',
     label: 'Module',
-    path: '/admin/settings/module/[id]',
+    path: '/admin/settings/module/[...slug]',
     roles: [ROLES.ADMIN],
-    slug: { create: 'create' },
+    tabs: {
+      keys: {
+        create: 'create',
+        details: 'details',
+        blocks: 'blocks',
+      },
+      labels: {
+        details: 'Details',
+        blocks: 'Blocks',
+      },
+    },
   },
   ADMIN_SETTINGS_MODULE_BLOCKS: {
     name: 'adminSettingsModuleBlocks',

@@ -11,6 +11,8 @@ import { useEffect } from 'react';
 
 const Module = (props: any) => {
   const router = useRouter();
+  const id = router.query.slug?.[0] as string;
+
   const breadCrumbs: TBreadCrumb[] = [
     {
       label: ROUTES.HOME.label,
@@ -22,15 +24,15 @@ const Module = (props: any) => {
     },
     {
       label: ROUTES.ADMIN_SETTINGS_MODULE.label,
-      url: { pathname: ROUTES.ADMIN_SETTINGS_MODULE.path, query: router.query },
+      url: { pathname: ROUTES.ADMIN_SETTINGS_MODULE.path, query: { slug: [id] } },
     },
   ];
 
   const { getData, setData } = useModuleItemStore();
   useEffect(() => {
-    if (router.query.id) getData(router.query.id as string);
+    if (id) getData(id);
     return () => setData();
-  }, [router.query.id]);
+  }, [id]);
 
   return (
     <MasterAuth>

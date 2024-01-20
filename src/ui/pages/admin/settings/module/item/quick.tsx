@@ -28,7 +28,7 @@ export const Quick = observer(() => {
   } = useModuleItemStore();
 
   const router = useRouter();
-  const id = router.query.id;
+  const id = router.query.slug?.[0] as string;
   const isCreate = id === 'create';
 
   const handleDelete = async () => {
