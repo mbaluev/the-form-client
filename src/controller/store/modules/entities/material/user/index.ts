@@ -4,7 +4,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { MaterialBaseStore } from '@store/modules/entities/material/base';
 import { STORE } from '@store/ids';
 import type IMaterialUserStore from '@store/modules/entities/material/user/interface';
-import type IBlockUserStore from '@store/modules/entities/block/user/interface';
+import type IBlockUserStore from '@store/modules/entities/block/_/user/interface';
 
 @injectable()
 export class MaterialUserStore extends MaterialBaseStore implements IMaterialUserStore {

@@ -7,9 +7,9 @@ import { Button } from '@mui/material';
 type IProps<T extends TListITem> = IListBaseProps<T>;
 
 export const BtnReload = observer(<T extends TListITem>(props: IProps<T>) => {
-  const { dataModel } = props;
+  const { dataModel, query } = props;
   const { getData } = dataModel;
-  const handleRefresh = async () => getData();
+  const handleRefresh = async () => getData(query);
   return (
     <Button variant="text" color="secondary" startIcon={<RefreshIcon />} onClick={handleRefresh}>
       Reload

@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import { STORE } from '@store/ids';
 import { TaskBaseDocumentStore } from '@store/modules/entities/task/baseDocument';
 import type ITaskUserDocumentStore from '@store/modules/entities/task/userDocument/interface';
-import type IBlockUserStore from '@store/modules/entities/block/user/interface';
+import type IBlockUserStore from '@store/modules/entities/block/_/user/interface';
 
 @injectable()
 export class TaskUserDocumentStore extends TaskBaseDocumentStore implements ITaskUserDocumentStore {

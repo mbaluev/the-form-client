@@ -8,7 +8,7 @@ import { STORE } from '@store/ids';
 import { guid } from '@utils/guid';
 import type IQuestionStore from '@store/modules/entities/question/interface';
 import type IQuestionService from '@service/modules/entities/question/interface';
-import type IBlockStore from '@store/modules/entities/block/interface';
+import type IBlockStore from '@store/modules/entities/block/_/interface';
 
 @injectable()
 export class QuestionStore extends BaseCardStore<IQuestionDTO> implements IQuestionStore {

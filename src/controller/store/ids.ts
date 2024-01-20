@@ -13,6 +13,8 @@ export const STORE = {
   UserItem: Symbol.for('UserItemStore'),
   ModuleList: Symbol.for('ModuleListStore'),
   ModuleItem: Symbol.for('ModuleItemStore'),
+  BlockList: Symbol.for('BlockListStore'),
+  BlockItem: Symbol.for('BlockItemStore'),
 
   // old
   Block: Symbol.for('BlockViewModel'),

@@ -20,8 +20,12 @@ import type IOptionStore from '@store/modules/common/option/interface';
 import { OptionStore } from '@store/modules/common/option';
 import type IModuleListStore from '@store/modules/entities/module/list/interface';
 import { ModuleListStore } from '@store/modules/entities/module/list';
-import IModuleItemStore from '@store/modules/entities/module/item/interface';
+import type IModuleItemStore from '@store/modules/entities/module/item/interface';
 import { ModuleItemStore } from '@store/modules/entities/module/item';
+import type IBlockListStore from '@store/modules/entities/block/list/interface';
+import { BlockListStore } from '@store/modules/entities/block/list';
+import type IBlockItemStore from '@store/modules/entities/block/item/interface';
+import { BlockItemStore } from '@store/modules/entities/block/item';
 
 export const storeContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -50,3 +54,7 @@ storeContainer.bind<IUserItemStore>(STORE.UserItem).to(UserItemStore);
 storeContainer.bind<IModuleListStore>(STORE.ModuleList).to(ModuleListStore);
 
 storeContainer.bind<IModuleItemStore>(STORE.ModuleItem).to(ModuleItemStore);
+
+storeContainer.bind<IBlockListStore>(STORE.BlockList).to(BlockListStore);
+
+storeContainer.bind<IBlockItemStore>(STORE.BlockItem).to(BlockItemStore);

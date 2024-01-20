@@ -8,7 +8,7 @@ import { ITaskDTO } from '@model/entities/task';
 import { BaseCardStore } from '@store/modules/base/card';
 import { STORE } from '@store/ids';
 import type ITaskStore from '@store/modules/entities/task/interface';
-import type IBlockStore from '@store/modules/entities/block/interface';
+import type IBlockStore from '@store/modules/entities/block/_/interface';
 import type ITaskService from '@service/modules/entities/task/interface';
 import type IFileService from '@service/modules/common/file/interface';
 

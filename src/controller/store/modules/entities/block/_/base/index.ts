@@ -4,7 +4,7 @@ import { IBlockUserDTO } from '@model/entities/block';
 import { action, makeObservable, observable } from 'mobx';
 import { BaseCardStore } from '@store/modules/base/card';
 import { BlockTabNames } from '@ui/components/blockTab/blockTabNames';
-import type IBlockBaseStore from '@store/modules/entities/block/base/interface';
+import type IBlockBaseStore from '@store/modules/entities/block/_/base/interface';
 import type IBlockService from '@service/modules/entities/block/interface';
 
 @injectable()

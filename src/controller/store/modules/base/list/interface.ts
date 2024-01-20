@@ -1,5 +1,6 @@
 import type IBaseStore from '@store/modules/base/store/interface';
 import type { ISelectItem } from '@components/fields/selectField/types';
+import { ParsedUrlQuery } from 'querystring';
 
 export type TListITem = {
   id?: string | null;
@@ -21,7 +22,7 @@ export default interface IBaseListStore<T extends TListITem> extends IBaseStore 
   // data
   data?: T[];
   setData: (value?: T[]) => void;
-  getData: () => Promise<void>;
+  getData: (query?: ParsedUrlQuery) => Promise<void>;
   resetData: () => void;
   dataItems?: ISelectItem[];
 

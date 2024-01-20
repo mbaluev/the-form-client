@@ -5,9 +5,11 @@ import { VirtualizeItem } from '@ui/layout/virtualize/item/item';
 import { VirtualizeSkeleton } from '@ui/layout/virtualize/item/skeleton';
 import { VirtualizeBlock } from '@ui/layout/virtualize/block';
 import { VirtualizeNoData } from '@ui/layout/virtualize/item/nodata';
+import { ParsedUrlQuery } from 'querystring';
 
 export interface IListBaseProps<T extends TListITem> {
   dataModel: IBaseListStore<T>;
+  query?: ParsedUrlQuery;
 }
 
 interface IListProps<T extends TListITem> extends IListBaseProps<T> {
@@ -19,6 +21,7 @@ interface IListProps<T extends TListITem> extends IListBaseProps<T> {
   handleClick?: (id: string) => void;
   checkbox?: boolean;
   estimateSize: number;
+  query?: ParsedUrlQuery;
 }
 
 export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
@@ -32,11 +35,12 @@ export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
     handleClick,
     checkbox,
     estimateSize,
+    query,
   } = props;
   const { dataFiltered, dataLength, isLoading, getData, selectItem } = dataModel;
 
   useEffect(() => {
-    getData();
+    getData(query);
   }, dependencies || []);
 
   return (

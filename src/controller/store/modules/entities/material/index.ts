@@ -12,7 +12,7 @@ import { STORE } from '@store/ids';
 import type IMaterialStore from '@store/modules/entities/material/interface';
 import type IMaterialService from '@service/modules/entities/material/interface';
 import type IFileService from '@service/modules/common/file/interface';
-import type IBlockStore from '@store/modules/entities/block/interface';
+import type IBlockStore from '@store/modules/entities/block/_/interface';
 
 @injectable()
 export class MaterialStore extends BaseCardStore<IMaterialDTO> implements IMaterialStore {

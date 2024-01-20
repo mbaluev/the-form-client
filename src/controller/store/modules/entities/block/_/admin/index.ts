@@ -3,8 +3,8 @@ import _ from 'lodash';
 import { injectable } from 'inversify';
 import { IBlockUserDTO } from '@model/entities/block';
 import { ParsedUrlQuery } from 'querystring';
-import { BlockBaseStore } from '@store/modules/entities/block/base';
-import type IBlockAdminStore from '@store/modules/entities/block/admin/interface';
+import { BlockBaseStore } from '@store/modules/entities/block/_/base';
+import type IBlockAdminStore from '@store/modules/entities/block/_/admin/interface';
 
 @injectable()
 export class BlockAdminStore extends BlockBaseStore implements IBlockAdminStore {

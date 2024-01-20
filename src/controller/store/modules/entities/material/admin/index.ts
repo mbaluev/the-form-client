@@ -3,7 +3,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { MaterialBaseStore } from '@store/modules/entities/material/base';
 import IMaterialAdminStore from '@store/modules/entities/material/admin/interface';
 import { STORE } from '@store/ids';
-import type IBlockAdminStore from '@store/modules/entities/block/admin/interface';
+import type IBlockAdminStore from '@store/modules/entities/block/_/admin/interface';
 
 @injectable()
 export class MaterialAdminStore extends MaterialBaseStore implements IMaterialAdminStore {

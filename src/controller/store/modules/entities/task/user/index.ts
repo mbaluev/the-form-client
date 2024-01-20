@@ -3,7 +3,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { STORE } from '@store/ids';
 import { TaskBaseStore } from '@store/modules/entities/task/base';
 import type ITaskUserStore from '@store/modules/entities/task/user/interface';
-import type IBlockUserStore from '@store/modules/entities/block/user/interface';
+import type IBlockUserStore from '@store/modules/entities/block/_/user/interface';
 
 @injectable()
 export class TaskUserStore extends TaskBaseStore implements ITaskUserStore {

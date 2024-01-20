@@ -1,20 +1,20 @@
-import { PageContent } from '@ui/layout/page/pageContent';
-import { Title } from '@ui/pages/admin/settings/module/item/title';
-import { Quick } from '@ui/pages/admin/settings/module/item/quick';
-import { Details } from '@ui/pages/admin/settings/module/item/details';
-import { observer } from 'mobx-react';
-import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
-import NoData from '@components/noData';
-import { Panel } from '@ui/layout/page/panel';
 import { useRouter } from 'next/router';
+import { observer } from 'mobx-react';
+import { PageContent } from '@ui/layout/page/pageContent';
+import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
 import { SeparatorBase } from '@ui/layout/card/separator';
+import { Panel } from '@ui/layout/page/panel';
+import NoData from '@components/noData';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
-import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
-import { SubTitle } from '@ui/pages/admin/settings/module/item/subtitle';
-import { Tabs } from '@ui/pages/admin/settings/module/item/tabs';
+import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
+import { Tabs } from '@ui/pages/admin/settings/block/item/tabs';
+import { Title } from '@ui/pages/admin/settings/block/item/title';
+import { Quick } from '@ui/pages/admin/settings/block/item/quick';
+import { Details } from '@ui/pages/admin/settings/block/item/details';
+import { SubTitle } from '@ui/pages/admin/settings/block/item/subtitle';
 
-export const PageModule = observer(() => {
-  const { data, isDataLoading } = useModuleItemStore();
+export const PageBlock = observer(() => {
+  const { data, isDataLoading } = useBlockItemStore();
   const router = useRouter();
   const id = router.query.slug?.[0];
   const isCreate = id === 'create';

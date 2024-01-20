@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
-import { Form } from '@ui/pages/admin/settings/module/item/form';
 import { Box } from '@mui/material';
-import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
+import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
+import { Form } from '@ui/pages/admin/settings/block/item/form';
 
-export const Content = observer(() => {
-  const { isDataLoading } = useModuleItemStore();
+export const Details = observer(() => {
+  const { isDataLoading } = useBlockItemStore();
   return (
     <Box paddingLeft={3} paddingRight={3} overflow="auto">
       {isDataLoading ? <TabSkeleton /> : <Form />}

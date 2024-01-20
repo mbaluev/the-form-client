@@ -97,9 +97,11 @@ export const SelectField = (props: SelectFieldProps) => {
   const selectRef = useRef<HTMLDivElement>();
 
   useUpdateEffect(() => {
+    console.log(value);
     setState(isItem(value) ? value : '');
   }, [value]);
   useUpdateEffect(() => {
+    console.log(items);
     setStateItems(items);
   }, [items]);
 

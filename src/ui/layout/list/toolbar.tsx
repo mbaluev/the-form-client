@@ -12,7 +12,7 @@ interface IProps<T extends TListITem> extends IListBaseProps<T> {
 }
 
 export const Toolbar = observer(<T extends TListITem>(props: IProps<T>) => {
-  const { dataModel, padding, handleCreate, checkbox } = props;
+  const { dataModel, padding, handleCreate, checkbox, query } = props;
 
   const { isLoading, dataLength, dataTotal, selectedItems, selectAllItems, allItemsSelected } =
     dataModel;
@@ -26,7 +26,7 @@ export const Toolbar = observer(<T extends TListITem>(props: IProps<T>) => {
       dataSelected={selectedItems}
       dataSelectAll={selectAllItems}
       dataAllSelected={allItemsSelected}
-      refreshAction={<BtnReload dataModel={dataModel} />}
+      refreshAction={<BtnReload dataModel={dataModel} query={query} />}
       more={handleCreate ? <BtnCreate handleCreate={handleCreate} /> : undefined}
       checkbox={checkbox}
     />

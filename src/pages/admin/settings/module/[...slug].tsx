@@ -28,10 +28,10 @@ const Module = (props: any) => {
     },
   ];
 
-  const { getData, setData } = useModuleItemStore();
+  const { getData: getModules, setData: setModules } = useModuleItemStore();
   useEffect(() => {
-    if (id) getData(id);
-    return () => setData();
+    if (id) getModules(id);
+    return () => setModules();
   }, [id]);
 
   return (

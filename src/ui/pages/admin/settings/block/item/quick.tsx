@@ -8,7 +8,7 @@ import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { observer } from 'mobx-react';
 import { Fragment } from 'react';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
-import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
+import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
 
 export const Quick = observer(() => {
   const {
@@ -25,7 +25,7 @@ export const Quick = observer(() => {
     deleteSubmit,
     hasErrors,
     clearChanges,
-  } = useModuleItemStore();
+  } = useBlockItemStore();
 
   const router = useRouter();
   const id = router.query.slug?.[0] as string;
@@ -37,14 +37,14 @@ export const Quick = observer(() => {
   };
   const handleClose = async () => {
     await router.push({
-      pathname: ROUTES.ADMIN_SETTINGS_MODULES.path,
+      pathname: ROUTES.ADMIN_SETTINGS_BLOCKS.path,
     });
   };
   const handleDeleteSubmit = async () => {
     const result = await deleteSubmit();
     if (result) {
       await router.push({
-        pathname: ROUTES.ADMIN_SETTINGS_MODULES.path,
+        pathname: ROUTES.ADMIN_SETTINGS_BLOCKS.path,
       });
     }
   };
@@ -52,7 +52,7 @@ export const Quick = observer(() => {
     const item = await saveData();
     if (item?.id) {
       await router.push({
-        pathname: ROUTES.ADMIN_SETTINGS_MODULE.path,
+        pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
         query: { slug: [item.id] },
       });
     }
@@ -88,8 +88,8 @@ export const Quick = observer(() => {
           isLoading={isDeleteLoading}
           onClose={deleteClose}
           onSubmit={handleDeleteSubmit}
-          title="Delete module"
-          message="Are you sure you want to delete module?"
+          title="Delete block"
+          message="Are you sure you want to delete block?"
         />
       </Stack>
       <Prompt onSave={handleSave} onDiscard={handleDiscard} />

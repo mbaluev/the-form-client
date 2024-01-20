@@ -4,7 +4,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { QuestionBaseStore } from '@store/modules/entities/question/base';
 import { STORE } from '@store/ids';
 import type IQuestionUserStore from '@store/modules/entities/question/user/interface';
-import type IBlockUserStore from '@store/modules/entities/block/user/interface';
+import type IBlockUserStore from '@store/modules/entities/block/_/user/interface';
 
 @injectable()
 export class QuestionUserStore extends QuestionBaseStore implements IQuestionUserStore {

@@ -3,7 +3,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { QuestionBaseStore } from '@store/modules/entities/question/base';
 import { STORE } from '@store/ids';
 import type IQuestionAdminStore from '@store/modules/entities/question/admin/interface';
-import type IBlockAdminStore from '@store/modules/entities/block/admin/interface';
+import type IBlockAdminStore from '@store/modules/entities/block/_/admin/interface';
 
 @injectable()
 export class QuestionAdminStore extends QuestionBaseStore implements IQuestionAdminStore {
