@@ -49,18 +49,17 @@ export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemS
     }
   };
 
-  saveData = async () => {
-    this.setDataLoading(true);
+  saveData = async (data?: IUserDTO) => {
+    this.setSaveLoading(true);
     try {
-      if (this.data && !this.hasErrors) {
-        const data = await this.userService.saveUser(this.data);
+      if (data) {
+        const res = await this.userService.saveUser(data);
         await this.userListStore.getData();
-        await this.clearChanges();
-        return data;
+        return res;
       }
     } catch (err) {
     } finally {
-      this.setDataLoading(false);
+      this.setSaveLoading(false);
     }
   };
 

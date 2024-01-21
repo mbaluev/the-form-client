@@ -1,38 +1,66 @@
+import { Fragment, useState } from 'react';
 import { IconButton, Stack } from '@mui/material';
+import { useFormContext } from 'react-hook-form';
+import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
+import CloseIcon from '@mui/icons-material/Close';
+import { DialogDiscard } from '@ui/dialogs/dialogDiscard';
+import { observer } from 'mobx-react';
+import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { IUserDTO } from '@model/entities/user';
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CloseIcon from '@mui/icons-material/Close';
-import { useRouter } from 'next/router';
-import { ROUTES } from '@settings/routes';
-import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
-import { observer } from 'mobx-react';
-import { Fragment } from 'react';
-import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
+import { ROUTES } from '@settings/routes';
+import { useRouter } from 'next/router';
 
 export const Quick = observer(() => {
   const {
-    data,
-    isDataLoading,
-    hasChanges,
-    validate,
+    isSaveLoading,
+    isDeleteLoading,
     saveData,
     isDeleteOpen,
-    isDeleteLoading,
     addDeleteId,
     deleteOpen,
     deleteClose,
     deleteSubmit,
-    hasErrors,
-    clearChanges,
   } = useUserItemStore();
 
   const router = useRouter();
-  const id = router.query.id;
+  const id = router.query.id as string;
   const isCreate = id === 'create';
 
+  const {
+    handleSubmit,
+    formState: { isDirty, isValid },
+    reset,
+  } = useFormContext<IUserDTO>();
+
+  // unsaved changes
+  const { Prompt } = useUnsavedChanges(isDirty);
+  const [isOpenDiscard, setIsOpenDiscard] = useState<boolean>(false);
+  const handleSave = handleSubmit(async (data) => {
+    const res = (await saveData(data)) as IUserDTO;
+    if (res) {
+      reset(res);
+      setTimeout(() => {
+        router.push({
+          pathname: ROUTES.ADMIN_SETTINGS_USER.path,
+          query: { id: res.id },
+        });
+      });
+    }
+  });
+  const handleDiscard = async () => {
+    reset();
+  };
+  const handleDiscardClose = () => setIsOpenDiscard(false);
+  const handleDiscardConfirm = async () => {
+    reset();
+  };
+
+  // handlers
   const handleDelete = async () => {
-    addDeleteId(data?.id);
+    addDeleteId(id);
     deleteOpen();
   };
   const handleClose = async () => {
@@ -48,24 +76,6 @@ export const Quick = observer(() => {
       });
     }
   };
-  const handleDoSave = async () => {
-    const item = await saveData();
-    if (item?.id) {
-      await router.push({
-        pathname: ROUTES.ADMIN_SETTINGS_USER.path,
-        query: { id: item.id },
-      });
-    }
-  };
-  const handleSave = async () => {
-    const isValid = validate();
-    if (isValid) await handleDoSave();
-  };
-  const handleDiscard = async () => {
-    await clearChanges();
-  };
-
-  const { Prompt } = useUnsavedChanges(hasChanges);
 
   return (
     <Fragment>
@@ -73,14 +83,14 @@ export const Quick = observer(() => {
         <IconButton
           color="primary"
           onClick={handleSave}
-          disabled={!hasChanges || hasErrors || isDataLoading}
+          disabled={isSaveLoading || !isDirty || !isValid}
         >
           <SaveIcon />
         </IconButton>
-        <IconButton color="primary" onClick={handleDelete} disabled={isCreate || isDataLoading}>
+        <IconButton color="primary" onClick={handleDelete} disabled={isSaveLoading || isCreate}>
           <DeleteIcon />
         </IconButton>
-        <IconButton color="primary" onClick={handleClose}>
+        <IconButton color="primary" onClick={handleClose} disabled={isSaveLoading}>
           <CloseIcon />
         </IconButton>
         <DialogConfirm
@@ -92,7 +102,8 @@ export const Quick = observer(() => {
           message="Are you sure you want to delete user?"
         />
       </Stack>
-      <Prompt onSave={handleSave} onDiscard={handleDiscard} />
+      <DialogDiscard open={isOpenDiscard} onClose={handleDiscardClose} onDiscard={handleDiscard} />
+      <Prompt onDiscard={handleDiscardConfirm} onSave={handleSave} />
     </Fragment>
   );
 });

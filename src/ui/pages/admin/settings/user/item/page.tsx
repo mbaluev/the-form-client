@@ -7,12 +7,12 @@ import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
 import NoData from '@components/noData';
 import { Panel } from '@ui/layout/page/panel';
 import { useRouter } from 'next/router';
-import { SeparatorBase } from '@ui/layout/card/separator';
 import { SubTitle } from '@ui/pages/admin/settings/user/item/subtitle';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { IUserDTO } from '@model/entities/user';
 import { Form } from '@ui/pages/admin/settings/user/item/form';
+import { Separator } from '@ui/pages/admin/settings/user/item/separator';
 
 export const PageUser = observer(() => {
   const { isDataLoading } = useUserItemStore();
@@ -44,7 +44,7 @@ export const PageUser = observer(() => {
       title={<Title />}
       subtitle={<SubTitle />}
       quick={<Quick />}
-      separator={<SeparatorBase />}
+      separator={<Separator />}
     >
       <Form />
     </PageContent>
