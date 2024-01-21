@@ -7,7 +7,7 @@ interface IProps extends SwitchFieldProps {
 }
 
 export const Switch = (props: IProps) => {
-  const { name, rules, onChange: handleChange, ...otherProps } = props;
+  const { name, rules, ...otherProps } = props;
   const { control } = useFormContext();
   return (
     <Controller
@@ -19,10 +19,7 @@ export const Switch = (props: IProps) => {
         <SwitchField
           name={name}
           value={value as any}
-          onChange={(e, checked) => {
-            onChange(e);
-            if (handleChange) handleChange(e, checked);
-          }}
+          onChange={onChange}
           checked={value as any}
           error={!!error}
           helperText={error ? error.message : null}

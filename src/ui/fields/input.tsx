@@ -1,8 +1,6 @@
 import { Controller, useFormContext } from 'react-hook-form';
-import { Warning } from '@ui/fields/warning';
 import { useState } from 'react';
 import { Copy } from '@components/copy';
-import { useTranslation } from 'next-i18next';
 import { InputAdornment } from '@mui/material';
 import Loader from '@components/loader';
 import { TextInputFieldProps } from '@components/fields/textInputField/types';
@@ -15,7 +13,6 @@ interface IProps extends TextInputFieldProps {
 
 export const Input = (props: IProps) => {
   const { name, rules, loading, ...otherProps } = props;
-  const { t } = useTranslation();
   const { control } = useFormContext();
   const [hover, setHover] = useState<boolean>(false);
   const handleMouseEnter = () => setHover(true);
@@ -24,13 +21,7 @@ export const Input = (props: IProps) => {
     <Controller
       name={name as any}
       control={control}
-      rules={{
-        maxLength: {
-          value: 256,
-          message: `${t('common:validation-max-length')} 256`,
-        },
-        ...rules,
-      }}
+      rules={rules}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <TextInputField
           value={value as string}
@@ -43,10 +34,6 @@ export const Input = (props: IProps) => {
               hover && !otherProps.multiline ? (
                 <InputAdornment position="end">
                   <Copy text={value as string} />
-                </InputAdornment>
-              ) : error ? (
-                <InputAdornment position="end">
-                  <Warning />
                 </InputAdornment>
               ) : loading ? (
                 <InputAdornment position="end">
