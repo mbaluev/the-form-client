@@ -5,9 +5,8 @@ import { Page } from '@ui/layout/page/page';
 import { PageModules } from '@ui/pages/admin/settings/module/index/page';
 import { PageModule } from '@ui/pages/admin/settings/module/item/page';
 import { FormProvider, useForm } from 'react-hook-form';
-import { IUserDTO } from '@model/entities/user';
-import { useEffect } from 'react';
 import { DEFAULT_MODULE } from '@model/entities/module/default';
+import { IModuleDTO } from '@model/entities/module';
 
 const Modules = (props: any) => {
   const breadCrumbs: TBreadCrumb[] = [
@@ -20,12 +19,7 @@ const Modules = (props: any) => {
       url: { pathname: ROUTES.ADMIN_SETTINGS_MODULES.path },
     },
   ];
-
-  const methods = useForm<IUserDTO>({ mode: 'all' });
-  useEffect(() => {
-    methods.reset(DEFAULT_MODULE);
-  }, [module]);
-
+  const methods = useForm<IModuleDTO>({ mode: 'all', defaultValues: DEFAULT_MODULE });
   return (
     <MasterAuth>
       <FormProvider {...methods}>

@@ -12,12 +12,19 @@ import { useModuleItemStore } from '@store/modules/entities/module/item/useModul
 import { SubTitle } from '@ui/pages/admin/settings/module/item/subtitle';
 import { Tabs } from '@ui/pages/admin/settings/module/item/tabs';
 import { Separator } from '@ui/pages/admin/settings/module/item/separator';
+import { useFormContext, useWatch } from 'react-hook-form';
+import { IUserDTO } from '@model/entities/user';
 
 export const PageModule = observer(() => {
-  const { data, isDataLoading } = useModuleItemStore();
+  const { isDataLoading } = useModuleItemStore();
+
   const router = useRouter();
-  const id = router.query.slug?.[0];
+  const id = router.query.slug?.[0] as string;
   const isCreate = id === 'create';
+
+  const { control } = useFormContext<IUserDTO>();
+  const hasData = useWatch({ control, name: 'id' });
+
   if (isDataLoading) {
     return (
       <Panel sx={{ p: 3 }}>
@@ -25,18 +32,19 @@ export const PageModule = observer(() => {
       </Panel>
     );
   }
-  if (!data && !isCreate) {
+  if (!isCreate && !hasData) {
     return (
       <Panel sx={{ pt: 20 }}>
         <NoData icon={<SearchOffIcon />} message="No content. Please select item" />
       </Panel>
     );
   }
+
   return (
     <PageContent
       title={<Title />}
-      quick={<Quick />}
       subtitle={<SubTitle />}
+      quick={<Quick />}
       separator={<Separator />}
     >
       {isCreate ? <Details /> : <Tabs />}

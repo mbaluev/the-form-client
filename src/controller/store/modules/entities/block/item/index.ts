@@ -14,16 +14,6 @@ export class BlockItemStore extends BaseCardStore<IBlockDTO> implements IBlockIt
 
   @inject(STORE.BlockList) protected blockListStore!: IBlockListStore;
 
-  constructor() {
-    super();
-    this.setValidations([
-      { nameSpace: 'moduleId', type: 'required', message: 'Required' },
-      { nameSpace: 'title', type: 'required', message: 'Required' },
-      { nameSpace: 'name', type: 'required', message: 'Required' },
-      { nameSpace: 'position', type: 'required', message: 'Required' },
-    ]);
-  }
-
   // --- override
 
   getList = async (query?: ParsedUrlQuery) => {
@@ -48,14 +38,13 @@ export class BlockItemStore extends BaseCardStore<IBlockDTO> implements IBlockIt
     }
   };
 
-  saveData = async () => {
+  saveData = async (data?: IBlockDTO) => {
     this.setSaveLoading(true);
     try {
-      if (this.data && !this.hasErrors) {
-        const data = await this.blockService.saveBlock(this.data);
+      if (data) {
+        const res = await this.blockService.saveBlock(data);
         await this.blockListStore.getData();
-        await this.clearChanges();
-        return data;
+        return res;
       }
     } catch (err) {
     } finally {

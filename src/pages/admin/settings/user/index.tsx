@@ -6,7 +6,6 @@ import { PageUsers } from '@ui/pages/admin/settings/user/index/page';
 import { PageUser } from '@ui/pages/admin/settings/user/item/page';
 import { FormProvider, useForm } from 'react-hook-form';
 import { IUserDTO } from '@model/entities/user';
-import { useEffect } from 'react';
 import { DEFAULT_USER } from '@model/entities/user/default';
 
 const Users = (props: any) => {
@@ -20,12 +19,7 @@ const Users = (props: any) => {
       url: { pathname: ROUTES.ADMIN_SETTINGS_USERS.path },
     },
   ];
-
-  const methods = useForm<IUserDTO>({ mode: 'all' });
-  useEffect(() => {
-    methods.reset(DEFAULT_USER);
-  }, []);
-
+  const methods = useForm<IUserDTO>({ mode: 'all', defaultValues: DEFAULT_USER });
   return (
     <MasterAuth>
       <FormProvider {...methods}>

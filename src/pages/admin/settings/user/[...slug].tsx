@@ -37,7 +37,7 @@ const User = (props: any) => {
     return () => setUser();
   }, [id]);
 
-  const methods = useForm<IUserDTO>({ mode: 'all' });
+  const methods = useForm<IUserDTO>({ mode: 'all', defaultValues: DEFAULT_USER });
   useEffect(() => {
     methods.reset(user || DEFAULT_USER);
   }, [user]);

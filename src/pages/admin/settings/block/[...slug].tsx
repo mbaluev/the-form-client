@@ -9,6 +9,9 @@ import { PageBlock } from '@ui/pages/admin/settings/block/item/page';
 import { useEffect } from 'react';
 import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
 import { useModuleListStore } from '@store/modules/entities/module/list/useModuleListStore';
+import { FormProvider, useForm } from 'react-hook-form';
+import { IBlockDTO } from '@model/entities/block';
+import { DEFAULT_BLOCK } from '@model/entities/block/default';
 
 const Block = (props: any) => {
   const router = useRouter();
@@ -29,7 +32,7 @@ const Block = (props: any) => {
     },
   ];
 
-  const { getData: getBlock, setData: setBlock } = useBlockItemStore();
+  const { getData: getBlock, setData: setBlock, data: block } = useBlockItemStore();
   const { getData: getModules, setData: setModules } = useModuleListStore();
   useEffect(() => {
     if (id) {
@@ -42,11 +45,18 @@ const Block = (props: any) => {
     };
   }, [id]);
 
+  const methods = useForm<IBlockDTO>({ mode: 'all', defaultValues: DEFAULT_BLOCK });
+  useEffect(() => {
+    methods.reset(block || DEFAULT_BLOCK);
+  }, [block]);
+
   return (
     <MasterAuth>
-      <Page {...props} breadCrumbs={breadCrumbs} right={<PageBlock />}>
-        <PageBlocks />
-      </Page>
+      <FormProvider {...methods}>
+        <Page {...props} breadCrumbs={breadCrumbs} right={<PageBlock />}>
+          <PageBlocks />
+        </Page>
+      </FormProvider>
     </MasterAuth>
   );
 };

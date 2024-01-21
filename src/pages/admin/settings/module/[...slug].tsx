@@ -9,8 +9,8 @@ import { PageModules } from '@ui/pages/admin/settings/module/index/page';
 import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
 import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { IUserDTO } from '@model/entities/user';
 import { DEFAULT_MODULE } from '@model/entities/module/default';
+import { IModuleDTO } from '@model/entities/module';
 
 const Module = (props: any) => {
   const router = useRouter();
@@ -37,7 +37,7 @@ const Module = (props: any) => {
     return () => setModule();
   }, [id]);
 
-  const methods = useForm<IUserDTO>({ mode: 'all' });
+  const methods = useForm<IModuleDTO>({ mode: 'all', defaultValues: DEFAULT_MODULE });
   useEffect(() => {
     methods.reset(module || DEFAULT_MODULE);
   }, [module]);

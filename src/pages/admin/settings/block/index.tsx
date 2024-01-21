@@ -4,6 +4,9 @@ import { MasterAuth } from '@ui/masters/masterAuth';
 import { Page } from '@ui/layout/page/page';
 import { PageBlocks } from '@ui/pages/admin/settings/block/index/page';
 import { PageBlock } from '@ui/pages/admin/settings/block/item/page';
+import { FormProvider, useForm } from 'react-hook-form';
+import { IBlockDTO } from '@model/entities/block';
+import { DEFAULT_BLOCK } from '@model/entities/block/default';
 
 const Blocks = (props: any) => {
   const breadCrumbs: TBreadCrumb[] = [
@@ -16,11 +19,14 @@ const Blocks = (props: any) => {
       url: { pathname: ROUTES.ADMIN_SETTINGS_BLOCKS.path },
     },
   ];
+  const methods = useForm<IBlockDTO>({ mode: 'all', defaultValues: DEFAULT_BLOCK });
   return (
     <MasterAuth>
-      <Page {...props} breadCrumbs={breadCrumbs} right={<PageBlock />}>
-        <PageBlocks />
-      </Page>
+      <FormProvider {...methods}>
+        <Page {...props} breadCrumbs={breadCrumbs} right={<PageBlock />}>
+          <PageBlocks />
+        </Page>
+      </FormProvider>
     </MasterAuth>
   );
 };
