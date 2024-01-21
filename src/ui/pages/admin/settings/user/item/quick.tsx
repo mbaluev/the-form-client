@@ -40,8 +40,8 @@ export const Quick = observer(() => {
   const [isOpenDiscard, setIsOpenDiscard] = useState<boolean>(false);
   const handleSave = handleSubmit(async (data) => {
     const res = (await saveData(data)) as IUserDTO;
-    if (res) {
-      reset(res);
+    if (res) reset(res);
+    if (res && isCreate) {
       setTimeout(() => {
         router.push({
           pathname: ROUTES.ADMIN_SETTINGS_USER.path,
