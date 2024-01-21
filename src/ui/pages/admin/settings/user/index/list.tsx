@@ -16,13 +16,13 @@ export const UsersList = observer(() => {
   const handleClick = async (id: string) => {
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_USER.path,
-      query: { id },
+      query: { slug: [id] },
     });
   };
   const handleCreate = async () => {
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_USER.path,
-      query: { id: ROUTES.ADMIN_SETTINGS_USER.slug.create },
+      query: { slug: [ROUTES.ADMIN_SETTINGS_USER.tabs.keys.create] },
     });
   };
   return (

@@ -8,6 +8,9 @@ import { PageModule } from '@ui/pages/admin/settings/module/item/page';
 import { PageModules } from '@ui/pages/admin/settings/module/index/page';
 import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
 import { useEffect } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { IUserDTO } from '@model/entities/user';
+import { DEFAULT_MODULE } from '@model/entities/module/default';
 
 const Module = (props: any) => {
   const router = useRouter();
@@ -28,17 +31,24 @@ const Module = (props: any) => {
     },
   ];
 
-  const { getData: getModules, setData: setModules } = useModuleItemStore();
+  const { getData: getModule, setData: setModule, data: module } = useModuleItemStore();
   useEffect(() => {
-    if (id) getModules(id);
-    return () => setModules();
+    if (id) getModule(id);
+    return () => setModule();
   }, [id]);
+
+  const methods = useForm<IUserDTO>({ mode: 'all' });
+  useEffect(() => {
+    methods.reset(module || DEFAULT_MODULE);
+  }, [module]);
 
   return (
     <MasterAuth>
-      <Page {...props} breadCrumbs={breadCrumbs} right={<PageModule />}>
-        <PageModules />
-      </Page>
+      <FormProvider {...methods}>
+        <Page {...props} breadCrumbs={breadCrumbs} right={<PageModule />}>
+          <PageModules />
+        </Page>
+      </FormProvider>
     </MasterAuth>
   );
 };

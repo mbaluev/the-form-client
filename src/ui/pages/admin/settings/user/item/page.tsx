@@ -18,7 +18,7 @@ export const PageUser = observer(() => {
   const { isDataLoading } = useUserItemStore();
 
   const router = useRouter();
-  const id = router.query.id;
+  const id = router.query.slug?.[0] as string;
   const isCreate = id === 'create';
 
   const { control } = useFormContext<IUserDTO>();

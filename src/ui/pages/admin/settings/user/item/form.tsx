@@ -12,7 +12,7 @@ export const Form = observer(() => {
   const { isSaveLoading: disabled } = useUserItemStore();
 
   const router = useRouter();
-  const id = router.query.id;
+  const id = router.query.slug?.[0] as string;
   const isCreate = id === 'create';
   const required = { required: 'required' };
 

@@ -26,7 +26,7 @@ export const Quick = observer(() => {
   } = useUserItemStore();
 
   const router = useRouter();
-  const id = router.query.id as string;
+  const id = router.query.slug?.[0] as string;
   const isCreate = id === 'create';
 
   const {
@@ -45,7 +45,7 @@ export const Quick = observer(() => {
       setTimeout(() => {
         router.push({
           pathname: ROUTES.ADMIN_SETTINGS_USER.path,
-          query: { id: res.id },
+          query: { slug: [res.id] },
         });
       });
     }

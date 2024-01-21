@@ -14,15 +14,6 @@ export class ModuleItemStore extends BaseCardStore<IModuleDTO> implements IModul
 
   @inject(STORE.ModuleList) protected moduleListStore!: IModuleListStore;
 
-  constructor() {
-    super();
-    this.setValidations([
-      { nameSpace: 'title', type: 'required', message: 'Required' },
-      { nameSpace: 'name', type: 'required', message: 'Required' },
-      { nameSpace: 'position', type: 'required', message: 'Required' },
-    ]);
-  }
-
   // --- override
 
   getList = async (query?: ParsedUrlQuery) => {
@@ -53,7 +44,6 @@ export class ModuleItemStore extends BaseCardStore<IModuleDTO> implements IModul
       if (this.data && !this.hasErrors) {
         const data = await this.moduleService.saveModule(this.data);
         await this.moduleListStore.getData();
-        await this.clearChanges();
         return data;
       }
     } catch (err) {

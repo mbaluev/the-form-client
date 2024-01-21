@@ -14,6 +14,8 @@ import { DEFAULT_USER } from '@model/entities/user/default';
 
 const User = (props: any) => {
   const router = useRouter();
+  const id = router.query.slug?.[0] as string;
+
   const breadCrumbs: TBreadCrumb[] = [
     {
       label: ROUTES.HOME.label,
@@ -29,16 +31,16 @@ const User = (props: any) => {
     },
   ];
 
-  const { getData, setData, data } = useUserItemStore();
+  const { getData: getUser, setData: setUser, data: user } = useUserItemStore();
   useEffect(() => {
-    if (router.query.id) getData(router.query.id as string);
-    return () => setData();
-  }, [router.query.id]);
+    if (id) getUser(id);
+    return () => setUser();
+  }, [id]);
 
   const methods = useForm<IUserDTO>({ mode: 'all' });
   useEffect(() => {
-    methods.reset(data || DEFAULT_USER);
-  }, [data]);
+    methods.reset(user || DEFAULT_USER);
+  }, [user]);
 
   return (
     <MasterAuth>

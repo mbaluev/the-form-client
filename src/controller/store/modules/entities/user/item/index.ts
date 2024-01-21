@@ -14,17 +14,6 @@ export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemS
 
   @inject(STORE.UserList) protected userListStore!: IUserListStore;
 
-  constructor() {
-    super();
-    this.setValidations([
-      { nameSpace: 'firstname', type: 'required', message: 'Required' },
-      { nameSpace: 'lastname', type: 'required', message: 'Required' },
-      { nameSpace: 'username', type: 'required', message: 'Required' },
-      { nameSpace: 'username', type: 'email', message: 'Not correct email' },
-      { nameSpace: 'password', type: 'required', message: 'Required' },
-    ]);
-  }
-
   // --- override
 
   getList = async (query?: ParsedUrlQuery) => {

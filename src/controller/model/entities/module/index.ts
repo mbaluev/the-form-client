@@ -5,7 +5,7 @@ export interface IModuleDTO {
   id: string;
   title: string;
   name: string;
-  position: number;
+  position?: number | null;
   createdAt: string;
   updatedAt: string;
 
