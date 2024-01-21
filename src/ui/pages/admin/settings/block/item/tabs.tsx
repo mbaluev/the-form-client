@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 
 export const Tabs = observer(() => {
   const router = useRouter();
+  const id = router.query.slug?.[0] as string;
   const active = router.query.slug?.[1] as string;
   const { isSaveLoading } = useBlockItemStore();
 
@@ -33,7 +34,6 @@ export const Tabs = observer(() => {
     },
   ];
   const handleChange = async (value: string) => {
-    const id = router.query.slug?.[0] as string;
     const slug = [id];
     if (value !== ROUTES.ADMIN_SETTINGS_BLOCK.tabs.keys.details) slug.push(value);
     await router.push({ pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path, query: { slug } });

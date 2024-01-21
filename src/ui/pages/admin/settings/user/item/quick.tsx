@@ -39,7 +39,7 @@ export const Quick = observer(() => {
   const { Prompt } = useUnsavedChanges(isDirty);
   const [isOpenDiscard, setIsOpenDiscard] = useState<boolean>(false);
   const handleSave = handleSubmit(async (data) => {
-    const res = (await saveData(data)) as IUserDTO;
+    const res = await saveData(data);
     if (res) reset(res);
     if (res && isCreate) {
       setTimeout(() => {
