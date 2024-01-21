@@ -17,6 +17,7 @@ export const Quick = observer(() => {
     hasChanges,
     validate,
     saveData,
+    // getData,
     isDeleteOpen,
     isDeleteLoading,
     addDeleteId,
@@ -63,6 +64,7 @@ export const Quick = observer(() => {
   };
   const handleDiscard = async () => {
     await clearChanges();
+    // await getData(id);
   };
 
   const { Prompt } = useUnsavedChanges(hasChanges);

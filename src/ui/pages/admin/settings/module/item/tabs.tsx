@@ -3,11 +3,14 @@ import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
 import { Details } from '@ui/pages/admin/settings/module/item/details';
 import { BlocksList } from '@ui/pages/admin/settings/block/index/list';
+import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
+import { observer } from 'mobx-react';
 
-export const Tabs = () => {
+export const Tabs = observer(() => {
   const router = useRouter();
   const id = router.query.slug?.[0] as string;
   const active = router.query.slug?.[1] as string;
+  const { isSaveLoading } = useModuleItemStore();
 
   const tabs = [
     {
@@ -27,5 +30,7 @@ export const Tabs = () => {
     await router.push({ pathname: ROUTES.ADMIN_SETTINGS_MODULE.path, query: { slug } });
   };
 
-  return <MuiTabs active={active} tabs={tabs} onChange={handleChange} padding />;
-};
+  return (
+    <MuiTabs active={active} tabs={tabs} onChange={handleChange} loading={isSaveLoading} padding />
+  );
+});

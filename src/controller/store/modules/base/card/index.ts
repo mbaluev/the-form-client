@@ -34,6 +34,11 @@ export class BaseCardStore<T extends IBaseCardType> implements IBaseCardStore<T>
       setDataLoading: action,
       hasData: computed,
 
+      // ---- save
+
+      isSaveLoading: observable,
+      setSaveLoading: action,
+
       // --- filter
 
       filter: observable,
@@ -45,11 +50,10 @@ export class BaseCardStore<T extends IBaseCardType> implements IBaseCardStore<T>
 
       getList: action,
       getData: action,
-      saveData: action,
-      deleteData: action,
-
       getModalData: action,
+      saveData: action,
       saveModalData: action,
+      deleteData: action,
 
       // --- edit
 
@@ -199,6 +203,14 @@ export class BaseCardStore<T extends IBaseCardType> implements IBaseCardStore<T>
   get hasData() {
     return Boolean(this.data);
   }
+
+  // --- save
+
+  isSaveLoading = false;
+
+  setSaveLoading = (value: boolean) => {
+    this.isSaveLoading = value;
+  };
 
   // --- filter
 

@@ -49,7 +49,7 @@ export class BlockItemStore extends BaseCardStore<IBlockDTO> implements IBlockIt
   };
 
   saveData = async () => {
-    this.setDataLoading(true);
+    this.setSaveLoading(true);
     try {
       if (this.data && !this.hasErrors) {
         const data = await this.blockService.saveBlock(this.data);
@@ -59,7 +59,7 @@ export class BlockItemStore extends BaseCardStore<IBlockDTO> implements IBlockIt
       }
     } catch (err) {
     } finally {
-      this.setDataLoading(false);
+      this.setSaveLoading(false);
     }
   };
 

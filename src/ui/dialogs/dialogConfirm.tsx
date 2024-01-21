@@ -53,6 +53,7 @@ export const DialogConfirm = (props: IProps) => {
           variant="outlined"
           color="primary"
           sx={{ flexBasis: '50%' }}
+          disabled={isLoading}
           fullWidth
         >
           No
@@ -62,6 +63,7 @@ export const DialogConfirm = (props: IProps) => {
           variant="contained"
           color="primary"
           sx={{ flexBasis: '50%' }}
+          disabled={isLoading}
           fullWidth
         >
           Yes

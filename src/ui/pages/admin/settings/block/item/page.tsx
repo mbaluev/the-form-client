@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { observer } from 'mobx-react';
 import { PageContent } from '@ui/layout/page/pageContent';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
-import { SeparatorBase } from '@ui/layout/card/separator';
 import { Panel } from '@ui/layout/page/panel';
 import NoData from '@components/noData';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
@@ -12,6 +11,7 @@ import { Title } from '@ui/pages/admin/settings/block/item/title';
 import { Quick } from '@ui/pages/admin/settings/block/item/quick';
 import { Details } from '@ui/pages/admin/settings/block/item/details';
 import { SubTitle } from '@ui/pages/admin/settings/block/item/subtitle';
+import { Separator } from '@ui/pages/admin/settings/block/item/separator';
 
 export const PageBlock = observer(() => {
   const { data, isDataLoading } = useBlockItemStore();
@@ -35,7 +35,7 @@ export const PageBlock = observer(() => {
       title={<Title />}
       quick={<Quick />}
       subtitle={<SubTitle />}
-      separator={isCreate && <SeparatorBase />}
+      separator={<Separator />}
     >
       {isCreate ? <Details /> : <Tabs />}
     </PageContent>

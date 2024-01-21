@@ -48,7 +48,7 @@ export class ModuleItemStore extends BaseCardStore<IModuleDTO> implements IModul
   };
 
   saveData = async () => {
-    this.setDataLoading(true);
+    this.setSaveLoading(true);
     try {
       if (this.data && !this.hasErrors) {
         const data = await this.moduleService.saveModule(this.data);
@@ -58,7 +58,7 @@ export class ModuleItemStore extends BaseCardStore<IModuleDTO> implements IModul
       }
     } catch (err) {
     } finally {
-      this.setDataLoading(false);
+      this.setSaveLoading(false);
     }
   };
 

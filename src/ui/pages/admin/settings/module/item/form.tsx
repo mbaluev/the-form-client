@@ -6,7 +6,7 @@ import { TextInputField } from '@components/fields/textInputField';
 import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
 
 export const Form = observer(() => {
-  const { data, changeField, getError, hasErrors } = useModuleItemStore();
+  const { data, changeField, getError, hasErrors, isSaveLoading } = useModuleItemStore();
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     changeField(e.target.name, e.target.value);
@@ -25,6 +25,7 @@ export const Form = observer(() => {
           onChange={changeHandler}
           error={Boolean(getError('title'))}
           helperText={getError('title')?.message}
+          disabled={isSaveLoading}
         />
       </FormField>
       <FormField title="Name">
@@ -34,6 +35,9 @@ export const Form = observer(() => {
           onChange={changeHandler}
           error={Boolean(getError('name'))}
           helperText={getError('name')?.message}
+          disabled={isSaveLoading}
+          minRows={5}
+          multiline
         />
       </FormField>
       <FormField title="Position">
@@ -43,6 +47,7 @@ export const Form = observer(() => {
           onChange={changeHandler}
           error={Boolean(getError('position'))}
           helperText={getError('position')?.message}
+          disabled={isSaveLoading}
           inputType="number"
         />
       </FormField>

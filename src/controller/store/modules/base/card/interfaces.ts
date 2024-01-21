@@ -43,6 +43,11 @@ export default interface IBaseCardStore<T extends IBaseCardType> {
   setData: (data?: T | null) => void;
   hasData: boolean;
 
+  // ---- save
+
+  isSaveLoading: boolean;
+  setSaveLoading: (value: boolean) => void;
+
   // --- filter
 
   filter?: string;

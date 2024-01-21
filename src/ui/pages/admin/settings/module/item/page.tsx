@@ -7,11 +7,11 @@ import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
 import NoData from '@components/noData';
 import { Panel } from '@ui/layout/page/panel';
 import { useRouter } from 'next/router';
-import { SeparatorBase } from '@ui/layout/card/separator';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
 import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
 import { SubTitle } from '@ui/pages/admin/settings/module/item/subtitle';
 import { Tabs } from '@ui/pages/admin/settings/module/item/tabs';
+import { Separator } from '@ui/pages/admin/settings/module/item/separator';
 
 export const PageModule = observer(() => {
   const { data, isDataLoading } = useModuleItemStore();
@@ -35,7 +35,7 @@ export const PageModule = observer(() => {
       title={<Title />}
       quick={<Quick />}
       subtitle={<SubTitle />}
-      separator={isCreate && <SeparatorBase />}
+      separator={<Separator />}
     >
       {isCreate ? <Details /> : <Tabs />}
     </PageContent>

@@ -9,11 +9,10 @@ import { useModuleListStore } from '@store/modules/entities/module/list/useModul
 import { SelectChangeEvent, Skeleton } from '@mui/material';
 
 export const Form = observer(() => {
-  const { data, changeField, getError, hasErrors } = useBlockItemStore();
+  const { data, changeField, getError, hasErrors, isSaveLoading } = useBlockItemStore();
   const { data: modules, isLoading: loadingModules } = useModuleListStore();
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
     changeField(e.target.name, e.target.value);
   };
   const changeSelectHandler = (e: SelectChangeEvent<unknown>) => {
@@ -43,7 +42,7 @@ export const Form = observer(() => {
             onChange={changeSelectHandler}
             error={Boolean(getError('moduleId'))}
             helperText={getError('moduleId')?.message}
-            required
+            disabled={isSaveLoading}
           />
         )}
       </FormField>
@@ -54,7 +53,7 @@ export const Form = observer(() => {
           onChange={changeHandler}
           error={Boolean(getError('title'))}
           helperText={getError('title')?.message}
-          required
+          disabled={isSaveLoading}
         />
       </FormField>
       <FormField title="Name">
@@ -64,7 +63,7 @@ export const Form = observer(() => {
           onChange={changeHandler}
           error={Boolean(getError('name'))}
           helperText={getError('name')?.message}
-          required
+          disabled={isSaveLoading}
         />
       </FormField>
       <FormField title="Position">
@@ -74,8 +73,8 @@ export const Form = observer(() => {
           onChange={changeHandler}
           error={Boolean(getError('position'))}
           helperText={getError('position')?.message}
+          disabled={isSaveLoading}
           inputType="number"
-          required
         />
       </FormField>
     </FormSection>
