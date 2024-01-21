@@ -1,7 +1,6 @@
 import { PageContent } from '@ui/layout/page/pageContent';
 import { Title } from '@ui/pages/admin/settings/user/item/title';
 import { Quick } from '@ui/pages/admin/settings/user/item/quick';
-import { Content } from '@ui/pages/admin/settings/user/item/content';
 import { observer } from 'mobx-react';
 import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
@@ -13,6 +12,7 @@ import { SubTitle } from '@ui/pages/admin/settings/user/item/subtitle';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { IUserDTO } from '@model/entities/user';
+import { Form } from '@ui/pages/admin/settings/user/item/form';
 
 export const PageUser = observer(() => {
   const { isDataLoading } = useUserItemStore();
@@ -31,7 +31,7 @@ export const PageUser = observer(() => {
       </Panel>
     );
   }
-  if (!hasData && !isCreate) {
+  if (!isCreate && !hasData) {
     return (
       <Panel sx={{ pt: 20 }}>
         <NoData icon={<SearchOffIcon />} message="No content. Please select item" />
@@ -46,7 +46,7 @@ export const PageUser = observer(() => {
       quick={<Quick />}
       separator={<SeparatorBase />}
     >
-      <Content />
+      <Form />
     </PageContent>
   );
 });
