@@ -3,11 +3,11 @@ export interface IUserDTO {
   firstname: string;
   lastname: string;
   username: string;
-  password?: string;
-  salt?: string;
-  active?: boolean;
-  paid?: boolean;
-  admin?: boolean;
+  password?: string | null;
+  salt?: string | null;
+  active?: boolean | null;
+  paid?: boolean | null;
+  admin?: boolean | null;
   createdAt: string;
   updatedAt: string;
 }

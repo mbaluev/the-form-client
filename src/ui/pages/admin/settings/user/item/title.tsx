@@ -5,10 +5,15 @@ import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemS
 import { observer } from 'mobx-react';
 import { Skeleton } from '@mui/material';
 import { PageIcon } from '@ui/layout/page/pageIcon';
+import { useFormContext, useWatch } from 'react-hook-form';
+import { IUserDTO } from '@model/entities/user';
 
 export const Title = observer(() => {
-  const { data, isDataLoading, hasChanges, hasData } = useUserItemStore();
-  const displayName = data?.username || 'New user';
+  const { isDataLoading, hasChanges, hasData } = useUserItemStore();
+
+  const { control } = useFormContext<IUserDTO>();
+  const username = useWatch({ control, name: 'username' }) || 'New user';
+
   return (
     <Stack direction="row" spacing={2}>
       <PageIcon>
@@ -18,7 +23,7 @@ export const Title = observer(() => {
         <Skeleton width={100} />
       ) : (
         <Typography sx={{ fontSize: '1.3rem', fontWeight: 600, lineHeight: '24px' }}>
-          {displayName}
+          {username}
         </Typography>
       )}
     </Stack>

@@ -8,6 +8,9 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { FormProvider, useForm } from 'react-hook-form';
+import { IUserDTO } from '@model/entities/user';
+import { DEFAULT_USER } from '@model/entities/user/default';
 
 const User = (props: any) => {
   const router = useRouter();
@@ -26,17 +29,24 @@ const User = (props: any) => {
     },
   ];
 
-  const { getData, setData } = useUserItemStore();
+  const { getData, setData, data } = useUserItemStore();
   useEffect(() => {
     if (router.query.id) getData(router.query.id as string);
     return () => setData();
   }, [router.query.id]);
 
+  const methods = useForm<IUserDTO>({ mode: 'all' });
+  useEffect(() => {
+    methods.reset(data || DEFAULT_USER);
+  }, [data]);
+
   return (
     <MasterAuth>
-      <Page {...props} breadCrumbs={breadCrumbs} right={<PageUser />}>
-        <PageUsers />
-      </Page>
+      <FormProvider {...methods}>
+        <Page {...props} breadCrumbs={breadCrumbs} right={<PageUser />}>
+          <PageUsers />
+        </Page>
+      </FormProvider>
     </MasterAuth>
   );
 };
