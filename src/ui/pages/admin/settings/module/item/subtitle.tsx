@@ -1,24 +1,28 @@
-import { Stack, useTheme } from '@mui/material';
+import { Chip, Stack, useTheme } from '@mui/material';
 import { observer } from 'mobx-react';
 import Typography from '@mui/material/Typography';
-import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
+import { useFormContext, useWatch } from 'react-hook-form';
+import { IModuleDTO } from '@model/entities/module';
 
 export const SubTitle = observer(() => {
-  const { data } = useModuleItemStore();
-  const displayName = data?.name || '...';
   const theme = useTheme();
-  const grey = theme.palette.fGrey[100];
+  const { control } = useFormContext<IModuleDTO>();
+  const name = useWatch({ control, name: 'title' });
   return (
     <Stack direction="row" spacing={2}>
-      <Typography
-        textOverflow="ellipsis"
-        whiteSpace="nowrap"
-        overflow="hidden"
-        fontWeight={600}
-        color={grey}
-      >
-        {displayName}
-      </Typography>
+      {name ? (
+        <Typography
+          textOverflow="ellipsis"
+          whiteSpace="nowrap"
+          overflow="hidden"
+          fontWeight={600}
+          color={theme.palette.fGrey[100]}
+        >
+          {name}
+        </Typography>
+      ) : (
+        <Chip label="new" color="secondary" size="small" />
+      )}
     </Stack>
   );
 });

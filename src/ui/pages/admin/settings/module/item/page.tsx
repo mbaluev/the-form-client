@@ -18,18 +18,20 @@ export const PageModule = observer(() => {
   const router = useRouter();
   const id = router.query.slug?.[0];
   const isCreate = id === 'create';
-  if (isDataLoading)
+  if (isDataLoading) {
     return (
       <Panel sx={{ p: 3 }}>
         <TabSkeleton />
       </Panel>
     );
-  if (!data && !isCreate)
+  }
+  if (!data && !isCreate) {
     return (
       <Panel sx={{ pt: 20 }}>
         <NoData icon={<SearchOffIcon />} message="No content. Please select item" />
       </Panel>
     );
+  }
   return (
     <PageContent
       title={<Title />}

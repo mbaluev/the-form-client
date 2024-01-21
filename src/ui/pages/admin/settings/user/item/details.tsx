@@ -1,4 +1,4 @@
-import { Form } from '@ui/pages/admin/settings/module/item/form';
+import { Form } from '@ui/pages/admin/settings/user/item/form';
 import { Box } from '@mui/material';
 
 export const Details = () => {

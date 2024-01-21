@@ -38,13 +38,13 @@ export class ModuleItemStore extends BaseCardStore<IModuleDTO> implements IModul
     }
   };
 
-  saveData = async () => {
+  saveData = async (data?: IModuleDTO) => {
     this.setSaveLoading(true);
     try {
-      if (this.data && !this.hasErrors) {
-        const data = await this.moduleService.saveModule(this.data);
+      if (data) {
+        const res = await this.moduleService.saveModule(data);
         await this.moduleListStore.getData();
-        return data;
+        return res;
       }
     } catch (err) {
     } finally {

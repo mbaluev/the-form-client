@@ -5,12 +5,11 @@ import { useModuleItemStore } from '@store/modules/entities/module/item/useModul
 import { ProgressBase } from '@ui/layout/card/progress';
 
 export const Separator = observer(() => {
-  const { isSaveLoading, isDeleteLoading } = useModuleItemStore();
+  const { isSaveLoading } = useModuleItemStore();
   const router = useRouter();
   const id = router.query.slug?.[0];
   const isCreate = id === 'create';
-
   if (!isCreate) return null;
-  if (isSaveLoading || isDeleteLoading) return <ProgressBase />;
+  if (isSaveLoading) return <ProgressBase />;
   return <SeparatorBase />;
 });
