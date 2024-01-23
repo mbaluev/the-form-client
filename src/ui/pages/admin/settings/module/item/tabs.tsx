@@ -7,10 +7,11 @@ import { useModuleItemStore } from '@store/modules/entities/module/item/useModul
 import { observer } from 'mobx-react';
 
 export const Tabs = observer(() => {
+  const { isSaveLoading } = useModuleItemStore();
+
   const router = useRouter();
   const id = router.query.slug?.[0] as string;
   const active = router.query.slug?.[1] as string;
-  const { isSaveLoading } = useModuleItemStore();
 
   const tabs = [
     {
@@ -21,7 +22,7 @@ export const Tabs = observer(() => {
     {
       key: ROUTES.ADMIN_SETTINGS_MODULE.tabs.keys.blocks,
       label: ROUTES.ADMIN_SETTINGS_MODULE.tabs.labels.blocks,
-      component: <BlocksList query={{ moduleId: id }} />,
+      component: <BlocksList />,
     },
   ];
   const handleChange = async (value: string) => {

@@ -12,6 +12,7 @@ import { useModuleItemStore } from '@store/modules/entities/module/item/useModul
 import { useFormContext } from 'react-hook-form';
 import { DialogDiscard } from '@ui/dialogs/dialogDiscard';
 import { IModuleDTO } from '@model/entities/module';
+import { useModuleListStore } from '@store/modules/entities/module/list/useModuleListStore';
 
 export const Quick = observer(() => {
   const {
@@ -24,10 +25,12 @@ export const Quick = observer(() => {
     deleteClose,
     deleteSubmit,
   } = useModuleItemStore();
+  const { getData: getModules } = useModuleListStore();
 
   const router = useRouter();
   const id = router.query.slug?.[0] as string;
-  const isCreate = id === 'create';
+  const isCreate = router.pathname === ROUTES.ADMIN_SETTINGS_MODULE_CREATE.path;
+  const isEdit = router.pathname === ROUTES.ADMIN_SETTINGS_MODULE.path;
 
   const {
     handleSubmit,
@@ -40,14 +43,19 @@ export const Quick = observer(() => {
   const [isOpenDiscard, setIsOpenDiscard] = useState<boolean>(false);
   const handleSave = handleSubmit(async (data) => {
     const res = await saveData(data);
-    if (res) reset(res);
-    if (res && isCreate) {
-      setTimeout(() => {
-        router.push({
-          pathname: ROUTES.ADMIN_SETTINGS_MODULE.path,
-          query: { slug: [res.id] },
-        });
-      });
+    if (res) {
+      reset(res);
+      if (isCreate) {
+        setTimeout(() => {
+          router.push({
+            pathname: ROUTES.ADMIN_SETTINGS_MODULE.path,
+            query: { slug: [res.id] },
+          });
+        }, 100);
+      }
+      if (isEdit) {
+        await getModules();
+      }
     }
   });
   const handleDiscard = async () => {
@@ -61,7 +69,7 @@ export const Quick = observer(() => {
   // handlers
   const handleDelete = async () => {
     addDeleteId(id);
-    deleteOpen();
+    await deleteOpen();
   };
   const handleClose = async () => {
     await router.push({
@@ -94,8 +102,8 @@ export const Quick = observer(() => {
           isLoading={isDeleteLoading}
           onClose={deleteClose}
           onSubmit={handleDeleteSubmit}
-          title="Delete user"
-          message="Are you sure you want to delete user?"
+          title="Delete module"
+          message="Are you sure you want to delete module?"
         />
       </Stack>
       <DialogDiscard open={isOpenDiscard} onClose={handleDiscardClose} onDiscard={handleDiscard} />

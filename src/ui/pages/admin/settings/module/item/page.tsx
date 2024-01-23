@@ -12,32 +12,29 @@ import { useModuleItemStore } from '@store/modules/entities/module/item/useModul
 import { SubTitle } from '@ui/pages/admin/settings/module/item/subtitle';
 import { Tabs } from '@ui/pages/admin/settings/module/item/tabs';
 import { Separator } from '@ui/pages/admin/settings/module/item/separator';
-import { useFormContext, useWatch } from 'react-hook-form';
-import { IUserDTO } from '@model/entities/user';
+import { ROUTES } from '@settings/routes';
 
 export const PageModule = observer(() => {
-  const { isDataLoading } = useModuleItemStore();
+  const { data, isDataLoading } = useModuleItemStore();
 
   const router = useRouter();
-  const id = router.query.slug?.[0] as string;
-  const isCreate = id === 'create';
+  const isCreate = router.pathname === ROUTES.ADMIN_SETTINGS_MODULE_CREATE.path;
 
-  const { control } = useFormContext<IUserDTO>();
-  const hasData = useWatch({ control, name: 'id' });
-
-  if (isDataLoading) {
-    return (
-      <Panel sx={{ p: 3 }}>
-        <TabSkeleton />
-      </Panel>
-    );
-  }
-  if (!isCreate && !hasData) {
-    return (
-      <Panel sx={{ pt: 20 }}>
-        <NoData icon={<SearchOffIcon />} message="No content. Please select item" />
-      </Panel>
-    );
+  if (!isCreate) {
+    if (isDataLoading) {
+      return (
+        <Panel sx={{ p: 3 }}>
+          <TabSkeleton />
+        </Panel>
+      );
+    }
+    if (!data) {
+      return (
+        <Panel sx={{ pt: 20 }}>
+          <NoData icon={<SearchOffIcon />} message="No content. Please select item" />
+        </Panel>
+      );
+    }
   }
 
   return (

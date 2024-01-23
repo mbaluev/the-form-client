@@ -6,10 +6,11 @@ import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockIt
 import { observer } from 'mobx-react';
 
 export const Tabs = observer(() => {
+  const { isSaveLoading } = useBlockItemStore();
+
   const router = useRouter();
   const id = router.query.slug?.[0] as string;
   const active = router.query.slug?.[1] as string;
-  const { isSaveLoading } = useBlockItemStore();
 
   const tabs = [
     {

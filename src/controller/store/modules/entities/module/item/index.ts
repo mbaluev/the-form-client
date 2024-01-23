@@ -2,17 +2,13 @@ import { inject, injectable } from 'inversify';
 import { SERVICE } from '@service/ids';
 import { ParsedUrlQuery } from 'querystring';
 import { BaseCardStore } from '@store/modules/base/card';
-import { STORE } from '@store/ids';
 import { IModuleDTO } from '@model/entities/module';
 import type IModuleItemStore from '@store/modules/entities/module/item/interface';
 import type IModuleService from '@service/modules/entities/module/interface';
-import type IModuleListStore from '@store/modules/entities/module/list/interface';
 
 @injectable()
 export class ModuleItemStore extends BaseCardStore<IModuleDTO> implements IModuleItemStore {
   @inject(SERVICE.Module) private moduleService!: IModuleService;
-
-  @inject(STORE.ModuleList) protected moduleListStore!: IModuleListStore;
 
   // --- override
 
@@ -43,7 +39,7 @@ export class ModuleItemStore extends BaseCardStore<IModuleDTO> implements IModul
     try {
       if (data) {
         const res = await this.moduleService.saveModule(data);
-        await this.moduleListStore.getData();
+        this.setData(res);
         return res;
       }
     } catch (err) {
@@ -57,7 +53,6 @@ export class ModuleItemStore extends BaseCardStore<IModuleDTO> implements IModul
     try {
       if (this.deleteIds) {
         await this.moduleService.deleteModules(this.deleteIds);
-        await this.moduleListStore.getData();
         await this.clearDelete();
         await this.clearData();
         return true;

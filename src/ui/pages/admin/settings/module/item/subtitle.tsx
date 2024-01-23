@@ -7,7 +7,7 @@ import { IModuleDTO } from '@model/entities/module';
 export const SubTitle = observer(() => {
   const theme = useTheme();
   const { control } = useFormContext<IModuleDTO>();
-  const name = useWatch({ control, name: 'title' });
+  const name = useWatch({ control, name: 'name' });
   return (
     <Stack direction="row" spacing={2}>
       {name ? (

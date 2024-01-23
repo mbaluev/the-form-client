@@ -12,6 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
+import { useUserListStore } from '@store/modules/entities/user/list/useUserListStore';
 
 export const Quick = observer(() => {
   const {
@@ -24,14 +25,16 @@ export const Quick = observer(() => {
     deleteClose,
     deleteSubmit,
   } = useUserItemStore();
+  const { getData: getUsers } = useUserListStore();
 
   const router = useRouter();
   const id = router.query.slug?.[0] as string;
-  const isCreate = id === 'create';
+  const isCreate = router.pathname === ROUTES.ADMIN_SETTINGS_USER_CREATE.path;
+  const isEdit = router.pathname === ROUTES.ADMIN_SETTINGS_USER.path;
 
   const {
     handleSubmit,
-    formState: { isDirty, isValid },
+    formState: { isDirty },
     reset,
   } = useFormContext<IUserDTO>();
 
@@ -40,14 +43,19 @@ export const Quick = observer(() => {
   const [isOpenDiscard, setIsOpenDiscard] = useState<boolean>(false);
   const handleSave = handleSubmit(async (data) => {
     const res = await saveData(data);
-    if (res) reset(res);
-    if (res && isCreate) {
-      setTimeout(() => {
-        router.push({
-          pathname: ROUTES.ADMIN_SETTINGS_USER.path,
-          query: { slug: [res.id] },
+    if (res) {
+      reset(res);
+      if (isCreate) {
+        setTimeout(() => {
+          router.push({
+            pathname: ROUTES.ADMIN_SETTINGS_USER.path,
+            query: { slug: [res.id] },
+          });
         });
-      });
+      }
+      if (isEdit) {
+        await getUsers();
+      }
     }
   });
   const handleDiscard = async () => {
@@ -61,7 +69,7 @@ export const Quick = observer(() => {
   // handlers
   const handleDelete = async () => {
     addDeleteId(id);
-    deleteOpen();
+    await deleteOpen();
   };
   const handleClose = async () => {
     await router.push({
@@ -80,11 +88,7 @@ export const Quick = observer(() => {
   return (
     <Fragment>
       <Stack direction="row" spacing={2}>
-        <IconButton
-          color="primary"
-          onClick={handleSave}
-          disabled={isSaveLoading || !isDirty || !isValid}
-        >
+        <IconButton color="primary" onClick={handleSave} disabled={isSaveLoading || !isDirty}>
           <SaveIcon />
         </IconButton>
         <IconButton color="primary" onClick={handleDelete} disabled={isSaveLoading || isCreate}>

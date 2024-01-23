@@ -13,6 +13,7 @@ export const ModulesList = observer(() => {
   const dataModel = useModuleListStore();
   const router = useRouter();
   const theme = useTheme();
+
   const handleClick = async (id: string) => {
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_MODULE.path,
@@ -21,10 +22,10 @@ export const ModulesList = observer(() => {
   };
   const handleCreate = async () => {
     await router.push({
-      pathname: ROUTES.ADMIN_SETTINGS_MODULE.path,
-      query: { slug: [ROUTES.ADMIN_SETTINGS_MODULE.tabs.keys.create] },
+      pathname: ROUTES.ADMIN_SETTINGS_MODULE_CREATE.path,
     });
   };
+
   return (
     <Stack spacing={2} height="100%">
       <Stack spacing={2}>

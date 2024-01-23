@@ -2,27 +2,14 @@ import { TBreadCrumb } from '@ui/layout/page/breadCrumbs';
 import { ROUTES } from '@settings/routes';
 import { MasterAuth } from '@ui/masters/masterAuth';
 import { Page } from '@ui/layout/page/page';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Skeleton } from '@mui/material';
-import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
-import { IModuleDTO } from '@model/entities/module';
 import { DEFAULT_MODULE } from '@model/entities/module/default';
+import { IModuleDTO } from '@model/entities/module';
 import { PageModule } from '@ui/pages/admin/settings/module/item/page';
 import { PageModules } from '@ui/pages/admin/settings/module/index/page';
 
-const Module = (props: any) => {
-  const router = useRouter();
-  const id = router.query.slug?.[0] as string;
-  const {
-    getData: getModule,
-    setData: setModule,
-    data: module,
-    isDataLoading: loadingModule,
-  } = useModuleItemStore();
-
+const ModuleCreate = (props: any) => {
   const breadCrumbs: TBreadCrumb[] = [
     {
       label: ROUTES.HOME.label,
@@ -33,26 +20,11 @@ const Module = (props: any) => {
       url: { pathname: ROUTES.ADMIN_SETTINGS_MODULES.path },
     },
     {
-      label: loadingModule ? (
-        <Skeleton width={100} />
-      ) : module ? (
-        module.title
-      ) : (
-        ROUTES.ADMIN_SETTINGS_MODULE.label
-      ),
-      url: { pathname: ROUTES.ADMIN_SETTINGS_MODULE.path, query: router.query },
+      label: ROUTES.ADMIN_SETTINGS_MODULE_CREATE.label,
+      url: { pathname: ROUTES.ADMIN_SETTINGS_MODULE_CREATE.path },
     },
   ];
-
-  useEffect(() => {
-    if (id) getModule(id);
-    return () => setModule();
-  }, [id]);
-
   const methods = useForm<IModuleDTO>({ mode: 'all', defaultValues: DEFAULT_MODULE });
-  useEffect(() => {
-    methods.reset(module || DEFAULT_MODULE);
-  }, [module]);
 
   return (
     <MasterAuth>
@@ -65,4 +37,4 @@ const Module = (props: any) => {
   );
 };
 
-export default observer(Module);
+export default observer(ModuleCreate);

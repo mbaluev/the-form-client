@@ -6,13 +6,13 @@ import { Password } from '@ui/fields/password';
 import { Checkbox } from '@ui/fields/checkbox';
 import { observer } from 'mobx-react';
 import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { ROUTES } from '@settings/routes';
 
 export const Form = observer(() => {
   const { isSaveLoading: disabled } = useUserItemStore();
 
   const router = useRouter();
-  const id = router.query.slug?.[0] as string;
-  const isCreate = id === 'create';
+  const isCreate = router.pathname === ROUTES.ADMIN_SETTINGS_USER_CREATE.path;
   const required = { required: 'required' };
 
   return (

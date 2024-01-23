@@ -9,6 +9,7 @@ import { Select } from '@ui/fields/select';
 export const Form = observer(() => {
   const { isSaveLoading: disabled } = useBlockItemStore();
   const { dataItems: modules } = useModuleListStore();
+
   const required = { required: 'required' };
   return (
     <FormSection>

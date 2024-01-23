@@ -5,7 +5,7 @@ import { action, computed, makeObservable, observable } from 'mobx';
 import { ParsedUrlQuery } from 'querystring';
 import { BaseCardStore } from '@store/modules/base/card';
 import { STORE } from '@store/ids';
-import { guid } from '@utils/guid';
+import { v4 } from 'uuid';
 import type IQuestionStore from '@store/modules/entities/question/interface';
 import type IQuestionService from '@service/modules/entities/question/interface';
 import type IBlockStore from '@store/modules/entities/block/_/interface';
@@ -52,7 +52,7 @@ export class QuestionStore extends BaseCardStore<IQuestionDTO> implements IQuest
     if (this.option) {
       const data = this.modalData;
       const index = data?.questionOptions ? data?.questionOptions.length : 0;
-      const value = { id: guid(), title: this.option };
+      const value = { id: v4(), title: this.option };
       this.changeModalField(`questionOptions.${index}`, value);
       this.validateModal();
       this.setOption();

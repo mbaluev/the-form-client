@@ -9,34 +9,31 @@ import { Panel } from '@ui/layout/page/panel';
 import { useRouter } from 'next/router';
 import { SubTitle } from '@ui/pages/admin/settings/user/item/subtitle';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
-import { useFormContext, useWatch } from 'react-hook-form';
-import { IUserDTO } from '@model/entities/user';
 import { Separator } from '@ui/pages/admin/settings/user/item/separator';
 import { Details } from '@ui/pages/admin/settings/user/item/details';
+import { ROUTES } from '@settings/routes';
 
 export const PageUser = observer(() => {
-  const { isDataLoading } = useUserItemStore();
+  const { data, isDataLoading } = useUserItemStore();
 
   const router = useRouter();
-  const id = router.query.slug?.[0] as string;
-  const isCreate = id === 'create';
+  const isCreate = router.pathname === ROUTES.ADMIN_SETTINGS_USER_CREATE.path;
 
-  const { control } = useFormContext<IUserDTO>();
-  const hasData = useWatch({ control, name: 'id' });
-
-  if (isDataLoading) {
-    return (
-      <Panel sx={{ p: 3 }}>
-        <TabSkeleton />
-      </Panel>
-    );
-  }
-  if (!isCreate && !hasData) {
-    return (
-      <Panel sx={{ pt: 20 }}>
-        <NoData icon={<SearchOffIcon />} message="No content. Please select item" />
-      </Panel>
-    );
+  if (!isCreate) {
+    if (isDataLoading) {
+      return (
+        <Panel sx={{ p: 3 }}>
+          <TabSkeleton />
+        </Panel>
+      );
+    }
+    if (!data) {
+      return (
+        <Panel sx={{ pt: 20 }}>
+          <NoData icon={<SearchOffIcon />} message="No content. Please select item" />
+        </Panel>
+      );
+    }
   }
 
   return (

@@ -2,12 +2,12 @@ import { Chip, Stack, useTheme } from '@mui/material';
 import { observer } from 'mobx-react';
 import Typography from '@mui/material/Typography';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { IModuleDTO } from '@model/entities/module';
+import { IBlockDTO } from '@model/entities/block';
 
 export const SubTitle = observer(() => {
   const theme = useTheme();
-  const { control } = useFormContext<IModuleDTO>();
-  const name = useWatch({ control, name: 'title' });
+  const { control } = useFormContext<IBlockDTO>();
+  const name = useWatch({ control, name: 'name' });
   return (
     <Stack direction="row" spacing={2}>
       {name ? (

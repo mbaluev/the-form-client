@@ -3,16 +3,12 @@ import { SERVICE } from '@service/ids';
 import { IUserDTO } from '@model/entities/user';
 import { ParsedUrlQuery } from 'querystring';
 import { BaseCardStore } from '@store/modules/base/card';
-import { STORE } from '@store/ids';
 import type IUserItemStore from '@store/modules/entities/user/item/interface';
-import type IUserListStore from '@store/modules/entities/user/list/interface';
 import type IUserService from '@service/modules/entities/user/interface';
 
 @injectable()
 export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemStore {
   @inject(SERVICE.User) protected userService!: IUserService;
-
-  @inject(STORE.UserList) protected userListStore!: IUserListStore;
 
   // --- override
 
@@ -43,7 +39,7 @@ export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemS
     try {
       if (data) {
         const res = await this.userService.saveUser(data);
-        await this.userListStore.getData();
+        this.setData(res);
         return res;
       }
     } catch (err) {
@@ -57,7 +53,6 @@ export class UserItemStore extends BaseCardStore<IUserDTO> implements IUserItemS
     try {
       if (this.deleteIds) {
         await this.userService.deleteUsers(this.deleteIds);
-        await this.userListStore.getData();
         await this.clearDelete();
         await this.clearData();
         return true;

@@ -12,6 +12,7 @@ import { useFormContext } from 'react-hook-form';
 import { DialogDiscard } from '@ui/dialogs/dialogDiscard';
 import { IBlockDTO } from '@model/entities/block';
 import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
+import { useBlockListStore } from '@store/modules/entities/block/list/useBlockListStore';
 
 export const Quick = observer(() => {
   const {
@@ -24,10 +25,12 @@ export const Quick = observer(() => {
     deleteClose,
     deleteSubmit,
   } = useBlockItemStore();
+  const { getData: getBlocks } = useBlockListStore();
 
   const router = useRouter();
   const id = router.query.slug?.[0] as string;
-  const isCreate = id === 'create';
+  const isCreate = router.pathname === ROUTES.ADMIN_SETTINGS_BLOCK_CREATE.path;
+  const isEdit = router.pathname === ROUTES.ADMIN_SETTINGS_BLOCK.path;
 
   const {
     handleSubmit,
@@ -40,14 +43,19 @@ export const Quick = observer(() => {
   const [isOpenDiscard, setIsOpenDiscard] = useState<boolean>(false);
   const handleSave = handleSubmit(async (data) => {
     const res = await saveData(data);
-    if (res) reset(res);
-    if (res && isCreate) {
-      setTimeout(() => {
-        router.push({
-          pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
-          query: { slug: [res.id] },
-        });
-      });
+    if (res) {
+      reset(res);
+      if (isCreate) {
+        setTimeout(() => {
+          router.push({
+            pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
+            query: { slug: [res.id] },
+          });
+        }, 100);
+      }
+      if (isEdit) {
+        await getBlocks();
+      }
     }
   });
   const handleDiscard = async () => {
@@ -61,7 +69,7 @@ export const Quick = observer(() => {
   // handlers
   const handleDelete = async () => {
     addDeleteId(id);
-    deleteOpen();
+    await deleteOpen();
   };
   const handleClose = async () => {
     await router.push({
@@ -94,8 +102,8 @@ export const Quick = observer(() => {
           isLoading={isDeleteLoading}
           onClose={deleteClose}
           onSubmit={handleDeleteSubmit}
-          title="Delete user"
-          message="Are you sure you want to delete user?"
+          title="Delete block"
+          message="Are you sure you want to delete block?"
         />
       </Stack>
       <DialogDiscard open={isOpenDiscard} onClose={handleDiscardClose} onDiscard={handleDiscard} />
