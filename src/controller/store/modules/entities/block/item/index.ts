@@ -2,17 +2,13 @@ import { inject, injectable } from 'inversify';
 import { SERVICE } from '@service/ids';
 import { ParsedUrlQuery } from 'querystring';
 import { BaseCardStore } from '@store/modules/base/card';
-import { STORE } from '@store/ids';
 import { IBlockDTO } from '@model/entities/block';
 import type IBlockItemStore from '@store/modules/entities/block/item/interface';
 import type IBlockService from '@service/modules/entities/block/interface';
-import type IBlockListStore from '@store/modules/entities/block/list/interface';
 
 @injectable()
 export class BlockItemStore extends BaseCardStore<IBlockDTO> implements IBlockItemStore {
   @inject(SERVICE.Block) private blockService!: IBlockService;
-
-  @inject(STORE.BlockList) protected blockListStore!: IBlockListStore;
 
   // --- override
 
@@ -43,7 +39,7 @@ export class BlockItemStore extends BaseCardStore<IBlockDTO> implements IBlockIt
     try {
       if (data) {
         const res = await this.blockService.saveBlock(data);
-        await this.blockListStore.getData();
+        this.setData(res);
         return res;
       }
     } catch (err) {
@@ -57,7 +53,6 @@ export class BlockItemStore extends BaseCardStore<IBlockDTO> implements IBlockIt
     try {
       if (this.deleteIds) {
         await this.blockService.deleteBlocks(this.deleteIds);
-        await this.blockListStore.getData();
         await this.clearDelete();
         await this.clearData();
         return true;
