@@ -1,4 +1,4 @@
-import { Tabs as MuiTabs } from '@theme/tabs';
+import { ITabDTO, Tabs as MuiTabs } from '@theme/tabs';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
 import { Details } from '@ui/pages/admin/settings/module/item/details';
@@ -13,16 +13,18 @@ export const Tabs = observer(() => {
   const id = router.query.slug?.[0] as string;
   const active = router.query.slug?.[1] as string;
 
-  const tabs = [
+  const tabs: ITabDTO[] = [
     {
       key: ROUTES.ADMIN_SETTINGS_MODULE.tabs.keys.details,
       label: ROUTES.ADMIN_SETTINGS_MODULE.tabs.labels.details,
       component: <Details />,
+      sxPanel: { overflow: 'auto' },
     },
     {
       key: ROUTES.ADMIN_SETTINGS_MODULE.tabs.keys.blocks,
       label: ROUTES.ADMIN_SETTINGS_MODULE.tabs.labels.blocks,
       component: <BlocksList />,
+      sxPanel: { overflow: 'hidden', pb: 0 },
     },
   ];
   const handleChange = async (value: string) => {
