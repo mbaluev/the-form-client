@@ -7,6 +7,8 @@ import { observer } from 'mobx-react';
 export const Filter = observer(() => {
   const { dataItems } = useModuleListStore();
   const dataModel = useBlockListStore();
-  const filter = <FilterSelect name="moduleId" items={dataItems} sx={{ width: '100%' }} />;
+  const filter = (
+    <FilterSelect name="moduleId" placeholder="Module" items={dataItems} sx={{ width: '100%' }} />
+  );
   return <VirtualizeFilter padding filterSearchName={dataModel.filterName} filter={filter} />;
 });
