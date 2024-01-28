@@ -47,8 +47,7 @@ export const MENU_CONFIG: IMenuItemDTO[] = [
         active: (pathname: string) => {
           return (
             pathname === ROUTES.ADMIN_SETTINGS_MODULES.path ||
-            pathname === ROUTES.ADMIN_SETTINGS_MODULE.path ||
-            pathname === ROUTES.ADMIN_SETTINGS_MODULE_BLOCK.path
+            pathname === ROUTES.ADMIN_SETTINGS_MODULE.path
           );
         },
       },

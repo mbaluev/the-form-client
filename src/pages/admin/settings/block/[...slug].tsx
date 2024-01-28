@@ -23,7 +23,7 @@ const Block = (props: any) => {
     data: block,
     isDataLoading: loadingBlock,
   } = useBlockItemStore();
-  const { getData: getModules, data: modules } = useModuleListStore();
+  const { getData: getModules, setData: setModules } = useModuleListStore();
 
   const breadCrumbs: TBreadCrumb[] = [
     {
@@ -47,7 +47,8 @@ const Block = (props: any) => {
   ];
 
   useEffect(() => {
-    if (!modules) getModules();
+    getModules();
+    return () => setModules();
   }, []);
 
   useEffect(() => {

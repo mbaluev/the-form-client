@@ -137,33 +137,6 @@ export const ROUTES: Record<string, any> = {
   },
   // --
 
-  ADMIN_SETTINGS_MODULE_BLOCK: {
-    name: 'admin-settings-module-block',
-    label: 'Block',
-    path: '/admin/settings/moduleBlock/[...slug]',
-    roles: [ROLES.ADMIN],
-    tabs: {
-      keys: {
-        details: 'details',
-        materials: 'materials',
-        homework: 'homework',
-        test: 'test',
-      },
-      labels: {
-        details: 'Details',
-        materials: 'Materials',
-        homework: 'Homework',
-        test: 'Test',
-      },
-    },
-  },
-  ADMIN_SETTINGS_MODULE_BLOCK_CREATE: {
-    name: 'admin-settings-module-block-create',
-    label: 'Create',
-    path: '/admin/settings/moduleBlock/create/[...slug]',
-    roles: [ROLES.ADMIN],
-  },
-
   ADMIN_PROGRESS_USERS: {
     name: 'admin-progress-users',
     label: 'Users progress',

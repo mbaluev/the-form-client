@@ -18,9 +18,7 @@ export const PageBlock = observer(() => {
   const { data, isDataLoading } = useBlockItemStore();
 
   const router = useRouter();
-  const isCreate =
-    router.pathname === ROUTES.ADMIN_SETTINGS_BLOCK_CREATE.path ||
-    router.pathname === ROUTES.ADMIN_SETTINGS_MODULE_BLOCK_CREATE.path;
+  const isCreate = router.pathname === ROUTES.ADMIN_SETTINGS_BLOCK_CREATE.path;
 
   if (!isCreate) {
     if (isDataLoading) {

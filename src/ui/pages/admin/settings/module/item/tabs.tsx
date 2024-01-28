@@ -2,9 +2,9 @@ import { ITabDTO, Tabs as MuiTabs } from '@theme/tabs';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
 import { Details } from '@ui/pages/admin/settings/module/item/details';
-import { BlocksList } from '@ui/pages/admin/settings/block/index/list';
 import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
 import { observer } from 'mobx-react';
+import { BlocksList } from '@ui/pages/admin/settings/module/item/blocks';
 
 export const Tabs = observer(() => {
   const { isSaveLoading } = useModuleItemStore();
@@ -30,7 +30,10 @@ export const Tabs = observer(() => {
   const handleChange = async (value: string) => {
     const slug = [id];
     if (value !== ROUTES.ADMIN_SETTINGS_MODULE.tabs.keys.details) slug.push(value);
-    await router.push({ pathname: ROUTES.ADMIN_SETTINGS_MODULE.path, query: { slug } });
+    await router.push({
+      pathname: ROUTES.ADMIN_SETTINGS_MODULE.path,
+      query: { ...router.query, slug },
+    });
   };
 
   return (

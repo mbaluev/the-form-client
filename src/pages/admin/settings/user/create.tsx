@@ -4,7 +4,6 @@ import { MasterAuth } from '@ui/masters/masterAuth';
 import { Page } from '@ui/layout/page/page';
 import { PageUsers } from '@ui/pages/admin/settings/user/index/page';
 import { PageUser } from '@ui/pages/admin/settings/user/item/page';
-import { observer } from 'mobx-react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { IUserDTO } from '@model/entities/user';
 import { DEFAULT_USER } from '@model/entities/user/default';
@@ -25,7 +24,6 @@ const UserCreate = (props: any) => {
     },
   ];
   const methods = useForm<IUserDTO>({ mode: 'all', defaultValues: DEFAULT_USER });
-
   return (
     <MasterAuth>
       <FormProvider {...methods}>
@@ -37,4 +35,4 @@ const UserCreate = (props: any) => {
   );
 };
 
-export default observer(UserCreate);
+export default UserCreate;

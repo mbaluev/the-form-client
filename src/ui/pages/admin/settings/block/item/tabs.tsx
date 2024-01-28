@@ -41,7 +41,10 @@ export const Tabs = observer(() => {
   const handleChange = async (value: string) => {
     const slug = [id];
     if (value !== ROUTES.ADMIN_SETTINGS_BLOCK.tabs.keys.details) slug.push(value);
-    await router.push({ pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path, query: { slug } });
+    await router.push({
+      pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
+      query: { ...router.query, slug },
+    });
   };
 
   return (

@@ -2,13 +2,17 @@ import { TBreadCrumb } from '@ui/layout/page/breadCrumbs';
 import { ROUTES } from '@settings/routes';
 import { MasterAuth } from '@ui/masters/masterAuth';
 import { Page } from '@ui/layout/page/page';
-import { PageBlocks } from '@ui/pages/admin/settings/block/index/page';
-import { PageBlock } from '@ui/pages/admin/settings/block/item/page';
 import { FormProvider, useForm } from 'react-hook-form';
 import { IBlockDTO } from '@model/entities/block';
 import { DEFAULT_BLOCK } from '@model/entities/block/default';
+import { PageBlocks } from '@ui/pages/admin/settings/block/index/page';
+import { PageBlock } from '@ui/pages/admin/settings/block/item/page';
+import { useModuleListStore } from '@store/modules/entities/module/list/useModuleListStore';
+import { useEffect } from 'react';
 
 const Blocks = (props: any) => {
+  const { getData: getModules, setData: setModules } = useModuleListStore();
+
   const breadCrumbs: TBreadCrumb[] = [
     {
       label: ROUTES.HOME.label,
@@ -19,7 +23,14 @@ const Blocks = (props: any) => {
       url: { pathname: ROUTES.ADMIN_SETTINGS_BLOCKS.path },
     },
   ];
+
+  useEffect(() => {
+    getModules();
+    return () => setModules();
+  }, []);
+
   const methods = useForm<IBlockDTO>({ mode: 'all', defaultValues: DEFAULT_BLOCK });
+
   return (
     <MasterAuth>
       <FormProvider {...methods}>

@@ -1,4 +1,4 @@
-import { CSSProperties, DependencyList, ReactElement, useEffect } from 'react';
+import { CSSProperties, ReactElement } from 'react';
 import { observer } from 'mobx-react';
 import IBaseListStore, { TListITem } from '@store/modules/base/list/interface';
 import { VirtualizeItem } from '@ui/layout/virtualize/item/item';
@@ -13,7 +13,6 @@ export interface IListBaseProps<T extends TListITem> {
 }
 
 interface IListProps<T extends TListITem> extends IListBaseProps<T> {
-  dependencies?: DependencyList;
   itemRenderer: (item: T) => ReactElement;
   avatarRenderer?: (item: T) => ReactElement;
   moreRenderer?: (item: T) => ReactElement;
@@ -22,12 +21,12 @@ interface IListProps<T extends TListITem> extends IListBaseProps<T> {
   checkbox?: boolean;
   estimateSize: number;
   query?: ParsedUrlQuery;
+  isQuery?: boolean;
 }
 
 export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
   const {
     dataModel,
-    dependencies,
     itemRenderer,
     avatarRenderer,
     moreRenderer,
@@ -35,13 +34,8 @@ export const List = observer(<T extends TListITem>(props: IListProps<T>) => {
     handleClick,
     checkbox,
     estimateSize,
-    query,
   } = props;
-  const { dataFiltered, dataLength, isLoading, getData, selectItem } = dataModel;
-
-  useEffect(() => {
-    getData(query);
-  }, dependencies || []);
+  const { dataFiltered, dataLength, isLoading, selectItem } = dataModel;
 
   return (
     <VirtualizeBlock

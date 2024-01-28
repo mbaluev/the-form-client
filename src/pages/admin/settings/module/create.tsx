@@ -2,12 +2,11 @@ import { TBreadCrumb } from '@ui/layout/page/breadCrumbs';
 import { ROUTES } from '@settings/routes';
 import { MasterAuth } from '@ui/masters/masterAuth';
 import { Page } from '@ui/layout/page/page';
-import { observer } from 'mobx-react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { DEFAULT_MODULE } from '@model/entities/module/default';
 import { IModuleDTO } from '@model/entities/module';
-import { PageModule } from '@ui/pages/admin/settings/module/item/page';
 import { PageModules } from '@ui/pages/admin/settings/module/index/page';
+import { PageModule } from '@ui/pages/admin/settings/module/item/page';
 
 const ModuleCreate = (props: any) => {
   const breadCrumbs: TBreadCrumb[] = [
@@ -25,7 +24,6 @@ const ModuleCreate = (props: any) => {
     },
   ];
   const methods = useForm<IModuleDTO>({ mode: 'all', defaultValues: DEFAULT_MODULE });
-
   return (
     <MasterAuth>
       <FormProvider {...methods}>
@@ -37,4 +35,4 @@ const ModuleCreate = (props: any) => {
   );
 };
 
-export default observer(ModuleCreate);
+export default ModuleCreate;

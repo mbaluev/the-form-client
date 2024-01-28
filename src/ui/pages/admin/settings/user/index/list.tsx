@@ -8,6 +8,7 @@ import { IUserDTO } from '@model/entities/user';
 import { Item } from '@ui/pages/admin/settings/user/index/item';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@settings/routes';
+import { useEffect } from 'react';
 
 export const UsersList = observer(() => {
   const dataModel = useUserListStore();
@@ -25,6 +26,10 @@ export const UsersList = observer(() => {
       pathname: ROUTES.ADMIN_SETTINGS_USER_CREATE.path,
     });
   };
+
+  useEffect(() => {
+    dataModel.getData();
+  }, []);
 
   return (
     <Stack spacing={2} height="100%">

@@ -5,10 +5,8 @@ import { useFilterStore } from '@store/modules/common/filter/useFilterStore';
 import { SelectChangeEvent } from '@mui/material';
 import { SelectField } from 'core/components/fields/selectField';
 import { SelectFieldProps } from '@components/fields/selectField/types';
-import { useTheme } from '@mui/material';
 
 export const FilterSelect = observer((props: SelectFieldProps) => {
-  const theme = useTheme();
   const { name = '' } = props;
   const { filters, setFilter } = useFilterStore();
   const [state, setState] = useState<unknown>(filters[name]);
@@ -22,20 +20,5 @@ export const FilterSelect = observer((props: SelectFieldProps) => {
 
   useEffect(() => setState(filters[name] || ''), [filters[name]]);
 
-  const sxSelected = {
-    '& .MuiOutlinedInput-notchedOutline, & .MuiDivider-root': {
-      borderColor: theme.palette.primary.main,
-    },
-  };
-
-  return (
-    <SelectField
-      value={state}
-      onChange={onChange}
-      sx={state ? sxSelected : undefined}
-      highlightInput
-      highlightValue
-      {...props}
-    />
-  );
+  return <SelectField value={state} onChange={onChange} highlightInput highlightValue {...props} />;
 });
