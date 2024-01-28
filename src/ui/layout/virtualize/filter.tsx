@@ -12,7 +12,6 @@ interface IProps {
 
 export const VirtualizeFilter = observer((props: IProps) => {
   const { filter, filterSearchName, padding } = props;
-
   return (
     <Stack direction="row" spacing={2} sx={padding ? { pl: 3, pr: 3 } : undefined}>
       {filter && <Box sx={{ flexBasis: '50%' }}>{filter}</Box>}
