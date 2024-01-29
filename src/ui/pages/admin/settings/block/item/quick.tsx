@@ -13,6 +13,7 @@ import { DialogDiscard } from '@ui/dialogs/dialogDiscard';
 import { IBlockDTO } from '@model/entities/block';
 import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
 import { useBlockListStore } from '@store/modules/entities/block/list/useBlockListStore';
+import { ParsedUrlQuery } from 'querystring';
 
 export const Quick = observer(() => {
   const {
@@ -48,9 +49,11 @@ export const Quick = observer(() => {
       reset(res);
       if (isCreate) {
         setTimeout(() => {
+          const query: ParsedUrlQuery = { slug: [id] };
+          if (moduleId) query.moduleId = moduleId;
           router.push({
             pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
-            query: { slug: [res.id], moduleId },
+            query,
           });
         }, 100);
       }
@@ -73,17 +76,21 @@ export const Quick = observer(() => {
     await deleteOpen();
   };
   const handleClose = async () => {
+    const query: ParsedUrlQuery = {};
+    if (moduleId) query.moduleId = moduleId;
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_BLOCKS.path,
-      query: { moduleId },
+      query,
     });
   };
   const handleDeleteSubmit = async () => {
     const result = await deleteSubmit();
     if (result) {
+      const query: ParsedUrlQuery = {};
+      if (moduleId) query.moduleId = moduleId;
       await router.push({
         pathname: ROUTES.ADMIN_SETTINGS_BLOCKS.path,
-        query: { moduleId },
+        query,
       });
     }
   };
