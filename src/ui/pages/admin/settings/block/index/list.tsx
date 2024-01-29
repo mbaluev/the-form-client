@@ -9,39 +9,40 @@ import { useBlockListStore } from '@store/modules/entities/block/list/useBlockLi
 import { Item } from '@ui/pages/admin/settings/block/index/item';
 import { Filter } from '@ui/pages/admin/settings/block/index/filter';
 import { useEffect } from 'react';
+import { ParsedUrlQuery } from 'querystring';
 
 export const BlocksList = observer(() => {
   const dataModel = useBlockListStore();
   const router = useRouter();
   const theme = useTheme();
+  const moduleId = router.query?.moduleId;
 
   const handleClick = async (id: string) => {
+    const query: ParsedUrlQuery = { slug: [id] };
+    if (moduleId) query.moduleId = moduleId;
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
-      query: { ...router.query, slug: [id] },
+      query,
     });
   };
   const handleCreate = async () => {
+    const query: ParsedUrlQuery = {};
+    if (moduleId) query.moduleId = moduleId;
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_BLOCK_CREATE.path,
-      query: router.query,
+      query,
     });
   };
 
   useEffect(() => {
-    dataModel.getData({ moduleId: router.query?.moduleId });
-  }, [router.query?.moduleId]);
+    dataModel.getData({ moduleId });
+  }, [moduleId]);
 
   return (
     <Stack spacing={2} height="100%">
       <Stack spacing={2}>
         <Filter />
-        <Toolbar
-          dataModel={dataModel}
-          padding
-          handleCreate={handleCreate}
-          query={{ moduleId: router.query?.moduleId }}
-        />
+        <Toolbar dataModel={dataModel} padding handleCreate={handleCreate} query={{ moduleId }} />
       </Stack>
       <Stack flexGrow={1} overflow="hidden">
         <List

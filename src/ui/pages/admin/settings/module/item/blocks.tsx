@@ -9,6 +9,7 @@ import { IBlockDTO } from '@model/entities/block';
 import { useBlockListStore } from '@store/modules/entities/block/list/useBlockListStore';
 import { Item } from '@ui/pages/admin/settings/block/index/item';
 import { useEffect } from 'react';
+import { ParsedUrlQuery } from 'querystring';
 
 export const BlocksList = observer(() => {
   const dataModel = useBlockListStore();
@@ -17,15 +18,17 @@ export const BlocksList = observer(() => {
   const moduleId = router.query.slug?.[0] as string;
 
   const handleClick = async (id: string) => {
+    const query: ParsedUrlQuery = { slug: [id], moduleId };
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
-      query: { slug: [id], moduleId },
+      query,
     });
   };
   const handleCreate = async () => {
+    const query: ParsedUrlQuery = { moduleId };
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_BLOCK_CREATE.path,
-      query: { moduleId },
+      query,
     });
   };
 
