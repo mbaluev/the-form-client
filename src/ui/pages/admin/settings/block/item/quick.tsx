@@ -29,6 +29,7 @@ export const Quick = observer(() => {
 
   const router = useRouter();
   const id = router.query.slug?.[0] as string;
+  const moduleId = router.query.moduleId as string;
   const isCreate = router.pathname === ROUTES.ADMIN_SETTINGS_BLOCK_CREATE.path;
   const isEdit = router.pathname === ROUTES.ADMIN_SETTINGS_BLOCK.path;
 
@@ -49,7 +50,7 @@ export const Quick = observer(() => {
         setTimeout(() => {
           router.push({
             pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
-            query: { slug: [res.id] },
+            query: { slug: [res.id], moduleId },
           });
         }, 100);
       }
@@ -74,6 +75,7 @@ export const Quick = observer(() => {
   const handleClose = async () => {
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_BLOCKS.path,
+      query: { moduleId },
     });
   };
   const handleDeleteSubmit = async () => {
@@ -81,6 +83,7 @@ export const Quick = observer(() => {
     if (result) {
       await router.push({
         pathname: ROUTES.ADMIN_SETTINGS_BLOCKS.path,
+        query: { moduleId },
       });
     }
   };

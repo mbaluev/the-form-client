@@ -9,9 +9,12 @@ import { PageBlocks } from '@ui/pages/admin/settings/block/index/page';
 import { PageBlock } from '@ui/pages/admin/settings/block/item/page';
 import { useModuleListStore } from '@store/modules/entities/module/list/useModuleListStore';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const BlockCreate = (props: any) => {
   const { getData: getModules, setData: setModules } = useModuleListStore();
+  const router = useRouter();
+  const moduleId = router.query.moduleId as string;
 
   const breadCrumbs: TBreadCrumb[] = [
     {
@@ -34,6 +37,9 @@ const BlockCreate = (props: any) => {
   }, []);
 
   const methods = useForm<IBlockDTO>({ mode: 'all', defaultValues: DEFAULT_BLOCK });
+  useEffect(() => {
+    methods.reset({ ...DEFAULT_BLOCK, moduleId });
+  }, [moduleId]);
 
   return (
     <MasterAuth>
