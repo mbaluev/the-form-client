@@ -4,10 +4,9 @@ import { ParsedUrlQuery } from 'querystring';
 
 export type TListITem = {
   id?: string | null;
-  img?: string | null;
+  title?: string | null;
   name?: string | null;
-  displayName?: string | null;
-  order?: number | null;
+  position?: number | null;
   selected?: boolean | null;
   loading?: boolean | null;
   error?: string | null;

@@ -72,11 +72,16 @@ export class BaseListStore<T extends TListITem> extends BaseStore implements IBa
 
   get dataItems() {
     return this.data
+      ?.slice()
+      ?.sort(
+        (a, b) =>
+          Number(a.position) - Number(b.position) ||
+          (a.name && b.name ? a.name.localeCompare(b.name) : 0)
+      )
       ?.map((d) => ({
         value: d.id,
-        label: d.displayName || d.name,
-      }))
-      ?.sort((a, b) => (a.label && b.label ? a.label.localeCompare(b.label) : 0));
+        label: d.title,
+      }));
   }
 
   // computed
@@ -93,7 +98,8 @@ export class BaseListStore<T extends TListITem> extends BaseStore implements IBa
       ?.slice()
       ?.sort(
         (a, b) =>
-          Number(a.order) - Number(b.order) || (a.name && b.name ? a.name.localeCompare(b.name) : 0)
+          Number(a.position) - Number(b.position) ||
+          (a.name && b.name ? a.name.localeCompare(b.name) : 0)
       );
   }
 
