@@ -26,8 +26,10 @@ import type IBlockListStore from '@store/modules/entities/block/list/interface';
 import { BlockListStore } from '@store/modules/entities/block/list';
 import type IBlockItemStore from '@store/modules/entities/block/item/interface';
 import { BlockItemStore } from '@store/modules/entities/block/item';
-import IMaterialListStore from '@store/modules/entities/material/list/interface';
+import type IMaterialListStore from '@store/modules/entities/material/list/interface';
 import { MaterialListStore } from '@store/modules/entities/material/list';
+import type IMaterialItemStore from '@store/modules/entities/material/item/interface';
+import { MaterialItemStore } from '@store/modules/entities/material/item';
 
 export const storeContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -63,4 +65,4 @@ storeContainer.bind<IBlockItemStore>(STORE.BlockItem).to(BlockItemStore);
 
 storeContainer.bind<IMaterialListStore>(STORE.MaterialList).to(MaterialListStore);
 
-// storeContainer.bind<IMaterialItemStore>(STORE.MaterialItem).to(MaterialItemStore);
+storeContainer.bind<IMaterialItemStore>(STORE.MaterialItem).to(MaterialItemStore);

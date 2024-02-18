@@ -19,7 +19,8 @@ export const Download = (props: IProps) => {
   const iconLink = <OpenInNewIcon />;
   const iconVideo = <OndemandVideoIcon />;
   const iconFile = <FileDownloadIcon />;
-  const onClickLink = async (e: MouseEvent<HTMLButtonElement>) => {
+
+  const handleLink = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     const a = document.createElement('a');
     a.href = item.document?.url || '';
@@ -27,30 +28,33 @@ export const Download = (props: IProps) => {
     a.click();
     if (callback) await callback();
   };
-  const onClickFile = async (e: MouseEvent<HTMLButtonElement>) => {
+  const handleFile = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (download && item.document) await download(item.document.file?.id, item.document.file?.name);
     if (callback) await callback();
   };
+
   if (documentType === 'link') {
     return (
-      <Button onClick={onClickLink} color="primary" endIcon={iconLink}>
+      <Button onClick={handleLink} color="primary" endIcon={iconLink}>
         Open in a new window
       </Button>
     );
   }
   if (documentType === 'video') {
     return (
-      <Button onClick={onClickLink} color="primary" endIcon={iconVideo}>
+      <Button onClick={handleLink} color="primary" endIcon={iconVideo}>
         Open Youtube
       </Button>
     );
   }
   if (documentType === 'file') {
     return (
-      <Button onClick={onClickFile} color="primary" endIcon={iconFile}>
+      <Button onClick={handleFile} color="primary" endIcon={iconFile}>
         Download file
       </Button>
     );
   }
+
+  return null;
 };
