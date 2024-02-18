@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { ParsedUrlQuery } from 'querystring';
-import { MaterialBaseStore } from '@store/modules/entities/material/base';
-import IMaterialAdminStore from '@store/modules/entities/material/admin/interface';
+import { MaterialBaseStore } from '@store/modules/entities/material/_/base';
+import IMaterialAdminStore from '@store/modules/entities/material/_/admin/interface';
 import { STORE } from '@store/ids';
 import type IBlockAdminStore from '@store/modules/entities/block/_/admin/interface';
 

@@ -1,9 +1,9 @@
 import { inject, injectable } from 'inversify';
 import { action, makeObservable } from 'mobx';
 import { ParsedUrlQuery } from 'querystring';
-import { MaterialBaseStore } from '@store/modules/entities/material/base';
+import { MaterialBaseStore } from '@store/modules/entities/material/_/base';
 import { STORE } from '@store/ids';
-import type IMaterialUserStore from '@store/modules/entities/material/user/interface';
+import type IMaterialUserStore from '@store/modules/entities/material/_/user/interface';
 import type IBlockUserStore from '@store/modules/entities/block/_/user/interface';
 
 @injectable()

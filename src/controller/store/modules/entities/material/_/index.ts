@@ -9,7 +9,7 @@ import { action, makeObservable } from 'mobx';
 import { ParsedUrlQuery } from 'querystring';
 import { BaseCardStore } from '@store/modules/base/card';
 import { STORE } from '@store/ids';
-import type IMaterialStore from '@store/modules/entities/material/interface';
+import type IMaterialStore from '@store/modules/entities/material/_/interface';
 import type IMaterialService from '@service/modules/entities/material/interface';
 import type IFileService from '@service/modules/common/file/interface';
 import type IBlockStore from '@store/modules/entities/block/_/interface';

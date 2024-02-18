@@ -6,7 +6,7 @@ import { SERVICE } from '@service/ids';
 import { action, makeObservable } from 'mobx';
 import { ParsedUrlQuery } from 'querystring';
 import { BaseCardStore } from '@store/modules/base/card';
-import type IMaterialBaseStore from '@store/modules/entities/material/base/interface';
+import type IMaterialBaseStore from '@store/modules/entities/material/_/base/interface';
 import type IMaterialService from '@service/modules/entities/material/interface';
 import type IFileService from '@service/modules/common/file/interface';
 

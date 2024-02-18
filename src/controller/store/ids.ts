@@ -15,7 +15,10 @@ export const STORE = {
   ModuleItem: Symbol.for('ModuleItemStore'),
   BlockList: Symbol.for('BlockListStore'),
   BlockItem: Symbol.for('BlockItemStore'),
+  MaterialList: Symbol.for('MaterialListStore'),
+  MaterialItem: Symbol.for('MaterialItemStore'),
 
+  // ---
   // old
   Block: Symbol.for('BlockViewModel'),
   Material: Symbol.for('MaterialViewModel'),

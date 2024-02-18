@@ -26,6 +26,8 @@ import type IBlockListStore from '@store/modules/entities/block/list/interface';
 import { BlockListStore } from '@store/modules/entities/block/list';
 import type IBlockItemStore from '@store/modules/entities/block/item/interface';
 import { BlockItemStore } from '@store/modules/entities/block/item';
+import IMaterialListStore from '@store/modules/entities/material/list/interface';
+import { MaterialListStore } from '@store/modules/entities/material/list';
 
 export const storeContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -58,3 +60,7 @@ storeContainer.bind<IModuleItemStore>(STORE.ModuleItem).to(ModuleItemStore);
 storeContainer.bind<IBlockListStore>(STORE.BlockList).to(BlockListStore);
 
 storeContainer.bind<IBlockItemStore>(STORE.BlockItem).to(BlockItemStore);
+
+storeContainer.bind<IMaterialListStore>(STORE.MaterialList).to(MaterialListStore);
+
+// storeContainer.bind<IMaterialItemStore>(STORE.MaterialItem).to(MaterialItemStore);

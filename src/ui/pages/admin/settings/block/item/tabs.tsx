@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { Details } from '@ui/pages/admin/settings/block/item/details';
 import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
 import { observer } from 'mobx-react';
+import { MaterialsList } from '@ui/pages/admin/settings/block/item/materials/list';
 
 export const Tabs = observer(() => {
   const { isSaveLoading } = useBlockItemStore();
@@ -22,7 +23,7 @@ export const Tabs = observer(() => {
     {
       key: ROUTES.ADMIN_SETTINGS_BLOCK.tabs.keys.materials,
       label: ROUTES.ADMIN_SETTINGS_BLOCK.tabs.labels.materials,
-      component: <>materials</>,
+      component: <MaterialsList />,
       sxPanel: { overflow: 'hidden', pb: 0 },
     },
     {
