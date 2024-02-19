@@ -13,6 +13,7 @@ export type SelectFieldProps = SelectProps & {
   helperText?: string | null;
   highlightInput?: boolean;
   highlightValue?: boolean;
+  loadItems?: () => Promise<ISelectItem[] | undefined>;
 };
 
 export type SelectFreeTextFieldProps = Omit<SelectFieldProps, 'items'> & {

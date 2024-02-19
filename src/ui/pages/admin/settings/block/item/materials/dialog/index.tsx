@@ -35,11 +35,17 @@ export const MaterialDialog = observer((props: IProps) => {
 
   const methods = useForm<IMaterialDTO>({ mode: 'all', defaultValues: {} });
   useEffect(() => {
-    methods.reset(modalData || { block: block ? block : undefined });
+    const data: any = modalData ? { ...modalData } : {};
+    data.block = block;
+    data.blockId = block?.id;
+    methods.reset(data);
   }, [modalData]);
   useEffect(() => {
     if (open) {
-      methods.reset({ block: block ? block : undefined });
+      const data: any = {};
+      data.block = block;
+      data.blockId = block?.id;
+      methods.reset(data);
       getModalData(materialId);
     }
   }, [open, materialId]);
