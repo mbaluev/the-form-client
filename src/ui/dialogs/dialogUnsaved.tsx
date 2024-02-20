@@ -51,7 +51,7 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
   if (loading) return <Loader loading />;
 
   return (
-    <Dialog open={open} maxWidth="xs" fullWidth sx={{ zIndex: 1340 }}>
+    <Dialog open={open} maxWidth="sm" fullWidth sx={{ zIndex: 1340 }}>
       <DialogTitle>
         <Typography fontWeight={600} fontSize="1.1rem">
           Save changes?

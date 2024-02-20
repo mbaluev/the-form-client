@@ -29,7 +29,7 @@ export const DialogDiscard = (props: IDialogDiscardProps) => {
   };
 
   return (
-    <Dialog open={open} maxWidth="xs" fullWidth sx={{ zIndex: 1340 }}>
+    <Dialog open={open} maxWidth="sm" fullWidth sx={{ zIndex: 1340 }}>
       <DialogTitle>
         <Typography fontWeight={600} fontSize="1.1rem">
           Confirm discard
