@@ -188,7 +188,10 @@ export const theme = createTheme({
     MuiDialogTitle: {
       styleOverrides: {
         root: {
-          padding: 20,
+          paddingTop: 17,
+          paddingBottom: 17,
+          paddingLeft: 20,
+          paddingRight: 20,
         },
       },
     },

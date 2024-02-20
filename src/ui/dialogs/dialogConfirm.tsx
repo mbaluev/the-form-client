@@ -8,6 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 import { ProgressBase } from '@ui/layout/card/progress';
+import { SeparatorBase } from '@ui/layout/card/separator';
 
 interface IProps {
   open: boolean;
@@ -30,7 +31,7 @@ export const DialogConfirm = (props: IProps) => {
   };
 
   return (
-    <Dialog open={open} maxWidth="sm" fullWidth sx={{ zIndex: 1340 }}>
+    <Dialog open={open} maxWidth="xs" fullWidth sx={{ zIndex: 1340 }}>
       <DialogTitle>
         <Stack spacing={1}>
           <Typography fontWeight={600} fontSize="1.1rem">
@@ -43,10 +44,11 @@ export const DialogConfirm = (props: IProps) => {
           )}
         </Stack>
       </DialogTitle>
-      {isLoading && <ProgressBase />}
-      <DialogContent sx={{ pb: 0 }}>
+      {isLoading ? <ProgressBase /> : <SeparatorBase />}
+      <DialogContent>
         <Typography textAlign="left">{message || 'Are you sure?'}</Typography>
       </DialogContent>
+      <SeparatorBase />
       <DialogActions>
         <Button
           onClick={handleClose}
