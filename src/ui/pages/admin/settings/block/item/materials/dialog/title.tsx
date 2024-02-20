@@ -7,7 +7,7 @@ import { IMaterialDTO } from '@model/entities/material';
 import { useMaterialItemStore } from '@store/modules/entities/material/item/useMaterialItemStore';
 
 interface IProps {
-  onClose: () => Promise<void>;
+  onClose?: () => Promise<void>;
 }
 
 export const Title = observer((props: IProps) => {
@@ -20,9 +20,11 @@ export const Title = observer((props: IProps) => {
       <Typography fontWeight={600} fontSize="1.1rem" paddingX={2} paddingY="7px" width="100%">
         {isModalLoading ? <Skeleton width="50%" /> : displayName}
       </Typography>
-      <IconButton onClick={onClose}>
-        <CloseIcon />
-      </IconButton>
+      {onClose && (
+        <IconButton onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      )}
     </Stack>
   );
 });

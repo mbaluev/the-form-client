@@ -1,18 +1,84 @@
 import { observer } from 'mobx-react';
-import { Fragment } from 'react';
-import { Button } from '@mui/material';
+import { Fragment, useState } from 'react';
+import { Button, Stack } from '@mui/material';
+import { useFormContext } from 'react-hook-form';
+import { IMaterialDTO } from '@model/entities/material';
+import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
+import { useMaterialItemStore } from '@store/modules/entities/material/item/useMaterialItemStore';
+import { ROUTES } from '@settings/routes';
+import { DialogDiscard } from '@ui/dialogs/dialogDiscard';
+import { useRouter } from 'next/router';
 
 export const Actions = observer(() => {
-  const handleClose = async () => {};
-  const handleSave = async () => {};
+  const { isSaveLoading } = useMaterialItemStore();
+
+  const router = useRouter();
+  const blockId = router.query.slug?.[0] as string;
+  const tab = router.query.slug?.[1] as string;
+
+  const {
+    handleSubmit,
+    formState: { isDirty },
+    reset,
+  } = useFormContext<IMaterialDTO>();
+
+  const { Prompt } = useUnsavedChanges(isDirty);
+  const [isOpenDiscard, setIsOpenDiscard] = useState<boolean>(false);
+  const handleDiscard = async () => {
+    reset();
+    await router.push({
+      pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
+      query: { ...router.query, slug: [blockId, tab] },
+    });
+  };
+  const handleDiscardClose = () => setIsOpenDiscard(false);
+  const handleDiscardOpen = async () => {
+    if (isDirty) {
+      setIsOpenDiscard(true);
+    } else {
+      await handleDiscard();
+    }
+  };
+  const handleDiscardConfirm = async () => {
+    reset();
+  };
+  const handleDoSave = async (data: IMaterialDTO) => {
+    console.log(data);
+    // const res = await saveData(data);
+    await handleDiscard();
+  };
+  const handleSave = () => {
+    return new Promise<void>((resolve, reject) => {
+      handleSubmit(async (data) => {
+        await handleDoSave(data);
+        reset();
+        resolve();
+      }, reject)();
+    });
+  };
+
   return (
     <Fragment>
-      <Button onClick={handleClose} variant="outlined" color="primary">
-        Cancel
-      </Button>
-      <Button onClick={handleSave} variant="contained" color="primary">
-        Create
-      </Button>
+      <Stack direction="row" spacing={2}>
+        <Button
+          onClick={handleDiscardOpen}
+          disabled={isSaveLoading}
+          variant="outlined"
+          color="primary"
+        >
+          Discard
+        </Button>
+        <Button
+          onClick={handleSave}
+          disabled={isSaveLoading || !isDirty}
+          variant="contained"
+          color="primary"
+        >
+          Save
+        </Button>
+      </Stack>
+      <DialogDiscard open={isOpenDiscard} onClose={handleDiscardClose} onDiscard={handleDiscard} />
+      <Prompt onDiscard={handleDiscardConfirm} onSave={handleSave} />
     </Fragment>
   );
 });

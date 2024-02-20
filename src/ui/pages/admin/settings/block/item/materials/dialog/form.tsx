@@ -13,7 +13,7 @@ import { useMemo } from 'react';
 export const Form = observer(() => {
   const { data: blocks } = useBlockListStore();
   const { documentTypes, getDocumentTypes } = useOptionStore();
-  const required = { required: 'required' };
+  const required = 'required';
   const spacing = 3;
 
   const { control } = useFormContext<IMaterialDTO>();
@@ -25,7 +25,7 @@ export const Form = observer(() => {
 
   return (
     <Grid container spacing={spacing} alignItems="flex-start">
-      <Grid item xs={12}>
+      <Grid item xs={6}>
         <FormField title="Block">
           <SelectSearch
             name="blockId"
@@ -39,7 +39,7 @@ export const Form = observer(() => {
           />
         </FormField>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={6}>
         <FormField title="Material type">
           <SelectSearchAsync
             name="document.documentTypeId"

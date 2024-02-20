@@ -1,5 +1,4 @@
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { Button } from '@mui/material';
 import { IMaterialDTO } from '@model/entities/material';
@@ -15,11 +14,6 @@ export const Download = (props: IProps) => {
   const { item, download, callback } = props;
   if (!item?.document) return null;
 
-  const documentType = item.document.documentType.name;
-  const iconLink = <OpenInNewIcon />;
-  const iconVideo = <OndemandVideoIcon />;
-  const iconFile = <FileDownloadIcon />;
-
   const handleLink = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     const a = document.createElement('a');
@@ -34,23 +28,24 @@ export const Download = (props: IProps) => {
     if (callback) await callback();
   };
 
+  const documentType = item.document.documentType.name;
   if (documentType === 'link') {
     return (
-      <Button onClick={handleLink} color="primary" endIcon={iconLink}>
+      <Button onClick={handleLink} color="primary" endIcon={<OpenInNewIcon />}>
         Open in a new window
       </Button>
     );
   }
   if (documentType === 'video') {
     return (
-      <Button onClick={handleLink} color="primary" endIcon={iconVideo}>
+      <Button onClick={handleLink} color="primary" endIcon={<OpenInNewIcon />}>
         Open Youtube
       </Button>
     );
   }
   if (documentType === 'file') {
     return (
-      <Button onClick={handleFile} color="primary" endIcon={iconFile}>
+      <Button onClick={handleFile} color="primary" endIcon={<FileDownloadIcon />}>
         Download file
       </Button>
     );

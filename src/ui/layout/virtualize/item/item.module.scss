@@ -10,12 +10,12 @@
 .item_container {
   display: flex;
   padding: $base * 2 $base * 3;
-  gap: $base;
+  gap: $base * 2;
   overflow: hidden;
 }
 .item_checkbox {
   flex-grow: 0;
-  margin: -7px 0 (-$base * 2) 0;
+  margin-right: -$base * 2;
 }
 .item_content {
   display: flex;

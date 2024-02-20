@@ -52,7 +52,7 @@ export const MaterialDialog = observer((props: IProps) => {
 
   return (
     <FormProvider {...methods}>
-      <Dialog open={open} maxWidth="xs" fullWidth>
+      <Dialog open={open} maxWidth="sm" fullWidth>
         <DialogTitle sx={{ p: 2 }}>
           <Title onClose={handleClose} />
         </DialogTitle>

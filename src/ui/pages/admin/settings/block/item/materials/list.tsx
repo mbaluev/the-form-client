@@ -11,6 +11,7 @@ import { Item } from '@ui/pages/admin/settings/block/item/materials/item';
 import { Download } from '@ui/pages/admin/settings/block/item/materials/download';
 import { ROUTES } from '@settings/routes';
 import { MaterialDialog } from '@ui/pages/admin/settings/block/item/materials/dialog';
+import { Avatar } from '@ui/pages/admin/settings/block/item/materials/avatar';
 
 export const MaterialsList = observer(() => {
   const dataModel = useMaterialListStore();
@@ -50,6 +51,7 @@ export const MaterialsList = observer(() => {
       <Stack flexGrow={1} overflow="hidden">
         <List
           dataModel={dataModel}
+          avatarRenderer={(item: IMaterialDTO) => <Avatar item={item} />}
           itemRenderer={(item: IMaterialDTO) => <Item item={item} />}
           moreRenderer={(item: IMaterialDTO) => <Download item={item} />}
           rowStyleGetter={(item: IMaterialDTO) => {
