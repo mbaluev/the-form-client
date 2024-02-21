@@ -10,7 +10,7 @@ import { DialogDiscard } from '@ui/dialogs/dialogDiscard';
 import { useRouter } from 'next/router';
 
 export const Actions = observer(() => {
-  const { isSaveLoading } = useMaterialItemStore();
+  const { isSaveLoading, saveModalData } = useMaterialItemStore();
 
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;
@@ -26,9 +26,11 @@ export const Actions = observer(() => {
   const [isOpenDiscard, setIsOpenDiscard] = useState<boolean>(false);
   const handleDiscard = async () => {
     reset();
-    await router.push({
-      pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
-      query: { ...router.query, slug: [blockId, tab] },
+    setTimeout(() => {
+      router.push({
+        pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
+        query: { ...router.query, slug: [blockId, tab] },
+      });
     });
   };
   const handleDiscardClose = () => setIsOpenDiscard(false);
@@ -42,17 +44,16 @@ export const Actions = observer(() => {
   const handleDiscardConfirm = async () => {
     reset();
   };
-  const handleDoSave = async (data: IMaterialDTO) => {
-    console.log(data);
-    // const res = await saveData(data);
-    await handleDiscard();
-  };
   const handleSave = () => {
     return new Promise<void>((resolve, reject) => {
       handleSubmit(async (data) => {
-        await handleDoSave(data);
-        reset();
-        resolve();
+        const res = await saveModalData(data);
+        if (res) {
+          await handleDiscard();
+          resolve();
+        } else {
+          reject();
+        }
       }, reject)();
     });
   };

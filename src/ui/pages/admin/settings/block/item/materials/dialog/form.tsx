@@ -11,7 +11,7 @@ import { Input } from '@ui/fields/input';
 import { useMemo } from 'react';
 
 export const Form = observer(() => {
-  const { data: blocks } = useBlockListStore();
+  const { dataItems: blocksItems } = useBlockListStore();
   const { documentTypes, getDocumentTypes } = useOptionStore();
   const required = 'required';
   const spacing = 3;
@@ -27,16 +27,7 @@ export const Form = observer(() => {
     <Grid container spacing={spacing} alignItems="flex-start">
       <Grid item xs={6}>
         <FormField title="Block">
-          <SelectSearch
-            name="blockId"
-            items={blocks?.map((d) => {
-              return {
-                value: d.id,
-                label: d.title,
-              };
-            })}
-            disabled
-          />
+          <SelectSearch name="blockId" items={blocksItems} disabled />
         </FormField>
       </Grid>
       <Grid item xs={6}>
@@ -68,7 +59,7 @@ export const Form = observer(() => {
         )}
         {documentTypeName === 'file' && (
           <FormField title="Attachment">
-            <Input name="document.fileId" rules={{ required }} required disabled />
+            <Input name="document.fileId" rules={{ required }} required />
           </FormField>
         )}
       </Grid>

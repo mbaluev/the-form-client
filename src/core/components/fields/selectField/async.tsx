@@ -68,13 +68,14 @@ export const SelectSearchAsyncField = (props: SelectFieldProps) => {
 
   const [open, setOpen] = useState<boolean>(false);
   const [state, setState] = useState<string | null>(null);
-  const hasState = useMemo(() => Boolean(state), [state]);
-  useEffect(() => {
-    setState((value as string) || null);
-  }, [value]);
-
   const [selectItems, setSelectItems] = useState<ISelectItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const hasState = useMemo(() => Boolean(state), [state]);
+
+  useEffect(() => {
+    if (selectItems?.find((d) => d.value === value)) setState(value as string);
+    else setState(null);
+  }, [value, selectItems]);
 
   const [searchText, setSearchText] = useState<string>('');
   const search = (item: ISelectItem, searchString: string) => {

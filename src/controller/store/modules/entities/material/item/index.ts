@@ -1,27 +1,20 @@
 import { inject, injectable } from 'inversify';
 import { SERVICE } from '@service/ids';
+import { STORE } from '@store/ids';
 import { ParsedUrlQuery } from 'querystring';
 import { BaseCardStore } from '@store/modules/base/card';
 import { IMaterialDTO } from '@model/entities/material';
 import type IMaterialItemStore from '@store/modules/entities/material/item/interface';
 import type IMaterialService from '@service/modules/entities/material/interface';
+import type IMaterialListStore from '@store/modules/entities/material/list/interface';
 
 @injectable()
 export class MaterialItemStore extends BaseCardStore<IMaterialDTO> implements IMaterialItemStore {
   @inject(SERVICE.Material) private materialService!: IMaterialService;
 
-  // --- override
+  @inject(STORE.MaterialList) private materialListStore!: IMaterialListStore;
 
-  getList = async (query?: ParsedUrlQuery) => {
-    this.setListLoading(true);
-    try {
-      const data = await this.materialService.getMaterials(query);
-      this.setList(data);
-    } catch (err) {
-    } finally {
-      this.setListLoading(false);
-    }
-  };
+  // --- override
 
   getModalData = async (id?: string, query?: ParsedUrlQuery) => {
     this.setModalData();
@@ -36,32 +29,32 @@ export class MaterialItemStore extends BaseCardStore<IMaterialDTO> implements IM
   };
 
   saveModalData = async (data?: IMaterialDTO) => {
-    this.setModalLoading(true);
-    try {
-      if (data) {
+    if (data) {
+      this.setSaveLoading(true);
+      try {
         const res = await this.materialService.saveMaterial(data);
-        this.setModalData(res);
+        await this.materialListStore.getData({ blockId: data.blockId });
         return res;
+      } catch (err) {
+      } finally {
+        this.setSaveLoading(false);
       }
-    } catch (err) {
-    } finally {
-      this.setModalLoading(false);
     }
   };
 
   deleteData = async (): Promise<boolean | undefined> => {
-    this.setDeleteLoading(true);
-    try {
-      if (this.deleteIds) {
+    if (this.deleteIds) {
+      this.setDeleteLoading(true);
+      try {
         await this.materialService.deleteMaterials(this.deleteIds);
         await this.clearDelete();
         await this.clearData();
         return true;
+      } catch (err) {
+        return false;
+      } finally {
+        this.setDeleteLoading(false);
       }
-    } catch (err) {
-      return false;
-    } finally {
-      this.setDeleteLoading(false);
     }
   };
 }

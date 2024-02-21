@@ -12,6 +12,7 @@ import { Actions } from '@ui/pages/admin/settings/block/item/materials/dialog/ac
 import { FormProvider, useForm } from 'react-hook-form';
 import { IMaterialDTO } from '@model/entities/material';
 import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
+import { DEFAULT_MATERIAL } from '@model/entities/material/default';
 
 interface IProps {
   open?: boolean;
@@ -19,7 +20,7 @@ interface IProps {
 
 export const MaterialDialog = observer((props: IProps) => {
   const { open = false } = props;
-  const { isModalLoading, getModalData, modalData } = useMaterialItemStore();
+  const { isSaveLoading, getModalData, modalData } = useMaterialItemStore();
   const { data: block } = useBlockItemStore();
 
   const router = useRouter();
@@ -33,17 +34,15 @@ export const MaterialDialog = observer((props: IProps) => {
     });
   };
 
-  const methods = useForm<IMaterialDTO>({ mode: 'all', defaultValues: {} });
+  const methods = useForm<IMaterialDTO>({ mode: 'all', defaultValues: DEFAULT_MATERIAL });
   useEffect(() => {
     const data: any = modalData ? { ...modalData } : {};
-    data.block = block;
     data.blockId = block?.id;
     methods.reset(data);
   }, [modalData]);
   useEffect(() => {
     if (open) {
       const data: any = {};
-      data.block = block;
       data.blockId = block?.id;
       methods.reset(data);
       getModalData(materialId);
@@ -56,7 +55,7 @@ export const MaterialDialog = observer((props: IProps) => {
         <DialogTitle sx={{ p: 2 }}>
           <Title onClose={handleClose} />
         </DialogTitle>
-        {isModalLoading ? <ProgressBase sx={{ borderRadius: 0 }} /> : <SeparatorBase />}
+        {isSaveLoading ? <ProgressBase sx={{ borderRadius: 0 }} /> : <SeparatorBase />}
         <DialogContent>
           <Content />
         </DialogContent>
