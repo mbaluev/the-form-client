@@ -1,3 +1,3 @@
-import ITaskBaseStore from '@store/modules/entities/task/base/interface';
+import ITaskBaseStore from '@store/modules/entities/task/_/base/interface';
 
 export default interface ITaskUserStore extends ITaskBaseStore {}

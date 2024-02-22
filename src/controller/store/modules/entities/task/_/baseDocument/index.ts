@@ -4,7 +4,7 @@ import { ITaskUserDocumentDTO } from '@model/entities/task';
 import { action, makeObservable } from 'mobx';
 import objectPath from 'object-path';
 import { BaseCardStore } from '@store/modules/base/card';
-import type ITaskBaseDocumentStore from '@store/modules/entities/task/baseDocument/interface';
+import type ITaskBaseDocumentStore from '@store/modules/entities/task/_/baseDocument/interface';
 import type ITaskService from '@service/modules/entities/task/interface';
 import type IFileService from '@service/modules/common/file/interface';
 
