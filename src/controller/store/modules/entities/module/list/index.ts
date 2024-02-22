@@ -33,5 +33,5 @@ export class ModuleListStore extends BaseListStore<IModuleDTO> implements IModul
       ?.sort((a, b) => (a.position > b.position ? 1 : 0));
   }
 
-  filterName = 'query';
+  filterName = 'query_module';
 }

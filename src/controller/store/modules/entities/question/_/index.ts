@@ -6,7 +6,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { BaseCardStore } from '@store/modules/base/card';
 import { STORE } from '@store/ids';
 import { v4 } from 'uuid';
-import type IQuestionStore from '@store/modules/entities/question/interface';
+import type IQuestionStore from '@store/modules/entities/question/_/interface';
 import type IQuestionService from '@service/modules/entities/question/interface';
 import type IBlockStore from '@store/modules/entities/block/_/interface';
 

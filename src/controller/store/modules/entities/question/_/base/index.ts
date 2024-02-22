@@ -5,8 +5,8 @@ import { SERVICE } from '@service/ids';
 import { IQuestionUserDTO } from '@model/entities/question';
 import { action, computed, makeObservable, observable } from 'mobx';
 import { BaseCardStore } from '@store/modules/base/card';
-import { ITestStatus } from '@store/modules/entities/question/base/interface';
-import type IQuestionBaseStore from '@store/modules/entities/question/base/interface';
+import { ITestStatus } from '@store/modules/entities/question/_/base/interface';
+import type IQuestionBaseStore from '@store/modules/entities/question/_/base/interface';
 import type IQuestionService from '@service/modules/entities/question/interface';
 
 @injectable()

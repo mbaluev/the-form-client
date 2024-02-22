@@ -1,9 +1,9 @@
 import { inject, injectable } from 'inversify';
 import { action, computed, makeObservable } from 'mobx';
 import { ParsedUrlQuery } from 'querystring';
-import { QuestionBaseStore } from '@store/modules/entities/question/base';
+import { QuestionBaseStore } from '@store/modules/entities/question/_/base';
 import { STORE } from '@store/ids';
-import type IQuestionUserStore from '@store/modules/entities/question/user/interface';
+import type IQuestionUserStore from '@store/modules/entities/question/_/user/interface';
 import type IBlockUserStore from '@store/modules/entities/block/_/user/interface';
 
 @injectable()

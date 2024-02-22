@@ -34,5 +34,5 @@ export class UserListStore extends BaseListStore<IUserDTO> implements IUserListS
       ?.sort((a, b) => (a.username && b.username ? a.username.localeCompare(b.username) : 0));
   }
 
-  filterName = 'query';
+  filterName = 'query_user';
 }

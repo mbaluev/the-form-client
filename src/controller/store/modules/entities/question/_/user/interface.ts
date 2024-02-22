@@ -1,4 +1,4 @@
-import type IQuestionBaseStore from '@store/modules/entities/question/base/interface';
+import type IQuestionBaseStore from '@store/modules/entities/question/_/base/interface';
 
 export default interface IQuestionUserStore extends IQuestionBaseStore {
   isStart: boolean;

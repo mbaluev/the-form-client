@@ -34,5 +34,5 @@ export class BlockListStore extends BaseListStore<IBlockDTO> implements IBlockLi
       ?.sort((a, b) => (a.position > b.position ? 1 : 0));
   }
 
-  filterName = 'query';
+  filterName = 'query_block';
 }

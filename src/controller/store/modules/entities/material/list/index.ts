@@ -33,5 +33,5 @@ export class MaterialListStore extends BaseListStore<IMaterialDTO> implements IM
     });
   }
 
-  filterName = 'query';
+  filterName = 'query_material';
 }
