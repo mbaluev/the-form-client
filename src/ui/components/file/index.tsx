@@ -1,4 +1,4 @@
-import { Button, useTheme } from '@mui/material';
+import { Button, FormHelperText, useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import { useDropzone } from 'react-dropzone';
 import Typography from '@mui/material/Typography';
@@ -19,7 +19,7 @@ interface IProps {
 export const File = observer((props: IProps) => {
   const { file, onSuccess } = props;
   const theme = useTheme();
-  const { isLoading, upload, download } = useFileStore();
+  const { isLoading, upload, download, error } = useFileStore();
 
   const onDrop = async (acceptedFiles: Array<File>) => {
     const newFile = await upload(acceptedFiles[0]);
@@ -32,9 +32,10 @@ export const File = observer((props: IProps) => {
   });
 
   const activeStyle = { borderColor: theme.palette.primary.main };
+  const errorStyle = { borderColor: theme.palette.error.main };
   const style = useMemo(
-    () => ({ ...(isDragActive ? activeStyle : {}) }),
-    [isDragAccept, isDragReject]
+    () => ({ ...(isDragActive ? activeStyle : error ? errorStyle : {}) }),
+    [isDragAccept, isDragReject, error]
   );
 
   const handleDownload = async () => {
@@ -54,6 +55,7 @@ export const File = observer((props: IProps) => {
           </Typography>
         </Stack>
       </Root>
+      {error && <FormHelperText error={!!error}>{error}</FormHelperText>}
       {file && (
         <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
           <Button onClick={handleDownload} startIcon={<DownloadIcon />}>
