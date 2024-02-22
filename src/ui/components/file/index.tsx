@@ -12,7 +12,7 @@ import { useFileStore } from '@store/modules/common/file/useFileStore';
 import DownloadIcon from '@mui/icons-material/Download';
 
 interface IProps {
-  file: IFileDTO;
+  file?: IFileDTO;
   onSuccess?: (file: IFileDTO) => void;
 }
 
@@ -38,7 +38,7 @@ export const File = observer((props: IProps) => {
   );
 
   const handleDownload = async () => {
-    await download(file);
+    if (file) await download(file);
   };
 
   return (
@@ -54,12 +54,14 @@ export const File = observer((props: IProps) => {
           </Typography>
         </Stack>
       </Root>
-      <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
-        <Button onClick={handleDownload} startIcon={<DownloadIcon />}>
-          {file.name}
-        </Button>
-        <Typography color={theme.palette.fGrey['100']}>{filesize(file.size)}</Typography>
-      </Stack>
+      {file && (
+        <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
+          <Button onClick={handleDownload} startIcon={<DownloadIcon />}>
+            {file.name}
+          </Button>
+          <Typography color={theme.palette.fGrey['100']}>{filesize(file.size)}</Typography>
+        </Stack>
+      )}
     </Stack>
   );
 });
