@@ -24,8 +24,8 @@ export const Actions = observer(() => {
 
   const { Prompt } = useUnsavedChanges(isDirty);
   const [isOpenDiscard, setIsOpenDiscard] = useState<boolean>(false);
-  const handleDiscard = async () => {
-    reset();
+  const handleDiscard = async (data?: IMaterialDTO) => {
+    reset(data);
     setTimeout(() => {
       router.push({
         pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
@@ -49,7 +49,7 @@ export const Actions = observer(() => {
       handleSubmit(async (data) => {
         const res = await saveModalData(data);
         if (res) {
-          await handleDiscard();
+          await handleDiscard(res);
           resolve();
         } else {
           reject();

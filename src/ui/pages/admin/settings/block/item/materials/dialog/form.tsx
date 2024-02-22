@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { observer } from 'mobx-react';
 import { FormField } from '@components/form/field';
 import { Grid } from '@mui/material';
@@ -8,7 +9,8 @@ import { SelectSearchAsync } from '@ui/fields/selectSearchAsync';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { IMaterialDTO } from '@model/entities/material';
 import { Input } from '@ui/fields/input';
-import { useMemo } from 'react';
+import { File } from '@ui/components/file';
+import { IFileDTO } from '@model/common/file';
 
 export const Form = observer(() => {
   const { dataItems: blocksItems } = useBlockListStore();
@@ -16,12 +18,18 @@ export const Form = observer(() => {
   const required = 'required';
   const spacing = 3;
 
-  const { control } = useFormContext<IMaterialDTO>();
+  const { control, setValue } = useFormContext<IMaterialDTO>();
   const documentTypeId = useWatch({ control, name: 'document.documentTypeId' });
   const documentTypeName = useMemo(
     () => documentTypes?.find((d) => d.value === documentTypeId)?.label,
     [documentTypeId, documentTypes]
   );
+
+  const file = useWatch({ control, name: 'document.file' });
+  const handleSuccess = (newFile: IFileDTO) => {
+    setValue('document.file', newFile, { shouldDirty: true });
+    setValue('document.fileId', newFile.id, { shouldDirty: true });
+  };
 
   return (
     <Grid container spacing={spacing} alignItems="flex-start">
@@ -59,7 +67,7 @@ export const Form = observer(() => {
         )}
         {documentTypeName === 'file' && (
           <FormField title="Attachment">
-            <Input name="document.fileId" rules={{ required }} required />
+            <File onSuccess={handleSuccess} file={file} />
           </FormField>
         )}
       </Grid>

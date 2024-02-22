@@ -30,6 +30,8 @@ import type IMaterialListStore from '@store/modules/entities/material/list/inter
 import { MaterialListStore } from '@store/modules/entities/material/list';
 import type IMaterialItemStore from '@store/modules/entities/material/item/interface';
 import { MaterialItemStore } from '@store/modules/entities/material/item';
+import type IFileStore from '@store/modules/common/file/interface';
+import { FileStore } from '@store/modules/common/file';
 
 export const storeContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -38,6 +40,8 @@ export const storeContainer = new Container({ defaultScope: 'Singleton' });
 storeContainer.bind<IAppStore>(STORE.App).to(AppStore);
 
 storeContainer.bind<IAuthStore>(STORE.Auth).to(AuthStore);
+
+storeContainer.bind<IFileStore>(STORE.File).to(FileStore);
 
 storeContainer.bind<IFilterStore>(STORE.Filter).to(FilterStore);
 

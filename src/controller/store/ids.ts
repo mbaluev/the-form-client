@@ -2,6 +2,7 @@ export const STORE = {
   // common
   App: Symbol.for('AppStore'),
   Auth: Symbol.for('AuthStore'),
+  File: Symbol.for('FileStore'),
   Filter: Symbol.for('FilterStore'),
   Locale: Symbol.for('LocaleStore'),
   Menu: Symbol.for('MenuStore'),

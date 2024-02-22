@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { useMaterialListStore } from '@store/modules/entities/material/list/useMaterialListStore';
 import { IMaterialDTO } from '@model/entities/material';
 import { Item } from '@ui/pages/admin/settings/block/item/materials/item';
-import { Download } from '@ui/pages/admin/settings/block/item/materials/download';
+import { Download } from '@ui/components/download';
 import { ROUTES } from '@settings/routes';
 import { MaterialDialog } from '@ui/pages/admin/settings/block/item/materials/dialog';
 import { Avatar } from '@ui/pages/admin/settings/block/item/materials/avatar';
@@ -53,7 +53,7 @@ export const MaterialsList = observer(() => {
           dataModel={dataModel}
           avatarRenderer={(item: IMaterialDTO) => <Avatar item={item} />}
           itemRenderer={(item: IMaterialDTO) => <Item item={item} />}
-          moreRenderer={(item: IMaterialDTO) => <Download item={item} />}
+          moreRenderer={(item: IMaterialDTO) => <Download doc={item.document} />}
           rowStyleGetter={(item: IMaterialDTO) => {
             if (router.pathname === ROUTES.ADMIN_SETTINGS_BLOCK.path && item.id === materialId) {
               return { backgroundColor: theme.palette.fGrey[10] };

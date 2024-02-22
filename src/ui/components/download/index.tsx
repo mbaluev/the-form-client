@@ -1,34 +1,33 @@
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { Button } from '@mui/material';
-import { IMaterialDTO } from '@model/entities/material';
 import { MouseEvent } from 'react';
+import { observer } from 'mobx-react';
+import { useFileStore } from '@store/modules/common/file/useFileStore';
+import { IDocumentDTO } from '@model/common/document';
 
 interface IProps {
-  item?: IMaterialDTO;
-  download?: (id: string, name: string) => Promise<void>;
-  callback?: () => Promise<void>;
+  doc?: IDocumentDTO;
 }
 
-export const Download = (props: IProps) => {
-  const { item, download, callback } = props;
-  if (!item?.document) return null;
+export const Download = observer((props: IProps) => {
+  const { doc } = props;
+  const { download } = useFileStore();
+  if (!doc) return null;
 
   const handleLink = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     const a = document.createElement('a');
-    a.href = item.document?.url || '';
+    a.href = doc.url || '';
     a.target = '_blank';
     a.click();
-    if (callback) await callback();
   };
   const handleFile = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    if (download && item.document) await download(item.document.file?.id, item.document.file?.name);
-    if (callback) await callback();
+    await download(doc.file);
   };
 
-  const documentType = item.document.documentType.name;
+  const documentType = doc.documentType.name;
   if (documentType === 'link') {
     return (
       <Button onClick={handleLink} color="primary" endIcon={<OpenInNewIcon />}>
@@ -52,4 +51,4 @@ export const Download = (props: IProps) => {
   }
 
   return null;
-};
+});
