@@ -5,6 +5,7 @@ import { Details } from '@ui/pages/admin/settings/block/item/details';
 import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
 import { observer } from 'mobx-react';
 import { MaterialsList } from '@ui/pages/admin/settings/block/item/materials/list';
+import { TasksList } from '@ui/pages/admin/settings/block/item/tasks/list';
 
 export const Tabs = observer(() => {
   const { isSaveLoading } = useBlockItemStore();
@@ -29,7 +30,7 @@ export const Tabs = observer(() => {
     {
       key: ROUTES.ADMIN_SETTINGS_BLOCK.tabs.keys.homework,
       label: ROUTES.ADMIN_SETTINGS_BLOCK.tabs.labels.homework,
-      component: <>homework</>,
+      component: <TasksList />,
       sxPanel: { overflow: 'hidden', pb: 0 },
     },
     {

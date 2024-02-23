@@ -32,6 +32,10 @@ import type IMaterialItemStore from '@store/modules/entities/material/item/inter
 import { MaterialItemStore } from '@store/modules/entities/material/item';
 import type IFileStore from '@store/modules/common/file/interface';
 import { FileStore } from '@store/modules/common/file';
+import type ITaskListStore from '@store/modules/entities/task/list/interface';
+import { TaskListStore } from '@store/modules/entities/task/list';
+import type ITaskItemStore from '@store/modules/entities/task/item/interface';
+import { TaskItemStore } from '@store/modules/entities/task/item';
 
 export const storeContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -70,3 +74,7 @@ storeContainer.bind<IBlockItemStore>(STORE.BlockItem).to(BlockItemStore);
 storeContainer.bind<IMaterialListStore>(STORE.MaterialList).to(MaterialListStore);
 
 storeContainer.bind<IMaterialItemStore>(STORE.MaterialItem).to(MaterialItemStore);
+
+storeContainer.bind<ITaskListStore>(STORE.TaskList).to(TaskListStore);
+
+storeContainer.bind<ITaskItemStore>(STORE.TaskItem).to(TaskItemStore);

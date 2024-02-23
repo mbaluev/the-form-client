@@ -5,29 +5,29 @@ import { useEffect } from 'react';
 import { ROUTES } from '@settings/routes';
 import { SeparatorBase } from '@ui/layout/card/separator';
 import { ProgressBase } from '@ui/layout/card/progress';
-import { useMaterialItemStore } from '@store/modules/entities/material/item/useMaterialItemStore';
-import { Title } from '@ui/pages/admin/settings/block/item/materials/dialog/title';
-import { Actions } from '@ui/pages/admin/settings/block/item/materials/dialog/actions';
+import { useTaskItemStore } from '@store/modules/entities/task/item/useTaskItemStore';
+import { Title } from '@ui/pages/admin/settings/block/item/tasks/dialog/title';
+import { Actions } from '@ui/pages/admin/settings/block/item/tasks/dialog/actions';
 import { FormProvider, useForm } from 'react-hook-form';
-import { IMaterialDTO } from '@model/entities/material';
 import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
-import { DEFAULT_MATERIAL } from '@model/entities/material/default';
+import { DEFAULT_TASK } from '@model/entities/task/default';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
-import { Form } from '@ui/pages/admin/settings/block/item/materials/dialog/form';
+import { Form } from '@ui/pages/admin/settings/block/item/tasks/dialog/form';
+import { ITaskDTO } from '@model/entities/task';
 
 interface IProps {
   open?: boolean;
 }
 
-export const MaterialDialog = observer((props: IProps) => {
+export const TaskDialog = observer((props: IProps) => {
   const { open = false } = props;
-  const { isSaveLoading, getModalData, modalData, isModalLoading } = useMaterialItemStore();
+  const { isSaveLoading, getModalData, modalData, isModalLoading } = useTaskItemStore();
   const { data: block } = useBlockItemStore();
 
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;
   const tab = router.query.slug?.[1] as string;
-  const materialId = router.query.slug?.[2] as string;
+  const taskId = router.query.slug?.[2] as string;
   const handleClose = async () => {
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
@@ -35,7 +35,7 @@ export const MaterialDialog = observer((props: IProps) => {
     });
   };
 
-  const methods = useForm<IMaterialDTO>({ mode: 'all', defaultValues: DEFAULT_MATERIAL });
+  const methods = useForm<ITaskDTO>({ mode: 'all', defaultValues: DEFAULT_TASK });
   useEffect(() => {
     const data: any = modalData ? { ...modalData } : {};
     data.blockId = block?.id;
@@ -46,9 +46,9 @@ export const MaterialDialog = observer((props: IProps) => {
       const data: any = {};
       data.blockId = block?.id;
       methods.reset(data);
-      getModalData(materialId);
+      getModalData(taskId);
     }
-  }, [open, materialId]);
+  }, [open, taskId]);
 
   return (
     <FormProvider {...methods}>
