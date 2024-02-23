@@ -40,6 +40,16 @@ export class BaseListStore<T extends TListITem> extends BaseStore implements IBa
       deselectAllItems: action,
       selectedItems: computed,
       allItemsSelected: computed,
+      hasSelected: computed,
+
+      // delete
+      isDeleteOpen: observable,
+      isDeleteLoading: observable,
+      setDeleteOpen: action,
+      setDeleteLoading: action,
+      deleteOpen: action,
+      deleteClose: action,
+      deleteSubmit: action,
     });
   }
 
@@ -156,7 +166,7 @@ export class BaseListStore<T extends TListITem> extends BaseStore implements IBa
   };
 
   get selectedItems() {
-    return this.data?.filter((d) => d.selected)?.map((d) => d.id);
+    return this.data?.filter((d) => d.selected)?.map((d) => d.id as string);
   }
 
   get allItemsSelected() {
@@ -165,7 +175,35 @@ export class BaseListStore<T extends TListITem> extends BaseStore implements IBa
     );
   }
 
+  get hasSelected() {
+    return Boolean(this.selectedItems && this.selectedItems.length > 0);
+  }
+
+  // delete
+
+  isDeleteOpen = false;
+
+  isDeleteLoading = false;
+
+  setDeleteOpen = (value: boolean) => (this.isDeleteOpen = value);
+
+  setDeleteLoading = (value: boolean) => (this.isDeleteLoading = value);
+
+  deleteOpen = async () => {
+    this.setDeleteOpen(true);
+  };
+
+  deleteClose = async () => {
+    this.setDeleteOpen(false);
+  };
+
+  async deleteSubmit() {
+    if (this.selectedItems && this.hasSelected) return true;
+    if (this.selectedItems && !this.hasSelected) return false;
+    return undefined;
+  }
+
   // filter
 
-  filterName = 'search';
+  filterName = 'query';
 }

@@ -37,9 +37,17 @@ export default interface IBaseListStore<T extends TListITem> extends IBaseStore 
   // selected
   selectItem: (id: string) => void;
   selectAllItems: () => void;
-  selectedItems?: (string | null | undefined)[];
+  selectedItems?: string[];
   allItemsSelected: boolean;
   deselectAllItems: () => void;
+  hasSelected: boolean;
+
+  // delete
+  isDeleteOpen: boolean;
+  isDeleteLoading: boolean;
+  deleteOpen: () => Promise<void>;
+  deleteClose: () => Promise<void>;
+  deleteSubmit: () => Promise<boolean | undefined>;
 
   // filter
   filterName: string;

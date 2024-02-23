@@ -12,6 +12,7 @@ import { Download } from '@ui/components/download';
 import { ROUTES } from '@settings/routes';
 import { MaterialDialog } from '@ui/pages/admin/settings/block/item/materials/dialog';
 import { Avatar } from '@ui/pages/admin/settings/block/item/materials/avatar';
+import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 
 export const MaterialsList = observer(() => {
   const dataModel = useMaterialListStore();
@@ -33,6 +34,12 @@ export const MaterialsList = observer(() => {
       query: { ...router.query, slug: [blockId, tab, 'create'] },
     });
   };
+  const handleDelete = async () => {
+    await dataModel.deleteOpen();
+  };
+  const handleDeleteSubmit = async () => {
+    await dataModel.deleteSubmit();
+  };
 
   useEffect(() => {
     dataModel.getData({ blockId });
@@ -43,10 +50,11 @@ export const MaterialsList = observer(() => {
       <Filter dataModel={dataModel} padding />
       <Toolbar
         dataModel={dataModel}
-        padding
-        handleCreate={handleCreate}
         query={{ blockId }}
         checkbox
+        padding
+        handleCreate={handleCreate}
+        handleDelete={handleDelete}
       />
       <Stack flexGrow={1} overflow="hidden">
         <List
@@ -65,6 +73,14 @@ export const MaterialsList = observer(() => {
         />
       </Stack>
       <MaterialDialog open={Boolean(materialId)} />
+      <DialogConfirm
+        open={dataModel.isDeleteOpen}
+        isLoading={dataModel.isDeleteLoading}
+        onClose={dataModel.deleteClose}
+        onSubmit={handleDeleteSubmit}
+        title="Delete materials"
+        message="Are you sure you want to delete selected materials?"
+      />
     </Stack>
   );
 });

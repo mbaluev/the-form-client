@@ -3,19 +3,27 @@ import { VirtualizeToolbar } from '@ui/layout/virtualize/toolbar';
 import { TListITem } from '@store/modules/base/list/interface';
 import { IListBaseProps } from '@ui/layout/list/list';
 import { BtnReload } from '@ui/layout/list/btnReload';
-import { BtnCreate } from '@ui/layout/list/btnCreate';
+import { Actions } from '@ui/layout/list/actions';
 
 interface IProps<T extends TListITem> extends IListBaseProps<T> {
   padding?: boolean;
   handleCreate?: () => Promise<void>;
+  handleDelete?: () => Promise<void>;
   checkbox?: boolean;
 }
 
 export const Toolbar = observer(<T extends TListITem>(props: IProps<T>) => {
-  const { dataModel, padding, handleCreate, checkbox, query } = props;
+  const { dataModel, query, padding, handleCreate, handleDelete, checkbox } = props;
 
-  const { isLoading, dataLength, dataTotal, selectedItems, selectAllItems, allItemsSelected } =
-    dataModel;
+  const {
+    isLoading,
+    dataLength,
+    dataTotal,
+    selectedItems,
+    selectAllItems,
+    allItemsSelected,
+    hasSelected,
+  } = dataModel;
 
   return (
     <VirtualizeToolbar
@@ -27,7 +35,13 @@ export const Toolbar = observer(<T extends TListITem>(props: IProps<T>) => {
       dataSelectAll={selectAllItems}
       dataAllSelected={allItemsSelected}
       refreshAction={<BtnReload dataModel={dataModel} query={query} />}
-      more={handleCreate ? <BtnCreate handleCreate={handleCreate} /> : undefined}
+      more={
+        <Actions
+          handleCreate={handleCreate}
+          handleDelete={handleDelete}
+          hasSelected={hasSelected}
+        />
+      }
       checkbox={checkbox}
     />
   );
