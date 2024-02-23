@@ -27,12 +27,10 @@ export class TaskListStore extends BaseListStore<ITaskDTO> implements ITaskListS
   };
 
   get dataFiltered() {
-    const searchText = this.filterStore.filters.query?.toLowerCase();
+    const searchText = this.filterStore.filters[this.filterName]?.toLowerCase();
     return this.data?.filter((d) => {
       return (
         d.document?.name?.toLowerCase()?.includes(searchText || '') ||
-        d.document?.description?.toLowerCase()?.includes(searchText || '') ||
-        d.document?.url?.toLowerCase()?.includes(searchText || '') ||
         d.block?.name?.toLowerCase()?.includes(searchText || '') ||
         d.block?.title?.toLowerCase()?.includes(searchText || '')
       );

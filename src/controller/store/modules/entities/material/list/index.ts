@@ -27,7 +27,7 @@ export class MaterialListStore extends BaseListStore<IMaterialDTO> implements IM
   };
 
   get dataFiltered() {
-    const searchText = this.filterStore.filters.query?.toLowerCase();
+    const searchText = this.filterStore.filters[this.filterName]?.toLowerCase();
     return this.data?.filter((d) => {
       return (
         d.document?.name?.toLowerCase()?.includes(searchText || '') ||

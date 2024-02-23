@@ -22,7 +22,7 @@ export class ModuleListStore extends BaseListStore<IModuleDTO> implements IModul
   };
 
   get dataFiltered() {
-    const searchText = this.filterStore.filters.query?.toLowerCase();
+    const searchText = this.filterStore.filters[this.filterName]?.toLowerCase();
     return this.data
       ?.filter((d) => {
         return (

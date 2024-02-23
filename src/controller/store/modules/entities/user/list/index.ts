@@ -22,7 +22,7 @@ export class UserListStore extends BaseListStore<IUserDTO> implements IUserListS
   };
 
   get dataFiltered() {
-    const searchText = this.filterStore.filters.query?.toLowerCase();
+    const searchText = this.filterStore.filters[this.filterName]?.toLowerCase();
     return this.data
       ?.filter((d) => {
         return (

@@ -5,13 +5,13 @@ import { Toolbar } from '@ui/layout/list/toolbar';
 import { Chip, Stack, useTheme } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { IMaterialDTO } from '@model/entities/material';
 import { Item } from '@ui/pages/admin/settings/block/item/tasks/item';
 import { ROUTES } from '@settings/routes';
 import { TaskDialog } from '@ui/pages/admin/settings/block/item/tasks/dialog';
 import { Avatar } from '@ui/pages/admin/settings/block/item/tasks/avatar';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { useTaskListStore } from '@store/modules/entities/task/list/useTaskListStore';
+import { ITaskDTO } from '@model/entities/task';
 
 export const TasksList = observer(() => {
   const dataModel = useTaskListStore();
@@ -58,12 +58,12 @@ export const TasksList = observer(() => {
       <Stack flexGrow={1} overflow="hidden">
         <List
           dataModel={dataModel}
-          avatarRenderer={(item: IMaterialDTO) => <Avatar item={item} />}
-          itemRenderer={(item: IMaterialDTO) => <Item item={item} />}
-          moreRenderer={(item: IMaterialDTO) => (
+          avatarRenderer={(item: ITaskDTO) => <Avatar item={item} />}
+          itemRenderer={(item: ITaskDTO) => <Item item={item} />}
+          moreRenderer={(item: ITaskDTO) => (
             <Chip label={item.document?.documentType.name} color="primary" size="small" />
           )}
-          rowStyleGetter={(item: IMaterialDTO) => {
+          rowStyleGetter={(item: ITaskDTO) => {
             if (router.pathname === ROUTES.ADMIN_SETTINGS_BLOCK.path && item.id === taskId) {
               return { backgroundColor: theme.palette.fGrey[10] };
             }

@@ -21,7 +21,7 @@ export const Form = observer(() => {
         </FormField>
       </Grid>
       <Grid item xs={6}>
-        <FormField title="Material type">
+        <FormField title="Task type">
           <SelectSearchAsync
             name="document.documentTypeId"
             loadItems={getDocumentTypes}

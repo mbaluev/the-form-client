@@ -1,11 +1,11 @@
 import { Avatar as MuiAvatar, useTheme } from '@mui/material';
-import { IMaterialDTO } from '@model/entities/material';
 import LinkIcon from '@mui/icons-material/Link';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
+import { ITaskDTO } from '@model/entities/task';
 
 interface IProps {
-  item?: IMaterialDTO;
+  item?: ITaskDTO;
 }
 
 export const Avatar = (props: IProps) => {
