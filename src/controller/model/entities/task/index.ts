@@ -4,8 +4,8 @@ import { IBlockDTO, IBlockUserDTO } from '@model/entities/block';
 
 export interface ITaskDTO {
   id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   // foreign keys
   blockId: string;
@@ -22,8 +22,8 @@ export interface ITaskUserDTO {
   id: string;
   complete?: boolean;
   sent?: boolean;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   // foreign keys
   taskId: string;
@@ -38,8 +38,8 @@ export interface ITaskUserDTO {
 }
 export interface ITaskUserDocumentDTO {
   id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   // foreign keys
   userId: string;

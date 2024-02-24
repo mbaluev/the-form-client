@@ -9,8 +9,8 @@ export interface IBlockDTO {
   title: string;
   name: string;
   position: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   // foreign keys
   moduleId: string;

@@ -7,8 +7,8 @@ export interface IQuestionDTO {
   id: string;
   title: string;
   position: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   // foreign keys
   blockId: string;
@@ -25,8 +25,8 @@ export interface IQuestionOptionDTO {
   id: string;
   title: string;
   correct: boolean;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   // foreign keys
   questionId: string;

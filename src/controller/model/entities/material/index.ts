@@ -4,8 +4,8 @@ import { IUserDTO } from '@model/entities/user';
 
 export interface IMaterialDTO {
   id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   // foreign keys
   blockId: string;
@@ -21,8 +21,8 @@ export interface IMaterialDTO {
 export interface IMaterialUserDTO {
   id: string;
   complete?: boolean;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   // foreign keys
   materialId: string;

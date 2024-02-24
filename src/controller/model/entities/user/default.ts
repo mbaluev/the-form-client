@@ -10,6 +10,4 @@ export const DEFAULT_USER: IUserDTO = {
   active: null,
   paid: null,
   admin: null,
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
 };

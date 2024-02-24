@@ -5,6 +5,4 @@ export const DEFAULT_MODULE: IModuleDTO = {
   title: '',
   name: '',
   position: 0,
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
 };

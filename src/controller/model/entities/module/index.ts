@@ -6,8 +6,8 @@ export interface IModuleDTO {
   title: string;
   name: string;
   position: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   // references
   blocks?: IBlockDTO[];
@@ -19,8 +19,8 @@ export interface IModuleUserDTO {
   id: string;
   enable: boolean;
   complete: boolean;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   // foreign keys
   moduleId: string;

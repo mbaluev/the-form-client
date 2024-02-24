@@ -8,6 +8,6 @@ export interface IUserDTO {
   active?: boolean | null;
   paid?: boolean | null;
   admin?: boolean | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
