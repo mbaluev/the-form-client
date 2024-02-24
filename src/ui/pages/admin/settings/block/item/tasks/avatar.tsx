@@ -1,8 +1,8 @@
 import { Avatar as MuiAvatar, useTheme } from '@mui/material';
-import LinkIcon from '@mui/icons-material/Link';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { ITaskDTO } from '@model/entities/task';
+import PublicIcon from '@mui/icons-material/Public';
 
 interface IProps {
   item?: ITaskDTO;
@@ -19,7 +19,7 @@ export const Avatar = (props: IProps) => {
   if (documentType === 'link') {
     return (
       <MuiAvatar variant="rounded" sx={sxAvatar}>
-        <LinkIcon fontSize="large" sx={sxIcon} />
+        <PublicIcon fontSize="large" sx={sxIcon} />
       </MuiAvatar>
     );
   }
