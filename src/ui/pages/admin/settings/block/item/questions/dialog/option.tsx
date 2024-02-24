@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import { useMemo } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Checkbox } from '@ui/fields/checkbox';
+import { useTheme } from '@mui/material';
 
 interface IProps {
   id: string;
@@ -17,11 +18,9 @@ interface IProps {
 export const Option = (props: IProps) => {
   const { id, index, length, onDelete } = props;
   const handleDelete = () => onDelete(index);
-  const required = 'required';
+  const theme = useTheme();
 
   const alone = useMemo(() => length === 1, [length]);
-  const handleStyle = { display: alone ? 'none' : undefined };
-  const inputStyle = { marginLeft: alone ? 0 : undefined, width: '100%' };
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -36,21 +35,26 @@ export const Option = (props: IProps) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <IconButton sx={handleStyle} {...provided.dragHandleProps}>
+          <IconButton sx={{ display: alone ? 'none' : undefined }} {...provided.dragHandleProps}>
             <DragIndicatorIcon />
           </IconButton>
-          <Checkbox name={`questionOptions.${index}.correct`} />
           <Input
             name={`questionOptions.${index}.title`}
-            rules={{ required: required }}
-            style={inputStyle}
+            sx={{ marginLeft: alone ? '0px !important' : `${theme.spacing(2)} !important` }}
             minRows={3}
             multiline
             required
+            fullWidth
           />
-          <IconButton color="error" onClick={handleDelete}>
-            <DeleteIcon />
-          </IconButton>
+          <Stack>
+            <IconButton color="error" onClick={handleDelete}>
+              <DeleteIcon />
+            </IconButton>
+            <Checkbox
+              name={`questionOptions.${index}.correct`}
+              sx={{ marginLeft: `${theme.spacing(2)} !important` }}
+            />
+          </Stack>
         </Stack>
       )}
     </Draggable>

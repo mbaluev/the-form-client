@@ -30,7 +30,7 @@ export const Form = observer(() => {
         </FormField>
       </Grid>
       <Grid item xs={12}>
-        <FormField title="Question options">
+        <FormField title="Question options" styleValue={{ overflow: 'visible' }}>
           <Options />
         </FormField>
       </Grid>
