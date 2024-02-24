@@ -30,13 +30,13 @@ export const Actions = observer(() => {
       query: { ...router.query, slug: [blockId, tab] },
     });
   };
-  const handleDiscard = async () => {
-    reset();
+  const handleDiscard = async (data?: IQuestionDTO) => {
+    reset(data);
   };
   const handleSave = handleSubmit(async (data) => {
     const res = await saveModalData(data);
     if (res) {
-      await handleDiscard();
+      await handleDiscard(data);
       setSuccess(true);
     }
   });

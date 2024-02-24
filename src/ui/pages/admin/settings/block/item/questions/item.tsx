@@ -15,7 +15,7 @@ export const Item = observer((props: IProps) => {
         noWrap
         whiteSpace="normal"
         display="-webkit-box"
-        sx={{ '-webkit-line-clamp': '2', '-webkit-box-orient': 'vertical' }}
+        sx={{ WebkitLineClamp: '2', WebkitBoxOrient: 'vertical' }}
       >
         {item.title}
       </Typography>

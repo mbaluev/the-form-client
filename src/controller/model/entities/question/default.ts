@@ -1,4 +1,4 @@
-import { IQuestionDTO } from '@model/entities/question/index';
+import { IQuestionDTO, IQuestionOptionDTO } from '@model/entities/question/index';
 
 export const DEFAULT_QUESTION: IQuestionDTO = {
   id: '',
@@ -11,4 +11,16 @@ export const DEFAULT_QUESTION: IQuestionDTO = {
   questionOptions: [],
   userQuestions: [],
   _type: undefined,
+};
+
+export const DEFAULT_QUESTION_OPTION: IQuestionOptionDTO = {
+  id: '',
+  title: '',
+  correct: false,
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+
+  questionId: '',
+  question: undefined,
+  userQuestionAnswers: [],
 };
