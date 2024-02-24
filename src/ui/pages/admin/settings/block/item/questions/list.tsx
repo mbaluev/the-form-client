@@ -10,11 +10,11 @@ import { ROUTES } from '@settings/routes';
 import { QuestionDialog } from '@ui/pages/admin/settings/block/item/questions/dialog';
 import { Avatar } from '@ui/pages/admin/settings/block/item/questions/avatar';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
-import { useQuestionListStore } from '@store/modules/entities/question/list/useQuestionListStore';
+import { useQuestionSettingsListStore } from '@store/modules/settings/question/settings/list/hook';
 import { IQuestionDTO } from '@model/entities/question';
 
 export const QuestionsList = observer(() => {
-  const dataModel = useQuestionListStore();
+  const dataModel = useQuestionSettingsListStore();
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;
   const tab = router.query.slug?.[1] as string;

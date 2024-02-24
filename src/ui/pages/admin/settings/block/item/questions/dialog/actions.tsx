@@ -5,11 +5,11 @@ import { useFormContext } from 'react-hook-form';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
-import { useQuestionItemStore } from '@store/modules/entities/question/item/useQuestionItemStore';
+import { useQuestionSettingsItemStore } from '@store/modules/settings/question/settings/item/hook';
 import { IQuestionDTO } from '@model/entities/question';
 
 export const Actions = observer(() => {
-  const { isSaveLoading, saveModalData } = useQuestionItemStore();
+  const { isSaveLoading, saveModalData } = useQuestionSettingsItemStore();
 
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;

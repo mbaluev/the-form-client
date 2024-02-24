@@ -5,14 +5,14 @@ import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import CloseIcon from '@mui/icons-material/Close';
 import { DialogDiscard } from '@ui/dialogs/dialogDiscard';
 import { observer } from 'mobx-react';
-import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
 import { IUserDTO } from '@model/entities/user';
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
-import { useUserListStore } from '@store/modules/entities/user/list/useUserListStore';
+import { useUserSettingsListStore } from '@store/modules/settings/user/settings/list/hook';
 
 export const Quick = observer(() => {
   const {
@@ -24,8 +24,8 @@ export const Quick = observer(() => {
     deleteOpen,
     deleteClose,
     deleteSubmit,
-  } = useUserItemStore();
-  const { getData: getUsers } = useUserListStore();
+  } = useUserSettingsItemStore();
+  const { getData: getUsers } = useUserSettingsListStore();
 
   const router = useRouter();
   const id = router.query.slug?.[0] as string;

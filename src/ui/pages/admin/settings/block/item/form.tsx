@@ -1,14 +1,14 @@
 import { observer } from 'mobx-react';
 import { FormSection } from '@components/form/section';
 import { FormField } from '@components/form/field';
-import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
+import { useBlockSettingsItemStore } from '@store/modules/settings/block/settings/item/hook';
 import { Input } from '@ui/fields/input';
-import { useModuleListStore } from '@store/modules/entities/module/list/useModuleListStore';
+import { useModuleSettingsListStore } from '@store/modules/settings/module/settings/list/hook';
 import { Select } from '@ui/fields/select';
 
 export const Form = observer(() => {
-  const { isSaveLoading: disabled } = useBlockItemStore();
-  const { dataItems: modules } = useModuleListStore();
+  const { isSaveLoading: disabled } = useBlockSettingsItemStore();
+  const { dataItems: modules } = useModuleSettingsListStore();
   const required = { required: 'required' };
   return (
     <FormSection>

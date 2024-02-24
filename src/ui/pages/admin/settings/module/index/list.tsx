@@ -6,12 +6,12 @@ import { Stack, useTheme } from '@mui/material';
 import { Item } from '@ui/pages/admin/settings/module/index/item';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@settings/routes';
-import { useModuleListStore } from '@store/modules/entities/module/list/useModuleListStore';
+import { useModuleSettingsListStore } from '@store/modules/settings/module/settings/list/hook';
 import { IModuleDTO } from '@model/entities/module';
 import { useEffect } from 'react';
 
 export const ModulesList = observer(() => {
-  const dataModel = useModuleListStore();
+  const dataModel = useModuleSettingsListStore();
   const router = useRouter();
   const theme = useTheme();
 

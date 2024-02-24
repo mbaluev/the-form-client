@@ -1,4 +1,0 @@
-import type IBaseListStore from '@store/modules/base/list/interface';
-import { ITaskDTO } from '@model/entities/task';
-
-export default interface ITaskListStore extends IBaseListStore<ITaskDTO> {}

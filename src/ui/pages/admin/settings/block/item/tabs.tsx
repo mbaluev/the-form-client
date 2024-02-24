@@ -2,14 +2,14 @@ import { ITabDTO, Tabs as MuiTabs } from '@theme/tabs';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
 import { Details } from '@ui/pages/admin/settings/block/item/details';
-import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
+import { useBlockSettingsItemStore } from '@store/modules/settings/block/settings/item/hook';
 import { observer } from 'mobx-react';
 import { MaterialsList } from '@ui/pages/admin/settings/block/item/materials/list';
 import { TasksList } from '@ui/pages/admin/settings/block/item/tasks/list';
 import { QuestionsList } from '@ui/pages/admin/settings/block/item/questions/list';
 
 export const Tabs = observer(() => {
-  const { isSaveLoading } = useBlockItemStore();
+  const { isSaveLoading } = useBlockSettingsItemStore();
 
   const router = useRouter();
   const id = router.query.slug?.[0] as string;

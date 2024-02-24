@@ -8,14 +8,14 @@ import NoData from '@components/noData';
 import { Panel } from '@ui/layout/page/panel';
 import { useRouter } from 'next/router';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
-import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
+import { useModuleSettingsItemStore } from '@store/modules/settings/module/settings/item/hook';
 import { SubTitle } from '@ui/pages/admin/settings/module/item/subtitle';
 import { Tabs } from '@ui/pages/admin/settings/module/item/tabs';
 import { Separator } from '@ui/pages/admin/settings/module/item/separator';
 import { ROUTES } from '@settings/routes';
 
 export const PageModule = observer(() => {
-  const { data, isDataLoading } = useModuleItemStore();
+  const { data, isDataLoading } = useModuleSettingsItemStore();
 
   const router = useRouter();
   const isCreate = router.pathname === ROUTES.ADMIN_SETTINGS_MODULE_CREATE.path;

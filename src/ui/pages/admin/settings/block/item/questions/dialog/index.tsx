@@ -6,9 +6,9 @@ import { ROUTES } from '@settings/routes';
 import { SeparatorBase } from '@ui/layout/card/separator';
 import { ProgressBase } from '@ui/layout/card/progress';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
+import { useBlockSettingsItemStore } from '@store/modules/settings/block/settings/item/hook';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
-import { useQuestionItemStore } from '@store/modules/entities/question/item/useQuestionItemStore';
+import { useQuestionSettingsItemStore } from '@store/modules/settings/question/settings/item/hook';
 import { Title } from '@ui/pages/admin/settings/block/item/questions/dialog/title';
 import { Actions } from '@ui/pages/admin/settings/block/item/questions/dialog/actions';
 import { DEFAULT_QUESTION } from '@model/entities/question/default';
@@ -21,8 +21,8 @@ interface IProps {
 
 export const QuestionDialog = observer((props: IProps) => {
   const { open = false } = props;
-  const { isSaveLoading, getModalData, modalData, isModalLoading } = useQuestionItemStore();
-  const { data: block } = useBlockItemStore();
+  const { isSaveLoading, getModalData, modalData, isModalLoading } = useQuestionSettingsItemStore();
+  const { data: block } = useBlockSettingsItemStore();
 
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;

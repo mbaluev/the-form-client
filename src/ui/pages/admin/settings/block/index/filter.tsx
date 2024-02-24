@@ -1,12 +1,12 @@
 import { VirtualizeFilter } from '@ui/layout/virtualize/filter';
-import { useBlockListStore } from '@store/modules/entities/block/list/useBlockListStore';
+import { useBlockSettingsListStore } from '@store/modules/settings/block/settings/list/hook';
 import { FilterSelect } from '@ui/filter/filterSelect';
-import { useModuleListStore } from '@store/modules/entities/module/list/useModuleListStore';
+import { useModuleSettingsListStore } from '@store/modules/settings/module/settings/list/hook';
 import { observer } from 'mobx-react';
 
 export const Filter = observer(() => {
-  const { dataItems } = useModuleListStore();
-  const dataModel = useBlockListStore();
+  const { dataItems } = useModuleSettingsListStore();
+  const dataModel = useBlockSettingsListStore();
   const filter = (
     <FilterSelect name="moduleId" placeholder="Module" items={dataItems} sx={{ width: '100%' }} />
   );

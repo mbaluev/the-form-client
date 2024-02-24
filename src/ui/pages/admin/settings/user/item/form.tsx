@@ -5,11 +5,11 @@ import { Input } from '@ui/fields/input';
 import { Password } from '@ui/fields/password';
 import { Checkbox } from '@ui/fields/checkbox';
 import { observer } from 'mobx-react';
-import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
 import { ROUTES } from '@settings/routes';
 
 export const Form = observer(() => {
-  const { isSaveLoading: disabled } = useUserItemStore();
+  const { isSaveLoading: disabled } = useUserSettingsItemStore();
 
   const router = useRouter();
   const isCreate = router.pathname === ROUTES.ADMIN_SETTINGS_USER_CREATE.path;

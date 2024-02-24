@@ -7,7 +7,7 @@ import { PageUser } from '@ui/pages/admin/settings/user/item/page';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
-import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
 import { FormProvider, useForm } from 'react-hook-form';
 import { IUserDTO } from '@model/entities/user';
 import { DEFAULT_USER } from '@model/entities/user/default';
@@ -21,7 +21,7 @@ const User = (props: any) => {
     setData: setUser,
     data: user,
     isDataLoading: loadingUser,
-  } = useUserItemStore();
+  } = useUserSettingsItemStore();
 
   const breadCrumbs: TBreadCrumb[] = [
     {

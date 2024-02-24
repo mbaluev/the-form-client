@@ -10,11 +10,11 @@ import { ROUTES } from '@settings/routes';
 import { TaskDialog } from '@ui/pages/admin/settings/block/item/tasks/dialog';
 import { Avatar } from '@ui/pages/admin/settings/block/item/tasks/avatar';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
-import { useTaskListStore } from '@store/modules/entities/task/list/useTaskListStore';
+import { useTaskSettingsListStore } from '@store/modules/settings/task/settings/list/hook';
 import { ITaskDTO } from '@model/entities/task';
 
 export const TasksList = observer(() => {
-  const dataModel = useTaskListStore();
+  const dataModel = useTaskSettingsListStore();
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;
   const tab = router.query.slug?.[1] as string;

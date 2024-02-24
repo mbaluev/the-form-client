@@ -6,9 +6,9 @@ import { ROUTES } from '@settings/routes';
 import { SeparatorBase } from '@ui/layout/card/separator';
 import { ProgressBase } from '@ui/layout/card/progress';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
+import { useBlockSettingsItemStore } from '@store/modules/settings/block/settings/item/hook';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
-import { useTaskItemStore } from '@store/modules/entities/task/item/useTaskItemStore';
+import { useTaskSettingsItemStore } from '@store/modules/settings/task/settings/item/hook';
 import { Title } from '@ui/pages/admin/settings/block/item/tasks/dialog/title';
 import { Actions } from '@ui/pages/admin/settings/block/item/tasks/dialog/actions';
 import { DEFAULT_TASK } from '@model/entities/task/default';
@@ -21,8 +21,8 @@ interface IProps {
 
 export const TaskDialog = observer((props: IProps) => {
   const { open = false } = props;
-  const { isSaveLoading, getModalData, modalData, isModalLoading } = useTaskItemStore();
-  const { data: block } = useBlockItemStore();
+  const { isSaveLoading, getModalData, modalData, isModalLoading } = useTaskSettingsItemStore();
+  const { data: block } = useBlockSettingsItemStore();
 
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;

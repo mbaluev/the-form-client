@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react';
 import { FormSection } from '@components/form/section';
 import { FormField } from '@components/form/field';
-import { useModuleItemStore } from '@store/modules/entities/module/item/useModuleItemStore';
+import { useModuleSettingsItemStore } from '@store/modules/settings/module/settings/item/hook';
 import { Input } from '@ui/fields/input';
 
 export const Form = observer(() => {
-  const { isSaveLoading: disabled } = useModuleItemStore();
+  const { isSaveLoading: disabled } = useModuleSettingsItemStore();
   const required = { required: 'required' };
   return (
     <FormSection>

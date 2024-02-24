@@ -12,34 +12,34 @@ import type IAuthStore from '@store/modules/common/auth/interface';
 import { AuthStore } from '@store/modules/common/auth';
 import type IMenuStore from '@store/modules/common/menu/interface';
 import { MenuStore } from '@store/modules/common/menu';
-import type IUserListStore from '@store/modules/entities/user/list/interface';
-import { UserListStore } from '@store/modules/entities/user/list';
-import type IUserItemStore from '@store/modules/entities/user/item/interface';
-import { UserItemStore } from '@store/modules/entities/user/item';
+import type IUserSettingsListStore from '@store/modules/settings/user/settings/list/interface';
+import { UserSettingsListStore } from '@store/modules/settings/user/settings/list';
+import type IUserSettingsItemStore from '@store/modules/settings/user/settings/item/interface';
+import { UserSettingsItemStore } from '@store/modules/settings/user/settings/item';
 import type IOptionStore from '@store/modules/common/option/interface';
 import { OptionStore } from '@store/modules/common/option';
-import type IModuleListStore from '@store/modules/entities/module/list/interface';
-import { ModuleListStore } from '@store/modules/entities/module/list';
-import type IModuleItemStore from '@store/modules/entities/module/item/interface';
-import { ModuleItemStore } from '@store/modules/entities/module/item';
-import type IBlockListStore from '@store/modules/entities/block/list/interface';
-import { BlockListStore } from '@store/modules/entities/block/list';
-import type IBlockItemStore from '@store/modules/entities/block/item/interface';
-import { BlockItemStore } from '@store/modules/entities/block/item';
-import type IMaterialListStore from '@store/modules/entities/material/list/interface';
-import { MaterialListStore } from '@store/modules/entities/material/list';
-import type IMaterialItemStore from '@store/modules/entities/material/item/interface';
-import { MaterialItemStore } from '@store/modules/entities/material/item';
+import type IModuleSettingsListStore from '@store/modules/settings/module/settings/list/interface';
+import { ModuleSettingsListStore } from '@store/modules/settings/module/settings/list';
+import type IModuleSettingsItemStore from '@store/modules/settings/module/settings/item/interface';
+import { ModuleSettingsItemStore } from '@store/modules/settings/module/settings/item';
+import type IBlockSettingsListStore from '@store/modules/settings/block/settings/list/interface';
+import { BlockSettingsListStore } from '@store/modules/settings/block/settings/list';
+import type IBlockSettingsItemStore from '@store/modules/settings/block/settings/item/interface';
+import { BlockSettingsItemStore } from '@store/modules/settings/block/settings/item';
+import type IMaterialSettingsListStore from '@store/modules/settings/material/settings/list/interface';
+import { MaterialSettingsListStore } from '@store/modules/settings/material/settings/list';
+import type IMaterialSettingsItemStore from '@store/modules/settings/material/settings/item/interface';
+import { MaterialSettingsItemStore } from '@store/modules/settings/material/settings/item';
 import type IFileStore from '@store/modules/common/file/interface';
 import { FileStore } from '@store/modules/common/file';
-import type ITaskListStore from '@store/modules/entities/task/list/interface';
-import { TaskListStore } from '@store/modules/entities/task/list';
-import type ITaskItemStore from '@store/modules/entities/task/item/interface';
-import { TaskItemStore } from '@store/modules/entities/task/item';
-import type IQuestionListStore from '@store/modules/entities/question/list/interface';
-import { QuestionListStore } from '@store/modules/entities/question/list';
-import type IQuestionItemStore from '@store/modules/entities/question/item/interface';
-import { QuestionItemStore } from '@store/modules/entities/question/item';
+import type ITaskSettingsListStore from '@store/modules/settings/task/settings/list/interface';
+import { TaskSettingsListStore } from '@store/modules/settings/task/settings/list';
+import type ITaskSettingsItemStore from '@store/modules/settings/task/settings/item/interface';
+import { TaskSettingsItemStore } from '@store/modules/settings/task/settings/item';
+import type IQuestionSettingsListStore from '@store/modules/settings/question/settings/list/interface';
+import { QuestionSettingsListStore } from '@store/modules/settings/question/settings/list';
+import type IQuestionSettingsItemStore from '@store/modules/settings/question/settings/item/interface';
+import { QuestionSettingsItemStore } from '@store/modules/settings/question/settings/item';
 
 export const storeContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -61,28 +61,40 @@ storeContainer.bind<INotifyStore>(STORE.Notify).to(NotifyStore);
 
 storeContainer.bind<IOptionStore>(STORE.Option).to(OptionStore);
 
-// entities
+// settings
 
-storeContainer.bind<IUserListStore>(STORE.UserList).to(UserListStore);
+storeContainer.bind<IUserSettingsListStore>(STORE.UserSettingsList).to(UserSettingsListStore);
 
-storeContainer.bind<IUserItemStore>(STORE.UserItem).to(UserItemStore);
+storeContainer.bind<IUserSettingsItemStore>(STORE.UserSettingsItem).to(UserSettingsItemStore);
 
-storeContainer.bind<IModuleListStore>(STORE.ModuleList).to(ModuleListStore);
+storeContainer.bind<IModuleSettingsListStore>(STORE.ModuleSettingsList).to(ModuleSettingsListStore);
 
-storeContainer.bind<IModuleItemStore>(STORE.ModuleItem).to(ModuleItemStore);
+storeContainer.bind<IModuleSettingsItemStore>(STORE.ModuleSettingsItem).to(ModuleSettingsItemStore);
 
-storeContainer.bind<IBlockListStore>(STORE.BlockList).to(BlockListStore);
+storeContainer.bind<IBlockSettingsListStore>(STORE.BlockSettingsList).to(BlockSettingsListStore);
 
-storeContainer.bind<IBlockItemStore>(STORE.BlockItem).to(BlockItemStore);
+storeContainer.bind<IBlockSettingsItemStore>(STORE.BlockSettingsItem).to(BlockSettingsItemStore);
 
-storeContainer.bind<IMaterialListStore>(STORE.MaterialList).to(MaterialListStore);
+storeContainer
+  .bind<IMaterialSettingsListStore>(STORE.MaterialSettingsList)
+  .to(MaterialSettingsListStore);
 
-storeContainer.bind<IMaterialItemStore>(STORE.MaterialItem).to(MaterialItemStore);
+storeContainer
+  .bind<IMaterialSettingsItemStore>(STORE.MaterialSettingsItem)
+  .to(MaterialSettingsItemStore);
 
-storeContainer.bind<ITaskListStore>(STORE.TaskList).to(TaskListStore);
+storeContainer.bind<ITaskSettingsListStore>(STORE.TaskSettingsList).to(TaskSettingsListStore);
 
-storeContainer.bind<ITaskItemStore>(STORE.TaskItem).to(TaskItemStore);
+storeContainer.bind<ITaskSettingsItemStore>(STORE.TaskSettingsItem).to(TaskSettingsItemStore);
 
-storeContainer.bind<IQuestionListStore>(STORE.QuestionList).to(QuestionListStore);
+storeContainer
+  .bind<IQuestionSettingsListStore>(STORE.QuestionSettingsList)
+  .to(QuestionSettingsListStore);
 
-storeContainer.bind<IQuestionItemStore>(STORE.QuestionItem).to(QuestionItemStore);
+storeContainer
+  .bind<IQuestionSettingsItemStore>(STORE.QuestionSettingsItem)
+  .to(QuestionSettingsItemStore);
+
+// user
+
+// progress

@@ -6,9 +6,9 @@ import { ROUTES } from '@settings/routes';
 import { SeparatorBase } from '@ui/layout/card/separator';
 import { ProgressBase } from '@ui/layout/card/progress';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
+import { useBlockSettingsItemStore } from '@store/modules/settings/block/settings/item/hook';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
-import { useMaterialItemStore } from '@store/modules/entities/material/item/useMaterialItemStore';
+import { useMaterialSettingsItemStore } from '@store/modules/settings/material/settings/item/hook';
 import { Title } from '@ui/pages/admin/settings/block/item/materials/dialog/title';
 import { Actions } from '@ui/pages/admin/settings/block/item/materials/dialog/actions';
 import { DEFAULT_MATERIAL } from '@model/entities/material/default';
@@ -21,8 +21,8 @@ interface IProps {
 
 export const MaterialDialog = observer((props: IProps) => {
   const { open = false } = props;
-  const { isSaveLoading, getModalData, modalData, isModalLoading } = useMaterialItemStore();
-  const { data: block } = useBlockItemStore();
+  const { isSaveLoading, getModalData, modalData, isModalLoading } = useMaterialSettingsItemStore();
+  const { data: block } = useBlockSettingsItemStore();
 
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;

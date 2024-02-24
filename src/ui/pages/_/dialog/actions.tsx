@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react';
 import { Fragment } from 'react';
 import { Button } from '@mui/material';
-import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@settings/routes';
 
 export const Actions = observer(() => {
   const { isModalLoading, hasModalErrors, hasModalChanges, saveModalData, validateModal } =
-    useUserItemStore();
+    useUserSettingsItemStore();
 
   const router = useRouter();
   const handleClose = async () => {

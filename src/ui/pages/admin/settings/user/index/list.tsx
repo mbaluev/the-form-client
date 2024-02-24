@@ -3,7 +3,7 @@ import { List } from '@ui/layout/list/list';
 import { Filter } from '@ui/layout/list/filter';
 import { Toolbar } from '@ui/layout/list/toolbar';
 import { Stack, useTheme } from '@mui/material';
-import { useUserListStore } from '@store/modules/entities/user/list/useUserListStore';
+import { useUserSettingsListStore } from '@store/modules/settings/user/settings/list/hook';
 import { IUserDTO } from '@model/entities/user';
 import { Item } from '@ui/pages/admin/settings/user/index/item';
 import { useRouter } from 'next/router';
@@ -11,7 +11,7 @@ import { ROUTES } from '@settings/routes';
 import { useEffect } from 'react';
 
 export const UsersList = observer(() => {
-  const dataModel = useUserListStore();
+  const dataModel = useUserSettingsListStore();
   const router = useRouter();
   const theme = useTheme();
 

@@ -10,8 +10,8 @@ import { Fragment } from 'react';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import { useFormContext } from 'react-hook-form';
 import { IBlockDTO } from '@model/entities/block';
-import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
-import { useBlockListStore } from '@store/modules/entities/block/list/useBlockListStore';
+import { useBlockSettingsItemStore } from '@store/modules/settings/block/settings/item/hook';
+import { useBlockSettingsListStore } from '@store/modules/settings/block/settings/list/hook';
 import { ParsedUrlQuery } from 'querystring';
 
 export const Quick = observer(() => {
@@ -24,8 +24,8 @@ export const Quick = observer(() => {
     deleteOpen,
     deleteClose,
     deleteSubmit,
-  } = useBlockItemStore();
-  const { getData: getBlocks } = useBlockListStore();
+  } = useBlockSettingsItemStore();
+  const { getData: getBlocks } = useBlockSettingsListStore();
 
   const router = useRouter();
   const id = router.query.slug?.[0] as string;

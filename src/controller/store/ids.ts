@@ -9,19 +9,25 @@ export const STORE = {
   Notify: Symbol.for('NotifyStore'),
   Option: Symbol.for('OptionStore'),
 
-  // entities
-  UserList: Symbol.for('UserListStore'),
-  UserItem: Symbol.for('UserItemStore'),
-  ModuleList: Symbol.for('ModuleListStore'),
-  ModuleItem: Symbol.for('ModuleItemStore'),
-  BlockList: Symbol.for('BlockListStore'),
-  BlockItem: Symbol.for('BlockItemStore'),
-  MaterialList: Symbol.for('MaterialListStore'),
-  MaterialItem: Symbol.for('MaterialItemStore'),
-  TaskList: Symbol.for('TaskListStore'),
-  TaskItem: Symbol.for('TaskItemStore'),
-  QuestionList: Symbol.for('QuestionListStore'),
-  QuestionItem: Symbol.for('QuestionItemStore'),
+  // settings
+  UserSettingsList: Symbol.for('UserSettingsListStore'),
+  UserSettingsItem: Symbol.for('UserSettingsItemStore'),
+  ModuleSettingsList: Symbol.for('ModuleSettingsListStore'),
+  ModuleSettingsItem: Symbol.for('ModuleSettingsItemStore'),
+  BlockSettingsList: Symbol.for('BlockSettingsListStore'),
+  BlockSettingsItem: Symbol.for('BlockSettingsItemStore'),
+  MaterialSettingsList: Symbol.for('MaterialSettingsListStore'),
+  MaterialSettingsItem: Symbol.for('MaterialSettingsItemStore'),
+  TaskSettingsList: Symbol.for('TaskSettingsListStore'),
+  TaskSettingsItem: Symbol.for('TaskSettingsItemStore'),
+  QuestionSettingsList: Symbol.for('QuestionSettingsListStore'),
+  QuestionSettingsItem: Symbol.for('QuestionSettingsItemStore'),
+
+  // user
+  // ...
+
+  // progress
+  // ...
 
   // ---
   // old

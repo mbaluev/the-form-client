@@ -1,10 +1,10 @@
 import { observer } from 'mobx-react';
 import { SeparatorBase } from '@ui/layout/card/separator';
 import { ProgressBase } from '@ui/layout/card/progress';
-import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
 
 export const Separator = observer(() => {
-  const { isSaveLoading } = useUserItemStore();
+  const { isSaveLoading } = useUserSettingsItemStore();
   if (isSaveLoading) return <ProgressBase />;
   return <SeparatorBase />;
 });

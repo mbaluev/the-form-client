@@ -5,7 +5,7 @@ import { Toolbar } from '@ui/layout/list/toolbar';
 import { Stack, useTheme } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useMaterialListStore } from '@store/modules/entities/material/list/useMaterialListStore';
+import { useMaterialSettingsListStore } from '@store/modules/settings/material/settings/list/hook';
 import { IMaterialDTO } from '@model/entities/material';
 import { Item } from '@ui/pages/admin/settings/block/item/materials/item';
 import { Download } from 'ui/components/action';
@@ -15,7 +15,7 @@ import { Avatar } from '@ui/pages/admin/settings/block/item/materials/avatar';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 
 export const MaterialsList = observer(() => {
-  const dataModel = useMaterialListStore();
+  const dataModel = useMaterialSettingsListStore();
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;
   const tab = router.query.slug?.[1] as string;

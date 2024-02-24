@@ -2,7 +2,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { IconButton, Skeleton, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { useTaskItemStore } from '@store/modules/entities/task/item/useTaskItemStore';
+import { useTaskSettingsItemStore } from '@store/modules/settings/task/settings/item/hook';
 import { ITaskDTO } from '@model/entities/task';
 
 interface IProps {
@@ -12,7 +12,7 @@ interface IProps {
 export const Title = observer((props: IProps) => {
   const { onClose } = props;
   const { control } = useFormContext<ITaskDTO>();
-  const { isModalLoading } = useTaskItemStore();
+  const { isModalLoading } = useTaskSettingsItemStore();
   const displayName = useWatch({ control, name: 'document.name' }) || 'New task';
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="flex-start">

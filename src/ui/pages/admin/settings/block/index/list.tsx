@@ -5,14 +5,14 @@ import { Stack, useTheme } from '@mui/material';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@settings/routes';
 import { IBlockDTO } from '@model/entities/block';
-import { useBlockListStore } from '@store/modules/entities/block/list/useBlockListStore';
+import { useBlockSettingsListStore } from '@store/modules/settings/block/settings/list/hook';
 import { Item } from '@ui/pages/admin/settings/block/index/item';
 import { Filter } from '@ui/pages/admin/settings/block/index/filter';
 import { useEffect } from 'react';
 import { ParsedUrlQuery } from 'querystring';
 
 export const BlocksList = observer(() => {
-  const dataModel = useBlockListStore();
+  const dataModel = useBlockSettingsListStore();
   const router = useRouter();
   const theme = useTheme();
   const moduleId = router.query?.moduleId;

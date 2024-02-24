@@ -2,7 +2,7 @@ import { PageContent } from '@ui/layout/page/pageContent';
 import { Title } from '@ui/pages/admin/settings/user/item/title';
 import { Quick } from '@ui/pages/admin/settings/user/item/quick';
 import { observer } from 'mobx-react';
-import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
 import NoData from '@components/noData';
 import { Panel } from '@ui/layout/page/panel';
@@ -14,7 +14,7 @@ import { Details } from '@ui/pages/admin/settings/user/item/details';
 import { ROUTES } from '@settings/routes';
 
 export const PageUser = observer(() => {
-  const { data, isDataLoading } = useUserItemStore();
+  const { data, isDataLoading } = useUserSettingsItemStore();
 
   const router = useRouter();
   const isCreate = router.pathname === ROUTES.ADMIN_SETTINGS_USER_CREATE.path;

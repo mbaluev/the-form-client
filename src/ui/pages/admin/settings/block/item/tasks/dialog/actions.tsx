@@ -5,11 +5,11 @@ import { useFormContext } from 'react-hook-form';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
-import { useTaskItemStore } from '@store/modules/entities/task/item/useTaskItemStore';
+import { useTaskSettingsItemStore } from '@store/modules/settings/task/settings/item/hook';
 import { ITaskDTO } from '@model/entities/task';
 
 export const Actions = observer(() => {
-  const { isSaveLoading, saveModalData } = useTaskItemStore();
+  const { isSaveLoading, saveModalData } = useTaskSettingsItemStore();
 
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;

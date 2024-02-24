@@ -2,13 +2,13 @@ import { Grid } from '@mui/material';
 import { observer } from 'mobx-react';
 import { FormField } from '@components/form/field';
 import { SelectSearch } from '@ui/fields/selectSearch';
-import { useBlockListStore } from '@store/modules/entities/block/list/useBlockListStore';
+import { useBlockSettingsListStore } from '@store/modules/settings/block/settings/list/hook';
 import { Options } from '@ui/pages/admin/settings/block/item/questions/dialog/options';
 import { Input } from '@ui/fields/input';
 import { Count } from '@ui/fields/counter';
 
 export const Form = observer(() => {
-  const { dataItems: blocksItems } = useBlockListStore();
+  const { dataItems: blocksItems } = useBlockSettingsListStore();
   const required = 'required';
   const spacing = 3;
 
