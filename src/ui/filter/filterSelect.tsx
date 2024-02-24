@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import isEqual from 'lodash/isEqual';
 import { useFilterStore } from '@store/modules/common/filter/useFilterStore';
 import { SelectChangeEvent } from '@mui/material';
-import { SelectField } from 'core/components/fields/selectField';
+import { SelectField } from '@components/fields/selectField';
 import { SelectFieldProps } from '@components/fields/selectField/types';
 
 export const FilterSelect = observer((props: SelectFieldProps) => {

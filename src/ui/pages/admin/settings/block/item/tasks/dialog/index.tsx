@@ -5,13 +5,13 @@ import { useEffect } from 'react';
 import { ROUTES } from '@settings/routes';
 import { SeparatorBase } from '@ui/layout/card/separator';
 import { ProgressBase } from '@ui/layout/card/progress';
+import { FormProvider, useForm } from 'react-hook-form';
+import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
+import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
 import { useTaskItemStore } from '@store/modules/entities/task/item/useTaskItemStore';
 import { Title } from '@ui/pages/admin/settings/block/item/tasks/dialog/title';
 import { Actions } from '@ui/pages/admin/settings/block/item/tasks/dialog/actions';
-import { FormProvider, useForm } from 'react-hook-form';
-import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
 import { DEFAULT_TASK } from '@model/entities/task/default';
-import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
 import { Form } from '@ui/pages/admin/settings/block/item/tasks/dialog/form';
 import { ITaskDTO } from '@model/entities/task';
 

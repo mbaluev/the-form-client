@@ -6,7 +6,7 @@ import debounce from 'lodash/debounce';
 import { useFilterStore } from '@store/modules/common/filter/useFilterStore';
 import Divider from '@mui/material/Divider';
 import { IconButton } from '@mui/material';
-import { TextInputField } from 'core/components/fields/textInputField';
+import { TextInputField } from '@components/fields/textInputField';
 import { TextInputFieldProps } from '@components/fields/textInputField/types';
 
 export const FilterText = observer((props: TextInputFieldProps) => {

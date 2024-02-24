@@ -2,8 +2,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import { IconButton, Skeleton, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { useMaterialItemStore } from '@store/modules/entities/material/item/useMaterialItemStore';
-import { IMaterialDTO } from '@model/entities/material';
+import { useQuestionItemStore } from '@store/modules/entities/question/item/useQuestionItemStore';
+import { IQuestionDTO } from '@model/entities/question';
 
 interface IProps {
   onClose?: () => Promise<void>;
@@ -11,9 +11,9 @@ interface IProps {
 
 export const Title = observer((props: IProps) => {
   const { onClose } = props;
-  const { control } = useFormContext<IMaterialDTO>();
-  const { isModalLoading } = useMaterialItemStore();
-  const displayName = useWatch({ control, name: 'document.name' }) || 'New material';
+  const { control } = useFormContext<IQuestionDTO>();
+  const { isModalLoading } = useQuestionItemStore();
+  const displayName = useWatch({ control, name: 'title' }) || 'New question';
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="flex-start">
       <Typography

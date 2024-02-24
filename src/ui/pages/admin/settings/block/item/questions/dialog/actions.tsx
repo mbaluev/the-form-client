@@ -5,11 +5,11 @@ import { useFormContext } from 'react-hook-form';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
-import { useMaterialItemStore } from '@store/modules/entities/material/item/useMaterialItemStore';
-import { IMaterialDTO } from '@model/entities/material';
+import { useQuestionItemStore } from '@store/modules/entities/question/item/useQuestionItemStore';
+import { IQuestionDTO } from '@model/entities/question';
 
 export const Actions = observer(() => {
-  const { isSaveLoading, saveModalData } = useMaterialItemStore();
+  const { isSaveLoading, saveModalData } = useQuestionItemStore();
 
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;
@@ -19,7 +19,7 @@ export const Actions = observer(() => {
     handleSubmit,
     formState: { isDirty },
     reset,
-  } = useFormContext<IMaterialDTO>();
+  } = useFormContext<IQuestionDTO>();
 
   const { Prompt } = useUnsavedChanges(isDirty);
   const [success, setSuccess] = useState<boolean>(false);

@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/no-duplicate-string */
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton, Skeleton, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react';

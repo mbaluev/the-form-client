@@ -8,26 +8,26 @@ import { ProgressBase } from '@ui/layout/card/progress';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockItemStore';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
-import { useMaterialItemStore } from '@store/modules/entities/material/item/useMaterialItemStore';
-import { Title } from '@ui/pages/admin/settings/block/item/materials/dialog/title';
-import { Actions } from '@ui/pages/admin/settings/block/item/materials/dialog/actions';
-import { DEFAULT_MATERIAL } from '@model/entities/material/default';
-import { Form } from '@ui/pages/admin/settings/block/item/materials/dialog/form';
-import { IMaterialDTO } from '@model/entities/material';
+import { useQuestionItemStore } from '@store/modules/entities/question/item/useQuestionItemStore';
+import { Title } from '@ui/pages/admin/settings/block/item/questions/dialog/title';
+import { Actions } from '@ui/pages/admin/settings/block/item/questions/dialog/actions';
+import { DEFAULT_QUESTION } from '@model/entities/question/default';
+import { Form } from '@ui/pages/admin/settings/block/item/questions/dialog/form';
+import { IQuestionDTO } from '@model/entities/question';
 
 interface IProps {
   open?: boolean;
 }
 
-export const MaterialDialog = observer((props: IProps) => {
+export const QuestionDialog = observer((props: IProps) => {
   const { open = false } = props;
-  const { isSaveLoading, getModalData, modalData, isModalLoading } = useMaterialItemStore();
+  const { isSaveLoading, getModalData, modalData, isModalLoading } = useQuestionItemStore();
   const { data: block } = useBlockItemStore();
 
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;
   const tab = router.query.slug?.[1] as string;
-  const materialId = router.query.slug?.[2] as string;
+  const questionId = router.query.slug?.[2] as string;
   const handleClose = async () => {
     await router.push({
       pathname: ROUTES.ADMIN_SETTINGS_BLOCK.path,
@@ -35,7 +35,7 @@ export const MaterialDialog = observer((props: IProps) => {
     });
   };
 
-  const methods = useForm<IMaterialDTO>({ mode: 'all', defaultValues: DEFAULT_MATERIAL });
+  const methods = useForm<IQuestionDTO>({ mode: 'all', defaultValues: DEFAULT_QUESTION });
   useEffect(() => {
     const data: any = modalData ? { ...modalData } : {};
     data.blockId = block?.id;
@@ -43,12 +43,12 @@ export const MaterialDialog = observer((props: IProps) => {
   }, [modalData]);
   useEffect(() => {
     if (open) {
-      const data: any = {};
+      const data: any = DEFAULT_QUESTION;
       data.blockId = block?.id;
       methods.reset(data);
-      getModalData(materialId);
+      getModalData(questionId);
     }
-  }, [open, materialId]);
+  }, [open, questionId]);
 
   return (
     <FormProvider {...methods}>

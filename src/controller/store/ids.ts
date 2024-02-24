@@ -20,6 +20,8 @@ export const STORE = {
   MaterialItem: Symbol.for('MaterialItemStore'),
   TaskList: Symbol.for('TaskListStore'),
   TaskItem: Symbol.for('TaskItemStore'),
+  QuestionList: Symbol.for('QuestionListStore'),
+  QuestionItem: Symbol.for('QuestionItemStore'),
 
   // ---
   // old

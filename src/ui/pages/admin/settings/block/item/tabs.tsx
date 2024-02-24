@@ -6,6 +6,7 @@ import { useBlockItemStore } from '@store/modules/entities/block/item/useBlockIt
 import { observer } from 'mobx-react';
 import { MaterialsList } from '@ui/pages/admin/settings/block/item/materials/list';
 import { TasksList } from '@ui/pages/admin/settings/block/item/tasks/list';
+import { QuestionsList } from '@ui/pages/admin/settings/block/item/questions/list';
 
 export const Tabs = observer(() => {
   const { isSaveLoading } = useBlockItemStore();
@@ -36,7 +37,7 @@ export const Tabs = observer(() => {
     {
       key: ROUTES.ADMIN_SETTINGS_BLOCK.tabs.keys.test,
       label: ROUTES.ADMIN_SETTINGS_BLOCK.tabs.labels.test,
-      component: <>test</>,
+      component: <QuestionsList />,
       sxPanel: { overflow: 'hidden', pb: 0 },
     },
   ];

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 import { useFilterStore } from '@store/modules/common/filter/useFilterStore';
 import { useTheme } from '@mui/material';
-import { MultiSelectField } from 'core/components/fields/multiSelectField';
+import { MultiSelectField } from '@components/fields/multiSelectField';
 import { MultiSelectFieldProps } from '@components/fields/multiSelectField/types';
 
 export const FilterMultiSelect = observer(<ItemType,>(props: MultiSelectFieldProps<ItemType>) => {
