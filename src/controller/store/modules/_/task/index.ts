@@ -7,7 +7,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { ITaskDTO } from '@model/entities/task';
 import { BaseCardStore } from '@store/modules/base/card';
 import { STORE } from '@store/ids';
-import type ITaskStore from '@store/modules/settings/task/_/interface';
+import type ITaskStore from '@store/modules/_/task/interface';
 import type IBlockStore from '@store/modules/_/block/interface';
 import type ITaskService from '@service/modules/entities/task/interface';
 import type IFileService from '@service/modules/common/file/interface';

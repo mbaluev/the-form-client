@@ -1,9 +1,9 @@
 import { action, makeObservable } from 'mobx';
 import { inject, injectable } from 'inversify';
 import { ParsedUrlQuery } from 'querystring';
-import { TaskBaseStore } from '@store/modules/settings/task/_/base';
+import { TaskBaseStore } from '@store/modules/_/task/base';
 import { STORE } from '@store/ids';
-import type ITaskAdminStore from '@store/modules/settings/task/_/admin/interface';
+import type ITaskAdminStore from '@store/modules/_/task/admin/interface';
 import type IBlockAdminStore from '@store/modules/_/block/admin/interface';
 
 @injectable()

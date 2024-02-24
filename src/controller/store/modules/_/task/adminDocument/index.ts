@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
-import { TaskBaseDocumentStore } from '@store/modules/settings/task/_/baseDocument';
+import { TaskBaseDocumentStore } from '@store/modules/_/task/baseDocument';
 import { STORE } from '@store/ids';
-import type ITaskAdminDocumentStore from '@store/modules/settings/task/_/adminDocument/interface';
+import type ITaskAdminDocumentStore from '@store/modules/_/task/adminDocument/interface';
 import type IBlockAdminStore from '@store/modules/_/block/admin/interface';
 
 @injectable()

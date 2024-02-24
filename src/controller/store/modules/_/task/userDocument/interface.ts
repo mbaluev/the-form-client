@@ -1,3 +1,3 @@
-import type ITaskBaseDocumentStore from '@store/modules/settings/task/_/baseDocument/interface';
+import type ITaskBaseDocumentStore from '@store/modules/_/task/baseDocument/interface';
 
 export default interface ITaskUserDocumentStore extends ITaskBaseDocumentStore {}

@@ -1,8 +1,8 @@
 import { inject, injectable } from 'inversify';
 import { ParsedUrlQuery } from 'querystring';
 import { STORE } from '@store/ids';
-import { TaskBaseStore } from '@store/modules/settings/task/_/base';
-import type ITaskUserStore from '@store/modules/settings/task/_/user/interface';
+import { TaskBaseStore } from '@store/modules/_/task/base';
+import type ITaskUserStore from '@store/modules/_/task/user/interface';
 import type IBlockUserStore from '@store/modules/_/block/user/interface';
 
 @injectable()
