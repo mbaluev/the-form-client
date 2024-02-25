@@ -1,13 +1,13 @@
 import { Controller, useFormContext } from 'react-hook-form';
-import { Counter } from '@components/fields/counterField/counter';
+import { Counter, ICounterProps } from '@components/fields/counterField/counter';
 
-interface IProps {
+interface IProps extends ICounterProps {
   name: string;
   rules?: any;
 }
 
 export const Count = (props: IProps) => {
-  const { name, rules } = props;
+  const { name, rules, ...counterProps } = props;
   const { control } = useFormContext();
   return (
     <Controller
@@ -20,7 +20,9 @@ export const Count = (props: IProps) => {
             onChange({ target: { value: val } });
           }
         };
-        return <Counter min={0} count={Number(value || 0)} onChange={handleChange} />;
+        return (
+          <Counter min={0} count={Number(value || 0)} onChange={handleChange} {...counterProps} />
+        );
       }}
     />
   );

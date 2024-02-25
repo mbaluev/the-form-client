@@ -5,6 +5,7 @@ import { useBlockSettingsItemStore } from '@store/modules/settings/block/setting
 import { Input } from '@ui/fields/input';
 import { useModuleSettingsListStore } from '@store/modules/settings/module/settings/list/hook';
 import { Select } from '@ui/fields/select';
+import { Count } from '@ui/fields/counter';
 
 export const Form = observer(() => {
   const { isSaveLoading: disabled } = useBlockSettingsItemStore();
@@ -25,13 +26,7 @@ export const Form = observer(() => {
         <Input name="name" placeholder="name" rules={required} disabled={disabled} />
       </FormField>
       <FormField title="Position">
-        <Input
-          name="position"
-          placeholder="position"
-          rules={required}
-          disabled={disabled}
-          inputType="number"
-        />
+        <Count name="position" rules={required} disabled={disabled} />
       </FormField>
     </FormSection>
   );

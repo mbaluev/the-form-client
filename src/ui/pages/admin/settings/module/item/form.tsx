@@ -3,6 +3,7 @@ import { FormSection } from '@components/form/section';
 import { FormField } from '@components/form/field';
 import { useModuleSettingsItemStore } from '@store/modules/settings/module/settings/item/hook';
 import { Input } from '@ui/fields/input';
+import { Count } from '@ui/fields/counter';
 
 export const Form = observer(() => {
   const { isSaveLoading: disabled } = useModuleSettingsItemStore();
@@ -26,13 +27,7 @@ export const Form = observer(() => {
         />
       </FormField>
       <FormField title="Position">
-        <Input
-          name="position"
-          placeholder="position"
-          rules={required}
-          disabled={disabled}
-          inputType="number"
-        />
+        <Count name="position" rules={required} disabled={disabled} />
       </FormField>
     </FormSection>
   );
