@@ -20,7 +20,7 @@ export const Count = (props: IProps) => {
             onChange({ target: { value: val } });
           }
         };
-        return <Counter min={1} count={Number(value)} onChange={handleChange} />;
+        return <Counter min={0} count={Number(value || 0)} onChange={handleChange} />;
       }}
     />
   );

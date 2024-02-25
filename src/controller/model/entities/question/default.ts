@@ -3,7 +3,7 @@ import { IQuestionDTO, IQuestionOptionDTO } from '@model/entities/question/index
 export const DEFAULT_QUESTION: IQuestionDTO = {
   id: '',
   title: '',
-  position: 1,
+  position: 0,
   blockId: '',
   questionOptions: [],
   userQuestions: [],
