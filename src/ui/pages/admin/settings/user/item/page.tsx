@@ -2,7 +2,7 @@ import { PageContent } from '@ui/layout/page/pageContent';
 import { Title } from '@ui/pages/admin/settings/user/item/title';
 import { Quick } from '@ui/pages/admin/settings/user/item/quick';
 import { observer } from 'mobx-react';
-import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/item/hook';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
 import NoData from '@components/noData';
 import { Panel } from '@ui/layout/page/panel';

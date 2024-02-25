@@ -10,8 +10,8 @@ import { Fragment } from 'react';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import { useFormContext } from 'react-hook-form';
 import { IBlockDTO } from '@model/entities/block';
-import { useBlockSettingsItemStore } from '@store/modules/settings/block/settings/item/hook';
-import { useBlockSettingsListStore } from '@store/modules/settings/block/settings/list/hook';
+import { useBlockSettingsItemStore } from '@store/modules/settings/block/item/hook';
+import { useBlockSettingsListStore } from '@store/modules/settings/block/list/hook';
 import { ParsedUrlQuery } from 'querystring';
 
 export const Quick = observer(() => {

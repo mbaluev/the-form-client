@@ -1,7 +1,7 @@
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
-import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/item/hook';
 import { Title } from '@ui/pages/_/dialog/title';
 import { ROUTES } from '@settings/routes';
 import { Content } from '@ui/pages/_/dialog/content';

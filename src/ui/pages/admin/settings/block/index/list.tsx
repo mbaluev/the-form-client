@@ -5,7 +5,7 @@ import { Stack, useTheme } from '@mui/material';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@settings/routes';
 import { IBlockDTO } from '@model/entities/block';
-import { useBlockSettingsListStore } from '@store/modules/settings/block/settings/list/hook';
+import { useBlockSettingsListStore } from '@store/modules/settings/block/list/hook';
 import { Item } from '@ui/pages/admin/settings/block/index/item';
 import { Filter } from '@ui/pages/admin/settings/block/index/filter';
 import { useEffect } from 'react';

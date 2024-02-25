@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Skeleton } from '@mui/material';
-import { useModuleSettingsItemStore } from '@store/modules/settings/module/settings/item/hook';
+import { useModuleSettingsItemStore } from '@store/modules/settings/module/item/hook';
 import { IModuleDTO } from '@model/entities/module';
 import { DEFAULT_MODULE } from '@model/entities/module/default';
 import { PageModule } from '@ui/pages/admin/settings/module/item/page';

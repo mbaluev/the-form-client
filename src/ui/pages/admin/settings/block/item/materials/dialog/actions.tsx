@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
-import { useMaterialSettingsItemStore } from '@store/modules/settings/material/settings/item/hook';
+import { useMaterialSettingsItemStore } from '@store/modules/settings/material/item/hook';
 import { IMaterialDTO } from '@model/entities/material';
 
 export const Actions = observer(() => {

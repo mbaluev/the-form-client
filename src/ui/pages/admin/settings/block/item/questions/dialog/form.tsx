@@ -2,7 +2,7 @@ import { Grid } from '@mui/material';
 import { observer } from 'mobx-react';
 import { FormField } from '@components/form/field';
 import { SelectSearch } from '@ui/fields/selectSearch';
-import { useBlockSettingsListStore } from '@store/modules/settings/block/settings/list/hook';
+import { useBlockSettingsListStore } from '@store/modules/settings/block/list/hook';
 import { Options } from '@ui/pages/admin/settings/block/item/questions/dialog/options';
 import { Input } from '@ui/fields/input';
 import { Count } from '@ui/fields/counter';

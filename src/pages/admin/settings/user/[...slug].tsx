@@ -7,7 +7,7 @@ import { PageUser } from '@ui/pages/admin/settings/user/item/page';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
-import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/item/hook';
 import { FormProvider, useForm } from 'react-hook-form';
 import { IUserDTO } from '@model/entities/user';
 import { DEFAULT_USER } from '@model/entities/user/default';

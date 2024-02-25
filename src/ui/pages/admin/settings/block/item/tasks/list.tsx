@@ -10,7 +10,7 @@ import { ROUTES } from '@settings/routes';
 import { TaskDialog } from '@ui/pages/admin/settings/block/item/tasks/dialog';
 import { Avatar } from '@ui/pages/admin/settings/block/item/tasks/avatar';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
-import { useTaskSettingsListStore } from '@store/modules/settings/task/settings/list/hook';
+import { useTaskSettingsListStore } from '@store/modules/settings/task/list/hook';
 import { ITaskDTO } from '@model/entities/task';
 
 export const TasksList = observer(() => {

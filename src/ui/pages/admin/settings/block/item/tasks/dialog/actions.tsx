@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
-import { useTaskSettingsItemStore } from '@store/modules/settings/task/settings/item/hook';
+import { useTaskSettingsItemStore } from '@store/modules/settings/task/item/hook';
 import { ITaskDTO } from '@model/entities/task';
 
 export const Actions = observer(() => {

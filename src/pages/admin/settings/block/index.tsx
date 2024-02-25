@@ -7,7 +7,7 @@ import { IBlockDTO } from '@model/entities/block';
 import { DEFAULT_BLOCK } from '@model/entities/block/default';
 import { PageBlocks } from '@ui/pages/admin/settings/block/index/page';
 import { PageBlock } from '@ui/pages/admin/settings/block/item/page';
-import { useModuleSettingsListStore } from '@store/modules/settings/module/settings/list/hook';
+import { useModuleSettingsListStore } from '@store/modules/settings/module/list/hook';
 import { useEffect } from 'react';
 
 const Blocks = (props: any) => {

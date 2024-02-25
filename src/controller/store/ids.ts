@@ -23,8 +23,9 @@ export const STORE = {
   QuestionSettingsList: Symbol.for('QuestionSettingsListStore'),
   QuestionSettingsItem: Symbol.for('QuestionSettingsItemStore'),
 
-  // user
-  // ...
+  // school
+  ModuleSchoolList: Symbol.for('ModuleSchoolListStore'),
+  ModuleSchoolItem: Symbol.for('ModuleSchoolItemStore'),
 
   // progress
   // ...

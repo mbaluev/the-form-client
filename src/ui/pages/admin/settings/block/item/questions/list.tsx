@@ -10,7 +10,7 @@ import { ROUTES } from '@settings/routes';
 import { QuestionDialog } from '@ui/pages/admin/settings/block/item/questions/dialog';
 import { Avatar } from '@ui/pages/admin/settings/block/item/questions/avatar';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
-import { useQuestionSettingsListStore } from '@store/modules/settings/question/settings/list/hook';
+import { useQuestionSettingsListStore } from '@store/modules/settings/question/list/hook';
 import { IQuestionDTO } from '@model/entities/question';
 
 export const QuestionsList = observer(() => {

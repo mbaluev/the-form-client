@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
-import { useQuestionSettingsItemStore } from '@store/modules/settings/question/settings/item/hook';
+import { useQuestionSettingsItemStore } from '@store/modules/settings/question/item/hook';
 import { IQuestionDTO } from '@model/entities/question';
 
 export const Actions = observer(() => {

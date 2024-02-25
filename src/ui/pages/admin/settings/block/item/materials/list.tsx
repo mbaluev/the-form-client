@@ -5,7 +5,7 @@ import { Toolbar } from '@ui/layout/list/toolbar';
 import { Stack, useTheme } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useMaterialSettingsListStore } from '@store/modules/settings/material/settings/list/hook';
+import { useMaterialSettingsListStore } from '@store/modules/settings/material/list/hook';
 import { IMaterialDTO } from '@model/entities/material';
 import { Item } from '@ui/pages/admin/settings/block/item/materials/item';
 import { Download } from 'ui/components/action';

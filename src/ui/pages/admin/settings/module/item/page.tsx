@@ -8,7 +8,7 @@ import NoData from '@components/noData';
 import { Panel } from '@ui/layout/page/panel';
 import { useRouter } from 'next/router';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
-import { useModuleSettingsItemStore } from '@store/modules/settings/module/settings/item/hook';
+import { useModuleSettingsItemStore } from '@store/modules/settings/module/item/hook';
 import { SubTitle } from '@ui/pages/admin/settings/module/item/subtitle';
 import { Tabs } from '@ui/pages/admin/settings/module/item/tabs';
 import { Separator } from '@ui/pages/admin/settings/module/item/separator';

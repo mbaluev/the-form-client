@@ -2,7 +2,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { IconButton, Skeleton, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { useQuestionSettingsItemStore } from '@store/modules/settings/question/settings/item/hook';
+import { useQuestionSettingsItemStore } from '@store/modules/settings/question/item/hook';
 import { IQuestionDTO } from '@model/entities/question';
 
 interface IProps {

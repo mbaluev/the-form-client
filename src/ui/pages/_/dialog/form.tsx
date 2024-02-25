@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/item/hook';
 import { FormField } from '@components/form/field';
 import { TextInputField } from '@components/fields/textInputField';
 import { CheckboxField } from '@components/fields/checkboxField';

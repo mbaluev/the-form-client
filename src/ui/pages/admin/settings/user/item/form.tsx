@@ -5,7 +5,7 @@ import { Input } from '@ui/fields/input';
 import { Password } from '@ui/fields/password';
 import { Checkbox } from '@ui/fields/checkbox';
 import { observer } from 'mobx-react';
-import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/item/hook';
 import { ROUTES } from '@settings/routes';
 
 export const Form = observer(() => {

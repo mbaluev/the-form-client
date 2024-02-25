@@ -7,14 +7,14 @@ import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Skeleton } from '@mui/material';
-import { useBlockSettingsItemStore } from '@store/modules/settings/block/settings/item/hook';
+import { useBlockSettingsItemStore } from '@store/modules/settings/block/item/hook';
 import { IBlockDTO } from '@model/entities/block';
 import { DEFAULT_BLOCK } from '@model/entities/block/default';
 import { PageBlock } from '@ui/pages/admin/settings/block/item/page';
 import { PageBlocks } from '@ui/pages/admin/settings/block/index/page';
-import { useModuleSettingsListStore } from '@store/modules/settings/module/settings/list/hook';
+import { useModuleSettingsListStore } from '@store/modules/settings/module/list/hook';
 import { useFilterStore } from '@store/modules/common/filter/useFilterStore';
-import { useModuleSettingsItemStore } from '@store/modules/settings/module/settings/item/hook';
+import { useModuleSettingsItemStore } from '@store/modules/settings/module/item/hook';
 
 const Block = (props: any) => {
   const router = useRouter();

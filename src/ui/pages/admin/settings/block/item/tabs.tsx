@@ -2,7 +2,7 @@ import { ITabDTO, Tabs as MuiTabs } from '@theme/tabs';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
 import { Details } from '@ui/pages/admin/settings/block/item/details';
-import { useBlockSettingsItemStore } from '@store/modules/settings/block/settings/item/hook';
+import { useBlockSettingsItemStore } from '@store/modules/settings/block/item/hook';
 import { observer } from 'mobx-react';
 import { MaterialsList } from '@ui/pages/admin/settings/block/item/materials/list';
 import { TasksList } from '@ui/pages/admin/settings/block/item/tasks/list';

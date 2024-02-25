@@ -8,11 +8,11 @@ import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { observer } from 'mobx-react';
 import { Fragment, useState } from 'react';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
-import { useModuleSettingsItemStore } from '@store/modules/settings/module/settings/item/hook';
+import { useModuleSettingsItemStore } from '@store/modules/settings/module/item/hook';
 import { useFormContext } from 'react-hook-form';
 import { DialogDiscard } from '@ui/dialogs/dialogDiscard';
 import { IModuleDTO } from '@model/entities/module';
-import { useModuleSettingsListStore } from '@store/modules/settings/module/settings/list/hook';
+import { useModuleSettingsListStore } from '@store/modules/settings/module/list/hook';
 
 export const Quick = observer(() => {
   const {

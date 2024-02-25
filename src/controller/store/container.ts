@@ -12,34 +12,38 @@ import type IAuthStore from '@store/modules/common/auth/interface';
 import { AuthStore } from '@store/modules/common/auth';
 import type IMenuStore from '@store/modules/common/menu/interface';
 import { MenuStore } from '@store/modules/common/menu';
-import type IUserSettingsListStore from '@store/modules/settings/user/settings/list/interface';
-import { UserSettingsListStore } from '@store/modules/settings/user/settings/list';
-import type IUserSettingsItemStore from '@store/modules/settings/user/settings/item/interface';
-import { UserSettingsItemStore } from '@store/modules/settings/user/settings/item';
+import type IUserSettingsListStore from '@store/modules/settings/user/list/interface';
+import { UserSettingsListStore } from 'controller/store/modules/settings/user/list';
+import type IUserSettingsItemStore from '@store/modules/settings/user/item/interface';
+import { UserSettingsItemStore } from 'controller/store/modules/settings/user/item';
 import type IOptionStore from '@store/modules/common/option/interface';
 import { OptionStore } from '@store/modules/common/option';
-import type IModuleSettingsListStore from '@store/modules/settings/module/settings/list/interface';
-import { ModuleSettingsListStore } from '@store/modules/settings/module/settings/list';
-import type IModuleSettingsItemStore from '@store/modules/settings/module/settings/item/interface';
-import { ModuleSettingsItemStore } from '@store/modules/settings/module/settings/item';
-import type IBlockSettingsListStore from '@store/modules/settings/block/settings/list/interface';
-import { BlockSettingsListStore } from '@store/modules/settings/block/settings/list';
-import type IBlockSettingsItemStore from '@store/modules/settings/block/settings/item/interface';
-import { BlockSettingsItemStore } from '@store/modules/settings/block/settings/item';
-import type IMaterialSettingsListStore from '@store/modules/settings/material/settings/list/interface';
-import { MaterialSettingsListStore } from '@store/modules/settings/material/settings/list';
-import type IMaterialSettingsItemStore from '@store/modules/settings/material/settings/item/interface';
-import { MaterialSettingsItemStore } from '@store/modules/settings/material/settings/item';
+import type IModuleSettingsListStore from '@store/modules/settings/module/list/interface';
+import { ModuleSettingsListStore } from 'controller/store/modules/settings/module/list';
+import type IModuleSettingsItemStore from '@store/modules/settings/module/item/interface';
+import { ModuleSettingsItemStore } from 'controller/store/modules/settings/module/item';
+import type IBlockSettingsListStore from '@store/modules/settings/block/list/interface';
+import { BlockSettingsListStore } from 'controller/store/modules/settings/block/list';
+import type IBlockSettingsItemStore from '@store/modules/settings/block/item/interface';
+import { BlockSettingsItemStore } from 'controller/store/modules/settings/block/item';
+import type IMaterialSettingsListStore from '@store/modules/settings/material/list/interface';
+import { MaterialSettingsListStore } from 'controller/store/modules/settings/material/list';
+import type IMaterialSettingsItemStore from '@store/modules/settings/material/item/interface';
+import { MaterialSettingsItemStore } from 'controller/store/modules/settings/material/item';
 import type IFileStore from '@store/modules/common/file/interface';
 import { FileStore } from '@store/modules/common/file';
-import type ITaskSettingsListStore from '@store/modules/settings/task/settings/list/interface';
-import { TaskSettingsListStore } from '@store/modules/settings/task/settings/list';
-import type ITaskSettingsItemStore from '@store/modules/settings/task/settings/item/interface';
-import { TaskSettingsItemStore } from '@store/modules/settings/task/settings/item';
-import type IQuestionSettingsListStore from '@store/modules/settings/question/settings/list/interface';
-import { QuestionSettingsListStore } from '@store/modules/settings/question/settings/list';
-import type IQuestionSettingsItemStore from '@store/modules/settings/question/settings/item/interface';
-import { QuestionSettingsItemStore } from '@store/modules/settings/question/settings/item';
+import type ITaskSettingsListStore from '@store/modules/settings/task/list/interface';
+import { TaskSettingsListStore } from 'controller/store/modules/settings/task/list';
+import type ITaskSettingsItemStore from '@store/modules/settings/task/item/interface';
+import { TaskSettingsItemStore } from 'controller/store/modules/settings/task/item';
+import type IQuestionSettingsListStore from '@store/modules/settings/question/list/interface';
+import { QuestionSettingsListStore } from 'controller/store/modules/settings/question/list';
+import type IQuestionSettingsItemStore from '@store/modules/settings/question/item/interface';
+import { QuestionSettingsItemStore } from 'controller/store/modules/settings/question/item';
+import type IModuleSchoolListStore from '@store/modules/school/module/list/interface';
+import { ModuleSchoolListStore } from '@store/modules/school/module/list';
+import type IModuleSchoolItemStore from '@store/modules/school/module/item/interface';
+import { ModuleSchoolItemStore } from '@store/modules/school/module/item';
 
 export const storeContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -96,5 +100,9 @@ storeContainer
   .to(QuestionSettingsItemStore);
 
 // user
+
+storeContainer.bind<IModuleSchoolListStore>(STORE.ModuleSchoolList).to(ModuleSchoolListStore);
+
+storeContainer.bind<IModuleSchoolItemStore>(STORE.ModuleSchoolItem).to(ModuleSchoolItemStore);
 
 // progress

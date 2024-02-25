@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import { Fragment } from 'react';
 import { Button } from '@mui/material';
-import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/item/hook';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@settings/routes';
 

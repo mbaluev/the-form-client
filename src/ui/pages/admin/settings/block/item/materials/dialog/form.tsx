@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { FormField } from '@components/form/field';
 import { Grid } from '@mui/material';
 import { SelectSearch } from '@ui/fields/selectSearch';
-import { useBlockSettingsListStore } from '@store/modules/settings/block/settings/list/hook';
+import { useBlockSettingsListStore } from '@store/modules/settings/block/list/hook';
 import { useOptionStore } from '@store/modules/common/option/useOptionStore';
 import { SelectSearchAsync } from '@ui/fields/selectSearchAsync';
 import { useFormContext, useWatch } from 'react-hook-form';

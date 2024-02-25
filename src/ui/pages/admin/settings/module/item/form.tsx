@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import { FormSection } from '@components/form/section';
 import { FormField } from '@components/form/field';
-import { useModuleSettingsItemStore } from '@store/modules/settings/module/settings/item/hook';
+import { useModuleSettingsItemStore } from '@store/modules/settings/module/item/hook';
 import { Input } from '@ui/fields/input';
 import { Count } from '@ui/fields/counter';
 

@@ -6,7 +6,7 @@ import { Stack, useTheme } from '@mui/material';
 import { Item } from '@ui/pages/admin/settings/module/index/item';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@settings/routes';
-import { useModuleSettingsListStore } from '@store/modules/settings/module/settings/list/hook';
+import { useModuleSettingsListStore } from '@store/modules/settings/module/list/hook';
 import { IModuleDTO } from '@model/entities/module';
 import { useEffect } from 'react';
 

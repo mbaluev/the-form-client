@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import { SeparatorBase } from '@ui/layout/card/separator';
 import { ProgressBase } from '@ui/layout/card/progress';
-import { useBlockSettingsItemStore } from '@store/modules/settings/block/settings/item/hook';
+import { useBlockSettingsItemStore } from '@store/modules/settings/block/item/hook';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@settings/routes';
 

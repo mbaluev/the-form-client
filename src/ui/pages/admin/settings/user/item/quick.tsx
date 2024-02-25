@@ -5,14 +5,14 @@ import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
 import CloseIcon from '@mui/icons-material/Close';
 import { DialogDiscard } from '@ui/dialogs/dialogDiscard';
 import { observer } from 'mobx-react';
-import { useUserSettingsItemStore } from '@store/modules/settings/user/settings/item/hook';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/item/hook';
 import { IUserDTO } from '@model/entities/user';
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
-import { useUserSettingsListStore } from '@store/modules/settings/user/settings/list/hook';
+import { useUserSettingsListStore } from '@store/modules/settings/user/list/hook';
 
 export const Quick = observer(() => {
   const {

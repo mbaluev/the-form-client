@@ -2,7 +2,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { IconButton, Skeleton, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { useTaskSettingsItemStore } from '@store/modules/settings/task/settings/item/hook';
+import { useTaskSettingsItemStore } from '@store/modules/settings/task/item/hook';
 import { ITaskDTO } from '@model/entities/task';
 
 interface IProps {

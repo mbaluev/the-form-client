@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react';
 import { FormSection } from '@components/form/section';
 import { FormField } from '@components/form/field';
-import { useBlockSettingsItemStore } from '@store/modules/settings/block/settings/item/hook';
+import { useBlockSettingsItemStore } from '@store/modules/settings/block/item/hook';
 import { Input } from '@ui/fields/input';
-import { useModuleSettingsListStore } from '@store/modules/settings/module/settings/list/hook';
+import { useModuleSettingsListStore } from '@store/modules/settings/module/list/hook';
 import { Select } from '@ui/fields/select';
 import { Count } from '@ui/fields/counter';
 
