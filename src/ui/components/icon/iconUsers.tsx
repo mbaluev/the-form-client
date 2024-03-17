@@ -6,5 +6,5 @@ interface IProps {
 
 export const IconUsers = (props: IProps) => {
   const { style } = props;
-  return <BarChartRoundedIcon className="color_blue" style={style} />;
+  return <BarChartRoundedIcon color="primary" style={style} />;
 };

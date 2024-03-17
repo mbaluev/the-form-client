@@ -6,7 +6,7 @@ import { ROUTES } from '@settings/routes';
 export const TitleUsers = observer(() => {
   return (
     <Stack direction="row" spacing={2}>
-      <IconUsers style={{ marginTop: '5px' }} />
+      <IconUsers />
       <div>{ROUTES.ADMIN_PROGRESS_USERS.name}</div>
     </Stack>
   );

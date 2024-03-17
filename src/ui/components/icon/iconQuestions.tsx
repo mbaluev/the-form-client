@@ -14,18 +14,18 @@ interface IProps {
 export const IconQuestions = (props: IProps) => {
   const { userBlock } = props;
   const title = statusQuestions(userBlock);
-  let icon = <DoDisturbIcon className="color_grey-50" />;
+  let icon = <DoDisturbIcon color="secondary" />;
   if (userBlock?.enable && !userBlock?.completeQuestions) {
-    icon = <CircleOutlinedIcon className="color_grey-50" />;
+    icon = <CircleOutlinedIcon color="secondary" />;
   }
   if (userBlock?.completeQuestions) {
-    icon = <CheckCircleIcon className="color_green" />;
+    icon = <CheckCircleIcon color="success" />;
   }
   if (userBlock?.errorQuestions) {
-    icon = <CheckCircleIcon className="color_red" />;
+    icon = <CheckCircleIcon color="error" />;
   }
   if (userBlock?.commentQuestions) {
-    icon = <ChatIcon className="color_red" />;
+    icon = <ChatIcon color="error" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

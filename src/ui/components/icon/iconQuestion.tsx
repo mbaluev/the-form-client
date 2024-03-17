@@ -7,24 +7,23 @@ import ChatIcon from '@mui/icons-material/Chat';
 
 interface IProps {
   userQuestion?: IQuestionUserDTO | null;
-  style?: object;
 }
 
 export const IconQuestion = (props: IProps) => {
-  const { userQuestion, style } = props;
+  const { userQuestion } = props;
   const title = statusQuestion(userQuestion);
-  let icon = <CircleOutlinedIcon className="color_grey-50" style={style} />;
+  let icon = <CircleOutlinedIcon color="secondary" />;
   if (userQuestion?.userQuestionAnswers && userQuestion?.userQuestionAnswers.length > 0) {
-    icon = <CheckCircleIcon className="color_grey-50" style={style} />;
+    icon = <CheckCircleIcon color="secondary" />;
   }
   if (userQuestion?.complete) {
-    icon = <CheckCircleIcon className="color_green" style={style} />;
+    icon = <CheckCircleIcon color="success" />;
   }
   if (userQuestion?.error) {
-    icon = <CheckCircleIcon className="color_red" style={style} />;
+    icon = <CheckCircleIcon color="error" />;
   }
   if (userQuestion?.commentText) {
-    icon = <ChatIcon className="color_red" style={style} />;
+    icon = <ChatIcon color="error" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

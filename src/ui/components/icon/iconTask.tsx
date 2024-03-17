@@ -9,21 +9,20 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface IProps {
   userTask?: ITaskUserDTO | null;
   admin?: boolean;
-  style?: object;
 }
 
 export const IconTask = (props: IProps) => {
-  const { userTask, admin, style } = props;
+  const { userTask, admin } = props;
   const title = statusTask(userTask);
-  let icon = <CircleOutlinedIcon className="color_grey-50" style={style} />;
+  let icon = <CircleOutlinedIcon color="secondary" />;
   if ((admin && userTask?.sent === true) || (!admin && userTask?.sent === false)) {
-    icon = <CallReceivedRoundedIcon className="color_red" style={style} />;
+    icon = <CallReceivedRoundedIcon color="error" />;
   }
   if ((admin && userTask?.sent === false) || (!admin && userTask?.sent === true)) {
-    icon = <CallMadeRoundedIcon className="color_blue" style={style} />;
+    icon = <CallMadeRoundedIcon color="primary" />;
   }
   if (userTask?.complete) {
-    icon = <CheckCircleIcon className="color_green" style={style} />;
+    icon = <CheckCircleIcon color="success" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

@@ -12,7 +12,7 @@ export const TitleBlock = observer((props: IProps) => {
   const name = userBlock?.block?.name;
   return (
     <Stack direction="row" spacing="10px">
-      <IconBlock userBlock={userBlock} style={{ marginTop: '5px' }} />
+      <IconBlock userBlock={userBlock} />
       {name && <div>{name}</div>}
     </Stack>
   );

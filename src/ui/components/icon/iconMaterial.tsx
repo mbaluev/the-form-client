@@ -6,15 +6,14 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 interface IProps {
   userMaterial?: IMaterialUserDTO | null;
-  style?: object;
 }
 
 export const IconMaterial = (props: IProps) => {
-  const { userMaterial, style } = props;
+  const { userMaterial } = props;
   const title = statusMaterial(userMaterial);
-  let icon = <CircleOutlinedIcon className="color_grey-50" style={style} />;
+  let icon = <CircleOutlinedIcon color="secondary" />;
   if (userMaterial?.complete) {
-    icon = <CheckCircleIcon className="color_green" style={style} />;
+    icon = <CheckCircleIcon color="success" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

@@ -12,7 +12,7 @@ export const TitleQuestion = observer((props: IProps) => {
   const position = userQuestion?.question?.position;
   return (
     <Stack direction="row" spacing={2}>
-      <IconQuestion userQuestion={userQuestion} style={{ marginTop: '5px' }} />
+      <IconQuestion userQuestion={userQuestion} />
       {position ? <div>{`Question #${position}`}</div> : undefined}
     </Stack>
   );

@@ -13,12 +13,12 @@ interface IProps {
 export const IconMaterials = (props: IProps) => {
   const { userBlock } = props;
   const title = statusMaterials(userBlock);
-  let icon = <DoDisturbIcon className="color_grey-50" />;
+  let icon = <DoDisturbIcon color="secondary" />;
   if (userBlock?.enable && !userBlock?.completeMaterials) {
-    icon = <CircleOutlinedIcon className="color_grey-50" />;
+    icon = <CircleOutlinedIcon color="primary" />;
   }
   if (userBlock?.completeMaterials) {
-    icon = <CheckCircleIcon className="color_green" />;
+    icon = <CheckCircleIcon color="success" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };
