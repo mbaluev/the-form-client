@@ -10,17 +10,16 @@ import Typography from '@mui/material/Typography';
 interface IProps {
   userModules?: IModuleUserDTO[] | null;
   user?: IUserDTO | null;
-  admin?: boolean;
 }
 
 export const TitleModules = observer((props: IProps) => {
-  const { userModules, user, admin } = props;
+  const { userModules, user } = props;
   return (
     <Stack direction="row" spacing={2}>
       <PageIcon>
         <IconModules userModules={userModules} />
       </PageIcon>
-      {admin && user ? (
+      {user ? (
         <Stack direction="row" spacing={2}>
           <Typography sx={{ fontSize: '1.3rem', fontWeight: 600, lineHeight: '24px' }}>
             {user.firstname}

@@ -16,7 +16,7 @@ export const IconQuestions = (props: IProps) => {
   const title = statusQuestions(userBlock);
   let icon = <DoDisturbIcon color="secondary" />;
   if (userBlock?.enable && !userBlock?.completeQuestions) {
-    icon = <CircleOutlinedIcon color="secondary" />;
+    icon = <CircleOutlinedIcon color="primary" />;
   }
   if (userBlock?.completeQuestions) {
     icon = <CheckCircleIcon color="success" />;

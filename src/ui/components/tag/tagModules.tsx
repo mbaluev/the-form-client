@@ -23,5 +23,5 @@ export const TagModules = (props: IProps) => {
   if (complete) {
     color = 'success';
   }
-  return <Chip label={label} color={color} size="small" />;
+  return <Chip label={label} color={color} size="small" sx={{ width: 'fit-content' }} />;
 };

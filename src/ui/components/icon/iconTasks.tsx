@@ -17,7 +17,7 @@ export const IconTasks = (props: IProps) => {
   const title = statusTasks(userBlock, admin);
   let icon = <DoDisturbIcon color="secondary" />;
   if (userBlock?.enable && !userBlock?.completeTasks) {
-    icon = <CircleOutlinedIcon color="secondary" />;
+    icon = <CircleOutlinedIcon color="primary" />;
   }
   if (
     (!admin && (userBlock?.sentTasksAdmin === true || userBlock?.sentTasksUser === false)) ||

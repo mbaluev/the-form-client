@@ -3,7 +3,7 @@ import { useModuleSchoolListStore } from '@store/modules/school/module/list/hook
 import { Grid, Stack } from '@mui/material';
 import { ModuleGridItem } from '@ui/pages/school/module/index/item';
 
-export const ModuleGrid = observer(() => {
+export const ModulesGrid = observer(() => {
   const { data: userModules } = useModuleSchoolListStore();
   const spacing = 3;
 

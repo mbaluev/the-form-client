@@ -27,5 +27,5 @@ export const TagTask = observer((props: IProps) => {
   if (userTask?.complete) {
     color = 'success';
   }
-  return <Chip label={label} color={color} size="small" />;
+  return <Chip label={label} color={color} size="small" sx={{ width: 'fit-content' }} />;
 });

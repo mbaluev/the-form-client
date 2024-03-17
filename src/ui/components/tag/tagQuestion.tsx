@@ -23,5 +23,5 @@ export const TagQuestion = observer((props: IProps) => {
   if (userQuestion?.commentText) {
     color = 'error';
   }
-  return <Chip label={label} color={color} size="small" />;
+  return <Chip label={label} color={color} size="small" sx={{ width: 'fit-content' }} />;
 });

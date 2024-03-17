@@ -29,7 +29,7 @@ export const IconBlock = (props: IProps) => {
     userBlock.errorQuestions &&
     userBlock.commentQuestions
   ) {
-    icon = <ChatIcon color="error" />;
+    icon = <ChatIcon color="success" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

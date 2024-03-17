@@ -12,5 +12,5 @@ export const TagMaterial = observer((props: IProps) => {
   const label = statusMaterial(userMaterial);
   let color: ChipProps['color'] = 'secondary';
   if (userMaterial?.complete) color = 'success';
-  return <Chip label={label} color={color} size="small" />;
+  return <Chip label={label} color={color} size="small" sx={{ width: 'fit-content' }} />;
 });

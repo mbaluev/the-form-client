@@ -1,38 +1,41 @@
 import Link from 'next/link';
 import { observer } from 'mobx-react';
 import { Typography, Stack, useTheme, Box } from '@mui/material';
-import { TagModule } from '@ui/components/tag/tagModule';
 import { getProgress } from '@ui/components/progress/getProgress';
 import { ProgressBar } from '@ui/components/progress';
-import { IModuleUserDTO } from '@model/entities/module';
 import { ROUTES } from '@settings/routes';
 import { ReactNode } from 'react';
-import { IconBlock } from '@ui/components/icon/iconBlock';
 import { SeparatorBase } from '@ui/layout/card/separator';
+import { IBlockUserDTO } from '@model/entities/block';
+import { TagBlock } from '@ui/components/tag/tagBlock';
+import { IconMaterials } from '@ui/components/icon/iconMaterials';
+import { statusMaterials } from '@ui/components/status/statusMaterials';
+import { IconQuestions } from '@ui/components/icon/iconQuestions';
+import { statusQuestions } from '@ui/components/status/statusQuestions';
+import { IconTasks } from '@ui/components/icon/iconTasks';
+import { statusTasks } from '@ui/components/status/statusTasks';
 
 interface IProps {
-  userModule: IModuleUserDTO;
+  userBlock: IBlockUserDTO;
 }
 
-export const ModuleGridItem = observer((props: IProps) => {
-  const { userModule } = props;
+export const BlockGridItem = observer((props: IProps) => {
+  const { userBlock } = props;
   const theme = useTheme();
 
-  const progressValues = userModule.userBlocks?.reduce((prev: boolean[], curr) => {
-    return prev.concat([
-      Boolean(curr.completeMaterials),
-      Boolean(curr.completeQuestions),
-      Boolean(curr.completeTasks),
-    ]);
-  }, []);
+  const progressValues = [
+    Boolean(userBlock.completeMaterials),
+    Boolean(userBlock.completeQuestions),
+    Boolean(userBlock.completeTasks),
+  ];
   const progress = getProgress(progressValues);
-  const disabled = !userModule.enable;
-  const complete = userModule.enable && userModule.complete;
+  const disabled = !userBlock.enable;
+  const complete = userBlock.enable && userBlock.complete;
 
   const Wrapper = ({ children }: { children: ReactNode }) => {
     if (disabled) return <Box height="100%">{children}</Box>;
     return (
-      <Link passHref href={{ pathname: ROUTES.SCHOOL_MODULE.path, query: { id: userModule.id } }}>
+      <Link passHref href={{ pathname: ROUTES.SCHOOL_BLOCK.path, query: { id: userBlock.id } }}>
         {children}
       </Link>
     );
@@ -59,21 +62,27 @@ export const ModuleGridItem = observer((props: IProps) => {
         }}
       >
         <Stack spacing={2} padding={3} paddingBottom={0}>
-          <TagModule userModule={userModule} />
+          <TagBlock userBlock={userBlock} />
           <Typography fontSize="1.1rem" fontWeight={600} color={theme.palette.common.black}>
-            {userModule.module?.name}
+            {userBlock.block?.name}
           </Typography>
           <Typography fontWeight={600} color={theme.palette.fGrey[100]}>
-            {userModule.module?.title}
+            {userBlock.block?.title}
           </Typography>
         </Stack>
         <Stack flexGrow={1} spacing={2} padding={3} paddingBottom={0} justifyContent="flex-end">
-          {userModule.userBlocks?.map((userBlock, index) => (
-            <Stack key={index} direction="row" spacing={2}>
-              <IconBlock userBlock={userBlock} />
-              <Typography color={theme.palette.common.black}>{userBlock.block?.name}</Typography>
-            </Stack>
-          ))}
+          <Stack direction="row" spacing={2}>
+            <IconMaterials userBlock={userBlock} />
+            <Typography color={theme.palette.common.black}>{statusMaterials(userBlock)}</Typography>
+          </Stack>
+          <Stack direction="row" spacing={2}>
+            <IconTasks userBlock={userBlock} />
+            <Typography color={theme.palette.common.black}>{statusTasks(userBlock)}</Typography>
+          </Stack>
+          <Stack direction="row" spacing={2}>
+            <IconQuestions userBlock={userBlock} />
+            <Typography color={theme.palette.common.black}>{statusQuestions(userBlock)}</Typography>
+          </Stack>
         </Stack>
         <SeparatorBase />
         <ProgressBar value={progress} sx={{ padding: 3, paddingTop: 0 }} />

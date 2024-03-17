@@ -8,7 +8,7 @@ import { ProgressBar } from '@ui/components/progress';
 import { getProgress } from '@ui/components/progress/getProgress';
 import { Panel } from '@ui/layout/page/panel';
 import { TabSkeleton } from '@ui/layout/card/tabSkeleton';
-import { ModuleGrid } from '@ui/pages/school/module/index/grid';
+import { ModulesGrid } from '@ui/pages/school/module/index/grid';
 
 export const PageSchoolModules = observer(() => {
   const { data: userModules, isLoading } = useModuleSchoolListStore();
@@ -41,7 +41,7 @@ export const PageSchoolModules = observer(() => {
       subtitle={<SubTitleModules userModules={userModules} />}
       quick={<ProgressBar value={progress} sx={{ margin: 1, width: 200 }} />}
     >
-      <ModuleGrid />
+      <ModulesGrid />
     </PageContent>
   );
 });

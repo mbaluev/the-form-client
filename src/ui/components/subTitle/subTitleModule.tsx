@@ -1,7 +1,8 @@
 import { observer } from 'mobx-react';
-import { TagModule } from '@ui/components/tag/tagModule';
 import { IModuleUserDTO } from '@model/entities/module';
-import { Fragment } from 'react';
+import { Stack, useTheme } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import { TagModule } from '@ui/components/tag/tagModule';
 
 interface IProps {
   userModule?: IModuleUserDTO | null;
@@ -9,10 +10,19 @@ interface IProps {
 
 export const SubTitleModule = observer((props: IProps) => {
   const { userModule } = props;
+  const theme = useTheme();
   return (
-    <Fragment>
+    <Stack direction="row" spacing={2}>
       <TagModule userModule={userModule} />
-      {userModule?.module?.title}
-    </Fragment>
+      <Typography
+        textOverflow="ellipsis"
+        whiteSpace="nowrap"
+        overflow="hidden"
+        fontWeight={600}
+        color={theme.palette.fGrey[100]}
+      >
+        {userModule?.module?.title}
+      </Typography>
+    </Stack>
   );
 });

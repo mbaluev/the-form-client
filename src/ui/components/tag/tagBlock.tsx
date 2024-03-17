@@ -12,5 +12,5 @@ export const TagBlock = (props: IProps) => {
   let color: ChipProps['color'] = 'primary';
   if (userBlock?.complete) color = 'success';
   if (!userBlock?.enable) color = 'secondary';
-  return <Chip label={label} color={color} size="small" />;
+  return <Chip label={label} color={color} size="small" sx={{ width: 'fit-content' }} />;
 };
