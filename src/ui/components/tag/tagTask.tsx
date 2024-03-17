@@ -11,7 +11,7 @@ interface IProps {
 export const TagTask = observer((props: IProps) => {
   const { userTask, admin } = props;
   const label = statusTask(userTask, admin);
-  let color: ChipProps['color'] = 'default';
+  let color: ChipProps['color'] = 'secondary';
   if (!admin && userTask?.sent === false) {
     color = 'error';
   }

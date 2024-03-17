@@ -10,7 +10,7 @@ interface IProps {
 export const TagMaterial = observer((props: IProps) => {
   const { userMaterial } = props;
   const label = statusMaterial(userMaterial);
-  let color: ChipProps['color'] = 'default';
+  let color: ChipProps['color'] = 'secondary';
   if (userMaterial?.complete) color = 'success';
   return <Chip label={label} color={color} size="small" />;
 });

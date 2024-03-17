@@ -1,10 +1,11 @@
-import { Fragment } from 'react';
 import { observer } from 'mobx-react';
 import { Stack } from '@mui/material';
 import { IModuleUserDTO } from '@model/entities/module';
 import { IconModules } from '@ui/components/icon/iconModules';
 import { IUserDTO } from '@model/entities/user';
 import { ROUTES } from '@settings/routes';
+import { PageIcon } from '@ui/layout/page/pageIcon';
+import Typography from '@mui/material/Typography';
 
 interface IProps {
   userModules?: IModuleUserDTO[] | null;
@@ -16,14 +17,22 @@ export const TitleModules = observer((props: IProps) => {
   const { userModules, user, admin } = props;
   return (
     <Stack direction="row" spacing={2}>
-      <IconModules userModules={userModules} style={{ marginTop: '5px' }} />
+      <PageIcon>
+        <IconModules userModules={userModules} />
+      </PageIcon>
       {admin && user ? (
-        <Fragment>
-          <div>{user.firstname}</div>
-          <div>{user.lastname}</div>
-        </Fragment>
+        <Stack direction="row" spacing={2}>
+          <Typography sx={{ fontSize: '1.3rem', fontWeight: 600, lineHeight: '24px' }}>
+            {user.firstname}
+          </Typography>
+          <Typography sx={{ fontSize: '1.3rem', fontWeight: 600, lineHeight: '24px' }}>
+            {user.lastname}
+          </Typography>
+        </Stack>
       ) : (
-        <div>{ROUTES.SCHOOL_MODULES.label}</div>
+        <Typography sx={{ fontSize: '1.3rem', fontWeight: 600, lineHeight: '24px' }}>
+          {ROUTES.SCHOOL_MODULES.label}
+        </Typography>
       )}
     </Stack>
   );

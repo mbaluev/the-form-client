@@ -8,21 +8,20 @@ import ChatIcon from '@mui/icons-material/Chat';
 
 interface IProps {
   userBlock?: IBlockUserDTO | null;
-  style?: object;
 }
 
 export const IconBlock = (props: IProps) => {
-  const { userBlock, style } = props;
+  const { userBlock } = props;
   const title = statusBlock(userBlock);
-  let icon = <DoDisturbIcon className="color_grey-50" style={style} />;
+  let icon = <DoDisturbIcon color="secondary" />;
   if (userBlock?.enable && !userBlock.complete) {
-    icon = <CircleOutlinedIcon className="color_grey-50" style={style} />;
+    icon = <CircleOutlinedIcon color="primary" />;
   }
   if (userBlock?.enable && userBlock.complete) {
-    icon = <CheckCircleIcon className="color_green" style={style} />;
+    icon = <CheckCircleIcon color="success" />;
   }
   if (userBlock?.enable && userBlock.complete && userBlock.errorQuestions) {
-    icon = <CheckCircleIcon className="color_red" style={style} />;
+    icon = <CheckCircleIcon color="error" />;
   }
   if (
     userBlock?.enable &&
@@ -30,8 +29,7 @@ export const IconBlock = (props: IProps) => {
     userBlock.errorQuestions &&
     userBlock.commentQuestions
   ) {
-    icon = <ChatIcon className="color_red" style={style} />;
+    icon = <ChatIcon color="error" />;
   }
-
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

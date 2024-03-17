@@ -11,6 +11,6 @@ export const TagModule = (props: IProps) => {
   const label = statusModule(userModule);
   let color: ChipProps['color'] = 'primary';
   if (userModule?.complete) color = 'success';
-  if (!userModule?.enable) color = 'default';
-  return <Chip label={label} color={color} size="small" />;
+  if (!userModule?.enable) color = 'secondary';
+  return <Chip label={label} color={color} size="small" sx={{ width: 'fit-content' }} />;
 };

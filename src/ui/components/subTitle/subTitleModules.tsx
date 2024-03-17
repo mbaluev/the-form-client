@@ -1,8 +1,9 @@
-import { Fragment } from 'react';
 import { observer } from 'mobx-react';
 import { IModuleUserDTO } from '@model/entities/module';
 import { TagModules } from '@ui/components/tag/tagModules';
 import { IUserDTO } from '@model/entities/user';
+import Stack from '@mui/material/Stack';
+import { Chip } from '@mui/material';
 
 interface IProps {
   userModules?: IModuleUserDTO[] | null;
@@ -14,9 +15,9 @@ export const SubTitleModules = observer((props: IProps) => {
   const { userModules, user, admin } = props;
 
   return (
-    <Fragment>
+    <Stack direction="row" spacing={2}>
       <TagModules userModules={userModules} />
-      {admin && user && <div>{user.username}</div>}
-    </Fragment>
+      {admin && user && <Chip label={user.username} color="default" size="small" />}
+    </Stack>
   );
 });

@@ -9,7 +9,7 @@ interface IProps {
 export const TagModules = (props: IProps) => {
   const { userModules } = props;
   const label = statusModules(userModules);
-  let color: ChipProps['color'] = 'default';
+  let color: ChipProps['color'] = 'secondary';
   userModules?.forEach((userModule) => {
     if (userModule?.enable && !userModule.complete) color = 'primary';
   });

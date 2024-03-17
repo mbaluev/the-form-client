@@ -10,9 +10,9 @@ interface IProps {
 export const TagQuestion = observer((props: IProps) => {
   const { userQuestion } = props;
   const label = statusQuestion(userQuestion);
-  let color: ChipProps['color'] = 'default';
+  let color: ChipProps['color'] = 'secondary';
   if (userQuestion?.userQuestionAnswers && userQuestion?.userQuestionAnswers.length > 0) {
-    color = 'default';
+    color = 'secondary';
   }
   if (userQuestion?.complete) {
     color = 'success';

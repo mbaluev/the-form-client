@@ -7,16 +7,14 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 interface IProps {
   userModules?: IModuleUserDTO[] | null;
-  style?: object;
 }
 
 export const IconModules = (props: IProps) => {
-  const { userModules, style } = props;
+  const { userModules } = props;
   const title = statusModules(userModules);
-  let icon = <DoDisturbIcon className="color_grey-50" style={style} />;
+  let icon = <DoDisturbIcon color="secondary" />;
   userModules?.forEach((userModule: IModuleUserDTO) => {
-    if (userModule?.enable && !userModule.complete)
-      icon = <CircleOutlinedIcon className="color_grey-50" style={style} />;
+    if (userModule?.enable && !userModule.complete) icon = <CircleOutlinedIcon color="primary" />;
   });
   let complete = false;
   if (userModules && userModules.length > 0) {
@@ -26,7 +24,7 @@ export const IconModules = (props: IProps) => {
     );
   }
   if (complete) {
-    icon = <CheckCircleIcon className="color_green" style={style} />;
+    icon = <CheckCircleIcon color="success" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };
