@@ -1,9 +1,7 @@
 import { Tooltip } from '@theme/tooltip';
 import { IModuleUserDTO } from '@model/entities/module';
 import { statusModules } from '@ui/components/status/statusModules';
-import DoDisturbIcon from '@mui/icons-material/DoDisturb';
-import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import SchoolIcon from '@mui/icons-material/School';
 
 interface IProps {
   userModules?: IModuleUserDTO[] | null;
@@ -12,9 +10,9 @@ interface IProps {
 export const IconModules = (props: IProps) => {
   const { userModules } = props;
   const title = statusModules(userModules);
-  let icon = <DoDisturbIcon color="secondary" />;
+  let icon = <SchoolIcon color="secondary" />;
   userModules?.forEach((userModule: IModuleUserDTO) => {
-    if (userModule?.enable && !userModule.complete) icon = <CircleOutlinedIcon color="primary" />;
+    if (userModule?.enable && !userModule.complete) icon = <SchoolIcon color="primary" />;
   });
   let complete = false;
   if (userModules && userModules.length > 0) {
@@ -24,7 +22,7 @@ export const IconModules = (props: IProps) => {
     );
   }
   if (complete) {
-    icon = <CheckCircleIcon color="success" />;
+    icon = <SchoolIcon color="success" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

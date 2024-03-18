@@ -9,6 +9,7 @@ import { ROUTES } from '@settings/routes';
 import { ReactNode } from 'react';
 import { IconBlock } from '@ui/components/icon/iconBlock';
 import { SeparatorBase } from '@ui/layout/card/separator';
+import { IconModule } from '@ui/components/icon/iconModule';
 
 interface IProps {
   userModule: IModuleUserDTO;
@@ -65,7 +66,10 @@ export const ModuleGridItem = observer((props: IProps) => {
         }}
       >
         <Stack spacing={2} padding={3} paddingBottom={0}>
-          <TagModule userModule={userModule} />
+          <Stack direction="row" spacing={2}>
+            <IconModule userModule={userModule} />
+            <TagModule userModule={userModule} />
+          </Stack>
           <Typography fontSize="1.1rem" fontWeight={600} color={theme.palette.common.black}>
             {userModule.module?.name}
           </Typography>

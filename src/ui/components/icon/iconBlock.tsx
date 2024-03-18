@@ -1,10 +1,8 @@
 import { IBlockUserDTO } from '@model/entities/block';
 import { statusBlock } from '@ui/components/status/statusBlock';
 import { Tooltip } from '@theme/tooltip';
-import DoDisturbIcon from '@mui/icons-material/DoDisturb';
-import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ChatIcon from '@mui/icons-material/Chat';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
 interface IProps {
   userBlock?: IBlockUserDTO | null;
@@ -13,15 +11,15 @@ interface IProps {
 export const IconBlock = (props: IProps) => {
   const { userBlock } = props;
   const title = statusBlock(userBlock);
-  let icon = <DoDisturbIcon color="secondary" />;
+  let icon = <BookmarkBorderIcon color="secondary" />;
   if (userBlock?.enable && !userBlock.complete) {
-    icon = <CircleOutlinedIcon color="primary" />;
+    icon = <BookmarkBorderIcon color="primary" />;
   }
   if (userBlock?.enable && userBlock.complete) {
-    icon = <CheckCircleIcon color="success" />;
+    icon = <BookmarkIcon color="success" />;
   }
   if (userBlock?.enable && userBlock.complete && userBlock.errorQuestions) {
-    icon = <CheckCircleIcon color="error" />;
+    icon = <BookmarkBorderIcon color="error" />;
   }
   if (
     userBlock?.enable &&
@@ -29,7 +27,7 @@ export const IconBlock = (props: IProps) => {
     userBlock.errorQuestions &&
     userBlock.commentQuestions
   ) {
-    icon = <ChatIcon color="success" />;
+    icon = <BookmarkBorderIcon color="success" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

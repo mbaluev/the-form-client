@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { PageIcon } from '@ui/layout/page/pageIcon';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { IModuleDTO } from '@model/entities/module';
-import SchoolIcon from '@mui/icons-material/School';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 export const Title = observer(() => {
   const {
@@ -16,7 +16,7 @@ export const Title = observer(() => {
   return (
     <Stack direction="row" spacing={2}>
       <PageIcon>
-        <SchoolIcon color={isDirty ? 'error' : 'primary'} />
+        <BookmarkIcon color={isDirty ? 'error' : 'primary'} />
       </PageIcon>
       <Typography sx={{ fontSize: '1.3rem', fontWeight: 600, lineHeight: '24px' }}>
         {title}

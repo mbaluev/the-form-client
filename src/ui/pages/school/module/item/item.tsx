@@ -14,6 +14,7 @@ import { IconQuestions } from '@ui/components/icon/iconQuestions';
 import { statusQuestions } from '@ui/components/status/statusQuestions';
 import { IconTasks } from '@ui/components/icon/iconTasks';
 import { statusTasks } from '@ui/components/status/statusTasks';
+import { IconBlock } from '@ui/components/icon/iconBlock';
 
 interface IProps {
   userBlock: IBlockUserDTO;
@@ -68,7 +69,10 @@ export const BlockGridItem = observer((props: IProps) => {
         }}
       >
         <Stack spacing={2} padding={3} paddingBottom={0}>
-          <TagBlock userBlock={userBlock} />
+          <Stack direction="row" spacing={2}>
+            <IconBlock userBlock={userBlock} />
+            <TagBlock userBlock={userBlock} />
+          </Stack>
           <Typography fontSize="1.1rem" fontWeight={600} color={theme.palette.common.black}>
             {userBlock.block?.name}
           </Typography>
