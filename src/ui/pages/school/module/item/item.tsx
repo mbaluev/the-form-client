@@ -47,7 +47,13 @@ export const BlockGridItem = observer((props: IProps) => {
         spacing={3}
         borderRadius={1}
         border="solid 2px transparent"
-        borderColor={complete ? theme.palette.success.light : theme.palette.fGrey['20']}
+        borderColor={
+          complete
+            ? theme.palette.success.light
+            : disabled
+            ? theme.palette.fGrey['20']
+            : theme.palette.primary.light
+        }
         height="100%"
         sx={{
           backgroundColor: disabled ? theme.palette.fGrey['10'] : undefined,
