@@ -44,6 +44,8 @@ import type IModuleSchoolListStore from '@store/modules/school/module/list/inter
 import { ModuleSchoolListStore } from '@store/modules/school/module/list';
 import type IModuleSchoolItemStore from '@store/modules/school/module/item/interface';
 import { ModuleSchoolItemStore } from '@store/modules/school/module/item';
+import type IBlockSchoolItemStore from '@store/modules/school/block/item/interface';
+import { BlockSchoolItemStore } from '@store/modules/school/block/item';
 
 export const storeContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -99,10 +101,12 @@ storeContainer
   .bind<IQuestionSettingsItemStore>(STORE.QuestionSettingsItem)
   .to(QuestionSettingsItemStore);
 
-// user
+// school
 
 storeContainer.bind<IModuleSchoolListStore>(STORE.ModuleSchoolList).to(ModuleSchoolListStore);
 
 storeContainer.bind<IModuleSchoolItemStore>(STORE.ModuleSchoolItem).to(ModuleSchoolItemStore);
+
+storeContainer.bind<IBlockSchoolItemStore>(STORE.BlockSchoolItem).to(BlockSchoolItemStore);
 
 // progress

@@ -36,7 +36,7 @@ export const BlockGridItem = observer((props: IProps) => {
   const Wrapper = ({ children }: { children: ReactNode }) => {
     if (disabled) return <Box height="100%">{children}</Box>;
     return (
-      <Link passHref href={{ pathname: ROUTES.SCHOOL_BLOCK.path, query: { id: userBlock.id } }}>
+      <Link passHref href={{ pathname: ROUTES.SCHOOL_BLOCK.path, query: { slug: [userBlock.id] } }}>
         {children}
       </Link>
     );

@@ -51,8 +51,20 @@ export const ROUTES: Record<string, any> = {
   SCHOOL_BLOCK: {
     name: 'user-block',
     label: 'Block',
-    path: '/school/block/[id]',
+    path: '/school/block/[...slug]',
     roles: [ROLES.STUDENT],
+    tabs: {
+      keys: {
+        materials: 'materials',
+        homework: 'homework',
+        test: 'test',
+      },
+      labels: {
+        materials: 'Materials',
+        homework: 'Homework',
+        test: 'Test',
+      },
+    },
   },
 
   // --
