@@ -8,24 +8,34 @@ import { IUserDTO } from '@model/entities/user';
 import { Item } from '@ui/pages/settings/user/index/item';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@settings/routes';
+import { useEffect } from 'react';
 
 export const UsersList = observer(() => {
   const dataModel = useUserSettingsListStore();
   const router = useRouter();
   const theme = useTheme();
+
   const handleClick = async (id: string) => {
-    const slug = [id];
-    if (router.pathname === ROUTES.SETTINGS_USER.path) slug.push(router.query.slug?.[1] as string);
     await router.push({
       pathname: ROUTES.SETTINGS_USER.path,
-      query: { ...router.query, slug },
+      query: { slug: [id] },
     });
   };
+  const handleCreate = async () => {
+    await router.push({
+      pathname: ROUTES.SETTINGS_USER_CREATE.path,
+    });
+  };
+
+  useEffect(() => {
+    dataModel.getData();
+  }, []);
+
   return (
     <Stack spacing={2} height="100%">
       <Stack spacing={2}>
         <Filter dataModel={dataModel} padding />
-        <Toolbar dataModel={dataModel} padding />
+        <Toolbar dataModel={dataModel} padding handleCreate={handleCreate} />
       </Stack>
       <Stack flexGrow={1} overflow="hidden">
         <List
@@ -33,7 +43,7 @@ export const UsersList = observer(() => {
           itemRenderer={(item: IUserDTO) => <Item item={item} />}
           rowStyleGetter={(item: IUserDTO) => {
             if (router.pathname === ROUTES.SETTINGS_USER.path) {
-              const id = router.query.slug?.[0] as string;
+              const id = router.query.id as string;
               if (item.id === id) return { backgroundColor: theme.palette.fGrey[10] };
             }
           }}

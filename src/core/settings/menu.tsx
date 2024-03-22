@@ -41,36 +41,31 @@ export const MENU_CONFIG: IMenuItemDTO[] = [
     icon: <SettingsIcon />,
     items: [
       {
-        name: ROUTES.ADMIN_SETTINGS_MODULES.name,
-        label: ROUTES.ADMIN_SETTINGS_MODULES.label,
-        url: ROUTES.ADMIN_SETTINGS_MODULES.path,
+        name: ROUTES.SETTINGS_MODULES.name,
+        label: ROUTES.SETTINGS_MODULES.label,
+        url: ROUTES.SETTINGS_MODULES.path,
         active: (pathname: string) => {
           return (
-            pathname === ROUTES.ADMIN_SETTINGS_MODULES.path ||
-            pathname === ROUTES.ADMIN_SETTINGS_MODULE.path
+            pathname === ROUTES.SETTINGS_MODULES.path || pathname === ROUTES.SETTINGS_MODULE.path
           );
         },
       },
       {
-        name: ROUTES.ADMIN_SETTINGS_BLOCKS.name,
-        label: ROUTES.ADMIN_SETTINGS_BLOCKS.label,
-        url: ROUTES.ADMIN_SETTINGS_BLOCKS.path,
+        name: ROUTES.SETTINGS_BLOCKS.name,
+        label: ROUTES.SETTINGS_BLOCKS.label,
+        url: ROUTES.SETTINGS_BLOCKS.path,
         active: (pathname: string) => {
           return (
-            pathname === ROUTES.ADMIN_SETTINGS_BLOCKS.path ||
-            pathname === ROUTES.ADMIN_SETTINGS_BLOCK.path
+            pathname === ROUTES.SETTINGS_BLOCKS.path || pathname === ROUTES.SETTINGS_BLOCK.path
           );
         },
       },
       {
-        name: ROUTES.ADMIN_SETTINGS_USERS.name,
-        label: ROUTES.ADMIN_SETTINGS_USERS.label,
-        url: ROUTES.ADMIN_SETTINGS_USERS.path,
+        name: ROUTES.SETTINGS_USERS.name,
+        label: ROUTES.SETTINGS_USERS.label,
+        url: ROUTES.SETTINGS_USERS.path,
         active: (pathname: string) => {
-          return (
-            pathname === ROUTES.ADMIN_SETTINGS_USERS.path ||
-            pathname === ROUTES.ADMIN_SETTINGS_USER.path
-          );
+          return pathname === ROUTES.SETTINGS_USERS.path || pathname === ROUTES.SETTINGS_USER.path;
         },
       },
     ],

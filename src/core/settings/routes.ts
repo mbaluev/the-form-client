@@ -68,34 +68,34 @@ export const ROUTES: Record<string, any> = {
   },
 
   // --
-  ADMIN_SETTINGS_USERS: {
-    name: 'admin-settings-users',
+  SETTINGS_USERS: {
+    name: 'settings-users',
     label: 'Users',
-    path: '/admin/settings/user',
+    path: '/settings/user',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_SETTINGS_USER: {
-    name: 'admin-settings-user',
+  SETTINGS_USER: {
+    name: 'settings-user',
     label: 'User',
-    path: '/admin/settings/user/[...slug]',
+    path: '/settings/user/[...slug]',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_SETTINGS_USER_CREATE: {
-    name: 'admin-settings-user-create',
+  SETTINGS_USER_CREATE: {
+    name: 'settings-user-create',
     label: 'Create',
-    path: '/admin/settings/user/create',
+    path: '/settings/user/create',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_SETTINGS_MODULES: {
-    name: 'admin-settings-modules',
+  SETTINGS_MODULES: {
+    name: 'settings-modules',
     label: 'Modules',
-    path: '/admin/settings/module',
+    path: '/settings/module',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_SETTINGS_MODULE: {
-    name: 'admin-settings-module',
+  SETTINGS_MODULE: {
+    name: 'settings-module',
     label: 'Module',
-    path: '/admin/settings/module/[...slug]',
+    path: '/settings/module/[...slug]',
     roles: [ROLES.ADMIN],
     tabs: {
       keys: {
@@ -108,22 +108,22 @@ export const ROUTES: Record<string, any> = {
       },
     },
   },
-  ADMIN_SETTINGS_MODULE_CREATE: {
-    name: 'admin-settings-module-create',
+  SETTINGS_MODULE_CREATE: {
+    name: 'settings-module-create',
     label: 'Create',
-    path: '/admin/settings/module/create',
+    path: '/settings/module/create',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_SETTINGS_BLOCKS: {
-    name: 'admin-settings-blocks',
+  SETTINGS_BLOCKS: {
+    name: 'settings-blocks',
     label: 'Blocks',
-    path: '/admin/settings/block',
+    path: '/settings/block',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_SETTINGS_BLOCK: {
-    name: 'admin-settings-block',
+  SETTINGS_BLOCK: {
+    name: 'settings-block',
     label: 'Block',
-    path: '/admin/settings/block/[...slug]',
+    path: '/settings/block/[...slug]',
     roles: [ROLES.ADMIN],
     tabs: {
       keys: {
@@ -141,10 +141,10 @@ export const ROUTES: Record<string, any> = {
       },
     },
   },
-  ADMIN_SETTINGS_BLOCK_CREATE: {
-    name: 'admin-settings-block-create',
+  SETTINGS_BLOCK_CREATE: {
+    name: 'settings-block-create',
     label: 'Create',
-    path: '/admin/settings/block/create',
+    path: '/settings/block/create',
     roles: [ROLES.ADMIN],
   },
   // --

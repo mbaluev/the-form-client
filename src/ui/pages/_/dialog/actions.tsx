@@ -12,14 +12,14 @@ export const Actions = observer(() => {
   const router = useRouter();
   const handleClose = async () => {
     await router.push({
-      pathname: ROUTES.ADMIN_SETTINGS_USERS.path,
+      pathname: ROUTES.SETTINGS_USERS.path,
     });
   };
   const handleDoSave = async () => {
     const user = await saveModalData();
     if (user?.id) {
       await router.push({
-        pathname: ROUTES.ADMIN_SETTINGS_USER.path,
+        pathname: ROUTES.SETTINGS_USER.path,
         query: { id: user.id },
       });
     }

@@ -1,12 +1,12 @@
 import { PageContent } from '@ui/layout/page/pageContent';
-import { Title } from '@ui/pages/settings/user/index/title';
 import { SeparatorBase } from '@ui/layout/card/separator';
-import { UsersList } from '@ui/pages/settings/user/index/list';
+import { Title } from '@ui/pages/settings/block/index/title';
+import { BlocksList } from '@ui/pages/settings/block/index/list';
 
-export const PageUsers = () => {
+export const PageBlocks = () => {
   return (
     <PageContent title={<Title />} separator={<SeparatorBase />}>
-      <UsersList />
+      <BlocksList />
     </PageContent>
   );
 };

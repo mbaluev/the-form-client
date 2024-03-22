@@ -21,7 +21,7 @@ export const UserDialog = observer((props: IProps) => {
   const router = useRouter();
   const handleClose = async () => {
     await router.push({
-      pathname: ROUTES.ADMIN_SETTINGS_USERS.path,
+      pathname: ROUTES.SETTINGS_USERS.path,
     });
   };
   useEffect(() => {
