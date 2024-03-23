@@ -2,8 +2,8 @@ import { IQuestionUserDTO } from '@model/entities/question';
 import { statusQuestion } from '@ui/components/status/statusQuestion';
 import { Tooltip } from '@theme/tooltip';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ChatIcon from '@mui/icons-material/Chat';
+import CheckIcon from '@mui/icons-material/Check';
 
 interface IProps {
   userQuestion?: IQuestionUserDTO | null;
@@ -14,13 +14,13 @@ export const IconQuestion = (props: IProps) => {
   const title = statusQuestion(userQuestion);
   let icon = <CircleOutlinedIcon color="secondary" />;
   if (userQuestion?.userQuestionAnswers && userQuestion?.userQuestionAnswers.length > 0) {
-    icon = <CheckCircleIcon color="secondary" />;
+    icon = <CheckIcon color="secondary" />;
   }
   if (userQuestion?.complete) {
-    icon = <CheckCircleIcon color="success" />;
+    icon = <CheckIcon color="success" />;
   }
   if (userQuestion?.error) {
-    icon = <CheckCircleIcon color="error" />;
+    icon = <CheckIcon color="error" />;
   }
   if (userQuestion?.commentText) {
     icon = <ChatIcon color="error" />;

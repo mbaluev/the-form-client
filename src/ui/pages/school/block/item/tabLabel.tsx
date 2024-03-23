@@ -11,7 +11,7 @@ interface IProps {
   admin?: boolean;
 }
 
-export const BlockTabLabel = (props: IProps) => {
+export const TabLabel = (props: IProps) => {
   const { label, userBlock, admin } = props;
   return (
     <Stack direction="row" spacing={2}>

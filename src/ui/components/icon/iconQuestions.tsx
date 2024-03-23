@@ -3,8 +3,8 @@ import { statusQuestions } from '@ui/components/status/statusQuestions';
 import { Tooltip } from '@theme/tooltip';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ChatIcon from '@mui/icons-material/Chat';
+import CheckIcon from '@mui/icons-material/Check';
 
 interface IProps {
   userBlock?: IBlockUserDTO | null;
@@ -19,10 +19,10 @@ export const IconQuestions = (props: IProps) => {
     icon = <CircleOutlinedIcon color="primary" />;
   }
   if (userBlock?.completeQuestions) {
-    icon = <CheckCircleIcon color="success" />;
+    icon = <CheckIcon color="success" />;
   }
   if (userBlock?.errorQuestions) {
-    icon = <CheckCircleIcon color="error" />;
+    icon = <CheckIcon color="error" />;
   }
   if (userBlock?.commentQuestions) {
     icon = <ChatIcon color="error" />;

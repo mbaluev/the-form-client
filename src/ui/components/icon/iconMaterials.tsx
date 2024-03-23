@@ -3,7 +3,7 @@ import { statusMaterials } from '@ui/components/status/statusMaterials';
 import { Tooltip } from '@theme/tooltip';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckIcon from '@mui/icons-material/Check';
 
 interface IProps {
   userBlock?: IBlockUserDTO | null;
@@ -18,7 +18,7 @@ export const IconMaterials = (props: IProps) => {
     icon = <CircleOutlinedIcon color="primary" />;
   }
   if (userBlock?.completeMaterials) {
-    icon = <CheckCircleIcon color="success" />;
+    icon = <CheckIcon color="success" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

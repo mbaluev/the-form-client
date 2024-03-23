@@ -10,7 +10,7 @@ import { SeparatorBase } from '@ui/layout/card/separator';
 
 export interface ITabDTO {
   key: string;
-  label: string;
+  label: string | ReactElement;
   component: ReactElement;
   sxPanel?: SxProps<Theme>;
 }
@@ -46,7 +46,7 @@ export const Tabs = (props: IProps) => {
                 key={tab.key}
                 label={tab.label}
                 value={tab.key}
-                sx={{ textTransform: 'capitalize' }}
+                sx={{ textTransform: 'capitalize', mr: 3 }}
               />
             ))}
           </TabList>

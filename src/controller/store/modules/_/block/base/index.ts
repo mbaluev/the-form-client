@@ -3,9 +3,9 @@ import { SERVICE } from '@service/ids';
 import { IBlockUserDTO } from '@model/entities/block';
 import { action, makeObservable, observable } from 'mobx';
 import { BaseCardStore } from '@store/modules/base/card';
-import { BlockTabNames } from '@ui/components/blockTab/blockTabNames';
 import type IBlockBaseStore from '@store/modules/_/block/base/interface';
 import type IBlockService from '@service/modules/entities/block/interface';
+import { ROUTES } from '@settings/routes';
 
 @injectable()
 export class BlockBaseStore extends BaseCardStore<IBlockUserDTO> implements IBlockBaseStore {
@@ -21,11 +21,11 @@ export class BlockBaseStore extends BaseCardStore<IBlockUserDTO> implements IBlo
     });
   }
 
-  tab = BlockTabNames.materials;
+  tab = ROUTES.SCHOOL_BLOCK.tabs.keys.materials;
 
-  setTab = (value: BlockTabNames) => (this.tab = value);
+  setTab = (value: string) => (this.tab = value);
 
-  changeTab = (value: BlockTabNames) => {
+  changeTab = (value: string) => {
     this.setTab(value);
   };
 

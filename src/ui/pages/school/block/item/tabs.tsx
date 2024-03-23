@@ -1,14 +1,15 @@
 import { ITabDTO, Tabs as MuiTabs } from '@theme/tabs';
 import { ROUTES } from '@settings/routes';
 import { useRouter } from 'next/router';
-import { useBlockSettingsItemStore } from '@store/modules/settings/block/item/hook';
 import { observer } from 'mobx-react';
 import { MaterialsList } from '@ui/pages/school/block/item/materials/list';
 import { TasksList } from '@ui/pages/school/block/item/tasks/list';
 import { QuestionsList } from '@ui/pages/school/block/item/questions/list';
+import { TabLabel } from '@ui/pages/school/block/item/tabLabel';
+import { useBlockSchoolItemStore } from '@store/modules/school/block/item/hook';
 
 export const Tabs = observer(() => {
-  const { isSaveLoading } = useBlockSettingsItemStore();
+  const { isSaveLoading, data: userBlock } = useBlockSchoolItemStore();
 
   const router = useRouter();
   const id = router.query.slug?.[0] as string;
@@ -17,19 +18,19 @@ export const Tabs = observer(() => {
   const tabs: ITabDTO[] = [
     {
       key: ROUTES.SCHOOL_BLOCK.tabs.keys.materials,
-      label: ROUTES.SCHOOL_BLOCK.tabs.labels.materials,
+      label: <TabLabel label={ROUTES.SCHOOL_BLOCK.tabs.labels.materials} userBlock={userBlock} />,
       component: <MaterialsList />,
       sxPanel: { overflow: 'hidden', pb: 0 },
     },
     {
       key: ROUTES.SCHOOL_BLOCK.tabs.keys.homework,
-      label: ROUTES.SCHOOL_BLOCK.tabs.labels.homework,
+      label: <TabLabel label={ROUTES.SCHOOL_BLOCK.tabs.labels.homework} userBlock={userBlock} />,
       component: <TasksList />,
       sxPanel: { overflow: 'hidden', pb: 0 },
     },
     {
       key: ROUTES.SCHOOL_BLOCK.tabs.keys.test,
-      label: ROUTES.SCHOOL_BLOCK.tabs.labels.test,
+      label: <TabLabel label={ROUTES.SCHOOL_BLOCK.tabs.labels.test} userBlock={userBlock} />,
       component: <QuestionsList />,
       sxPanel: { overflow: 'hidden', pb: 0 },
     },

@@ -4,7 +4,7 @@ import { Tooltip } from '@theme/tooltip';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CallReceivedRoundedIcon from '@mui/icons-material/CallReceivedRounded';
 import CallMadeRoundedIcon from '@mui/icons-material/CallMadeRounded';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckIcon from '@mui/icons-material/Check';
 
 interface IProps {
   userTask?: ITaskUserDTO | null;
@@ -22,7 +22,7 @@ export const IconTask = (props: IProps) => {
     icon = <CallMadeRoundedIcon color="primary" />;
   }
   if (userTask?.complete) {
-    icon = <CheckCircleIcon color="success" />;
+    icon = <CheckIcon color="success" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

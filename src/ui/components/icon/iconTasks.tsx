@@ -3,9 +3,9 @@ import { statusTasks } from '@ui/components/status/statusTasks';
 import { Tooltip } from '@theme/tooltip';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CallMadeRoundedIcon from '@mui/icons-material/CallMadeRounded';
 import CallReceivedRoundedIcon from '@mui/icons-material/CallReceivedRounded';
+import CheckIcon from '@mui/icons-material/Check';
 
 interface IProps {
   userBlock?: IBlockUserDTO | null;
@@ -31,7 +31,7 @@ export const IconTasks = (props: IProps) => {
     icon = <CallMadeRoundedIcon color="primary" />;
   }
   if (userBlock?.completeTasks) {
-    icon = <CheckCircleIcon color="success" />;
+    icon = <CheckIcon color="success" />;
   }
   return <Tooltip title={title}>{icon}</Tooltip>;
 };
