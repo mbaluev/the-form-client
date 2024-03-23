@@ -15,17 +15,6 @@ export class UserSettingsItemStore
 
   // --- override
 
-  getList = async (query?: ParsedUrlQuery) => {
-    this.setListLoading(true);
-    try {
-      const data = await this.userService.getUsers(query);
-      this.setList(data);
-    } catch (err) {
-    } finally {
-      this.setListLoading(false);
-    }
-  };
-
   getData = async (id?: string, query?: ParsedUrlQuery) => {
     this.setDataLoading(true);
     try {

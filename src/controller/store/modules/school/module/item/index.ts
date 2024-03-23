@@ -5,7 +5,7 @@ import { BaseCardStore } from '@store/modules/base/card';
 import { IModuleUserDTO } from '@model/entities/module';
 import type IModuleSchoolItemStore from '@store/modules/school/module/item/interface';
 import type IModuleService from '@service/modules/entities/module/interface';
-import { makeObservable } from 'mobx';
+import { action, makeObservable } from 'mobx';
 
 @injectable()
 export class ModuleSchoolItemStore
@@ -16,21 +16,12 @@ export class ModuleSchoolItemStore
 
   constructor() {
     super();
-    makeObservable(this, {});
+    makeObservable(this, {
+      getDataByBlockId: action,
+    });
   }
 
   // --- override
-
-  getList = async (query?: ParsedUrlQuery) => {
-    this.setListLoading(true);
-    try {
-      const data = await this.moduleService.getModulesUser(query);
-      this.setList(data);
-    } catch (err) {
-    } finally {
-      this.setListLoading(false);
-    }
-  };
 
   getData = async (id?: string, query?: ParsedUrlQuery) => {
     this.setDataLoading(true);

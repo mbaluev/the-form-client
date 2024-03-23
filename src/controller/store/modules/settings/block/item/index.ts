@@ -15,17 +15,6 @@ export class BlockSettingsItemStore
 
   // --- override
 
-  getList = async (query?: ParsedUrlQuery) => {
-    this.setListLoading(true);
-    try {
-      const data = await this.blockService.getBlocks(query);
-      this.setList(data);
-    } catch (err) {
-    } finally {
-      this.setListLoading(false);
-    }
-  };
-
   getData = async (id?: string, query?: ParsedUrlQuery) => {
     this.setDataLoading(true);
     try {

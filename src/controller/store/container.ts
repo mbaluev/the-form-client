@@ -46,6 +46,10 @@ import type IModuleSchoolItemStore from '@store/modules/school/module/item/inter
 import { ModuleSchoolItemStore } from '@store/modules/school/module/item';
 import type IBlockSchoolItemStore from '@store/modules/school/block/item/interface';
 import { BlockSchoolItemStore } from '@store/modules/school/block/item';
+import type IMaterialSchoolListStore from '@store/modules/school/material/list/interface';
+import { MaterialSchoolListStore } from '@store/modules/school/material/list';
+import type IMaterialSchoolItemStore from '@store/modules/school/material/item/interface';
+import { MaterialSchoolItemStore } from '@store/modules/school/material/item';
 
 export const storeContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -108,5 +112,9 @@ storeContainer.bind<IModuleSchoolListStore>(STORE.ModuleSchoolList).to(ModuleSch
 storeContainer.bind<IModuleSchoolItemStore>(STORE.ModuleSchoolItem).to(ModuleSchoolItemStore);
 
 storeContainer.bind<IBlockSchoolItemStore>(STORE.BlockSchoolItem).to(BlockSchoolItemStore);
+
+storeContainer.bind<IMaterialSchoolListStore>(STORE.MaterialSchoolList).to(MaterialSchoolListStore);
+
+storeContainer.bind<IMaterialSchoolItemStore>(STORE.MaterialSchoolItem).to(MaterialSchoolItemStore);
 
 // progress

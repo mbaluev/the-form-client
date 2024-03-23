@@ -27,6 +27,8 @@ export const STORE = {
   ModuleSchoolList: Symbol.for('ModuleSchoolListStore'),
   ModuleSchoolItem: Symbol.for('ModuleSchoolItemStore'),
   BlockSchoolItem: Symbol.for('BlockSchoolItemStore'),
+  MaterialSchoolList: Symbol.for('MaterialSchoolListStore'),
+  MaterialSchoolItem: Symbol.for('MaterialSchoolItemStore'),
 
   // progress
   // ...
