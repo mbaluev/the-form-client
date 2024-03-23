@@ -18,7 +18,7 @@ export const TabLabel = (props: IProps) => {
       {label === 'Materials' && <IconMaterials userBlock={userBlock} admin={admin} />}
       {label === 'Homework' && <IconTasks userBlock={userBlock} admin={admin} />}
       {label === 'Test' && <IconQuestions userBlock={userBlock} admin={admin} />}
-      <Typography fontWeight={500}>{label}</Typography>
+      <Typography fontWeight={600}>{label}</Typography>
     </Stack>
   );
 };
