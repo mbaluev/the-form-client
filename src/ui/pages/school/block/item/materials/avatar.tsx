@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material';
 import { observer } from 'mobx-react';
 import { IMaterialUserDTO } from '@model/entities/material';
-import { Icon } from '@ui/pages/school/block/item/materials/icon';
+import { IconDocument } from '@ui/components/icon/iconDocument';
 import { IconMaterial } from '@ui/components/icon/iconMaterial';
 
 interface IProps {
@@ -13,7 +13,7 @@ export const Avatar = observer((props: IProps) => {
   return (
     <Stack direction="row" spacing={2} alignItems="center">
       <IconMaterial userMaterial={item} />
-      <Icon item={item} />
+      <IconDocument document={item.material?.document} />
     </Stack>
   );
 });

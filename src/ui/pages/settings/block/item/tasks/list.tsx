@@ -8,10 +8,10 @@ import { useEffect } from 'react';
 import { Item } from '@ui/pages/settings/block/item/tasks/item';
 import { ROUTES } from '@settings/routes';
 import { TaskDialog } from '@ui/pages/settings/block/item/tasks/dialog';
-import { Avatar } from '@ui/pages/settings/block/item/tasks/avatar';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { useTaskSettingsListStore } from '@store/modules/settings/task/list/hook';
 import { ITaskDTO } from '@model/entities/task';
+import { IconDocument } from '@ui/components/icon/iconDocument';
 
 export const TasksList = observer(() => {
   const dataModel = useTaskSettingsListStore();
@@ -58,7 +58,7 @@ export const TasksList = observer(() => {
       <Stack flexGrow={1} overflow="hidden">
         <List
           dataModel={dataModel}
-          avatarRenderer={(item: ITaskDTO) => <Avatar item={item} />}
+          avatarRenderer={(item: ITaskDTO) => <IconDocument document={item.document} />}
           itemRenderer={(item: ITaskDTO) => <Item item={item} />}
           moreRenderer={(item: ITaskDTO) => (
             <Chip label={item.document?.documentType.name} color="primary" size="small" />
