@@ -50,6 +50,14 @@ import type IMaterialSchoolListStore from '@store/modules/school/material/list/i
 import { MaterialSchoolListStore } from '@store/modules/school/material/list';
 import type IMaterialSchoolItemStore from '@store/modules/school/material/item/interface';
 import { MaterialSchoolItemStore } from '@store/modules/school/material/item';
+import type ITaskSchoolListStore from '@store/modules/school/task/list/interface';
+import { TaskSchoolListStore } from '@store/modules/school/task/list';
+import type ITaskSchoolItemStore from '@store/modules/school/task/item/interface';
+import { TaskSchoolItemStore } from '@store/modules/school/task/item';
+import type IQuestionSchoolItemStore from '@store/modules/school/question/item/interface';
+import { QuestionSchoolItemStore } from '@store/modules/school/question/item';
+import type IQuestionSchoolListStore from '@store/modules/school/question/list/interface';
+import { QuestionSchoolListStore } from '@store/modules/school/question/list';
 
 export const storeContainer = new Container({ defaultScope: 'Singleton' });
 
@@ -116,5 +124,13 @@ storeContainer.bind<IBlockSchoolItemStore>(STORE.BlockSchoolItem).to(BlockSchool
 storeContainer.bind<IMaterialSchoolListStore>(STORE.MaterialSchoolList).to(MaterialSchoolListStore);
 
 storeContainer.bind<IMaterialSchoolItemStore>(STORE.MaterialSchoolItem).to(MaterialSchoolItemStore);
+
+storeContainer.bind<ITaskSchoolListStore>(STORE.TaskSchoolList).to(TaskSchoolListStore);
+
+storeContainer.bind<ITaskSchoolItemStore>(STORE.TaskSchoolItem).to(TaskSchoolItemStore);
+
+storeContainer.bind<IQuestionSchoolItemStore>(STORE.QuestionSchoolItem).to(QuestionSchoolItemStore);
+
+storeContainer.bind<IQuestionSchoolListStore>(STORE.QuestionSchoolList).to(QuestionSchoolListStore);
 
 // progress

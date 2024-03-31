@@ -29,6 +29,10 @@ export const STORE = {
   BlockSchoolItem: Symbol.for('BlockSchoolItemStore'),
   MaterialSchoolList: Symbol.for('MaterialSchoolListStore'),
   MaterialSchoolItem: Symbol.for('MaterialSchoolItemStore'),
+  TaskSchoolList: Symbol.for('TaskSchoolListStore'),
+  TaskSchoolItem: Symbol.for('TaskSchoolItemStore'),
+  QuestionSchoolList: Symbol.for('QuestionSchoolListStore'),
+  QuestionSchoolItem: Symbol.for('QuestionSchoolItemStore'),
 
   // progress
   // ...

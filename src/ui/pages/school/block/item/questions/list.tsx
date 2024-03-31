@@ -5,39 +5,25 @@ import { Toolbar } from '@ui/layout/list/toolbar';
 import { Stack, useTheme } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { Item } from '@ui/pages/settings/block/item/questions/item';
 import { ROUTES } from '@settings/routes';
-import { QuestionDialog } from '@ui/pages/settings/block/item/questions/dialog';
-import { Avatar } from '@ui/pages/settings/block/item/questions/avatar';
-import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
-import { useQuestionSettingsListStore } from '@store/modules/settings/question/list/hook';
-import { IQuestionDTO } from '@model/entities/question';
+import { Item } from '@ui/pages/school/block/item/questions/item';
+import { Avatar } from '@ui/pages/school/block/item/questions/avatar';
+import { useQuestionSchoolListStore } from '@store/modules/school/question/list/hook';
+import { IQuestionUserDTO } from '@model/entities/question';
 
 export const QuestionsList = observer(() => {
-  const dataModel = useQuestionSettingsListStore();
+  const dataModel = useQuestionSchoolListStore();
   const router = useRouter();
   const blockId = router.query.slug?.[0] as string;
-  const tab = router.query.slug?.[1] as string;
+  const tab = ROUTES.SCHOOL_BLOCK.tabs.keys.test;
   const questionId = router.query.slug?.[2] as string;
   const theme = useTheme();
 
   const handleClick = async (id: string) => {
     await router.push({
-      pathname: ROUTES.SETTINGS_BLOCK.path,
+      pathname: ROUTES.SCHOOL_BLOCK.path,
       query: { ...router.query, slug: [blockId, tab, id] },
     });
-  };
-  const handleCreate = async () => {
-    await router.push({
-      pathname: ROUTES.SETTINGS_BLOCK.path,
-      query: { ...router.query, slug: [blockId, tab, 'create'] },
-    });
-  };
-  const handleDelete = async () => {
-    await dataModel.deleteOpen();
-  };
-  const handleDeleteSubmit = async () => {
-    await dataModel.deleteSubmit();
   };
 
   useEffect(() => {
@@ -47,38 +33,21 @@ export const QuestionsList = observer(() => {
   return (
     <Stack spacing={2} height="100%">
       <Filter dataModel={dataModel} padding />
-      <Toolbar
-        dataModel={dataModel}
-        query={{ blockId }}
-        checkbox
-        padding
-        handleCreate={handleCreate}
-        handleDelete={handleDelete}
-      />
+      <Toolbar dataModel={dataModel} query={{ blockId }} padding />
       <Stack flexGrow={1} overflow="hidden">
         <List
           dataModel={dataModel}
-          avatarRenderer={(item: IQuestionDTO) => <Avatar item={item} />}
-          itemRenderer={(item: IQuestionDTO) => <Item item={item} />}
-          rowStyleGetter={(item: IQuestionDTO) => {
-            if (router.pathname === ROUTES.SETTINGS_BLOCK.path && item.id === questionId) {
+          avatarRenderer={(item: IQuestionUserDTO) => <Avatar item={item} />}
+          itemRenderer={(item: IQuestionUserDTO) => <Item item={item} />}
+          rowStyleGetter={(item: IQuestionUserDTO) => {
+            if (router.pathname === ROUTES.SCHOOL_BLOCK.path && item.id === questionId) {
               return { backgroundColor: theme.palette.fGrey[10] };
             }
           }}
           handleClick={handleClick}
           estimateSize={62}
-          checkbox
         />
       </Stack>
-      <QuestionDialog open={Boolean(questionId)} />
-      <DialogConfirm
-        open={dataModel.isDeleteOpen}
-        isLoading={dataModel.isDeleteLoading}
-        onClose={dataModel.deleteClose}
-        onSubmit={handleDeleteSubmit}
-        title="Delete questions"
-        message="Are you sure you want to delete selected questions?"
-      />
     </Stack>
   );
 });

@@ -8,10 +8,10 @@ import { useEffect } from 'react';
 import { Item } from '@ui/pages/settings/block/item/questions/item';
 import { ROUTES } from '@settings/routes';
 import { QuestionDialog } from '@ui/pages/settings/block/item/questions/dialog';
-import { Avatar } from '@ui/pages/settings/block/item/questions/avatar';
 import { DialogConfirm } from '@ui/dialogs/dialogConfirm';
 import { useQuestionSettingsListStore } from '@store/modules/settings/question/list/hook';
 import { IQuestionDTO } from '@model/entities/question';
+import { IconTest } from '@ui/components/icon/iconTest';
 
 export const QuestionsList = observer(() => {
   const dataModel = useQuestionSettingsListStore();
@@ -58,7 +58,7 @@ export const QuestionsList = observer(() => {
       <Stack flexGrow={1} overflow="hidden">
         <List
           dataModel={dataModel}
-          avatarRenderer={(item: IQuestionDTO) => <Avatar item={item} />}
+          avatarRenderer={(item: IQuestionDTO) => <IconTest item={item} />}
           itemRenderer={(item: IQuestionDTO) => <Item item={item} />}
           rowStyleGetter={(item: IQuestionDTO) => {
             if (router.pathname === ROUTES.SETTINGS_BLOCK.path && item.id === questionId) {

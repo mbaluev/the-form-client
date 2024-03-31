@@ -1,26 +1,20 @@
-import { Avatar as MuiAvatar, useTheme } from '@mui/material';
-import { IQuestionDTO } from '@model/entities/question';
-import Typography from '@mui/material/Typography';
-import DoDisturbIcon from '@mui/icons-material/DoDisturb';
+import { Stack } from '@mui/material';
+import { IQuestionUserDTO } from '@model/entities/question';
+import { IconQuestion } from '@ui/components/icon/iconQuestion';
+import { IconTest } from '@ui/components/icon/iconTest';
 
 interface IProps {
-  item?: IQuestionDTO;
+  item?: IQuestionUserDTO;
 }
 
 export const Avatar = (props: IProps) => {
-  const theme = useTheme();
   const { item } = props;
   if (!item) return null;
 
   return (
-    <MuiAvatar variant="rounded" sx={{ backgroundColor: theme.palette.fGrey['10'] }}>
-      {item ? (
-        <Typography color={theme.palette.fGrey['100']} fontWeight={600}>
-          {item.position}
-        </Typography>
-      ) : (
-        <DoDisturbIcon sx={{ color: theme.palette.fGrey['100'] }} fontSize="large" />
-      )}
-    </MuiAvatar>
+    <Stack direction="row" spacing={2} alignItems="center">
+      <IconQuestion userQuestion={item} />
+      <IconTest item={item.question} />
+    </Stack>
   );
 };

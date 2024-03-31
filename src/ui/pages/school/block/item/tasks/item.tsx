@@ -1,10 +1,10 @@
 import { Stack } from '@mui/material';
 import { observer } from 'mobx-react';
 import Typography from '@mui/material/Typography';
-import { ITaskDTO } from '@model/entities/task';
+import { ITaskUserDTO } from '@model/entities/task';
 
 interface IProps {
-  item: ITaskDTO;
+  item: ITaskUserDTO;
 }
 
 export const Item = observer((props: IProps) => {
@@ -17,7 +17,7 @@ export const Item = observer((props: IProps) => {
         display="-webkit-box"
         sx={{ WebkitLineClamp: '2', WebkitBoxOrient: 'vertical' }}
       >
-        {item.document?.name}
+        {item.task?.document?.name}
       </Typography>
     </Stack>
   );
