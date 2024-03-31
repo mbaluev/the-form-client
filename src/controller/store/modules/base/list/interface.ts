@@ -9,7 +9,7 @@ export type TListITem = {
   position?: number | null;
   selected?: boolean | null;
   loading?: boolean | null;
-  // error?: string | null;
+  hasError?: string | null;
 };
 
 export default interface IBaseListStore<T extends TListITem> extends IBaseStore {

@@ -132,7 +132,7 @@ export class BaseListStore<T extends TListITem> extends BaseStore implements IBa
   setItemError = (id?: string | null, value?: string) => {
     const items: T[] | undefined = this.data ? JSON.parse(JSON.stringify(this.data)) : undefined;
     items?.forEach((d) => {
-      if (d.id === id) d.error = value;
+      if (d.id === id) d.hasError = value;
     });
     this.setData(items);
   };
