@@ -1,4 +1,4 @@
-name: build & deploy (mbaluev/the-form-client:main)
+name: build (mbaluev/the-form-client:main)
 on:
   workflow_dispatch:
   push:
