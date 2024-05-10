@@ -19,7 +19,14 @@ export const PageContent = (props: IProps) => {
         {(title || subtitle || quick) && (
           <Fragment>
             <Stack direction="row" spacing={2}>
-              <Stack spacing={2} height="100%" padding={3} paddingBottom={0} flexGrow={1}>
+              <Stack
+                spacing={2}
+                height="100%"
+                padding={3}
+                paddingBottom={0}
+                flexGrow={1}
+                overflow="hidden"
+              >
                 {title && <Box>{title}</Box>}
                 {subtitle && <Box>{subtitle}</Box>}
               </Stack>

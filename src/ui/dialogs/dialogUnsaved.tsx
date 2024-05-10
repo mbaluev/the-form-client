@@ -8,6 +8,8 @@ import {
   DialogTitle,
   Typography,
 } from '@mui/material';
+import { ProgressBase } from '@ui/layout/card/progress';
+import { SeparatorBase } from '@ui/layout/card/separator';
 
 export interface IDialogUnsavedProps {
   open: boolean;
@@ -55,12 +57,14 @@ export const DialogUnsaved = (props: IDialogUnsavedProps) => {
           Save changes?
         </Typography>
       </DialogTitle>
-      <DialogContent sx={{ pb: 0 }}>
+      {loading ? <ProgressBase /> : <SeparatorBase />}
+      <DialogContent>
         <Stack>
           <Typography>You have modified this page</Typography>
           <Typography>Do you want to save the changes before you go?</Typography>
         </Stack>
       </DialogContent>
+      <SeparatorBase />
       <DialogActions>
         <Button
           onClick={handleCancel}

@@ -1,25 +1,25 @@
 import { observer } from 'mobx-react';
 import { Fragment } from 'react';
 import { Button } from '@mui/material';
-import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/item/hook';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@settings/routes';
 
 export const Actions = observer(() => {
   const { isModalLoading, hasModalErrors, hasModalChanges, saveModalData, validateModal } =
-    useUserItemStore();
+    useUserSettingsItemStore();
 
   const router = useRouter();
   const handleClose = async () => {
     await router.push({
-      pathname: ROUTES.ADMIN_SETTINGS_USERS.path,
+      pathname: ROUTES.SETTINGS_USERS.path,
     });
   };
   const handleDoSave = async () => {
     const user = await saveModalData();
     if (user?.id) {
       await router.push({
-        pathname: ROUTES.ADMIN_SETTINGS_USER.path,
+        pathname: ROUTES.SETTINGS_USER.path,
         query: { id: user.id },
       });
     }

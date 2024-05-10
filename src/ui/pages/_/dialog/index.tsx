@@ -1,7 +1,7 @@
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
-import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/item/hook';
 import { Title } from '@ui/pages/_/dialog/title';
 import { ROUTES } from '@settings/routes';
 import { Content } from '@ui/pages/_/dialog/content';
@@ -16,12 +16,12 @@ interface IProps {
 
 export const UserDialog = observer((props: IProps) => {
   const { open = false } = props;
-  const { isModalLoading, setModalData } = useUserItemStore();
+  const { isModalLoading, setModalData } = useUserSettingsItemStore();
 
   const router = useRouter();
   const handleClose = async () => {
     await router.push({
-      pathname: ROUTES.ADMIN_SETTINGS_USERS.path,
+      pathname: ROUTES.SETTINGS_USERS.path,
     });
   };
   useEffect(() => {

@@ -26,7 +26,7 @@ export type IBaseCardType = {
   description?: string;
 };
 
-export interface IBaseCardStore<T extends IBaseCardType> {
+export default interface IBaseCardStore<T extends IBaseCardType> {
   // --- list
 
   list?: T[] | null;
@@ -43,6 +43,11 @@ export interface IBaseCardStore<T extends IBaseCardType> {
   setData: (data?: T | null) => void;
   hasData: boolean;
 
+  // ---- save
+
+  isSaveLoading: boolean;
+  setSaveLoading: (value: boolean) => void;
+
   // --- filter
 
   filter?: string;
@@ -55,8 +60,8 @@ export interface IBaseCardStore<T extends IBaseCardType> {
   getList: (query?: ParsedUrlQuery) => Promise<void>;
   getData: (id?: string, query?: ParsedUrlQuery) => Promise<void>;
   getModalData: (id?: string, query?: ParsedUrlQuery) => Promise<void>;
-  saveData: () => Promise<T | null | undefined>;
-  saveModalData: () => Promise<T | null | undefined>;
+  saveData: (data?: T) => Promise<T | null | undefined>;
+  saveModalData: (data?: T) => Promise<T | null | undefined>;
   deleteData: () => Promise<boolean | undefined>;
 
   // --- edit

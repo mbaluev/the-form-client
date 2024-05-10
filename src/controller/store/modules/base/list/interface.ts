@@ -1,15 +1,15 @@
 import type IBaseStore from '@store/modules/base/store/interface';
 import type { ISelectItem } from '@components/fields/selectField/types';
+import { ParsedUrlQuery } from 'querystring';
 
 export type TListITem = {
   id?: string | null;
-  img?: string | null;
+  title?: string | null;
   name?: string | null;
-  displayName?: string | null;
-  order?: number | null;
+  position?: number | null;
   selected?: boolean | null;
   loading?: boolean | null;
-  error?: string | null;
+  hasError?: string | null;
 };
 
 export default interface IBaseListStore<T extends TListITem> extends IBaseStore {
@@ -21,7 +21,7 @@ export default interface IBaseListStore<T extends TListITem> extends IBaseStore 
   // data
   data?: T[];
   setData: (value?: T[]) => void;
-  getData: () => Promise<void>;
+  getData: (query?: ParsedUrlQuery) => Promise<void>;
   resetData: () => void;
   dataItems?: ISelectItem[];
 
@@ -37,9 +37,17 @@ export default interface IBaseListStore<T extends TListITem> extends IBaseStore 
   // selected
   selectItem: (id: string) => void;
   selectAllItems: () => void;
-  selectedItems?: (string | null | undefined)[];
+  selectedItems?: string[];
   allItemsSelected: boolean;
   deselectAllItems: () => void;
+  hasSelected: boolean;
+
+  // delete
+  isDeleteOpen: boolean;
+  isDeleteLoading: boolean;
+  deleteOpen: () => Promise<void>;
+  deleteClose: () => Promise<void>;
+  deleteSubmit: () => Promise<boolean | undefined>;
 
   // filter
   filterName: string;

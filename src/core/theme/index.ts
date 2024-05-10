@@ -69,34 +69,34 @@ const colors = {
     contrastText: '#FFFFFF',
   },
   primary: {
-    main: '#167DFF',
-    light: '#5CA4FF',
-    dark: '#0E50A3',
-    contrastText: '#FFFFFF',
+    main: '#167dff',
+    light: '#a2cbff',
+    dark: '#0e50a3',
+    contrastText: '#ffffff',
   },
   info: {
-    main: '#167DFF',
-    light: '#5CA4FF',
-    dark: '#0E50A3',
-    contrastText: '#FFFFFF',
+    main: '#167dff',
+    light: '#a2cbff',
+    dark: '#0e50a3',
+    contrastText: '#ffffff',
   },
   success: {
-    main: '#00C075',
-    light: '#4DD39E',
-    dark: '#007B4B',
-    contrastText: '#FFFFFF',
+    main: '#00c075',
+    light: '#99e6c8',
+    dark: '#007b4b',
+    contrastText: '#ffffff',
   },
   warning: {
-    main: '#FD9B2C',
-    light: '#FEB96B',
-    dark: '#A2631C',
-    contrastText: '#FFFFFF',
+    main: '#fd9b2c',
+    light: '#fed7ab',
+    dark: '#a2631c',
+    contrastText: '#ffffff',
   },
   error: {
-    main: '#EC3D7D',
-    light: '#F277A4',
+    main: '#ec3d7d',
+    light: '#f7b1cb',
     dark: '#972750',
-    contrastText: '#FFFFFF',
+    contrastText: '#ffffff',
   },
   fGrey: {
     '300': '#111419',
@@ -175,10 +175,23 @@ export const theme = createTheme({
         endIcon: { marginRight: 0 },
       },
     },
+    MuiDialog: {
+      styleOverrides: {
+        container: {
+          alignItems: 'flex-start',
+        },
+        paper: {
+          boxShadow: 'none',
+        },
+      },
+    },
     MuiDialogTitle: {
       styleOverrides: {
         root: {
-          padding: 20,
+          paddingTop: 17,
+          paddingBottom: 17,
+          paddingLeft: 20,
+          paddingRight: 20,
         },
       },
     },
@@ -262,8 +275,6 @@ export const theme = createTheme({
     MuiTabPanel: {
       styleOverrides: {
         root: {
-          paddingTop: 20,
-          paddingBottom: 20,
           paddingLeft: 0,
           paddingRight: 0,
         },

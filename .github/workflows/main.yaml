@@ -1,4 +1,4 @@
-name: Build on DockerHub and Deploy to AWS
+name: build & deploy (mbaluev/the-form-client:main)
 on:
   workflow_dispatch:
   push:
@@ -34,32 +34,29 @@ jobs:
           push: true
           dockerfile: ./Dockerfile
           tags: mbaluev/the-form-client:main
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ env.DOCKERHUB_USERNAME }}
-          password: ${{ env.DOCKERHUB_TOKEN }}
-      - name: Set permissions for private key
-        run: |
-          echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
-          chmod 600 key.pem
-      - name: Stop running container
-        run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker stop the-form-client || true'
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker rm the-form-client || true'
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker image prune -a --force'
-      #          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker stop $(sudo docker ps -aq) || true'
-      #          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker rm $(sudo docker ps -aq) || true'
-      #          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker rmi $(sudo docker images -aq) || true'
-      - name: Pull Docker image
-        run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker pull mbaluev/the-form-client:main'
-      - name: Run new container
-        run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker run -d --name the-form-client -p 80:3000 mbaluev/the-form-client:main'
+#  deploy:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#      - name: Login to Docker Hub
+#        uses: docker/login-action@v1
+#        with:
+#          username: ${{ env.DOCKERHUB_USERNAME }}
+#          password: ${{ env.DOCKERHUB_TOKEN }}
+#      - name: Set permissions for private key
+#        run: |
+#          echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
+#          chmod 600 key.pem
+#      - name: Stop running container
+#        run: |
+#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker stop the-form-client || true'
+#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker rm the-form-client || true'
+#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker image prune -a --force'
+#      - name: Pull Docker image
+#        run: |
+#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker pull mbaluev/the-form-client:main'
+#      - name: Run new container
+#        run: |
+#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-27-175.eu-north-1.compute.amazonaws.com 'sudo docker run -d --name the-form-client -p 80:3000 mbaluev/the-form-client:main'

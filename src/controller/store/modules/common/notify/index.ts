@@ -1,10 +1,10 @@
 import { action, makeObservable, observable } from 'mobx';
 import { injectable } from 'inversify';
-import { guid } from '@utils/guid';
+import { BaseStore } from '@store/modules/base/store';
+import { v4 } from 'uuid';
 import type { AlertProps } from '@mui/material';
 import type INotifyStore from '@store/modules/common/notify/interface';
 import type { INotifyItem } from '@model/common/notify';
-import { BaseStore } from '@store/modules/base/store';
 
 @injectable()
 export class NotifyStore extends BaseStore implements INotifyStore {
@@ -30,7 +30,7 @@ export class NotifyStore extends BaseStore implements INotifyStore {
   add = (error: any, severity?: AlertProps['severity']) => {
     const items = this.items ? [...this.items] : [];
     const item = {
-      guid: guid(),
+      guid: v4(),
       message: this.parseError(error),
       severity,
     };

@@ -1,12 +1,12 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { observer } from 'mobx-react';
 import { useUnsavedChanges } from '@hooks/useUnsavedChanges';
-import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/item/hook';
 import { Form } from '@ui/pages/_/dialog/form';
 import { Fragment } from 'react';
 
 export const Content = observer(() => {
-  const { hasModalChanges, saveModalData, clearModalChanges } = useUserItemStore();
+  const { hasModalChanges, saveModalData, clearModalChanges } = useUserSettingsItemStore();
   const { Prompt } = useUnsavedChanges(hasModalChanges);
   const saveHandler = async () => {
     await saveModalData();

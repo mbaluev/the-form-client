@@ -8,7 +8,6 @@ import { SxProps } from '@mui/system';
 
 interface IProps {
   icon?: ReactElement;
-  iconColor?: string;
   message?: string | ReactElement;
   button?: ReactElement;
   loading?: boolean;
@@ -16,15 +15,17 @@ interface IProps {
 }
 
 export const NoData = (props: IProps) => {
-  const { icon, iconColor, message = 'Not found', button, sx, loading } = props;
+  const { icon, message = 'Not found', button, sx, loading } = props;
   const theme = useTheme();
-  const colorGrey = theme.palette.fGrey['80'];
-  const iconSx = { fontSize: '5rem', fill: iconColor || colorGrey };
+  const iconSx = {
+    fontSize: '5rem',
+    color: icon?.props.color ?? theme.palette.fGrey['80'],
+  };
   return (
     <Stack spacing={4} alignItems="center" justifyContent="center" sx={{ ...sx, pl: 10, pr: 10 }}>
       {icon && cloneElement(icon, { sx: iconSx })}
       {message && (
-        <Typography fontWeight={600} color={colorGrey}>
+        <Typography fontWeight={600} color={theme.palette.fGrey['80']}>
           {message}
         </Typography>
       )}

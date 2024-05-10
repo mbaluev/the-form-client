@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { TextInputField } from 'core/components/fields/textInputField';
 
-interface IProps {
+export interface ICounterProps {
   count?: number;
   min?: number;
   max?: number;
@@ -14,7 +14,7 @@ interface IProps {
   disabled?: boolean;
 }
 
-export const Counter = (props: IProps) => {
+export const Counter = (props: ICounterProps) => {
   const { count, min, max, increment = 1, onChange, disabled } = props;
 
   const [value, setValue] = useState<number | undefined>(count);

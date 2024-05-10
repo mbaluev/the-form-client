@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import { useUserItemStore } from '@store/modules/entities/user/item/useUserItemStore';
+import { useUserSettingsItemStore } from '@store/modules/settings/user/item/hook';
 import { FormField } from '@components/form/field';
 import { TextInputField } from '@components/fields/textInputField';
 import { CheckboxField } from '@components/fields/checkboxField';
@@ -8,7 +8,7 @@ import { Grid } from '@mui/material';
 import { PasswordField } from '@components/fields/passwordField';
 
 export const Form = observer(() => {
-  const { modalData, changeModalField, getModalError, hasModalErrors } = useUserItemStore();
+  const { modalData, changeModalField, getModalError, hasModalErrors } = useUserSettingsItemStore();
   const spacing = 3;
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +33,7 @@ export const Form = observer(() => {
           <FormField title="First name">
             <TextInputField
               name="firstname"
-              value={modalData?.firstname}
+              value={modalData?.firstname as any}
               onChange={changeHandler}
               error={Boolean(getModalError('firstname'))}
               helperText={getModalError('firstname')?.message}
@@ -44,7 +44,7 @@ export const Form = observer(() => {
           <FormField title="Last name">
             <TextInputField
               name="lastname"
-              value={modalData?.lastname}
+              value={modalData?.lastname as any}
               onChange={changeHandler}
               error={Boolean(getModalError('lastname'))}
               helperText={getModalError('lastname')?.message}
@@ -55,7 +55,7 @@ export const Form = observer(() => {
           <FormField title="Email">
             <TextInputField
               name="username"
-              value={modalData?.username}
+              value={modalData?.username as any}
               onChange={changeHandler}
               error={Boolean(getModalError('username'))}
               helperText={getModalError('username')?.message}
@@ -66,7 +66,7 @@ export const Form = observer(() => {
           <FormField title="Password">
             <PasswordField
               name="password"
-              value={modalData?.password}
+              value={modalData?.password as any}
               onChange={changeHandler}
               error={Boolean(getModalError('password'))}
               helperText={getModalError('password')?.message}
@@ -80,7 +80,7 @@ export const Form = observer(() => {
             <CheckboxField
               name="active"
               label="Active"
-              value={modalData?.active}
+              value={modalData?.active as any}
               onChange={changeCheckboxHandler}
             />
           </FormField>
@@ -90,7 +90,7 @@ export const Form = observer(() => {
             <CheckboxField
               name="paid"
               label="Paid"
-              value={modalData?.paid}
+              value={modalData?.paid as any}
               onChange={changeCheckboxHandler}
             />
           </FormField>
@@ -100,7 +100,7 @@ export const Form = observer(() => {
             <CheckboxField
               name="admin"
               label="Admin"
-              value={modalData?.admin}
+              value={modalData?.admin as any}
               onChange={changeCheckboxHandler}
             />
           </FormField>

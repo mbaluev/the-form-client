@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
 import { useAuthStore } from '@store/modules/common/auth/useAuthStore';
 import { ROUTES } from '@settings/routes';
-import { Box, Button, Stack } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import { FormSection } from '@components/form/section';
 import { FormField } from '@components/form/field';
 import { TextInputField } from '@components/fields/textInputField';
@@ -20,7 +20,7 @@ interface IProps {
 
 export const SignInForm = observer((props: IProps) => {
   const { sx } = props;
-  const { data, changeField, getError, signIn, hasErrors, clearMessage, isDataLoading } =
+  const { data, changeField, getError, signIn, hasErrors, clearMessage, isDataLoading, message } =
     useAuthStore();
 
   const router = useRouter();
@@ -63,6 +63,11 @@ export const SignInForm = observer((props: IProps) => {
             <Button variant="contained" onClick={submitHandler} disabled={hasErrors} fullWidth>
               Sign in
             </Button>
+            {message && (
+              <Typography color="error" fontWeight={600}>
+                {message}
+              </Typography>
+            )}
             {isDataLoading ? <ProgressBase /> : <SeparatorBase />}
             <Stack direction="row" spacing={4}>
               <Link passHref href={ROUTES.HOME.path} style={{ flex: '1 1 auto' }}>

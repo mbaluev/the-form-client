@@ -64,13 +64,11 @@ export const VirtualizeItem = observer((props: IProps) => {
             />
           </div>
         )}
-        <div className={classes.item_content}>
-          {avatar && <div style={{ flexGrow: 0 }}>{avatar}</div>}
-          <div style={{ flexGrow: 1, overflow: 'hidden' }}>
-            {content && cloneElement(content, { hover })}
-          </div>
-          {more && <div style={{ flexGrow: 0 }}>{more}</div>}
+        {avatar && <div style={{ flexGrow: 0 }}>{avatar}</div>}
+        <div style={{ flexGrow: 1, overflow: 'hidden' }}>
+          {content && cloneElement(content, { hover })}
         </div>
+        {more && <div style={{ flexGrow: 0 }}>{more}</div>}
       </div>
       {loading ? (
         <ProgressBase sx={{ mt: '-2px' }} />

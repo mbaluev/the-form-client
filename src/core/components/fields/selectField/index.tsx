@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   FormControl,
   FormHelperText,
@@ -11,7 +11,6 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import { SelectChangeEvent } from '@mui/material';
 import { SelectFieldProps } from '@components/fields/selectField/types';
 import { findItem } from '@components/fields/selectField/findItem';
@@ -35,14 +34,18 @@ export const SelectField = (props: SelectFieldProps) => {
     highlightInput,
     highlightValue,
     sx,
+    disabled,
     ...other
   } = props;
 
   const [stateItems, setStateItems] = useState(items);
   const theme = useTheme();
 
-  const isItem = (val?: any) => stateItems?.find((d) => d.value === val);
-  const [state, setState] = useState(isItem(value) ? value : '');
+  const isItem = useMemo(
+    () => Boolean(stateItems?.find((d) => d.value === value)),
+    [stateItems, value]
+  );
+  const [state, setState] = useState(isItem ? value : '');
   const [open, setOpen] = useState(false);
 
   const handleClose = () => setOpen(false);
@@ -66,7 +69,7 @@ export const SelectField = (props: SelectFieldProps) => {
   const endAdornment =
     hasState && !required ? (
       <InputAdornment position="end">
-        <IconButton edge="end" onClick={handleClear}>
+        <IconButton edge="end" onClick={handleClear} disabled={disabled}>
           <CloseIcon />
         </IconButton>
       </InputAdornment>
@@ -96,12 +99,10 @@ export const SelectField = (props: SelectFieldProps) => {
 
   const selectRef = useRef<HTMLDivElement>();
 
-  useUpdateEffect(() => {
-    setState(isItem(value) ? value : '');
-  }, [value]);
-  useUpdateEffect(() => {
+  useEffect(() => {
     setStateItems(items);
-  }, [items]);
+    setState(isItem ? value : '');
+  }, [value, items, isItem]);
 
   return (
     <FormControl sx={sx}>
@@ -131,6 +132,7 @@ export const SelectField = (props: SelectFieldProps) => {
         open={open}
         onClose={handleClose}
         onOpen={handleOpen}
+        disabled={disabled}
         {...other}
       >
         {stateItems?.map((item, index) => {

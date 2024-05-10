@@ -1,5 +1,5 @@
-import { IBaseCardStore } from '@store/modules/base/card/interfaces';
 import { IAccountDTO } from '@model/common/auth';
+import type IBaseCardStore from '@store/modules/base/card/interfaces';
 
 export default interface IAuthStore extends IBaseCardStore<IAccountDTO> {
   token?: string | null;

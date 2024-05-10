@@ -1,13 +1,13 @@
 /* eslint-disable sonarjs/cognitive-complexity */
+import _ from 'lodash';
+import objectPath from 'object-path';
 import { injectable } from 'inversify';
 import { action, computed, makeObservable, observable } from 'mobx';
 import { ParsedUrlQuery } from 'querystring';
-import objectPath from 'object-path';
-import _ from 'lodash';
+import type IBaseCardStore from '@store/modules/base/card/interfaces';
 import {
   IBaseCardError,
   IBaseCardField,
-  IBaseCardStore,
   IBaseCardType,
   IBaseCardValidation,
 } from '@store/modules/base/card/interfaces';
@@ -34,6 +34,11 @@ export class BaseCardStore<T extends IBaseCardType> implements IBaseCardStore<T>
       setDataLoading: action,
       hasData: computed,
 
+      // ---- save
+
+      isSaveLoading: observable,
+      setSaveLoading: action,
+
       // --- filter
 
       filter: observable,
@@ -45,11 +50,10 @@ export class BaseCardStore<T extends IBaseCardType> implements IBaseCardStore<T>
 
       getList: action,
       getData: action,
-      saveData: action,
-      deleteData: action,
-
       getModalData: action,
+      saveData: action,
       saveModalData: action,
+      deleteData: action,
 
       // --- edit
 
@@ -199,6 +203,14 @@ export class BaseCardStore<T extends IBaseCardType> implements IBaseCardStore<T>
   get hasData() {
     return Boolean(this.data);
   }
+
+  // --- save
+
+  isSaveLoading = false;
+
+  setSaveLoading = (value: boolean) => {
+    this.isSaveLoading = value;
+  };
 
   // --- filter
 

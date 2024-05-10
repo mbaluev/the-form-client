@@ -17,110 +17,158 @@ export const ROUTES: Record<string, any> = {
     name: '500',
     path: '/500',
   },
+
   HOME: {
     name: 'home',
     label: 'The Form',
     path: '/',
   },
   ACCOUNT_SIGN_IN: {
-    name: 'accountSignin',
-    label: 'signin',
+    name: 'accounts-sign-in',
+    label: 'Sign in',
     path: '/account/signin',
     roles: [ROLES.NONE],
   },
   ACCOUNT_SIGN_UP: {
-    name: 'accountSignup',
-    label: 'signup',
+    name: 'account-sign-up',
+    label: 'Sign up',
     path: '/account/signup',
     roles: [ROLES.NONE],
   },
+
   SCHOOL_MODULES: {
-    name: 'userModules',
+    name: 'user-modules',
     label: 'Modules',
     path: '/school/module',
     roles: [ROLES.STUDENT],
   },
   SCHOOL_MODULE: {
-    name: 'userModule',
+    name: 'user-module',
     label: 'Module',
     path: '/school/module/[id]',
     roles: [ROLES.STUDENT],
   },
   SCHOOL_BLOCK: {
-    name: 'userBlock',
+    name: 'user-block',
     label: 'Block',
-    path: '/school/block/[id]',
+    path: '/school/block/[...slug]',
     roles: [ROLES.STUDENT],
+    tabs: {
+      keys: {
+        materials: 'materials',
+        homework: 'homework',
+        test: 'test',
+      },
+      labels: {
+        materials: 'Materials',
+        homework: 'Homework',
+        test: 'Test',
+      },
+    },
   },
-  ADMIN_SETTINGS_MODULES: {
-    name: 'adminSettingsModules',
-    label: 'Modules',
-    path: '/admin/settings/module',
-    roles: [ROLES.ADMIN],
-  },
-  ADMIN_SETTINGS_MODULE: {
-    name: 'adminSettingsModule',
-    label: 'Module',
-    path: '/admin/settings/module/[moduleId]',
-    roles: [ROLES.ADMIN],
-  },
-  ADMIN_SETTINGS_MODULE_BLOCKS: {
-    name: 'adminSettingsModuleBlocks',
-    label: 'Blocks',
-    path: '/admin/settings/module/[moduleId]/block',
-    roles: [ROLES.ADMIN],
-  },
-  ADMIN_SETTINGS_MODULE_BLOCK: {
-    name: 'adminSettingsModuleBlock',
-    label: 'Block',
-    path: '/admin/settings/module/[moduleId]/block/[blockId]',
-    roles: [ROLES.ADMIN],
-  },
-  ADMIN_SETTINGS_BLOCKS: {
-    name: 'adminSettingsBlocks',
-    label: 'Blocks',
-    path: '/admin/settings/block',
-    roles: [ROLES.ADMIN],
-  },
-  ADMIN_SETTINGS_BLOCK: {
-    name: 'adminSettingsBlock',
-    label: 'Block',
-    path: '/admin/settings/block/[id]',
-    roles: [ROLES.ADMIN],
-  },
-  ADMIN_SETTINGS_USERS: {
-    name: 'adminSettingsUsers',
+
+  // --
+  SETTINGS_USERS: {
+    name: 'settings-users',
     label: 'Users',
-    path: '/admin/settings/user',
+    path: '/settings/user',
     roles: [ROLES.ADMIN],
   },
-  ADMIN_SETTINGS_USER: {
-    name: 'adminSettingsUser',
+  SETTINGS_USER: {
+    name: 'settings-user',
     label: 'User',
-    path: '/admin/settings/user/[id]',
+    path: '/settings/user/[...slug]',
     roles: [ROLES.ADMIN],
-    slug: { create: 'create' },
   },
+  SETTINGS_USER_CREATE: {
+    name: 'settings-user-create',
+    label: 'Create',
+    path: '/settings/user/create',
+    roles: [ROLES.ADMIN],
+  },
+  SETTINGS_MODULES: {
+    name: 'settings-modules',
+    label: 'Modules',
+    path: '/settings/module',
+    roles: [ROLES.ADMIN],
+  },
+  SETTINGS_MODULE: {
+    name: 'settings-module',
+    label: 'Module',
+    path: '/settings/module/[...slug]',
+    roles: [ROLES.ADMIN],
+    tabs: {
+      keys: {
+        details: 'details',
+        blocks: 'blocks',
+      },
+      labels: {
+        details: 'Details',
+        blocks: 'Blocks',
+      },
+    },
+  },
+  SETTINGS_MODULE_CREATE: {
+    name: 'settings-module-create',
+    label: 'Create',
+    path: '/settings/module/create',
+    roles: [ROLES.ADMIN],
+  },
+  SETTINGS_BLOCKS: {
+    name: 'settings-blocks',
+    label: 'Blocks',
+    path: '/settings/block',
+    roles: [ROLES.ADMIN],
+  },
+  SETTINGS_BLOCK: {
+    name: 'settings-block',
+    label: 'Block',
+    path: '/settings/block/[...slug]',
+    roles: [ROLES.ADMIN],
+    tabs: {
+      keys: {
+        create: 'create',
+        details: 'details',
+        materials: 'materials',
+        homework: 'homework',
+        test: 'test',
+      },
+      labels: {
+        details: 'Details',
+        materials: 'Materials',
+        homework: 'Homework',
+        test: 'Test',
+      },
+    },
+  },
+  SETTINGS_BLOCK_CREATE: {
+    name: 'settings-block-create',
+    label: 'Create',
+    path: '/settings/block/create',
+    roles: [ROLES.ADMIN],
+  },
+  // --
+
   ADMIN_PROGRESS_USERS: {
-    name: 'Users',
+    name: 'admin-progress-users',
     label: 'Users progress',
     path: '/admin/progress/users',
     roles: [ROLES.ADMIN],
   },
   ADMIN_PROGRESS_MODULES: {
-    name: 'adminProgressModules',
+    name: 'admin-progress-modules',
     label: 'User modules progress',
     path: '/admin/progress/modules/[userId]',
     roles: [ROLES.ADMIN],
   },
   ADMIN_PROGRESS_BLOCKS: {
-    name: 'adminProgressBlocks',
+    name: 'admin-progress-blocks',
     label: 'User blocks progress',
     path: '/admin/progress/blocks',
     roles: [ROLES.ADMIN],
   },
   ADMIN_PROGRESS_BLOCK: {
-    name: 'adminProgressBlock',
+    name: 'admin-progress-block',
     label: 'User block progress',
     path: '/admin/progress/blocks/[id]',
     roles: [ROLES.ADMIN],

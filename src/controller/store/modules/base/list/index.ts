@@ -40,6 +40,16 @@ export class BaseListStore<T extends TListITem> extends BaseStore implements IBa
       deselectAllItems: action,
       selectedItems: computed,
       allItemsSelected: computed,
+      hasSelected: computed,
+
+      // delete
+      isDeleteOpen: observable,
+      isDeleteLoading: observable,
+      setDeleteOpen: action,
+      setDeleteLoading: action,
+      deleteOpen: action,
+      deleteClose: action,
+      deleteSubmit: action,
     });
   }
 
@@ -72,11 +82,16 @@ export class BaseListStore<T extends TListITem> extends BaseStore implements IBa
 
   get dataItems() {
     return this.data
+      ?.slice()
+      ?.sort(
+        (a, b) =>
+          Number(a.position) - Number(b.position) ||
+          (a.name && b.name ? a.name.localeCompare(b.name) : 0)
+      )
       ?.map((d) => ({
         value: d.id,
-        label: d.displayName || d.name,
-      }))
-      ?.sort((a, b) => (a.label && b.label ? a.label.localeCompare(b.label) : 0));
+        label: d.title,
+      }));
   }
 
   // computed
@@ -93,7 +108,8 @@ export class BaseListStore<T extends TListITem> extends BaseStore implements IBa
       ?.slice()
       ?.sort(
         (a, b) =>
-          Number(a.order) - Number(b.order) || (a.name && b.name ? a.name.localeCompare(b.name) : 0)
+          Number(a.position) - Number(b.position) ||
+          (a.name && b.name ? a.name.localeCompare(b.name) : 0)
       );
   }
 
@@ -116,7 +132,7 @@ export class BaseListStore<T extends TListITem> extends BaseStore implements IBa
   setItemError = (id?: string | null, value?: string) => {
     const items: T[] | undefined = this.data ? JSON.parse(JSON.stringify(this.data)) : undefined;
     items?.forEach((d) => {
-      if (d.id === id) d.error = value;
+      if (d.id === id) d.hasError = value;
     });
     this.setData(items);
   };
@@ -150,7 +166,7 @@ export class BaseListStore<T extends TListITem> extends BaseStore implements IBa
   };
 
   get selectedItems() {
-    return this.data?.filter((d) => d.selected)?.map((d) => d.id);
+    return this.data?.filter((d) => d.selected)?.map((d) => d.id as string);
   }
 
   get allItemsSelected() {
@@ -159,7 +175,35 @@ export class BaseListStore<T extends TListITem> extends BaseStore implements IBa
     );
   }
 
+  get hasSelected() {
+    return Boolean(this.selectedItems && this.selectedItems.length > 0);
+  }
+
+  // delete
+
+  isDeleteOpen = false;
+
+  isDeleteLoading = false;
+
+  setDeleteOpen = (value: boolean) => (this.isDeleteOpen = value);
+
+  setDeleteLoading = (value: boolean) => (this.isDeleteLoading = value);
+
+  deleteOpen = async () => {
+    this.setDeleteOpen(true);
+  };
+
+  deleteClose = async () => {
+    this.setDeleteOpen(false);
+  };
+
+  async deleteSubmit() {
+    if (this.selectedItems && this.hasSelected) return true;
+    if (this.selectedItems && !this.hasSelected) return false;
+    return undefined;
+  }
+
   // filter
 
-  filterName = 'search';
+  filterName = 'query';
 }

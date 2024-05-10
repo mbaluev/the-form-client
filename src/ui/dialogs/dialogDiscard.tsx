@@ -7,6 +7,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import { SeparatorBase } from '@ui/layout/card/separator';
 
 export interface IDialogDiscardProps {
   open: boolean;
@@ -34,12 +35,14 @@ export const DialogDiscard = (props: IDialogDiscardProps) => {
           Confirm discard
         </Typography>
       </DialogTitle>
-      <DialogContent sx={{ pb: 0 }}>
+      <SeparatorBase />
+      <DialogContent>
         <Stack alignItems="flex-start">
           <Typography textAlign="left">Are you sure you want to discard all changes?</Typography>
           <Typography textAlign="left">They won't be saved</Typography>
         </Stack>
       </DialogContent>
+      <SeparatorBase />
       <DialogActions>
         <Button
           onClick={handleCancel}

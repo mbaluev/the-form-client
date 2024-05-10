@@ -7,12 +7,12 @@ import { setCookie, deleteCookie, getCookie } from 'cookies-next';
 import cookie from '@utils/cookie';
 import moment from 'moment';
 import { Jwt } from '@utils/jwt';
-import { AuthService } from '@service/modules/common/auth';
 import { IAccountDTO } from '@model/common/auth';
+import type IAuthService from '@service/modules/common/auth/interface';
 
 @injectable()
 export class AuthStore extends BaseCardStore<IAccountDTO> implements IAuthStore {
-  @inject(SERVICE.Auth) protected authService!: AuthService;
+  @inject(SERVICE.Auth) protected authService!: IAuthService;
 
   constructor() {
     super();
