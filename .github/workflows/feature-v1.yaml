@@ -1,9 +1,9 @@
 name: build (mbaluev/the-form-client:feature-v1)
 on:
   workflow_dispatch:
-#  push:
-#    branches:
-#      - feature/v1
+  push:
+    branches:
+      - feature/v1
 jobs:
   build:
     runs-on: ubuntu-latest
