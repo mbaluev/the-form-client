@@ -1,4 +1,4 @@
-name: Build on DockerHub
+name: build (mbaluev/the-form-client:feature-v1)
 on:
   workflow_dispatch:
 #  push:
