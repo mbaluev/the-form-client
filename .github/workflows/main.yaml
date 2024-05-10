@@ -1,4 +1,4 @@
-name: build (mbaluev/the-form-client:main)
+name: build (mbaluev/the-form-client:latest)
 on:
   workflow_dispatch:
   push:
@@ -33,7 +33,7 @@ jobs:
           context: ./
           push: true
           dockerfile: ./Dockerfile
-          tags: mbaluev/the-form-client:main
+          tags: mbaluev/the-form-client:latest
 #  deploy:
 #    needs: build
 #    runs-on: ubuntu-latest
