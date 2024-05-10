@@ -1,17 +1,13 @@
 name: Build on DockerHub
 on:
   workflow_dispatch:
-#  push:
-#    branches:
-#      - feature/v2
-env:
-  DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
-  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-  AWS_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+  push:
+    branches:
+      - feature/v2
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: development
+    environment: production
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

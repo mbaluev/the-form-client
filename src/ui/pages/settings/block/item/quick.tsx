@@ -75,7 +75,7 @@ export const Quick = observer(() => {
       reset(res);
       if (isCreate) {
         setTimeout(() => {
-          const query: ParsedUrlQuery = { slug: [id] };
+          const query: ParsedUrlQuery = { slug: [res.id] };
           if (moduleId) query.moduleId = moduleId;
           router.push({
             pathname: ROUTES.SETTINGS_BLOCK.path,

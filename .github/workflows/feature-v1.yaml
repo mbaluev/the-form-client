@@ -4,10 +4,6 @@ on:
 #  push:
 #    branches:
 #      - feature/v1
-env:
-  DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
-  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-  AWS_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
 jobs:
   build:
     runs-on: ubuntu-latest
