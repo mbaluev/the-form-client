@@ -12,8 +12,10 @@ export const IconMaterial = (props: IProps) => {
   const { userMaterial } = props;
   const title = statusMaterial(userMaterial);
   let icon = <CircleOutlinedIcon color="secondary" />;
+
   if (userMaterial?.complete) {
     icon = <CheckIcon color="success" />;
   }
+
   return <Tooltip title={title}>{icon}</Tooltip>;
 };

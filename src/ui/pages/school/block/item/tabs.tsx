@@ -9,7 +9,7 @@ import { TabLabel } from '@ui/pages/school/block/item/tabLabel';
 import { useBlockSchoolItemStore } from '@store/modules/school/block/item/hook';
 
 export const Tabs = observer(() => {
-  const { isSaveLoading, data: userBlock } = useBlockSchoolItemStore();
+  const { data: userBlock } = useBlockSchoolItemStore();
 
   const router = useRouter();
   const id = router.query.slug?.[0] as string;
@@ -44,7 +44,5 @@ export const Tabs = observer(() => {
     });
   };
 
-  return (
-    <MuiTabs active={active} tabs={tabs} onChange={handleChange} loading={isSaveLoading} padding />
-  );
+  return <MuiTabs active={active} tabs={tabs} onChange={handleChange} padding />;
 });

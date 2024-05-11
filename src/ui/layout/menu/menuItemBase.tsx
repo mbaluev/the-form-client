@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 import Link from 'next/link';
 import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
@@ -16,7 +17,6 @@ type TMenuItemContainer = IMenuItemDTO & {
   isChild?: boolean;
 };
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 export const MenuItemBase = observer((props: TMenuItemContainer) => {
   const { isOpen, open, setItemOpen } = useMenuStore();
   const router = useRouter();

@@ -1,8 +1,8 @@
 import { useContainer } from '@provider/useContainer';
 import { STORE } from '@store/ids';
-import type IMaterialSchoolItemStore from '@store/modules/school/material/item/interface';
+import type ITaskSchoolItemStore from '@store/modules/school/task/item/interface';
 
-export const useMaterialSchoolItemStore = () => {
+export const useTaskSchoolItemStore = () => {
   const container = useContainer();
-  return container.get<IMaterialSchoolItemStore>(STORE.MaterialSchoolItem);
+  return container.get<ITaskSchoolItemStore>(STORE.TaskSchoolItem);
 };
