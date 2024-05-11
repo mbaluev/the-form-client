@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 import { CSSProperties, ReactElement, useEffect, useRef } from 'react';
 import { observer } from 'mobx-react';
 import { useVirtualizer } from '@tanstack/react-virtual';
@@ -17,7 +18,6 @@ interface IProps<T> {
   width?: number;
 }
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 export const VirtualizeBlock = observer(<T,>(props: IProps<T>) => {
   const {
     data,

@@ -9,7 +9,7 @@ import { Skeleton } from '@mui/material';
 import { PageBlock } from '@ui/pages/school/block/item/page';
 import { useBlockSchoolItemStore } from '@store/modules/school/block/item/hook';
 import { useModuleSchoolItemStore } from '@store/modules/school/module/item/hook';
-import { Panel } from '@ui/layout/page/panel';
+import { PagePanel } from '@ui/pages/school/block/panel/page';
 
 const SchoolBlock = (props: any) => {
   const router = useRouter();
@@ -77,7 +77,7 @@ const SchoolBlock = (props: any) => {
   return (
     <MasterAuth>
       {/*<FormProvider {...methods}>*/}
-      <Page {...props} breadCrumbs={breadCrumbs} right={<Panel />}>
+      <Page {...props} breadCrumbs={breadCrumbs} right={<PagePanel />}>
         <PageBlock />
       </Page>
       {/*</FormProvider>*/}
