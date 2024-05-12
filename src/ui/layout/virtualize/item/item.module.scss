@@ -16,6 +16,7 @@
 .item_checkbox {
   flex-grow: 0;
   margin-right: -$base * 2;
+  margin-top: -$base - 2;
 }
 .item_content {
   display: flex;
